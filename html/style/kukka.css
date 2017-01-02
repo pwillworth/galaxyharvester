@@ -1,0 +1,83 @@
+/* This file is part of Kukkaisvoima. It is meant to be example css
+for Kukkaisvoima nothing more. This is config file. Kukkaisvoima's
+license don't affect this file. So you may freely modify this as you
+like */
+
+
+#content1 {
+    font-family: Verdana, sans-serif;
+    font-size: small;
+    margin:0 auto;
+    width:750px;
+}
+
+#content2 {
+    float:left;
+    width:500px;
+    border-right: 1px solid;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding:20px;
+    line-height: 120%
+}
+
+#content3 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding:20px;
+    line-height: 120%
+}
+
+#sidebar {
+    float:right;
+    width:200px;
+    margin-top: 40px;
+}
+
+#sidebar li {
+    list-style-type: square;
+    margin-left: 1em;
+}
+
+#header {
+    padding: 2em;
+}
+
+#content2 h2 {
+    margin-top: 2em;
+}
+
+#content2 ul {
+    margin-left: 20px;
+}
+
+#content2 li {
+    background-image: url(/images/lstsq.gif);
+    background-repeat: no-repeat;
+    background-position: 0px 4px;
+    padding-left: 14px;
+    padding-bottom: 4px;
+}
+
+p {
+    text-align: left;
+}
+
+img {
+    border: none;
+}
+
+#footer {
+    padding: 2em;
+    clear:both;
+}
+pre {
+    padding: 1em;
+    border: 1px solid gray;
+}
+
+#hit {
+    display: inline;
+    text-decoration: none;
+}
+

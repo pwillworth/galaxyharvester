@@ -1,0 +1,14 @@
+use swgresource;
+INSERT INTO tPlanet (planetID, planetName) VALUES (14, 'Mandalore');
+CREATE TABLE tGalaxyPlanet (galaxyID INT, planetID SMALLINT, PRIMARY KEY (galaxyID, planetID));
+INSERT INTO tGalaxyPlanet (galaxyID, planetID) VALUES (37, 11);
+INSERT INTO tGalaxyPlanet (galaxyID, planetID) VALUES (37, 12);
+INSERT INTO tGalaxyPlanet (galaxyID, planetID) VALUES (37, 13);
+INSERT INTO tGalaxyPlanet (galaxyID, planetID) VALUES (32, 11);
+INSERT INTO tGalaxyPlanet (galaxyID, planetID) VALUES (32, 12);
+INSERT INTO tGalaxyPlanet (galaxyID, planetID) VALUES (48, 13);
+INSERT INTO tGalaxyPlanet (galaxyID, planetID) VALUES (32, 14);
+DELETE FROM tResourceType;
+LOAD DATA LOCAL INFILE '/var/www/database/seedData/tResourceType.txt' INTO TABLE tResourceType;
+DELETE FROM tResourceTypeGroup;
+LOAD DATA LOCAL INFILE '/var/www/database/seedData/typegroup.csv' INTO TABLE tResourceTypeGroup FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"';

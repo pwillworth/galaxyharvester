@@ -1,0 +1,6 @@
+Wipesalot
+
+<p>It's a fresh new galaxy again, and it's sure to happen many more times.  "TC Nova O.R. 2" is the new active galaxy if you're tracking resources during testing.  While Galaxy Harvester is much less utilized in an active testing, blue frog environment, we'll continue to refresh to a new galaxy for each wipe as long as people are using it.  And who knows, maybe we'll even get a few new features set up in time for Suncrusher!</p>
+
+<p>Happy Testing!</p>
+<p>-ioscode</p>

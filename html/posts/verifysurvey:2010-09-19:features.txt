@@ -1,0 +1,7 @@
+Verify By Survey Tool
+
+<p>Well, the people have spoken and today we bring you the top voted <a href="/feedback.py">suggestion</a> so far.  Suggested by jmatt, the new <a href="/surveyList.py">survey verify tool</a> brings you a new easy way to check for resource changes.  Just select a planet and survey tool to bring up a list of current available resources as listed on Galaxy Harvester for easy comparison to what you see in game.  You can then use the verify or remove checkboxes and the buttons at the top of the list to clear out the old, or verify what is still sticking around.  There is also a quick resource add box below the planet and tool selection so you can add in those new ones without leaving the screen.</p>
+
+<p>Thanks again for the suggestion jmatt!  If you haven't already voted or submitted your suggestions, be sure to head over and put in your 2 credits <a href="/feedback.py">here</a>.  It looks like favorites is the current leader of the pack now, so that will most likely be the next thing to get done.</p>
+
+<p>-ioscode</p>

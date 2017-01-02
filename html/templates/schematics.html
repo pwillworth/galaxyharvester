@@ -1,0 +1,365 @@
+{% import 'blocks.html' as blocks %}
+<!DOCTYPE html>
+<html lang="en"><head><title>Schematics - Galaxy Harvester</title>
+<link rel="stylesheet" href="/style/ghCore.css" type="text/css" />
+<link rel="stylesheet" href="/style/themes/{{ uiTheme }}.css" type="text/css" />
+<script type="text/javascript" src="/js/ghShared.js"></script>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
+    groupBy = getCookie("schemListGroup");
+    if (groupBy == "prof") {
+        $("#oProf").attr("checked", true);
+        $("#oTab").removeAttr("checked");
+        $("#oFavorite").removeAttr("checked");
+    }
+    if (groupBy == "favorite") {
+      $("#oFavorite").attr("checked", true);
+      $("#oProf").removeAttr("checked");
+      $("#oTab").removeAttr("checked");
+    }
+
+{% if schematicID == 'index' %}
+	    $("#tab1").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 1});
+	    $("#tab2").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 2});
+	    $("#tab4").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 4});
+	    $("#tab8").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 8});
+	    $("#tab16").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 16});
+	    $("#tab32").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 32});
+	    $("#tab64").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 64});
+	    $("#tab128").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 128});
+	    $("#tab256").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 256});
+	    $("#tab512").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 512});
+	    $("#tab1024").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 1024});
+	    $("#tab2048").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 2048});
+	    $("#tab8192").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 8192});
+	    $("#tab32767").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 32767});
+{% else %}
+	    $("#profSel").val(getCookie("schemListProfSel"));
+	    $("#tabSel").val(getCookie("schemListTabSel"));
+{% endif %}
+{% if schematicID == 'home' %}
+	    if (getCookie("schemTabSelRes") != null) {
+	        $("#tabSelRes").val(getCookie("schemTabSelRes"));
+	    }
+	    if (getCookie("schemTypeSelRes") != null) {
+	        $("#objectTypeSel").val(getCookie("schemTypeSelRes"));
+	    }
+	    if ($("#tabSelRes").val() != "") {
+	        getTypeRes();
+	        updateObjectTypes($("#tabSelRes").val());
+	    }
+	    if (getCookie("schemFindMethod") == "type") {
+	        $("#oType").attr("checked", "checked");
+	        $("#resGroup").attr("disabled","disabled");
+	    } else {
+	        //$("#oGroup").attr("checked");
+	        $("#resType").attr("disabled","disabled");
+	    }
+	    if (getCookie("schemFindGroup")) $("#resGroup").val(getCookie("schemFindGroup"));
+	    if (getCookie("schemFindType")) $("#resType").val(getCookie("schemFindType"));
+{% endif %}
+{% if schematicID == 'home' %}
+	    if ($("#typeSel").val() != "none") {
+	        findSchematics();
+	    }
+{% elif schematicID != 'index' %}
+	{% if loggedin == 1 %}
+		    $("#copyFromSchem").load(BASE_SCRIPT_URL + "getSchematicsWithImages.py",{
+		    schematicID: "{{ schematicID }}"});
+		    if (getCookie("compareCurrent", true) == "false") {
+				$("#compareCurrent").attr("checked",false);
+			}
+		    if (getCookie("compareAll", true) == "false") {
+				$("#compareAll").attr("checked",false);
+			}
+	{% endif %}
+{% endif %}
+    refreshSchematics();
+    $(".window .close").click(function(e) {
+        e.preventDefault();
+        $("#mask, .window").hide();
+    });
+    $("#mask").click(function() {
+        $(this).hide();
+        $(".window").hide();
+    });
+});
+{% if (schematicID == 'home') %}
+	function findSchematics() {
+	    $("#busyImgFindSchem").css("display","block");
+	    var rg = "";
+	    var rt = "";
+	    if ($("#oGroup").attr("checked") == "checked") {
+	        $("#resType").attr("disabled","disabled");
+	        $("#resGroup").removeAttr("disabled");
+	        setCookie("schemFindMethod","group",30);
+	        rg = $("#resGroup").val();
+	        setCookie("schemFindGroup", rg, 30);
+	    } else {
+	        $("#resGroup").attr("disabled","disabled");
+	        $("#resType").removeAttr("disabled");
+	        setCookie("schemFindMethod","type",30);
+	        rt = $("#resType").val();
+	        setCookie("schemFindType", rt, 30);
+	    }
+	    $("#schemFinderList").load(BASE_SCRIPT_URL + "getSchematicList.py",{
+	        groupType: "res",
+	        resGroup: rg,
+	        resType: rt},
+	        function() {
+	            $("#busyImgFindSchem").css("display","none");
+	    });
+	    $("#busyImgFindSchemRelated").css("display","block");
+	    $("#schemFinderListAncestors").load(BASE_SCRIPT_URL + "getSchematicList.py",{
+	        groupType: "res",
+	        resSecondary: "1",
+	        resGroup: rg,
+	        resType: rt},
+	        function() {
+	            $("#busyImgFindSchemRelated").css("display","none");
+	    });
+	}
+	function getTypeRes() {
+	    if ($("#tabSelRes").val() != 0) {
+	        $("#busyImgFindProfRes").css("display","block");
+	        $("#profResList").load(BASE_SCRIPT_URL + "getTopResources.py",{
+	            galaxy: $("#galaxySel").val(),
+	            craftingTab: $("#tabSelRes").val(),
+	            objectType: $("#objectTypeSel").val()},
+	            function() {
+	                $("#busyImgFindProfRes").css("display","none");
+	        });
+	    }
+	}
+	function updateObjectTypes(craftingTab) {
+	    $("#objectTypeSel").html("");
+	    $("#objectTypeSel").append("<option value=''>Any</option>");
+	    $("#objectTypeAll option[group='" + craftingTab + "']").each(function () {
+	        $("#objectTypeSel").append("<option value='" + $(this).val() + "'>"+$(this).text()+"</option>");
+	    });
+	}
+{% endif %}
+function refreshSchematics() {
+    var groupBy = "prof";
+    if ($("#oProf").attr("checked") == "checked") {
+        $("#tabSel").css("display","none");
+        $("#profSel").css("display","block");
+        setCookie("schemListGroup","prof",7);
+    } else if ($("#oFavorite").attr("checked") == "checked") {
+      $("#tabSel").css("display","none");
+      $("#profSel").css("display","none");
+      setCookie("schemListGroup","favorite",7);
+      groupBy = "favorite";
+    } else {
+        setCookie("schemListGroup","tab",7);
+        $("#profSel").css("display","none");
+        $("#tabSel").css("display","block");
+        groupBy = "tab";
+    }
+    $("#busyImgList").css("display","block");
+    $("#schematicList").load(BASE_SCRIPT_URL + "getSchematicList.py",{
+        groupType: groupBy,
+        profession: $("#profSel").val(),
+        craftingTab: $("#tabSel").val(),
+        selectSchematic: "{{ schematicID }}"
+        },
+        function() {$("#busyImgList").css("display","none");});
+    refreshSchematicResources();
+}
+function refreshSchematicResources() {
+    // Exclude any unchecked experimental quality group weights
+    qualStr = "";
+    $("#qualitiesList input").each(function () {
+        if (this.checked == false) {
+            qualStr = qualStr + '"' + this.id + '",';
+        }
+    });
+    if (qualStr.length>0) qualStr = qualStr.substr(0, qualStr.length-1);
+    $("#bestCurrentRes").empty();
+    $("#busyImgCurrentRes").css("display","block");
+    $("#bestCurrentRes").load(BASE_SCRIPT_URL + "getTopResSchematic.py",{
+        galaxy: $("#galaxySel").val(), schematicID: "{{ schematicID }}",
+        excludeGroups: qualStr,
+        unavailable: 0,
+        compare: $("#compareCurrent:checked").val()},
+        function() {compareResources("bestCurrentRes");$("#busyImgCurrentRes").css("display","none");});
+    $("#busyImgAllRes").css("display","none");
+    $("#bestAllRes").empty();
+    $("#bestAllRes").load(BASE_SCRIPT_URL + "getTopResSchematic.py",{
+        galaxy: $("#galaxySel").val(), schematicID: "{{ schematicID }}",
+        excludeGroups: qualStr,
+        unavailable: 1,
+        compare: $("#compareAll:checked").val()},
+        function() {compareResources("bestAllRes");$("#busyImgAllRes").css("display","none");});
+}
+
+function viewSchematic(e, schematicID) {
+    e.cancelBubble = true;
+    e.stopPropagation();
+    e.preventDefault();
+    return false;
+}
+function refreshRecipes() {
+    document.location.href="{{ BASE_SCRIPT_URL }}recipe.py/" + newRecipeID;
+}
+</script>
+{{ blocks.pageTracker() }}
+<body>
+{{ blocks.headerSection(loggedin, currentUser, loginResult, linkappend, url, imgNum, galaxyList, pictureName) }}
+<div id="mainContent" class="wrapper">
+  <div id="leftNavContent" class="ghCol">
+    <div id="schemList" class="ghWidgetBox">
+    <div class="boxHeader">Schematic List
+    <span style="float:right;font-weight:normal;font-size:.9em;"><a href="{{ BASE_SCRIPT_URL }}schematics.py/home" title="Go back to the schematics home page">[Home]</a></span></div>
+      <div>View: <span style="font-weight:normal;"><input type="radio" name="oSelectType" id="oTab" value="ByTab" checked="checked" onclick="refreshSchematics()" />By Tab &nbsp;
+      <input type="radio" name="oSelectType" id="oProf" value="ByProf" onclick="refreshSchematics()" />By Profession
+      {% if loggedin == 1 %}
+      <input type="radio" name="oSelectType" id="oFavorite" value="ByFavorite" onclick="refreshSchematics()" />Favorites
+      {% endif %}
+      </span></div>
+      <select name="profSel" id="profSel" style="display:none;" onchange="setCookie('schemListProfSel',this.value,7);refreshSchematics();"><option value=0>Select Profession</option>
+{{ professionList }}
+      </select>
+      <select name="tabSel" id="tabSel" style="display:none;" onchange="setCookie('schemListTabSel',this.value,7);refreshSchematics();"><option value=0>Select Tab</option>
+{{ schematicTabList }}
+      </select>
+      <div id=busyImgList><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+      <div id="schematicList"></div>
+    </div>
+  </div>
+  <div id="rightMainContent" class="ghCol">
+    <div class="ghWidgetBox">
+{% if schematicID == 'index' %}
+    <table><tr><td valign="top"><div class="standOut">Weapon</div><div id="tab1"></div></td>
+    <td valign="top"><div class="standOut">Armor</div><div id="tab2"></div></td>
+    <td valign="top"><div class="standOut">Food</div><div id="tab4"></div></td>
+    <td valign="top"><div class="standOut">Clothing</div><div id="tab8"></div></td>
+    <td valign="top"><div class="standOut">Vehicle</div><div id="tab16"></div></td>
+    <td valign="top"><div class="standOut">Droid</div><div id="tab32"></div></td>
+    <td valign="top"><div class="standOut">Chemical</div><div id="tab64"></div></td>
+    <td valign="top"><div class="standOut">Bio-Chemical</div><div id="tab128"></div></td>
+    <td valign="top"><div class="standOut">Creature</div><div id="tab256"></div></td>
+    <td valign="top"><div class="standOut">Furniture</div><div id="tab512"></div></td>
+    <td valign="top"><div class="standOut">Deed</div><div id="tab1024"></div></td>
+    <td valign="top"><div class="standOut">Jedi</div><div id="tab2048"></div></td>
+    <td valign="top"><div class="standOut">Genetics</div><div id="tab8196"></div></td>
+    <td valign="top"><div class="standOut">General</div><div id="tab32767"></div></td></tr></table>
+{% endif %}
+
+{% if schematicID == 'home' %}
+    <h1>Crafting Schematics</h1>
+{% endif %}
+
+{% if (schematicID != '' and schematicID != 'index' and schematicID != 'home') %}
+    <h2>{{ schematic.schematicName }}
+    {% if loggedin == 1 %}
+        {{ favHTML }}
+        <button type=button value="New Recipe" class="ghButton" onclick="newRecipe('{{ schematicID }}','{{ schematic.schematicName }} Recipe', $('#galaxySel').val());">New Recipe</button><div id="busyImgAdd" style="display:none;float:right;"><img src="/images/ghWait.gif" /></div>
+    {% endif %}
+    <div style="float:right;font-weight:normal"> (XP: {{ schematic.xpAmount }}, Complexity: {{ schematic.complexity }})</div></h2>
+    <table width="100%"><tr>
+        <td valign="top" width="240px"><h3>Ingredients</h3><table style="margin-top:6px;">
+        {% for ingredient in schematic.ingredients %}
+            <tr><td style="padding-right:4px;">{{ ingredient.ingredientQuantity }}</td><td>
+            {{ ingredient.objectLink }}
+            </td></tr>
+        {% endfor %}
+        </table>
+        <h3>This schematic is an ingredient in the following schematics:</h3>
+        <ul id="usedInList">
+        {% for schem in schematic.schematicsUsedIn %}
+            <li><a href="{{ BASE_SCRIPT_URL }}schematics.py/{{ schem[0] }}">{{ schem[1] }}</a></li>
+        {% endfor %}
+        </ul></td>
+
+        <td valign="top"><h3>Qualities</h3><div>Uncheck to remove from best resources calculation.</div><ul id="qualitiesList" style="margin-top:6px;">
+        {% for qualityGroup in schematic.qualityGroups %}
+            <h4 style="color:#e8d43d;">{{ qualityGroup.groupName() }}<span><input type="checkbox" id="{{ qualityGroup.group }}" name="{{ qualityGroup.group }}" value="on" checked="checked" onclick="refreshSchematicResources()" title="Un-check to exclude this groups weights from determining best resources." /></span></h4>
+            {% for expProp in qualityGroup.properties %}
+                <li style="padding-left:10px;font-weight:bold;">{{ expProp.propertyName() }}</li>
+                {% for statWeight in expProp.statWeights %}
+                    <li style="padding-left:20px;"><span class="inlineBlock" style="width:100px;">{{ statWeight.statName() }}: </span><span>{{ statWeight.weightPercent() }}</span></li>
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+        </ul></td>
+        <td valign="top" width="325px"><img src="/images/schematics/{{ schematic.schematicImage }}" class="schematics" />
+        <div id="udInfo">{{ schemImageAttempt }}</div>
+      {% if loggedin == 1 %}
+        <form enctype="multipart/form-data" name="udImageForm" method="post" action="{{ BASE_SCRIPT_URL }}udSchematicImage.py">
+        <div class="inlineBlock" style="width:120px;font-weight:bold;">Add Image</div><div class="inlineBlock" style="text-align:right;">Use image from another schematic: <input type="checkbox" name="useExisting" id="useExisting" onclick="switchImageInput();" /></div>
+        <select id="copyFromSchem" name="copyFromSchem" style="display:none;"></select>
+        <input type="file" id="schemImage" name="schemImage" accept="image/gif, image/jpeg, image/png" />
+        <input type="hidden" name="schematicID" value="{{ schematicID }}" />
+        <input type="hidden" name="src_url" value="{{ BASE_SCRIPT_URL }}schematics.py" />
+        <input type="submit" value="Add" name="gosi" id="gosi" class="ghButton" />
+        </form>
+      {% endif %}
+        </td>
+        </tr></table>
+
+	    <div class="footer" style="margin-top:12px;"></div>
+	    <h2 style="margin-top: 12px;">Best current resources for this schematic:
+	    {% if loggedin == 1 %}
+			<div style="float:right;">Compare <input type="checkbox" id="compareCurrent" checked="checked" onchange="refreshSchematicResources();setCookie('compareCurrent',this.checked,365);" title="Check this box to compare your inventory to these resources." /></div>
+		{% endif %}
+	    </h2>
+	    <div id=busyImgCurrentRes><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+	    <div id="bestCurrentRes"></div>
+	    <div class="footer" style="margin-top:12px;"></div>
+	    <h2 style="margin-top: 12px;">Best all time resources for this schematic:
+	    {% if loggedin == 1 %}
+			<div style="float:right;">Compare <input type="checkbox" id="compareAll" checked="checked" onchange="refreshSchematicResources();setCookie('compareAll',this.checked,365);" title="Check this box to compare your inventory to these resources." /></div>
+		{% endif %}
+	    </h2>
+	    <div id=busyImgAllRes><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+	    <div id="bestAllRes"></div>
+{% endif %}
+{% if schematicID == '' %}
+    <h2>Select a Schematic</h2>
+{% endif %}
+{% if (schematicID == 'home') %}
+	    <p>Find a schematic in the schematic list on the left or use the tools below to discover by resource.  If you have a question about how the schematics tool works, you may find an answer in the <a href="{{ BASE_SCRIPT_URL }}help.py#schematics">help</a> section.</p>
+	    <div class="footer" style="margin-top:20px;">&nbsp;</div>
+	    <div class="resourceBox"><h2>Schematic Finder</h2>
+	      <div style="margin:4px;">Select a resource type or group to find schematics that use it:<div>Find By: <span style="font-weight:normal;"><input type="radio" name="oFindType" id="oGroup" value="ByGroup" checked="checked" onclick="findSchematics()" />Group &nbsp;
+	      <select name="resGroup" id="resGroup" onchange="findSchematics();"><option value="none">&lt;Select&gt;</option>
+	{{ resourceGroupList }}
+	      </select>
+	      <input type="radio" name="oFindType" id="oType" value="ByType" onclick="findSchematics()" />Type&nbsp;'
+	      <select name="resType" id="resType" onchange="findSchematics();" disabled="disabled"><option value="none">&lt;Select&gt;</option>
+	{{ noenergyTypeList }}
+	      </select>
+	    <div style="margin-top:20px;">&nbsp;</div>
+	      <div style="width:300px;float:left;border-top:1px solid;margin-left:14px;"><div class="standOut">Named Schematics</div>
+	      <div id="busyImgFindSchem" style="display:none;"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+	      <div id="schemFinderList" style="margin: 20px;"></div></div>
+	      <div style="width:300px;float:left;border-left:1px solid;border-top:1px solid;"><div class="standOut">Related Schematics</div>
+	      <div id="busyImgFindSchemRelated" style="display:none;"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+	      <div id="schemFinderListAncestors" style="margin: 20px;"></div></div>
+	      </div>
+	    </div>
+	    <div class="footer" style="margin-top:20px;">&nbsp;</div>
+	    <div class="resourceBox"><h2>Top Available Resources By Crafting Type</h2>
+	      <div><select id="tabSelRes" onchange="setCookie('schemTabSelRes',this.value,7);updateObjectTypes(this.value);getTypeRes();"><option value="">Select Crafting Tab</option>
+	{{ schematicTabList }}
+	      </select>
+	      <img src="/images/rightArrowGrey16.png" style="vertical-align:-4px;" /><select id="objectTypeSel" onchange="setCookie('schemTypeSelRes',this.value,7);getTypeRes();"><option value="">Any</option>
+	{{ objectTypeList }}
+	      </select>
+	      <select id="objectTypeAll" style="display: none;">
+	{{ objectTypeList }}
+	      </select></div>
+	    <div id="profResList"></div>
+	    <div id="busyImgFindProfRes" style="display:none;"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+	    </div>
+{% endif %}
+    <div class="footer" style="margin-top:24px;"><a href="{{ BASE_SCRIPT_URL }}schematics.py/index">full index</a></div>
+  </div>
+</div>
+{{ blocks.pageFooter() }}
+{{ blocks.joinForm(loggedin, ['?src_url={{ BASE_SCRIPT_URL }}schematics.py&', linkappend]|join, url) }}
+<div id="mask"></div>
+</body></html>

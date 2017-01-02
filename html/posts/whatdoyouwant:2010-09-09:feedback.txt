@@ -1,0 +1,7 @@
+What Do You Want?
+
+<p>Really, I want to know.  Head on over to the <a href="http://gh.apex-games.net/feedback.py">feedback page</a> and submit a suggestion for the site, or vote on ones already there.  A few suggestions that we have gotten from people by email so far have already been added.  If you have a suggestion, it might be a good idea to browse or search the ones already there to see if someone else already had the same idea.</p>
+
+<p>We want to use this not only as a way to find out what you want to see on the site, but also as a guide to what most people are most interested in.  That way we know what features to work on first.  But that will only work if you cast your votes!</p>
+
+<p>-ioscode</p>

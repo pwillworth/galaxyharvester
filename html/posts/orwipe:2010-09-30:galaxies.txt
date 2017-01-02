@@ -1,0 +1,8 @@
+OR Wipe
+
+<p>Well, the wipe party is over and it's time to get back to work with some real testing.  With the complete wipe in game, we will also be starting over from scratch here at Galaxy Harvester.  The old "TC Nova" galaxy will be frozen, and the new galaxy available in the galaxy drop down list at the top right of ever page named "TC Nova OR Wipe" will be open for resource reports.  New visitors will default to the new galaxy, but if your a GH regular, you may need to select the new galaxy from the drop down once.</p>
+
+<p>See you in the OR!</p>
+<br />
+-ioscode
+<br />

@@ -1,0 +1,13 @@
+Update: The Bestiary And More
+
+<p>I sometimes find myself searching old websites trying to find which creatures drop a certain type of hide, meat, or bone.  Now we can get the information right here on Galaxy Harvester.  Click on a resource type link to go to it's page and you will now find a list of creatures that that resource type can be harvested from.  Here is an example <a href="/resourceType.py/meat_carnivore_dathomir" title="Dathomir Carnivore Meat page">Dathomir Carnivore Meat</a>.</p>
+<br />
+<p>A few other updates are listed here:</p>
+<ul class="plain">
+<li>Resource Group ID is now included in the xml and csv export files.</li>
+<li>You can now do a quick search by resource type from the home page.</li>
+<li>Other basic resource type information such as Min/Max stats have been added to the Resource Type pages</li>
+</ul>
+<br />
+-ioscode
+

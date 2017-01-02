@@ -1,0 +1,14 @@
+Reputation
+
+<p>Being a community driven site, we sometimes have issues with data in Galaxy Harvester.  The reputation system is intended to help manage that in an automatic way, so that if someone gets enough negative reputation hits in a certain galaxy the system will limit their access to the resources in that galaxy.  Unfortunately the system around that wasn't very developed and people have been running into issues where the reputation system is missing some problems and even restricting people when it should not.  So we're going to start enhancing that system a bit to help with this.</p>
+
+<p>This update is the first wave of enhancement to the reputation system.  I expect at least one more update to follow with more tweaks and possibly an achievements based addition that will not only enhance reputation but also be a help to new users in general.  Here is the initial changes that you will start seeing with today's update.</p>
+
+<ul>
+  <li>Additional check for detecting resources added to the wrong galaxy.</li>
+  <li>Reputation award for contributions after resources have despawned added.</li>
+  <li>Home page alerts provided when reputation changes.</li>
+  <li>Added cooldown period for posting after reputation drop to reduce new accidental wrong entries.</li>
+</ul>
+
+<p>-ioscode</p>

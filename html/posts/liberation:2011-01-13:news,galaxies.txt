@@ -1,0 +1,8 @@
+Liberation
+
+<p>A wave of change hit SWG Emu while I was out of touch for a week or so.  Thanks to your heads up though, Galaxy Harvester was set up for the new Liberator galaxy a couple days ago.  The resources have already started flowing in, so it looks like that will not be news to many.  Today, a new galaxy was also added for the seventh wipe of Test Center with the object restructure code.</p>
+
+<p>While things have been pretty quiet, work has been continuing on some of the larger features suggested over on the <a href="http://gh.apex-games.net/feedback.py" title="Suggestions">suggestions</a> page.  At least one of them is getting close to completion though, so hopefully it can be released soon.  Please share any new ideas you may have as well, the suggestions page is always open.  Or if you're new to the site with the Liberator server opening up, consider voting on the ideas there too.</p>
+
+<p>-ioscode</p>
+

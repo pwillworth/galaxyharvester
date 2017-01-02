@@ -1,0 +1,29 @@
+Update: Schematics, Exports, and more Stats
+
+<p>It took some time to get this release put together, but today's update brings the beginning of what I hope you find to be a very useful feature.  A tool to let you view crafting schematics and quickly find the best resources to craft with them.  You will find the new schematics page <a href="/schematics.py/home" title="cool new feature">here</a>.  The schematics available now are based on what is currently available from the SWG Emu project.  As work progresses, more schematics will become available.  In the meantime, you can usually at least find a schematic similar to the one you are crafting to get a top resources listing based on similar weights and requirements.  Having the schematic information up also means that the profession drop down on the Top Resources widget on the home page is now enabled.  Use it to find the best stuff out there based on the unique requirements and weightings of a specific profession.</p>
+
+<p>Another major feature releasing today that some of the more hard core harvesters and/or site developers might be interested in is export files.  When you are logged into the site, you should see two new links in the Other Links box on the home page.  These will link to 2 files for the galaxy you have selected up at the top of the page.  These files are updated at 5pm UTC time each day with the current available resources data.  One is XML (eXtensible Markup Language) format which developers working on other community tools might find useful for incorporating resource data.  The other is CSV (Comma Separated Values) format for those of you that like to dump the resource data into a spreadsheet and do some of your own manipulation.</p>
+
+<p>There's always a few other odds and ends worthy of note as well, and here they are:</p>
+<ul>
+<li>Added Top Harvesters section on the home page showing top harvesters for current spawns.</li>
+<li>Made resource type names a link to other recent resource spawns of that same type.</li>
+<li>Added more user stats breakdowns to the <a href="/user.py">Stats page</a> as well as charts of the top 5 members in various categories.</li>
+<li>Some new graphics for top links and other UI polishing</li>
+</ul>
+<br />
+
+<p>The schematics feature is based on a large set of data which is not complete.  In addition to the need to get missing schematics filled out, there's another job that anyone can help with if they are interested.  You may notice when you are logged in that you should have the option to upload an image for a schematic.  Anyone who wants to help fill out some of these images is welcome to help out.  We'll want to stick to the same method to create a consistent look though.  Have a look at an example that I already have an image on like <a href="/schematics.py/armor_bone_s01_bracer_l" title="Bone Armor Left Bracer Schematic">Bone Armor Left Bracer</a> or <a href="/schematics.py/armor_segment_ubese" title="Ubese armor segment schematic">Ubese Armor Segment</a>.  You should be able to get the same look by following these steps:</p>
+<ul>
+<li>Open crafting tool and select the item schematic</li>
+<li>Make sure the item preview part of the window is pretty square and you have the window at full height, then take a screenshot.</li>
+<li>Crop the screenshot so you have just the item preview and background without any of the dark edge or light border.</li>
+<li>Make sure your resulting cropped image is square and at least 320x320.  It will be automitically resized down to that when you upload it if it is bigger.</li>
+</ul>
+<br />
+<p>Also keep in mind that there is an option to just link up a schematic to use another schematics' image.  This is handy because many schematics use the same image resource in the game.  Using this feature whenever possible will make the tool run more efficiently, and be a little quicker for you than browsing to and uploading the same image again.  If enough people chip in and do a few images, I bet we can fill out all of them before long.  The same group effort that keeps track of hundreds of in-game resources at a time should do well at conquering this task as well.</p>
+
+<p>These two major features may prompt questions and suggestions, and if so, I encourge you to send me any questions or feedback.  Feel free to post a comment here on the blog and start a discussion, or send me an email with the contact link at the bottom of the page.</p>
+<br />
+Thanks,<br />
+-ioscode

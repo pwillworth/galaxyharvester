@@ -1,0 +1,11 @@
+use swgresource;
+ALTER TABLE tSchematicIngredients MODIFY COLUMN ingredientObject VARCHAR(255);
+ALTER TABLE tSchematic ADD COLUMN objectGroup VARCHAR(255);
+CREATE TABLE tRecipe (recipeID INT AUTO_INCREMENT PRIMARY KEY, recipeName VARCHAR(255), userID VARCHAR(31), schematicID VARCHAR(127), galaxy SMALLINT, INDEX IX_recipe_user_galaxy (userID, galaxy));
+CREATE TABLE tRecipeIngredients (recipeID INT, ingredientName VARCHAR(63), ingredientResource INT, ingredientQuality SMALLINT, PRIMARY KEY (recipeID, ingredientName));
+DELETE FROM tResourceGroup;
+ALTER TABLE tResourceGroup ADD COLUMN containerType VARCHAR(63);
+LOAD DATA LOCAL INFILE '/var/www/database/seedData/groups.csv' INTO TABLE tResourceGroup FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"';
+DELETE FROM tResourceType;
+ALTER TABLE tResourceType ADD COLUMN inventoryType VARCHAR(63);
+LOAD DATA LOCAL INFILE '/var/www/database/seedData/tResourceType.txt' INTO TABLE tResourceType;

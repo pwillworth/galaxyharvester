@@ -1,0 +1,13 @@
+Update: Resource List Collapsing and More
+
+<p>Rontos, Eopies, and Banthas are likely going extinct as everyone scours Tatooine harvesting <a href="http://gh.apex-games.net/resource.py/1/wanim">this stuff</a>.  If you can take a break from harvesting Herbivore meat for a little bit, you might want to check out a couple new features available here today.</p>
+<br />
+<ul>
+<li>Added option to collapse top level categories of resources on the <a href="http://gh.apex-games.net/resourceList.py">Resource List</a>.  (Your view must be set to "By Type" to see the arrows on the right side that let you collapse the section.)</li>
+<li>Added text next to the inner groups on the resource list indicating what resource types within that group are currently unavailable or not reported.  This should be handy to easily see what organics need to be surveyed or to quickly see what inorganics are not in spawn right now.</li>
+<li>Added option when viewing a schematic to exclude a group of qualities when determining the best resources.  Just un-check the box next to group title, and the resource lists will refresh.</li>
+<li>Improved the way the algorithm determines best resources for a profession or crafting group.  Resources that did not have all the stats utilized by the group were getting too much weight and being driven to the top.</li>
+</ul>
+
+Till next time!<br />
+-ioscode

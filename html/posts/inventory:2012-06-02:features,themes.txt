@@ -1,0 +1,7 @@
+Resource Inventory
+
+<p>There are some upgrades to the <a href="http://galaxyharvester.net/myResources.py">Favorites</a> page today.  You can now enter amounts for your resources there.  This can allow you to keep track of how much you have of a resource, or how much you want to collect, etc.  You will also notice an indicator for the resource availability stats in each row now.</p>
+
+<p>There's also a new theme!  It's called Hutt, and it's meant to look like the Hutt interface style in game.  Tons 'o green.  Go to your profile page and try it out if you like that color scheme.</p>
+
+<p>-ioscode</p>

@@ -1,0 +1,263 @@
+6	craftArmorLightLayersGroupA	Layers I
+6	craftArmorLightLayersGroupB	Layers II
+6	craftArmorLightLayersGroupC	Layers III
+6	craftArmorLightLayersGroupD	Layers IV
+6	craftArmorLightLayersGroupE	Master Armorsmith
+6	craftArmorPersonalGroupA	Novice Armorsmith
+6	craftArmorPersonalGroupB	Personal Armor I
+6	craftArmorPersonalGroupC	Personal Armor II
+6	craftArmorPersonalGroupD	Personal Armor III
+6	craftArmorPersonalGroupE	Personal Armor IV
+6	craftArmorPersonalGroupF	Master Armorsmith
+6	craftArmorShieldsGroupA	Deflectors I
+6	craftArmorShieldsGroupB	Deflectors II
+6	craftArmorShieldsGroupC	Deflectors III
+6	craftArmorShieldsGroupD	Deflectors IV
+1	craftArtisanDomesticGroupA	Domestic Arts I
+1	craftArtisanDomesticGroupB	Domestic Arts II
+1	craftArtisanDomesticGroupC	Domestic Arts III
+1	craftArtisanDomesticGroupD	Domestic Arts IV
+1	craftArtisanEngineeringGroupA	Engineering I
+1	craftArtisanEngineeringGroupB	Engineering II
+1	craftArtisanEngineeringGroupC	Engineering III
+1	craftArtisanEngineeringGroupD	Engineering IV
+1	craftArtisanMasterGroupA	Master Artisan
+1	craftArtisanNewbieGroupA	Novice Artisan
+1	craftArtisanNewbieGroupB	Novice Artisan
+1	craftArtisanSurveyGroupA	Novice Artisan
+1	craftArtisanToolGroupA	Engineering I
+1	craftArtisanVehicle	Master Artisan
+16	craftClothingCasualGroupA	Casual Wear I
+16	craftClothingCasualGroupB	Casual Wear II
+16	craftClothingCasualGroupC	Casual Wear III
+16	craftClothingCasualGroupD	Casual Wear IV
+16	craftClothingFieldGroupA	Field Wear I
+16	craftClothingFieldGroupB	Field Wear II
+16	craftClothingFieldGroupC	Field Wear III
+16	craftClothingFieldGroupD	Field Wear IV
+16	craftClothingFormalGroupA	Formal Wear I
+16	craftClothingFormalGroupB	Formal Wear II
+16	craftClothingFormalGroupC	Formal Wear III
+16	craftClothingFormalGroupD	Formal Wear IV
+16	craftClothingMaster	Master Tailor
+16	craftClothingNoviceGroupA	Novice Tailor
+16	craftClothingNoviceGroupB	Novice Tailor
+16	craftClothingNoviceGroupC	Novice Tailor
+5	craftInstallationGroupAA	Novice Architect
+5	craftInstallationGroupA	Installations I
+5	craftInstallationGroupB	Installations II
+5	craftInstallationGroupC	Installations III
+5	craftInstallationGroupD	Installations IV
+2	craftInstrumentGroupA	Novice Entertainer
+2	craftInstrumentGroupB	Musicianship II
+12	craftInstrumentGroupC	Novice Musician
+12	craftInstrumentGroupD	Musical Techniques II
+12	craftInstrumentGroupE	Musical Techniques III
+12	craftInstrumentGroupF	Technique Specialist IV
+13	craftRangerCamoGroupA	Wayfaring I
+13	craftRangerCamoGroupB	Wayfaring II
+13	craftRangerCamoGroupC	Wayfaring III
+13	craftRangerCamoGroupD	Wayfaring IV
+13	craftRangerCamoGroupMaster	Master Ranger
+13	craftRangerCampGroupA	Novice Ranger
+13	craftRangerCampGroupB	Frontiering II
+13	craftRangerCampGroupC	Frontiering IV
+13	craftRangerTrapGroupA	Advanced Trapping II
+13	craftRangerTrapGroupB	Advanced Trapping III
+4	craftScoutCampGroupA	Novice Scout
+4	craftScoutCampGroupB	Survival II
+4	craftScoutCampGroupC	Survival IV
+4	craftScoutTrapGroupA	Trapping I
+4	craftScoutTrapGroupB	Trapping II
+4	craftScoutTrapGroupC	Trapping III
+4	craftScoutTrapGroupD	Trapping IV
+4	craftScoutTrapGroupNovice	Novice Scout
+15	craftSmugglerSpiceA	Spices I
+15	craftSmugglerSpiceB	Spices II
+15	craftSmugglerSpiceC	Spices III
+15	craftSmugglerSpiceD	Spices IV
+15	craftSmugglerSpiceNovice	Novice Smuggler
+15	craftSmugglerToolsA	Novice Smuggler
+15	craftSmugglerToolsB	Slicing II
+15	craftSmugglerToolsC	Slicing IV
+17	craftWeaponMeleeGroupA	Novice Weaponsmith
+17	craftWeaponMeleeGroupB	Intermediate Melee Weapons Crafting
+17	craftWeaponMeleeGroupC	Advanced Melee Weapons Crafting
+17	craftWeaponMeleeGroupD	Expert Melee Weapons Crafting
+17	craftWeaponMeleeGroupE	Master Melee Weapons Crafting
+17	craftWeaponMeleeGroupF	Master Weaponsmith
+17	craftWeaponRangedGroupA	Novice Weaponsmith
+17	craftWeaponRangedGroupB	Intermediate Firearms Crafting
+17	craftWeaponRangedGroupC	Advanced Firearms Crafting
+17	craftWeaponRangedGroupD	Expert Firearms Crafting
+17	craftWeaponRangedGroupE	Master Firearms Crafting
+17	craftWeaponRangedGroupF	Master Weaponsmith
+8	craftFoodNoviceGroupA	Novice Chef
+8	craftFoodNoviceGroupB	Novice Chef
+8	craftFoodNoviceGroupC	Novice Chef
+8	craftFoodDishGroupA	Entrees I
+8	craftFoodDishGroupB	Entrees II
+8	craftFoodDishGroupC	Entrees III
+8	craftFoodDishGroupD	Entrees IV
+8	craftFoodDessertGroupA	Desserts I
+8	craftFoodDessertGroupB	Desserts II
+8	craftFoodDessertGroupC	Desserts III
+8	craftFoodDessertGroupD	Desserts IV
+8	craftFoodDrinkGroupA	Mixology I
+8	craftFoodDrinkGroupB	Mixology II
+8	craftFoodDrinkGroupC	Mixology III
+8	craftFoodDrinkGroupD	Mixology IV
+8	craftFoodMaster	Master Chef
+11	craftdroidGroupA	Novice Droid Engineer
+11	craftdroidgenmodGroupA	Novice Droid Engineer
+11	craftdroiddefmodGroupA	Novice Droid Engineer
+11	craftdroidGroupB	Intermediate Droid Blueprints
+11	craftdroidgenmodGroupB	Intermediate Droid Production
+11	craftdroiddefmodGroupB	Intermediate Droid Construction Techniques
+11	craftdroidGroupC	Advanced Droid Blueprints
+11	craftdroidgenmodGroupC	Advanced Droid Production
+11	craftdroiddefmodGroupC	Advanced Droid Construction Techniques
+11	craftdroidGroupD	Expert Droid Blueprints
+11	craftdroidgenmodGroupD	Expert Droid Production
+11	craftdroiddefmodGroupD	Expert Droid Construction Techniques
+11	craftdroidgenmodGroupDD	Master Droid Engineer
+11	craftdroidGroupE	Master Droid Blueprints
+11	craftdroidgenmodGroupE	Master Droid Production
+11	craftdroiddefmodGroupE	Master Droid Construction Techniques
+11	craftdroidGroupF	Master Droid Engineer
+11	craftdroidgenmodGroupF	Master Droid Engineer
+11	craftdroiddefmodGroupF	Master Droid Engineer
+11	craftDroidRepairCompA	Novice Droid Engineer
+11	craftDroidRepairCompB	Master Droid Engineer
+11	craftDroidWoundRepairA	Intermediate Droid Construction Techniques
+11	craftDroidWoundRepairB	Advanced Droid Construction Techniques
+11	craftDroidWoundRepairC	Expert Droid Construction Techniques
+11	craftDroidWoundRepairD	Master Droid Construction Techniques
+11	craftDroidDamageRepairA	Intermediate Droid Refinement
+11	craftDroidDamageRepairB	Advanced Droid Refinement
+11	craftDroidDamageRepairC	Expert Droid Refinement
+11	craftDroidDamageRepairD	Master Droid Refinement
+5	craftFurnitureGroupAA	Novice Architect
+5	craftFurnitureGroupA	Furniture I
+5	craftFurnitureGroupB	Furniture II
+5	craftFurnitureGroupC	Furniture III
+5	craftFurnitureGroupD	Furniture IV
+5	craftFurnitureGroupE	Master Architect
+17	craftGrenadeGroupA	Master Weaponsmith
+17	craftGrenadeGroupB	Master Weaponsmith
+17	craftGrenadeGroupC	Master Weaponsmith
+3	craftMedicineComponentGroupA	Novice Medic
+3	craftMedicineComponentGroupB	Organic Chemistry II
+9	craftMedicineComponentGroupC	Novice Combat Medic
+3	craftMedicineComponentGroupD	Organic Chemistry IV
+9	craftMedicineComponentGroupE	Advanced Combat Medicine Crafting
+3	craftMedicineStimpackGroupA	Novice Medic
+3	craftMedicineStimpackGroupB	Organic Chemistry II
+3	craftMedicineStimpackGroupC	Organic Chemistry IV
+3	craftMedicineStimpackGroupD	Master Medic
+10	craftMedicineStimpackGroupE	Expert Doctor's Medicine Crafting
+3	craftMedpackGroupA	Organic Chemistry I
+3	craftMedpackGroupB	Organic Chemistry III
+10	craftMedpackGroupC	Advanced Doctor's Medicine Crafting
+10	craftMedpackGroupD	Master Doctor's Medicine Crafting
+10	craftMedpackGroupE	Master Doctor
+3	craftMedpackBGroupA	Organic Chemistry III
+3	craftMedpackBGroupB	Organic Chemistry IV
+10	craftMedpackBGroupC	Expert Doctor's Medicine Crafting
+10	craftMedpackBGroupD	Master Doctor's Medicine Crafting
+10	craftMedpackBGroupE	Master Doctor
+10	craftMedpackEnhanceGroupA	Intermediate Doctor's Medicine Crafting
+10	craftMedpackEnhanceGroupB	Advanced Doctor's Medicine Crafting
+10	craftMedpackEnhanceGroupC	Expert Doctor's Medicine Crafting
+10	craftMedpackEnhanceGroupD	Master Doctor's Medicine Crafting
+10	craftMedpackBEnhanceGroupA	Advanced Doctor's Medicine Crafting
+10	craftMedpackBEnhanceGroupB	Expert Doctor's Medicine Crafting
+10	craftMedpackBEnhanceGroupC	Master Doctor's Medicine Crafting
+10	craftMedpackBEnhanceGroupD	Master Doctor
+17	craftMunitionsGroupA	Novice Weaponsmith
+17	craftMunitionsGroupB	Intermediate Munitions Crafting
+17	craftMunitionsGroupC	Advanced Munitions Crafting
+17	craftMunitionsGroupD	Expert Munitions Crafting
+17	craftMunitionsGroupE	Master Munitions Crafting
+17	craftMunitionsGroupF	Master Weaponsmith
+9	craftStimpackRangeGroupA	Novice Combat Medic
+9	craftStimpackRangeGroupB	Intermediate Combat Medicine Crafting
+9	craftStimpackRangeGroupC	Advanced Combat Medicine Crafting
+9	craftStimpackRangeGroupD	Expert Combat Medicine Crafting
+9	craftStimpackRangeGroupE	Master Combat Medicine Crafting
+10	craftStimpackStateGroupA	Novice Doctor
+10	craftStimpackStateGroupB	Intermediate Doctor's Medicine Crafting
+10	craftCurePoisonGroupA	Novice Doctor
+10	craftCurePoisonGroupB	Advanced Doctor's Medicine Crafting
+10	craftCurePoisonGroupC	Master Doctor's Medicine Crafting
+10	craftCureDiseaseGroupA	Intermediate Doctor's Medicine Crafting
+10	craftCureDiseaseGroupB	Expert Doctor's Medicine Crafting
+10	craftCureDiseaseGroupC	Master Doctor
+9	craftApplyPoisonGroupA	Novice Combat Medic
+9	craftApplyPoisonGroupB	Advanced Combat Medicine Crafting
+9	craftApplyPoisonGroupC	Master Combat Medicine Crafting
+9	craftApplyPoisonAreaGroupA	Intermediate Combat Medicine Crafting
+9	craftApplyPoisonAreaGroupB	Expert Combat Medicine Crafting
+9	craftApplyPoisonAreaGroupC	Master Combat Medic
+9	craftApplyDiseaseGroupA	Intermediate Combat Medicine Crafting
+9	craftApplyDiseaseGroupB	Expert Combat Medicine Crafting
+9	craftApplyDiseaseGroupC	Master Combat Medic
+9	craftApplyDiseaseAreaGroupA	Advanced Combat Medicine Crafting
+9	craftApplyDiseaseAreaGroupB	Master Combat Medicine Crafting
+9	craftApplyDiseaseAreaGroupC	Master Combat Medic
+5	craftStructureGroupAA	Novice Architect
+5	craftStructureGroupA	Buildings I
+5	craftStructureGroupB	Buildings II
+5	craftStructureGroupC	Buildings III
+5	craftStructureGroupD	Buildings IV
+5	craftStructureGroupE	Master Architect
+7	craftBasicTissueGroup	Novice Bio-Engineer
+7	craftBasicCreatureGroup	Novice Bio-Engineer
+7	craftDomesticCreatureGroupA	Clone Engineering I
+7	craftAggressiveCreatureGroupA	Clone Engineering II
+7	craftDomesticCreatureGroupB	Clone Engineering III
+7	craftAggressiveCreatureGroupB	Clone Engineering IV
+7	craftTissueGroupA	Tissue Engineering I
+7	craftTissueGroupB	Tissue Engineering II
+7	craftTissueGroupC	Tissue Engineering III
+7	craftTissueGroupD	Tissue Engineering IV
+7	craftAdvancedCreatureGroup	Master Bio-Engineer
+7	craftAdvancedTissueGroup	Master Bio-Engineer
+17	craftWookieItems	Master Weaponsmith
+18	craftJediStuff	Jedi Skill
+18	craftJediTool	Jedi Skill
+18	craftSaberTraining	Jedi Skill
+18	craftSaberNovice	Jedi Skill
+18	craftSaberOneHand2	Jedi Skill
+18	craftSaberOneHand3	Jedi Skill
+18	craftSaberOneHand5	Jedi Skill
+18	craftSaberTwoHand2	Jedi Skill
+18	craftSaberTwoHand3	Jedi Skill
+18	craftSaberTwoHand5	Jedi Skill
+18	craftSaberPoleArm2	Jedi Skill
+18	craftSaberPoleArm3	Jedi Skill
+18	craftSaberMaster	Jedi Skill
+18	craftSaberPoleArm5	Jedi Skill
+5	craftPlayerCityA	Construction I
+5	craftPlayerCityB	Construction II
+5	craftPlayerCityC	Construction III
+5	craftPlayerCityD	Construction IV
+5	craftPlayerCityE	Master Architect
+14	craftShipwrightNoviceGroupA	Novice Shipwright
+14	craftShipwrightEngGroupA	Spaceframe Engineering I
+14	craftShipwrightEngGroupB	Spaceframe Engineering II
+14	craftShipwrightEngGroupC	Spaceframe Engineering III
+14	craftShipwrightEngGroupD	Spaceframe Engineering IV
+14	craftShipwrightPropulsionGroupA	Propulsion Technology I
+14	craftShipwrightPropulsionGroupB	Propulsion Technology II
+14	craftShipwrightPropulsionGroupC	Propulsion Technology III
+14	craftShipwrightPropulsionGroupD	Propulsion Technology IV
+14	craftShipwrightSystemsGroupA	Core Systems I
+14	craftShipwrightSystemsGroupB	Core Systems II
+14	craftShipwrightSystemsGroupC	Core Systems III
+14	craftShipwrightSystemsGroupD	Core Systems IV
+14	craftShipwrightDefenseGroupA	Defense Systems I
+14	craftShipwrightDefenseGroupB	Defense Systems II
+14	craftShipwrightDefenseGroupC	Defense Systems III
+14	craftShipwrightDefenseGroupD	Defense Systems IV
+14	craftShipwrightMaster	Master Shipwright

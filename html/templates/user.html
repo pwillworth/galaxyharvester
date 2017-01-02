@@ -1,0 +1,223 @@
+{% import 'blocks.html' as blocks %}
+<!DOCTYPE html>
+<html lang="en"><head><title>Users - Galaxy Harvester</title>
+<link rel="stylesheet" href="/style/ghCore.css" type="text/css" />
+<link rel="stylesheet" href="/style/themes/{{ uiTheme }}.css" type="text/css" id="colorStyle" />
+<script type="text/javascript" src="/js/ghShared.js"></script>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
+    $("#harvesterData").load("getHarvesterData.py",{galaxy:$("#galaxySel").val(), uid:"{{ uid }}"}, function(){$("#addBusyImgHD").css("display","none");});
+    $("#userHistory").load("getUserHistory.py",{galaxy:$("#galaxySel").val(), uid:"{{ uid }}"}, function(){$("#addBusyImgUH").css("display","none");});
+{% if uid|length < 1 %}
+	    $("#harvesterDataC").load("getHarvesterData.py",{galaxy:$("#galaxySel").val(),period:"current"},function(){$("#addBusyImgHDC").css("display","none");});
+	    $("#harvesterDataG").load("getHarvesterData.py",{galaxy:$("#galaxySel").val(),period:"category"},function(){$("#addBusyImgHDG").css("display","none");});
+	    $("#memberData").load("getMemberList.py",{galaxy:$("#galaxySel").val()}, function(){$("#addBusyImgMD").css("display","none");});
+{% else %}
+	    $("#friendList").load("getFriendsList.py",{uid:"{{ uid }}"}, function(){$("#flBusyImg").css("display","none");});
+{% endif %}
+    $(".window .close").click(function(e) {
+        e.preventDefault();
+        $("#mask, .window").hide();
+    });
+    $("#mask").click(function() {
+        $(this).hide();
+        $(".window").hide();
+    });
+    $("#themeSel").change(function() {
+        // switch color style css when select changes
+        $("#colorStyle").attr("href","/style/themes/"+this.value+".css");
+    });
+{% if (loggedin == 1 and currentUser == uid) %}
+	    $("#themeSel").val("{{ uiTheme }}");
+	    $("#inGameInfo").val("{{ convertGI }}");
+{% endif %}
+});
+function moreFriends(lastFriend, dir) {
+    $('#friendList').html('<div id="flBusyImg"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>');
+    $.get("getFriendsList.py",{uid:"{{ uid }}", lastUser: lastFriend, direction: dir},
+        function(data) {
+            if (data.indexOf("Error:") == -1) {
+                $("#friendList").html(data);
+            } else {
+                $("#friendList").html("");
+            }
+            $("#flBusyImg").css("display","none");
+        }, "html");
+}
+function moreHistory(lastTime) {
+    $.get("getUserHistory.py",{galaxy:$("#galaxySel").val(), uid:"{{ uid }}", lastTime: lastTime},
+        function(data) {
+            $("#moreButton").remove();
+            $("#userHistory").append(data);
+        }, "html");
+}
+function udPassword() {
+    var thePwd = document.getElementById("userpass").value;
+    var sid = "{{ sid }}";
+    $("#udInfo").load("udPassword.py",{userpass:thePwd,gh_sid:sid});
+}
+function udEmail() {
+    var theEmail = document.getElementById("email").value;
+    var sid = "{{ sid }}";
+    $("#udInfo").load("udEmail.py",{email:theEmail,gh_sid:sid});
+}
+function udOther() {
+    var theTheme = document.getElementById("themeSel").value;
+    var ign = document.getElementById("inGameInfo").value;
+    var alerts = 0;
+    if ($("#oHome").attr("checked") == "checked") {
+      alerts += 1;
+    }
+    if ($("#oEmail").attr("checked") == "checked") {
+      alerts += 2;
+    }
+    if ($("#oMobile").attr("checked") == "checked") {
+      alerts += 4;
+    }
+    if (ign.length > 255) {
+        alert("Your in game info must be 255 characters or less.");
+        return false;
+    }
+    $("#udInfo").animate({opacity: 0.0, fontSize: "1em"}, 200);
+    $("#udInfo").load("udUserOther.py",{uiTheme:theTheme, inGameInfo: ign, defaultAlerts: alerts, gh_sid: "{{ sid }}"},
+        function(){$("#udInfo").animate({opacity: 1.0, fontSize: "2em"}, 700);});
+}
+</script>
+{{ blocks.pageTracker() }}
+<body>
+{{ blocks.headerSection(loggedin, currentUser, loginResult, linkappend, url, imgNum, galaxyList, pictureName) }}
+<div id="mainContent" class="wrapper">
+  <div class="ghCol" style="width:35%;">
+    {% if (loggedin == 1 and currentUser == uid) %}
+    	    <div id="userForm" class="ghWidgetBox">
+    	      <span id="udInfo">
+    	{% if avatarResult != '' %}
+    		{{ avatarResult }}
+    	{% endif %}
+    	      </span>
+    	      <div class="boxHeader">User Controls</div>
+    	      <div class="newsItem"><h3>Avatar</h3><form enctype="multipart/form-data" name="udAvatarForm" method="post" action="udUserImage.py">
+    	      <input type="file" id="avatar" name="avatar" accept="image/gif, image/jpeg, image/png" />
+    	      <input type="hidden" name="src_url" value="user.py" />
+    	      <input type="submit" value="Update" name="goavatar" id="goavatar" class="ghButton" />
+    	      </form></div>
+    	      <div class="newsItem"><h3>E-mail Address</h3>
+    	      <input type="text" id="email" size="24" maxlength="255" onchange="valEmail(this)" value="{{ email }}"/>
+    	      <button name="goemail" id="goemail" onClick="udEmail()" class="ghButton">Update e-mail</button>
+    	      <span id="emailInf" class="formMsg">Please enter a valid e-mail address.</span>
+    	      </div>
+    	      <div class="newsItem"><h3>Password Change</h3>
+              <button name="gopwd" id="gopwd" onClick="udPassword()" class="ghButton" style="float:right;">Update Password</button>
+    	        <span>Password: </span>
+    	        <input type="password" id="userpass" size="12" maxlength="16" onchange="valPass(this)" id="userpass" />
+    	        <span id="passInf" class="formMsg">Password must be at least 6 characters.</span><br />
+    	        <span>Verify Pwd: </span>
+    	        <input type="password" id="verifypass" size="12" maxlength="16" onchange="valVpass(&quot;userpass&quot;,this)" />
+    	        <span id="vpassInf" class="formMsg">Passwords do not match.</span>
+            </div>
+    	      <div class="newsItem"><h3>Other Info</h3>
+              <button name="goother" id="goother" onClick="udOther()" class="ghButton" style="float:right;">Save</button>
+    	        <h3>In Game Names:</h3><textarea id="inGameInfo" rows="3" cols="20"></textarea>
+    	        <h3>Theme: </h3><select id="themeSel" name="themeSel">
+    	{{ themeList }}
+    	        </select>
+              <h3>Default Alert Types</h3>
+              <table class="resourceStats"><tr>
+                <th class="tableHead"><img src="/images/browser16.png"/>Site</th>
+                <th class="tableHead"><img src="/images/email16.png"/>E-mail</th>
+                <th class="tableHead"><img src="/images/mobile16.png"/>Mobile</th>
+              </tr><tr class="statRow">
+                <td align='center'><input type="checkbox"{{ siteAlertCheckStr }} id="oHome" /></td>
+                <td align='center'><input type="checkbox"{{ emailAlertCheckStr }} id="oEmail"/></td>
+                <td align='center'><input type="checkbox"{{ mobileAlertCheckStr }} id="oMobile"/></td>
+    	        </tr></table>
+    	      </div>
+    	    </div>
+    {% endif %}
+    <div id="userStats" class="ghWidgetBox">
+    <div class="boxHeader">User Stats</div>
+{% if uid|length < 1 %}
+	    <h4 class="sectionHead">All Time</h4>
+{% endif %}
+    <div id="harvesterData"></div>
+    <div id=addBusyImgHD><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+{% if uid|length < 1 %}
+	    <h4 class="sectionHead">Adds by Category</h4>
+	    <div id="harvesterDataG"></div>
+	    <div id=addBusyImgHDG><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+	    <h4 class="sectionHead">Current Spawns</h4>
+	    <div id="harvesterDataC"></div>
+	    <div id=addBusyImgHDC><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+{% endif %}
+    </div>
+{% if uid|length < 1 %}
+	    <div id="userList" class="ghWidgetBox">
+	    <div class="boxHeader">All Time Resource Add Ranking</div>
+	    <div id="memberData"></div>
+	    <div id=addBusyImgMD><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+	    </div>
+{% endif %}
+  </div>
+  <div class="ghCol" style="width:65%;">
+    <div class="ghWidgetBox">
+{% if uid != '' %}
+	    <div class="boxHeader"><h2>{{ [donorBadge, uid]|join }}
+	{% if (loggedin == 1 and currentUser != uid) %}
+		    <span id="friendStatus">
+		{% if tmpStat == 2 %}
+			    <img src="/images/rStar16.png" title="' + uid + ' has added you to their friends list." />
+			    <img src="/images/xGrey16.png" title="Click to remove from friends list." onclick="removeFriend(\'' + uid + '\')" />
+		{% elif tmpStat == 1 %}
+			    <img src="/images/eStar16.png" title="You have added ' + uid + ' to your friends list." />
+			    <img src="/images/xGrey16.png" title="Click to remove from friends list." onclick="removeFriend(\'' + uid + '\')" />
+		{% else %}
+			    <button type=button value="Add To Friends" class="ghButton" onclick="addFriend('{{ uid }}');">Add To Friends</button>
+		{% endif %}
+		    </span>
+	{% endif %}
+	    </h2></div>
+	    <div id="profileData" style="height:240px;">
+	      <div style="float:left;height:140px;"><img class="largeAvatar" src="/images/users/{{ userPictureName }}" /></div>
+	      <div style="float:left;height:128px;padding:4px;"><div style="font-size: 14px;font-weight:bold;">{{ userTitle }}</div>
+	      <div>{{ joinedStr }}</div>
+	      <br /><h4>In Game Info</h4>{{ convertGI }}</div>
+	      <div style="float:right;"><h4>Friends {{ friendCountStr }}</h4><div id="friendList">
+	      <div id="flBusyImg"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div></div>
+	      </div>
+	      <div style="clear:both;"></div>
+	      <div id="userStats">
+	        <div id="resourceScoreInfo" style="text-align:center;" class="inlineBlock" title="Resource Score"><span style="font-weight:bold;">{{ resScore }}</span><br/><img style="background-color: {{ resColor }};" src="/images/resScoreIcon.png" /><br /></div>
+	        <div id="mappingScoreInfo" style="text-align:center;" class="inlineBlock" title="Mapping Score"><span style="font-weight:bold;">{{ mapScore }}</span><br/><img style="background-color: {{ mapColor }};" src="/images/mapScoreIcon.png" /><br /></div>
+	        <div id="reputationInfo" style="text-align:center;" class="inlineBlock" title="Reputation Score"><span style="font-weight:bold;">{{ reputation }}</span><br/><img style="background-color: {{ repColor }};" src="/images/repIcon.png" /><br /></div>
+	      </div>
+	    </div>
+{% else %}
+	    <h3>Top Harvesters Charts</h3>
+	    <div id="byCategoryCharts" class="charts">
+	    <div class="inlineBlock">All Time Top Creature Resource Adders<br />
+	    <img src="{{ chart1URL }}" alt="Top Creature Resource Adders" title="Top Creature Resource Adders" /></div>
+	    <div class="inlineBlock">All Time Top Inorganic Resource Adders<br />
+	    <img src="{{ chart2URL }}" alt="Top Inorganic Resource Adders" title="Top Inorganic Resource Adders" /></div>
+	    <div class="inlineBlock">All Time Top Flora Resource Adders<br />
+	    <img src="{{ chart3URL }}" alt="Top Flora Resource Adders" title="Top Flora Resource Adders" /></div>
+	    </div><div id="byActionCharts" class="charts">
+	    <div class="inlineBlock">All Time Top Cleanup<br />
+	    <img src="{{ chart4URL }}" alt="Top Cleanup" title="Top Cleanup" /></div>
+	    <div class="inlineBlock">All Time Top Planet Adds<br />
+	    <img src="{{ chart5URL }}" alt="Top Planet Adders" title="Top Planet Adders" /></div>
+	    <div class="inlineBlock">All Time Top Verifiers<br />
+	    <img src="{{ chart6URL }}" alt="Top Veifiers" title="Top Resource Verifiers" /></div>
+	    </div>
+{% endif %}
+    <br /><h3 style="clear:both;">Recent Activity</h3>
+    <div id="userHistory"></div>
+    <div id=addBusyImgUH><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+    </div>
+  </div>
+</div>
+{{ blocks.pageFooter() }}
+{{ blocks.joinForm(loggedin, ['?src_url=user.py&', linkappend], url) }}
+<div id="mask"></div>
+</body></html>

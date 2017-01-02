@@ -1,0 +1,8 @@
+Update new View and Resource History
+
+<p>Couple new features available today on the <a href="/resourceList.py">Available Resources</a> page.  You can now find some view options at the top of the resource list.  You can now select to view the list by time, which sorts it by either the resource entered, verified, or unavailable date.  I'm thinking the most common use for this might be sorting by entered time to see the latest resources entered since the last time you checked the site.  Sometimes when a shift happens and lots of resources get entered, the short list on the homepage might not include everything that's been put in since your last visit.</p>
+<br />
+<p>Another smaller feature you may notice is that resource names on the available resources page are now links.  If you click them, it takes you to another page with information for just that resource including its complete history of events.  These pages will be expanded on in the future.  Because of the way you link to that page, it could also be a useful way to check if a resource exists or not.  If you type in your browser address bar http://gh.apex-games.net/gh/resource.py/1/imanewres for example, you get a little message that says that resource doesn't exist.  Replace "imanewres" with any resource name you want to check and if it exists it will go to its page, if not you get that message.</p>
+<br />
+<br />
+<b>Enjoy!<b>

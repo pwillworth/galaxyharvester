@@ -1,0 +1,14 @@
+Honor and Performance
+
+<p>Putting out a small update today, mostly small performance tweaks to resource lists and a couple bug fixes.  Along with it though is honorary user titles.  If you click on a user name to go to someones profile page, you will now see a title associated with each person based on their activity on the site.  Click the profile link up top to check out your own!</p>
+
+<p>Details of tweaks:</p>
+<ul>
+<li>Improved performance of some small image retrieval.</li>
+<li>Shortened time to populate hidden groups on resource list page.</li>
+<li>Fixed bug causing resource list groups to sometimes populate twice if clicked.</li>
+<li>Switched to smaller busy wait image graphic.</li>
+<li>Added total counts for current and all time spawns on home page.</li>
+</ul>
+<br/>
+<p>-ioscode</p>

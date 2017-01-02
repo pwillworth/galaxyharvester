@@ -1,0 +1,11 @@
+Alerts
+
+<p>At long last a new feature has been released.  A new tool called My Alerts lets you pick a resource type or group and enter minimum stat values you are looking for.  If a resource is added that has at least the minimum on all stats you specified, you will be notified, either by a list on the home page, an email, or both, depending on your selection.  You will only be notified if all the minimums on a row you specify are met, so if you want to be notified if one stat OR a another stat of the same resource meets a minimum, you should make two separate alert rows for that.  Go to the <a href="http://galaxyharvester.net/myAlerts.py">My Alerts</a> page and set up your alerts now.</p>
+
+<p>A couple smaller updates are also published today:</p>
+<ul>
+<li>The xml and csv file links should no longer forget what galaxy you have selected and give you the link for the right galaxy.</li>
+<li>Buttons to add a waypoint have been added to the home page and the individual resource pages.</li>
+<ul>
+<br/>
+<p>-ioscode</p>

@@ -1,0 +1,60 @@
+aluminum_|PLANET|	|PLANETIAN| Aluminum	mineral	aluminum	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	aluminum	aluminum	|PLANETID|
+copper_|PLANET|	|PLANETIAN| Copper	mineral	copper	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	copper	copper	|PLANETID|
+armophous_|PLANET|	|PLANETIAN| Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	|PLANETID|
+crystalline_|PLANET|	|PLANETIAN| Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	|PLANETID|
+gas_inert_|PLANET|	|PLANETIAN| Inert Gas	gas	gas_inert	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	|PLANETID|
+gas_reactive_|PLANET|	|PLANETIAN| Reactive Gas	gas	gas_reactive	1	1	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_reactive	gas_reactive	|PLANETID|
+iron_|PLANET|	|PLANETIAN| Iron	mineral	iron	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	iron	metal_ferrous	|PLANETID|
+ore_extrusive_|PLANET|	|PLANETIAN| Extrusive Ore	mineral	ore_extrusive	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	|PLANETID|
+ore_intrusive_|PLANET|	|PLANETIAN| Intrusive Ore	mineral	ore_intrusive	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	|PLANETID|
+ore_carbonate_|PLANET|	|PLANETIAN| Carbonate Ore	mineral	ore_carbonate	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_carbonate	ore_carbonate	|PLANETID|
+ore_siliclastic_|PLANET|	|PLANETIAN| Siliclastic Ore	mineral	ore_siliclastic	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_siliclastic	ore_siliclastic	|PLANETID|
+petrochem_fuel_liquid_|PLANET|	|PLANETIAN| Liquid Petrochem Fuel	chemical	fuel_petrochem_liquid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	|PLANETID|
+petrochem_fuel_solid_|PLANET|	|PLANETIAN| Solid Petrochem Fuel	mineral	fuel_petrochem_solid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	|PLANETID|
+radioactive_|PLANET|	|PLANETIAN| Radioactive	mineral	radioactive	1	2	0	0	0	0	1	800	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	radioactive	radioactive	|PLANETID|
+steel_|PLANET|	|PLANETIAN| Steel	mineral	steel	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	steel	steel	|PLANETID|
+bone_avian_|PLANET|	|PLANETIAN| Avian Bones	creature_structural	bone_avian	1	1	0	0	0	0	1	700	0	0	0	0	1	600	0	0	1	1000	100	500	1	500	0	0	bone	bone	|PLANETID|
+bone_horn_|PLANET|	|PLANETIAN| Horn	creature_structural	bone_horn	1	1	0	0	0	0	200	1000	0	0	0	0	1	500	0	0	1	1000	300	700	1	500	0	0	bone	bone_horn	|PLANETID|
+bone_mammal_|PLANET|	|PLANETIAN| Animal Bones	creature_structural	bone	1	1	0	0	0	0	300	1000	0	0	0	0	1	500	0	0	1	1000	400	1000	1	1000	0	0	bone	bone	|PLANETID|
+corn_domesticated_|PLANET|	|PLANETIAN| Domesticated Corn	flora_food	corn_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	corn	|PLANETID|
+corn_wild_|PLANET|	|PLANETIAN| Wild Corn	flora_food	corn_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	corn	|PLANETID|
+energy_renewable_site_limited_geothermal_|PLANET|	|PLANETIAN| Geothermal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	|PLANETID|
+energy_renewable_site_limited_hydron3_|PLANET|	|PLANETIAN| Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	|PLANETID|
+energy_renewable_site_limited_tidal_|PLANET|	|PLANETIAN| Tidal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	|PLANETID|
+energy_renewable_unlimited_solar_|PLANET|	|PLANETIAN| Solar Renewable Energy	energy	energy_renewable_unlimited_solar	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	600	500	500	0	0	0	0	0	0	energy	energy	|PLANETID|
+energy_renewable_unlimited_wind_|PLANET|	|PLANETIAN| Wind Renewable Energy	energy	energy_renewable_unlimited_wind	1	1	0	0	0	0	0	0	0	0	0	0	0	0	1	400	500	500	0	0	0	0	0	0	energy	energy	|PLANETID|
+fiberplast_|PLANET|	|PLANETIAN| Fiberplast	chemical	fiberplast	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	inorganic	fiberplast	|PLANETID|
+fruit_berries_|PLANET|	|PLANETIAN| Berry Fruit	flora_food	fruit_berries	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_berries	|PLANETID|
+fruit_flowers_|PLANET|	|PLANETIAN| Flower Fruit	flora_food	fruit_flowers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	seeds	fruit_berries	|PLANETID|
+fruit_fruits_|PLANET|	|PLANETIAN| Fruit	flora_food	fruit_fruits	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_fruits	|PLANETID|
+hide_bristley_|PLANET|	|PLANETIAN| Bristley Hide	creature_structural	hide_bristley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_bristley	|PLANETID|
+hide_leathery_|PLANET|	|PLANETIAN| Leathery Hide	creature_structural	hide_leathery	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_leathery	|PLANETID|
+hide_scaley_|PLANET|	|PLANETIAN| Scaley Hide	creature_structural	hide_scaley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_scaley	|PLANETID|
+hide_wooly_|PLANET|	|PLANETIAN| Wooly Hide	creature_structural	hide_wooly	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_wooly	|PLANETID|
+meat_avian_|PLANET|	|PLANETIAN| Avian Meat	creature_food	meat_avian	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
+meat_carnivore_|PLANET|	|PLANETIAN| Carnivore Meat	creature_food	meat_carnivore	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
+meat_domesticated_|PLANET|	|PLANETIAN| Domesticated Meat	creature_food	meat_domesticated	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
+meat_egg_|PLANET|	|PLANETIAN| Egg Meat	creature_food	meat_egg	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
+meat_herbivore_|PLANET|	|PLANETIAN| Herbivore Meat	creature_food	meat_herbivore	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
+meat_insect_|PLANET|	|PLANETIAN| Insect Meat	creature_food	meat_insect	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
+meat_reptillian_|PLANET|	|PLANETIAN| Reptillian Meat	creature_food	meat_reptillian	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
+meat_wild_|PLANET|	|PLANETIAN| Wild Meat	creature_food	meat_wild	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
+milk_domesticated_|PLANET|	|PLANETIAN| Domesticated Milk	creature_food	milk_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	milk	milk	|PLANETID|
+milk_wild_|PLANET|	|PLANETIAN| Wild Milk	creature_food	milk_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	milk	milk	|PLANETID|
+oats_domesticated_|PLANET|	|PLANETIAN| Domesticated Oats	flora_food	oats_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	oats	|PLANETID|
+oats_wild_|PLANET|	|PLANETIAN| Wild Oats	flora_food	oats_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	oats	|PLANETID|
+rice_domesticated_|PLANET|	|PLANETIAN| Domesticated Rice	flora_food	rice_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	rice	|PLANETID|
+rice_wild_|PLANET|	|PLANETIAN| Wild Rice	flora_food	rice_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	rice	|PLANETID|
+seafood_crustacean_|PLANET|	|PLANETIAN| Crustacean Meat	creature_food	seafood_crustacean	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
+seafood_fish_|PLANET|	|PLANETIAN| Fish Meat	creature_food	seafood_fish	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
+seafood_mollusk_|PLANET|	|PLANETIAN| Mollusk Meat	creature_food	seafood_mollusk	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
+softwood_conifer_|PLANET|	|PLANETIAN| Conifer Wood	flora_structural	softwood	1	1	0	0	0	0	1	600	0	0	0	0	600	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	|PLANETID|
+softwood_evergreen_|PLANET|	|PLANETIAN| Evergreen Wood	flora_structural	softwood_evergreen	1	1	0	0	0	0	1	500	0	0	0	0	800	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	|PLANETID|
+vegetable_beans_|PLANET|	|PLANETIAN| Vegetable Beans	flora_food	vegetable_beans	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_beans	|PLANETID|
+vegetable_fungi_|PLANET|	|PLANETIAN| Vegetable Fungus	flora_food	vegetable_fungi	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_fungi	|PLANETID|
+vegetable_greens_|PLANET|	|PLANETIAN| Vegetable Greens	flora_food	vegetable_greens	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_greens	|PLANETID|
+vegetable_tubers_|PLANET|	|PLANETIAN| Vegetable Tubers	flora_food	vegetable_tubers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_tubers	|PLANETID|
+water_vapor_|PLANET|	|PLANETIAN| Water Vapor	water	water	1	5	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	600	1000	0	0	0	0	0	0	water	water	|PLANETID|
+wheat_domesticated_|PLANET|	|PLANETIAN| Domesticated Wheat	flora_food	wheat_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	wheat	|PLANETID|
+wheat_wild_|PLANET|	|PLANETIAN| Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	wheat	|PLANETID|
+wood_deciduous_|PLANET|	|PLANETIAN| Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	|PLANETID|

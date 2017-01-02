@@ -1,0 +1,10 @@
+Update: Themes and Avatars
+
+<p>While new tools for keeping track of all those hot resources are great, today we bring you an aesthetic update.  Besides, the Doctors know what's <a href="/resource.py/1/zile" title="uber dolovite">hot right now</a>, and Armorsmiths are digging a new trench big enough to trap a Kimogilla while harvesting <a href="/resource.py/1/yovuwyino" title="Composite armor dream ore">this stuff</a>.</p>
+<br />
+<p>So head over to your profile, which you can get to after logging in at the top right corner of the page and personalize your Galaxy Harvester experience a bit.  You can now upload an Avatar image for yourself there, as well as choose from a few different color themes.  Hopefully you find one you like, but if you don't, rest assured we have more themes on the way.  For now there are three new options: FS Jedi, Imperial, and Rebel.  A big thanks to Apex for giving me a hand with the theme setup.</p>
+<br />
+<p>More cool features on the way!  Till next time, may the resources be with you.</p>
+<br />
+-ioscode
+<br />

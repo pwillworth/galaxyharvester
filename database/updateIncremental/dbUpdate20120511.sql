@@ -1,0 +1,20 @@
+use swgresource;
+UPDATE tObjectType SET craftingTab=524288 WHERE craftingTab=32767;
+UPDATE tObjectType SET typeName="Misc Armor" WHERE objectType=259;
+UPDATE tObjectType SET typeName="Shield Generator" WHERE objectType=264;
+UPDATE tObjectType SET typeName="Misc" WHERE objectType=8192;
+UPDATE tObjectType SET typeName="Container" WHERE objectType=8197;
+UPDATE tObjectType SET typeName="Fishing Pole" WHERE objectType=8214;
+UPDATE tObjectType SET typeName="Droid Programming Chip" WHERE objectType=8226;
+UPDATE tObjectType SET typeName="Component" WHERE objectType=262144;
+UPDATE tObjectType SET typeName="Armor Component" WHERE objectType=262145;
+UPDATE tObjectType SET typeName="Droid Component" WHERE objectType=262148;
+UPDATE tObjectType SET typeName="Electronics Component" WHERE objectType=262149;
+UPDATE tObjectType SET typeName="Structure Component" WHERE objectType=262151;
+UPDATE tObjectType SET typeName="Ranged Weapon Powerup" WHERE objectType=524290;
+UPDATE tObjectType SET typeName="Thrown Weapon Powerup" WHERE objectType=524291;
+UPDATE tObjectType SET typeName="Mine Powerup" WHERE objectType=524293;
+UPDATE tObjectType SET typeName="Deed" WHERE objectType=8388608;
+UPDATE tObjectType SET typeName="Building Deed" WHERE objectType=8388609;
+UPDATE tObjectType SET typeName="Installation Deed" WHERE objectType=8388610;
+

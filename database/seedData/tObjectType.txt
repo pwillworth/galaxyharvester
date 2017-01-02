@@ -1,0 +1,99 @@
+objectType	typeName	craftingTab
+0	Other	524288
+257	Body Armor	2
+258	Head Armor	2
+259	Misc Armor	2
+260	Leg Armor	2
+261	Arm Armor	2
+262	Hand Armor	2
+263	Foot Armor	2
+264	Shield Generator	2
+8192	Misc	131072
+8197	Container	512
+8198	Crafting Station	512
+8200	Component	524288
+8202	Food	4
+8203	Furniture	512
+8204	Instrument	524288
+8205	Pharmaceutical	64
+8209	Firework	524288
+8211	Generic Item	524288
+8212	Trap	524288
+8213	Wearable Container	8
+8214	Fishing Pole	524288
+8216	Drink	4
+8217	Fireworks	524288
+8218	Item	32
+8224	Food Component	4
+8226	Droid Programming Chip	32
+8232	Camouflage	524288
+16396	Gaming	512
+32768	Tool	524288
+32769	Crafting Tool	524288
+32770	Survey Tool	524288
+32771	Repair Tool	524288
+32772	Camp	524288
+32773	Ship Component Repair Item	262144
+131073	Melee Weapon	1
+131075	Thrown Weapon	1
+131076	Heavy Weapon	1
+131077	Mine	1
+131078	Special Heavy Weapon 1
+131079	1-Handed Melee Weapon	1
+131080	Two-Handed Melee Weapon	1
+131081	Polearm	1
+131082	Pistol	1
+131083	Carbine	1
+131084	Rifle	1
+262144	Component	32
+262145	Armor Component	2
+262146	Chemistry Component	64
+262147	Component	8
+262148	Droid Component	32
+262149	Electronics Component	524288
+262150	Munition Component	1
+262151	Structure Component	1024
+262152	Melee Weapon Component	1
+262153	Ranged Weapon Component	1
+262154	Component	128
+262155	Component	1
+524289	Melee Powerup	524288
+524290	Ranged Weapon Powerup	524288
+524291	Thrown Weapon Powerup	524288
+524293	Mine Powerup	524288
+2097153	Ring	8
+2097154	Bracelet	8
+2097155	Necklace	8
+8388608	Deed	1024
+8388609	Building Deed	1024
+8388610	Installation Deed	1024
+8388611	Pet Deed	256
+8388612	Droid Deed	32
+8388613	Vehicle Deed	16
+16777216	Jewelry	8
+16777217	Bandolier	8
+16777218	Belt	8
+16777219	Bodysuit	8
+16777221	Cloak	8
+16777222	Footwear	8
+16777223	Dress	8
+16777224	Gloves	8
+16777226	Headwear	8
+16777227	Jacket	8
+16777228	Pants	8
+16777229	Robe	8
+16777230	Shirt	8
+16777231	Vest	8
+16777232	Wookie Wear	8
+16777233	Jewelry	8
+16777234	Skirt	8
+805306374	Repair Tool	524288
+1073741831	Booster	131072
+1073741836	Ship Chassis	131072
+1073741825	Reactor	131072
+1073741826	Engine	131072
+1073741830	Capacitor	131072
+1073741832	Droid Interface	131072
+1073741828	Armor	131072
+1073741827	Shield	131072
+1073741829	Weapon	131072

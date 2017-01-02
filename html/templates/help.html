@@ -1,0 +1,170 @@
+{% import 'blocks.html' as blocks %}
+<!DOCTYPE html>
+<html><head><title>Help - Galaxy Harvester</title>
+<link rel="stylesheet" href="/style/ghCore.css" type="text/css" />
+<link rel="stylesheet" href="/style/themes/{{ uiTheme }}.css" type="text/css" />
+<script type="text/javascript" src="/js/ghShared.js"></script>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript">
+{% if vid == '' %}
+	function resetPassword(form) {
+	    var theMail = form.umail.value;
+	    $("span#idInfo").load("resetPassword.py",{email:theMail},
+	        function(response, status, xhr) {
+	            if (status == "error") {
+	                $("#idInfo").html("Sorry, an error occurred: " + xhr.status + " " + xhr.statusText);
+	            }
+	        });
+	}
+	function showReset() {
+	    $("#resetForm").css("display","block");
+	}
+{% endif %}
+$(document).ready(function() {
+    $(".window .close").click(function(e) {
+        e.preventDefault();
+        $("#mask, .window").hide();
+    });
+    $("#mask").click(function() {
+        $(this).hide();
+        $(".window").hide();
+    });
+});
+</script>
+{{ blocks.pageTracker() }}
+<body>
+{{ blocks.headerSection(loggedin, currentUser, loginResult, linkappend, url, imgNum, galaxyList, pictureName) }}
+<div id="mainContent" class="wrapper">
+  <div id="leftNavContent" class="ghCol">
+    <div id="helpVideos" class="ghWidgetBox">
+    <div class="boxHeader">Help Videos</div>
+    <div id="topicList">
+    <a href="help.py?v=V-C3d_Q7n0U" title="Watch a tutorial video about using Favorites/My Resources.">Favorites</a><br />
+    <a href="help.py?v=vpdsb7qmhJE" title="Watch a tutorial video about using the recipe feature.">Recipes</a><br />
+    </div>
+    </div>
+    <div id="helpTopics" class="ghWidgetBox">
+    <div class="boxHeader">Help Topics</div>
+    <div id="topicList">
+    <a href="help.py#logintrouble">Login Trouble</a><br />
+    <a href="help.py#addingResources">Adding Resources</a><br />
+    <a href="help.py#managingResources">Managing Resources</a><br />
+    <a href="help.py#findingResources">Finding Resources</a><br />
+    <a href="help.py#waypoints">Using Waypoint Maps</a><br />
+    <a href="help.py#rssFeeds">RSS Feeds</a><br />
+    <a href="help.py#schematics">Schematics</a><br />
+    <a href="help.py#alerts">Alerts</a><br />
+    <a href="help.py#exports">Export Data</a><br />
+    <a href="help.py#myResources">My Resources</a><br />
+    <a href="help.py#recipes">Recipes</a><br />
+    </div>
+    </div>
+    <div id="aboutInfo" class="ghWidgetBox">
+      <div class="boxHeader">About</div>
+      <p>Galaxy Harvester was created in March of 2010 to provide an easy to use web application where game resource information can be tracked.  A number of people contribute to in some way and make Galaxy Harvester possible.</p>
+      <ul class="plain">
+        <li><span style="font-weight:bold;">ioscode :</span> Site Developer and Administrator</li>
+        <li><span style="font-weight:bold;">apex :</span> Design Contributor</li>
+        <li><span style="font-weight:bold;">SWG Emu :</span> This project and it\'s various contributors provide the test bed which makes the gathering of infomation to populate the data for this site possible.</li>
+        <li><span style="font-weight:bold;">Lucas Arts and Sony Online Entertainment :</span> Original creators of the game "Star Wars Galaxies", which Galaxy Harvester tracks information on.</li>
+        <li><span style="font-weight:bold;">You :</span> Last but not least every member of this web site that reports resources are the single most important element of Galaxy Harvester.</li>
+      </ul>
+    </div>
+  </div>
+  <div id="rightMainContent" class="ghCol">
+    <div class="ghWidgetBox">
+{% if vid == '' %}
+	    <div style="text-align:center;margin-bottom:20px;"><h2>We try to make things easy to use around here, but it isn't always enough.  If you can't find your answer here, try the contact link at the bottom of the page.</h2></div>
+	    <div id="helpContent">
+	      <a name="logintrouble"></a><h3>Login Trouble</h3>
+	      <div class="helpTopic">
+	        <p>Forgot your password?  If you know your e-mail you can reset it <a href="#logintrouble" onclick="showReset()">here</a>
+	        <div id="resetForm" class="helpTopic" style="display:none;">
+	        Enter the e-mail address associated with your account here to get your password reset.<br />
+	        <form name="uform" method="GET" action="">
+	        <b>E-mail Address:</b><input type="text" name="umail" maxlength=128 />
+	        <input type="button" name="goreset" value="Reset" id="goreset" onclick="resetPassword(this.form)" />
+	        </form></div>
+	        <br /><span id="idInfo"></span></p>
+	      </div>
+	      <a name="addingResources"></a><h3>Adding Resources</h3>
+	      <div class="helpTopic">
+	        <p>There are two ways to add resources, the quick add box on the <a href="ghHome.py">home</a> page, and the <a href="addResources.py">Add Resources</a> page.  For the quick add box, you can type in multiple resource names separated by any special character like a comma.  Select the planet the resources are on and click go, then you will be prompted one at a time for information on any of the resources that are not already entered with stats.  The add resources page provides a larger layout where you can enter as many resources as you want one at a time with the stats.  As you enter names, galaxy harvester will automatically look them up to see if they have already been entered.</p>
+	      </div>
+	      <a name="managingResources"></a><h3>Managing Resources</h3>
+	      <div class="helpTopic">
+	        <p>When you are logged in, there are a variety of tools available for managing resources currently in the system from the <a href="resourceList.py">Resource List</a> page.  Next to the resource name is a link to edit and an X link which will mark that resource as unavailable on all planets, or just the currently selected planet if one is selected in the search controls.  You can also quickly mark a resource as available on another planet or remove it from a planet by clicking on that planet circle in the bar that displays which planets the resource is available on.</p>
+	        <p>Unverified resources will also have a Verify link available.  You should have a planet selected in the search criteria box to use this link.  When you click it, if the resource is already marked available on the selected planet, it will be marked as verified by you.  If it was not already marked for the planet, it will be marked available on the planet instead.</p>
+	        <p>You can also use the <a href="surveyList.py">Survey Tool</a> page to quickly verify what resources are available on a planet by resource tool.  Just select a planet and survey tool, and the currently available resources will be listed in the resource group tree just like the in game survey tool.  You can then check the boxes next to the resources you want to verify or remove based on what is shown in game, and click the appropriate buttons at the top of the list to take action on the resources checked.  If a resource has already been verified less than an hour ago, a checkbox will not be displayed for you to verify that resource.  If you also want to add resources from this screen, you can do so with the quick add box below the planet and tool selection area.</p>
+	      </div>
+	      <a name="findingResources"></a><h3>Finding Resources</h3>
+	      <div class="helpTopic">
+	        <p>The <a href="ghHome.py">home</a> page has a couple options for quickly jumping to a particular search on the resource listing page.  You can jump to all available resources on a particular planet or all available resources of a particular group with this tool.  The two lists on the home page give useful info on current resources.  The top list shows the most recent resources that have been entered to keep you on top of what is new.  The bottom list gives you a way to easily discover the best resources that are currently spawning in your galaxy.  By default it will display the top overall resources, but you can narrow it down to a specific resource group with the drop down in the top of the box.  Top resources are determined by the percentage of range for all stats on the resource giving a little extra weight to overall quality.</p>
+	        <p>When on the resources list page, you have a couple additional search options, you can select a specific type of resource, as well as find old resources that have been marked unavailable.  To find unavailable resources, enter a number in the unavailable box under search criteria.  When you click go, the resources that were marked unavailable that week will be listed.  For example, if you set it to 1, it will list the resources that were marked unavailable up to 7 days before today.  If you set it to 2, it will list the resources that were marked unavailable between 7 and 14 days ago, and so on.</p>
+	        <p>The percentages below each stat for a resource tell you what percentage the stat falls within the range of possible values.  For most stats it\'s pretty simple because the range is 1 to 1000, so the percentage is pretty straight forward.  Some stats will have a range of possible values on a resource, for example, Neutronium Steel has a SR range of 685-765, so if a Neutronium Steel spawned with a shock resistance of 702, the percentage would be: (702-685) / (765-685) = 21% That tells you how good the stat really is, given the range of it's possible values.</p>
+	        <p>For those that like a little more specific control, the <a href="resourceFinder.py">Resource Finder</a> tool is available.  Here you can find resources by various criteria including user and can specify specific stat weights to use for sorting the results.  If you use the <a href="myResources.py">inventory tool</a> on Galaxy Harvester also, you can compare results of your searches to your inventory by stat quality.</p>
+	        <div class="tip">Tip:  At the top of the resource list page are options for changing the view.  By default resources will be grouped by their categories, groups, and types.  If you choose one of the time options, you can quickly list the resources by the latest entered, verified, or unavailable.</div>
+	      </div>
+	      <a name="waypoints"></a><h3>Using Waypoint Maps</h3>
+	      <div class="helpTopic">
+	        <p>On the <a href="waypointMaps.py" title="View and add waypoints">Waypoint Maps</a> page, you can view resource waypoints people have added and contribute your own.  You can find waypoints by just browsing via the planet buttons at the top, or you can search for a waypoint for a specific resource spawn with the waypoint search tool on the left.  When viewing the map, you may filter the waypoints shown with the planet filters on the left as well to narrow it down to higher concentrations or to include old unavailable resource waypoints.  Waypoint markers are drawn on the map with a light blue marker that will be more saturated (less dull) the higher the resource concentration.  The transparent red circles that appear on the maps indicate no build zones.</p>
+	        <p>If you are logged in, you will have the option to add waypoints using the button at the top left.  Enter the exact spawn name, planet, location (x,y coordinates such as 3477,-123), concentration (what percentage concentration does the survey tool show at the waypoint you entered), and a name/description for the waypoint.  In the description you can enter helpful information related to the terrain or buildability of the area around the waypoint.  If you need to edit information for a waypoint later, you will find a link to edit when you hover over it in the map, or by clicking the spawn name in the table below the map.</p>
+	        <p>Additional indicators for waypoints include the last 10 entered waypoints on the home page, and the resource list displays a small waypoint indicator icon in the bottom right of the resource box for resources that have at least 1 waypoint entered.  You can then click that icon or the resource spawn name to go to that resource spawns information page and view the list of it's waypoints.</p>
+	        <div class="tip">Tip: You can also see waypoints for a resource listed on that resource spawns information page which you can get to by clicking the name of the spawn anywhere you see it linked.</div>
+	      </div>
+	      <a name="rssFeeds"></a><h3>RSS Feeds</h3>
+	      <div class="helpTopic">
+	      <p>The <a href="feeds.py">feeds</a> page lists all of the feeds available to subscribe to on Galaxy Harvester.  Subscribe to a resource feeds to get an update in your Feed reader whenever a new resource is added at Galaxy Harvester.  If you're not familiar with subscribing to RSS feeds, don't worry, it's pretty simple.  There's a lot of readers you can use for free, some are applications you can install on your computer, and some you just access online, like <a href="http://www.google.com/reader">Google Reader</a></p>
+	      </div>
+	      <a name="schematics"></a><h3>Schematics</h3>
+	      <div class="helpTopic">
+	      <p>There are a few ways to approach using the <a href="schematics.py/home">schematics page</a>.  Consider the following features of the Galaxy Harvester schematics tool to determine how it might best serve you.</p>
+	      <ul class="plain">
+	        <li><span style="font-weight:bold;">Specific Schematic :</span> If you are looking for information pertaining to a specific schematic, you can use the Schematic List on the left side to find it and go right to it.  You can find schematics by the crafting tab they show up on, or by what profession crafts the item.  Select the Tab or Profession to get a list of available schematics associated with it.  When you search by tab, the schematic listing will be grouped by the type of object it is, just like you see in the game when crafting.  When you search by profession, the schematics will be grouped by the skill that they are granted at instead.  When you've found the schematic you're looking for, clicking on it will bring up it's information in the main part of the window.  Ingredients, experimental properties, and top resources for crafting the item will be listed.  You can also see the experience gained per item crafted and item complexity in the upper right corner.</li>
+	        <li><span style="font-weight:bold;">By Resource :</span> If you are in the resource trading business you may find a good resource and want to know what type of crafting professions might need it.  In this case, you might find the schematic finder useful.  Just select a resource, and if any schematics call for that specific resource type, they will be listed.  You can select by a resource group, or a specific resource type.  If you search by group, related schematics that require a specific type under that group will also be shown.  If you search by type, related schematics that could use it because they can use it's generic parent resource grouping will be shown too.</li>
+	        <li><span style="font-weight:bold;">Resources by Type :</span> On the schematics home page, you will also find a listing of top current resources.  This list is based on the crafting tab and object type you select above it.  When you make your selections, top resources are listed based on the resource needs and specific experimentation weights of the schematics of that type.  This tool is not so much for finding schematics you're looking for, but can be a good complement to the top resources listing on the home page, allowing you to focus in on the best resource for a specific group of items.</li>
+	      <p>When you are a viewing a schematic and the best resources are listed for it, the resources shown is based on the weightings from the Qualities section of the schematic.  If you want to exclude any groups of qualities from being included in that calculation, just un-check the box next to the group name.  The best resources will then be refreshed, excluding that groups weightings.  You can also compare the top resources listed to your inventory by using the "Compare" checkboxes at the top right of the top resources lists.</p>
+				<p>You can click the star next to the Schematic name to mark that schematic as one of your favorites.  Whenever a server best or almost server best resource spawns for one your favorite schematics, Galaxy Harvester will alert you about it according to your default alert types defined under your profile.</p>
+	        <div class="tip">Note :  The schematics available on Galaxy Harvester are not a complete list of what is craftable in game.  The schematic information available is based on what is currently available from the SWG Emu project.  As work progresses, more schematics will become available.  In the meantime, you can usually at least find a schematic similar to the one you are crafting to get a top resources listing based on similar weights and requirements.</div>
+	      </div>
+	      <a name="alerts"></a><h3>Alerts</h3>
+	      <div class="helpTopic">
+	      <p>The My Alerts page lets you set up notifications when resources of a certain type and quality are posted to Galaxy Harvester.  Select a resource type or group on a row and then you can enter values for the different possible stats that will trigger an alert to you.  For example, if you wanted to be notified if a selected resource type was entered with Overall Quality of at least 900, you would enter 900 in the OQ column.  Leave stat columns blank to ignore them.  You can enter minimum values for multiple stats to only be notified if the resource has those minimum values for each of the stats you enter values for.  If you want to be notified on any one of multiple stats for the same resource type, you will need to add multiple rows for the same type.</p>
+	      <p>The Alert Types column lets you pick how you will be alerted.  If you check the box for Site, resources that match your criteria will show up on the Galaxy Harvester home page when you are logged in.  If you check the box for E-Mail, you will receive an email when resources are added that match your criteria.</p>
+	      <p>Use the red x next to a row to remove that alert.  Use the green plus sign at the bottom of the page to add a new row for an alert.  And don't forget to click the Update Alerts button after you make changes to save them!</p>
+	      <p>The despawn alerts section lets you monitor specific resources and be notified when they are marked unavailable on the site.  When you add a spawn it will be set to notify by email by default.  You can click the envelope icon in the row to change the alert to web site notification, or to turn it off.  If you already have a resource set as a favorite so it shows up in your inventory, you can turn on despawn alerts for the resource there also.</p>
+				<p>The alerts page also has a section where you can select you favorite professions.  For any profession that you favorite, Galaxy Harvester will alert you when a new server best or close to server best resource for that profession spawns.  The type of alert you get is based on your default alert types preferences in your profile.</p>
+	        <div class="tip">Note :  Alerts will be automatically cleaned up after 30 days.</div>
+	      </div>
+	      <a name="exports"></a><h3>Export Data</h3>
+	      <div class="helpTopic">
+	      <p>If you have a need to manipulate the raw resource data from Galaxy Harvester, a daily export of available resources is provided in two formats.  When you are logged in to the site, you will find a link to each file for your selected galaxy in the Other Links box.  XML and CSV formats are provided.  These files are updated at 5pm UTC time each day.</p>
+	      </div>
+	      <a name="myResources"></a><h3>My Resources</h3>
+	      <div class="helpTopic">
+	        <p>The <a href="myResources.py">My Resources page</a> provides you a list of all the resources you have starred as a favorite.  You can favorite or unfavorite a resource by clicking the star icon in it's row in any resource list.  There is also a tool at the top of your resources page where you can type in a resource name to add to your favorites.</p>
+	        <p>You can organize your resources into groups.  To move some resources into a group, just check the box next to the resources you want to put in a group and click the Move Checked button.  You will be prompted to enter a new group name or select an existing group you have created.  You can also move 1 resource at a time to another group that already exists by dragging and dropping it onto the header of the group you want it moved to.</p>
+	        <p>The units column is an editable column where you can keep track of how much of the resource you have, or how much of it you want to get perhaps.  When you start editing this field, the text will go red indicating you have changed the value but it is not yet saved.  When you leave the field, the amount will be saved, and the text should go back to normal.  If you un-favorite a resource, any amount you have entered for it is lost.</p>
+	        <p>The icon next to the units box in each resource row indicates if you have a despawn alert turned on for that resource or not.  It can either be <span class="statRow"><img src="/images/none16.png"/></span> for no alert, <span class="statRow"><img src="/images/email16.png"/></span> for alert by e-mail, or <span class="statRow"><img src="/images/browser16.png"/></span> for alert on the web site.</p>
+					<p>If you have favorited any resource types or groups, they will show up in a list on the left side of this page as well.  You can click on one of them to jump to that page and see recent spawns and other information for that resource type.</p>
+	      </div>
+	      <a name="recipes"></a><h3>Recipes</h3>
+	      <div class="helpTopic">
+	      <p>The recipe feature combines the <a href="myResources.py" title="Go to your favorites/inventory page.">inventory</a> and schematics tools of Galaxy Harvester to let you build different ways to fill the resource ingredients of a schematic and save them for future reference.  Recipes can be created in a variety of ways.  You can click the New Recipe button on a schematic page or next to your recipe list on your favorites page, or save a suggestion from the <a href="recipe.py/home">recipe home page</a>.</p>
+	      <p>Your saved recipes are listed on your favorites/inventory page and the recipe home page.  These lists show the recipe name, and a quality bar indicating the overall quality of the recipe based on the ingredients.  This quality is just an average of the quality of each resource against the weightings of the schematic.  Because the calculations used in game are more complex, certain combinations of resources will yield different results in game when the schematic uses a resource stat weighting that is not present in all the used resources.  If you don't want a recipe anymore, just click the X on the far right in the list.</p>
+	      <p>When you click on a recipe in your list, it launches the recipe editor.  You should find the editor familiar to use, as it is designed to resemble the in-game assembly interface of the crafting process.  Simply double-click or drag an item in your inventory to add it to a slot in the ingredient slots.  You can change the recipe name by clicking on it above the ingredient slots.  Once your recipe is all set, just click the save button.</p>
+	      <p>The recipe home page provides a graphical inventory list as well as a list of your recipes.  If you have an unfinished recipe in your list, you can drag a resource from your inventory to that recipe in the list to fill any open slots in the recipe that resource can go in to.  The recipe home page also has a tool to suggest recipes for you.  If you select a profession, it will search your inventory for resources that can be used for schematics in that profession.  If you have all the resources needed for a schematic, it will suggest to you the best combination of resources it can come up with for that schematic.  If you want to save and tweak that suggestion, just click the save button to the right in the list of suggestions.</p>
+	        <div class="tip">Watch the tutorial video on the recipe feature <a href="help.py?v=vpdsb7qmhJE">here</a>.</div>
+	      </div>
+	    </div>
+	    </div>
+	    </div>
+{% else %}
+	<iframe width="640" height="480" src="http://www.youtube.com/embed/{{ vid }}" frameborder="0" allowfullscreen></iframe>
+{% endif %}
+  </div>
+</div>
+{{ blocks.pageFooter() }}
+{{ blocks.joinForm(loggedin, ['?src_url=ghHome.py&', linkappend]|join, url) }}
+<div id="mask"></div>
+</body></html>

@@ -1,0 +1,116 @@
+
+body {
+	background: #3d3d3d;
+	color: #5c5c5c;
+}
+a {
+	color: #5c5c5c;
+}
+a:link {
+	color: #5c5c5c;
+}
+a:hover {
+	color: #99ccff;
+}
+a:visited, .altText {
+	color: #1f1f1f;
+}
+a:active, .groupText {
+	color: #99ccff;
+}
+.footer {
+	border-top-color: #e0e0e0;
+	background: #ffffff;
+}
+.ghWidgetBox, #tooltip {
+	background: #ffffff;
+	border-color: #e0e0e0;
+}
+.bigForm, .bigForm input {
+	color: #000;
+}
+#loginForm {
+	color: #5c5c5c;
+}
+.tableHead {
+	background: #3d3d3d;
+	color: #e0e0e0;
+}
+.statRow, .recipeRow {
+	background: #bababa;
+}
+.window {
+	background: #ffffff;
+	border-color: #e0e0e0;
+}
+.formMsg {
+	color: #990000;
+}
+.resourceBox, #header, #footer {
+	background: #bababa;
+}
+.standOut {
+	color: white;
+	background-color: #3d3d3d;
+}
+.statusMsg {
+	color: #333333;
+}
+.bigLink {
+	border-color: #3d3d3d;
+}
+.statNormal {
+	color: #5c5c5c;
+}
+.statHigh {
+	color: #996600;
+}
+.statMax {
+	color: #cc0000;
+}
+.listSelected {
+	background-color: #bababa;
+	border-color: #99ccff;
+}
+.boxBorderHidden {
+	border-color: #ffffff;
+}
+ul.schematics a:hover, ul.schematics a:visited {
+	color: #5c5c5c;
+}
+.control {
+	border-color: #e0e0e0;
+	background: #bababa;
+}
+.textOnBackground {
+	color: #e0e0e0;
+}
+ul.alert li {
+	background: #bababa;
+}
+a div.resTreeItem, a:link div.resTreeItem, a:visited div.resTreeItem, a:active div.resTreeItem {
+	color: #e0e0e0;
+	background: #3d3d3d;
+	border-color: #e0e0e0;
+}
+a:hover div.resTreeItem, .slotIndicatorFilled {
+	background: #e0e0e0;
+	color: #3d3d3d;
+	border-color: #3d3d3d;
+}
+.ingredientSlot {
+	border-color: #e0e0e0;
+	background: #9999ff;
+}
+.ingredientSlotActive {
+	background: #99ffff;
+}
+.ingredientSlotFilled {
+	background: #ffffff;
+}
+.slotIndicator {
+	border-color: #000000;
+}
+#myShortcuts {
+	background: #1f1f1f;
+}

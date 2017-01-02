@@ -1,0 +1,19 @@
+GH Alpha is Live on apex-games!
+
+<p>Well, it took some work but we're all set up here on http://gh.apex-games.net.  All existing user accounts and resource data was successfully migrated here.  In the process I've also added this blog to the site as a way to let everyone know what's going on with the site as far as new features, notices, etc.  Also, the planet selection drop downs have been changed to default to no selection instead of Corellia, to prevent accidental mass posting of resources to Corellia by accident!  Thanks to <a href="http://www.swgemu.com/forums/member.php?u=9454">Brane Ded</a> for the suggestion on that one.</p>
+
+<p>I have a lot of ideas for this tool, what you see now is just the beginning.  Hopefully over the coming months I can turn some of those ideas, as well as suggestions from all of you into a reality.  For now at least, we have an easy to use, information rich tool for keeping track of the stuff spawning on Test Center Nova.</p>
+
+<p>As cRush stated <a href="http://www.swgemu.com/forums/showthread.php?t=49545">here</a> on the SWG Emu Forums, some web based tools are planned which should include a resource management tool.  No doubt they will come up with something really cool, and I'm excited to see what other kinds of tools are included as well.  Until it comes out, I hope everyone finds Galaxy Harvester useful.  Most likely my next order of business will be adding to the help page to provide information on how to best use the site's current features.  Here's a short list of some other long term ideas I'm to incorporate into Galaxy Harvester:</p>
+<ul>
+<li> RSS feeds you can subscribe to that keep you updated on the latest resource activity</li>
+<li> Different views for grouping and sorting on the <a href="http://gh.apex-games.net/resourceList.py">Available Resources</a> page.</li>
+<li> Comprehensive crafting schematic information highly integrated with resource data giving you the ability to search for the best current or server all time best resources for a particular schematic.</li>
+<li> (Maybe, I'm not sure if this one can work yet.) Maps of each planet with the ability to add resource spawn waypoint markers that can be sold to other members for credits (via exchange of a code that allows the waypoint to be unlocked), creating a market for the Resource Scouts of the galaxy.</li>
+<li> More stats and features that highlight the sites top contributors.</li>
+</ul><br />
+Thanks for being a part of Galaxy Harvester!<br />
+<br />
+ioscode
+
+

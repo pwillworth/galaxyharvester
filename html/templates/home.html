@@ -1,0 +1,169 @@
+{% import 'blocks.html' as blocks %}
+<!DOCTYPE html>
+<html lang="en">
+<head><title>Home - Galaxy Harvester</title>
+<meta name="description" content="Tool for tracking resources spawning in galaxies of the MMO game Star Wars Galaxies that are emulating original game functionality." />
+<meta name="keywords" content="SWGEmu, crafting, resources, star wars galaxies, harvester" />
+<link rel="SHORTCUT ICON" href="favicon.ico"/>
+<link rel="stylesheet" href="/style/ghCore.css" type="text/css" />
+<link rel="stylesheet" href="/style/themes/{{ uiTheme }}.css" type="text/css" />
+<link rel="stylesheet" href="/style/autocomplete.css" type="text/css" />
+<script type="text/javascript" src="/js/ghShared.js"></script>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery.autocomplete-min.js"></script>
+<script type="text/javascript" src="/js/Colors.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#galaxySel").val({{ galaxy }});
+    if ($("#galaxySel option:selected").attr("group") == "Inactive") {
+        $("#quickAddMask").addClass("disabled");
+        $("#quickAddMask").html("Inactive Galaxy");
+        $("#quickAddGo").attr("disabled","disabled");
+    }
+{% if loggedin == 1 %}
+	    $("#alertList").load(BASE_SCRIPT_URL + "getAlerts.py",{alertTypes:1},function(){$("#busyImgAlerts").css("display","none");if($("#alertList").html().trim() == "No Alerts"){$("#myAlerts").fadeOut(3000);}});
+{% endif %}
+    $("#newsList").load("/blog.py/smy");
+    $("#topCurrentCount").load(BASE_SCRIPT_URL + "ghStats.py",{statID:"currentSpawns",galaxy:$("#galaxySel").val()});
+    $("#harvesterDataC").load(BASE_SCRIPT_URL + "getHarvesterData.py",{period:"current",galaxy:$("#galaxySel").val()},function(){$("#addBusyImgTHC").css("display","none");});
+    $("#topAllCount").load(BASE_SCRIPT_URL + "ghStats.py",{statID:"totalSpawns",galaxy:$("#galaxySel").val()});
+    $("#harvesterData").load(BASE_SCRIPT_URL + "getHarvesterData.py",{galaxy:$("#galaxySel").val()},function(){$("#addBusyImgTH").css("display","none");});
+    $("#newResourceData").load(BASE_SCRIPT_URL + "getLatestResources.py",{galaxy:$("#galaxySel").val()},function(){$("#addBusyImgNR").css("display","none");});
+    $("#topResourceData").load(BASE_SCRIPT_URL + "getTopResources.py",{galaxy:$("#galaxySel").val(), prof: $("#profSel").val(), resGroup: $("#resTopGroup").val() },function(){$("#addBusyImgTR").css("display","none");});
+    $("#typeSel").load(BASE_SCRIPT_URL + "getResourceTypeList.py");
+    $("#currentWaypointCount").load(BASE_SCRIPT_URL + "ghStats.py",{statID:"currentWaypoints",galaxy:$("#galaxySel").val()});
+    findWaypoints("recent");
+    $(".window .close").click(function(e) {
+        e.preventDefault();
+        $("#mask, .window").hide();
+    });
+    $("#mask").click(function() {
+        $(this).hide();
+        $(".window").hide();
+    });
+    loadPlanetSel($("#galaxySel option:selected").val(), '', '#wpPlanetSel');
+});
+function filterTopResources() {
+    $("#topResourceData").load(BASE_SCRIPT_URL + "getTopResources.py",{galaxy:$("#galaxySel").val(), prof: $("#profSel").val(), resGroup: $("#resTopGroup").val() });
+}
+</script>
+{{ blocks.pageTracker() }}
+</head>
+<body>
+{{ blocks.headerSection(loggedin, currentUser, loginResult, linkappend, url, imgNum, galaxyList, pictureName) }}
+
+<div id="mainContent" class="wrapper">
+  <div id="leftColumn" class="ghCol">
+{% if loggedin == 1 %}
+	<div id="myAlerts" class="ghWidgetBox">
+	<div class="boxHeader">My Alerts [<a href="myAlerts.py">Manage</a>]</div>
+	<div id="alertList"></div>
+	<div id=busyImgAlerts><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+	</div>
+{% endif %}
+    <div id="userStats" class="ghWidgetBox">
+    <div class="boxHeader">Top Harvesters</div>
+    <h4 class="sectionHead">Current Spawns (<span id="topCurrentCount">?</span>) Waypoints (<span id="currentWaypointCount">?</span>)</h4>
+    <div id="harvesterDataC"></div>
+    <div id=addBusyImgTHC><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+    <h4 class="sectionHead">All Time (<span id="topAllCount">?</span>)</h4>
+    <div id="harvesterData"></div>
+    <div id=addBusyImgTH><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+    </div>
+    <div id="donateBox" class="ghOrphanBox" style="text-align:center;">
+{{ blocks.donateTracker(totalAmt,percentOfGoal) }}
+    </div>
+    <div id="newWaypoints" class="ghWidgetBox">
+      <div class="boxHeader">New Waypoints [<a href="{{ BASE_SCRIPT_URL }}waypointMaps.py">Maps</a>]
+{% if loggedin == 1 %}
+	<div style="float:right;"><button type=button value="New Waypoint" class="ghButton" onclick="addWaypoint();">New Waypoint</button></div>
+{% endif %}
+	</div>
+      <table id="findWaypointsList"></table>
+      <div id="busyImgWaypointSearch"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+      <input type="hidden" id="findSpawn" />
+    </div>
+  </div>
+  <div id="centerColumn" class="ghCol">
+    <div id="newResources" class="ghWidgetBox">
+    <div class="boxHeader">Latest Resources <a href="{{ BASE_SCRIPT_URL }}resourceList.py?list=Entered">[More]</a></div>
+    <div id="newResourceData"></div>
+    <div id=addBusyImgNR><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+    </div>
+    <div id="topResources" class="ghWidgetBox">
+      <div class="boxHeader">Top Current Resources
+      <span style="float:right;"><select name="resTopGroup" id="resTopGroup" style="width:120px;" onchange="filterTopResources();"><option value="any" selected="selected">Res. Group: Any</option>
+{{ resourceGroupListShort }}
+      </select></span>
+      <span style="float: right;"><select name="profSel" id="profSel" onchange="filterTopResources();"><option value=0>Profession: Any</option>
+{{ professionList }}
+      </select></span></div>
+      <div id="topResourceData"></div>
+    <div id=addBusyImgTR><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+    </div>
+  </div>
+  <div id="rightColumn" class="ghCol">
+    <div id="quickSearch" class="ghWidgetBox">
+      <form action="" id="quickSearchForm">
+      <div class="boxHeader">Quick Search
+        <button type=button value="Go" class="ghButton" style="float:right;" onclick="quickSearch(form);">Go</button>
+      </div>
+      <div class="searchInput">Planet:<select name="planetSearchSel" id="planetSearchSel"><option value="any" selected="selected">Any</option>
+{{ planetList }}
+      </select></div>
+      <div class="searchInput">Res Group:<select name="resGroup" id="resGroup" style="width:100%"><option value="any" selected="selected">Any</option>
+{{ resourceGroupList }}
+      </select></div>
+      <div class="searchInput">Res Type:<select name="resType" id="resType" style="width:100%"><option value="any" selected="selected">Any</option>
+{{ resourceTypeList }}
+      </select></div>
+      </form>
+    </div>
+    <div id="quickAdd" class="ghWidgetBox">
+      <div class="boxHeader">Quick Add</div>
+      <div id="qNameAdd">
+      <form action="" id="quickAddForm">
+      Resource Name(s)<br />
+      <textarea name=resName id=resName rows=3 cols=20{{ disableStr }}></textarea><br />
+      Planet:<select name="planetSel" id="planetSel"{{ disableStr }}>
+      <option value=0>&lt;Select&gt;</option>
+{{ planetList }}
+    </select>
+      <button id="quickAddGo" type=button value="Go" class="ghButton" onclick="quickAdd(form, '');"{{ disableStr }}>Go</button>
+      </form>
+      </div>
+{% if loggedin == 0 %}
+	    <div id="quickAddMask" class="disabled">Login First</div>
+{% else %}
+	    <div id="quickAddMask"></div>
+{% endif %}
+    </div>
+    <div id="recentNews" class="ghWidgetBox">
+      <div class="boxHeader">Latest News from the <a href="/blog.py">GH Blog</a></div>
+      <div id="newsList"></div>
+    </div>
+    <div id="otherLinks" class="ghWidgetBox">
+    <div class="boxHeader">Other Links</div>
+    <ul class="plain">
+      <li><a href="{{ BASE_SCRIPT_URL }}resourceType.py?{{ linkappend }}" title="Browse the different resource groups/types and info about them.">Resource Types</a></li>
+      <li><a href="{{ BASE_SCRIPT_URL }}schematics.py/home?{{ linkappend }}" title="Browse crafting schematics and their resource requirements.">Schematics</a></li>
+      <li><a href="{{ BASE_SCRIPT_URL }}surveyList.py?{{ linkappend }}" title="Verify current resource spawns by survey tool.">Survey Tool</a></li>
+      <li><a href="{{ BASE_SCRIPT_URL }}blog.py?{{ linkappend }}">News</a></li>
+      <li><a href="{{ BASE_SCRIPT_URL }}feeds.py?{{ linkappend }}" title="List of RSS feeds you can subscribe to">Feeds</a></li>
+      <li><a href="{{ BASE_SCRIPT_URL }}help.py?{{ linkappend }}">Help</a></li>
+{% if loggedin == 1 %}
+	      <li><a href="/exports/current{{ galaxy }}.xml" target="_new">XML Export File</a></li>
+	      <li><a href="/exports/current{{ galaxy }}.csv" target="_new">CSV Export File</a></li>
+{% endif %}
+    <h3>Related Sites</h3>
+      <li><a href="http://www.swgemu.com" target="_blank">SWG Emu</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+{{ blocks.pageFooter() }}
+{{ blocks.resourceForm() }}
+{{ blocks.joinForm(loggedin, ['?src_url=ghHome.py&',linkappend]|join, url) }}
+{{ blocks.waypointForm(loggedin) }}
+<div id="mask"></div>
+</body></html>

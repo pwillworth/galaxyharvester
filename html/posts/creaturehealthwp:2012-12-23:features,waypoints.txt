@@ -1,0 +1,7 @@
+Creature Health Waypoints
+
+<p>A small update was just released which will allow you to post waypoints for creature resources.  When you are adding a waypoint and you enter the spawn name that is a creature resource, the box where you normally would enter the concentration percent will switch to a drop down list where you can select the health of the creature you harvested at that waypoint.  When these waypoints are displayed in a list or on the map, the concentration will be displayed as the harvest adjustment percent that correlates with the health (Fat and Healthy - 100%, Medium - 80%, Scrawny - 60%, Skinny - 40%).  Further discussion on how the creature resource zones work can be found <a href="http://www.swgemu.com/forums/showthread.php?t=58925">here</a>.</p>
+
+<p>
+-ioscode
+</p>

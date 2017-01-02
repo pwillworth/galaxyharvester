@@ -1,0 +1,5 @@
+Resource Admin
+
+<p>Everyone makes mistakes sometimes.  That's why today we're adding the ability to fix an incorrectly entered resource name, and the ability to correct the galaxy a resource was entered for.  These controls will appear on the page for each resource which you can get to by clicking on a resource name anywhere it shows up on the site.  These controls will only show up if you are logged in and have a high enough reputation on the site.</p>
+
+<p>-ioscode</p>

@@ -1,0 +1,9 @@
+More Feedback Features and Export Planets
+
+<p>You should now be able to add new suggestions and comment on existing ones on the <a href="http://galaxyharvester.net/feedback.py">feedback</a> page.  You must be logged in to do so.</p>
+
+<p>Getting the addition of planet information to the exports file recently rose to the top of the popular suggestions.  As of the next export, planet information will be included in the xml and csv export files.</p>
+
+<p>Happy integrating,</p>
+
+<p>-ioscode</p>

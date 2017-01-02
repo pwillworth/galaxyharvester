@@ -1,0 +1,6 @@
+*.pyc
+dist/
+html/temp/
+html/exports/
+test/pyunit/.coverage
+

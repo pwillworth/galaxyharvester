@@ -1,0 +1,73 @@
+{% import 'blocks.html' as blocks %}
+<!DOCTYPE html>
+<html lang="en"><head><title>Feedback - Galaxy Harvester</title>
+<link rel="stylesheet" href="/style/ghCore.css" type="text/css" />
+<link rel="stylesheet" href="/style/themes/{{ uiTheme }}.css" type="text/css" />
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script src="/js/ghShared.js" type="text/javascript"></script>
+<script src="http://www.google.com/moderator/static/moderator-embed-api.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
+    
+    loadFeedback();
+});
+    function addFeedback() {
+        $("#addInfo").html("");
+        $("#feedbackText").val("")
+        $("#fbDialogHeader").html("New Suggestion");
+        $("#fbDialogPrompt").html("Suggestion:");
+        $("#goCreate").attr("onclick", "postFeedback(0, $('#feedbackText').val());");
+        showWindow("#feedbackDialog");
+    }
+    function addFeedbackComment(linkFrom) {
+        $("#addInfo").html("");
+        $("#feedbackText").val("")
+        $("#fbDialogHeader").html("Add Comment");
+        $("#fbDialogPrompt").html("Comment:");
+        $("#feedbackID").val($(linkFrom).attr("id").substr(19));
+        $("#goCreate").attr("onclick", "postFeedback(" + $(linkFrom).attr("id").substr(19) + ", $('#feedbackText').val());");
+        showWindow("#feedbackDialog");
+    }
+    $(".window .close").click(function(e) {
+        e.preventDefault();
+        $("#mask, .window").hide();
+    });
+</script>
+{{ blocks.pageTracker() }}
+<body>
+{{ blocks.headerSection(loggedin, currentUser, loginResult, linkappend, url, imgNum, galaxyList, pictureName) }}
+
+<div id="mainContent" class="wrapper">
+  <div>
+    <div id="messageBox" class="ghWidgetBox">
+      <div class="boxHeader"><div style="float:left;">Galaxy Harvester Feedback and Suggestions</div>
+      <div style="float:right;position:relative;top:0px;">
+{% if loggedin == 1 %}
+        <button type="button" id="addFeedback" class="ghButton"{{ disableStr }} onclick="addFeedback()">New Suggestion</button>
+{% endif %}
+        View: <span style="font-weight:normal;"><input type="radio" name="oViewType" id="oVoted" value="ByVote" checked="checked" onclick="loadFeedback()" />Top Voted   &nbsp;
+        <input type="radio" name="oViewType" id="oTime" value="ByTime" onclick="loadFeedback()" />Latest</div>
+      </div>
+      <div class="footer"></div>
+      <div id="feedbackList"><div id="feedbackBusyImg" style="text-align:center;"><img src="../../images/ghWait.gif" /></div></div>
+    </div>
+  </div>
+</div>
+{{ blocks.pageFooter() }}
+{{ blocks.joinForm(loggedin, ['?src_url=feedback.py&', linkappend]|join, url) }}
+<div id="feedbackDialog" class="window">
+  <div class="bigForm">
+    <h2 style="display: inline;" id="fbDialogHeader">New Suggestion</h2>
+    <div class="searchInput"><span id="fbDialogPrompt">Suggestion:</span><br />
+    <textarea id="feedbackText" rows="5" cols="70"></textarea>
+    </div>
+    <input type="hidden" name="feedbackID" id="feedbackID" />
+    <div id="busyImgAdd" style="display:none;float:right;"><img src="/images/ghWait.gif" /></div>
+    <span id="addInfo"></span>
+    <div style="float:right;margin:6px;padding-top:100px;"><input type="button" class="ghButton" value="Create" id="goCreate" onclick="postFeedback(0, $('#feedbackText').val());" /></div>
+    <div style="float:right;margin:6px;padding-top:100px;"><input type="button" class="ghButton" value="Cancel" id="cancelFeedback" onclick="$('#mask, .window').hide();" /></div>
+  </div>
+</div>
+<div id="mask"> </div>
+</body></html>

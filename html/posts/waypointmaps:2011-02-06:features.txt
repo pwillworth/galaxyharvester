@@ -1,0 +1,9 @@
+Waypoint Maps
+
+<p>First of all let me say, forums are great.  For discussions that is, but not really so much for sharing a constantly changing set of x,y coordinates on planets.  So, if people want to share waypoints, why not do it in a convenient place?  Well, starting now you can.  Check out the new <a href="http://galaxyharvester.net/waypointMaps.py" title="View waypoints posted on a map">Waypoint Maps</a> feature and start sharing all those great locations (except your own top secret ones of course ;-) - but we'll have a way for you to store those too privately or with your friends at some point).</p>
+
+<p>Check out the <a href="http://galaxyharvester.net/help.py#waypoints" title="help on waypoints">help section</a> on waypoints for more details on how this new feature works.  On a side note, if you want to get the most out of this tool, you'll want to view it using a browser that supports the graphics features needed to draw the maps.  If you use Firefox, Chrome, or Safari you're probably set, but the newest Internet Explorer doesn't quite support it yet as of version 8.  It sounds like Internet Explorer 9 will support it, but until then...</p>
+
+<p>Any feedback on this new feature is welcome, and can be shared here, or via email using the contact link at the bottom of the page.  I'm sure some great ideas on how to tweak it will come up after some of you try it out.</p>
+
+<p>-ioscode</p>

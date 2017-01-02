@@ -1,0 +1,13 @@
+Still Alive
+
+<p>Hey, it's been some time since you've seen news, so I wanted to give you all a quick update on current Galaxy Harvester activity.  For the most part, I've been working on a new feature where you will be able to mark resources as favorites to keep track of and group specific resources on a personalized page.  I would say it is about 50% done at this point, so that should be coming out within a month or two.</p>
+
+<p>You may or may not have noticed recently some performance improvements on various parts of the site.  Over the last couple of weeks improvements to the efficiency of a large number of database queries have gone in.  As new features have gone in over time, things have gotten more complex, so a review and tuning was long overdue.  Finally, today I have refreshed the schematic data from the current SWGEmu code base which adds almost 300 <a href="/schematics.py/home">schematics</a>, bringing the total up to 1660 now.  And yes, I remembered to swap the OQ/PE weights on the chemical schematics this time!  ;-)</p>
+
+<p>
+Thanks,
+</p>
+
+<p>
+-ioscode
+</p>

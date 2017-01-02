@@ -1,0 +1,219 @@
+{% import 'blocks.html' as blocks %}
+<!DOCTYPE html>
+<html lang="en"><head><title>My Alerts - Galaxy Harvester</title>
+<link rel="stylesheet" href="/style/ghCore.css" type="text/css" />
+<link rel="stylesheet" href="/style/themes/{{ uiTheme }}.css" type="text/css" />
+<link rel="stylesheet" href="/style/autocomplete.css" type="text/css" />
+<script src="/js/ghShared.js" type="text/javascript"></script>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery.autocomplete-min.js"></script>
+<script type="text/javascript">
+var rownum = 0;
+$(document).ready(function() {
+    $("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
+    if ($("#galaxySel option:selected").attr("group") == "Inactive") {
+        $("#addAlertsMask").addClass("disabled");
+        $("#addAlertsMask").html("Inactive Galaxy");
+        $("#sendData").attr("disabled","disabled");
+    }
+{% if loggedin == 1 %}
+	    loadAlerts();
+	    var a = $('#findSpawn').autocomplete({
+	        serviceUrl:'getSpawnNames.py',
+	        maxHeight:200,
+	        width:200,
+	        params: {galaxy: $("#galaxySel").val()}
+	    });
+	    loadDespawnAlerts();
+      loadProfessionFavs();
+      loadSchematicFavs();
+{% endif %}
+});
+function loadProfessionFavs() {
+  $("#favProfessionList").load(BASE_SCRIPT_URL + "getFavoriteList.py",{
+        favType: "p",
+        galaxy: $("#galaxySel").val()},
+        function() {
+            $("#favProfessionBusyImg").css("display","none");
+        });
+    return false;
+}
+function loadSchematicFavs() {
+  $("#favSchematicList").load(BASE_SCRIPT_URL + "getFavoriteList.py",{
+        favType: "s",
+        galaxy: $("#galaxySel").val()},
+        function() {
+            $("#favSchematicBusyImg").css("display","none");
+        });
+    return false;
+}
+function setTGlist(rownum) {
+    if ($("#oType" + rownum).attr("checked") == "checked") {
+        $("#typeGroupSel"+rownum).load("getResourceTypeList.py", function() {$(this).val($(this).attr("tag"));maskStats(this);});
+    } else {
+        $("#typeGroupSel"+rownum).load("getResourceGroupList.py", function() {$(this).val($(this).attr("tag"));maskStats(this);});
+    }
+}
+function removeRow(rownum) {
+    $("#resRow"+rownum).remove();
+}
+function addFilterRow(numset) {
+    if (numset == null) {
+        numset = rownum;
+    }
+    if (true) {
+      var typeGroupBox = "typeGroupSel" + numset;
+      $("#addAlertTable").append("<tr height=16px valign=middle id='resRow"+numset+"'><td><input type='radio' name='oResTG"+numset+"' id='oType"+numset+"' value='ByType' checked='checked' onclick='setTGlist("+numset+")' />By Type<input type='radio' name='oResTG"+numset+"' id='oGroup"+numset+"' value='ByGroup' onclick='setTGlist("+numset+")' />By Group</td>"+
+        "<td><select name='"+typeGroupBox+"' id='"+typeGroupBox+"' style='width:200px;' onchange='maskStats(this);'></select></td>"+
+        "<td><input type='text' size=2 maxlength=4 id='ER"+numset+"' name='ER"+numset+"'></td>"+
+        "<td><input type='text' size=2 maxlength=4 id='CR"+numset+"' name='CR"+numset+"'></td>"+
+        "<td><input type='text' size=2 maxlength=4 id='CD"+numset+"' name='CD"+numset+"'></td>"+
+        "<td><input type='text' size=2 maxlength=4 id='DR"+numset+"' name='DR"+numset+"'></td>"+
+        "<td><input type='text' size=2 maxlength=4 id='FL"+numset+"' name='FL"+numset+"'></td>"+
+        "<td><input type='text' size=2 maxlength=4 id='HR"+numset+"' name='HR"+numset+"'></td>"+
+        "<td><input type='text' size=2 maxlength=4 id='MA"+numset+"' name='MA"+numset+"'></td>"+
+        "<td><input type='text' size=2 maxlength=4 id='PE"+numset+"' name='PE"+numset+"'></td>"+
+        "<td><input type='text' size=2 maxlength=4 id='OQ"+numset+"' name='OQ"+numset+"'></td>"+
+        "<td><input type='text' size=2 maxlength=4 id='SR"+numset+"' name='SR"+numset+"'></td>"+
+        "<td><input type='text' size=2 maxlength=4 id='UT"+numset+"' name='UT"+numset+"'></td>"+
+        "<td align='center'><input type='checkbox'{{ siteAlertCheckStr }} id='oHome"+numset+"' /></td>"+
+        "<td align='center'><input type='checkbox'{{ emailAlertCheckStr }} id='oEmail"+numset+"'/></td>"+
+        "<td align='center'><input type='checkbox'{{ mobileAlertCheckStr }} id='oMobile"+numset+"'/></td>"+
+        "<td><img src='/images/xRed16.png' alt='red x' title='Remove this row' style='cursor:pointer' onclick='removeRow("+numset+")'/></td>"+
+        "</tr>");
+      rownum = numset + 1;
+    }
+}
+function maskStats(typeSel) {
+    var statMask = "p11111111111";
+    if (typeSel.selectedIndex > -1) {
+        statMask = typeSel.options[typeSel.selectedIndex].title;
+    }
+    thisRow = typeSel.id.substr(12);
+    if (statMask.substr(1,1) == "0") {
+        $("#CR"+thisRow).attr("disabled", true);
+        $("#CD"+thisRow).focus();
+    } else {
+        $("#CR"+thisRow).removeAttr("disabled");
+    }
+    if (statMask.substr(2,1) == "0") {
+        $("#CD"+thisRow).attr("disabled", true);
+        if (statMask.substr(1,1) == "0")
+            $("#DR"+thisRow).focus();
+    } else {
+        $("#CD"+thisRow).removeAttr("disabled");
+    }
+    if (statMask.substr(3,1) == "0") {
+        $("#DR"+thisRow).attr("disabled", true);
+    } else {
+        $("#DR"+thisRow).removeAttr("disabled");
+    }
+    if (statMask.substr(4,1) == "0") {
+        $("#FL"+thisRow).attr("disabled", true);
+    } else {
+        $("#FL"+thisRow).removeAttr("disabled");
+    }
+    if (statMask.substr(5,1) == "0") {
+        $("#HR"+thisRow).attr("disabled", true);
+    } else {
+        $("#HR"+thisRow).removeAttr("disabled");
+    }
+    if (statMask.substr(6,1) == "0") {
+        $("#MA"+thisRow).attr("disabled", true);
+    } else {
+        $("#MA"+thisRow).removeAttr("disabled");
+    }
+    if (statMask.substr(7,1) == "0") {
+        $("#PE"+thisRow).attr("disabled", true);
+    } else {
+        $("#PE"+thisRow).removeAttr("disabled");
+    }
+    if (statMask.substr(8,1) == "0") {
+        $("#OQ"+thisRow).attr("disabled", true);
+    } else {
+        $("#OQ"+thisRow).removeAttr("disabled");
+    }
+    if (statMask.substr(9,1) == "0") {
+        $("#SR"+thisRow).attr("disabled", true);
+    } else {
+        $("#SR"+thisRow).removeAttr("disabled");
+    }
+    if (statMask.substr(10,1) == "0") {
+        $("#UT"+thisRow).attr("disabled", true);
+    } else {
+        $("#UT"+thisRow).removeAttr("disabled");
+    }
+    if (statMask.substr(11,1) == "0") {
+        $("#ER"+thisRow).attr("disabled", true);
+    } else {
+        $("#ER"+thisRow).removeAttr("disabled");
+        $("#ER"+thisRow).focus();
+    }
+}
+</script>
+{{ blocks.pageTracker() }}
+</head><body>
+{{ blocks.headerSection(loggedin, currentUser, loginResult, linkappend, url, imgNum, galaxyList, pictureName) }}
+
+<div id="mainContent" class="wrapper">
+  <div style="width:32%;" class="ghCol">
+    <div id="professionAlertsBox" class="ghWidgetBox">
+    <div class="boxHeader">Profession Server Best Alerts</div>
+{% if loggedin == 0 %}
+          <div id="favProfessionMask" class="disabled">Login First</div>
+{% else %}
+          <div id="favProfessionMask"></div>
+          <div id="favProfessionBusyImg" style="text-align:center;"><img src="../../images/ghWait.gif" /></div>
+{% endif %}
+      <div id="favProfessionList"></div>
+    </div>
+    <div id="schematicAlertsBox" class="ghWidgetBox">
+    <div class="boxHeader">Schematic Server Best Alerts</div>
+{% if loggedin == 0 %}
+          <div id="favSchematicMask" class="disabled">Login First</div>
+{% else %}
+          <div id="favSchematicMask"></div>
+          <div id="favSchematicBusyImg" style="text-align:center;"><img src="../../images/ghWait.gif" /></div>
+{% endif %}
+      <div id="favSchematicList"></div>
+    </div>
+    <div id="despawnAlertsBox" class="ghWidgetBox">
+    <div class="boxHeader">Despawn Alerts</div>
+      <div style="margin:10px;">Spawn:<input type="text" name="findSpawn" id="findSpawn" tabindex="20" size="16" maxlength="64" onkeyup="if(event.keyCode == 13){addDespawnAlert(this.value, 1)};" />
+      <button type="button" id="addDespawnButton" class="ghButton" onclick="addDespawnAlert($('#findSpawn').val(), 1)">Add</button></div>
+{% if loggedin == 0 %}
+      <div id="despawnAlertsMask" class="disabled">Login First</div>
+{% else %}
+      <div id="despawnAlertsMask"></div>
+      <div id="despawnBusyImg" style="text-align:center;"><img src="../../images/ghWait.gif" /></div>
+{% endif %}
+      <div id="despawnAlertsList"></div>
+    </div>
+  </div>
+  <div style="width:68%;" class="ghCol">
+    <div id="addAlertsBox" class="ghWidgetBox">
+    <div class="boxHeader">My Alerts</div>
+    <form name="fsetfilts" id="fsetfilts" onsubmit="return updateAlerts()">
+    <span id="sentMessage"></span>
+    <div id="alertData" style="margin-top:12px;">
+      <div style="position:relative;"><div id="alertMask" class="disabledDark" style="display:none;"><div id="udBusyImg" style="display:none;"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div></div>
+      <table id="addAlertTable"><thead>
+      <tr class="tableHead"><td colspan=2 style="text-align:center;">Resource Types</td><td colspan=11 style="font-weight:bold;text-align:center;">Minimum Stat Values</td><td colspan=3 style="font-weight:bold;text-align:center;">Alert Types</td></tr>
+      <tr><td>Select Type</td><td>Resource</td><td>ER</td><td>CR</td><td>CD</td><td>DR</td><td>FL</td><td>HR</td><td>MA</td><td>PE</td><td>OQ</td><td>SR</td><td>UT</td><td width="40" align="center">Site</td><td width="40" align="center">E-Mail</td><td width="40" align="center">Mobile</td></tr>
+      </thead></table>
+      <img src="/images/plusGreen32.png" alt="plus sign" title="Add another filter definition row" onclick="addFilterRow()" style="cursor:pointer;margin-right:120px;"/>
+      <button type="button" id="sendData" class="ghButton"{{ disableStr }} onclick="updateAlerts()">Update Alerts</button>
+      <div id="sendResponse" style="display:none;"></div>
+      </form>
+    </div>
+{% if loggedin == 0 %}
+      <div id="addAlertsMask" class="disabled">Login First</div>
+{% else %}
+      <div id="addAlertsMask"></div>
+{% endif %}
+    </div>
+  </div>
+</div>
+{{ blocks.pageFooter() }}
+{{ blocks.joinForm(loggedin, ['?src_url=myAlerts.py&', linkappend]|join, url) }}
+</body></html>

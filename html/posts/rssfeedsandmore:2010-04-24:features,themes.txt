@@ -1,0 +1,14 @@
+Update: RSS Feeds and more
+
+<p>Those of you who are familiar with the awesomeness of RSS will be extra pleased with todays update.  Head on over to the <a href="http://gh.apex-games.net/feeds.py">feeds</a> page, and you will find a new way to keep up to date on the resource data flowing into Galaxy Harvester.  If you're not already familiar with subscribing to RSS feeds, this may be your opportunity to discover something new that you may use in many ways.  So do a little research and try it out.  You might like it.</p>
+
+<p>Besides the feeds, there's a few smaller goodies coming your way as well.  Apex got a couple new themes whipped up for you, so now you can style your experience with Destroyer or Rebel Flight Suits.  Here's a list of some other minor tweaks of note in this update.</p>
+<ul>
+<li>Fixed cookie so your theme sticks around when you're not logged in.</li>
+<li>Made resource edit form populate with existing stats on edit action.</li>
+<li>UI changes to Planet availability bar.</li>
+<li>Added prompt to remove old resource if it exists when adding a new creature or flora resource.</li>
+<li>Added link in resource list to verify a resource.  Uses selected planet in search criteria.</li>
+</ul>
+<br />
+-ioscode

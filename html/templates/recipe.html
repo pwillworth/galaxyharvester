@@ -1,0 +1,357 @@
+{% import 'blocks.html' as blocks %}
+<!DOCTYPE html>
+<html lang="en">
+<head><title>Recipe - Galaxy Harvester</title>
+<meta name="description" content="Tool for tracking resources spawning in galaxies of the MMO game Star Wars Galaxies that are emulating original game functionality." />
+<meta name="keywords" content="SWGEmu, crafting, resources, star wars galaxies, harvester" />
+<link rel="SHORTCUT ICON" href="favicon.ico"/>
+<link rel="stylesheet" href="/style/ghCore.css" type="text/css" />
+<link rel="stylesheet" href="/style/themes/{{ uiTheme }}.css" type="text/css" />
+<script type="text/javascript" src="/js/ghShared.js"></script>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery-ui-1.8.20.custom.min.js"></script>
+<script type="text/javascript" src="/js/Colors.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
+    $("#profSel").val(getCookie("schemPickerProfSel",0));
+    $('#groupSel').load(BASE_SCRIPT_URL + 'getMyGroups.py',{favType:1,firstOption:'<option value="any">Group: Any</option>'});
+    loadInventory('{{ ingTypes }}','{{ ingGroups }}');
+    $("#inventory").droppable({
+        accept: ".ingredientSlot",
+        drop: handleSlotDrop,
+        hoverClass: "tableHead"
+    });
+{% if pageType == 'home' %}
+	    refreshRecipes();
+	    refreshSuggestions();
+{% else %}
+	    $(".ingredientSlot").droppable({
+	        accept: "div.inventoryItem",
+	        drop: handleItemDrop,
+	        hoverClass: "tableHead"
+	    });
+	    $(".ingredientSlot").draggable({
+	        stack: ".ingredientSlot",
+	        revert: "invalid",
+	        helper: "clone"
+	    }).dblclick(ingredientSlotDoubleClick);
+{% endif %}
+    $(".window .close").click(function(e) {
+        e.preventDefault();
+        $("#mask, .window").hide();
+    });
+    $("#mask").click(function() {
+        $(this).hide();
+        $(".window").hide();
+    });
+});
+{% if loggedin == 1 %}
+	function refreshSchematics() {
+	    $("#schematicList").attr("disabled","disabled");
+	    $("#schematicList").load(BASE_SCRIPT_URL + "getSchematicList.py",{
+	        listFormat: "option",
+	        groupType: "prof",
+	        profession: $("#profSel").val()
+	        },
+	        function() {$("#schematicList").removeAttr("disabled");$("#recipeName").val($("#schematicList option:selected").text());});
+	}
+	function addRecipe() {
+	    refreshSchematics();
+	    showWindow("#recipeDialog");
+	}
+	function refreshRecipes(newID) {
+	    document.location.href=BASE_SCRIPT_URL + "recipe.py/" + newID;
+	}
+{% endif %}
+function handleResRecipeDrop(event, ui) {
+    var spawn = $(ui.draggable).children(".resourceDetails").attr("id").substr(12);
+    var recipe = $(this).attr("id").substr(6);
+    addRecipeIngredient(recipe, spawn);
+}
+function refreshRecipes() {
+    $("#busyImgRecipeList").show();
+    $("#recipeList").load(BASE_SCRIPT_URL + "getRecipeList.py?{{ linkappend }}",{
+        listFormat: "table",
+        galaxy: $("#galaxySel").val()
+        },
+        function() {
+            $("#recipeList").find("tr").droppable({
+                accept: "div.inventoryItem",
+                drop: handleResRecipeDrop,
+                hoverClass: "ingredientSlotFilled"
+            });
+            $("#busyImgRecipeList").hide();
+        });
+}
+function refreshSuggestions() {
+    if ($("#profSelSuggest").val() == 0) {
+        $("#recipeSuggestList").html("<div class='disabledDark'>Select a profession above to get recipe suggestions based on your inventory.</div>");
+    } else {
+        $("#recipeSuggestList").html("<div style='width:100%;float:right;align:center;'><div style='font-size:16px;font-weight:bolder;margin:10px;'>Trying to find something good to make with your inventory.  This may take a while...</div><img src='/images/ghWaitBlue256.gif' /></div>");
+        $("#recipeSuggestList").load(BASE_SCRIPT_URL + "getRecipeList.py",{
+            listFormat: "table",
+            listType: "suggest",
+            galaxy: $("#galaxySel").val(),
+            profession: $("#profSelSuggest").val()
+            });
+        }
+}
+function handleSlotDrop(event, ui) {
+    if (true) {
+        clearIngredientSlot(ui.draggable);
+    }
+}
+function handleItemDrop(event, ui) {
+    if ($(ui.draggable).attr("tag").indexOf("," + $(this).parent().attr("tag") + ",") > -1) {
+        var spawn = $(ui.draggable).children(".resourceDetails").attr("id").substr(12);
+        var stats = $(ui.draggable).find("p").html();
+        updateIngredientSlot(this, spawn, stats);
+    }
+}
+function updateIngredientSlot(targetSlot, spawnID, statsText) {
+    $(targetSlot).attr("tt", statsText);
+    $(targetSlot).addClass("ingredientSlotFilled");
+    var quantities = $(targetSlot).text().split("/");
+    $(targetSlot).text(quantities[1] + "/" + quantities[1]);
+    $(targetSlot).attr("tag","filled");
+    $(targetSlot).attr("spawnID",spawnID);
+}
+function clearIngredientSlot(targetSlot) {
+    $(targetSlot).removeAttr("tt");
+    $(targetSlot).removeClass("ingredientSlotFilled");
+    var quantities = $(targetSlot).text().split("/");
+    $(targetSlot).text("0/" + quantities[1]);
+    $(targetSlot).attr("tag","empty");
+    $(targetSlot).parent().children(".qualityBar").hide();
+}
+function inventoryItemClick() {
+    inv = this;
+    $("#inventory").find("div.inventoryItem").css("border", "none");
+    $("#inventory").find("div.inventoryItem").css("margin", "4px");
+    $(this).css("border", "1px solid");
+    $(this).css("margin", "3px");
+    // show resource info below
+    $("#resourceDetails").html($(this).find("div.resourceDetails").html());
+    // preview quality in schematic details box
+    var qualityResSum = 0;
+    var qualityResCount = 0;
+    ql = $("#qualitiesList");
+    ql.find(".qualityCalc").remove();
+    ql.find("li").each(function() {
+        if ($(this).attr("tag") != undefined) {
+            qualityData = $(this).attr("tag").split(":");
+            qualityStat = qualityData[0];
+            qualityValue = parseInt(qualityData[1]);
+            // get resource inventory stats
+            resourceData = $(inv).find("div.resourceDetails").attr("tag").split(",");
+            for (i=0;i<resourceData.length;i++) {
+                resourceStatData = resourceData[i].split(":");
+                resourceStat = resourceStatData[0];
+                if (resourceStat == qualityStat) {
+                    qualityResCount += (qualityValue/100);
+                    if (resourceStatData[1] == "None") {
+                        valueStyle = "";
+                        resourceValue = "--";
+                        qualityValue = "--";
+                        resContribution = "---";
+                    } else {
+                        resourceValue = parseInt(resourceStatData[1]);
+                        valueStyle = "color:" + getResourceValueColor(resourceValue);
+                        resContribution = resourceValue * (qualityValue/100);
+                        qualityResSum += resContribution;
+                    }
+                    $(this).after("<li class='schemQualityItem qualityCalc'><span class='inlineBlock' style='width:100px;'>" + $(inv).attr("id").substr(12) + ": </span><span style='" + valueStyle + "'>" + resourceValue + " x " + qualityValue + "% = " + Math.floor(resContribution) + "</span>");
+                    break;
+                }
+            }
+        }
+    });
+    // Highlight available slots and show quality indicator bar
+    $("#recipeIngredients").find("div").each(function() {
+        $(this).children(".ingredientSlot").removeClass("ingredientSlotActive");
+        var slotStatus = $(this).children(".ingredientSlot").attr("tag");
+        if (slotStatus != "filled") {
+            $(this).children(".qualityBar").hide();
+            if ($(inv).attr("tag").indexOf("," + $(this).attr("tag") + ",") > -1) {
+                $(this).children(".ingredientSlot").addClass("ingredientSlotActive");
+                var newHeight = Math.floor(70 * (qualityResSum/qualityResCount/1000));
+                $(this).find(".qualityIndicator").height(newHeight).css({backgroundColor: getResourceValueColor(qualityResSum/qualityResCount)});
+                $(this).children(".qualityBar").show();
+            }
+        }
+    });
+}
+function inventoryItemDoubleClick() {
+    inv = this;
+    // Fill first available and valed ingredient slot with resource
+    $("#recipeIngredients").find("div").each(function() {
+        var slot = $(this).children(".ingredientSlot")[0];
+        if ($(inv).attr("tag").indexOf("," + $(this).attr("tag") + ",") > -1 && $(slot).attr("tag") != "filled") {
+            var spawn = $(inv).children(".resourceDetails").attr("id").substr(12);
+            var stats = $(inv).find("p").html();
+            updateIngredientSlot(slot, spawn, stats);
+            return false;
+        }
+    });
+}
+function ingredientSlotDoubleClick() {
+    slot = this;
+    // unload resource from ingredient slot
+    if ($(slot).attr("tag") == "filled") {
+        clearIngredientSlot(slot);
+    }
+}
+function loadInventory(filterTypes, filterGroups, favoriteGroup) {
+    $("#busyImg").css("display","block");
+    $("#inventory").load(BASE_SCRIPT_URL + "getMyResources.py?{{ linkappend }}",{
+        galaxy: $("#galaxySel").val(),
+        formatType: "inventory",
+        resGroups: filterGroups,
+        resTypes: filterTypes,
+        favGroup: favoriteGroup},
+        function() {
+            var inv = $("#inventory");
+            inv.find("div.inventoryItem").draggable({
+                stack: ".inventoryItem",
+                revert: "invalid",
+                appendTo: "body",
+                helper: "clone"}).click(inventoryItemClick).dblclick(inventoryItemDoubleClick);
+            $("#busyImg").css("display","none");
+        });
+    return false;
+}
+function slotHoverCheck(e) {
+    var tt = $("#tooltip");
+    var ri = $("#recipeIngredients").find(".ingredientSlot");
+    var cOffset = $("#recipeIngredients").offset();
+    var cX = e.pageX - cOffset.left;
+    var cY = e.pageY - cOffset.top;
+    var found = false;
+    for (i=0;i<ri.length;i++) {
+        ing = $(ri.eq(i));
+        wpX = ing.position().left;
+        wpY = ing.position().top;
+        if (cX > wpX && cX < (wpX + ing.width()) && cY > wpY && cY < (wpY + ing.height())) {
+            if (ing.attr("tt") != undefined) {
+                slotData = ing.attr("tt");
+                tt.html(slotData);
+                tt.css("left", e.pageX + 6);
+                tt.css("top", e.pageY + 6);
+                tt.show();
+                found = true;
+                break;
+            }
+        }
+    }
+    if (!found) {
+        tt.hide();
+    }
+}
+</script>
+{{ blocks.pageTracker() }}
+</head>
+<body>
+{{ blocks.headerSection(loggedin, currentUser, loginResult, linkappend, url, imgNum, galaxyList, pictureName) }}
+<div id="mainContent" class="wrapper">
+{% if pageType == 'home' %}
+	  <div id="leftNavContent" class="ghCol">
+	    <div id="inventoryBox" class="ghWidgetBox">
+	    <div class="boxHeader">Inventory
+	      <span style="float:right;"><select name="groupSel" id="groupSel" style="width:120px;" onchange="loadInventory('{{  ingTypes }}','{{ ingGroups }}', this.value);"><option value="any" selected="selected">Group: Any</option>
+	      </select></span>
+	    </div>
+	    <div class="footer"></div>
+	    <div id="busyImg" style="text-align:center;"><img src="../../images/ghWait.gif" /></div>
+	      <div id="inventory"></div>
+	    </div>
+	    <div id="resourceInfo" class="ghWidgetBox">
+	      <div class="boxHeader">Selected Resource</div>
+	      <div id="resourceDetails" class="resourceDetails"></div>
+	    </div>
+	  </div>
+	  <div id="rightMainContent" class="ghCol">
+	    <div id="recipeControls" class="ghWidgetBox">
+        <h2>Home</h2>{{ recipeHTML }}
+        <div style="float:right;">
+          <button type=button value="New Recipe" class="ghButton" onclick="addRecipe();">New Recipe</button>
+        </div>
+	      <div id="recipeMessage"></div>
+	      <div id="busyImgSave" style="text-align:center;display:none;"><img src="../../images/ghWait.gif" /></div>
+	      <div class="footer"></div>
+	      <div class="inlineBlock" style="width:49%;"><div class="standOut">Your Recipes</div>
+	        <div id="busyImgRecipeList" style="display:none;"><img src="/images/ghWait.gif" /></div>
+	        <div id="recipeList" style="margin: 10px;"></div>
+	      </div>
+	      <div class="inlineBlock" style="width:49%;"><div class="standOut">Suggested Recipes
+	        <div style="float:right;">Profession:<select name="profSelSuggest" id="profSelSuggest" onchange="refreshSuggestions();"><option value=0>Select Profession</option>
+		{{ professionList }}
+	        </select></div>
+	        </div>
+	        <div style="min-height:400px;position:relative;">
+	        <div id="recipeSuggestList" style="margin: 10px;"></div></div>
+	      </div>
+	    </div>
+	    </div>
+	  </div>
+{% else %}
+	  <div class="ghCol" style="width:30%;min-width:140px;">
+	    <div id="inventoryBox" class="ghWidgetBox">
+	    <div class="boxHeader">Inventory</div>
+	    <div id="busyImg" style="text-align:center;"><img src="../../images/ghWait.gif" /></div>
+	      <div id="inventory"></div>
+	    </div>
+	    <div id="resourceInfo" class="ghWidgetBox">
+	      <div class="boxHeader">Selected Resource</div>
+	      <div id="resourceDetails" class="resourceDetails"></div>
+	    </div>
+	  </div>
+	  <div class="ghCol" style="width:30%;min-width:180px;">
+	    <div id="recipeControls" class="ghWidgetBox">
+        <div>
+          [<a href="/recipe.py/home">Recipe Home</a>] {{ recipeHTML }}
+          <h2>
+            <a href="" id="nameLink" onclick="$(this).hide();$('#nameEditor').show();$('#recipeName').focus();return false;" title="Click to edit name." class="nameLink">{{ recipeName }}</a>
+          </h2>
+          <div id="nameEditor" style="display:none;">
+            <input type="text" id="recipeName" size="30" maxlength="255" value="{{ recipeName }}" onblur="$('#nameLink').html(this.value).show();$('#nameEditor').hide();" onkeyup="if(event.keyCode == 13){$('#nameLink').html(this.value).show();$('#nameEditor').hide();}"/>
+          </div>
+          <div style="float:right;">
+            <button type=button value="Save" class="ghButton" onclick="saveRecipe({{ recipeID }},$('#recipeName').val());">Save</button>
+            <button type=button value="Delete" class="ghButton" onclick="deleteRecipe('recipe',{{ recipeID }});">Delete</button>
+          </div>
+          <div class="footer"></div>
+          <div id="factoryCalc" style="text-align:left">
+            Calculate Factory Run:
+            <input type="text" id="factoryAmount" size="6" maxlength="4"/> units.
+            <button type="button" value="Calculate" class="ghButton" onclick="getFactoryList(parseInt($('#factoryAmount').val()))">Calculate</button>
+            <div id="factoryResults" style="margin:6px;"></div>
+          </div>
+        </div>
+	      <div id="recipeMessage"></div>
+	      <div id="busyImgSave" style="text-align:center;display:none;"><img src="../../images/ghWait.gif" /></div>
+	    </div>
+	    <div id="schematicSlots" class="ghWidgetBox">
+	      <div class="boxHeader">Schematic Slots</div>
+		    {{ slotHTML }}
+	    </div>
+	  </div>
+	  <div class="ghCol" style="width:40%;min-width:330px;">
+	    <div id="schematicSummary" class="ghWidgetBox">
+        <img src="/images/schematics/{{ schemImageName }}" class="schematics" />
+	    </div>
+	    <div id="schematicDetails" class="ghWidgetBox">
+	      <div class="boxHeader">Schematic Details</div>
+		{{ schematicDetailsHTML }}
+	    </div>
+	  </div>
+{% endif %}
+</div>
+{{ blocks.pageFooter() }}
+{% if loggedin == 1 %}
+	{{ blocks.recipeForm(professionList) }}
+{% endif %}
+{{ blocks.joinForm(loggedin, ['?src_url=recipe.py&', linkappend]|join, url) }}
+<div id="tooltip"></div>
+<div id="mask"></div>
+</body></html>

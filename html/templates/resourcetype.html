@@ -1,0 +1,128 @@
+{% import 'blocks.html' as blocks %}
+<!DOCTYPE html><html lang="en">
+<head><title>Resource - Galaxy Harvester</title>
+<link rel="stylesheet" href="/style/ghCore.css" type="text/css" />
+<link rel="stylesheet" href="/style/themes/{{ uiTheme }}.css" type="text/css" />
+<script type="text/javascript" src="/js/ghShared.js"></script>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
+    $(".window .close").click(function(e) {
+        e.preventDefault();
+        $("#mask, .window").hide();
+    });
+    $("#mask").click(function() {
+        $(this).hide();
+        $(".window").hide();
+    });
+{% if typeID != '' %}
+	    $("#typeSel").load(BASE_SCRIPT_URL + "getResourceTypeList.py");
+	    $("#resSchematics").load(BASE_SCRIPT_URL + "getSchematicList.py",{
+	{% if (typeGroup == 'group') %}
+		        resGroup: "{{ typeID }}",
+	{% elif (typeGroup == 'type') %}
+		        resType: "{{ typeID }}",
+	{% endif %}
+	        groupType: "res"},
+	        function() {
+	            $("#busyImgFindSchem").css("display","none");
+	    });
+{% endif %}
+{% if typeGroup == 'type' %}
+	{% if (creature > -1) %}
+		    $("#resCreatures").load(BASE_SCRIPT_URL + "getCreatureList.py",{
+		        resType: "{{ typeID }}",
+		        groupType: "res"},
+		        function() {
+		            $("#busyImgFindCreatures").css("display","none");
+		    });
+	{% endif %}
+{% else %}
+	    $("#resChildren").load(BASE_SCRIPT_URL + "getResourceTypeList.py",{
+	        resGroup: "{{ typeID }}",
+	        outType: "links"},
+	        function() {
+	            $("#busyImgFindChildren").css("display","none");
+	    });
+{% endif %}
+{% if typeID != '' %}
+	    $("#busyImgSpawns").css("display","block");
+	    $("#recentSpawns").load(BASE_SCRIPT_URL + "getResourceList.py",{
+	        galaxy: $("#galaxySel").val(),
+	        unavailableDays: 6*7,
+	{% if (typeGroup == 'group') %}
+		resGroup: "{{ typeID }}",
+	{% else %}
+		resType: "{{ typeID }}",
+	{% endif %}
+	        sort: "timeEntered"},
+	        function() {$("#busyImgSpawns").css("display","none");});
+      $("#busyImgSpawns").css("display","block");
+    	$("#bestSpawns").load(BASE_SCRIPT_URL + "getTopResources.py",{
+    	    galaxy: $("#galaxySel").val(),
+  {% if (typeGroup == 'group') %}
+    resGroup: "{{ typeID }}",
+  {% else %}
+    resType: "{{ typeID }}",
+  {% endif %}
+    	    boxFormat: 0,
+    	    unavailable: 1},
+    	    function() {$("#busyImgSpawns").css("display","none");});
+{% endif %}
+});
+</script>
+{{ blocks.pageTracker() }}
+<body>
+{{ blocks.headerSection(loggedin, currentUser, loginResult, linkappend, url, imgNum, galaxyList, pictureName) }}
+<div id="mainContent" class="wrapper">
+{% if typeID != '' %}
+	  <div id="leftNavContent" class="ghCol">
+	    <div id="resTypeNav" class="ghWidgetBox">
+	    <div class="boxHeader"><a href="{{ BASE_SCRIPT_URL }}resourceType.py">Resource Type Home</a></div>
+	    </div>
+	    <div id="schematicInfo" class="ghWidgetBox">
+	    <div class="boxHeader">Schematics</div>
+	      <div id="busyImgFindSchem" style="display:none;"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+	      <div id="resSchematics"></div>
+	    </div>
+
+	{% if typeGroup == 'type' %}
+		{% if (creature > -1) %}
+			<div id="creatureInfo" class="ghWidgetBox">
+			<div class="boxHeader">Creatures</div>
+			  <div id="busyImgFindCreatures" style="display:none;"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+			  <div id="resCreatures"></div>
+			</div>
+		{% endif %}
+	{% else %}
+		<div id="childrenInfo" class="ghWidgetBox">
+		<div class="boxHeader">Types</div>
+		  <div id="busyImgFindChildren" style="display:none;"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+		  <div id="resChildren"></div>
+		</div>
+	{% endif %}
+	  </div>
+	  <div id="rightMainContent" class="ghCol">
+{% endif %}
+    <div id="resourceTypeInfo" class="ghWidgetBox" style="height:1600px;">
+{{ resHTML }}
+{% if typeID != '' %}
+	    <div id="busyImgSpawns" style="display:none;"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+      <h3>Recent Spawns</h3>
+  	  <div id="recentSpawns"></div>
+	    <h3>Best Spawns</h3>
+	    <div id="bestSpawns"></div>
+{% else %}
+	{{ resTree }}
+{% endif %}
+    </div>
+{% if typeID != '' %}
+	  </div>
+{% endif %}
+</div>
+{{ blocks.pageFooter() }}
+{{ blocks.resourceForm() }}
+{{ blocks.joinForm(loggedin, ['?src_url={{ BASE_SCRIPT_URL }}resource.py&', linkappend]|join, url) }}
+<div id="mask"></div>
+</body></html>

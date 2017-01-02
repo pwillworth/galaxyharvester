@@ -1,0 +1,114 @@
+
+body {
+	background: #003344;
+	color: #c8f4f3;
+}
+a {
+	color: #c8f4f3;
+}
+a:link {
+	color: #c8f4f3;
+}
+a:hover {
+	color: #7de643;
+}
+a:visited, .altText {
+	color: #feffa1;
+}
+a:active, .groupText {
+	color: #7de643;
+}
+.footer {
+	border-top-color: #05fffe;
+	background: #006b87;
+}
+.ghWidgetBox, #tooltip {
+	background: #006b87;
+	border-color: #05fffe;
+}
+.bigForm, .bigForm input {
+	color: #000;
+}
+#loginForm {
+	color: #c8f4f3;
+}
+.tableHead {
+	background: #003344;
+	color: #feffa1;
+}
+.statRow, .recipeRow {
+	background: #589bac;
+}
+.window {
+	background: #006b87;
+	border-color: #05fffe;
+}
+.formMsg {
+	color: #990000;
+}
+.resourceBox, #header, #footer {
+	background: #589bac;
+}
+.standOut {
+	color: white;
+	background-color: #003344;
+}
+.statusMsg {
+	color: #333333;
+}
+.bigLink {
+	border-color: #003344;
+}
+.statNormal {
+	color: #c8f4f3;
+}
+.statHigh {
+	color: #996600;
+}
+.statMax {
+	color: #cc0000;
+}
+.listSelected {
+	background-color: #589bac;
+	border-color: #7de643;
+}
+.boxBorderHidden {
+	border-color: #006b87;
+}
+ul.schematics a:hover, ul.schematics a:visited {
+	color: #c8f4f3;
+}
+.control {
+	border-color: #05fffe;
+	background: #589bac;
+}
+.textOnBackground {
+	color: #05fffe;
+}
+ul.alert li {
+	background: #589bac;
+}
+a div.resTreeItem, a:link div.resTreeItem, a:visited div.resTreeItem, a:active div.resTreeItem {
+	color: #05fffe;
+	background: #003344;
+	border-color: #05fffe;
+}
+a:hover div.resTreeItem, .slotIndicatorFilled {
+	background: #05fffe;
+	color: #003344;
+	border-color: #003344;
+}
+.ingredientSlot {
+	border-color: #05fffe;
+	background: #015f4f;
+}
+.ingredientSlotActive {
+	background: #019a4a;
+}
+.ingredientSlotFilled {
+	background: #006b87;
+}
+.slotIndicator {
+	border-color: #006b87;
+}
+

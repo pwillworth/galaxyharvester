@@ -1,0 +1,64 @@
+{% import 'blocks.html' as blocks %}
+<!DOCTYPE html>
+<html lang="en"><head><title>Feeds - Galaxy Harvester</title>
+<link rel="stylesheet" href="/style/ghCore.css" type="text/css" />
+<link rel="stylesheet" href="/style/themes/{{ uiTheme }}.css" type="text/css" />
+<script type="text/javascript" src="/js/ghShared.js"></script>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
+    $(".window .close").click(function(e) {
+        e.preventDefault();
+        $("#mask, .window").hide();
+    });
+    $("#mask").click(function() {
+        $(this).hide();
+        $(".window").hide();
+    });
+});
+</script>
+{{ blocks.pageTracker() }}
+<body>
+{{ blocks.headerSection(loggedin, currentUser, loginResult, linkappend, url, imgNum, galaxyList, pictureName) }}
+
+<div id="mainContent" class="wrapper">
+  <div id="leftNavContent" class="ghCol">
+    <div id="helpTopics" class="ghWidgetBox">
+    <div class="boxHeader">What's RSS?</div>
+    <span>RSS stands for Really Simple Syndication, and it's a great way to get notified when new content is available here on Galaxy Harvester and elsewhere.  You need to pick out a reader where you'll get your subscriptions fed to you. Just click on one of the links to a feed on this page to get started and subscribe.</span>
+    </div>
+  </div>
+  <div id="rightMainContent" class="ghCol">
+    <div class="ghWidgetBox">
+    <h1>Feeds
+    <div style="float:right;"><a href="http://www.feedburner.com" target="_blank"><img src="http://www.feedburner.com/fb/images/pub/powered_by_fb.gif" alt="Powered by FeedBurner" style="border:0"/></a></div>
+    </h1>
+    <div class="footer" style="height:1px;">&nbsp;</div>
+      <ul class="feedList">
+      <li>
+      <div><span class="bigLink"><a href="http://feeds.feedburner.com/GalaxyHarvesterNews" title="Subscribe to the site news feed" rel="alternate" type="application/rss+xml">Galaxy Harvester News Blog</a></span><br />
+      <span>Subscribe to the Galaxy Harvester news blog to get the latest information about updates and new features on the site.</span></div></li>
+      <li><div><span class="bigLink"><a href="http://feeds.feedburner.com/GalaxyHarvesterResourceActivity" rel="alternate" type="application/rss+xml">All Resource Adds</a></span>
+      <br /><span>The all resource adds feed will update you whenever any new resource is added.  Use this feed if you are interested in all types of resources in the game.  If you want to custom tailor what kinds of resources you get updates on, use any combination of the feeds below.</span></div></li>
+    <div class="footer" style="height:1px;">&nbsp;</div>
+      <li><div><span class="bigLink"><a href="http://feeds.feedburner.com/GalaxyHarvesterResource-Creature" rel="alternate" type="application/rss+xml">Creature Resources</a></span>
+      <br /><span>Subscribe to the creature resources feed to stay on top of the newest meat, hide, and bone updates.</span></div></li>
+      <li><div><span class="bigLink"><a href="http://feeds.feedburner.com/GalaxyHarvesterResource-Flora" rel="alternate" type="application/rss+xml">Flora Resources</a></span>
+      <br /><span>The flora feed will keep you up to date on fruit, grains, vegetables, and wood.</span></div></li>
+      <li><div><span class="bigLink"><a href="http://feeds.feedburner.com/GalaxyHarvesterResource-Chemical" rel="alternate" type="application/rss+xml">Chemical Resources</a></span>
+      <br /><span>Chemical feed updates include fiberplast, polymer, and lubricating oil.</span></div></li>
+      <li><div><span class="bigLink"><a href="http://feeds.feedburner.com/GalaxyHarvesterResource-Water" rel="alternate" type="application/rss+xml">Water Resources</a></span>
+      <br /><span>Chefs and Doctors of the game will want to keep an eye on updates from the water resource adds feed.</div></li>
+      <li><div><span class="bigLink"><a href="http://feeds.feedburner.com/GalaxyHarvesterResource-Mineral" rel="alternate" type="application/rss+xml">Mineral Resources</a></span>
+      <br /><span>Get updates for the wide array of in game mineral resources like ore, steel, radioactive, iron, copper, aluminum, gemstone, and solid petro fuel.</span></div></li>
+      <li><div><span class="bigLink"><a href="http://feeds.feedburner.com/GalaxyHarvesterResource-Gas" rel="alternate" type="application/rss+xml">Gas Resources</a></span>
+      <br /><span>Inert and Reactive, a wide array of Star Wars Galaxies professions should be interested in staying on top of the newest gas spawns.</span></div></li>
+      <li><div><span class="bigLink"><a href="http://feeds.feedburner.com/GalaxyHarvesterResource-Energy" rel="alternate" type="application/rss+xml">Energy Resources</a></span></div></li>
+    </div>
+  </div>
+</div>
+{{ blocks.pageFooter() }}
+{{ blocks.joinForm(loggedin, ['?src_url=feeds.py&', linkappend]|join, url) }}
+<div id="mask"></div>
+</body></html>

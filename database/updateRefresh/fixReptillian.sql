@@ -1,0 +1,13 @@
+use swgresource;
+UPDATE tResources SET resourceType='meat_reptillian_corellia' WHERE resourceType='meat_reptilian_corellia';
+UPDATE tResources SET resourceType='meat_reptillian_dantooine' WHERE resourceType='meat_reptilian_dantooine';
+UPDATE tResources SET resourceType='meat_reptillian_dathomir' WHERE resourceType='meat_reptilian_dathomir';
+UPDATE tResources SET resourceType='meat_reptillian_endor' WHERE resourceType='meat_reptilian_endor';
+UPDATE tResources SET resourceType='meat_reptillian_hoth' WHERE resourceType='meat_reptilian_hoth';
+UPDATE tResources SET resourceType='meat_reptillian_kaas' WHERE resourceType='meat_reptilian_kaas';
+UPDATE tResources SET resourceType='meat_reptillian_lok' WHERE resourceType='meat_reptilian_lok';
+UPDATE tResources SET resourceType='meat_reptillian_naboo' WHERE resourceType='meat_reptilian_naboo';
+UPDATE tResources SET resourceType='meat_reptillian_rori' WHERE resourceType='meat_reptilian_rori';
+UPDATE tResources SET resourceType='meat_reptillian_talus' WHERE resourceType='meat_reptilian_talus';
+UPDATE tResources SET resourceType='meat_reptillian_tatooine' WHERE resourceType='meat_reptilian_tatooine';
+UPDATE tResources SET resourceType='meat_reptillian_yavin4' WHERE resourceType='meat_reptilian_yavin4';

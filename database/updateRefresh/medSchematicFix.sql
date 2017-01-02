@@ -1,0 +1,2 @@
+UPDATE tSchematicResWeights SET statWeight=1 WHERE statName='OQ' AND expQualityID IN (SELECT sq.expQualityID FROM tSchematicQualities sq WHERE schematicID LIKE 'chemistry%' and expProperty='power' and weightTotal=3);
+UPDATE tSchematicResWeights SET statWeight=2 WHERE statName='PE' AND expQualityID IN (SELECT sq.expQualityID FROM tSchematicQualities sq WHERE schematicID LIKE 'chemistry%' and expProperty='power' and weightTotal=3);

@@ -1,0 +1,63 @@
+{% import 'blocks.html' as blocks %}
+<!DOCTYPE html>
+<html lang="en"><head><title>Mobile Apps - Galaxy Harvester</title>
+<link rel="stylesheet" href="/style/ghCore.css" type="text/css" />
+<link rel="stylesheet" href="/style/themes/{{ uiTheme }}.css" type="text/css" />
+<script type="text/javascript" src="/js/ghShared.js"></script>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
+    $(".window .close").click(function(e) {
+        e.preventDefault();
+        $("#mask, .window").hide();
+    });
+    $("#mask").click(function() {
+        $(this).hide();
+        $(".window").hide();
+    });
+});
+</script>
+{{ blocks.pageTracker() }}
+<body>
+{{ blocks.headerSection(loggedin, currentUser, loginResult, linkappend, url, imgNum, galaxyList, pictureName) }}
+
+<div id="mainContent" class="wrapper">
+  <div id="leftNavContent" class="ghCol">
+    <div id="helpTopics" class="ghWidgetBox">
+    <div class="boxHeader">Go Mobile</div>
+    <div>Galaxy Harvester is available on a variety of Mobile Platforms.  Search for it in your app store or visit the store pages listed here.</div>
+    <a href="https://play.google.com/store/apps/details?id=com.ioscode.gameaid.galaxyharvester"><img class="appStoreBadge" src="/images/appstores/google-play-badge.png" alt="Get it on Google Play"/></a>
+    <a href="https://itunes.apple.com/us/app/galaxy-harvester/id1082088469?ls=1&mt=8"><img class="appStoreBadge" src="/images/appstores/AppleStore.png" alt="Get it in the Apple Store"/></a>
+    <a href="https://www.microsoft.com/store/apps/9nblggh5lm49?ocid=badge"><img class="appStoreBadge" src="/images/appstores/English_get-it-from-MS.png" alt="Get it from Microsoft" /></a>
+    <a href="http://www.amazon.com/gp/product/B01CXC657Y/ref=mas_pm_galaxy_harvester"><img class="appStoreBadge" src="/images/appstores/amazon-badge.png" alt="Get it on Amazon"/></a>
+    </div>
+  </div>
+  <div id="rightMainContent" class="ghCol">
+    <div class="ghWidgetBox">
+      <h1>Galaxy Harvester Mobile Apps</h1>
+      <div>The Galaxy Harvester Mobile App provides features to let you do research while you're out and about, or assist you while in game without switching out to a browser on your PC.</div>
+      <table><tr><td>
+      <h3>Features:</h3>
+      <ul class="plain">
+        <li>Login/Logout/Register/Password Reset</li>
+        <li>Select Galaxy</li>
+        <li>Add/Edit Resources</li>
+        <li>Add/Edit Waypoints</li>
+        <li>Browse Recent Activity</li>
+        <li>Search Resources By Type, Group, Quality, Availability, Name, Favorites</li>
+        <li>Manage Spawn and Despawn Alert Filters</li>
+        <li>Get Alerts inside Mobile App</li>
+        <li>Browse News</li>
+        <li>OCR Partial Resource Add assist with camera</li>
+      </ul>
+    </td><td>
+      <div><img src="/images/ghMobile.png" alt="Mobile App Features Graphic"/></div>
+    </td></tr></table>
+    </div>
+  </div>
+</div>
+{{ blocks.pageFooter() }}
+{{ blocks.joinForm(loggedin, ['?src_url=apps.py&', linkappend]|join, url) }}
+<div id="mask"></div>
+</body></html>

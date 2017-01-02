@@ -1,0 +1,16 @@
+For a Cleaner Planet (Map)
+
+<p>A bunch of small tweaks have been released today, mostly related to waypoint maps.  You can now verify and mark unavailable waypoints.  If you use a waypoint someone posted, finding the concentration accurate when you get there, click the green checkmark in the waypoint list for it to acknowlege that it is good for others who might come across it.  When a resource is marked unavailable, the waypoints for it have always automatically gone off the map, but since resources can sometimes move before they go away, we needed a way for anyone to indicate that they are not available at a location anymore.  If you travel to a waypoint and find that the concentration listed is no longer there, click the X in the waypoint row for it to mark it as unavailable.  The waypoint will go red on the map, eventually go away if enough people with experience mark it.</p>
+
+<p>Other updates coming on today include:</p>
+<ul>
+<li>Added resource type column to resource history on stats page.</li>
+<li>Changed resource names to be links to resource page in waypoint lists.</li>
+<li>Add badge for users on their page for those who have donated to the site. (Thank you for covering costs for the first time last month!)</li>
+<li>Changed the information for a waypoint listed on the resource page to display how long ago it was added instead of spawn name.</li>
+<li>Added automatic refreshing of waypoints when making entries or changes.</li>
+</ul>
+<br/>
+<p>For those who haven't stopped by the <a href="http://galaxyharvester.net/feedback.py" title="Suggestions page">suggestions</a> in a bit, I got it updated so you can comment on suggestions to help facilitate conversation around the items.  Stop by and check it out!</p>
+
+<p>-ioscode</p>

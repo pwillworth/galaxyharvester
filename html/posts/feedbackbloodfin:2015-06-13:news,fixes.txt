@@ -1,0 +1,9 @@
+Feedback and Bloodfin
+
+<p>Ok, so today we have a return of the Suggestions and Feedback page.  Almost.  At this point you can view and vote on feedback, but the ability to add new items and comment on existing ones is still in the works.</p>
+
+<p>Also, as players on the Bloodfin server are aware, the new planets available there Hoth, and Dromund Kaas have not quite had full functionality here on Galaxy Harvester due to missing resource types and other details.  As of now, almost all of those types are available and all site functionality for those planets should be available.  There are a few resource types I think that might still not be in the list, but they will be getting added soon.</p>
+
+<p>Happy surveying,</p>
+
+<p>-ioscode</p>

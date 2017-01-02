@@ -1,0 +1,13 @@
+Goodbye Ads
+
+<p>You may have noticed that advertisements were removed from the site recently.  For various reasons that may be obvious, it wasn't a very good fit for the site.  Think ads for agriculture equipment, and combine that with people who appreciate Galaxy Harvester, but really aren't interested in things that really aren't remotely related, and we had something that probably didn't work well for anyone.</p>
+
+<p>For those who find the application useful, we've set up a new way for you to contribute to keeping us running.  There is a button on the home page which you have probably already seen you can click to make a donation to the site.  Your donation will help to pay for art, development, and hosting of Galaxy Harvester, keeping the lights on and new features coming your way.  We appreciate any donation you can give, and if you can't, everyone appreciates your continuted contributions to updating resource information on Galaxy Harvester.</p>
+
+<p>
+Thanks,
+</p>
+
+<p>
+-ioscode
+</p>

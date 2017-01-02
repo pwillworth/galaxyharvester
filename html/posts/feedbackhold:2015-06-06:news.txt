@@ -1,0 +1,5 @@
+Feedback Migration
+
+<p>Just a heads up, the <a href="http://galaxyharvester.net/feedback.py">feedback page</a> where you enter and vote on site suggestions is going to be unavailable for a little bit.  The Google Moderator service we have been using for it is shutting down soon.  Suggestions and voting will be closed while the existing data is moved.  I'll post an update when this process is complete and the page is available again.</p>
+
+<p>-ioscode</p>

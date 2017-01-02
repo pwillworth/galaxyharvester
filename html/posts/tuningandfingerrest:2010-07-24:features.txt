@@ -1,0 +1,10 @@
+Update: Tuning and Rest for Your Fingers
+
+<p>I've got two main enhancements coming at you this time.  First of all, you may notice an option up in the login box to "Stay Logged In".  Check that box before you log in if you'd like to never have to log in again for the computer you are on (assuming you have cookies enabled).  Tell your fingers they are welcome ;-)</p>
+
+<p>The other big item is some fine tuning and a new option on the resource list page.  When you are using the "By Type" view, the resources will now be loaded in chunks so you can start interacting with the page before it's loaded everything.  You can also control what it loads first by collapsing sections you don't want it to load right away.  It will remember what sections you left expanded, and populate those first the next time you go to the page.  The new option available is a new view that lets you sort by a resource stat, or the average of all present stats.</p>
+
+<p>Also, a small side note.  A small bug was also fixed which was preventing you from being able to make a resource available by entering it again after it was accidentally marked unavailable.</p>
+<br />
+Enjoy!<br />
+-ioscode

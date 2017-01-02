@@ -1,0 +1,21 @@
+use swgresource;
+UPDATE tObjectType SET typeName="Misc" WHERE objectType=8192;
+UPDATE tObjectType SET typeName="Item" WHERE objectType=8218;
+UPDATE tObjectType SET typeName="Thrown Weapon" WHERE objectType=131075;
+UPDATE tObjectType SET typeName="Heavy Weapon" WHERE objectType=131076;
+UPDATE tObjectType SET typeName="Special Heavy Weapon" WHERE objectType=131078;
+UPDATE tObjectType SET typeName="1-Handed Melee Weapon" WHERE objectType=131079;
+UPDATE tObjectType SET typeName="Two-Handed Melee Weapon" WHERE objectType=131080;
+UPDATE tObjectType SET typeName="Munition Component" WHERE objectType=262150;
+UPDATE tObjectType SET typeName="Melee Weapon Component" WHERE objectType=262152;
+UPDATE tObjectType SET typeName="Ranged Weapon Component" WHERE objectType=262153;
+UPDATE tObjectType SET typeName="Ship Component Repair Item" WHERE objectType=32773;
+UPDATE tObjectType SET typeName="Booster" WHERE objectType=1073741831;
+UPDATE tObjectType SET typeName="Ship Chassis" WHERE objectType=1073741836;
+UPDATE tObjectType SET typeName="Armor" WHERE objectType=1073741828;
+UPDATE tObjectType SET typeName="Shield" WHERE objectType=1073741827;
+UPDATE tObjectType SET typeName="Weapon" WHERE objectType=1073741829;
+UPDATE tObjectType SET typeName="Chemistry Component" WHERE objectType=262146;
+INSERT INTO tGalaxy (galaxyName, galaxyState) VALUES ("Pre-Alpha", 1);
+INSERT INTO tGalaxy (galaxyName, galaxyState) VALUES ("Basilisk", 0);
+

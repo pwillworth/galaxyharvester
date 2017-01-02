@@ -1,0 +1,1106 @@
+aluminum_agrinium	Agrinium Aluminum	mineral	aluminum	1	2	94	307	358	492	94	307	0	0	270	430	382	568	0	0	1	1000	370	530	370	530	0	0	aluminum	aluminum	0
+aluminum_chromium	Chromium Aluminum	mineral	aluminum	1	2	227	440	442	575	227	440	0	0	370	530	498	685	0	0	1	1000	470	630	470	630	0	0	aluminum	aluminum	0
+aluminum_duralumin	Duralumin Aluminum	mineral	aluminum	1	2	361	574	525	658	361	574	0	0	470	630	615	802	0	0	1	1000	570	730	570	730	0	0	aluminum	aluminum	0
+aluminum_linksteel	Link-Steel Aluminum	mineral	aluminum	1	2	494	707	608	742	494	707	0	0	570	730	732	918	0	0	1	1000	670	830	670	830	0	0	aluminum	aluminum	0
+aluminum_perovskitic	Perovskitic Aluminum	mineral	aluminum	1	1	1	1000	1	1000	1	1000	0	0	1	1000	1	1000	0	0	1	1000	1	1000	1	1000	0	0	aluminum	aluminum	0
+aluminum_phrik	Phrik Aluminum	mineral	aluminum	1	2	627	800	692	800	627	800	0	0	670	800	848	1000	0	0	1	1000	770	900	770	900	0	0	aluminum	aluminum	0
+aluminum_smelted	Smelted Aluminum	mineral	aluminum	0	1	200	200	200	200	200	200	0	0	200	200	200	200	0	0	200	200	200	200	200	200	0	0	aluminum	aluminum	0
+aluminum_titanium	Titanium Aluminum	mineral	aluminum	1	2	1	174	300	408	1	174	0	0	200	330	300	452	0	0	1	1000	300	430	300	430	0	0	aluminum	aluminum	0
+armophous_baltaran	Bal'ta'ran Crystal Amorphous Gemstone	mineral	gemstone_armophous	1	2	870	1000	0	0	870	1000	0	0	948	1000	522	600	0	0	1	1000	870	1000	870	1000	696	800	gemstone	gemstone	0
+armophous_baradium	Baradium Amorphous Gemstone	mineral	gemstone_armophous	1	2	71	231	0	0	71	231	0	0	628	692	43	139	0	0	1	1000	71	231	71	231	57	185	gemstone	gemstone	0
+armophous_bospridium	Bospridium Amorphous Gemstone	mineral	gemstone_armophous	1	2	1	131	0	0	1	131	0	0	600	652	1	79	0	0	1	1000	1	131	1	131	1	105	gemstone	gemstone	0
+armophous_plexite	Plexite Amorphous Gemstone	mineral	gemstone_armophous	1	2	271	431	0	0	271	431	0	0	708	772	163	259	0	0	1	1000	271	431	271	431	217	345	gemstone	gemstone	0
+armophous_regvis	Regvis Amorphous Gemstone	mineral	gemstone_armophous	1	2	171	331	0	0	171	331	0	0	668	732	103	199	0	0	1	1000	171	331	171	331	137	265	gemstone	gemstone	0
+armophous_rudic	Rudic Amorphous Gemstone	mineral	gemstone_armophous	1	2	371	530	0	0	371	530	0	0	748	812	223	318	0	0	1	1000	371	530	371	530	297	424	gemstone	gemstone	0
+armophous_ryll	Ryll Amorphous Gemstone	mineral	gemstone_armophous	1	2	471	630	0	0	471	630	0	0	788	852	283	378	0	0	1	1000	471	630	471	630	377	504	gemstone	gemstone	0
+armophous_sedrellium	Sedrellium Amorphous Gemstone	mineral	gemstone_armophous	1	2	570	730	0	0	570	730	0	0	828	892	342	438	0	0	1	1000	570	730	570	730	456	584	gemstone	gemstone	0
+armophous_stygium	Stygium Amorphous Gemstone	mineral	gemstone_armophous	1	2	670	830	0	0	670	830	0	0	868	932	402	498	0	0	1	1000	670	830	670	830	536	664	gemstone	gemstone	0
+armophous_vendusii	Vendusii Crystal Amorphous Gemstone	mineral	gemstone_armophous	1	2	770	930	0	0	770	930	0	0	908	972	462	558	0	0	1	1000	770	930	770	930	616	744	gemstone	gemstone	0
+bone_avian_corellia	Corellian Avian Bones	creature_structural	bone_avian	1	1	0	0	0	0	1	700	0	0	0	0	1	600	0	0	1	1000	100	500	1	500	0	0	bone	bone	1
+bone_avian_dantooine	Dantooine Avian Bones	creature_structural	bone_avian	1	1	0	0	0	0	1	700	0	0	0	0	1	600	0	0	1	1000	100	500	1	500	0	0	bone	bone	2
+bone_avian_dathomir	Dathomirian Avian Bones	creature_structural	bone_avian	1	1	0	0	0	0	1	700	0	0	0	0	1	600	0	0	1	1000	100	500	1	500	0	0	bone	bone	3
+bone_avian_endor	Endorian Avian Bones	creature_structural	bone_avian	1	1	0	0	0	0	1	700	0	0	0	0	1	600	0	0	1	1000	100	500	1	500	0	0	bone	bone	4
+bone_avian_hoth	Hothian Avian Bones	creature_structural	bone_avian	1	1	0	0	0	0	1	700	0	0	0	0	1	600	0	0	1	1000	100	500	1	500	0	0	bone	bone	11
+bone_avian_kaas	Kaasian Avian Bones	creature_structural	bone_avian	1	1	0	0	0	0	1	700	0	0	0	0	1	600	0	0	1	1000	100	500	1	500	0	0	bone	bone	12
+bone_avian_lok	Lokian Avian Bones	creature_structural	bone_avian	1	1	0	0	0	0	1	700	0	0	0	0	1	600	0	0	1	1000	100	500	1	500	0	0	bone	bone	5
+bone_avian_mandalore	Mandalore Avian Bones	creature_structural	bone_avian	1	1	0	0	0	0	1	700	0	0	0	0	1	600	0	0	1	1000	100	500	1	500	0	0	bone	bone	14
+bone_avian_naboo	Nabooian Avian Bones	creature_structural	bone_avian	1	1	0	0	0	0	1	700	0	0	0	0	1	600	0	0	1	1000	100	500	1	500	0	0	bone	bone	6
+bone_avian_rori	Rori Avian Bones	creature_structural	bone_avian	1	1	0	0	0	0	1	700	0	0	0	0	1	600	0	0	1	1000	100	500	1	500	0	0	bone	bone	7
+bone_avian_talus	Talusian Avian Bones	creature_structural	bone_avian	1	1	0	0	0	0	1	700	0	0	0	0	1	600	0	0	1	1000	100	500	1	500	0	0	bone	bone	8
+bone_avian_tatooine	Tatooinian Avian Bones	creature_structural	bone_avian	1	1	0	0	0	0	1	700	0	0	0	0	1	600	0	0	1	1000	100	500	1	500	0	0	bone	bone	9
+bone_avian_yavin4	Yavinian Avian Bones	creature_structural	bone_avian	1	1	0	0	0	0	1	700	0	0	0	0	1	600	0	0	1	1000	100	500	1	500	0	0	bone	bone	10
+bone_horn_corellia	Corellian Horn	creature_structural	bone_horn	1	1	0	0	0	0	200	1000	0	0	0	0	1	500	0	0	1	1000	300	700	1	500	0	0	bone	bone_horn	1
+bone_horn_dantooine	Dantooine Horn	creature_structural	bone_horn	1	1	0	0	0	0	200	1000	0	0	0	0	1	500	0	0	1	1000	300	700	1	500	0	0	bone	bone_horn	2
+bone_horn_dathomir	Dathomirian Horn	creature_structural	bone_horn	1	1	0	0	0	0	200	1000	0	0	0	0	1	500	0	0	1	1000	300	700	1	500	0	0	bone	bone_horn	3
+bone_horn_endor	Endorian Horn	creature_structural	bone_horn	1	1	0	0	0	0	200	1000	0	0	0	0	1	500	0	0	1	1000	300	700	1	500	0	0	bone	bone_horn	4
+bone_horn_ground	Ground Horn	creature_structural	bone_horn	0	1	0	0	0	0	200	200	0	0	0	0	200	200	0	0	200	200	200	200	200	200	0	0	bone	bone_horn	0
+bone_horn_hoth	Hothian Horn	creature_structural	bone_horn	1	1	0	0	0	0	200	1000	0	0	0	0	1	500	0	0	1	1000	300	700	1	500	0	0	bone	bone_horn	11
+bone_horn_kaas	Kaasian Horn	creature_structural	bone_horn	1	1	0	0	0	0	200	1000	0	0	0	0	1	500	0	0	1	1000	300	700	1	500	0	0	bone	bone_horn	12
+bone_horn_lok	Lokian Horn	creature_structural	bone_horn	1	1	0	0	0	0	200	1000	0	0	0	0	1	500	0	0	1	1000	300	700	1	500	0	0	bone	bone_horn	5
+bone_horn_mandalore	Mandalore Horn	creature_structural	bone_horn	1	1	0	0	0	0	200	1000	0	0	0	0	1	500	0	0	1	1000	300	700	1	500	0	0	bone	bone_horn	14
+bone_horn_naboo	Nabooian Horn	creature_structural	bone_horn	1	1	0	0	0	0	200	1000	0	0	0	0	1	500	0	0	1	1000	300	700	1	500	0	0	bone	bone_horn	6
+bone_horn_rori	Rori Horn	creature_structural	bone_horn	1	1	0	0	0	0	200	1000	0	0	0	0	1	500	0	0	1	1000	300	700	1	500	0	0	bone	bone_horn	7
+bone_horn_talus	Talusian Horn	creature_structural	bone_horn	1	1	0	0	0	0	200	1000	0	0	0	0	1	500	0	0	1	1000	300	700	1	500	0	0	bone	bone_horn	8
+bone_horn_tatooine	Tatooinian Horn	creature_structural	bone_horn	1	1	0	0	0	0	200	1000	0	0	0	0	1	500	0	0	1	1000	300	700	1	500	0	0	bone	bone_horn	9
+bone_horn_yavin4	Yavinian Horn	creature_structural	bone_horn	1	1	0	0	0	0	200	1000	0	0	0	0	1	500	0	0	1	1000	300	700	1	500	0	0	bone	bone_horn	10
+bone_mammal_corellia	Corellian Animal Bones	creature_structural	bone	1	1	0	0	0	0	300	1000	0	0	0	0	1	500	0	0	1	1000	400	1000	1	1000	0	0	bone	bone	1
+bone_mammal_dantooine	Dantooine Animal Bones	creature_structural	bone	1	1	0	0	0	0	300	1000	0	0	0	0	1	500	0	0	1	1000	400	1000	1	1000	0	0	bone	bone	2
+bone_mammal_dathomir	Dathomirian Animal Bones	creature_structural	bone	1	1	0	0	0	0	300	1000	0	0	0	0	1	500	0	0	1	1000	400	1000	1	1000	0	0	bone	bone	3
+bone_mammal_endor	Endorian Animal Bones	creature_structural	bone	1	1	0	0	0	0	300	1000	0	0	0	0	1	500	0	0	1	1000	400	1000	1	1000	0	0	bone	bone	4
+bone_mammal_hoth	Hothian Animal Bones	creature_structural	bone	1	1	0	0	0	0	300	1000	0	0	0	0	1	500	0	0	1	1000	400	1000	1	1000	0	0	bone	bone	11
+bone_mammal_kaas	Kaasian Animal Bones	creature_structural	bone	1	1	0	0	0	0	300	1000	0	0	0	0	1	500	0	0	1	1000	400	1000	1	1000	0	0	bone	bone	12
+bone_mammal_lok	Lokian Animal Bones	creature_structural	bone	1	1	0	0	0	0	300	1000	0	0	0	0	1	500	0	0	1	1000	400	1000	1	1000	0	0	bone	bone	5
+bone_mammal_mandalore	Mandalore Animal Bones	creature_structural	bone	1	1	0	0	0	0	300	1000	0	0	0	0	1	500	0	0	1	1000	400	1000	1	1000	0	0	bone	bone	14
+bone_mammal_naboo	Nabooian Animal Bones	creature_structural	bone	1	1	0	0	0	0	300	1000	0	0	0	0	1	500	0	0	1	1000	400	1000	1	1000	0	0	bone	bone	6
+bone_mammal_rori	Rori Animal Bones	creature_structural	bone	1	1	0	0	0	0	300	1000	0	0	0	0	1	500	0	0	1	1000	400	1000	1	1000	0	0	bone	bone	7
+bone_mammal_talus	Talusian Animal Bones	creature_structural	bone	1	1	0	0	0	0	300	1000	0	0	0	0	1	500	0	0	1	1000	400	1000	1	1000	0	0	bone	bone	8
+bone_mammal_tatooine	Tatooinian Animal Bones	creature_structural	bone	1	1	0	0	0	0	300	1000	0	0	0	0	1	500	0	0	1	1000	400	1000	1	1000	0	0	bone	bone	9
+bone_mammal_yavin4	Yavinian Animal Bones	creature_structural	bone	1	1	0	0	0	0	300	1000	0	0	0	0	1	500	0	0	1	1000	400	1000	1	1000	0	0	bone	bone	10
+chemical_compound	Chemical Compound	chemical	chemical	0	1	0	0	0	0	200	200	0	0	0	0	0	0	200	200	200	200	0	0	0	0	0	0	inorganic	fuel_petrochem_liquid	0
+combined_radioactive_isotpopes	Combined Radioactive Isotopes	mineral	radioactive	0	1	0	0	0	0	200	200	0	0	0	0	0	0	200	200	200	200	0	0	0	0	0	0	radioactive	radioactive	0
+copper_beyrllius	Beyrllius Copper	mineral	copper	1	2	152	294	594	683	133	257	0	0	285	365	594	683	0	0	1	1000	394	483	394	483	0	0	copper	copper	0
+copper_borocarbitic	Conductive Borcarbitic Copper	mineral	copper	1	1	1	1000	1	1000	1	1000	0	0	1	1000	1	1000	0	0	1	1000	1	1000	1	1000	0	0	copper	copper	0
+copper_codoan	Codoan Copper	mineral	copper	1	2	241	383	650	739	211	335	0	0	335	415	650	739	0	0	1	1000	450	539	450	539	0	0	copper	copper	0
+copper_desh	Desh Copper	mineral	copper	1	2	1	116	500	572	1	102	0	0	200	265	500	572	0	0	1	1000	300	372	300	372	0	0	copper	copper	0
+copper_diatium	Diatium Copper	mineral	copper	1	2	329	472	706	794	288	413	0	0	385	465	706	794	0	0	1	1000	506	594	506	594	0	0	copper	copper	0
+copper_kelsh	Kelsh Copper	mineral	copper	1	2	418	560	761	850	366	490	0	0	435	515	761	850	0	0	1	1000	561	650	561	650	0	0	copper	copper	0
+copper_mythra	Mythra Copper	mineral	copper	1	2	507	649	817	906	444	568	0	0	485	565	817	906	0	0	1	1000	617	706	617	706	0	0	copper	copper	0
+copper_platinite	Platinite Copper	mineral	copper	1	2	596	738	872	961	521	646	0	0	535	615	872	961	0	0	1	1000	672	761	672	761	0	0	copper	copper	0
+copper_polysteel	Polysteel Copper	mineral	copper	1	2	685	800	928	1000	599	700	0	0	585	650	928	1000	0	0	1	1000	728	800	728	800	0	0	copper	copper	0
+copper_smelted	Smelted Copper	mineral	copper	0	1	200	200	200	200	200	200	0	0	200	200	200	200	0	0	200	200	200	200	200	200	0	0	copper	copper	0
+copper_thallium	Thallium Copper	mineral	copper	1	2	63	205	539	628	55	180	0	0	235	315	539	628	0	0	1	1000	339	428	339	428	0	0	copper	copper	0
+corn_domesticated_corellia	Corellian Domesticated Corn	flora_food	corn_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	corn	1
+corn_domesticated_dantooine	Dantooine Domesticated Corn	flora_food	corn_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	corn	2
+corn_domesticated_dathomir	Dathomirian Domesticated Corn	flora_food	corn_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	corn	3
+corn_domesticated_endor	Endorian Domesticated Corn	flora_food	corn_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	corn	4
+corn_domesticated_hoth	Hothian Domesticated Corn	flora_food	corn_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	corn	11
+corn_domesticated_kaas	Kaasian Domesticated Corn	flora_food	corn_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	corn	12
+corn_domesticated_lok	Lokian Domesticated Corn	flora_food	corn_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	corn	5
+corn_domesticated_mandalore	Mandalore Domesticated Corn	flora_food	corn_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	corn	14
+corn_domesticated_naboo	Nabooian Domesticated Corn	flora_food	corn_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	corn	6
+corn_domesticated_rori	Rori Domesticated Corn	flora_food	corn_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	corn	7
+corn_domesticated_talus	Talusian Domesticated Corn	flora_food	corn_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	corn	8
+corn_domesticated_tatooine	Tatooinian Domesticated Corn	flora_food	corn_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	corn	9
+corn_domesticated_yavin4	Yavinian Domesticated Corn	flora_food	corn_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	corn	10
+corn_wild_corellia	Corellian Wild Corn	flora_food	corn_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	corn	1
+corn_wild_dantooine	Dantooine Wild Corn	flora_food	corn_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	corn	2
+corn_wild_dathomir	Dathomirian Wild Corn	flora_food	corn_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	corn	3
+corn_wild_endor	Endorian Wild Corn	flora_food	corn_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	corn	4
+corn_wild_hoth	Hothian Wild Corn	flora_food	corn_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	corn	11
+corn_wild_kaas	Kaasian Wild Corn	flora_food	corn_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	corn	12
+corn_wild_lok	Lokian Wild Corn	flora_food	corn_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	corn	5
+corn_wild_mandalore	Mandalore Wild Corn	flora_food	corn_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	corn	14
+corn_wild_naboo	Nabooian Wild Corn	flora_food	corn_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	corn	6
+corn_wild_rori	Rori Wild Corn	flora_food	corn_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	corn	7
+corn_wild_talus	Talusian Wild Corn	flora_food	corn_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	corn	8
+corn_wild_tatooine	Tatooinian Wild Corn	flora_food	corn_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	corn	9
+corn_wild_yavin4	Yavinian Wild Corn	flora_food	corn_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	corn	10
+crystalline_byrothsis	Byrothsis Crystalline Gemstone	mineral	gemstone_crystalline	1	2	1	163	0	0	1	163	0	0	700	749	1	66	0	0	1	1000	300	414	300	414	500	581	gemstone	gemstone	0
+crystalline_gallinorian	Gallinorian Rainbow Gem Crystalline Gemstone	mineral	gemstone_crystalline	1	2	88	288	0	0	88	288	0	0	726	786	36	116	0	0	1	1000	361	501	361	501	544	644	gemstone	gemstone	0
+crystalline_green_diamond	Green Diamond Crystalline Gemstone	mineral	gemstone_crystalline	1	2	213	413	0	0	213	413	0	0	764	824	86	166	0	0	1	1000	449	589	449	589	606	706	gemstone	gemstone	0
+crystalline_kerol_firegem	Kerol Fire-Gem Crystalline Gemstone	mineral	gemstone_crystalline	1	2	338	538	0	0	338	538	0	0	801	861	136	215	0	0	1	1000	536	676	536	676	669	769	gemstone	gemstone	0
+crystalline_laboi_mineral_crystal	Laboi Mineral Crystal Crystalline Gemstone	mineral	gemstone_crystalline	1	2	713	913	0	0	713	913	0	0	914	974	285	365	0	0	1	1000	799	939	799	939	856	956	gemstone	gemstone	0
+crystalline_seafah_jewel	Seafah Jewel Crystalline Gemstone	mineral	gemstone_crystalline	1	2	463	663	0	0	463	663	0	0	839	899	186	265	0	0	1	1000	624	764	624	764	731	831	gemstone	gemstone	0
+crystalline_sormahil_firegem	Sormahil Fire Gem Crystalline Gemstone	mineral	gemstone_crystalline	1	2	588	788	0	0	588	788	0	0	876	936	235	315	0	0	1	1000	711	851	711	851	794	894	gemstone	gemstone	0
+crystalline_vertex	Vertex Crystalline Gemstone	mineral	gemstone_crystalline	1	2	838	1000	0	0	838	1000	0	0	951	1000	335	400	0	0	1	1000	886	1000	886	1000	919	1000	gemstone	gemstone	0
+degraded_fuel_petrochem_solid	Degraded Solid Petrochem Fuel	mineral	fuel_petrochem_solid	0	1	0	0	0	0	200	200	0	0	0	0	0	0	200	200	200	200	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	0
+energy_renewable_site_limited_geothermal_corellia	Corellian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	1
+energy_renewable_site_limited_geothermal_dantooine	Dantooine Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	2
+energy_renewable_site_limited_geothermal_dathomir	Dathomirian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	3
+energy_renewable_site_limited_geothermal_endor	Endorian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	4
+energy_renewable_site_limited_geothermal_hoth	Hothian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	11
+energy_renewable_site_limited_geothermal_kaas	Kaasian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	12
+energy_renewable_site_limited_geothermal_lok	Lokian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	5
+energy_renewable_site_limited_geothermal_mandalore	Mandalore Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	14
+energy_renewable_site_limited_geothermal_naboo	Nabooian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	6
+energy_renewable_site_limited_geothermal_rori	Rori Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	7
+energy_renewable_site_limited_geothermal_talus	Talusian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	8
+energy_renewable_site_limited_geothermal_tatooine	Tatooinian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	9
+energy_renewable_site_limited_geothermal_weak	Weak Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	200	200	200	0	0	0	0	0	0	energy	energy	0
+energy_renewable_site_limited_geothermal_yavin4	Yavinian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	10
+energy_renewable_site_limited_hydron3_corellia	Corellian Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	1
+energy_renewable_site_limited_hydron3_dantooine	Dantooine Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	2
+energy_renewable_site_limited_hydron3_dathomir	Dathomirian Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	3
+energy_renewable_site_limited_hydron3_endor	Endorian Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	4
+energy_renewable_site_limited_hydron3_hoth	Hothian Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	11
+energy_renewable_site_limited_hydron3_kaas	Kaasian Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	12
+energy_renewable_site_limited_hydron3_lok	Lokian Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	5
+energy_renewable_site_limited_hydron3_mandalore	Mandalore Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	14
+energy_renewable_site_limited_hydron3_naboo	Nabooian Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	6
+energy_renewable_site_limited_hydron3_rori	Rori Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	7
+energy_renewable_site_limited_hydron3_talus	Talusian Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	8
+energy_renewable_site_limited_hydron3_tatooine	Tatooinian Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	9
+energy_renewable_site_limited_hydron3_weak	Weak Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	1	0	0	0	0	0	0	0	0	0	0	0	0	200	200	200	200	0	0	0	0	0	0	energy	energy	0
+energy_renewable_site_limited_hydron3_yavin4	Yavinian Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	10
+energy_renewable_site_limited_tidal_corellia	Corellian Tidal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	1
+energy_renewable_site_limited_tidal_dantooine	Dantooine Tidal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	2
+energy_renewable_site_limited_tidal_dathomir	Dathomirian Tidal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	3
+energy_renewable_site_limited_tidal_endor	Endor Tidal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	4
+energy_renewable_site_limited_tidal_hoth	Hothian Tidal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	11
+energy_renewable_site_limited_tidal_kaas	Kaasian Tidal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	12
+energy_renewable_site_limited_tidal_lok	Lokian Tidal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	5
+energy_renewable_site_limited_tidal_mandalore	Mandalore Tidal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	14
+energy_renewable_site_limited_tidal_naboo	Naboo Tidal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	6
+energy_renewable_site_limited_tidal_rori	Rori Tidal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	7
+energy_renewable_site_limited_tidal_talus	Talusian Tidal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	8
+energy_renewable_site_limited_tidal_tatooine	Tatooinian Tidal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	9
+energy_renewable_site_limited_tidal_weak	Weak Tidal Renewable Energy	energy	energy_renewable_site_limited	0	1	0	0	0	0	0	0	0	0	0	0	0	0	200	200	200	200	0	0	0	0	0	0	energy	energy	0
+energy_renewable_site_limited_tidal_yavin4	Yavinian Tidal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	10
+energy_renewable_unlimited_solar_corellia	Corellian Solar Renewable Energy	energy	energy_renewable_unlimited_solar	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	600	500	500	0	0	0	0	0	0	energy	energy	1
+energy_renewable_unlimited_solar_dantooine	Dantooine Solar Renewable Energy	energy	energy_renewable_unlimited_solar	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	600	500	500	0	0	0	0	0	0	energy	energy	2
+energy_renewable_unlimited_solar_dathomir	Dathomirian Solar Renewable Energy	energy	energy_renewable_unlimited_solar	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	600	500	500	0	0	0	0	0	0	energy	energy	3
+energy_renewable_unlimited_solar_endor	Endorian Solar Renewable Energy	energy	energy_renewable_unlimited_solar	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	600	500	500	0	0	0	0	0	0	energy	energy	4
+energy_renewable_unlimited_solar_hoth	Hothian Solar Renewable Energy	energy	energy_renewable_unlimited_solar	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	600	500	500	0	0	0	0	0	0	energy	energy	11
+energy_renewable_unlimited_solar_kaas	Kaasian Solar Renewable Energy	energy	energy_renewable_unlimited_solar	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	600	500	500	0	0	0	0	0	0	energy	energy	12
+energy_renewable_unlimited_solar_lok	Lokian Solar Renewable Energy	energy	energy_renewable_unlimited_solar	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	600	500	500	0	0	0	0	0	0	energy	energy	5
+energy_renewable_unlimited_solar_mandalore	Mandalore Solar Renewable Energy	energy	energy_renewable_unlimited_solar	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	600	500	500	0	0	0	0	0	0	energy	energy	14
+energy_renewable_unlimited_solar_naboo	Nabooian Solar Renewable Energy	energy	energy_renewable_unlimited_solar	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	600	500	500	0	0	0	0	0	0	energy	energy	6
+energy_renewable_unlimited_solar_rori	Rori Solar Renewable Energy	energy	energy_renewable_unlimited_solar	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	600	500	500	0	0	0	0	0	0	energy	energy	7
+energy_renewable_unlimited_solar_talus	Talusian Solar Renewable Energy	energy	energy_renewable_unlimited_solar	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	600	500	500	0	0	0	0	0	0	energy	energy	8
+energy_renewable_unlimited_solar_tatooine	Tatooinian Solar Renewable Energy	energy	energy_renewable_unlimited_solar	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	600	500	500	0	0	0	0	0	0	energy	energy	9
+energy_renewable_unlimited_solar_weak	Weak Solar Renewable Energy	energy	energy_renewable_unlimited_solar	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	200	200	200	0	0	0	0	0	0	energy	energy	0
+energy_renewable_unlimited_solar_yavin4	Yavinian Solar Renewable Energy	energy	energy_renewable_unlimited_solar	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	600	500	500	0	0	0	0	0	0	energy	energy	10
+energy_renewable_unlimited_wind_corellia	Corellian Wind Renewable Energy	energy	energy_renewable_unlimited_wind	1	1	0	0	0	0	0	0	0	0	0	0	0	0	1	400	500	500	0	0	0	0	0	0	energy	energy	1
+energy_renewable_unlimited_wind_dantooine	Dantooine Wind Renewable Energy	energy	energy_renewable_unlimited_wind	1	1	0	0	0	0	0	0	0	0	0	0	0	0	1	400	500	500	0	0	0	0	0	0	energy	energy	2
+energy_renewable_unlimited_wind_dathomir	Dathomirian Wind Renewable Energy	energy	energy_renewable_unlimited_wind	1	1	0	0	0	0	0	0	0	0	0	0	0	0	1	400	500	500	0	0	0	0	0	0	energy	energy	3
+energy_renewable_unlimited_wind_endor	Endorian Wind Renewable Energy	energy	energy_renewable_unlimited_wind	1	1	0	0	0	0	0	0	0	0	0	0	0	0	1	400	500	500	0	0	0	0	0	0	energy	energy	4
+energy_renewable_unlimited_wind_hoth	Hothian Wind Renewable Energy	energy	energy_renewable_unlimited_wind	1	1	0	0	0	0	0	0	0	0	0	0	0	0	1	400	500	500	0	0	0	0	0	0	energy	energy	11
+energy_renewable_unlimited_wind_kaas	Kaasian Wind Renewable Energy	energy	energy_renewable_unlimited_wind	1	1	0	0	0	0	0	0	0	0	0	0	0	0	1	400	500	500	0	0	0	0	0	0	energy	energy	12
+energy_renewable_unlimited_wind_lok	Lokian Wind Renewable Energy	energy	energy_renewable_unlimited_wind	1	1	0	0	0	0	0	0	0	0	0	0	0	0	1	400	500	500	0	0	0	0	0	0	energy	energy	5
+energy_renewable_unlimited_wind_mandalore	Mandalore Wind Renewable Energy	energy	energy_renewable_unlimited_wind	1	1	0	0	0	0	0	0	0	0	0	0	0	0	1	400	500	500	0	0	0	0	0	0	energy	energy	14
+energy_renewable_unlimited_wind_naboo	Nabooian Wind Renewable Energy	energy	energy_renewable_unlimited_wind	1	1	0	0	0	0	0	0	0	0	0	0	0	0	1	400	500	500	0	0	0	0	0	0	energy	energy	6
+energy_renewable_unlimited_wind_rori	Rori Wind Renewable Energy	energy	energy_renewable_unlimited_wind	1	1	0	0	0	0	0	0	0	0	0	0	0	0	1	400	500	500	0	0	0	0	0	0	energy	energy	7
+energy_renewable_unlimited_wind_talus	Talusian Wind Renewable Energy	energy	energy_renewable_unlimited_wind	1	1	0	0	0	0	0	0	0	0	0	0	0	0	1	400	500	500	0	0	0	0	0	0	energy	energy	8
+energy_renewable_unlimited_wind_tatooine	Tatooinian Wind Renewable Energy	energy	energy_renewable_unlimited_wind	1	1	0	0	0	0	0	0	0	0	0	0	0	0	1	400	500	500	0	0	0	0	0	0	energy	energy	9
+energy_renewable_unlimited_wind_weak	Weak Wind Renewable Energy	energy	energy_renewable_unlimited_wind	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	200	200	200	0	0	0	0	0	0	energy	energy	0
+energy_renewable_unlimited_wind_yavin4	Yavinian Wind Renewable Energy	energy	energy_renewable_unlimited_wind	1	1	0	0	0	0	0	0	0	0	0	0	0	0	1	400	500	500	0	0	0	0	0	0	energy	energy	10
+fiberplast_corellia	Corellian Fiberplast	chemical	fiberplast	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	inorganic	fiberplast	1
+fiberplast_dantooine	Dantooine Fiberplast	chemical	fiberplast	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	inorganic	fiberplast	2
+fiberplast_dathomir	Dathomirian Fiberplast	chemical	fiberplast	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	inorganic	fiberplast	3
+fiberplast_endor	Endorian Fiberplast	chemical	fiberplast	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	inorganic	fiberplast	4
+fiberplast_gravitonic	Gravitonic Fiberplast	chemical	fiberplast	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	inorganic	fiberplast	0
+fiberplast_hoth	Hothian Fiberplast	chemical	fiberplast	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	inorganic	fiberplast	11
+fiberplast_kaas	Kaasian Fiberplast	chemical	fiberplast	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	inorganic	fiberplast	12
+fiberplast_lok	Lokian Fiberplast	chemical	fiberplast	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	inorganic	fiberplast	5
+fiberplast_mandalore	Mandalore Fiberplast	chemical	fiberplast	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	inorganic	fiberplast	14
+fiberplast_naboo	Nabooian Fiberplast	chemical	fiberplast	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	inorganic	fiberplast	6
+fiberplast_rori	Rori Fiberplast	chemical	fiberplast	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	inorganic	fiberplast	7
+fiberplast_talus	Talusian Fiberplast	chemical	fiberplast	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	inorganic	fiberplast	8
+fiberplast_tatooine	Tatooinian Fiberplast	chemical	fiberplast	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	inorganic	fiberplast	9
+fiberplast_yavin4	Yavinian Fiberplast	chemical	fiberplast	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	inorganic	fiberplast	10
+fruit_berries_corellia	Corellian Berry Fruit	flora_food	fruit_berries	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_berries	1
+fruit_berries_dantooine	Dantooine Berry Fruit	flora_food	fruit_berries	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_berries	2
+fruit_berries_dathomir	Dathomirian Berry Fruit	flora_food	fruit_berries	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_berries	3
+fruit_berries_endor	Endorian Berry Fruit	flora_food	fruit_berries	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_berries	4
+fruit_berries_hoth	Hothian Berry Fruit	flora_food	fruit_berries	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_berries	11
+fruit_berries_kaas	Kaasian Berry Fruit	flora_food	fruit_berries	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_berries	12
+fruit_berries_lok	Lokian Berry Fruit	flora_food	fruit_berries	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_berries	5
+fruit_berries_mandalore	Mandalore Berry Fruit	flora_food	fruit_berries	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_berries	14
+fruit_berries_naboo	Nabooian Berry Fruit	flora_food	fruit_berries	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_berries	6
+fruit_berries_rori	Rori Berry Fruit	flora_food	fruit_berries	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_berries	7
+fruit_berries_talus	Talusian Berry Fruit	flora_food	fruit_berries	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_berries	8
+fruit_berries_tatooine	Tatooinian Berry Fruit	flora_food	fruit_berries	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_berries	9
+fruit_berries_yavin4	Yavinian Berry Fruit	flora_food	fruit_berries	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_berries	10
+fruit_flowers_corellia	Corellian Flower Fruit	flora_food	fruit_flowers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	seeds	fruit_berries	1
+fruit_flowers_dantooine	Dantooine Flower Fruit	flora_food	fruit_flowers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	seeds	fruit_berries	2
+fruit_flowers_dathomir	Dathomirian Flower Fruit	flora_food	fruit_flowers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	seeds	fruit_berries	3
+fruit_flowers_endor	Endorian Flower Fruit	flora_food	fruit_flowers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	seeds	fruit_berries	4
+fruit_flowers_hoth	Hothian Flower Fruit	flora_food	fruit_flowers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	seeds	fruit_berries	11
+fruit_flowers_kaas	Kaasian Flower Fruit	flora_food	fruit_flowers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	seeds	fruit_berries	12
+fruit_flowers_lok	Lokian Flower Fruit	flora_food	fruit_flowers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	seeds	fruit_berries	5
+fruit_flowers_mandalore	Mandalore Flower Fruit	flora_food	fruit_flowers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	seeds	fruit_berries	14
+fruit_flowers_naboo	Nabooian Flower Fruit	flora_food	fruit_flowers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	seeds	fruit_berries	6
+fruit_flowers_rori	Rori Flower Fruit	flora_food	fruit_flowers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	seeds	fruit_berries	7
+fruit_flowers_talus	Talusian Flower Fruit	flora_food	fruit_flowers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	seeds	fruit_berries	8
+fruit_flowers_tatooine	Tatooinian Flower Fruit	flora_food	fruit_flowers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	seeds	fruit_berries	9
+fruit_flowers_yavin4	Yavinian Flower Fruit	flora_food	fruit_flowers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	seeds	fruit_berries	10
+fruit_fruits_corellia	Corellian Fruit	flora_food	fruit_fruits	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_fruits	1
+fruit_fruits_dantooine	Dantooine Fruit	flora_food	fruit_fruits	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_fruits	2
+fruit_fruits_dathomir	Dathomirian Fruit	flora_food	fruit_fruits	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_fruits	3
+fruit_fruits_endor	Endorian Fruit	flora_food	fruit_fruits	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_fruits	4
+fruit_fruits_hoth	Hothian Fruit	flora_food	fruit_fruits	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_fruits	11
+fruit_fruits_kaas	Kaasian Fruit	flora_food	fruit_fruits	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_fruits	12
+fruit_fruits_lok	Lokian Fruit	flora_food	fruit_fruits	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_fruits	5
+fruit_fruits_mandalore	Mandalore Fruit	flora_food	fruit_fruits	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_fruits	14
+fruit_fruits_naboo	Nabooian Fruit	flora_food	fruit_fruits	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_fruits	6
+fruit_fruits_rori	Rori Fruit	flora_food	fruit_fruits	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_fruits	7
+fruit_fruits_talus	Talusian Fruit	flora_food	fruit_fruits	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_fruits	8
+fruit_fruits_tatooine	Tatooinian Fruit	flora_food	fruit_fruits	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_fruits	9
+fruit_fruits_yavin4	Yavinian Fruit	flora_food	fruit_fruits	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_fruits	10
+gas_inert_bilal	Bilal Inert Gas	gas	gas_inert	1	2	0	0	0	0	105	204	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	0
+gas_inert_corthel	Corthel Inert Gas	gas	gas_inert	1	2	0	0	0	0	167	265	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	0
+gas_inert_culsion	Culsion Inert Gas	gas	gas_inert	1	2	0	0	0	0	228	327	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	0
+gas_inert_dioxis	Dioxis Inert Gas	gas	gas_inert	1	2	0	0	0	0	290	388	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	0
+gas_inert_hurlothrombic	Hurlothrombic Inert Gas	gas	gas_inert	1	2	0	0	0	0	351	450	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	0
+gas_inert_hydron3	Hydron-3 Inert Gas	gas	gas_inert	1	2	0	0	0	0	1	81	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	0
+gas_inert_kaylon	Kaylon Inert Gas	gas	gas_inert	1	2	0	0	0	0	413	511	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	0
+gas_inert_korfaise	Korfaise Inert Gas	gas	gas_inert	1	2	0	0	0	0	474	573	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	0
+gas_inert_malium	Malium Inert Gas	gas	gas_inert	1	2	0	0	0	0	44	142	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	0
+gas_inert_methanagen	Methanagen Inert Gas	gas	gas_inert	1	2	0	0	0	0	536	634	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	0
+gas_inert_mirth	Mirth Inert Gas	gas	gas_inert	1	2	0	0	0	0	597	696	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	0
+gas_inert_mixed	Mixed Inert Gas	gas	gas_inert	0	1	0	0	0	0	200	200	0	0	0	0	0	0	0	0	200	200	0	0	0	0	0	0	gas_inert	gas_inert	0
+gas_inert_obah	Obah Inert Gas	gas	gas_inert	1	2	0	0	0	0	659	757	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	0
+gas_inert_rethin	Rethin Inert Gas	gas	gas_inert	1	2	0	0	0	0	720	800	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	0
+gas_inert_unknown	Unknown Inert Gas	gas	gas_inert	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	0
+gas_reactive_eleton	Eleton Reactive Gas	gas	gas_reactive	1	2	0	0	0	0	1	400	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_reactive	gas_reactive	0
+gas_reactive_irolunn	Irolunn Reactive Gas	gas	gas_reactive	1	2	0	0	0	0	1	600	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_reactive	gas_reactive	0
+gas_reactive_methane	Methane Reactive Gas	gas	gas_reactive	1	2	0	0	0	0	200	700	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_reactive	gas_reactive	0
+gas_reactive_mixed	Mixed Reactive Gas	gas	gas_reactive	0	2	0	0	0	0	200	200	0	0	0	0	0	0	0	0	200	200	0	0	0	0	0	0	gas_reactive	gas_reactive	0
+gas_reactive_organometallic	Unstable Organometallic Reactive Gas	gas	gas_reactive	1	1	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_reactive	gas_reactive	0
+gas_reactive_orveth	Orveth Reactive Gas	gas	gas_reactive	1	2	0	0	0	0	300	800	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_reactive	gas_reactive	0
+gas_reactive_sig	Sig Reactive Gas	gas	gas_reactive	1	2	0	0	0	0	300	900	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_reactive	gas_reactive	0
+gas_reactive_skevon	Skevon Reactive Gas	gas	gas_reactive	1	2	0	0	0	0	400	900	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_reactive	gas_reactive	0
+gas_reactive_tolium	Tolium Reactive Gas	gas	gas_reactive	1	2	0	0	0	0	500	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_reactive	gas_reactive	0
+gas_reactive_unknown	Unknown Reactive Gas	gas	gas_reactive	1	1	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_reactive	gas_reactive	0
+gemstone_mixed_low_quality	Low Quality Gemstones	mineral	gemstone	0	1	200	200	0	0	200	200	0	0	200	200	200	200	0	0	200	200	200	200	200	200	200	200	gemstone	gemstone	0
+gemstone_unknown	Unknown Gem Type	mineral	gemstone	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	0
+ground_bones	Ground Bones	creature_structural	bone	0	1	0	0	0	0	200	200	0	0	0	0	200	200	0	0	200	200	200	200	200	200	0	0	bone	bone	0
+hide_bristley_corellia	Corellian Bristley Hide	creature_structural	hide_bristley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_bristley	1
+hide_bristley_dantooine	Dantooine Bristley Hide	creature_structural	hide_bristley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_bristley	2
+hide_bristley_dathomir	Dathomirian Bristley Hide	creature_structural	hide_bristley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_bristley	3
+hide_bristley_endor	Endorian Bristley Hide	creature_structural	hide_bristley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_bristley	4
+hide_bristley_hoth	Hothian Bristley Hide	creature_structural	hide_bristley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_bristley	11
+hide_bristley_kaas	Kaasian Bristley Hide	creature_structural	hide_bristley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_bristley	12
+hide_bristley_lok	Lokian Bristley Hide	creature_structural	hide_bristley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_bristley	5
+hide_bristley_mandalore	Mandalore Bristley Hide	creature_structural	hide_bristley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_bristley	14
+hide_bristley_naboo	Nabooian Bristley Hide	creature_structural	hide_bristley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_bristley	6
+hide_bristley_rori	Rori Bristley Hide	creature_structural	hide_bristley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_bristley	7
+hide_bristley_talus	Talusian Bristley Hide	creature_structural	hide_bristley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_bristley	8
+hide_bristley_tatooine	Tatooinian Bristley Hide	creature_structural	hide_bristley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_bristley	9
+hide_bristley_yavin4	Yavinian Bristley Hide	creature_structural	hide_bristley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_bristley	10
+hide_leathery_corellia	Corellian Leathery Hide	creature_structural	hide_leathery	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_leathery	1
+hide_leathery_dantooine	Dantooine Leathery Hide	creature_structural	hide_leathery	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_leathery	2
+hide_leathery_dathomir	Dathomirian Leathery Hide	creature_structural	hide_leathery	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_leathery	3
+hide_leathery_endor	Endorian Leathery Hide	creature_structural	hide_leathery	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_leathery	4
+hide_leathery_hoth	Hothian Leathery Hide	creature_structural	hide_leathery	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_leathery	11
+hide_leathery_kaas	Kaasian Leathery Hide	creature_structural	hide_leathery	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_leathery	12
+hide_leathery_lok	Lokian Leathery Hide	creature_structural	hide_leathery	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_leathery	5
+hide_leathery_mandalore	Mandalore Leathery Hide	creature_structural	hide_leathery	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_leathery	14
+hide_leathery_naboo	Nabooian Leathery Hide	creature_structural	hide_leathery	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_leathery	6
+hide_leathery_rori	Rori Leathery Hide	creature_structural	hide_leathery	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_leathery	7
+hide_leathery_talus	Talusian Leathery Hide	creature_structural	hide_leathery	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_leathery	8
+hide_leathery_tatooine	Tatooinian Leathery Hide	creature_structural	hide_leathery	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_leathery	9
+hide_leathery_yavin4	Yavinian Leathery Hide	creature_structural	hide_leathery	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_leathery	10
+hide_scaley_corellia	Corellian Scaley Hide	creature_structural	hide_scaley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_scaley	1
+hide_scaley_dantooine	Dantooine Scaley Hide	creature_structural	hide_scaley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_scaley	2
+hide_scaley_dathomir	Dathomirian Scaley Hide	creature_structural	hide_scaley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_scaley	3
+hide_scaley_endor	Endorian Scaley Hide	creature_structural	hide_scaley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_scaley	4
+hide_scaley_hoth	Hothian Scaley Hide	creature_structural	hide_scaley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_scaley	11
+hide_scaley_kaas	Kaasian Scaley Hide	creature_structural	hide_scaley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_scaley	12
+hide_scaley_lok	Lokian Scaley Hide	creature_structural	hide_scaley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_scaley	5
+hide_scaley_mandalore	Mandalore Scaley Hide	creature_structural	hide_scaley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_scaley	14
+hide_scaley_naboo	Nabooian Scaley Hide	creature_structural	hide_scaley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_scaley	6
+hide_scaley_rori	Rori Scaley Hide	creature_structural	hide_scaley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_scaley	7
+hide_scaley_talus	Talusian Scaley Hide	creature_structural	hide_scaley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_scaley	8
+hide_scaley_tatooine	Tatooinian Scaley Hide	creature_structural	hide_scaley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_scaley	9
+hide_scaley_yavin4	Yavinian Scaley Hide	creature_structural	hide_scaley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_scaley	10
+hide_wooly_corellia	Corellian Wooly Hide	creature_structural	hide_wooly	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_wooly	1
+hide_wooly_dantooine	Dantooine Wooly Hide	creature_structural	hide_wooly	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_wooly	2
+hide_wooly_dathomir	Dathomirian Wooly Hide	creature_structural	hide_wooly	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_wooly	3
+hide_wooly_endor	Endorian Wooly Hide	creature_structural	hide_wooly	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_wooly	4
+hide_wooly_hoth	Hothian Wooly Hide	creature_structural	hide_wooly	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_wooly	11
+hide_wooly_kaas	Kaasian Wooly Hide	creature_structural	hide_wooly	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_wooly	12
+hide_wooly_lok	Lokian Wooly Hide	creature_structural	hide_wooly	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_wooly	5
+hide_wooly_mandalore	Mandalore Wooly Hide	creature_structural	hide_wooly	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_wooly	14
+hide_wooly_naboo	Nabooian Wooly Hide	creature_structural	hide_wooly	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_wooly	6
+hide_wooly_rori	Rori Wooly Hide	creature_structural	hide_wooly	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_wooly	7
+hide_wooly_talus	Talusian Wooly Hide	creature_structural	hide_wooly	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_wooly	8
+hide_wooly_tatooine	Tatooinian Wooly Hide	creature_structural	hide_wooly	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_wooly	9
+hide_wooly_yavin4	Yavinian Wooly Hide	creature_structural	hide_wooly	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_wooly	10
+iron_axidite	Axidite Iron	mineral	iron	1	5	171	331	107	207	559	589	0	0	606	706	128	248	0	0	1	1000	528	648	528	648	0	0	iron	metal_ferrous	0
+iron_bronzium	Bronzium Iron	mineral	iron	1	5	271	430	169	269	536	676	0	0	669	769	203	323	0	0	1	1000	603	723	603	723	0	0	iron	metal_ferrous	0
+iron_colat	Colat Iron	mineral	iron	1	5	371	530	232	332	624	764	0	0	731	831	278	398	0	0	1	1000	678	798	678	798	0	0	iron	metal_ferrous	0
+iron_dolovite	Dolovite Iron	mineral	iron	1	5	470	630	294	394	711	851	0	0	794	894	353	473	0	0	1	1000	753	873	753	873	0	0	iron	metal_ferrous	0
+iron_doonium	Doonium Iron	mineral	iron	1	5	570	730	357	456	799	939	0	0	856	956	428	548	0	0	1	1000	828	948	828	948	0	0	iron	metal_ferrous	0
+iron_kammris	Kammris Iron	mineral	iron	1	5	670	800	419	500	886	1000	0	0	919	1000	503	600	0	0	1	1000	903	1000	903	1000	0	0	iron	metal_ferrous	0
+iron_plumbum	Plumbum Iron	mineral	iron	1	5	1	131	1	82	300	414	0	0	500	581	1	98	0	0	1	1000	400	498	400	498	0	0	iron	metal_ferrous	0
+iron_polonium	Polonium Iron	mineral	iron	1	5	71	231	45	144	361	501	0	0	544	644	53	173	0	0	1	1000	453	573	453	573	0	0	iron	metal_ferrous	0
+iron_smelted	Smelted Iron	mineral	iron	0	1	200	200	200	200	200	200	0	0	200	200	200	200	0	0	200	200	200	200	200	200	0	0	iron	metal_ferrous	0
+meat_avian_corellia	Corellian Avian Meat	creature_food	meat_avian	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	1
+meat_avian_dantooine	Dantooine Avian Meat	creature_food	meat_avian	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	2
+meat_avian_dathomir	Dathomirian Avian Meat	creature_food	meat_avian	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	3
+meat_avian_endor	Endorian Avian Meat	creature_food	meat_avian	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	4
+meat_avian_hoth	Hothian Avian Meat	creature_food	meat_avian	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	11
+meat_avian_kaas	Kaasian Avian Meat	creature_food	meat_avian	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	12
+meat_avian_lok	Lokian Avian Meat	creature_food	meat_avian	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	5
+meat_avian_mandalore	Mandalore Avian Meat	creature_food	meat_avian	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	14
+meat_avian_naboo	Nabooian Avian Meat	creature_food	meat_avian	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	6
+meat_avian_rori	Rori Avian Meat	creature_food	meat_avian	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	7
+meat_avian_talus	Talusian Avian Meat	creature_food	meat_avian	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	8
+meat_avian_tatooine	Tatooinian Avian Meat	creature_food	meat_avian	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	9
+meat_avian_yavin4	Yavinian Avian Meat	creature_food	meat_avian	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	10
+meat_carnivore_corellia	Corellian Carnivore Meat	creature_food	meat_carnivore	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	1
+meat_carnivore_dantooine	Dantooine Carnivore Meat	creature_food	meat_carnivore	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	2
+meat_carnivore_dathomir	Dathomirian Carnivore Meat	creature_food	meat_carnivore	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	3
+meat_carnivore_endor	Endorian Carnivore Meat	creature_food	meat_carnivore	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	4
+meat_carnivore_hoth	Hothian Carnivore Meat	creature_food	meat_carnivore	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	11
+meat_carnivore_kaas	Kaasian Carnivore Meat	creature_food	meat_carnivore	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	12
+meat_carnivore_lok	Lokian Carnivore Meat	creature_food	meat_carnivore	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	5
+meat_carnivore_mandalore	Mandalore Carnivore Meat	creature_food	meat_carnivore	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	14
+meat_carnivore_naboo	Nabooian Carnivore Meat	creature_food	meat_carnivore	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	6
+meat_carnivore_rori	Rori Carnivore Meat	creature_food	meat_carnivore	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	7
+meat_carnivore_talus	Talusian Carnivore Meat	creature_food	meat_carnivore	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	8
+meat_carnivore_tatooine	Tatooinian Carnivore Meat	creature_food	meat_carnivore	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	9
+meat_carnivore_yavin4	Yavinian Carnivore Meat	creature_food	meat_carnivore	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	10
+meat_domesticated_corellia	Corellian Domesticated Meat	creature_food	meat_domesticated	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	1
+meat_domesticated_dantooine	Dantooine Domesticated Meat	creature_food	meat_domesticated	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	2
+meat_domesticated_dathomir	Dathomirian Domesticated Meat	creature_food	meat_domesticated	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	3
+meat_domesticated_endor	Endorian Domesticated Meat	creature_food	meat_domesticated	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	4
+meat_domesticated_hoth	Hothian Domesticated Meat	creature_food	meat_domesticated	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	11
+meat_domesticated_kaas	Kaasian Domesticated Meat	creature_food	meat_domesticated	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	12
+meat_domesticated_lok	Lokian Domesticated Meat	creature_food	meat_domesticated	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	5
+meat_domesticated_mandalore	Mandalore Domesticated Meat	creature_food	meat_domesticated	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	14
+meat_domesticated_naboo	Nabooian Domesticated Meat	creature_food	meat_domesticated	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	6
+meat_domesticated_rori	Rori Domesticated Meat	creature_food	meat_domesticated	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	7
+meat_domesticated_talus	Talusian Domesticated Meat	creature_food	meat_domesticated	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	8
+meat_domesticated_tatooine	Tatooinian Domesticated Meat	creature_food	meat_domesticated	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	9
+meat_domesticated_yavin4	Yavinian Domesticated Meat	creature_food	meat_domesticated	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	10
+meat_egg_corellia	Corellian Egg Meat	creature_food	meat_egg	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	1
+meat_egg_dantooine	Dantooine Egg Meat	creature_food	meat_egg	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	2
+meat_egg_dathomir	Dathomirian Egg Meat	creature_food	meat_egg	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	3
+meat_egg_endor	Endorian Egg Meat	creature_food	meat_egg	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	4
+meat_egg_hoth	Hothian Egg Meat	creature_food	meat_egg	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	11
+meat_egg_kaas	Kaasian Egg Meat	creature_food	meat_egg	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	12
+meat_egg_lok	Lokian Egg Meat	creature_food	meat_egg	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	5
+meat_egg_mandalore	Mandalore Egg Meat	creature_food	meat_egg	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	14
+meat_egg_naboo	Nabooian Egg Meat	creature_food	meat_egg	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	6
+meat_egg_rori	Rori Egg Meat	creature_food	meat_egg	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	7
+meat_egg_talus	Talusian Egg Meat	creature_food	meat_egg	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	8
+meat_egg_tatooine	Tatooinian Egg Meat	creature_food	meat_egg	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	9
+meat_egg_yavin4	Yavinian Egg Meat	creature_food	meat_egg	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	10
+meat_herbivore_corellia	Corellian Herbivore Meat	creature_food	meat_herbivore	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	1
+meat_herbivore_dantooine	Dantooine Herbivore Meat	creature_food	meat_herbivore	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	2
+meat_herbivore_dathomir	Dathomirian Herbivore Meat	creature_food	meat_herbivore	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	3
+meat_herbivore_endor	Endorian Herbivore Meat	creature_food	meat_herbivore	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	4
+meat_herbivore_hoth	Hothian Herbivore Meat	creature_food	meat_herbivore	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	11
+meat_herbivore_kaas	Kaasian Herbivore Meat	creature_food	meat_herbivore	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	12
+meat_herbivore_lok	Lokian Herbivore Meat	creature_food	meat_herbivore	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	5
+meat_herbivore_mandalore	Mandalore Herbivore Meat	creature_food	meat_herbivore	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	14
+meat_herbivore_naboo	Nabooian Herbivore Meat	creature_food	meat_herbivore	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	6
+meat_herbivore_rori	Rori Herbivore Meat	creature_food	meat_herbivore	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	7
+meat_herbivore_talus	Talusian Herbivore Meat	creature_food	meat_herbivore	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	8
+meat_herbivore_tatooine	Tatooinian Herbivore Meat	creature_food	meat_herbivore	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	9
+meat_herbivore_yavin4	Yavinian Herbivore Meat	creature_food	meat_herbivore	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	10
+meat_insect_corellia	Corellian Insect Meat	creature_food	meat_insect	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	1
+meat_insect_dantooine	Dantooine Insect Meat	creature_food	meat_insect	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	2
+meat_insect_dathomir	Dathomirian Insect Meat	creature_food	meat_insect	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	3
+meat_insect_endor	Endorian Insect Meat	creature_food	meat_insect	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	4
+meat_insect_hoth	Hothian Insect Meat	creature_food	meat_insect	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	11
+meat_insect_kaas	Kaasian Insect Meat	creature_food	meat_insect	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	12
+meat_insect_lok	Lokian Insect Meat	creature_food	meat_insect	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	5
+meat_insect_mandalore	Mandalore Insect Meat	creature_food	meat_insect	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	14
+meat_insect_naboo	Nabooian Insect Meat	creature_food	meat_insect	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	6
+meat_insect_rori	Rori Insect Meat	creature_food	meat_insect	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	7
+meat_insect_talus	Talusian Insect Meat	creature_food	meat_insect	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	8
+meat_insect_tatooine	Tatooinian Insect Meat	creature_food	meat_insect	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	9
+meat_insect_yavin4	Yavinian Insect Meat	creature_food	meat_insect	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	10
+meat_reptillian_corellia	Corellian Reptillian Meat	creature_food	meat_reptillian	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	1
+meat_reptillian_dantooine	Dantooine Reptillian Meat	creature_food	meat_reptillian	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	2
+meat_reptillian_dathomir	Dathomirian Reptillian Meat	creature_food	meat_reptillian	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	3
+meat_reptillian_endor	Endorian Reptillian Meat	creature_food	meat_reptillian	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	4
+meat_reptillian_hoth	Hothian Reptillian Meat	creature_food	meat_reptillian	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	11
+meat_reptillian_kaas	Kaasian Reptillian Meat	creature_food	meat_reptillian	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	12
+meat_reptillian_lok	Lokian Reptillian Meat	creature_food	meat_reptillian	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	5
+meat_reptillian_mandalore	Mandalore Reptillian Meat	creature_food	meat_reptillian	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	14
+meat_reptillian_naboo	Nabooian Reptillian Meat	creature_food	meat_reptillian	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	6
+meat_reptillian_rori	Rori Reptillian Meat	creature_food	meat_reptillian	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	7
+meat_reptillian_talus	Talusian Reptillian Meat	creature_food	meat_reptillian	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	8
+meat_reptillian_tatooine	Tatooinian Reptillian Meat	creature_food	meat_reptillian	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	9
+meat_reptillian_yavin4	Yavinian Reptillian Meat	creature_food	meat_reptillian	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	10
+meat_wild_corellia	Corellian Wild Meat	creature_food	meat_wild	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	1
+meat_wild_dantooine	Dantooine Wild Meat	creature_food	meat_wild	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	2
+meat_wild_dathomir	Dathomirian Wild Meat	creature_food	meat_wild	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	3
+meat_wild_endor	Endorian Wild Meat	creature_food	meat_wild	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	4
+meat_wild_hoth	Hothian Wild Meat	creature_food	meat_wild	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	11
+meat_wild_kaas	Kaasian Wild Meat	creature_food	meat_wild	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	12
+meat_wild_lok	Lokian Wild Meat	creature_food	meat_wild	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	5
+meat_wild_mandalore	Mandalore Wild Meat	creature_food	meat_wild	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	14
+meat_wild_naboo	Nabooian Wild Meat	creature_food	meat_wild	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	6
+meat_wild_rori	Rori Wild Meat	creature_food	meat_wild	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	7
+meat_wild_talus	Talusian Wild Meat	creature_food	meat_wild	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	8
+meat_wild_tatooine	Tatooinian Wild Meat	creature_food	meat_wild	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	9
+meat_wild_yavin4	Yavinian Wild Meat	creature_food	meat_wild	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	10
+metal_ferrous_unknown	Unknown Ferrous Metal	mineral	metal_ferrous	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	metal_ferrous	metal_ferrous	0
+metal_nonferrous_unknown	Unknown Non-Ferrous Metal	mineral	metal_nonferrous	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	metal_nonferrous	metal_nonferrous	0
+milk_domesticated_corellia	Corellian Domesticated Milk	creature_food	milk_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	milk	milk	1
+milk_domesticated_dantooine	Dantooine Domesticated Milk	creature_food	milk_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	milk	milk	2
+milk_domesticated_dathomir	Dathomirian Domesticated Milk	creature_food	milk_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	milk	milk	3
+milk_domesticated_endor	Endorian Domesticated Milk	creature_food	milk_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	milk	milk	4
+milk_domesticated_hoth	Hothian Domesticated Milk	creature_food	milk_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	milk	milk	11
+milk_domesticated_kaas	Kaasian Domesticated Milk	creature_food	milk_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	milk	milk	12
+milk_domesticated_lok	Lokian Domesticated Milk	creature_food	milk_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	milk	milk	5
+milk_domesticated_mandalore	Mandalore Domesticated Milk	creature_food	milk_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	milk	milk	14
+milk_domesticated_naboo	Nabooian Domesticated Milk	creature_food	milk_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	milk	milk	6
+milk_domesticated_rori	Rori Domesticated Milk	creature_food	milk_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	milk	milk	7
+milk_domesticated_talus	Talusian Domesticated Milk	creature_food	milk_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	milk	milk	8
+milk_domesticated_tatooine	Tatooinian Domesticated Milk	creature_food	milk_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	milk	milk	9
+milk_domesticated_yavin4	Yavinian Domesticated Milk	creature_food	milk_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	milk	milk	10
+milk_homogenized	Homogenized Milk	creature_food	milk	0	1	0	0	0	0	200	200	200	200	0	0	0	0	200	200	200	200	0	0	0	0	0	0	milk	milk	0
+milk_wild_corellia	Corellian Wild Milk	creature_food	milk_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	milk	milk	1
+milk_wild_dantooine	Dantooine Wild Milk	creature_food	milk_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	milk	milk	2
+milk_wild_dathomir	Dathomirian Wild Milk	creature_food	milk_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	milk	milk	3
+milk_wild_endor	Endorian Wild Milk	creature_food	milk_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	milk	milk	4
+milk_wild_hoth	Hothian Wild Milk	creature_food	milk_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	milk	milk	11
+milk_wild_kaas	Kaasian Wild Milk	creature_food	milk_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	milk	milk	12
+milk_wild_lok	Lokian Wild Milk	creature_food	milk_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	milk	milk	5
+milk_wild_mandalore	Mandalore Wild Milk	creature_food	milk_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	milk	milk	14
+milk_wild_naboo	Nabooian Wild Milk	creature_food	milk_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	milk	milk	6
+milk_wild_rori	Rori Wild Milk	creature_food	milk_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	milk	milk	7
+milk_wild_talus	Talusian Wild Milk	creature_food	milk_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	milk	milk	8
+milk_wild_tatooine	Tatooinian Wild Milk	creature_food	milk_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	milk	milk	9
+milk_wild_yavin4	Yavinian Wild Milk	creature_food	milk_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	milk	milk	10
+mixed_fruits	Mixed Fruits	flora_food	fruit	0	1	0	0	0	0	200	200	200	200	0	0	0	0	200	200	200	200	0	0	0	0	0	0	seeds	fruit_fruits	0
+mixed_vegetables	Mixed Vegetables	flora_food	vegetable	0	1	0	0	0	0	200	200	200	200	0	0	0	0	200	200	200	200	0	0	0	0	0	0	seeds	vegetable_greens	0
+oats_domesticated_corellia	Corellian Domesticated Oats	flora_food	oats_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	oats	1
+oats_domesticated_dantooine	Dantooine Domesticated Oats	flora_food	oats_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	oats	2
+oats_domesticated_dathomir	Dathomirian Domesticated Oats	flora_food	oats_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	oats	3
+oats_domesticated_endor	Endorian Domesticated Oats	flora_food	oats_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	oats	4
+oats_domesticated_hoth	Hothian Domesticated Oats	flora_food	oats_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	oats	11
+oats_domesticated_kaas	Kaasian Domesticated Oats	flora_food	oats_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	oats	12
+oats_domesticated_lok	Lokian Domesticated Oats	flora_food	oats_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	oats	5
+oats_domesticated_mandalore	Mandalore Domesticated Oats	flora_food	oats_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	oats	14
+oats_domesticated_naboo	Nabooian Domesticated Oats	flora_food	oats_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	oats	6
+oats_domesticated_rori	Rori Domesticated Oats	flora_food	oats_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	oats	7
+oats_domesticated_talus	Talusian Domesticated Oats	flora_food	oats_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	oats	8
+oats_domesticated_tatooine	Tatooinian Domesticated Oats	flora_food	oats_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	oats	9
+oats_domesticated_yavin4	Yavinian Domesticated Oats	flora_food	oats_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	oats	10
+oats_wild_corellia	Corellian Wild Oats	flora_food	oats_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	oats	1
+oats_wild_dantooine	Dantooine Wild Oats	flora_food	oats_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	oats	2
+oats_wild_dathomir	Dathomirian Wild Oats	flora_food	oats_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	oats	3
+oats_wild_endor	Endorian Wild Oats	flora_food	oats_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	oats	4
+oats_wild_hoth	Hothian Wild Oats	flora_food	oats_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	oats	11
+oats_wild_kaas	Kaasian Wild Oats	flora_food	oats_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	oats	12
+oats_wild_lok	Lokian Wild Oats	flora_food	oats_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	oats	5
+oats_wild_mandalore	Mandalore Wild Oats	flora_food	oats_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	oats	14
+oats_wild_naboo	Nabooian Wild Oats	flora_food	oats_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	oats	6
+oats_wild_rori	Rori Wild Oats	flora_food	oats_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	oats	7
+oats_wild_talus	Talusian Wild Oats	flora_food	oats_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	oats	8
+oats_wild_tatooine	Tatooinian Wild Oats	flora_food	oats_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	oats	9
+oats_wild_yavin4	Yavinian Wild Oats	flora_food	oats_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	oats	10
+ore_carbonate_alantium	Alantium Carbonate Ore	mineral	ore_carbonate	1	2	300	414	0	0	1	115	0	0	400	498	300	414	0	0	1	1000	1	115	200	330	0	0	ore_carbonate	ore_carbonate	0
+ore_carbonate_barthierium	Barthierium Carbonate Ore	mineral	ore_carbonate	1	2	361	501	0	0	62	202	0	0	453	573	361	501	0	0	1	1000	62	202	270	430	0	0	ore_carbonate	ore_carbonate	0
+ore_carbonate_chromite	Chromite Carbonate Ore	mineral	ore_carbonate	1	2	449	589	0	0	150	289	0	0	528	648	449	589	0	0	1	1000	150	289	370	530	0	0	ore_carbonate	ore_carbonate	0
+ore_carbonate_frasium	Frasium Carbonate Ore	mineral	ore_carbonate	1	2	536	676	0	0	237	377	0	0	603	723	536	676	0	0	1	1000	237	377	470	630	0	0	ore_carbonate	ore_carbonate	0
+ore_carbonate_lommite	Lommite Carbonate Ore	mineral	ore_carbonate	1	2	624	764	0	0	324	464	0	0	678	798	624	764	0	0	1	1000	324	464	570	730	0	0	ore_carbonate	ore_carbonate	0
+ore_carbonate_low_grade	Low Grade Ore (sedimentary)	mineral	ore_sedimentary	0	1	200	200	0	0	200	200	0	0	200	200	200	200	0	0	200	200	200	200	200	200	0	0	ore_sedimentary	ore_sedimentary	0
+ore_carbonate_ostrine	Ostrine Carbonate Ore	mineral	ore_carbonate	1	2	711	851	0	0	412	551	0	0	753	873	711	851	0	0	1	1000	412	551	670	830	0	0	ore_carbonate	ore_carbonate	0
+ore_carbonate_varium	Varium Carbonate Ore	mineral	ore_carbonate	1	2	799	939	0	0	499	639	0	0	828	948	799	939	0	0	1	1000	499	639	770	930	0	0	ore_carbonate	ore_carbonate	0
+ore_carbonate_zinsiam	Zinsiam Carbonate Ore	mineral	ore_carbonate	1	2	886	1000	0	0	586	700	0	0	903	1000	886	1000	0	0	1	1000	586	700	870	1000	0	0	ore_carbonate	ore_carbonate	0
+ore_extrusive_bene	Bene Extrusive Ore	mineral	ore_extrusive	1	2	200	304	0	0	300	391	0	0	400	478	1	79	0	0	1	1000	400	478	400	478	0	0	ore_igneous	ore_igneous	0
+ore_extrusive_chronamite	Chronamite Extrusive Ore	mineral	ore_extrusive	1	2	256	384	0	0	349	461	0	0	442	538	43	139	0	0	1	1000	442	538	442	538	0	0	ore_igneous	ore_igneous	0
+ore_extrusive_ilimium	Ilimium Extrusive Ore	mineral	ore_extrusive	1	2	336	464	0	0	419	531	0	0	502	598	103	199	0	0	1	1000	502	598	502	598	0	0	ore_igneous	ore_igneous	0
+ore_extrusive_kalonterium	Kalonterium Extrusive Ore	mineral	ore_extrusive	1	2	416	544	0	0	489	601	0	0	562	658	163	259	0	0	1	1000	562	658	562	658	0	0	ore_igneous	ore_igneous	0
+ore_extrusive_keschel	Keschel Extrusive Ore	mineral	ore_extrusive	1	2	496	624	0	0	559	671	0	0	622	718	223	318	0	0	1	1000	622	718	622	718	0	0	ore_igneous	ore_igneous	0
+ore_extrusive_lidium	Lidium Extrusive Ore	mineral	ore_extrusive	1	2	576	704	0	0	629	741	0	0	682	778	283	378	0	0	1	1000	682	778	682	778	0	0	ore_igneous	ore_igneous	0
+ore_extrusive_low_grade	Low Grade Ore (igneous)	mineral	ore_igneous	0	1	200	200	0	0	200	200	0	0	200	200	200	200	0	0	200	200	200	200	200	200	0	0	ore_igneous	ore_igneous	0
+ore_extrusive_maranium	Maranium Extrusive Ore	mineral	ore_extrusive	1	2	656	784	0	0	699	811	0	0	742	838	342	438	0	0	1	1000	742	838	742	838	0	0	ore_igneous	ore_igneous	0
+ore_extrusive_pholokite	Pholokite Extrusive Ore	mineral	ore_extrusive	1	2	736	864	0	0	769	881	0	0	802	898	402	498	0	0	1	1000	802	898	802	898	0	0	ore_igneous	ore_igneous	0
+ore_extrusive_quadrenium	Quadrenium Extrusive Ore	mineral	ore_extrusive	1	2	816	944	0	0	839	951	0	0	862	958	462	558	0	0	1	1000	862	958	862	958	0	0	ore_igneous	ore_igneous	0
+ore_extrusive_vintrium	Vintrium Extrusive Ore	mineral	ore_extrusive	1	2	896	1000	0	0	909	1000	0	0	922	1000	522	600	0	0	1	1000	922	1000	922	1000	0	0	ore_igneous	ore_igneous	0
+ore_igneous_unknown	Unknown Igneous Ore	mineral	ore_igneous	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	0
+ore_intrusive_berubium	Berubium Intrusive Ore	mineral	ore_intrusive	1	2	200	316	0	0	300	401	0	0	700	743	1	88	0	0	1	1000	500	572	400	487	0	0	ore_igneous	ore_igneous	0
+ore_intrusive_chanlon	Chanlon Intrusive Ore	mineral	ore_intrusive	1	2	262	404	0	0	354	479	0	0	723	777	48	154	0	0	1	1000	539	628	447	553	0	0	ore_igneous	ore_igneous	0
+ore_intrusive_corintium	Corintium Intrusive Ore	mineral	ore_intrusive	1	2	351	493	0	0	432	557	0	0	757	810	114	221	0	0	1	1000	594	683	513	620	0	0	ore_igneous	ore_igneous	0
+ore_intrusive_derillium	Derillium Intrusive Ore	mineral	ore_intrusive	1	2	440	582	0	0	510	634	0	0	790	843	181	287	0	0	1	1000	650	739	580	687	0	0	ore_igneous	ore_igneous	0
+ore_intrusive_dylinium	Dylinium Intrusive Ore	mineral	ore_intrusive	1	2	618	760	0	0	666	790	0	0	857	910	314	420	0	0	1	1000	761	850	713	820	0	0	ore_igneous	ore_igneous	0
+ore_intrusive_hollinium	Hollinium Intrusive Ore	mineral	ore_intrusive	1	2	707	849	0	0	743	868	0	0	890	943	380	487	0	0	1	1000	817	906	780	887	0	0	ore_igneous	ore_igneous	0
+ore_intrusive_ionite	Ionite Intrusive Ore	mineral	ore_intrusive	1	2	796	938	0	0	821	946	0	0	923	977	447	553	0	0	1	1000	872	961	847	953	0	0	ore_igneous	ore_igneous	0
+ore_intrusive_katrium	Katrium Intrusive Ore	mineral	ore_intrusive	1	2	884	1000	0	0	899	1000	0	0	957	1000	513	600	0	0	1	1000	928	1000	913	1000	0	0	ore_igneous	ore_igneous	0
+ore_intrusive_oridium	Oridium Intrusive Ore	mineral	ore_intrusive	1	2	529	671	0	0	588	712	0	0	823	877	247	354	0	0	1	1000	706	794	647	753	0	0	ore_igneous	ore_igneous	0
+ore_sedimentary_unkown	Unknown Sedimentary Ore	mineral	ore_sedimentary	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_sedimentary	ore_sedimentary	0
+ore_siliclastic_ardanium	Ardanium Siliclastic Ore	mineral	ore_siliclastic	1	2	300	452	0	0	1	152	0	0	300	452	300	452	0	0	1	1000	1	131	1	152	0	0	ore_siliclastic	ore_siliclastic	0
+ore_siliclastic_cortosis	Cortosis Siliclastic Ore	mineral	ore_siliclastic	1	2	382	568	0	0	83	269	0	0	382	568	382	568	0	0	1	1000	71	231	83	269	0	0	ore_siliclastic	ore_siliclastic	0
+ore_siliclastic_crism	Crism Siliclastic Ore	mineral	ore_siliclastic	1	2	498	685	0	0	199	385	0	0	498	685	498	685	0	0	1	1000	171	330	199	385	0	0	ore_siliclastic	ore_siliclastic	0
+ore_siliclastic_fermionic	Fermionic Siliclastic Ore	mineral	ore_siliclastic	1	1	1	1000	0	0	1	1000	0	0	1	1000	1	1000	0	0	1	1000	1	1000	1	1000	0	0	ore_siliclastic	ore_siliclastic	0
+ore_siliclastic_low_grade	Low Grade Ore (siliclastic)	mineral	ore_siliclastic	0	1	200	200	0	0	200	200	0	0	200	200	200	200	0	0	200	200	200	200	200	200	0	0	ore_siliclastic	ore_siliclastic	0
+ore_siliclastic_malab	Malab Siliclastic Ore	mineral	ore_siliclastic	1	2	615	802	0	0	316	502	0	0	615	802	615	802	0	0	1	1000	271	430	316	502	0	0	ore_siliclastic	ore_siliclastic	0
+ore_siliclastic_robindun	Robindun Siliclastic Ore	mineral	ore_siliclastic	1	2	732	918	0	0	432	618	0	0	732	918	732	918	0	0	1	1000	370	530	432	618	0	0	ore_siliclastic	ore_siliclastic	0
+ore_siliclastic_tertian	Tertian Siliclastic Ore	mineral	ore_siliclastic	1	2	848	1000	0	0	549	700	0	0	848	1000	848	1000	0	0	1	1000	470	600	549	700	0	0	ore_siliclastic	ore_siliclastic	0
+petrochem_fuel_liquid_type1	Class 1 Liquid Petro Fuel	chemical	fuel_petrochem_liquid	1	1	0	0	0	0	1	600	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	0
+petrochem_fuel_liquid_type2	Class 2 Liquid Petro Fuel	chemical	fuel_petrochem_liquid	1	1	0	0	0	0	1	600	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	0
+petrochem_fuel_liquid_type3	Class 3 Liquid Petro Fuel	chemical	fuel_petrochem_liquid	1	1	0	0	0	0	1	600	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	0
+petrochem_fuel_liquid_type4	Class 4 Liquid Petro Fuel	chemical	fuel_petrochem_liquid	1	1	0	0	0	0	1	600	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	0
+petrochem_fuel_liquid_type5	Class 5 Liquid Petro Fuel	chemical	fuel_petrochem_liquid	1	1	0	0	0	0	1	600	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	0
+petrochem_fuel_liquid_type6	Class 6 Liquid Petro Fuel	chemical	fuel_petrochem_liquid	1	1	0	0	0	0	1	600	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	0
+petrochem_fuel_liquid_type7	Class 7 Liquid Petro Fuel	chemical	fuel_petrochem_liquid	1	1	0	0	0	0	1	600	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	0
+petrochem_fuel_liquid_unknown	Unknown Liquid Petrochem Fuel	chemical	fuel_petrochem_liquid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	0
+petrochem_fuel_solid_type1	Class 1 Solid Petro Fuel	mineral	fuel_petrochem_solid	1	1	0	0	0	0	1	149	0	0	0	0	0	0	300	430	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	0
+petrochem_fuel_solid_type2	Class 2 Solid Petro Fuel	mineral	fuel_petrochem_solid	1	1	0	0	0	0	81	264	0	0	0	0	0	0	370	530	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	0
+petrochem_fuel_solid_type3	Class 3 Solid Petro Fuel	mineral	fuel_petrochem_solid	1	1	0	0	0	0	195	378	0	0	0	0	0	0	470	630	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	0
+petrochem_fuel_solid_type4	Class 4 Solid Petro Fuel	mineral	fuel_petrochem_solid	1	1	0	0	0	0	309	492	0	0	0	0	0	0	570	730	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	0
+petrochem_fuel_solid_type5	Class 5 Solid Petro Fuel	mineral	fuel_petrochem_solid	1	1	0	0	0	0	423	606	0	0	0	0	0	0	670	830	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	0
+petrochem_fuel_solid_type6	Class 6 Solid Petro Fuel	mineral	fuel_petrochem_solid	1	1	0	0	0	0	537	720	0	0	0	0	0	0	770	930	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	0
+petrochem_fuel_solid_type7	Class 7 Solid Petro Fuel	mineral	fuel_petrochem_solid	1	1	0	0	0	0	652	800	0	0	0	0	0	0	870	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	0
+petrochem_fuel_solid_unknown	Unknown Solid Petrochem Fuel	mineral	fuel_petrochem_solid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	0
+petrochem_inert_lubricating_oil	Lubricating Oil	chemical	petrochem_inert	1	5	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	petrochem_inert	petrochem_inert	0
+petrochem_inert_polymer	Polymer	chemical	petrochem_inert	1	5	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	petrochem_inert	petrochem_inert	0
+processed_cereal	Processed Cereal	flora_food	cereal	0	1	0	0	0	0	200	200	200	200	0	0	0	0	200	200	200	200	0	0	0	0	0	0	cereal	oats	0
+processed_meat	Processed Meat	creature_food	meat	0	1	0	0	0	0	200	200	200	200	0	0	0	0	200	200	200	200	0	0	0	0	0	0	meat	meat	0
+processed_seafood	Processed Seafood	creature_food	seafood	0	1	0	0	0	0	200	200	200	200	0	0	0	0	200	200	200	200	0	0	0	0	0	0	meat	meat	0
+processed_wood	Blended Wood	flora_structural	wood	0	1	0	0	0	0	200	200	0	0	0	0	200	200	0	0	200	200	200	200	200	200	0	0	flora_structural	wood	0
+radioactive_polymetric	High Grade Polymetric Radioactive	mineral	radioactive	1	1	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	radioactive	radioactive	0
+radioactive_type1	Class 1 Radioactive	mineral	radioactive	1	1	0	0	0	0	400	474	0	0	0	0	0	0	500	593	1	1000	0	0	0	0	0	0	radioactive	radioactive	0
+radioactive_type2	Class 2 Radioactive	mineral	radioactive	1	1	0	0	0	0	440	531	0	0	0	0	0	0	550	664	1	1000	0	0	0	0	0	0	radioactive	radioactive	0
+radioactive_type3	Class 3 Radioactive	mineral	radioactive	1	1	0	0	0	0	497	589	0	0	0	0	0	0	621	736	1	1000	0	0	0	0	0	0	radioactive	radioactive	0
+radioactive_type4	Class 4 Radioactive	mineral	radioactive	1	1	0	0	0	0	554	646	0	0	0	0	0	0	693	807	1	1000	0	0	0	0	0	0	radioactive	radioactive	0
+radioactive_type5	Class 5 Radioactive	mineral	radioactive	1	1	0	0	0	0	611	703	0	0	0	0	0	0	764	879	1	1000	0	0	0	0	0	0	radioactive	radioactive	0
+radioactive_type6	Class 6 Radioactive	mineral	radioactive	1	1	0	0	0	0	669	760	0	0	0	0	0	0	836	950	1	1000	0	0	0	0	0	0	radioactive	radioactive	0
+radioactive_type7	Class 7 Radioactive	mineral	radioactive	1	1	0	0	0	0	726	800	0	0	0	0	0	0	907	1000	1	1000	0	0	0	0	0	0	radioactive	radioactive	0
+radioactive_unknown	Unknown Radioactive	mineral	radioactive	1	2	0	0	0	0	1	800	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	radioactive	radioactive	0
+rice_domesticated_corellia	Corellian Domesticated Rice	flora_food	rice_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	rice	1
+rice_domesticated_dantooine	Dantooine Domesticated Rice	flora_food	rice_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	rice	2
+rice_domesticated_dathomir	Dathomirian Domesticated Rice	flora_food	rice_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	rice	3
+rice_domesticated_endor	Endorian Domesticated Rice	flora_food	rice_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	rice	4
+rice_domesticated_hoth	Hothian Domesticated Rice	flora_food	rice_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	rice	11
+rice_domesticated_kaas	Kaasian Domesticated Rice	flora_food	rice_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	rice	12
+rice_domesticated_lok	Lokian Domesticated Rice	flora_food	rice_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	rice	5
+rice_domesticated_mandalore	Mandalore Domesticated Rice	flora_food	rice_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	rice	14
+rice_domesticated_naboo	Nabooian Domesticated Rice	flora_food	rice_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	rice	6
+rice_domesticated_rori	Rori Domesticated Rice	flora_food	rice_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	rice	7
+rice_domesticated_talus	Talusian Domesticated Rice	flora_food	rice_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	rice	8
+rice_domesticated_tatooine	Tatooinian Domesticated Rice	flora_food	rice_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	rice	9
+rice_domesticated_yavin4	Yavinian Domesticated Rice	flora_food	rice_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	rice	10
+rice_wild_corellia	Corellian Wild Rice	flora_food	rice_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	rice	1
+rice_wild_dantooine	Dantooine Wild Rice	flora_food	rice_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	rice	2
+rice_wild_dathomir	Dathomirian Wild Rice	flora_food	rice_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	rice	3
+rice_wild_endor	Endorian Wild Rice	flora_food	rice_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	rice	4
+rice_wild_hoth	Hothian Wild Rice	flora_food	rice_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	rice	11
+rice_wild_kaas	Kaasian Wild Rice	flora_food	rice_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	rice	12
+rice_wild_lok	Lokian Wild Rice	flora_food	rice_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	rice	5
+rice_wild_mandalore	Mandalore Wild Rice	flora_food	rice_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	rice	14
+rice_wild_naboo	Nabooian Wild Rice	flora_food	rice_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	rice	6
+rice_wild_rori	Rori Wild Rice	flora_food	rice_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	rice	7
+rice_wild_talus	Talusian Wild Rice	flora_food	rice_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	rice	8
+rice_wild_tatooine	Tatooinian Wild Rice	flora_food	rice_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	rice	9
+rice_wild_yavin4	Yavinian Wild Rice	flora_food	rice_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	rice	10
+seafood_crustacean_corellia	Corellian Crustacean Meat	creature_food	seafood_crustacean	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	1
+seafood_crustacean_dantooine	Dantooine Crustacean Meat	creature_food	seafood_crustacean	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	2
+seafood_crustacean_dathomir	Dathomirian Crustacean Meat	creature_food	seafood_crustacean	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	3
+seafood_crustacean_endor	Endorian Crustacean Meat	creature_food	seafood_crustacean	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	4
+seafood_crustacean_hoth	Hothian Crustacean Meat	creature_food	seafood_crustacean	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	11
+seafood_crustacean_kaas	Kaasian Crustacean Meat	creature_food	seafood_crustacean	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	12
+seafood_crustacean_lok	Lokian Crustacean Meat	creature_food	seafood_crustacean	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	5
+seafood_crustacean_mandalore	Mandalore Crustacean Meat	creature_food	seafood_crustacean	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	14
+seafood_crustacean_naboo	Nabooian Crustacean Meat	creature_food	seafood_crustacean	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	6
+seafood_crustacean_rori	Rori Crustacean Meat	creature_food	seafood_crustacean	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	7
+seafood_crustacean_talus	Talusian Crustacean Meat	creature_food	seafood_crustacean	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	8
+seafood_crustacean_tatooine	Tatooinian Crustacean Meat	creature_food	seafood_crustacean	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	9
+seafood_crustacean_yavin4	Yavinian Crustacean Meat	creature_food	seafood_crustacean	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	10
+seafood_fish_corellia	Corellian Fish Meat	creature_food	seafood_fish	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	1
+seafood_fish_dantooine	Dantooine Fish Meat	creature_food	seafood_fish	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	2
+seafood_fish_dathomir	Dathomirian Fish Meat	creature_food	seafood_fish	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	3
+seafood_fish_endor	Endorian Fish Meat	creature_food	seafood_fish	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	4
+seafood_fish_hoth	Hothian Fish Meat	creature_food	seafood_fish	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	11
+seafood_fish_kaas	Kaasian Fish Meat	creature_food	seafood_fish	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	12
+seafood_fish_lok	Lokian Fish Meat	creature_food	seafood_fish	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	5
+seafood_fish_mandalore	Mandalore Fish Meat	creature_food	seafood_fish	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	14
+seafood_fish_naboo	Nabooian Fish Meat	creature_food	seafood_fish	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	6
+seafood_fish_rori	Rori Fish Meat	creature_food	seafood_fish	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	7
+seafood_fish_talus	Talusian Fish Meat	creature_food	seafood_fish	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	8
+seafood_fish_tatooine	Tatooinian Fish Meat	creature_food	seafood_fish	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	9
+seafood_fish_yavin4	Yavinian Fish Meat	creature_food	seafood_fish	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	10
+seafood_mollusk_corellia	Corellian Mollusk Meat	creature_food	seafood_mollusk	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	1
+seafood_mollusk_dantooine	Dantooine Mollusk Meat	creature_food	seafood_mollusk	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	2
+seafood_mollusk_dathomir	Dathomirian Mollusk Meat	creature_food	seafood_mollusk	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	3
+seafood_mollusk_endor	Endorian Mollusk Meat	creature_food	seafood_mollusk	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	4
+seafood_mollusk_hoth	Hothian Mollusk Meat	creature_food	seafood_mollusk	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	11
+seafood_mollusk_kaas	Kaasian Mollusk Meat	creature_food	seafood_mollusk	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	12
+seafood_mollusk_lok	Lokian Mollusk Meat	creature_food	seafood_mollusk	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	5
+seafood_mollusk_mandalore	Mandalore Mollusk Meat	creature_food	seafood_mollusk	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	14
+seafood_mollusk_naboo	Nabooian Mollusk Meat	creature_food	seafood_mollusk	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	6
+seafood_mollusk_rori	Rori Mollusk Meat	creature_food	seafood_mollusk	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	7
+seafood_mollusk_talus	Talusian Mollusk Meat	creature_food	seafood_mollusk	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	8
+seafood_mollusk_tatooine	Tatooinian Mollusk Meat	creature_food	seafood_mollusk	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	9
+seafood_mollusk_yavin4	Yavinian Mollusk Meat	creature_food	seafood_mollusk	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	10
+smelted_metal_ferrous_unknown	Smelted Ferrous Metal	mineral	metal_ferrous	0	1	200	200	200	200	200	200	0	0	200	200	200	200	0	0	200	200	200	200	200	200	0	0	metal_ferrous	metal_ferrous	0
+smelted_metal_nonferrous_unknown	Smelted Non-Ferrous Metal	mineral	metal_nonferrous	0	1	200	200	200	200	200	200	0	0	200	200	200	200	0	0	200	200	200	200	200	200	0	0	metal_nonferrous	metal_nonferrous	0
+softwood_conifer_corellia	Corellian Conifer Wood	flora_structural	softwood	1	1	0	0	0	0	1	600	0	0	0	0	600	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	1
+softwood_conifer_dantooine	Dantooine Conifer Wood	flora_structural	softwood	1	1	0	0	0	0	1	600	0	0	0	0	600	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	2
+softwood_conifer_dathomir	Dathomirian Conifer Wood	flora_structural	softwood	1	1	0	0	0	0	1	600	0	0	0	0	600	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	3
+softwood_conifer_endor	Endorian Conifer Wood	flora_structural	softwood	1	1	0	0	0	0	1	600	0	0	0	0	600	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	4
+softwood_conifer_hoth	Hothian Conifer Wood	flora_structural	softwood	1	1	0	0	0	0	1	600	0	0	0	0	600	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	11
+softwood_conifer_kaas	Kaasian Conifer Wood	flora_structural	softwood	1	1	0	0	0	0	1	600	0	0	0	0	600	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	12
+softwood_conifer_lok	Lokian Conifer Wood	flora_structural	softwood	1	1	0	0	0	0	1	600	0	0	0	0	600	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	5
+softwood_conifer_mandalore	Mandalore Conifer Wood	flora_structural	softwood	1	1	0	0	0	0	1	600	0	0	0	0	600	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	14
+softwood_conifer_naboo	Nabooian Conifer Wood	flora_structural	softwood	1	1	0	0	0	0	1	600	0	0	0	0	600	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	6
+softwood_conifer_rori	Rori Conifer Wood	flora_structural	softwood	1	1	0	0	0	0	1	600	0	0	0	0	600	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	7
+softwood_conifer_talus	Talusian Conifer Wood	flora_structural	softwood	1	1	0	0	0	0	1	600	0	0	0	0	600	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	8
+softwood_conifer_tatooine	Tatooinian Conifer Wood	flora_structural	softwood	1	1	0	0	0	0	1	600	0	0	0	0	600	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	9
+softwood_conifer_yavin4	Yavinian Conifer Wood	flora_structural	softwood	1	1	0	0	0	0	1	600	0	0	0	0	600	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	10
+softwood_evergreen_corellia	Corellian Evergreen Wood	flora_structural	softwood_evergreen	1	1	0	0	0	0	1	500	0	0	0	0	800	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	1
+softwood_evergreen_dantooine	Dantooine Evergreen Wood	flora_structural	softwood_evergreen	1	1	0	0	0	0	1	500	0	0	0	0	800	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	2
+softwood_evergreen_dathomir	Dathomirian Evergreen Wood	flora_structural	softwood_evergreen	1	1	0	0	0	0	1	500	0	0	0	0	800	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	3
+softwood_evergreen_endor	Endorian Evergreen Wood	flora_structural	softwood_evergreen	1	1	0	0	0	0	1	500	0	0	0	0	800	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	4
+softwood_evergreen_hoth	Hothian Evergreen Wood	flora_structural	softwood_evergreen	1	1	0	0	0	0	1	500	0	0	0	0	800	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	11
+softwood_evergreen_kaas	Kaasian Evergreen Wood	flora_structural	softwood_evergreen	1	1	0	0	0	0	1	500	0	0	0	0	800	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	12
+softwood_evergreen_lok	Lokian Evergreen Wood	flora_structural	softwood_evergreen	1	1	0	0	0	0	1	500	0	0	0	0	800	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	5
+softwood_evergreen_mandalore	Mandalore Evergreen Wood	flora_structural	softwood_evergreen	1	1	0	0	0	0	1	500	0	0	0	0	800	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	14
+softwood_evergreen_naboo	Nabooian Evergreen Wood	flora_structural	softwood_evergreen	1	1	0	0	0	0	1	500	0	0	0	0	800	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	6
+softwood_evergreen_rori	Rori Evergreen Wood	flora_structural	softwood_evergreen	1	1	0	0	0	0	1	500	0	0	0	0	800	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	7
+softwood_evergreen_talus	Talusian Evergreen Wood	flora_structural	softwood_evergreen	1	1	0	0	0	0	1	500	0	0	0	0	800	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	8
+softwood_evergreen_tatooine	Tatooinian Evergreen Wood	flora_structural	softwood_evergreen	1	1	0	0	0	0	1	500	0	0	0	0	800	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	9
+softwood_evergreen_yavin4	Yavinian Evergreen Wood	flora_structural	softwood_evergreen	1	1	0	0	0	0	1	500	0	0	0	0	800	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	10
+steel_arveshian	Hardened Arveshium Steel	mineral	steel	1	1	1	1000	1	1000	1	1000	0	0	1	1000	1	1000	0	0	1	1000	1	1000	1	1000	0	0	steel	steel	0
+steel_bicorbantium	Crystallized Bicorbantium Steel	mineral	steel	1	1	1	1000	1	1000	1	1000	0	0	1	1000	1	1000	0	0	1	1000	1	1000	1	1000	0	0	steel	steel	0
+steel_carbonite	Carbonite Steel	mineral	steel	1	5	616	744	501	605	885	965	0	0	908	972	308	372	0	0	1	1000	885	965	862	958	0	0	steel	steel	0
+steel_cubirian	Cubirian Steel	mineral	steel	1	5	137	265	111	215	585	665	0	0	668	732	69	133	0	0	1	1000	585	665	502	598	0	0	steel	steel	0
+steel_ditanium	Ditanium Steel	mineral	steel	1	5	456	584	371	475	785	865	0	0	828	892	228	292	0	0	1	1000	785	865	742	838	0	0	steel	steel	0
+steel_duralloy	Duralloy Steel	mineral	steel	1	5	696	800	566	650	935	1000	0	0	948	1000	348	400	0	0	1	1000	935	1000	922	1000	0	0	steel	steel	0
+steel_duranium	Duranium Steel	mineral	steel	1	5	377	504	306	410	735	815	0	0	788	852	189	252	0	0	1	1000	735	815	682	778	0	0	steel	steel	0
+steel_kiirium	Kiirium Steel	mineral	steel	1	5	57	185	46	150	535	615	0	0	628	692	29	93	0	0	1	1000	535	615	442	538	0	0	steel	steel	0
+steel_neutronium	Neutronium Steel	mineral	steel	1	5	297	424	241	345	685	765	0	0	748	812	149	212	0	0	1	1000	685	765	622	718	0	0	steel	steel	0
+steel_quadranium	Quadranium Steel	mineral	steel	1	5	536	664	436	540	835	915	0	0	868	932	268	332	0	0	1	1000	835	915	802	898	0	0	steel	steel	0
+steel_rhodium	Rhodium Steel	mineral	steel	1	5	1	105	1	85	500	565	0	0	600	652	1	53	0	0	1	1000	500	565	400	478	0	0	steel	steel	0
+steel_smelted	Smelted Steel	mineral	steel	0	1	200	200	200	200	200	200	0	0	200	200	200	200	0	0	200	200	200	200	200	200	0	0	steel	steel	0
+steel_thoranium	Thoranium Steel	mineral	steel	1	5	217	345	176	280	635	715	0	0	708	772	109	173	0	0	1	1000	635	715	562	658	0	0	steel	steel	0
+synthesized_hides	Synthesized Hides	creature_structural	hide	0	1	0	0	0	0	200	200	0	0	0	0	200	200	0	0	200	200	200	200	200	200	0	0	hide	hide_leathery	0
+vegetable_beans_corellia	Corellian Vegetable Beans	flora_food	vegetable_beans	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_beans	1
+vegetable_beans_dantooine	Dantooine Vegetable Beans	flora_food	vegetable_beans	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_beans	2
+vegetable_beans_dathomir	Dathomirian Vegetable Beans	flora_food	vegetable_beans	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_beans	3
+vegetable_beans_endor	Endorian Vegetable Beans	flora_food	vegetable_beans	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_beans	4
+vegetable_beans_hoth	Hothian Vegetable Beans	flora_food	vegetable_beans	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_beans	11
+vegetable_beans_kaas	Kaasian Vegetable Beans	flora_food	vegetable_beans	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_beans	12
+vegetable_beans_lok	Lokian Vegetable Beans	flora_food	vegetable_beans	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_beans	5
+vegetable_beans_mandalore	Mandalore Vegetable Beans	flora_food	vegetable_beans	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_beans	14
+vegetable_beans_naboo	Nabooian Vegetable Beans	flora_food	vegetable_beans	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_beans	6
+vegetable_beans_rori	Rori Vegetable Beans	flora_food	vegetable_beans	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_beans	7
+vegetable_beans_talus	Talusian Vegetable Beans	flora_food	vegetable_beans	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_beans	8
+vegetable_beans_tatooine	Tatooinian Vegetable Beans	flora_food	vegetable_beans	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_beans	9
+vegetable_beans_yavin4	Yavinian Vegetable Beans	flora_food	vegetable_beans	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_beans	10
+vegetable_fungi_corellia	Corellian Vegetable Fungus	flora_food	vegetable_fungi	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_fungi	1
+vegetable_fungi_dantooine	Dantooine Vegetable Fungus	flora_food	vegetable_fungi	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_fungi	2
+vegetable_fungi_dathomir	Dathomirian Vegetable Fungus	flora_food	vegetable_fungi	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_fungi	3
+vegetable_fungi_endor	Endorian Vegetable Fungus	flora_food	vegetable_fungi	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_fungi	4
+vegetable_fungi_hoth	Hothian Vegetable Fungus	flora_food	vegetable_fungi	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_fungi	11
+vegetable_fungi_kaas	Kaasian Vegetable Fungus	flora_food	vegetable_fungi	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_fungi	12
+vegetable_fungi_lok	Lokian Vegetable Fungus	flora_food	vegetable_fungi	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_fungi	5
+vegetable_fungi_mandalore	Mandalore Vegetable Fungus	flora_food	vegetable_fungi	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_fungi	14
+vegetable_fungi_naboo	Nabooian Vegetable Fungus	flora_food	vegetable_fungi	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_fungi	6
+vegetable_fungi_rori	Rori Vegetable Fungus	flora_food	vegetable_fungi	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_fungi	7
+vegetable_fungi_talus	Talusian Vegetable Fungus	flora_food	vegetable_fungi	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_fungi	8
+vegetable_fungi_tatooine	Tatooinian Vegetable Fungus	flora_food	vegetable_fungi	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_fungi	9
+vegetable_fungi_yavin4	Yavinian Vegetable Fungus	flora_food	vegetable_fungi	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_fungi	10
+vegetable_greens_corellia	Corellian Vegetable Greens	flora_food	vegetable_greens	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_greens	1
+vegetable_greens_dantooine	Dantooine Vegetable Greens	flora_food	vegetable_greens	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_greens	2
+vegetable_greens_dathomir	Dathomirian Vegetable Greens	flora_food	vegetable_greens	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_greens	3
+vegetable_greens_endor	Endorian Vegetable Greens	flora_food	vegetable_greens	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_greens	4
+vegetable_greens_hoth	Hothian Vegetable Greens	flora_food	vegetable_greens	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_greens	11
+vegetable_greens_kaas	Kaasian Vegetable Greens	flora_food	vegetable_greens	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_greens	12
+vegetable_greens_lok	Lokian Vegetable Greens	flora_food	vegetable_greens	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_greens	5
+vegetable_greens_mandalore	Mandalore Vegetable Greens	flora_food	vegetable_greens	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_greens	14
+vegetable_greens_naboo	Nabooian Vegetable Greens	flora_food	vegetable_greens	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_greens	6
+vegetable_greens_rori	Rori Vegetable Greens	flora_food	vegetable_greens	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_greens	7
+vegetable_greens_talus	Talusian Vegetable Greens	flora_food	vegetable_greens	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_greens	8
+vegetable_greens_tatooine	Tatooinian Vegetable Greens	flora_food	vegetable_greens	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_greens	9
+vegetable_greens_yavin4	Yavinian Vegetable Greens	flora_food	vegetable_greens	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_greens	10
+vegetable_tubers_corellia	Corellian Vegetable Tubers	flora_food	vegetable_tubers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_tubers	1
+vegetable_tubers_dantooine	Dantooine Vegetable Tubers	flora_food	vegetable_tubers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_tubers	2
+vegetable_tubers_dathomir	Dathomirian Vegetable Tubers	flora_food	vegetable_tubers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_tubers	3
+vegetable_tubers_endor	Endorian Vegetable Tubers	flora_food	vegetable_tubers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_tubers	4
+vegetable_tubers_hoth	Hothian Vegetable Tubers	flora_food	vegetable_tubers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_tubers	11
+vegetable_tubers_kaas	Kaasian Vegetable Tubers	flora_food	vegetable_tubers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_tubers	12
+vegetable_tubers_lok	Lokian Vegetable Tubers	flora_food	vegetable_tubers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_tubers	5
+vegetable_tubers_mandalore	Mandalore Vegetable Tubers	flora_food	vegetable_tubers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_tubers	14
+vegetable_tubers_naboo	Nabooian Vegetable Tubers	flora_food	vegetable_tubers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_tubers	6
+vegetable_tubers_rori	Rori Vegetable Tubers	flora_food	vegetable_tubers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_tubers	7
+vegetable_tubers_talus	Talusian Vegetable Tubers	flora_food	vegetable_tubers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_tubers	8
+vegetable_tubers_tatooine	Tatooinian Vegetable Tubers	flora_food	vegetable_tubers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_tubers	9
+vegetable_tubers_yavin4	Yavinian Vegetable Tubers	flora_food	vegetable_tubers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_tubers	10
+water_solution	Water Solution	water	water	0	1	0	0	0	0	200	200	0	0	0	0	0	0	0	0	200	200	0	0	0	0	0	0	water	water	0
+water_vapor_corellia	Corellian Water Vapor	water	water	1	5	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	600	1000	0	0	0	0	0	0	water	water	1
+water_vapor_dantooine	Dantooine Water Vapor	water	water	1	5	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	600	1000	0	0	0	0	0	0	water	water	2
+water_vapor_dathomir	Dathomirian Water Vapor	water	water	1	5	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	600	1000	0	0	0	0	0	0	water	water	3
+water_vapor_endor	Endorian Water Vapor	water	water	1	5	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	600	1000	0	0	0	0	0	0	water	water	4
+water_vapor_hoth	Hothian Water Vapor	water	water	1	5	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	600	1000	0	0	0	0	0	0	water	water	11
+water_vapor_kaas	Kaasian Water Vapor	water	water	1	5	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	600	1000	0	0	0	0	0	0	water	water	12
+water_vapor_lok	Lokian Water Vapor	water	water	1	5	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	600	1000	0	0	0	0	0	0	water	water	5
+water_vapor_mandalore	Mandalore Water Vapor	water	water	1	5	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	600	1000	0	0	0	0	0	0	water	water	14
+water_vapor_naboo	Nabooian Water Vapor	water	water	1	5	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	600	1000	0	0	0	0	0	0	water	water	6
+water_vapor_rori	Rori Water Vapor	water	water	1	5	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	600	1000	0	0	0	0	0	0	water	water	7
+water_vapor_talus	Talusian Water Vapor	water	water	1	5	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	600	1000	0	0	0	0	0	0	water	water	8
+water_vapor_tatooine	Tatooinian Water Vapor	water	water	1	5	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	600	1000	0	0	0	0	0	0	water	water	9
+water_vapor_yavin4	Yavinian Water Vapor	water	water	1	5	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	600	1000	0	0	0	0	0	0	water	water	10
+wheat_domesticated_corellia	Corellian Domesticated Wheat	flora_food	wheat_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	wheat	1
+wheat_domesticated_dantooine	Dantooine Domesticated Wheat	flora_food	wheat_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	wheat	2
+wheat_domesticated_dathomir	Dathomirian Domesticated Wheat	flora_food	wheat_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	wheat	3
+wheat_domesticated_endor	Endorian Domesticated Wheat	flora_food	wheat_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	wheat	4
+wheat_domesticated_hoth	Hothian Domesticated Wheat	flora_food	wheat_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	wheat	11
+wheat_domesticated_kaas	Kaasian Domesticated Wheat	flora_food	wheat_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	wheat	12
+wheat_domesticated_lok	Lokian Domesticated Wheat	flora_food	wheat_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	wheat	5
+wheat_domesticated_mandalore	Mandalore Domesticated Wheat	flora_food	wheat_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	wheat	14
+wheat_domesticated_naboo	Nabooian Domesticated Wheat	flora_food	wheat_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	wheat	6
+wheat_domesticated_rori	Rori Domesticated Wheat	flora_food	wheat_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	wheat	7
+wheat_domesticated_talus	Talusian Domesticated Wheat	flora_food	wheat_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	wheat	8
+wheat_domesticated_tatooine	Tatooinian Domesticated Wheat	flora_food	wheat_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	wheat	9
+wheat_domesticated_yavin4	Yavinian Domesticated Wheat	flora_food	wheat_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	wheat	10
+wheat_wild_corellia	Corellian Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	wheat	1
+wheat_wild_dantooine	Dantooine Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	wheat	2
+wheat_wild_dathomir	Dathomirian Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	wheat	3
+wheat_wild_endor	Endorian Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	wheat	4
+wheat_wild_hoth	Hothian Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	wheat	11
+wheat_wild_kaas	Kaasian Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	wheat	12
+wheat_wild_lok	Lokian Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	wheat	5
+wheat_wild_mandalore	Mandalore Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	wheat	14
+wheat_wild_naboo	Nabooian Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	wheat	6
+wheat_wild_rori	Rori Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	wheat	7
+wheat_wild_talus	Talusian Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	wheat	8
+wheat_wild_tatooine	Tatooinian Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	wheat	9
+wheat_wild_yavin4	Yavinian Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	wheat	10
+wood_deciduous_corellia	Corellian Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	1
+wood_deciduous_dantooine	Dantooine Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	2
+wood_deciduous_dathomir	Dathomirian Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	3
+wood_deciduous_endor	Endorian Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	4
+wood_deciduous_hoth	Hothian Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	11
+wood_deciduous_kaas	Kaasian Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	12
+wood_deciduous_lok	Lokian Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	5
+wood_deciduous_mandalore	Mandalore Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	14
+wood_deciduous_naboo	Nabooian Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	6
+wood_deciduous_rori	Rori Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	7
+wood_deciduous_talus	Talusian Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	8
+wood_deciduous_tatooine	Tatooinian Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	9
+wood_deciduous_yavin4	Yavinian Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	10
+aluminum_hoth	Hothian Aluminum	mineral	aluminum	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	aluminum	aluminum	11
+copper_hoth	Hothian Copper	mineral	copper	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	copper	copper	11
+armophous_hoth	Hothian Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	11
+crystalline_hoth	Hothian Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	11
+gas_inert_hoth	Hothian Inert Gas	gas	gas_inert	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	11
+gas_reactive_hoth	Hothian Reactive Gas	gas	gas_reactive	1	1	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_reactive	gas_reactive	11
+iron_hoth	Hothian Iron	mineral	iron	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	iron	metal_ferrous	11
+ore_extrusive_hoth	Hothian Extrusive Ore	mineral	ore_extrusive	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	11
+ore_intrusive_hoth	Hothian Intrusive Ore	mineral	ore_intrusive	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	11
+ore_carbonate_hoth	Hothian Carbonate Ore	mineral	ore_carbonate	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_carbonate	ore_carbonate	11
+ore_siliclastic_hoth	Hothian Siliclastic Ore	mineral	ore_siliclastic	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_siliclastic	ore_siliclastic	11
+petrochem_fuel_liquid_hoth	Hothian Liquid Petrochem Fuel	chemical	fuel_petrochem_liquid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	11
+petrochem_fuel_solid_hoth	Hothian Solid Petrochem Fuel	mineral	fuel_petrochem_solid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	11
+radioactive_hoth	Hothian Radioactive	mineral	radioactive	1	2	0	0	0	0	1	800	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	radioactive	radioactive	11
+steel_hoth	Hothian Steel	mineral	steel	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	steel	steel	11
+aluminum_mustafar	Mustafarian Aluminum	mineral	aluminum	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	aluminum	aluminum	15
+copper_mustafar	Mustafarian Copper	mineral	copper	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	copper	copper	15
+armophous_mustafar	Mustafarian Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	15
+crystalline_mustafar	Mustafarian Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	15
+gas_inert_mustafar	Mustafarian Inert Gas	gas	gas_inert	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	15
+gas_reactive_mustafar	Mustafarian Reactive Gas	gas	gas_reactive	1	1	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_reactive	gas_reactive	15
+iron_mustafar	Mustafarian Iron	mineral	iron	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	iron	metal_ferrous	15
+ore_extrusive_mustafar	Mustafarian Extrusive Ore	mineral	ore_extrusive	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	15
+ore_intrusive_mustafar	Mustafarian Intrusive Ore	mineral	ore_intrusive	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	15
+ore_carbonate_mustafar	Mustafarian Carbonate Ore	mineral	ore_carbonate	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_carbonate	ore_carbonate	15
+ore_siliclastic_mustafar	Mustafarian Siliclastic Ore	mineral	ore_siliclastic	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_siliclastic	ore_siliclastic	15
+petrochem_fuel_liquid_mustafar	Mustafarian Liquid Petrochem Fuel	chemical	fuel_petrochem_liquid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	15
+petrochem_fuel_solid_mustafar	Mustafarian Solid Petrochem Fuel	mineral	fuel_petrochem_solid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	15
+radioactive_mustafar	Mustafarian Radioactive	mineral	radioactive	1	2	0	0	0	0	1	800	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	radioactive	radioactive	15
+steel_mustafar	Mustafarian Steel	mineral	steel	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	steel	steel	15
+bone_avian_mustafar	Mustafarian Avian Bones	creature_structural	bone_avian	1	1	0	0	0	0	1	700	0	0	0	0	1	600	0	0	1	1000	100	500	1	500	0	0	bone	bone	15
+bone_horn_mustafar	Mustafarian Horn	creature_structural	bone_horn	1	1	0	0	0	0	200	1000	0	0	0	0	1	500	0	0	1	1000	300	700	1	500	0	0	bone	bone_horn	15
+bone_mammal_mustafar	Mustafarian Animal Bones	creature_structural	bone	1	1	0	0	0	0	300	1000	0	0	0	0	1	500	0	0	1	1000	400	1000	1	1000	0	0	bone	bone	15
+corn_domesticated_mustafar	Mustafarian Domesticated Corn	flora_food	corn_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	corn	15
+corn_wild_mustafar	Mustafarian Wild Corn	flora_food	corn_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	corn	15
+energy_renewable_site_limited_geothermal_mustafar	Mustafarian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	15
+energy_renewable_site_limited_hydron3_mustafar	Mustafarian Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	15
+energy_renewable_site_limited_tidal_mustafar	Mustafarian Tidal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	15
+energy_renewable_unlimited_solar_mustafar	Mustafarian Solar Renewable Energy	energy	energy_renewable_unlimited_solar	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	600	500	500	0	0	0	0	0	0	energy	energy	15
+energy_renewable_unlimited_wind_mustafar	Mustafarian Wind Renewable Energy	energy	energy_renewable_unlimited_wind	1	1	0	0	0	0	0	0	0	0	0	0	0	0	1	400	500	500	0	0	0	0	0	0	energy	energy	15
+fiberplast_mustafar	Mustafarian Fiberplast	chemical	fiberplast	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	inorganic	fiberplast	15
+fruit_berries_mustafar	Mustafarian Berry Fruit	flora_food	fruit_berries	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_berries	15
+fruit_flowers_mustafar	Mustafarian Flower Fruit	flora_food	fruit_flowers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	seeds	fruit_berries	15
+fruit_fruits_mustafar	Mustafarian Fruit	flora_food	fruit_fruits	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_fruits	15
+hide_bristley_mustafar	Mustafarian Bristley Hide	creature_structural	hide_bristley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_bristley	15
+hide_leathery_mustafar	Mustafarian Leathery Hide	creature_structural	hide_leathery	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_leathery	15
+hide_scaley_mustafar	Mustafarian Scaley Hide	creature_structural	hide_scaley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_scaley	15
+hide_wooly_mustafar	Mustafarian Wooly Hide	creature_structural	hide_wooly	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_wooly	15
+meat_avian_mustafar	Mustafarian Avian Meat	creature_food	meat_avian	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	15
+meat_carnivore_mustafar	Mustafarian Carnivore Meat	creature_food	meat_carnivore	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	15
+meat_domesticated_mustafar	Mustafarian Domesticated Meat	creature_food	meat_domesticated	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	15
+meat_egg_mustafar	Mustafarian Egg Meat	creature_food	meat_egg	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	15
+meat_herbivore_mustafar	Mustafarian Herbivore Meat	creature_food	meat_herbivore	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	15
+meat_insect_mustafar	Mustafarian Insect Meat	creature_food	meat_insect	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	15
+meat_reptillian_mustafar	Mustafarian Reptillian Meat	creature_food	meat_reptillian	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	15
+meat_wild_mustafar	Mustafarian Wild Meat	creature_food	meat_wild	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	15
+milk_domesticated_mustafar	Mustafarian Domesticated Milk	creature_food	milk_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	milk	milk	15
+milk_wild_mustafar	Mustafarian Wild Milk	creature_food	milk_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	milk	milk	15
+oats_domesticated_mustafar	Mustafarian Domesticated Oats	flora_food	oats_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	oats	15
+oats_wild_mustafar	Mustafarian Wild Oats	flora_food	oats_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	oats	15
+rice_domesticated_mustafar	Mustafarian Domesticated Rice	flora_food	rice_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	rice	15
+rice_wild_mustafar	Mustafarian Wild Rice	flora_food	rice_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	rice	15
+seafood_crustacean_mustafar	Mustafarian Crustacean Meat	creature_food	seafood_crustacean	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	15
+seafood_fish_mustafar	Mustafarian Fish Meat	creature_food	seafood_fish	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	15
+seafood_mollusk_mustafar	Mustafarian Mollusk Meat	creature_food	seafood_mollusk	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	15
+softwood_conifer_mustafar	Mustafarian Conifer Wood	flora_structural	softwood	1	1	0	0	0	0	1	600	0	0	0	0	600	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	15
+softwood_evergreen_mustafar	Mustafarian Evergreen Wood	flora_structural	softwood_evergreen	1	1	0	0	0	0	1	500	0	0	0	0	800	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	15
+vegetable_beans_mustafar	Mustafarian Vegetable Beans	flora_food	vegetable_beans	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_beans	15
+vegetable_fungi_mustafar	Mustafarian Vegetable Fungus	flora_food	vegetable_fungi	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_fungi	15
+vegetable_greens_mustafar	Mustafarian Vegetable Greens	flora_food	vegetable_greens	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_greens	15
+vegetable_tubers_mustafar	Mustafarian Vegetable Tubers	flora_food	vegetable_tubers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_tubers	15
+water_vapor_mustafar	Mustafarian Water Vapor	water	water	1	5	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	600	1000	0	0	0	0	0	0	water	water	15
+wheat_domesticated_mustafar	Mustafarian Domesticated Wheat	flora_food	wheat_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	wheat	15
+wheat_wild_mustafar	Mustafarian Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	wheat	15
+wood_deciduous_mustafar	Mustafarian Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	15
+aluminum_taanab	Taanab Aluminum	mineral	aluminum	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	aluminum	aluminum	16
+copper_taanab	Taanab Copper	mineral	copper	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	copper	copper	16
+armophous_taanab	Taanab Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	16
+crystalline_taanab	Taanab Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	16
+gas_inert_taanab	Taanab Inert Gas	gas	gas_inert	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	16
+gas_reactive_taanab	Taanab Reactive Gas	gas	gas_reactive	1	1	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_reactive	gas_reactive	16
+iron_taanab	Taanab Iron	mineral	iron	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	iron	metal_ferrous	16
+ore_extrusive_taanab	Taanab Extrusive Ore	mineral	ore_extrusive	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	16
+ore_intrusive_taanab	Taanab Intrusive Ore	mineral	ore_intrusive	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	16
+ore_carbonate_taanab	Taanab Carbonate Ore	mineral	ore_carbonate	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_carbonate	ore_carbonate	16
+ore_siliclastic_taanab	Taanab Siliclastic Ore	mineral	ore_siliclastic	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_siliclastic	ore_siliclastic	16
+petrochem_fuel_liquid_taanab	Taanab Liquid Petrochem Fuel	chemical	fuel_petrochem_liquid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	16
+petrochem_fuel_solid_taanab	Taanab Solid Petrochem Fuel	mineral	fuel_petrochem_solid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	16
+radioactive_taanab	Taanab Radioactive	mineral	radioactive	1	2	0	0	0	0	1	800	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	radioactive	radioactive	16
+steel_taanab	Taanab Steel	mineral	steel	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	steel	steel	16
+bone_avian_taanab	Taanab Avian Bones	creature_structural	bone_avian	1	1	0	0	0	0	1	700	0	0	0	0	1	600	0	0	1	1000	100	500	1	500	0	0	bone	bone	16
+bone_horn_taanab	Taanab Horn	creature_structural	bone_horn	1	1	0	0	0	0	200	1000	0	0	0	0	1	500	0	0	1	1000	300	700	1	500	0	0	bone	bone_horn	16
+bone_mammal_taanab	Taanab Animal Bones	creature_structural	bone	1	1	0	0	0	0	300	1000	0	0	0	0	1	500	0	0	1	1000	400	1000	1	1000	0	0	bone	bone	16
+corn_domesticated_taanab	Taanab Domesticated Corn	flora_food	corn_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	corn	16
+corn_wild_taanab	Taanab Wild Corn	flora_food	corn_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	corn	16
+energy_renewable_site_limited_geothermal_taanab	Taanab Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	16
+energy_renewable_site_limited_hydron3_taanab	Taanab Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	16
+energy_renewable_site_limited_tidal_taanab	Taanab Tidal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	16
+energy_renewable_unlimited_solar_taanab	Taanab Solar Renewable Energy	energy	energy_renewable_unlimited_solar	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	600	500	500	0	0	0	0	0	0	energy	energy	16
+energy_renewable_unlimited_wind_taanab	Taanab Wind Renewable Energy	energy	energy_renewable_unlimited_wind	1	1	0	0	0	0	0	0	0	0	0	0	0	0	1	400	500	500	0	0	0	0	0	0	energy	energy	16
+fiberplast_taanab	Taanab Fiberplast	chemical	fiberplast	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	inorganic	fiberplast	16
+fruit_berries_taanab	Taanab Berry Fruit	flora_food	fruit_berries	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_berries	16
+fruit_flowers_taanab	Taanab Flower Fruit	flora_food	fruit_flowers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	seeds	fruit_berries	16
+fruit_fruits_taanab	Taanab Fruit	flora_food	fruit_fruits	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_fruits	16
+hide_bristley_taanab	Taanab Bristley Hide	creature_structural	hide_bristley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_bristley	16
+hide_leathery_taanab	Taanab Leathery Hide	creature_structural	hide_leathery	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_leathery	16
+hide_scaley_taanab	Taanab Scaley Hide	creature_structural	hide_scaley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_scaley	16
+hide_wooly_taanab	Taanab Wooly Hide	creature_structural	hide_wooly	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_wooly	16
+meat_avian_taanab	Taanab Avian Meat	creature_food	meat_avian	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	16
+meat_carnivore_taanab	Taanab Carnivore Meat	creature_food	meat_carnivore	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	16
+meat_domesticated_taanab	Taanab Domesticated Meat	creature_food	meat_domesticated	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	16
+meat_egg_taanab	Taanab Egg Meat	creature_food	meat_egg	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	16
+meat_herbivore_taanab	Taanab Herbivore Meat	creature_food	meat_herbivore	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	16
+meat_insect_taanab	Taanab Insect Meat	creature_food	meat_insect	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	16
+meat_reptillian_taanab	Taanab Reptillian Meat	creature_food	meat_reptillian	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	16
+meat_wild_taanab	Taanab Wild Meat	creature_food	meat_wild	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	16
+milk_domesticated_taanab	Taanab Domesticated Milk	creature_food	milk_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	milk	milk	16
+milk_wild_taanab	Taanab Wild Milk	creature_food	milk_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	milk	milk	16
+oats_domesticated_taanab	Taanab Domesticated Oats	flora_food	oats_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	oats	16
+oats_wild_taanab	Taanab Wild Oats	flora_food	oats_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	oats	16
+rice_domesticated_taanab	Taanab Domesticated Rice	flora_food	rice_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	rice	16
+rice_wild_taanab	Taanab Wild Rice	flora_food	rice_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	rice	16
+seafood_crustacean_taanab	Taanab Crustacean Meat	creature_food	seafood_crustacean	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	16
+seafood_fish_taanab	Taanab Fish Meat	creature_food	seafood_fish	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	16
+seafood_mollusk_taanab	Taanab Mollusk Meat	creature_food	seafood_mollusk	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	16
+softwood_conifer_taanab	Taanab Conifer Wood	flora_structural	softwood	1	1	0	0	0	0	1	600	0	0	0	0	600	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	16
+softwood_evergreen_taanab	Taanab Evergreen Wood	flora_structural	softwood_evergreen	1	1	0	0	0	0	1	500	0	0	0	0	800	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	16
+vegetable_beans_taanab	Taanab Vegetable Beans	flora_food	vegetable_beans	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_beans	16
+vegetable_fungi_taanab	Taanab Vegetable Fungus	flora_food	vegetable_fungi	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_fungi	16
+vegetable_greens_taanab	Taanab Vegetable Greens	flora_food	vegetable_greens	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_greens	16
+vegetable_tubers_taanab	Taanab Vegetable Tubers	flora_food	vegetable_tubers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_tubers	16
+water_vapor_taanab	Taanab Water Vapor	water	water	1	5	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	600	1000	0	0	0	0	0	0	water	water	16
+wheat_domesticated_taanab	Taanab Domesticated Wheat	flora_food	wheat_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	wheat	16
+wheat_wild_taanab	Taanab Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	wheat	16
+wood_deciduous_taanab	Taanab Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	16
+aluminum_kaas	Kaasian Aluminum	mineral	aluminum	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	aluminum	aluminum	12
+copper_kaas	Kaasian Copper	mineral	copper	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	copper	copper	12
+armophous_kaas	Kaasian Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	12
+crystalline_kaas	Kaasian Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	12
+gas_inert_kaas	Kaasian Inert Gas	gas	gas_inert	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	12
+gas_reactive_kaas	Kaasian Reactive Gas	gas	gas_reactive	1	1	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_reactive	gas_reactive	12
+iron_kaas	Kaasian Iron	mineral	iron	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	iron	metal_ferrous	12
+ore_extrusive_kaas	Kaasian Extrusive Ore	mineral	ore_extrusive	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	12
+ore_intrusive_kaas	Kaasian Intrusive Ore	mineral	ore_intrusive	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	12
+ore_carbonate_kaas	Kaasian Carbonate Ore	mineral	ore_carbonate	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_carbonate	ore_carbonate	12
+ore_siliclastic_kaas	Kaasian Siliclastic Ore	mineral	ore_siliclastic	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_siliclastic	ore_siliclastic	12
+petrochem_fuel_liquid_kaas	Kaasian Liquid Petrochem Fuel	chemical	fuel_petrochem_liquid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	12
+petrochem_fuel_solid_kaas	Kaasian Solid Petrochem Fuel	mineral	fuel_petrochem_solid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	12
+radioactive_kaas	Kaasian Radioactive	mineral	radioactive	1	2	0	0	0	0	1	800	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	radioactive	radioactive	12
+steel_kaas	Kaasian Steel	mineral	steel	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	steel	steel	12
+aluminum_mandalore	Mandalore Aluminum	mineral	aluminum	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	aluminum	aluminum	14
+copper_mandalore	Mandalore Copper	mineral	copper	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	copper	copper	14
+armophous_mandalore	Mandalore Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	14
+crystalline_mandalore	Mandalore Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	14
+gas_inert_mandalore	Mandalore Inert Gas	gas	gas_inert	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	14
+gas_reactive_mandalore	Mandalore Reactive Gas	gas	gas_reactive	1	1	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_reactive	gas_reactive	14
+iron_mandalore	Mandalore Iron	mineral	iron	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	iron	metal_ferrous	14
+ore_extrusive_mandalore	Mandalore Extrusive Ore	mineral	ore_extrusive	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	14
+ore_intrusive_mandalore	Mandalore Intrusive Ore	mineral	ore_intrusive	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	14
+ore_carbonate_mandalore	Mandalore Carbonate Ore	mineral	ore_carbonate	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_carbonate	ore_carbonate	14
+ore_siliclastic_mandalore	Mandalore Siliclastic Ore	mineral	ore_siliclastic	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_siliclastic	ore_siliclastic	14
+petrochem_fuel_liquid_mandalore	Mandalore Liquid Petrochem Fuel	chemical	fuel_petrochem_liquid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	14
+petrochem_fuel_solid_mandalore	Mandalore Solid Petrochem Fuel	mineral	fuel_petrochem_solid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	14
+radioactive_mandalore	Mandalore Radioactive	mineral	radioactive	1	2	0	0	0	0	1	800	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	radioactive	radioactive	14
+steel_mandalore	Mandalore Steel	mineral	steel	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	steel	steel	14
+aluminum_kashyyyk	Kashyyyk Aluminum	mineral	aluminum	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	aluminum	aluminum	13
+copper_kashyyyk	Kashyyyk Copper	mineral	copper	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	copper	copper	13
+armophous_kashyyyk	Kashyyyk Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	13
+crystalline_kashyyyk	Kashyyyk Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	13
+gas_inert_kashyyyk	Kashyyyk Inert Gas	gas	gas_inert	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	13
+gas_reactive_kashyyyk	Kashyyyk Reactive Gas	gas	gas_reactive	1	1	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_reactive	gas_reactive	13
+iron_kashyyyk	Kashyyyk Iron	mineral	iron	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	iron	metal_ferrous	13
+ore_extrusive_kashyyyk	Kashyyyk Extrusive Ore	mineral	ore_extrusive	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	13
+ore_intrusive_kashyyyk	Kashyyyk Intrusive Ore	mineral	ore_intrusive	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	13
+ore_carbonate_kashyyyk	Kashyyyk Carbonate Ore	mineral	ore_carbonate	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_carbonate	ore_carbonate	13
+ore_siliclastic_kashyyyk	Kashyyyk Siliclastic Ore	mineral	ore_siliclastic	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_siliclastic	ore_siliclastic	13
+petrochem_fuel_liquid_kashyyyk	Kashyyyk Liquid Petrochem Fuel	chemical	fuel_petrochem_liquid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	13
+petrochem_fuel_solid_kashyyyk	Kashyyyk Solid Petrochem Fuel	mineral	fuel_petrochem_solid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	13
+radioactive_kashyyyk	Kashyyyk Radioactive	mineral	radioactive	1	2	0	0	0	0	1	800	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	radioactive	radioactive	13
+steel_kashyyyk	Kashyyyk Steel	mineral	steel	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	steel	steel	13
+bone_avian_kashyyyk	Kashyyyk Avian Bones	creature_structural	bone_avian	1	1	0	0	0	0	1	700	0	0	0	0	1	600	0	0	1	1000	100	500	1	500	0	0	bone	bone	13
+bone_horn_kashyyyk	Kashyyyk Horn	creature_structural	bone_horn	1	1	0	0	0	0	200	1000	0	0	0	0	1	500	0	0	1	1000	300	700	1	500	0	0	bone	bone_horn	13
+bone_mammal_kashyyyk	Kashyyyk Animal Bones	creature_structural	bone	1	1	0	0	0	0	300	1000	0	0	0	0	1	500	0	0	1	1000	400	1000	1	1000	0	0	bone	bone	13
+corn_domesticated_kashyyyk	Kashyyyk Domesticated Corn	flora_food	corn_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	corn	13
+corn_wild_kashyyyk	Kashyyyk Wild Corn	flora_food	corn_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	corn	13
+energy_renewable_site_limited_geothermal_kashyyyk	Kashyyyk Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	13
+energy_renewable_site_limited_hydron3_kashyyyk	Kashyyyk Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	13
+energy_renewable_site_limited_tidal_kashyyyk	Kashyyyk Tidal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	13
+energy_renewable_unlimited_solar_kashyyyk	Kashyyyk Solar Renewable Energy	energy	energy_renewable_unlimited_solar	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	600	500	500	0	0	0	0	0	0	energy	energy	13
+energy_renewable_unlimited_wind_kashyyyk	Kashyyyk Wind Renewable Energy	energy	energy_renewable_unlimited_wind	1	1	0	0	0	0	0	0	0	0	0	0	0	0	1	400	500	500	0	0	0	0	0	0	energy	energy	13
+fiberplast_kashyyyk	Kashyyyk Fiberplast	chemical	fiberplast	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	inorganic	fiberplast	13
+fruit_berries_kashyyyk	Kashyyyk Berry Fruit	flora_food	fruit_berries	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_berries	13
+fruit_flowers_kashyyyk	Kashyyyk Flower Fruit	flora_food	fruit_flowers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	seeds	fruit_berries	13
+fruit_fruits_kashyyyk	Kashyyyk Fruit	flora_food	fruit_fruits	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_fruits	13
+hide_bristley_kashyyyk	Kashyyyk Bristley Hide	creature_structural	hide_bristley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_bristley	13
+hide_leathery_kashyyyk	Kashyyyk Leathery Hide	creature_structural	hide_leathery	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_leathery	13
+hide_scaley_kashyyyk	Kashyyyk Scaley Hide	creature_structural	hide_scaley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_scaley	13
+hide_wooly_kashyyyk	Kashyyyk Wooly Hide	creature_structural	hide_wooly	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_wooly	13
+meat_avian_kashyyyk	Kashyyyk Avian Meat	creature_food	meat_avian	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	13
+meat_carnivore_kashyyyk	Kashyyyk Carnivore Meat	creature_food	meat_carnivore	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	13
+meat_domesticated_kashyyyk	Kashyyyk Domesticated Meat	creature_food	meat_domesticated	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	13
+meat_egg_kashyyyk	Kashyyyk Egg Meat	creature_food	meat_egg	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	13
+meat_herbivore_kashyyyk	Kashyyyk Herbivore Meat	creature_food	meat_herbivore	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	13
+meat_insect_kashyyyk	Kashyyyk Insect Meat	creature_food	meat_insect	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	13
+meat_reptillian_kashyyyk	Kashyyyk Reptillian Meat	creature_food	meat_reptillian	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	13
+meat_wild_kashyyyk	Kashyyyk Wild Meat	creature_food	meat_wild	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	13
+milk_domesticated_kashyyyk	Kashyyyk Domesticated Milk	creature_food	milk_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	milk	milk	13
+milk_wild_kashyyyk	Kashyyyk Wild Milk	creature_food	milk_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	milk	milk	13
+oats_domesticated_kashyyyk	Kashyyyk Domesticated Oats	flora_food	oats_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	oats	13
+oats_wild_kashyyyk	Kashyyyk Wild Oats	flora_food	oats_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	oats	13
+rice_domesticated_kashyyyk	Kashyyyk Domesticated Rice	flora_food	rice_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	rice	13
+rice_wild_kashyyyk	Kashyyyk Wild Rice	flora_food	rice_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	rice	13
+seafood_crustacean_kashyyyk	Kashyyyk Crustacean Meat	creature_food	seafood_crustacean	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	13
+seafood_fish_kashyyyk	Kashyyyk Fish Meat	creature_food	seafood_fish	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	13
+seafood_mollusk_kashyyyk	Kashyyyk Mollusk Meat	creature_food	seafood_mollusk	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	13
+softwood_conifer_kashyyyk	Kashyyyk Conifer Wood	flora_structural	softwood	1	1	0	0	0	0	1	600	0	0	0	0	600	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	13
+softwood_evergreen_kashyyyk	Kashyyyk Evergreen Wood	flora_structural	softwood_evergreen	1	1	0	0	0	0	1	500	0	0	0	0	800	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	13
+vegetable_beans_kashyyyk	Kashyyyk Vegetable Beans	flora_food	vegetable_beans	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_beans	13
+vegetable_fungi_kashyyyk	Kashyyyk Vegetable Fungus	flora_food	vegetable_fungi	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_fungi	13
+vegetable_greens_kashyyyk	Kashyyyk Vegetable Greens	flora_food	vegetable_greens	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_greens	13
+vegetable_tubers_kashyyyk	Kashyyyk Vegetable Tubers	flora_food	vegetable_tubers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_tubers	13
+water_vapor_kashyyyk	Kashyyyk Water Vapor	water	water	1	5	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	600	1000	0	0	0	0	0	0	water	water	13
+wheat_domesticated_kashyyyk	Kashyyyk Domesticated Wheat	flora_food	wheat_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	wheat	13
+wheat_wild_kashyyyk	Kashyyyk Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	wheat	13
+wood_deciduous_kashyyyk	Kashyyyk Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	13
+aluminum_lothal	Lothal Aluminum	mineral	aluminum	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	aluminum	aluminum	17
+copper_lothal	Lothal Copper	mineral	copper	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	copper	copper	17
+armophous_lothal	Lothal Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	17
+crystalline_lothal	Lothal Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	17
+gas_inert_lothal	Lothal Inert Gas	gas	gas_inert	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	17
+gas_reactive_lothal	Lothal Reactive Gas	gas	gas_reactive	1	1	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_reactive	gas_reactive	17
+iron_lothal	Lothal Iron	mineral	iron	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	iron	metal_ferrous	17
+ore_extrusive_lothal	Lothal Extrusive Ore	mineral	ore_extrusive	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	17
+ore_intrusive_lothal	Lothal Intrusive Ore	mineral	ore_intrusive	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	17
+ore_carbonate_lothal	Lothal Carbonate Ore	mineral	ore_carbonate	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_carbonate	ore_carbonate	17
+ore_siliclastic_lothal	Lothal Siliclastic Ore	mineral	ore_siliclastic	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_siliclastic	ore_siliclastic	17
+petrochem_fuel_liquid_lothal	Lothal Liquid Petrochem Fuel	chemical	fuel_petrochem_liquid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	17
+petrochem_fuel_solid_lothal	Lothal Solid Petrochem Fuel	mineral	fuel_petrochem_solid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	17
+radioactive_lothal	Lothal Radioactive	mineral	radioactive	1	2	0	0	0	0	1	800	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	radioactive	radioactive	17
+steel_lothal	Lothal Steel	mineral	steel	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	steel	steel	17
+bone_avian_lothal	Lothal Avian Bones	creature_structural	bone_avian	1	1	0	0	0	0	1	700	0	0	0	0	1	600	0	0	1	1000	100	500	1	500	0	0	bone	bone	17
+bone_horn_lothal	Lothal Horn	creature_structural	bone_horn	1	1	0	0	0	0	200	1000	0	0	0	0	1	500	0	0	1	1000	300	700	1	500	0	0	bone	bone_horn	17
+bone_mammal_lothal	Lothal Animal Bones	creature_structural	bone	1	1	0	0	0	0	300	1000	0	0	0	0	1	500	0	0	1	1000	400	1000	1	1000	0	0	bone	bone	17
+corn_domesticated_lothal	Lothal Domesticated Corn	flora_food	corn_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	corn	17
+corn_wild_lothal	Lothal Wild Corn	flora_food	corn_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	corn	17
+energy_renewable_site_limited_geothermal_lothal	Lothal Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	17
+energy_renewable_site_limited_hydron3_lothal	Lothal Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	17
+energy_renewable_site_limited_tidal_lothal	Lothal Tidal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	17
+energy_renewable_unlimited_solar_lothal	Lothal Solar Renewable Energy	energy	energy_renewable_unlimited_solar	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	600	500	500	0	0	0	0	0	0	energy	energy	17
+energy_renewable_unlimited_wind_lothal	Lothal Wind Renewable Energy	energy	energy_renewable_unlimited_wind	1	1	0	0	0	0	0	0	0	0	0	0	0	0	1	400	500	500	0	0	0	0	0	0	energy	energy	17
+fiberplast_lothal	Lothal Fiberplast	chemical	fiberplast	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	inorganic	fiberplast	17
+fruit_berries_lothal	Lothal Berry Fruit	flora_food	fruit_berries	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_berries	17
+fruit_flowers_lothal	Lothal Flower Fruit	flora_food	fruit_flowers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	seeds	fruit_berries	17
+fruit_fruits_lothal	Lothal Fruit	flora_food	fruit_fruits	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_fruits	17
+hide_bristley_lothal	Lothal Bristley Hide	creature_structural	hide_bristley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_bristley	17
+hide_leathery_lothal	Lothal Leathery Hide	creature_structural	hide_leathery	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_leathery	17
+hide_scaley_lothal	Lothal Scaley Hide	creature_structural	hide_scaley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_scaley	17
+hide_wooly_lothal	Lothal Wooly Hide	creature_structural	hide_wooly	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_wooly	17
+meat_avian_lothal	Lothal Avian Meat	creature_food	meat_avian	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	17
+meat_carnivore_lothal	Lothal Carnivore Meat	creature_food	meat_carnivore	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	17
+meat_domesticated_lothal	Lothal Domesticated Meat	creature_food	meat_domesticated	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	17
+meat_egg_lothal	Lothal Egg Meat	creature_food	meat_egg	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	17
+meat_herbivore_lothal	Lothal Herbivore Meat	creature_food	meat_herbivore	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	17
+meat_insect_lothal	Lothal Insect Meat	creature_food	meat_insect	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	17
+meat_reptillian_lothal	Lothal Reptillian Meat	creature_food	meat_reptillian	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	17
+meat_wild_lothal	Lothal Wild Meat	creature_food	meat_wild	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	17
+milk_domesticated_lothal	Lothal Domesticated Milk	creature_food	milk_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	milk	milk	17
+milk_wild_lothal	Lothal Wild Milk	creature_food	milk_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	milk	milk	17
+oats_domesticated_lothal	Lothal Domesticated Oats	flora_food	oats_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	oats	17
+oats_wild_lothal	Lothal Wild Oats	flora_food	oats_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	oats	17
+rice_domesticated_lothal	Lothal Domesticated Rice	flora_food	rice_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	rice	17
+rice_wild_lothal	Lothal Wild Rice	flora_food	rice_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	rice	17
+seafood_crustacean_lothal	Lothal Crustacean Meat	creature_food	seafood_crustacean	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	17
+seafood_fish_lothal	Lothal Fish Meat	creature_food	seafood_fish	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	17
+seafood_mollusk_lothal	Lothal Mollusk Meat	creature_food	seafood_mollusk	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	17
+softwood_conifer_lothal	Lothal Conifer Wood	flora_structural	softwood	1	1	0	0	0	0	1	600	0	0	0	0	600	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	17
+softwood_evergreen_lothal	Lothal Evergreen Wood	flora_structural	softwood_evergreen	1	1	0	0	0	0	1	500	0	0	0	0	800	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	17
+vegetable_beans_lothal	Lothal Vegetable Beans	flora_food	vegetable_beans	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_beans	17
+vegetable_fungi_lothal	Lothal Vegetable Fungus	flora_food	vegetable_fungi	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_fungi	17
+vegetable_greens_lothal	Lothal Vegetable Greens	flora_food	vegetable_greens	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_greens	17
+vegetable_tubers_lothal	Lothal Vegetable Tubers	flora_food	vegetable_tubers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_tubers	17
+water_vapor_lothal	Lothal Water Vapor	water	water	1	5	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	600	1000	0	0	0	0	0	0	water	water	17
+wheat_domesticated_lothal	Lothal Domesticated Wheat	flora_food	wheat_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	wheat	17
+wheat_wild_lothal	Lothal Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	wheat	17
+wood_deciduous_lothal	Lothal Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	17
+aluminum_jakku	Jakkuan Aluminum	mineral	aluminum	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	aluminum	aluminum	|PLANETID|
+copper_jakku	Jakkuan Copper	mineral	copper	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	copper	copper	|PLANETID|
+armophous_jakku	Jakkuan Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	|PLANETID|
+crystalline_jakku	Jakkuan Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	|PLANETID|
+gas_inert_jakku	Jakkuan Inert Gas	gas	gas_inert	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	|PLANETID|
+gas_reactive_jakku	Jakkuan Reactive Gas	gas	gas_reactive	1	1	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_reactive	gas_reactive	|PLANETID|
+iron_jakku	Jakkuan Iron	mineral	iron	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	iron	metal_ferrous	|PLANETID|
+ore_extrusive_jakku	Jakkuan Extrusive Ore	mineral	ore_extrusive	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	|PLANETID|
+ore_intrusive_jakku	Jakkuan Intrusive Ore	mineral	ore_intrusive	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	|PLANETID|
+ore_carbonate_jakku	Jakkuan Carbonate Ore	mineral	ore_carbonate	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_carbonate	ore_carbonate	|PLANETID|
+ore_siliclastic_jakku	Jakkuan Siliclastic Ore	mineral	ore_siliclastic	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_siliclastic	ore_siliclastic	|PLANETID|
+petrochem_fuel_liquid_jakku	Jakkuan Liquid Petrochem Fuel	chemical	fuel_petrochem_liquid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	|PLANETID|
+petrochem_fuel_solid_jakku	Jakkuan Solid Petrochem Fuel	mineral	fuel_petrochem_solid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	|PLANETID|
+radioactive_jakku	Jakkuan Radioactive	mineral	radioactive	1	2	0	0	0	0	1	800	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	radioactive	radioactive	|PLANETID|
+steel_jakku	Jakkuan Steel	mineral	steel	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	steel	steel	|PLANETID|
+bone_avian_jakku	Jakkuan Avian Bones	creature_structural	bone_avian	1	1	0	0	0	0	1	700	0	0	0	0	1	600	0	0	1	1000	100	500	1	500	0	0	bone	bone	|PLANETID|
+bone_horn_jakku	Jakkuan Horn	creature_structural	bone_horn	1	1	0	0	0	0	200	1000	0	0	0	0	1	500	0	0	1	1000	300	700	1	500	0	0	bone	bone_horn	|PLANETID|
+bone_mammal_jakku	Jakkuan Animal Bones	creature_structural	bone	1	1	0	0	0	0	300	1000	0	0	0	0	1	500	0	0	1	1000	400	1000	1	1000	0	0	bone	bone	|PLANETID|
+corn_domesticated_jakku	Jakkuan Domesticated Corn	flora_food	corn_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	corn	|PLANETID|
+corn_wild_jakku	Jakkuan Wild Corn	flora_food	corn_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	corn	|PLANETID|
+energy_renewable_site_limited_geothermal_jakku	Jakkuan Geothermal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	|PLANETID|
+energy_renewable_site_limited_hydron3_jakku	Jakkuan Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	|PLANETID|
+energy_renewable_site_limited_tidal_jakku	Jakkuan Tidal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	|PLANETID|
+energy_renewable_unlimited_solar_jakku	Jakkuan Solar Renewable Energy	energy	energy_renewable_unlimited_solar	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	600	500	500	0	0	0	0	0	0	energy	energy	|PLANETID|
+energy_renewable_unlimited_wind_jakku	Jakkuan Wind Renewable Energy	energy	energy_renewable_unlimited_wind	1	1	0	0	0	0	0	0	0	0	0	0	0	0	1	400	500	500	0	0	0	0	0	0	energy	energy	|PLANETID|
+fiberplast_jakku	Jakkuan Fiberplast	chemical	fiberplast	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	inorganic	fiberplast	|PLANETID|
+fruit_berries_jakku	Jakkuan Berry Fruit	flora_food	fruit_berries	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_berries	|PLANETID|
+fruit_flowers_jakku	Jakkuan Flower Fruit	flora_food	fruit_flowers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	seeds	fruit_berries	|PLANETID|
+fruit_fruits_jakku	Jakkuan Fruit	flora_food	fruit_fruits	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_fruits	|PLANETID|
+hide_bristley_jakku	Jakkuan Bristley Hide	creature_structural	hide_bristley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_bristley	|PLANETID|
+hide_leathery_jakku	Jakkuan Leathery Hide	creature_structural	hide_leathery	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_leathery	|PLANETID|
+hide_scaley_jakku	Jakkuan Scaley Hide	creature_structural	hide_scaley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_scaley	|PLANETID|
+hide_wooly_jakku	Jakkuan Wooly Hide	creature_structural	hide_wooly	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_wooly	|PLANETID|
+meat_avian_jakku	Jakkuan Avian Meat	creature_food	meat_avian	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
+meat_carnivore_jakku	Jakkuan Carnivore Meat	creature_food	meat_carnivore	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
+meat_domesticated_jakku	Jakkuan Domesticated Meat	creature_food	meat_domesticated	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
+meat_egg_jakku	Jakkuan Egg Meat	creature_food	meat_egg	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
+meat_herbivore_jakku	Jakkuan Herbivore Meat	creature_food	meat_herbivore	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
+meat_insect_jakku	Jakkuan Insect Meat	creature_food	meat_insect	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
+meat_reptillian_jakku	Jakkuan Reptillian Meat	creature_food	meat_reptillian	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
+meat_wild_jakku	Jakkuan Wild Meat	creature_food	meat_wild	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
+milk_domesticated_jakku	Jakkuan Domesticated Milk	creature_food	milk_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	milk	milk	|PLANETID|
+milk_wild_jakku	Jakkuan Wild Milk	creature_food	milk_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	milk	milk	|PLANETID|
+oats_domesticated_jakku	Jakkuan Domesticated Oats	flora_food	oats_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	oats	|PLANETID|
+oats_wild_jakku	Jakkuan Wild Oats	flora_food	oats_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	oats	|PLANETID|
+rice_domesticated_jakku	Jakkuan Domesticated Rice	flora_food	rice_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	rice	|PLANETID|
+rice_wild_jakku	Jakkuan Wild Rice	flora_food	rice_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	rice	|PLANETID|
+seafood_crustacean_jakku	Jakkuan Crustacean Meat	creature_food	seafood_crustacean	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
+seafood_fish_jakku	Jakkuan Fish Meat	creature_food	seafood_fish	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
+seafood_mollusk_jakku	Jakkuan Mollusk Meat	creature_food	seafood_mollusk	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
+softwood_conifer_jakku	Jakkuan Conifer Wood	flora_structural	softwood	1	1	0	0	0	0	1	600	0	0	0	0	600	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	|PLANETID|
+softwood_evergreen_jakku	Jakkuan Evergreen Wood	flora_structural	softwood_evergreen	1	1	0	0	0	0	1	500	0	0	0	0	800	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	|PLANETID|
+vegetable_beans_jakku	Jakkuan Vegetable Beans	flora_food	vegetable_beans	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_beans	|PLANETID|
+vegetable_fungi_jakku	Jakkuan Vegetable Fungus	flora_food	vegetable_fungi	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_fungi	|PLANETID|
+vegetable_greens_jakku	Jakkuan Vegetable Greens	flora_food	vegetable_greens	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_greens	|PLANETID|
+vegetable_tubers_jakku	Jakkuan Vegetable Tubers	flora_food	vegetable_tubers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_tubers	|PLANETID|
+water_vapor_jakku	Jakkuan Water Vapor	water	water	1	5	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	600	1000	0	0	0	0	0	0	water	water	|PLANETID|
+wheat_domesticated_jakku	Jakkuan Domesticated Wheat	flora_food	wheat_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	wheat	|PLANETID|
+wheat_wild_jakku	Jakkuan Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	wheat	|PLANETID|
+wood_deciduous_jakku	Jakkuan Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	|PLANETID|

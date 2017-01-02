@@ -1,0 +1,114 @@
+
+body {
+  background: #002201;
+  color: #eaf6b8;
+}
+a {
+	color: #eaf6b8;
+}
+a:link {
+	color: #f1f690;
+}
+a:hover {
+	color: #00ad20;
+}
+a:visited, .altText {
+	color: #eaf6b8;
+}
+a:active, .groupText {
+	color: #00ad20;
+}
+.statNormal { /* Standard resource stats text */
+    color: #eaf6b8;
+}
+.statHigh { /* If stats are above 500 */
+ 	color: #51f200;
+}
+.statMax { /* If stats hit the cap or go over it */
+ 	color: #ffbf00;
+}
+.footer {
+	border-top-color: #00ad20; /* Box Trim Color */
+	background: #00571b; /* Box Body Color */
+}
+.ghWidgetBox, #tooltip {
+	background: #00571b; /* Box Body Color */
+	border-color: #00ad20; /* Box Trim Color */
+}
+.bigForm, .bigForm input {
+	color: #000; /* ??? */
+}
+#loginForm {
+	color: #eaf6b8; /* use default text color, or link color */
+}
+.tableHead {
+	background: #002201; /* Stats table header background */
+	color: #f1f690; /* Stats table text */
+}
+.statRow, .recipeRow {
+	background: #099733; /* Stat table cell background */
+}
+.window {
+	background: #00571b; /* Add Resource window body */
+	border-color: #00ad20; /* Add Resource window trim */
+}
+.formMsg {
+	color: #990000; /* Not sure this needs altered */
+}
+.resourceBox {
+	background: #099733; /* Body interior color */
+}
+.standOut {
+	color: white;
+	background-color: #002201;
+}
+.statusMsg {
+	color: #00ad20; /* "Lookups complete" text in Quick Add */
+}
+.bigLink {
+	border-color: #eaf6b8; /* Use default text color */
+}
+.listSelected {
+	background-color: #099733;
+	border-color: #00ad20;
+}
+.boxBorderHidden {
+	border-color: #00571b;
+}
+ul.schematics a:hover, ul.schematics a:visited {
+	color: #f1f690;
+}
+.control {
+	border-color: #00ad20;
+	background: #099733;
+}
+.textOnBackground {
+	color: #00ad20;
+}
+ul.alert li {
+	background: #099733;
+}
+a div.resTreeItem, a:link div.resTreeItem, a:visited div.resTreeItem, a:active div.resTreeItem {
+	color: #eaf6b8;
+	background: #002201;
+	border-color: #00ad20;
+}
+a:hover div.resTreeItem, .slotIndicatorFilled {
+	background: #00ad20;
+	color: #002201;
+	border-color: #002201;
+}
+.ingredientSlot {
+	border-color: #00ad20;
+	background: #002201;
+}
+.ingredientSlotActive {
+	background: #099733;
+}
+.ingredientSlotFilled {
+	background: #00571b;
+}
+.slotIndicator {
+	border-color: #00571b;
+}
+

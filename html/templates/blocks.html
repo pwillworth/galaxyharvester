@@ -1,0 +1,266 @@
+{% macro headerSection(loginState, userID, loginResult, linkappend, url, imgNum, galaxyList, pictureName) %}
+	<div id="topBar" class="wrapper">
+	  <div id="topLeftColumn" class="ghCol">
+	    <div id="topLeftLinks" class="ghWidgetBox">
+	{{ topLeftLinks(linkappend) }}
+	    {% if ( MOBILE_PLATFORM == 'android' ) %}
+			<a href="https://play.google.com/store/apps/details?id=com.ioscode.gameaid.galaxyharvester"><img class="appStoreBadge" src="/images/appstores/google-play-badge.png" alt="Get it on Google Play"/></a>
+			{% elif ( MOBILE_PLATFORM == 'ios' ) %}
+			<a href="https://itunes.apple.com/us/app/galaxy-harvester/id1082088469?ls=1&mt=8"><img class="appStoreBadge" src="/images/appstores/AppleStore.png" alt="Get it in the Apple Store"/></a>
+			{% elif ( MOBILE_PLATFORM == 'microsoft' ) %}
+			<a href="https://www.microsoft.com/store/apps/9nblggh5lm49?ocid=badge"><img class="appStoreBadge" src="/images/appstores/English_get-it-from-MS.png" alt="Get it from Microsoft" /></a>
+			{% elif ( MOBILE_PLATFORM == 'amazon' ) %}
+			<a href="http://www.amazon.com/gp/product/B01CXC657Y/ref=mas_pm_galaxy_harvester"><img class="appStoreBadge" src="/images/appstores/amazon-badge.png" alt="Get it on Amazon"/></a>
+			{% else %}
+	    <a href="{{ BASE_SCRIPT_URL }}apps.py?{{ linkappend }}"><div class="alert control">NEW! Mobile Apps</div></a>
+			{% endif %}
+	    </div>
+	  </div>
+	  <div id="topCenterColumn" class="ghCol">
+	    <a href="{{ BASE_SCRIPT_URL }}ghHome.py?{{ linkappend }}">
+	    <div id="ghLogo" class="{{ ['logo',imgNum]|join }}"></div>
+	    </a>
+	  </div>
+	  <div id="topRightColumn" class="ghCol">
+	  <div id="topRightLinks" class="ghWidgetBox">
+	{{ loginForm(loginState, userID, loginResult, linkappend, url, galaxyList, pictureName) }}
+	  </div>
+	</div></div>
+{% endmacro %}
+
+{% macro topLeftLinks(linkappend) %}
+	  <a href="{{ BASE_SCRIPT_URL }}addResources.py?{{ linkappend }}"><img style="height:48px;" src="/images/ghAdd.png" alt="Add Resources" title="Add Resources" /></a>
+	  <a href="{{ BASE_SCRIPT_URL }}resourceList.py?{{ linkappend }}"><img style="height:48px;" src="/images/ghList.png" alt="Resource List" title="Resource List" /></a>
+	  <a href="{{ BASE_SCRIPT_URL }}waypointMaps.py?{{ linkappend }}"><img style="height:48px;" src="/images/ghMaps.png" alt="Waypoint Maps" title="Find and browse your waypoints on the planet maps" /></a>
+	  <a href="{{ BASE_SCRIPT_URL }}user.py?{{ linkappend }}"><img style="height:48px;" src="/images/ghStats.png" alt="Member Stats" title="Member Stats" /></a>
+	  <a href="{{ BASE_SCRIPT_URL }}resourceFinder.py?{{ linkappend }}"><img style="height:48px;" src="/images/ghFind.png" alt="Resource Finder" title="Resource Finder" /></a>
+{% endmacro %}
+
+{% macro loginForm(loginState, userID, loginResult, linkappend, url, galaxyList, pictureName) %}
+{% if (loginState == 1) %}
+  <div id="loginForm"><div style="float:left;position:relative;"><span class="boxHeader">Hello, {{ userID }}</span><br />
+    <a href="{{ BASE_SCRIPT_URL }}user.py?uid={{ userID }}&{{ linkappend }}">profile</a> |
+    <a href="{{ BASE_SCRIPT_URL }}logout.py?src_url={{ url }}&{{ linkappend }}">logout</a></div>
+    <div style="float:right;position:relative;"><a href="{{ BASE_SCRIPT_URL }}user.py?uid={{ userID }}&{{ linkappend }}">
+    <img src="/images/users/{{ pictureName }}" class="smallAvatar" /></a></div>
+    <div style="width:100%;height:48px;clear:both;vertical-align:bottom;">
+    <div id="myShortcuts" style="float:left;position:relative;top:20px;"><a href="{{ BASE_SCRIPT_URL }}myAlerts.py?{{ linkappend }}"><img src="/images/alerts32.png" style="width:24px;height:24px;" alt="alert icon" title="Click to go to your alert filters page." /></a>
+    <a href="{{ BASE_SCRIPT_URL }}myResources.py?{{ linkappend }}"><img src="/images/inventory32.png" style="width:24px;height:24px;" alt="inventory icon" title="Click to manage your resource inventory." /></a>
+    <a href="{{ BASE_SCRIPT_URL }}recipe.py/home?{{ linkappend }}"><img src="/images/recipes32.png" style="width:24px;height:24px;" alt="recipes icon" title="Manage the recipes you have created and see suggested recipes based on your resources." /></a></div>
+    <div style="float:right;position:relative;top:20px;">Galaxy: <select name="galaxySel" id="galaxySel" onchange="switchGalaxy(this.value);">
+{{ galaxyList }}
+    </select></div>
+    </div>
+  </div>
+{% else %}
+  <div id="loginForm">
+{% if loginResult != 'success' and loginResult != '' %}
+  Your Login Failed: {{ loginResult }}
+{% endif %}
+  <form method="POST" action="{{ BASE_SCRIPT_URL }}authUser.py" name="flogin" id="flogin">
+  <table><tr><td>uid:</td><td style="width:85px;"><input type="text" id="loginu" name="loginu" value="{{ userID }}" maxlength="32" style="width:85px;" tabindex=1 class="inactive" /></td>
+<td align="left">&nbsp;<a href="#joinDialog" id="goJoin">Join</a></td></tr>
+  <tr><td>pwd:</td><td><input type="password" id="passu" name="passu" maxlength="16" style="width:85px;" tabindex=2 class="inactive" /></td>
+  <td align="left"><input type="hidden" name="src_url" value=" {{ url }}" />
+  <input type="submit" value="Login" id="logbutton" class="ghButton" tabindex=3 /></td></tr>
+  <tr><td>&nbsp;</td><td colspan=2><input type="checkbox" name="persist" value="persist" id="oPersist" tabindex=4 title="Check this box when logging in to stay logged in to the site for 30 days." />Stay Logged In</td></tr>
+    <tr><td colspan=3 nowrap>Galaxy: <select name="galaxySel" id="galaxySel" tabindex=5 onchange="switchGalaxy(this.value);">{{ galaxyList }}</select>&nbsp;<span style="font-size: .8em;"><a href="{{ BASE_SCRIPT_URL }}help.py#logintrouble">Forgot Password?</a></span></td></tr>
+  </table></form></div>
+<script type="text/javascript">
+    var formInputs = $("input");
+    formInputs.focus(function(e){
+        $(this).addClass("active");
+        $(this).removeClass("inactive");
+    });
+    formInputs.blur(function(e){
+        $(this).removeClass("active");
+        $(this).addClass("inactive");
+    });
+</script>
+{% endif %}
+{% endmacro %}
+
+{% macro pageTracker() %}
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-8756142-3']);
+	  _gaq.push(['_trackPageview']);
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+{% endmacro %}
+
+{% macro donateTracker(totalAmt, percentOfGoal) %}
+	<div id="donateTracker" style="position:relative;width:96px;" class="inlineBlock">
+	{% if (percentOfGoal) >= 1 %}
+	      <img src="/images/harvesterCapacity.png" alt="donations background" title="Total amount of donations received this month."/>
+	{% else %}
+		<img src="/images/harvesterIntegrity.png" alt="donations background" title="Total amount of donations received this month." />
+	{% endif %}
+      <div style="font-size:14px;font-weight:bold;color:white;position:absolute;top:40px;left:0px;width:100%;text-align:center;" title="Total amount of donations received this month.">${{ totalAmt }}</div>
+    </div>
+    <div class="inlineBlock" style="width:148px;"><p class="textOnBackground">
+{% if (percentOfGoal) >= 1 %}
+    <span>Donation goal for this month reached!</span>
+{% else %}
+    <span>Donation goal of $20 for this month not reached.</span>
+{% endif %}
+    </p>
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+    <input type="hidden" name="cmd" value="_s-xclick">
+    <input type="hidden" name="hosted_button_id" value="SYAMQZWZU3MHS">
+    <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" title="Your donation helps to pay for site hosting, design, and development.">
+    <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+    </form>
+    </div>
+{% endmacro %}
+
+{% macro pageFooter() %}
+	<div class="footer">
+	<a href="{{ BASE_SCRIPT_URL }}" title="Galaxy Harvester home page">Home</a> | <a href="{{ BASE_SCRIPT_URL }}help.py" title="Get more information about the Galaxy Harvester project and contributors">About</a> | <a href="http://ioscode_public.objects-us-west-1.dream.io/ghWebFiles.tgz" title="Open Source Code for Galaxy Harvester Application">Source</a> | <a href="#" onclick="contactMessage();">Contact</a> | <a href="{{ BASE_SCRIPT_URL }}help.py" title="Get help using this site">Help</a> | <a href="{{ BASE_SCRIPT_URL }}feedback.py" title="Submit and rate on suggestions for the site.">Suggestions</a>
+	<p style="padding: 4px;font-weight:normal;">Galaxy Harvester is a tool for tracking resources spawning in galaxies of the MMO game Star Wars Galaxies Emulator.  Serving the SWGEmu Community Since 2010.</p>
+	</div>
+{% endmacro %}
+
+{% macro resourceForm() %}
+	<div id="resourceDialog" class="window bigForm">
+	    <h2 style="display: inline;">Adding Resources</h2><div style="float: right;postion: relative;top:0px;"><a href="#" class="close">Close</a></div>
+	    <div id=resStatusUpdate class="statusMsg"></div><div id=addBusyImg style="float:left;display:none;"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+	    <div id=resCurrentInfo class="standOut"></div>
+	    <form name="quickResForm" method="post" action="" enctype="application/x-www-form-urlencoded">
+	        Resource Type:&nbsp;<select name="typeSel" id="typeSel" width="100" onchange="maskStats(this, true);"></select>
+	        <table style="width:100%"><tr><td style="width:70%">
+	        <table class="quickAdd"><tr><td id="ERheader">ER</td><td id="CRheader">CR</td><td id="CDheader">CD</td><td id="DRheader">DR</td><td id="FLheader">FL</td><td id="HRheader">HR</td><td id="MAheader">MA</td><td id="PEheader">PE</td><td id="OQheader">OQ</td><td id="SRheader">SR</td><td id="UTheader">UT</td></tr>
+	        <tr>
+	        <td id="ERbox"><input type="text" size=2 maxlength=4 id="ER0" name="ER0"></td>
+	        <td id="CRbox"><input type="text" size=2 maxlength=4 id="CR0" name="CR0"></td>
+	        <td id="CDbox"><input type="text" size=2 maxlength=4 id="CD0" name="CD0"></td>
+	        <td id="DRbox"><input type="text" size=2 maxlength=4 id="DR0" name="DR0"></td>
+	        <td id="FLbox"><input type="text" size=2 maxlength=4 id="FL0" name="FL0"></td>
+	        <td id="HRbox"><input type="text" size=2 maxlength=4 id="HR0" name="HR0"></td>
+	        <td id="MAbox"><input type="text" size=2 maxlength=4 id="MA0" name="MA0"></td>
+	        <td id="PEbox"><input type="text" size=2 maxlength=4 id="PE0" name="PE0"></td>
+	        <td id="OQbox"><input type="text" size=2 maxlength=4 id="OQ0" name="OQ0"></td>
+	        <td id="SRbox"><input type="text" size=2 maxlength=4 id="SR0" name="SR0"></td>
+	        <td id="UTbox"><input type="text" size=2 maxlength=4 id="UT0" name="UT0"></td>
+	    </tr></table></td>
+	    <td valign="bottom"><div style="float:right;margin:6px;"><input type="button" class="ghButton" value="Save" id="saveRes" onclick="quickAddSave();" /></div>
+	    <div style="float:right;margin:6px;"><input type="button" class="ghButton" value="Skip" id="skipRes" onclick="quickAddNext();" /></div></td>
+	    </tr></table></form>
+	    <div id="resAddResults"></div>
+	</div>
+{% endmacro %}
+
+{% macro joinForm(loginState, linkappend, url) %}
+{% if loginState == 0 %}
+	<div id="joinDialog" class="window">
+	    <form name="createuform" method="post" action="{{ BASE_SCRIPT_URL }}createUser.py" enctype="application/x-www-form-urlencoded">
+	    <table class="bigForm"><tr><td colspan="2"><h2>Join Galaxy Harvester</h2></td>
+	    <td align="right"><a href="#" class="close">Close</a></td></tr>
+	    <tr><td align="right" width="100">Username: </td>
+	    <td><input type="text" name="uname" tabindex="10" size="12" maxlength=32" onchange="valMinLength(this,document.getElementById('loginInf'),3)" onblur="checkUserName(this.value, '')" /></td>
+	    <td><span id="loginInf" class="formMsg">Login must be at least 3 characters.</span><span id="idInfo" class="content"></span><br /></td></tr>
+	    <tr><td align="right">Email Addr: </td>
+	    <td><input type="text" name="email" tabindex="11" size="24" maxlength="255" onchange="valEmail(this)" /></td>
+	    <td><span id="emailInf" class="formMsg">Please enter a valid e-mail.</span></td></tr>
+	    <tr><td align="right">Password: </td>
+	    <td><input type="password" name="userpass" tabindex="12" size="12" maxlength="16" onchange="valMinLength(this,document.getElementById('passInf'),6)" id="userpass" /></td>
+	    <td><span id="passInf" class="formMsg">Password must be at least 6 characters.</span><br /></td></tr>
+	    <tr><td align="right">Verify Pwd: </td>
+	    <td><input type="password" name="verifypass" tabindex="13" size="12" maxlength="16" onchange="valVpass(&quot;userpass&quot;,this)" /></td>
+	    <td><span id="vpassInf" class="formMsg">Passwords do not match.</span></td></tr>
+	    </table>
+	    <div style="text-align: center;padding: 20px;"><input type="submit" class="ghButton" name="gocreate" value="Create" id="gocreate" /></div></form>
+			<div class="tip"><a href="/privacy.html" target="_blank">Privacy Policy</a></div>
+	</div>
+	<script type="text/javascript">
+	function checkUserName(loginID, status) {
+	    $("span#idInfo").load("{{ BASE_SCRIPT_URL }}nameAvailable.py",{uname:loginID});
+	}
+	$("#goJoin").click(function(e) {
+	    e.preventDefault();
+	    var id = $(this).attr("href");
+	    var maskHeight = $(document).height();
+	    var maskWidth = $(document).width();
+	    $("#mask").css({"width":maskWidth,"height":maskHeight});
+	    $("#mask").fadeIn(1000);
+	    $("#mask").fadeTo("slow",0.8);
+	    var winH = $(window).height();
+	    var winW = $(window).width();
+	    $(id).css("top", winH/2-$(id).height()/2);
+	    $(id).css("left", winW/2-$(id).width()/2);
+	    $(id).fadeIn(1000);
+	});
+	</script>
+{% endif %}
+{% endmacro %}
+
+{% macro waypointForm(loginState) %}
+{% if loginState != 0 %}
+	<div id="waypointDialog" class="window">
+	    <form name="addwpform">
+	    <table class="bigForm"><tr><td colspan="2"><h2 id="waypointFormTitle">New Waypoint</h2></td>
+	    <td align="right"><a href="#" class="close">Close</a></td></tr>
+	    <tr><td align="right" width="100">Spawn: </td>
+	    <td><input type="text" name="wpSpawn" id="wpSpawn" tabindex="20" size="16" maxlength=64" onchange="valMinLength(this, document.getElementById('spawnInf'),1);" onblur="checkResourceType(this.value)" /></td>
+	    <td><span id="addInfo"></span><span id="spawnInf" class="formMsg">Spawn name is not valid.</span><span id="idInfo" class="content"></span><br /></td></tr>
+	    <tr><td align="right">Planet: </td>
+	    <td><select name="wpPlanetSel" id="wpPlanetSel" tabIndex="21" onchange="valMinValue(this,document.getElementById('PlanetInf'),0);">
+	    </select></td>
+	    <td><span id="PlanetInf" class="formMsg">Please select a planet.</span></td></tr>
+	    <tr><td align="right">Location: </td>
+	    <td><input type="text" name="wpLocation" tabindex="22" size="10" maxlength="12" id="wpLocation" onchange="valLocation(this)" /></td>
+	    <td><span id="locInf" class="formMsg">Use this format xxxx, -xxxx.</span><br /></td></tr>
+	    <tr><td align="right">Concentration: </td>
+	    <td><span id="concentrationEntry"><input type="text" name="wpConcentration" tabindex="22" size="4" maxlength="4" id="wpConcentration" onchange="valInteger(this, document.getElementById('conInf'));" />%</span><select name="creatureHealth" id="creatureHealth" tabIndex=21 style="display:none;" title="Select the health of creatures harvested at this waypoint." onchange="setConcentration(this.value)"><option value="100" selected="selected">Fat and Healthy</option><option value="80">Medium</option><option value="60">Scrawny</option><option value="40">Skinny</option></select></td>
+	    <td><span id="conInf" class="formMsg">Enter a valid interger between 0 and 100</td></tr>
+	    <tr style="visibility:hidden;"><td align="right">For Sale?: </td>
+	    <td><input type="checkbox" id="oForSale" tabindex=22 title="Post waypoint for sale." onchange="if($(this).attr('checked')==true){$('#wpPrice').removeAttr('disabled');}else{$('#wpPrice').attr('disabled',true);}" /> Price:<input type="text" name="wpPrice" tabindex="23" size="12" maxlength="16" id="wpPrice" disabled="disabled" /></td>
+	    <td><span id="priceInf" class="formMsg">numbers only.</span><br /></td></tr>
+	    <tr><td align="right">Name/Desc: </td>
+	    <td colspan="2"><input type="text" name="wpName" tabindex="25" size="50" maxlength="254" id="wpName" onchange="valMinLength(this, document.getElementById('nameInf'),1);" /></td></tr>
+	    <tr><td colspan="3"><span id="nameInf" class="formMsg">Name must not be blank.</span><br /></td></tr>
+	    <tr style="visibility:hidden;"><td align="right">Sharing: </td>
+	    <td><select name="wpSharing" id="wpSharing" tabIndex="26">
+	    <option value=256 selected="selected">Free To Public</option><option value=1>Private</option><option value=64>Friends</option>
+	    </select></td>
+	    <td><span id="ShareTypeInf" class="formMsg">Select an option for sharing this waypoint.</span></td></tr>
+	    </table>
+	    <input type="hidden" name="wpID" id="wpID" />
+	    <div id="busyImgAdd" style="display:none;float:right;"><img src="/images/ghWait.gif" /></div>
+	    <div style="text-align: center;padding: 20px;"><button type="button" id="sendWaypointData" class="ghButton" onclick="postWaypoint()">Create</button></div></form>
+	    <div id="addInfo"></div>
+	</div>
+	<script type="text/javascript">
+	$(document).ready(function() {
+	    var a = $('#wpSpawn').autocomplete({
+	        serviceUrl:'getSpawnNames.py',
+	        maxHeight:200,
+	        width:200,
+	        params: {galaxy: $("#galaxySel").val()},
+	        onSelect: function(value,data) {checkResourceType(value);}
+	    });
+	});
+	</script>
+{% endif %}
+{% endmacro %}
+
+{% macro recipeForm(professionList) %}
+	<div id="recipeDialog" class="window">
+		<h2 style="display: inline;">New Recipe</h2><div style="float: right;postion: relative;top:0px;"><a href="#" class="close">Close</a></div>
+		<div id="schematicSelectionGroup">
+		<div class="searchInput">Select Schematic:<br /><select name="profSel" id="profSel" onchange="setCookie('schemPickerProfSel',this.value,7);refreshSchematics();"><option value=0>Select Profession</option>
+		{{ professionList }}
+		</select></div>
+		<select name="schematicList" id="schematicList" onchange="$('#recipeName').val($('#schematicList option:selected').text());"></select>
+		</div>
+		<div class="searchInput">Recipe Name:<br /> <input type="text" id="recipeName" size="60" maxlength="255" value="" /></div>
+		<div id="busyImgAdd" style="display:none;float:right;"><img src="/images/ghWait.gif" /></div>
+		<span id="addInfo"></span>
+		<div style="float:right;margin:6px;padding-top:100px;"><input type="button" class="ghButton" value="Create" id="goCreate" onclick="newRecipe($('#schematicList').val(), $('#recipeName').val(), $('#galaxySel').val());" /></div>
+		<div style="float:right;margin:6px;padding-top:100px;"><input type="button" class="ghButton" value="Cancel" id="cancelRecipe" onclick="$('#mask, .window').hide();" /></div>
+	</div>
+{% endmacro %}

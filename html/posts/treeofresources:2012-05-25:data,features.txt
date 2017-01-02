@@ -1,0 +1,7 @@
+The Tree of Resources
+
+<p>While the feature to be able to click on any resource type and view info for that type has been handy, it didn't quite give you the ability to get to all of the higher level resource groups.  Also, sometimes we might want to just browse the whole tree of groups anyway instead of trying to find a link a type in the group we need.  Well, the tree is now <a href="http://galaxyharvester.net/resourceType.py">here</a>.  You will also find a link to it on the home page.  Clicking a resource group in the tree takes you to it's page where you can see the best and most recent spawns for any type under that group, as well as schematics, min/max stats, creatures, and links to parent/child groups.</p>
+
+<p>In other news, the creature data has been refreshed from SWGEmu code.  You will notice that some creatures show a 0 for harvest amount (Everything on Endor at least).  There are problems with harvesting those creatures now, but after that gets fixed in the server code, I'll do another refresh and they will be back on track.</p>
+
+<p>-ioscode</p>

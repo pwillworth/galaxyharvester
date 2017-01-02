@@ -1,0 +1,34 @@
+Coming Soon - Mobile Apps!
+
+<p>Things sure have been quiet around here for a while.  That is not because Galaxy Harvester has been abandoned, far from it.  For quite some time, having a Galaxy Harvester mobile app has been at the top of the suggestions list.  For the past several months, the answer to that call has been in development.  The Galaxy Harvester mobile app is now getting close to release!</p>
+
+<p>Here are some details:</p>
+<ul>
+  <li>When Available?  Sometime in March or early April 2016</li>
+  <li>What Platforms?  Android, iOS, and Windows Phone</li>
+  <li>How Much Will It Cost?  0.99 USD</li>
+  <li>What Languages?  English, French, German, Norwegian</li>
+</ul>
+<br/>
+<p>You might also be wondering what it can do.  Here is the feature list for the app as currently planned for the initial release.</p>
+<ul>
+  <li>Login/Logout</li>
+  <li>Select Galaxy</li>
+  <li>Register</li>
+  <li>Password Reset</li>
+  <li>Add/Edit Resources</li>
+  <li>Add/Edit Waypoints</li>
+  <li>Browse Recent Activity</li>
+  <li>Search Resources By Type,Group,Quality,Availability,Name,Favorites</li>
+  <li>Manage Spawn and Despawn Alert Filters</li>
+  <li>Get Alerts inside Mobile App</li>
+  <li>Browse News</li>
+  <li>OCR Partial Resource Add assist with camera</li>
+</ul>
+<br/>
+<p>And, how about a little sneak peak too...</p>
+<img src="/images/ghMobileScreenshot.jpg"/>
+<br/>
+<p>
+-ioscode
+</p>

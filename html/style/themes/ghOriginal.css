@@ -1,0 +1,112 @@
+
+body {
+	background: #000033;
+}
+a {
+	color: #000066;
+}
+a:link {
+	color: #000066;
+}
+a:hover {
+	color: #3399ff;
+}
+a:visited, .altText {
+	color: #003366;
+}
+a:active, .groupText {
+	color: #99ccff;
+}
+.footer {
+	border-top-color: #66ffcc;
+	background: #ccffff;
+}
+.ghWidgetBox, #tooltip {
+	background: #ccffff;
+	border-color: #66ffcc;
+}
+.bigForm, .bigForm input {
+	color: #000;
+}
+#loginForm {
+	color: #000033;
+}
+.tableHead {
+	background: #000033;
+	color: #9999ff;
+}
+.statRow, .recipeRow {
+	background: #99cccc;
+}
+.window {
+	background: #3366cc;
+	border-color: #000033;
+}
+.formMsg {
+	color: #990000;
+}
+.resourceBox, #header, #footer {
+	background: #ccddff;
+}
+.standOut {
+	color: white;
+	background-color: #000033;
+}
+.statusMsg {
+	color: #333333;
+}
+.bigLink {
+	border-color: #000033;
+}
+.statNormal {
+	color: black;
+}
+.statHigh {
+	color: #996600;
+}
+.statMax {
+	color: #cc0000;
+}
+.listSelected {
+	background-color: #ccddff;
+	border-color: #66ffcc;
+}
+.boxBorderHidden {
+	border-color: #ccffff;
+}
+ul.schematics a:hover, ul.schematics a:visited {
+	color: #000066;
+}
+.control {
+	border-color: #66ffcc;
+	background: #ccddff;
+}
+.textOnBackground {
+	color: #66ffcc;
+}
+ul.alert li {
+	background: #ccddff;
+}
+a div.resTreeItem, a:link div.resTreeItem, a:visited div.resTreeItem, a:active div.resTreeItem {
+	color: #66FFcc;
+	background: #000033;
+	border-color: #66ffcc;
+}
+a:hover div.resTreeItem, .slotIndicatorFilled {
+	background: #66FFcc;
+	color: #000033;
+	border-color: #000033;
+}
+.ingredientSlot {
+	border-color: #66ffcc;
+	background: #000033;
+}
+.ingredientSlotActive {
+	background: #ccddff;
+}
+.ingredientSlotFilled {
+	background: #ccffff;
+}
+.slotIndicator {
+	border-color: #ccffff;
+}

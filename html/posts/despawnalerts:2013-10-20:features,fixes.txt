@@ -1,0 +1,15 @@
+Despawn Alerts
+
+<p>Now available is a new kind of resource alert.  If you are currently harvesting a resource, and want to be notified if that resource becomes unavailable on Galaxy Harvester, you can set that up.  There are two places you can turn on the alert.  You can go to your <a href="http://galaxyharvester.net/myAlerts.py">alerts page</a> and add it there in the new despawn alerts box, or if you already have the resource added to <a href="http://galaxyharvester.net/myResources.py">your inventory</a>, you can just update the despawn alert option in that resources row in your inventory.</p>
+
+<p>As with the other alerts, you have the option of getting the alert via email, or on the home page of the website.  When you add a despawn alert, it will default to email notification.  If you want to change it to website, or turn it off, just click the envelope icon for the appropriate row.</p>
+
+<p>A few minor things also going in today:</p>
+<ul>
+<li>Added display for Resource, Mapping, and Reputation scores to profile pages.</li>
+<li>Improved some of the tracking in resource event logging when resources are marked re-available or re-verified.</li>
+<li>Fix top links to inventory an alerts when clicking from some pages like resource view and schematic.</li>
+<li>Require positive reputation for editing or removing resources.</li>
+</ul>
+
+<p>-ioscode</p>

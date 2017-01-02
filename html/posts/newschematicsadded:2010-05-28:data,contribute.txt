@@ -1,0 +1,17 @@
+New Schematics Added
+
+<p>I've manually added a few schematics today to help fill in some of the gaps for doctors and combat medics.  They are:</p>
+<ul>
+<li><a href="/schematics.py/biologic_effect_controller_advanced" title="Advanced Biological Effect Controller Schematic">Advanced Biological Effect Controller</a></li>
+<li><a href="/schematics.py/release_mechanism_duration_advanced" title="Advanced Chemical Release Duration Mechanism Schematic">Advanced Chemical Release Duration Mechanism</a></li>
+<li><a href="/schematics.py/solid_delivery_shell_advanced" title="Advanced Solid Delivery Shell Schematic">Advanced Solid Delivery Shell</a></li>
+<li><a href="/schematics.py/medpack_enhance_health_d" title="Enhance Health Medpack - D Schematic">Enhance Health Medpack - D</a></li>
+<li><a href="/schematics.py/dispersal_mechanism_advanced" title="Advanced Dispersal Mechanism Schematic">Advanced Dispersal Mechanism</a></li>
+<li><a href="/schematics.py/infection_amplifier_advanced" title="Advanced Infection Amplifier Schematic">Advanced Infection Amplifier</a></li>
+<li><a href="/schematics.py/resilience_compound_advanced" title="Advanced Resilience Compound Schematic">Advanced Resilience Compound</a></li>
+<li><a href="/schematics.py/medpack_poison_mind_c" title="Mind Poison Delivery Unit - C Schematic">Mind Poison Delivery Unit - C</a></li>
+</ul>
+<br />
+<p>This brings the total number of schematics available to 686.  There may be other schematics you would be interested in seeing available.  If you are someone who is working on SWG Emu lua scripts for draft schematics and have some those completed scripts available, please let me know and I can use them to import the schematics to my site.  Otherwise, please post here with the names of schematics you would like to see here on the site.  If enough people want certain ones, I will do my best to get them added.</p>
+<br />
+-ioscode

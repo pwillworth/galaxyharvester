@@ -1,0 +1,23 @@
+Favorites Enhancements
+
+<p>A few updates are being released today, mainly related to the <a href="http://galaxyharvester.net/myResources.py">favorites/my resources tool</a>.  These are the three main enhancements there you can enjoy now:</p>
+
+<ul>
+<li>My Resources list sortable by clicking on a column header</li>
+<li>Export button for saving your resources list as a .csv file</li>
+<li>View list of your favorite resource types, with links to those types. (Being able to favorite a resource type is new as well.  To favorite a resource type, just click the star next to the name on that resource type's page.)</li>
+</ul>
+
+<p>There's also some other minor release notes:</p>
+<ul>
+<li>Fix for occasional login issues related to small differences in the way a user name is typed.</li>
+<li>Fix for some instances where a user could not access their own recipes.</li>
+<li>Display recent spawns above top spawns on resource type page.</li>
+<li>Added a back to recipe home page to the individual recipe detail screen.</li>
+<li>Added a link from favorites/my resources to the recipe home page.</li>
+<li>Associate new recipes to selected galaxy so a user can maintain separate recipes between different galaxies.</li>
+</ul>
+
+<p>Happy harvesting!</p>
+
+<p>-ioscode</p>

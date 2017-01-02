@@ -1,0 +1,13 @@
+Update: Just a few details
+
+<p>If you find anything cool about the updates put in place today, it might be automatic correcting of mistyped resource names.  Sometimes when a resource has already been entered, and someone else goes to enter the same resource, they might type it in with 1 character off or so, and it gets listed as a new resource.  When entering resources on the Add Resources page, it will now check after you select the type to see if the resource you are entering has a similar name to any other current resources of the same type and prompt you if it finds one.  If you click ok when it finds one, it will automatically correct the name and enter the stats if available.</p>
+
+<p>A few other tweaks on this update are:</p>
+<ul>
+<li>Put in a fix when adding new resources to prevent stats that are not correct for the type selected to get entered</li>
+<li>Removed &empty; symbol from non-applicable resource stats on the resource list.</li>
+<li>Fixed ability to edit resource stats from the individual resource page.</li>
+<li>Added schematic - <a href="http://gh.apex-games.net/schematics.py/medpack_disease_mind_c">Mind Disease Delivery Unit - C</a></li>
+</ul>
+<br />
+-ioscode

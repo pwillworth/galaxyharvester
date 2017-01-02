@@ -1,0 +1,9 @@
+Find and Compare
+
+<p>The <a href="http://galaxyharvester.net/schematics.py">schematics</a> tool is pretty great.  It can help you find the best resources available or that have ever been available for the different slots of the schematic.  It even lets you customize which experimental properties to take into account.  I think this method makes sense for some people, but to many it is not very intuitive.  That is why at long last we have added a <a href="http://galaxyharvester.net/resourceFinder.py">resource finder</a> tool.  This tool lets you more directly specify exactly the stat percentages you are looking for to sort the results, as well as some other useful criteria options.</p>
+
+<p>Another feature coming out today that has been long desired is a way to compare resources to your inventory.  This is something that people have found to be useful in some of the desktop programs used in the past.  If you have some resources added to <a href="http://galaxyharvester.net/myResources.py">your inventory</a> on Galaxy Harvester, you can try this out right away.  It is available in a couple different locations.  When viewing a schematic you can click the "Compare" checkboxes on the right at the top of the  best resources groups to compare to your resources.  Also, when using the new resource finder tool, you can click the "Compare" button instead of the "Search" button to have the results include comparison to your inventory.</p>
+
+<p>To help with quality comparisons in general, you will also notice that resource boxes will display the calculated quality for the resource when listed in places where quality is being considered.  Also some of the options on the home page top resources display have been tuned up to work a little better.</p>
+
+<p>-ioscode</p>

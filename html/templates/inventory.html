@@ -1,0 +1,201 @@
+{% import 'blocks.html' as blocks %}
+<!DOCTYPE html>
+<html lang="en"><head><title>My Resources - Galaxy Harvester</title>
+<link rel="stylesheet" href="/style/ghCore.css" type="text/css" />
+<link rel="stylesheet" href="/style/themes/{{ uiTheme }}.css" type="text/css" />
+<link rel="stylesheet" href="/style/autocomplete.css" type="text/css" />
+<script type="text/javascript" src="/js/ghShared.js"></script>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery.autocomplete-min.js"></script>
+<script type="text/javascript" src="/js/jquery-ui-1.8.20.custom.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    var rgroup = getQueryVar("rgroup");
+    var rtype = getQueryVar("rtype");
+    $("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
+    if (rgroup.length > 1) {
+        $("#resGroup").val(rgroup);
+    }
+    if (rtype.length > 1) {
+        $("#resType").val(rtype);
+    }
+    filterResources();
+    refreshFavoriteTypes();
+    refreshRecipes();
+    $("#typeSel").load(BASE_SCRIPT_URL + "getResourceTypeList.py");
+    $(".window .close").click(function(e) {
+        e.preventDefault();
+        $("#mask, .window").hide();
+    });
+    $("#mask").click(function() {
+        $(this).hide();
+        $(".window").hide();
+    });
+    var b = $('#findSpawn').autocomplete({
+        serviceUrl:'getSpawnNames.py',
+        maxHeight:200,
+        width:200,
+        params: {galaxy: $("#galaxySel").val(), unavailable: "on"}
+    });
+{% if loggedin == 1 %}
+	$("#profSel").val(getCookie("schemPickerProfSel"));
+{% endif %}
+});
+function filterResources(sortColumn) {
+    $("#busyImg").css("display","block");
+    $("#resourceData").load(BASE_SCRIPT_URL + "getMyResources.py",{
+        galaxy: $("#galaxySel").val(),
+        resGroup: $("#resGroup").val(),
+        resType: $("#resType").val(),
+        unitsLT: $("#unitsLT").val(),
+        unitsGT: $("#unitsGT").val(),
+        favGroup: "any",
+        sortBy: sortColumn},
+        function() {
+            var table = $("#resourceData");
+            table.find("tr td.dragColumn").bind("mousedown", function(){table.disableSelection();}).bind("mouseup", function(){table.enableSelection();}).draggable({
+                helper: dragRowHelper,
+                cursor: "move",
+                revert: "invalid"
+            });
+            $(".categoryHead").droppable({
+                drop: handleRowDrop,
+                hoverClass: "control"
+            });
+            $("#busyImg").css("display","none");
+        });
+    return false;
+}
+function getMoveGroup() {
+    $("#groupSel").load(BASE_SCRIPT_URL + "getMyGroups.py",{favType:1});
+    showWindow("#groupDialog");
+}
+function moveChecked() {
+    var newGroup = $("#txtGroup").val();
+    $(":checkbox").each(function(index) {
+        var namePrefix = this.id.substr(0,8);
+        if (namePrefix == "chkMove_") {
+            if (this.checked) {
+                updateFavoriteGroup(this.id.substr(8), newGroup);
+            }
+        }
+    });
+    $("#mask, .window").hide();
+    filterResources();
+}
+function dragRowHelper(event) {
+    return $('<div class="drag-fav-item"><table class="resourceStats"></table></div>').find('table').append($(event.target).closest('tr').clone()).end().insertAfter($("#resourceData"));
+}
+function handleRowDrop(event, ui) {
+    var spawn = ui.helper.find("input:checkbox").attr("id").substr(8);
+    var group = $(this).attr("tag");
+    updateFavoriteGroup(spawn, group);
+    $(this).next().append(ui.helper.find("tr"));
+    ui.draggable.parent().remove();
+}
+function addRecipe() {
+    refreshSchematics();
+    showWindow("#recipeDialog");
+}
+{% if loggedin == 1 %}
+	function refreshSchematics() {
+	    $("#schematicList").attr("disabled","disabled");
+	    $("#schematicList").load(BASE_SCRIPT_URL + "getSchematicList.py",{
+	        listFormat: "option",
+	        groupType: "prof",
+	        profession: $("#profSel").val()
+	        },
+	        function() {$("#schematicList").removeAttr("disabled");$("#recipeName").val($("#schematicList option:selected").text());});
+	}
+	function refreshRecipes() {
+	    $("#busyImgRecipeList").show();
+	    $("#recipeList").load(BASE_SCRIPT_URL + "getRecipeList.py",{
+	        listFormat: "table",
+	        galaxy: $("#galaxySel").val()
+	        },
+	        function() {$("#busyImgRecipeList").hide();});
+	}
+  function refreshFavoriteTypes() {
+	    $("#busyImgTypesList").show();
+	    $("#favoriteTypesList").load(BASE_SCRIPT_URL + "getFavoriteList.py",{
+	        listFormat: "table",
+	        galaxy: $("#galaxySel").val()
+	        },
+	        function() {$("#busyImgTypesList").hide();});
+	}
+  function exportInventory(format) {
+    document.getElementById("download_frame").src = BASE_SCRIPT_URL + "getMyResources.py?formatType=" + format + "&galaxy=" + $("#galaxySel").val();
+  }
+{% endif %}
+</script>
+{{ blocks.pageTracker() }}
+<body>
+{{ blocks.headerSection(loggedin, currentUser, loginResult, linkappend, url, imgNum, galaxyList, pictureName) }}
+
+<div id="mainContent" class="wrapper">
+  <div id="leftNavContent" class="ghCol">
+    <div id="resourceCriteria" class="ghWidgetBox">
+    <form id="resourceSearch" name="resourceSearch"><div class="boxHeader">Filter Your Resources<button id="goFilter" type="button" class="ghButton" style="float: right;" onclick="filterResources();">Go</button></div>
+    <div id="searchInputs">
+      <div class="searchInput">Res Group:<select name="resGroup" id="resGroup" style="width:100%"><option value="any" selected="selected">Any</option>
+{{ resourceGroupList }}
+      </select></div>
+      <div class="searchInput">Res Type:<select name="resType" id="resType" style="width:100%"><option value="any" selected="selected">Any</option>
+{{ resourceTypeList }}
+      </select></div>
+      <div class="searchInput">Units More Than: <input type="text" id="unitsGT" size="10" maxlength="13" value="" /></div>
+      <div class="searchInput">Units Less Than: <input type="text" id="unitsLT" size="10" maxlength="13" value="" /></div>
+      <div class="searchInput" style="text-align:center"><input type="reset" value="Reset" class="ghButton" /></div></form>
+    </div>
+    </div>
+    <div id="favoriteTypesTool" class="ghWidgetBox">
+      <div class="boxHeader">Favorite Types
+	      <div style="float:right;"> [<a href="resourceType.py">Find More</a>]</div>
+	      <div id="busyImgTypesList" style="display:none;"><img src="/images/ghWait.gif" /></div>
+	      <div id="favoriteTypesList"></div>
+      </div>
+    </div>
+    <div id="recipeTool" class="ghWidgetBox">
+      <div class="boxHeader">Recipes [<a href="{{ BASE_SCRIPT_URL }}recipe.py/home">Recipe Home</a>]
+{% if loggedin == 1 %}
+	      <div style="float:right;"><button type=button value="New Recipe" class="ghButton" onclick="addRecipe();">New Recipe</button></div></div>
+	      <div id="busyImgRecipeList" style="display:none;"><img src="/images/ghWait.gif" /></div>
+	      <div id="recipeList"></div>
+{% endif %}
+      </div>
+    </div>
+  </div>
+  <div id="rightMainContent" class="ghCol">
+    <div id="resourceInfo" class="ghWidgetBox">
+    <div class="boxHeader" style="height:24px;"><div style="float:left;">My Resources<button type=button value="Export" class="ghButton" onclick="exportInventory('csv');" style="margin-left:20px;">Export</button></div>
+{% if loggedin == 1 %}
+	        <div style="float:right;">
+	        Add by name:<input type="text" name="findSpawn" id="findSpawn" tabindex="20" size="16" maxlength=64" />
+	        <button type=button value="Add" class="ghButton" onclick="addFavorite($('#galaxySel').val(), $('#findSpawn').val());" style="margin-right:20px;">Add</button>
+	        <button type=button value="Move Checked" class="ghButton" onclick="getMoveGroup();">Move Checked</button></div>
+{% endif %}
+    </div>
+      <div class="footer"></div>
+    <div id="busyImg" style="text-align:center;"><img src="../../images/ghWait.gif" /></div>
+    <div id="resourceData">
+    </div>
+  </div>
+</div>
+<div id="groupDialog" class="window bigForm">
+    <h2 style="display: inline;">Move Favorites</h2><div style="float: right;postion: relative;top:0px;"><a href="#" class="close">Close</a></div>
+    <div>Group:&nbsp;<select name="groupSel" id="groupSel" width="100" onchange="if(this.value=='New_Group'){$('#newGroup').css('visibility','visible');}else{$('#newGroup').css('visibility','hidden');}$('#txtGroup').val(this.value);">
+    </select></div>
+    <div id="newGroup" style="visibility:visible;">New Group:&nbsp<input type="text" name="txtGroup" id="txtGroup" size="24" maxlength="255" value="" /></div>
+    <div style="float:right;margin:6px;"><input type="button" class="ghButton" value="Move" id="moveRes" onclick="moveChecked();" /></div>
+    <div style="float:right;margin:6px;"><input type="button" class="ghButton" value="Cancel" id="cancelMove" onclick="$('#mask, .window').hide();" /></div>
+</div>
+
+{{ blocks.pageFooter() }}
+{% if loggedin == 1 %}
+	{{ blocks.recipeForm(professionList) }}
+{% endif %}
+{{ blocks.resourceForm() }}
+{{ blocks.joinForm(loggedin, ['?src_url=myResources.py&', linkappend]|join, url) }}
+<div id="mask"></div>
+<iframe id="download_frame" style="display:none;"></iframe>
+</body></html>

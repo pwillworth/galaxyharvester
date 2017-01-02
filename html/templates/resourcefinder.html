@@ -1,0 +1,214 @@
+{% import 'blocks.html' as blocks %}
+<!DOCTYPE html>
+<html lang="en"><head><title>Resource Finder - Galaxy Harvester</title>
+<link rel="stylesheet" href="/style/ghCore.css" type="text/css" />
+<link rel="stylesheet" href="/style/themes/{{ uiTheme }}.css" type="text/css" />
+<link rel="stylesheet" href="/style/autocomplete.css" type="text/css" />
+<link rel="alternate" type="application/rss+xml" title="Galaxy Harvester Resource Adds" href="http://feeds.feedburner.com/GalaxyHarvesterResourceActivity" />
+<script type="text/javascript" src="/js/ghShared.js"></script>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery.autocomplete-min.js"></script>
+<script type="text/javascript">
+var RES_STATS = new Array('ER','CR','CD','DR','FL','HR','MA','PE','OQ','SR','UT');
+$(document).ready(function() {
+    var planet = getQueryVar("planet");
+    var rgroup = getQueryVar("rgroup");
+    var rtype = getQueryVar("rtype");
+
+    $("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
+    loadPlanetSel($("#galaxySel option:selected").val(), '<option value="any" selected="selected">Any</option>');
+    if (planet.length > 0) {
+        $("#planetSel").val(planet);
+    }
+    if (getCookie("oFavoriteResourceFinder",false) == "true") {
+        $("#oFavorite").attr("checked",true);
+    }
+    if (rgroup.length > 1) {
+        $("#resGroup").val(rgroup);
+    }
+    if (rtype.length > 1) {
+        $("#resType").val(rtype);
+    }
+    sortBy = getCookie("resFinderSort");
+    if (sortBy == "time") {
+        $("#oTime").attr("checked", "checked");
+    } else if (sortBy == "quality") {
+        $("#oQuality").attr("checked", "checked");
+    }
+    setQualityControls();
+	var a = $("#userBy").autocomplete({
+	    serviceUrl:BASE_SCRIPT_URL + "getUserNames.py",
+	    maxHeight:100,
+	    width:120,
+	    params: {galaxy: $("#galaxySel").val()}
+	});
+    $("#typeSel").load(BASE_SCRIPT_URL + "getResourceTypeList.py");
+    $(".window .close").click(function(e) {
+        e.preventDefault();
+        $("#mask, .window").hide();
+    });
+    $("#mask").click(function() {
+        $(this).hide();
+        $(".window").hide();
+    });
+});
+function filterResources(compare) {
+	$("#resourceData").empty();
+    $("#busyImg").css("display","block");
+    var sortBy = "";
+    var minVals = "";
+    var maxVals = "";
+    var percVals = "";
+    if (compare == 'undefined') {
+		$("#oCompare").removeAttr("checked");
+	} else {
+	    $("#oCompare").attr("checked","checked");
+	}
+    if ($("#oTime").attr("checked") == "checked") {
+        setCookie("resFinderSort","time",90);
+        sortBy = "time";
+    }
+    if ($("#oQuality").attr("checked") == "checked") {
+        setCookie("resFinderSort","quality",90);
+        sortBy = "quality";
+    }
+    $("#busyImg").css("display","block");
+    for (i=0;i<RES_STATS.length;i++) {
+        minVals += "," + $("#min" + RES_STATS[i]).val();
+        maxVals += "," + $("#max" + RES_STATS[i]).val();
+        percVals += "," + $("#perc" + RES_STATS[i]).val();
+    }
+    minVals = minVals.substr(1);
+    maxVals = maxVals.substr(1);
+    percVals = percVals.substr(1);
+    $("#resourceData").load(BASE_SCRIPT_URL + "getResources.py",{
+        galaxy:$("#galaxySel").val(),
+        planetSel: $("#planetSel").val(),
+        resGroup: $("#resGroup").val(),
+        resType: $("#resType").val(),
+        userBy: $("#userBy").val(),
+        userAction: $("#userActionSel").val(),
+        minVals: minVals,
+        maxVals: maxVals,
+        percVals: percVals,
+        available: $("#oAvailable:checked").val(),
+        verified: $("#oVerified:checked").val(),
+        compare: $("#oCompare:checked").val(),
+        sort: sortBy},
+        function() {compareResources("resourceData");$("#busyImg").css("display","none");});
+    return false;
+}
+function moreResources(lastValue) {
+    var minVals = "";
+    var maxVals = "";
+    var percVals = "";
+    var sortBy = "";
+    if ($("#oTime").attr("checked") == "checked") {
+        sortBy = "time";
+    }
+    if ($("#oQuality").attr("checked") == "checked") {
+        sortBy = "quality";
+    }
+    $("#busyImg").css("display","block");
+    for (i=0;i<RES_STATS.length;i++) {
+        minVals += "," + $("#min" + RES_STATS[i]).val();
+        maxVals += "," + $("#max" + RES_STATS[i]).val();
+        percVals += "," + $("#perc" + RES_STATS[i]).val();
+    }
+    minVals = minVals.substr(1);
+    maxVals = maxVals.substr(1);
+    percVals = percVals.substr(1);
+    $.get(BASE_SCRIPT_URL + "getResources.py",{
+        galaxy:$("#galaxySel").val(),
+        planetSel: $("#planetSel").val(),
+        resGroup: $("#resGroup").val(),
+        resType: $("#resType").val(),
+        userBy: $("#userBy").val(),
+        userAction: $("#userActionSel").val(),
+        minVals: minVals,
+        maxVals: maxVals,
+        percVals: percVals,
+        available: $("#oAvailable:checked").val(),
+        verified: $("#oVerified:checked").val(),
+        compare: $("#oCompare:checked").val(),
+        sort: sortBy,
+        uid:"{{ uid }}",
+        lastValue: lastValue},
+        function(data) {
+            $("#nextResourcesButton").remove();
+            $("#resourceData").append(data);
+            compareResources("resourceData");
+            $("#busyImg").css("display","none");
+        }, "html");
+}
+function setQualityControls() {
+	if ($("#oQuality").attr("checked") == "checked") {
+        $(".qualityInput").removeAttr("disabled");
+    } else {
+        $(".qualityInput").attr("disabled","disabled");
+    }
+}
+</script>
+{{ blocks.pageTracker() }}
+<body>
+{{ blocks.headerSection(loggedin, currentUser, loginResult, linkappend, url, imgNum, galaxyList, pictureName) }}
+<div id="mainContent" class="wrapper">
+  <div id="leftNavContent" class="ghCol">
+    <div id="resourceCriteria" class="ghWidgetBox">
+    <form id="resourceSearch" name="resourceSearch"><div class="boxHeader">Search Options
+{% if loggedin == 1 %}
+    <button id="compareFilter" type="button" class="ghButton" tabindex=2 style="float: right;" onclick="filterResources('true');">Compare</button>
+{% endif %}
+    <button id="goFilter" type="button" class="ghButton" tabindex=1 style="margin-right:4px;float: right;" onclick="filterResources('undefined');">Search</button></div>
+    <div id="searchInputs">
+      <div class="searchInput">Was on Planet:<select id="planetSel" name="planetSel" tabindex=2>
+    </select></div>
+      <div class="searchInput">Res Group:<select name="resGroup" id="resGroup" style="width:100%" tabindex=4><option value="any" selected="selected">Any</option>
+{{ resourceGroupList }}
+      </select></div>
+      <div class="searchInput">Res Type:<select name="resType" id="resType" style="width:100%" tabindex=5><option value="any" selected="selected">Any</option>
+{{ resourceTypeList }}
+      </select></div>
+      <div class="searchInput">Stats:
+      <table><tr><td></td><td>Min</td><td>Max</td><td rowspan="12" style="background:black;width:4px;"></td><td>% Weight</td></tr>
+      <tr><td>ER</td><td><input type="text" name="minER" id="minER" size="6" tabindex=20/></td><td><input type="text" name="maxER" id="maxER" size="6" tabindex=31/></td><td><input type="text" class="qualityInput" name="percER" id="percER" size="6" tabindex=42/></td></tr>
+      <tr><td>CR</td><td><input type="text" name="minCR" id="minCR" size="6" tabindex=21/></td><td><input type="text" name="maxCR" id="maxCR" size="6" tabindex=32/></td><td><input type="text" class="qualityInput" name="percCR" id="percCR" size="6" tabindex=43/></td></tr>
+      <tr><td>CD</td><td><input type="text" name="minCD" id="minCD" size="6" tabindex=22/></td><td><input type="text" name="maxCD" id="maxCD" size="6" tabindex=33/></td><td><input type="text" class="qualityInput" name="percCD" id="percCD" size="6" tabindex=44/></td></tr>
+      <tr><td>DR</td><td><input type="text" name="minDR" id="minDR" size="6" tabindex=23/></td><td><input type="text" name="maxDR" id="maxDR" size="6" tabindex=34/></td><td><input type="text" class="qualityInput" name="percDR" id="percDR" size="6" tabindex=45/></td></tr>
+      <tr><td>FL</td><td><input type="text" name="minFL" id="minFL" size="6" tabindex=24/></td><td><input type="text" name="maxFL" id="maxFL" size="6" tabindex=35/></td><td><input type="text" class="qualityInput" name="percFL" id="percFL" size="6" tabindex=46/></td></tr>
+      <tr><td>HR</td><td><input type="text" name="minHR" id="minHR" size="6" tabindex=25/></td><td><input type="text" name="maxHR" id="maxHR" size="6" tabindex=36/></td><td><input type="text" class="qualityInput" name="percHR" id="percHR" size="6" tabindex=47/></td></tr>
+      <tr><td>MA</td><td><input type="text" name="minMA" id="minMA" size="6" tabindex=26/></td><td><input type="text" name="maxMA" id="maxMA" size="6" tabindex=37/></td><td><input type="text" class="qualityInput" name="percMA" id="percMA" size="6" tabindex=48/></td></tr>
+      <tr><td>PE</td><td><input type="text" name="minPE" id="minPE" size="6" tabindex=27/></td><td><input type="text" name="maxPE" id="maxPE" size="6" tabindex=38/></td><td><input type="text" class="qualityInput" name="percPE" id="percPE" size="6" tabindex=49/></td></tr>
+      <tr><td>OQ</td><td><input type="text" name="minOQ" id="minOQ" size="6" tabindex=28/></td><td><input type="text" name="maxOQ" id="maxOQ" size="6" tabindex=39/></td><td><input type="text" class="qualityInput" name="percOQ" id="percOQ" size="6" tabindex=50/></td></tr>
+      <tr><td>SR</td><td><input type="text" name="minSR" id="minSR" size="6" tabindex=29/></td><td><input type="text" name="maxSR" id="maxSR" size="6" tabindex=40/></td><td><input type="text" class="qualityInput" name="percSR" id="percSR" size="6" tabindex=51/></td></tr>
+      <tr><td>UT</td><td><input type="text" name="minUT" id="minUT" size="6" tabindex=30/></td><td><input type="text" name="maxUT" id="maxUT" size="6" tabindex=41/></td><td><input type="text" class="qualityInput" name="percUT" id="percUT" size="6" tabindex=52/></td></tr>
+      </table></div>
+      <div class="searchInput">User:<input type="text" name="userBy" id="userBy" size="12" tabindex=60/><select name="userActionSel" id="userActionSel" tabindex=61>
+        <option value="entered">Entered</option>
+        <option value="verified">Verified</option>
+        <option value="unavailable">Removed</option>
+      </select></div>
+      <div class="searchInput">Only Available:<input type="checkbox" id="oAvailable"/></div>
+      <div class="searchInput">Only Verified:<input type="checkbox" id="oVerified"/></div>
+      <div class="searchInput" style="text-align:center"><input type="reset" value="Reset" class="ghButton" tabindex=70/></div></form>
+    </div>
+    </div>
+  </div>
+  <div id="rightMainContent" class="ghCol">
+    <div id="resourceInfo" class="ghWidgetBox">
+    <div class="boxHeader" style="height:24px;"><div style="float:left;">Resource Finder</div>
+      <div style="float:right;position:relative;top:0px;">
+      Sort: <span style="font-weight:normal;">
+      <input type="radio" name="oViewType" id="oTime" value="ByTime" onclick="setQualityControls();filterResources('undefined')" />By Time&nbsp;
+      <input type="radio" name="oViewType" id="oQuality" value="ByQuality" checked="checked" onclick="setQualityControls();filterResources($('#oCompare:checked').val())" />By Quality
+      </span><input type="checkbox" id="oCompare" style="display:none;"/></div></div>
+      <div class="footer"></div>
+    <div id="resourceData">Select some criteria on the left and click Search or Compare.</div>
+    <div id="busyImg" style="text-align:center;display:none;"><img src="../../images/ghWait.gif" /></div>
+  </div>
+</div>
+{{ blocks.pageFooter() }}
+{{ blocks.resourceForm() }}
+{{ blocks.joinForm(loggedin, ['?src_url=resourceFinder.py&', linkappend]|join, url) }}
+<div id="mask"></div>
+</body></html>

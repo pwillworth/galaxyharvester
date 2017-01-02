@@ -1,0 +1,15 @@
+Available Planets
+
+<p>The number of SWGEmu based servers continues to expand, and many of those projects continue to add exciting new content to expand on the game we love - even new planets.</p>
+
+<p>You may have noticed references to these new planets on Galaxy Harvester even if the server you play on does not have them.  That is because Galaxy Harvester was never designed to represent different galaxies having different available planets.  When we went to add the latest planet addition, it seemed a good time to do something about that, as the additions could end up being quite a clutter of unnecessary information for some people.  So in addition to adding the planet Mandalore as an available selection today, we have also made the following changes.</p>
+
+<ul>
+  <li>When adding resources, the available planets to pick from will be based on your currently selected Galaxy.</li>
+  <li>When viewing resource lists, the planet bar will only include planets that are valid for that resources galaxy.</li>
+  <li>On the Waypoint Maps and Survey Tool screens, only planets related to your selected galaxy will be shown.</li>
+</ul>
+
+<p>As always, if you are running an SWGEmu server listed on Galaxy Harvester and have new planets added to your server, email us at the contact address to get those planets associated to your galaxy on the site so players can select them.</p>
+
+<p>-ioscode</p>

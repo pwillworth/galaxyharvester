@@ -1,0 +1,11 @@
+Headers, Cleanup, and Lothal
+
+<p>A few updates happened over the day, here is a summary:</p>
+
+<p>The long ago originator of most of the graphics on Galaxy Harvester cooked up some new header images for the site.  There are many more now, and even some seasonal ones.  Thanks Apex!</p>
+
+<p>In order to keep current resources somewhat cleaned up for servers using automatic resource uploading, Galaxy Harvester would previously automatically mark unavailable any resource that was available for over 30 days.  To tighten this up even more, this cleanup will now happen according to the default maximum spawn durations typically set.  11 days for most Inorganics, and 22 days for Organics and JTL resources.</p>
+
+<p>Rogue One server recently added a new planet, Lothal.  Lothal is now added to Galaxy Harvester so resources can be reported there.</p>
+
+<p>-ioscode</p>

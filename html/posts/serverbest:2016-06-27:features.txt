@@ -1,0 +1,27 @@
+Server Best
+
+<p>What is a server best resource?  This question is more complicated than it sounds, it comes with a lot of "It depends...".  What profession?  What schematic?  What experimental property?  For example, do you care about encumbrance or effectiveness?  Filling or duration?  Different crafters are interested in different things, so... it depends.  Based on suggestion votes though, many people sure are interested in hearing when a new server best resource spawns, so we set out to build the tools to make that happen.</p>
+
+<p>In the most recent update to Galaxy Harvester you will find some new functionality in existing pages that allow you to keep track of the new top spawns you care about.  In the following list, I'll go over the specific areas on the site where you can take advantage of this.</p>
+
+<ul>
+<li>Default Alert Types - Your profile page now has a new setting to define your default alert types.  This will define how you are alerted for all server best alerts, and the default types selected when you create a new general spawn alert.</li>
+<li>Favorite Professions - On the <a href="http://galaxyharvester.net/myAlerts.py">My Alerts</a> page is a new section where you can favorite a profession.  By selecting a profession as a favorite, you subscribe to all server best alerts for that profession.</li>
+<li>Favorite Schematics - On the <a href="http://galaxyharvester.net/schematics.py/home">Schematics</a> page is a new option to view the list of your favorite schematics, and each individual schematic page has a star you can click to select that schematic as a favorite.  By selecting a schematic as a favorite, you subscribe to all server best alerts related to that schematic.</li>
+<li>Resource History - On each resource spawn page (the one you go to when clicking the name of a specific resource spawn anywhere on the site), there is a new list that will show up if that resource spawned as or close to a server best.</li>
+</ul>
+
+<p>Galaxy Harvester checks all new spawns that are entered to see if they are the new server best or close to it (within 5%) in any experimental property group for any schematic.  Any results are published to that spawns server best history, and if you are subscribed to any related schematic or it's profession, you will get an alert.  You can easily subscribe to a whole profession, but if you find that you are getting alerts you don't care about, you might consider un-favoriting the profession and just selecting as favorites the schematics of that profession you care about.</p>
+
+<p>Other minor updates:</p>
+<ul>
+<li>Add an nicer format for all Alert E-mails.</li>
+<li>Log the previous stats of a resource when it is edited.</li>
+<li>Improve performance on resource adds by delaying after checks.</li>
+<li>Fix bug causing blank screen if you go to recipes page when not logged in.</li>
+<li>Add Recipes button in logged in toolbar and remove redundant links from other links on home page.</li>
+</ul>
+
+<p>We hope these tools help to ensure you never miss out on a great resource.  Enjoy, and please post here and let us know how the new Server Best tools are working out for you.</p>
+<br/>
+<p>-ioscode</p>

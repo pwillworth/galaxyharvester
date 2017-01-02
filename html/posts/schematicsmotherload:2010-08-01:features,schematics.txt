@@ -1,0 +1,13 @@
+The Schematics Motherload
+
+<p>Today, not only have the number of schematics available to view here more than doubled to 1,366 - the tools for finding them has been refined a bit.  If you head over to the <a href="http://gh.apex-games.net/schematics.py/home">schematics</a> page, you can try out the new Schematic Finder which now lets you choose either a resource group or specific resource type and find schematics that call for it.  Just to be helpful, the tool will also bring up related schematics in a list next to the primary ones.  The related schematics will be either schematics that call for a specific type under the group you picked, or ones that call for the generic group or any type under it for the type you picked.  If that is as clear as mud, give it a try and it should be a bit more clear.</p>
+
+<p>There's also a few smaller changes of note live now:</p>
+<ul>
+<li>A new resource type page will be shown when you click the name of a resource type or group somewhere in the site.  Instead of just displaying recent spawns of the type, it will also provide the best spawns of it, and a list of schematics that use it.  Here is an example: <a href="http://gh.apex-games.net/resourceType.py/ore_intrusive">Intrusive Ore</a>.</li>
+<li>Internet Explorer users should be able to see the View controls at the top of the Resource List page now.</a></li>
+<li>Internet Explorer users should be able to stay logged in and have other cookies persist after closing your browser instead of your preferences being lost every visit.</li>
+</ul>
+<p>
+-ioscode
+</p>

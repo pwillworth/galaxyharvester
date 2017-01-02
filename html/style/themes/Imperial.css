@@ -1,0 +1,115 @@
+body {
+  background: #000018;
+  color: #ffffff;
+}
+a {
+	color: #ffffff;
+}
+a:link {
+	color: #ffffff;
+}
+a:hover {
+	color: #3583ff;
+}
+a:visited, .altText {
+	color: #0039f2;
+}
+a:active, .groupText {
+	color: #3583ff;
+}
+.footer {
+	border-top-color: #0039f2; /* Box Trim Color */
+	background: #000040; /* Box Body Color */
+}
+.ghWidgetBox, #tooltip {
+	background: #000040; /* Box Body Color */
+	border-color: #0039f2; /* Box Trim Color */
+}
+.bigForm input {
+	color: #000; /* ??? */
+}
+#loginForm {
+	color: #ffffff; /* use default text color, or link color */
+}
+.tableHead {
+	background: #000000; /* Stats table header background */
+	color: #3583ff; /* Stats table text */
+}
+.statRow, .recipeRow, #header, #footer {
+	background: #000154; /* Stat table cell background */
+}
+.window {
+	background: #000040; /* Add Resource window body, use WidgetBox body color */
+	border-color: #0039f2; /* Add Resource window trim */
+	color: #ffffff; /* Use default text color */
+}
+.formMsg {
+	color: #990000; /* Not sure this needs altered */
+}
+.resourceBox {
+	background: #000154; /* Body interior color */
+	color: #ffffff; /* Default text color */
+}
+.standOut {
+	color: white;
+	background-color: #000000; /* Use default background color */
+}
+.statusMsg {
+	color: #ffffff; /* "Lookups Complete" text on Quick Add */
+}
+.bigLink {
+	border-color: #ffffff; /* Use default text color */
+}
+.statNormal {
+	color: #666666;
+}
+.statHigh {
+	color: #996600;
+}
+.statMax {
+	color: #cc0000;
+}
+.listSelected {
+	background-color: #000154;
+	border-color: #0039f2;
+}
+.boxBorderHidden {
+	border-color: #000040;
+}
+ul.schematics a:hover, ul.schematics a:visited {
+	color: #ffffff;
+}
+.control {
+	border-color: #0039f2;
+	background: #000154;
+}
+.textOnBackground {
+	color: #0039f2;
+}
+ul.alert li {
+	background: #000154;
+}
+a div.resTreeItem, a:link div.resTreeItem, a:visited div.resTreeItem, a:active div.resTreeItem {
+	color: #ffffff;
+	background: #000018;
+	border-color: #0039f2;
+}
+a:hover div.resTreeItem, .slotIndicatorFilled {
+	background: #0039f2;
+	color: #000018;
+	border-color: #000018;
+}
+.ingredientSlot {
+	border-color: #0039f2;
+	background: #000018;
+}
+.ingredientSlotActive {
+	background: #000154;
+}
+.ingredientSlotFilled {
+	background: #000040;
+}
+.slotIndicator {
+	border-color: #000040;
+}
+

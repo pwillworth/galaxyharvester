@@ -1,0 +1,138 @@
+{% import 'blocks.html' as blocks %}
+<!DOCTYPE html>
+<html lang="en"><head><title>Add Resources - Galaxy Harvester</title>
+<link rel="stylesheet" href="/style/ghCore.css" type="text/css" />
+<link rel="stylesheet" href="/style/themes/{{ uiTheme }}.css" type="text/css" />
+<script src="/js/ghShared.js" type="text/javascript"></script>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript">
+	var rownum = 0;
+	$(document).ready(function() {
+	    $("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
+	    if ($("#galaxySel option:selected").attr("group") == "Inactive") {
+	        $("#addResMask").addClass("disabled");
+	        $("#addResMask").html("Inactive Galaxy");
+	        $("#sendData").attr("disabled","disabled");
+	    }
+			loadPlanetSel($("#galaxySel option:selected").val(), '<option value=0>&lt;Select&gt;</option>');
+	    addResourceRow();
+	});
+	function addResourceRow() {
+	    if (true) {
+	      var typeBox = "typeSel" + rownum;
+	      $("#addResourceTable").append("<tr height=16px valign=middle id='resRow"+rownum+"'><td><input type='text' size=14 maxlength=255 id='resName"+rownum+"' onblur='getResource(this);'{{ disableStr }}></td>"+
+	        "<td><select name='"+typeBox+"' id='"+typeBox+"' style='width:200px;' onchange='maskStats(this);' onblur='getResourceFuzzy(this,"+rownum+");'></select></td>"+
+	        "<td><input type='text' size=2 maxlength=4 id='ER"+rownum+"' name='ER"+rownum+"'></td>"+
+	        "<td><input type='text' size=2 maxlength=4 id='CR"+rownum+"' name='CR"+rownum+"'></td>"+
+	        "<td><input type='text' size=2 maxlength=4 id='CD"+rownum+"' name='CD"+rownum+"'></td>"+
+	        "<td><input type='text' size=2 maxlength=4 id='DR"+rownum+"' name='DR"+rownum+"'></td>"+
+	        "<td><input type='text' size=2 maxlength=4 id='FL"+rownum+"' name='FL"+rownum+"'></td>"+
+	        "<td><input type='text' size=2 maxlength=4 id='HR"+rownum+"' name='HR"+rownum+"'></td>"+
+	        "<td><input type='text' size=2 maxlength=4 id='MA"+rownum+"' name='MA"+rownum+"'></td>"+
+	        "<td><input type='text' size=2 maxlength=4 id='PE"+rownum+"' name='PE"+rownum+"'></td>"+
+	        "<td><input type='text' size=2 maxlength=4 id='OQ"+rownum+"' name='OQ"+rownum+"'></td>"+
+	        "<td><input type='text' size=2 maxlength=4 id='SR"+rownum+"' name='SR"+rownum+"'></td>"+
+	        "<td><input type='text' size=2 maxlength=4 id='UT"+rownum+"' name='UT"+rownum+"'></td>"+
+	        "<td><div id='addInfo"+rownum+"'></div></td>"+
+	        "</tr>");
+	      $("#"+typeBox).load("getResourceTypeList.py");
+	      rownum+=1;
+	    }
+	}
+	function maskStats(typeSel) {
+	    var statMask = "p11111111111";
+	    if (typeSel.selectedIndex > -1) {
+	        statMask = typeSel.options[typeSel.selectedIndex].title;
+	    }
+	    thisRow = typeSel.id.substr(7);
+	    if (statMask.substr(1,1) == "0") {
+	        $("#CR"+thisRow).attr("disabled", true);
+	        $("#CD"+thisRow).focus();
+	    } else {
+	        $("#CR"+thisRow).removeAttr("disabled");
+	        $("#CR"+thisRow).focus();
+	    }
+	    if (statMask.substr(2,1) == "0") {
+	        $("#CD"+thisRow).attr("disabled", true);
+	        if (statMask.substr(1,1) == "0")
+	            $("#DR"+thisRow).focus();
+	    } else {
+	        $("#CD"+thisRow).removeAttr("disabled");
+	    }
+	    if (statMask.substr(3,1) == "0") {
+	        $("#DR"+thisRow).attr("disabled", true);
+	    } else {
+	        $("#DR"+thisRow).removeAttr("disabled");
+	    }
+	    if (statMask.substr(4,1) == "0") {
+	        $("#FL"+thisRow).attr("disabled", true);
+	    } else {
+	        $("#FL"+thisRow).removeAttr("disabled");
+	    }
+	    if (statMask.substr(5,1) == "0") {
+	        $("#HR"+thisRow).attr("disabled", true);
+	    } else {
+	        $("#HR"+thisRow).removeAttr("disabled");
+	    }
+	    if (statMask.substr(6,1) == "0") {
+	        $("#MA"+thisRow).attr("disabled", true);
+	    } else {
+	        $("#MA"+thisRow).removeAttr("disabled");
+	    }
+	    if (statMask.substr(7,1) == "0") {
+	        $("#PE"+thisRow).attr("disabled", true);
+	    } else {
+	        $("#PE"+thisRow).removeAttr("disabled");
+	    }
+	    if (statMask.substr(8,1) == "0") {
+	        $("#OQ"+thisRow).attr("disabled", true);
+	    } else {
+	        $("#OQ"+thisRow).removeAttr("disabled");
+	    }
+	    if (statMask.substr(9,1) == "0") {
+	        $("#SR"+thisRow).attr("disabled", true);
+	    } else {
+	        $("#SR"+thisRow).removeAttr("disabled");
+	    }
+	    if (statMask.substr(10,1) == "0") {
+	        $("#UT"+thisRow).attr("disabled", true);
+	    } else {
+	        $("#UT"+thisRow).removeAttr("disabled");
+	    }
+	    if (statMask.substr(11,1) == "0") {
+	        $("#ER"+thisRow).attr("disabled", true);
+	    } else {
+	        $("#ER"+thisRow).removeAttr("disabled");
+	        $("#ER"+thisRow).focus();
+	    }
+	}
+	</script>
+{{ blocks.pageTracker() }}
+</head><body>
+{{ blocks.headerSection(loggedin, currentUser, loginResult, linkappend, url, imgNum, galaxyList, pictureName) }}
+
+<div id="mainContent" class="wrapper">
+    <div id="addResBox" class="ghWidgetBox">
+    <div class="boxHeader">Add Resources</div>
+    <form name="faddres" id="faddres" onsubmit="return postResources()">
+    Planet: <select name="planetSel" id="planetSel"{{ disableStr }}>
+    </select><span id="sentMessage" style="margin-left: 20px;"></span>
+    <div id="resourceData" style="margin-top:12px;">
+    <div style="position:relative;"><div id="resMask" class="disabledDark" style="display:none;"></div>
+    <table id="addResourceTable"><thead>
+    <tr><td>Name</td><td>Type</td><td>ER</td><td>CR</td><td>CD</td><td>DR</td><td>FL</td><td>HR</td><td>MA</td><td>PE</td><td>OQ</td><td>SR</td><td>UT</td></tr>
+    </thead></table>
+    <button type="button" id="sendData" class="ghButton"{{ disableStr }} onclick="postResources()">Send Resource Data</button>
+    <div id="sendResponse"></div>
+    </form>
+    </div>
+{% if loggedin == 0 %}
+	    <div id="addResMask" class="disabled">Login First</div>
+{% else %}
+	    <div id="addResMask"></div>
+{% endif %}
+    </div>
+</div>
+{{ blocks.pageFooter() }}
+{{ blocks.joinForm(loggedin, ['?src_url=addResources.py&', linkappend]|join, url) }}
+</body></html>

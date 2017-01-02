@@ -1,0 +1,9 @@
+Mobile Apps Are Here
+
+<p>As of today, you should be able to find the new Galaxy Harvester mobile app in stores!</p>
+
+<p>It is being published on four platforms; Android, Apple (iOS), Windows Phone, and Amazon.  For more information on this app, see the previous <a href="http://galaxyharvester.net/blog.py/comingsoonmobile%3A2016-02-28%3Anews%2Cfeatures%2Cmobile">post</a>, or the new mobile apps <a href="http://galaxyharvester.net/apps.py">page</a>.</p>
+
+<p>Enjoy!</p>
+
+<p>-ioscode</p>

@@ -1,0 +1,186 @@
+{% import 'blocks.html' as blocks %}
+<!DOCTYPE html>
+<html lang="en"><head><title>Survey - Galaxy Harvester</title>
+<link rel="stylesheet" href="/style/ghCore.css" type="text/css" />
+<link rel="stylesheet" href="/style/themes/{{ uiTheme }}.css" type="text/css" />
+<script type="text/javascript" src="/js/ghShared.js"></script>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript">
+var surveyPlanet = "corellia";
+var surveyTool = "gas";
+$(document).ready(function() {
+    $("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
+    loadPlanetButtons($("#galaxySel option:selected").val());
+    if ($("#galaxySel option:selected").attr("group") == "Inactive") {
+        $("#quickAddMask").addClass("disabled");
+        $("#quickAddMask").html("Inactive Galaxy");
+        $("#quickAddGo").attr("disabled","disabled");
+    }
+    loadPlanetSel($("#galaxySel option:selected").val(), '<option value=0>&lt;Select&gt;</option>');
+    surveyPlanet = getCookie("surveyPlanet","corellia");
+    surveyTool = getCookie("surveyTool","gas");
+    $("#btn" + surveyPlanet).addClass("btnSelected control");
+    $("#btn" + surveyTool).addClass("btnSelected control");
+    selectPlanet(surveyPlanet);
+    filterResources();
+    $(".surveyToolButton").click(function(e) {
+        surveyTool = this.id.substr(3);
+        $(".surveyToolButton").removeClass("btnSelected control");
+        $(this).addClass("btnSelected control");
+        filterResources();
+    });
+    $("#typeSel").load(BASE_SCRIPT_URL + "getResourceTypeList.py");
+    $(".window .close").click(function(e) {
+        e.preventDefault();
+        $("#mask, .window").hide();
+    });
+    $("#mask").click(function() {
+        $(this).hide();
+        $(".window").hide();
+    });
+});
+function selectPlanet(planetName) {
+    $("#planetSel option").each(function() {
+        if ($(this).text().replace(" ","") == planetName) {
+            $("#planetSel").val($(this).val());
+        }
+    });
+}
+function filterResources() {
+    $("#checkAllVerify").removeAttr("checked");
+    $("#busyImg").css("display","block");
+    var sortBy = "";
+    if (surveyTool != "none" && surveyPlanet != "") {
+        setCookie("surveyPlanet",surveyPlanet,365);
+        setCookie("surveyTool",surveyTool,365);
+        sortBy = "tree";
+        $("#resourceData").load(BASE_SCRIPT_URL + "getResourceList.py",{
+            galaxy:$("#galaxySel").val(),
+            planetName: surveyPlanet,
+            resGroup: surveyTool,
+            sort: sortBy},
+            function() {$("#busyImg").css("display","none");});
+    } else {
+        $("#busyImg").css("display","none");
+    }
+    return false;
+}
+function removeChecked() {
+    $(":checkbox").each(function(index) {
+        var namePrefix = this.id.substr(0,10);
+        if (namePrefix == "chkRemove_") {
+            if (this.checked) {
+                markUnavailable(this,this.id.substr(10),$("#galaxySel").val(),surveyPlanet);
+            }
+        }
+    });
+}
+function verifyChecked() {
+    $(":checkbox").each(function(index) {
+        var namePrefix = this.id.substr(0,10);
+        if (namePrefix == "chkVerify_") {
+            if (this.checked) {
+                verifyResource(this.id.substr(10),surveyPlanet);
+            }
+        }
+    });
+}
+function toggleAllVerify() {
+    $(":checkbox").each(function(index) {
+        var namePrefix = this.id.substr(0,10);
+        if (namePrefix == "chkVerify_") {
+            this.checked = document.getElementById("checkAllVerify").checked;
+        }
+    });
+}
+function loadPlanetButtons(galaxy) {
+  var planetOptions = '';
+  $('#planetButtonRow').empty();
+  // Fetch planet data and load buttons
+  $.post(BASE_SCRIPT_URL + "getList.py", { listType: "planet", galaxy: galaxy},
+    function(data) {
+      var planetIds = $(data).find('planet_values');
+      var planetNames = $(data).find('planet_names');
+      for (var i=0;i<$(planetIds).find('item').length;i++) {
+          var planetName = $(planetNames).find('item').eq(i).text();
+          var planetShort = planetName.replace(' ', '');
+          var planetButton = $('<div id="btn' + planetShort + '" class="planetButton inlineBlock"><img src="/images/planets/icon' + planetShort + '.png" title="' + planetName + '" alt="' + planetName + '" /><br />' + planetName + '</div>');
+          $(planetButton).click(function(e) {
+            surveyPlanet = this.id.substr(3);
+            selectPlanet(surveyPlanet);
+            $(".planetButton").removeClass("btnSelected control");
+            $(this).addClass("btnSelected control");
+            filterResources();
+          });
+          $('#planetButtonRow').append(planetButton);
+      }
+    }, "xml");
+  return;
+}
+</script>
+{{ blocks.pageTracker() }}
+<body>
+{{ blocks.headerSection(loggedin, currentUser, loginResult, linkappend, url, imgNum, galaxyList, pictureName) }}
+<div id="mainContent" class="wrapper">
+  <div id="leftNavContent" class="ghCol">
+    <div id="resourceCriteria" class="ghWidgetBox">
+    <div class="boxHeader">Select Planet</div>
+    <div id="searchInputs">
+      <div id="planetButtonRow" style="text-align:center;margin-bottom:8px;">
+      </div>
+      <div class="footer"></div>
+      <div class="boxHeader">Select Survey Tool</div>
+      <div style="text-align:center">
+        <div id="btnchemical" class="surveyToolButton inlineBlock"><img src="/images/tools/chemicalSurveyTool.png" title="Chemical" alt="Chemical Survey Tool" /><br />Chemical</div>
+        <div id="btngas" class="surveyToolButton inlineBlock"><img src="/images/tools/gasSurveyTool.png" title="Gas" alt="Gas Survey Tool" /><br />Gas</div>
+        <div id="btnflora_resources" class="surveyToolButton inlineBlock"><img src="/images/tools/flora_resourcesSurveyTool.png" title="Flora" alt="Flora Survey Tool" /><br />Flora</div>
+        <div id="btnmineral" class="surveyToolButton inlineBlock"><img src="/images/tools/mineralSurveyTool.png" title="Mineral" alt="Mineral Survey Tool" /><br />Mineral</div>
+        <div id="btnenergy_renewable_unlimited_solar" class="surveyToolButton inlineBlock"><img src="/images/tools/energy_renewable_unlimited_solarSurveyTool.png" title="Solar" alt="Solar Survey Tool" /><br />Solar</div>
+        <div id="btnwater" class="surveyToolButton inlineBlock"><img src="/images/tools/waterSurveyTool.png" title="Water" alt="Water Survey Tool" /><br />Water</div>
+       <div id="btnenergy_renewable_unlimited_wind" class="surveyToolButton inlineBlock"><img src="/images/tools/energy_renewable_unlimited_windSurveyTool.png" title="Wind" alt="Wind Survey Tool" /><br />Wind</div>
+      </div>
+    </div>
+    </div>
+    <div id="quickAdd" class="ghWidgetBox">
+      <div class="boxHeader">Quick Add</div>
+      <div id="qNameAdd">
+      <form action="" id="quickAddForm">
+      Resource Name(s)<br />
+      <textarea name=resName id=resName rows=3 cols=20{{ disableStr }}></textarea><br />
+      Planet:<select name="planetSel" id="planetSel"{{ disableStr }}>
+      </select>
+      &nbsp;&nbsp;<button type=button value="Go" class="ghButton" onclick="quickAdd(form, '');"{{ disableStr }}>Go</button>
+      </form>
+      </div>
+{% if loggedin == 0 %}
+    <div id="quickAddMask" class="disabled">Login First</div>
+{% else %}
+    <div id="quickAddMask"></div>
+{% endif %}
+    </div>
+  </div>
+  <div id="rightMainContent" class="ghCol">
+    <div id="resourceInfo" class="ghWidgetBox">
+    <div class="boxHeader" style="height:24px;"><div style="float:left;">Survey Tool List</div>
+{% if loggedin == 1 %}
+	      <div style="float:right;width:140px;">
+	      <button type="button" value="Remove Checked" class="ghButton" style="float:right;" onclick="removeChecked();">Remove Checked</button>
+	      </div>
+	      <div style="float:right;width:140px;">
+	      <button type=button value="Verify Checked" class="ghButton" style="float:right;" onclick="verifyChecked();">Verify Checked</button>
+	      </div>
+{% endif %}
+      </div>
+      <div class="footer"></div>
+{% if loggedin == 1 %}
+	      <div style="position:absolute;right:160px;"><input type="checkbox" id="checkAllVerify" onclick="toggleAllVerify();" />Check All</div>
+{% endif %}
+    <div id="busyImg" style="text-align:center;"><img src="../../images/ghWait.gif" /></div>
+    <div id="resourceData"></div>
+  </div>
+</div>
+{{ blocks.pageFooter() }}
+{{ blocks.resourceForm() }}
+{{ blocks.joinForm(loggedin, ['?src_url=surveyList.py&', linkappend]|join, url) }}
+<div id="mask"></div>
+</body></html>

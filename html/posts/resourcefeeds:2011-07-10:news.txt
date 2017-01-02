@@ -1,0 +1,7 @@
+Resource Feeds
+
+<p>Wow, someone just brought to my attention that the resource RSS feeds were not working.  And they haven't been since January.  I've got them working now for the few of you that use them.  Sorry about that!</p>
+
+<p><a href="http://galaxyharvester.net/feeds.py">Resource Feeds Page</a></p>
+
+<p>-ioscode</p>

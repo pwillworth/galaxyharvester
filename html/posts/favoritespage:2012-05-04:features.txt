@@ -1,0 +1,13 @@
+Favorites and the My Resources Page
+
+<p>New feature time!  The <a href="http://galaxyharvester.net/myResources.py">My Resources</a> page is ready go.  You can click the star icon on a resource anywhere on the site to add it to your My Resources page.  You can also add them directly by name from the page itself.  You can organize your favorites into groups that you define, like grind resources, or groups for each crafting profession, or need to harvest/currently harvesting, or whatever makes sense for you.  Check the bottom of the <a href="http://galaxyharvester.net/help.py">help</a> page for more details on how to use the Favorites controls.</p>
+
+<p>With the Liberator wipe on the horizon, and an intense month of testing focus, I don't imagine people will have a ton of use for this new feature right away.  Getting it out there now though, maybe a few people can play around with it and submit any suggestions for it.  Then, by the time the new play server comes up and we're starting to build up our resource stocks, this tool can be even more polished.</p>
+
+<p>
+May the 4th be with you and go Team Xavia,
+</p>
+
+<p>
+-ioscode
+</p>

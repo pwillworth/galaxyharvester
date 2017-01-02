@@ -1,0 +1,172 @@
+{% import 'blocks.html' as blocks %}
+<!DOCTYPE html>
+<html lang="en"><head><title>Resource List - Galaxy Harvester</title>
+<link rel="stylesheet" href="/style/ghCore.css" type="text/css" />
+<link rel="stylesheet" href="/style/themes/{{ uiTheme }}.css" type="text/css" />
+<link rel="alternate" type="application/rss+xml" title="Galaxy Harvester Resource Adds" href="http://feeds.feedburner.com/GalaxyHarvesterResourceActivity" />
+<script type="text/javascript" src="/js/ghShared.js"></script>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    var planet = getQueryVar("planet");
+    var rgroup = getQueryVar("rgroup");
+    var rtype = getQueryVar("rtype");
+    var uw = getQueryVar("uw");
+    var list = getQueryVar("list");
+    $("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
+    if (planet.length > 0) {
+      $("#planetSel").val(planet);
+    }
+    if (getCookie("oFavoriteResourceList",false) == "true") {
+        $("#oFavorite").attr("checked",true);
+    }
+    if (rgroup.length > 1) {
+        $("#resGroup").val(rgroup);
+    }
+    if (rtype.length > 1) {
+        $("#resType").val(rtype);
+    }
+    if (uw.length > 0) {
+        $("#weeksUnavailable").val(uw);
+    }
+    sortBy = getCookie("resListSort");
+    if (sortBy == "time" || list == "Entered") {
+        $("#oTime").attr("checked", "checked");
+    } else if (sortBy == "stat") {
+        $("#oStat").attr("checked", "checked");
+    }
+    if (list != "-1") {
+        setCookie('resListTimeSel',list,90);
+    }
+    var timeType = getCookie("resListTimeSel");
+    if (timeType != "") $("#timeSel").val(timeType);
+    var statType = getCookie("resListStatSel");
+    if (statType != "") $("#statSel").val(statType);
+    filterResources();
+    $("#typeSel").load(BASE_SCRIPT_URL + "getResourceTypeList.py");
+    $(".window .close").click(function(e) {
+        e.preventDefault();
+        $("#mask, .window").hide();
+    });
+    $("#mask").click(function() {
+        $(this).hide();
+        $(".window").hide();
+    });
+});
+function filterResources() {
+    $("#busyImg").css("display","block");
+    var sortBy = "";
+    if ($("#oTime").attr("checked") == "checked") {
+        $("#statSel").attr("disabled", true);
+        $("#timeSel").removeAttr("disabled");
+        setCookie("resListSort","time",90);
+        sortBy = "time" + $("#timeSel").val();
+        $("#busyImg").css("display","block");
+        $("#resourceData").load(BASE_SCRIPT_URL + "getResourceList.py",{
+            galaxy:$("#galaxySel").val(),
+            unavailableDays: parseInt($("#weeksUnavailable").val())*7,
+            planetSel: $("#planetSel").val(),
+            resGroup: $("#resGroup").val(),
+            resType: $("#resType").val(),
+            favorite: $("#oFavorite:checked").val(),
+            sort: sortBy},
+            function() {$("#busyImg").css("display","none");});
+        // TODO - add limiting records with more button for time grouping option
+    } else if ($("#oStat").attr("checked") == "checked") {
+        $("#timeSel").attr("disabled", true);
+        $("#statSel").removeAttr("disabled");
+        setCookie("resListSort","stat",90);
+        sortBy = "stat" + $("#statSel").val();
+        $("#busyImg").css("display","block");
+        $("#resourceData").load(BASE_SCRIPT_URL + "getResourceList.py",{
+            galaxy:$("#galaxySel").val(),
+            unavailableDays: parseInt($("#weeksUnavailable").val())*7,
+            planetSel: $("#planetSel").val(),
+            resGroup: $("#resGroup").val(),
+            resType: $("#resType").val(),
+            favorite: $("#oFavorite:checked").val(),
+            sort: sortBy},
+            function() {$("#busyImg").css("display","none");});
+    } else {
+        $("#timeSel").attr("disabled", true);
+        $("#statSel").attr("disabled", true);
+        setCookie("resListSort","type",90);
+        var resData = $("#resourceData");
+        // auto expand group if specifically searching for it
+        var resGroup = $("#resGroup").val();
+        if (resGroup != "any") {
+            setCookie("resListVis_cont_" + resGroup, "block");
+        }
+        // load the category sections
+        resData.html('');
+{% for i in range(resCategoryIDs|length) %}
+	loadCategory(resData, "{{ resCategoryIDs[i] }}", "{{ resCategories[i] }}");
+{% endfor %}
+        attachCategoryEvents();
+        $("#busyImg").css("display","none");
+        // start chain of updates on collapsed sections
+        refreshPos = 0;
+        setTimeout("populateResCategory()", 1000);
+    }
+    return false;
+}
+</script>
+{{ blocks.pageTracker() }}
+<body>
+{{ blocks.headerSection(loggedin, currentUser, loginResult, linkappend, url, imgNum, galaxyList, pictureName) }}
+<div id="mainContent" class="wrapper">
+  <div id="leftNavContent" class="ghCol">
+    <div id="resourceCriteria" class="ghWidgetBox">
+    <form id="resourceSearch" name="resourceSearch"><div class="boxHeader">Search Criteria<button id="goFilter" type="button" class="ghButton" style="float: right;" onclick="filterResources();">Go</button></div>
+    <div id="searchInputs">
+      <div class="searchInput">Planet:<select id="planetSel" name="planetSel"><option value="any" selected="selected">Any</option>
+{{ planetList }}
+      </select></div>
+{% if loggedin == 1 %}
+      <div class="searchInput">Favorite:<input type=checkbox id="oFavorite" name="oFavorite" title="Select to show only favorite resources." onchange="setCookie('oFavoriteResourceList',this.checked,365);" /></div>
+{% endif %}
+      <div class="searchInput">Unavailable:<input type=text id="weeksUnavailable" name="weeksUnavailable" value=0 size=2 /> weeks ago</div>
+      <div class="searchInput">Res Group:<select name="resGroup" id="resGroup" style="width:100%"><option value="any" selected="selected">Any</option>
+{{ resourceGroupList }}
+      </select></div>
+      <div class="searchInput">Res Type:<select name="resType" id="resType" style="width:100%"><option value="any" selected="selected">Any</option>
+{{ resourceTypeList }}
+      </select></div>
+      <div class="searchInput" style="text-align:center"><input type="reset" value="Reset" class="ghButton" /></div></form>
+    </div>
+    </div>
+  </div>
+  <div id="rightMainContent" class="ghCol">
+    <div id="resourceInfo" class="ghWidgetBox">
+    <div class="boxHeader" style="height:24px;"><div style="float:left;">Resources Listing</div>
+      <div style="float:right;position:relative;top:0px;">View: <span style="font-weight:normal;"><input type="radio" name="oViewType" id="oResType" value="ByType" checked="checked" onclick="filterResources()" />By Type &nbsp;
+      <input type="radio" name="oViewType" id="oTime" value="ByTime" onclick="filterResources()" />By Time
+      <select name="timeSel" id="timeSel" onchange="setCookie('resListTimeSel',this.value,90);filterResources();" disabled="disabled"><option value="Entered" selected="selected">Entered</option><option value="Verified">Verified</option><option value="Unavailable">Unavailable</option>
+      </select>&nbsp;
+      <input type="radio" name="oViewType" id="oStat" value="ByStat" onclick="filterResources()" />By Stat
+      <select name="statSel" id="statSel" onchange="setCookie('resListStatSel',this.value,90);filterResources();" disabled="disabled">
+        <option value="avg">Avg</option>
+        <option value="CR">CR</option>
+        <option value="CD">CD</option>
+        <option value="DR">DR</option>
+        <option value="FL">FL</option>
+        <option value="HR">HR</option>
+        <option value="MA">MA</option>
+        <option value="PE">PE</option>
+        <option value="OQ">OQ</option>
+        <option value="SR">SR</option>
+        <option value="UT">UT</option>
+        <option value="ER">ER</option>
+      </select>
+      </span></div></div>
+      <div class="footer"></div>
+    <div id="busyImg" style="text-align:center;"><img src="../../images/ghWait.gif" /></div>
+    <div id="resourceData">
+    </div>
+  </div>
+</div>
+{{ blocks.pageFooter() }}
+{{ blocks.resourceForm() }}
+{{ blocks.joinForm(loggedin, ['?src_url=resourceList.py&', linkappend]|join, url) }}
+<div id="mask"></div>
+</body></html>

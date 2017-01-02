@@ -1,0 +1,31 @@
+Recipes
+
+<p>How do you keep track of what ingredients you use to make the different variations of products that you craft?  I have pretty much relied on my memory in the past, which is not so great.  That is why I was happy to see the feature being released today voted to the top of the <a href="http://galaxyharvester.net/feedback.py">suggestions list</a> by Galaxy Harvester members.  Starting today, you can build recipes that define a set of resources that are used to fill a schematic.  If you're already using the favorites/inventory feature, you'll be ahead of the game for getting started with recipes, becuase your favorite resources are what you can select to build recipes from.</p>
+
+<p>If you haven't already started defining your inventory on Galaxy Harvester, you might want to start by clicking the star on some resources in the resource list you have, or heading over to the <a href="http://galaxyharvester.net/myResources.py">My Resources</a> page to set up some inventory.  If you've already got some favorites defined you might want to start at the <a href="http://galaxyharvester.net/recipe.py/home">Recipe Home</a> page to start a new recipe or try out the suggestions tool.  I hope people will find this to be a useful crafters aide.</p>
+
+<p>With this release, there's also a little something new to acquaint you with the new recipes feature.  In addition to providing some information on the <a href="http://galaxyharvester.net/help.py">help page</a>, there is also a tutorial video available to watch that will show you around.  You can watch the tutorial on the help page <a href="http://galaxyharvester.net/help.py?v=vpdsb7qmhJE">here</a>.</p>
+
+<p>Other Minor Updates Included in this Release:</p>
+<ul>
+<li>Schematics will list component ingredients as a link to that component schematic.</li>
+<li>Schematic resource ingredients will link to resource type.</li>
+<li>Added shortcuts to Alerts and Inventory in login area at top right of pages.</li>
+<li>Prevent same user from being able to verify resource on same planet multiple times.</li>
+<li>Updated the default theme to resemble the in-game Alpha Blue theme.</li>
+<li>Tweaked Top Resources list calculation to more directly take into account a weighting of how much different stats are used in resources overall.</li>
+<li>Include unavailable resources in auto-complete add by name feature on Favorites page.</li>
+<li>Make user names in Waypoint list linky.</li>
+<li>Fixed favorite indicator not working on schematic pages resource lists.</li>
+</ul>
+<br/>
+<p>Over the past couple weeks, I have also been adding more schematic images.  The Artisan and Armorsmith professions are complete, and the furniture for architect.  If anyone is so inclined, all members are able to add images for schematics that do not have them by going to the schematic page.  The new recipe tool uses the schematic images for the lists, so some of these will be blank until more schematic images are uploaded.  If you do decide to help out, please follow these guidelines to make the images more consistent:</p>
+<ul>
+<li>Include only the object and background in the cropped image, not any surrounding borders or text.</li>
+<li>When you crop the image, make it square.</li>
+<li>Make sure the cropped image is at least 300x300 pixels.</li>
+<li>If the schematic uses an image that is the same as another schematic, just link it to the other schematic instead of uploading a new image.</li>
+</ul>
+<br/>
+
+<p>-ioscode</p>
