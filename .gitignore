@@ -2,5 +2,6 @@
 dist/
 html/temp/
 html/exports/
+html/images/users/
 test/pyunit/.coverage
 
