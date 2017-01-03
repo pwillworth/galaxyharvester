@@ -1,5 +1,5 @@
 <project name="galaxyharvester" default="integration" basedir=".">
-    <taskdef uri="antlib:org.sonar.ant" resource="org/sonar/ant/antlib.xml"></taskdef>
+
     <property file="build.properties"/>
 
     <target name="integration" description="Target for Continuous Integration Builds">
@@ -7,21 +7,6 @@
         <antcall target="unittest"/>
     </target>
 
-    <target name="deploy" description="Deploy web app">
-
-		<antcall target="sendobjects"/>
-    </target>
-
-	<target name="sendobjects" depends="package" description="Send objects to DreamObjects host">
-    	<copy file="dist/ghWebFiles.tgz" todir="scripts"/>
-        <exec executable="python" dir="scripts">
-	    <arg value="sendObjects.py"/>
-	    <arg value="--access-key"/>
-	    <arg value="${dreamObjects.accessKey}"/>
-	    <arg value="--secret-key"/>
-	    <arg value="${dreamObjects.secretKey}"/>
-	</exec>
-    </target>
 
     <target name="package">
         <mkdir dir="dist"/>
@@ -59,17 +44,4 @@
 	<delete dir="dist"/>
     </target>
 
-    <target name="stats" description="Report metrics to Sonar">
-        <property name="sonar.host.url" value="http://192.168.1.16:9000" />
-        <property name="sonar.sources" value="html" />
-        <property name="sonar.tests" value="test/pyunit" />
-        <property name="sonar.language" value="py" />
-        <property name="sonar.exclusions" value="blog.py" />
-        <property name="sonar.dynamicAnalysis" value="reuseReports" />
-        <property name="sonar.surefire.reportsPath" value="test/pyunit" />
-        <property name="sonar.cobertura.reportPath" value="test/pyunit/coverage.xml" />
-
-        <sonar:sonar key="net.ioscode.galaxyharvester:galaxyharvester" version="${label}" xmlns:sonar="antlib:org.sonar.ant"/>
-
-    </target>
 </project>
