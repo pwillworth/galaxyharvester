@@ -1,0 +1,13 @@
+Source Code on GitHub
+
+<p>The entire source code including database seed for Galaxy Harvester is finally moved to a publicly available repository.  Previously the source link on the page footers would link to a tarball of the sites web files, but now it links to this new <a href="https://github.com/pwillworth/galaxyharvester">GitHub repository</a> where all Galaxy Harvester development activity will happen now.  I hope this will serve these purposes:</p>
+
+<ul>
+  <li>Help people be able to set up their own private Galaxy Harvesters easier.</li>
+  <li>Disaster recovery incase the site needs to be recreated somewhere else for whatever reason.</li>
+  <li>Allow for an avenue for more contributors to site development in the future.</li>
+  <li>Provides a place to share documentation, users to report bugs, and activity to be shared/tracked.</li>
+<ul>
+
+<p>-ioscode</p>
+
