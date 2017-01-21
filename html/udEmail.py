@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2015 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -26,6 +26,20 @@ import Cookie
 import MySQLdb
 import dbSession
 import dbShared
+
+
+def sendVerificationMail(user, address, code):
+    # send message
+    message = Message(From="\"Galaxy Harvester Registration\" <registration@galaxyharvester.net>",To=address)
+    message.Subject = "Galaxy Harvester Email Change Verification"
+    link = "http://galaxyharvester.net/verifyUser.py?vc={0}&vt=mail".format(code)
+    message.Body = "Hello " + user + ",\n\nYou have updated your e-mail address on galaxyharvester.net to this email address.  You must verify this email with us by clicking the link below before the change can be completed.  If the link does not work, please copy the link and paste it into your browser address box.\n\n" + link + "\n\nThanks,\n-Galaxy Harvester Administrator\n"
+    message.Html = "<div><img src='http://galaxyharvester.net/images/ghLogoLarge.png'/></div><p>Hello " + user + ",</p><br/><p>You have updated your e-mail address on galaxyharvester.net to this email address.  You must verify this email with us by clicking the link below before the change can be completed.  If the link does not work, please copy the link and paste it into your browser address box.</p><p><a style='text-decoration:none;' href='" + link + "'><div style='width:170px;font-size:18px;font-weight:600;color:#feffa1;background-color:#003344;padding:8px;margin:4px;border:1px solid black;'>Click Here To Verify</div></a><br/>or copy and paste link: " + link + "</p><br/><p>Thanks,</p><p>-Galaxy Harvester Administrator</p>"
+    mailer = Mailer(mailInfo.MAIL_HOST)
+    mailer.login(mailInfo.REGMAIL_USER, mailInfo.MAIL_PASS)
+    mailer.send(message)
+    return 'email sent'
+
 
 # Get current url
 try:
@@ -92,8 +106,9 @@ else:
         result = "That e-mail is already in use by another user."
     else:
         cursor = conn.cursor()
-        cursor.execute("UPDATE tUsers SET emailAddress='" + email + "' WHERE userID='" + currentUser + "';")
-        result = "E-Mail Address Updated"
+        updatestr = "UPDATE tUsers SET verificationCode='" + verify_code + "', emailChange='" + email + "' WHERE userID='" + currentUser + "';"
+        sendVerificationMail(uname, email, verify_code)
+        result = "E-Mail Address Update Verification Email Sent.  Check your e-mail at this new address to finalize the change."
         cursor.close()
 
     conn.close()

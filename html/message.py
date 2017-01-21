@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2016 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -106,6 +106,8 @@ elif (messageAction == 'createuserfail'):
     theMessage = 'You account could not be created: ' + messageReason
 elif (messageAction == 'verifysuccess'):
     theMessage = 'Your account is now verified.  Please login above.'
+elif (messageAction == 'verifymailsuccess'):
+    theMessage = 'Your e-mail address change is now verified.  Your user profile should now reflect the change.'
 elif (messageAction == 'verifyfail'):
     theMessage = 'Account verification failed: ' + messageReason
 else:

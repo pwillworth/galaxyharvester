@@ -4,4 +4,6 @@ html/temp/
 html/exports/
 html/images/users/
 test/pyunit/.coverage
+test/pyunit/coverage.xml
+test/pyunit/nosetests.xml
 

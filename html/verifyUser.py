@@ -40,6 +40,7 @@ except KeyError:
 form = cgi.FieldStorage()
 
 verifycode = form.getfirst("vc")
+verifytype = form.getfirst("vt")
 # escape input to prevent sql injection
 verifycode = dbShared.dbInsertSafe(verifycode)
 
@@ -60,7 +61,11 @@ else:
             result = "verifyfail"
             errorstr = "That verification code is expired.  Please try joining again to get a new code."
         else:
-            updatestr = "UPDATE tUsers SET userState=1 WHERE userID='" + row[0] + "';"
+            if vt == "mail":
+                result = "verifymailsuccess"
+                updatestr = "UPDATE tUsers SET emailChange=emailAddress, emailAddress=emailChange WHERE userID='" + currentUser + "';"
+            else:
+                updatestr = "UPDATE tUsers SET userState=1 WHERE userID='" + row[0] + "';"
             cursor.execute(updatestr)
             updatedCount = cursor.rowcount
             if not updatedCount > 0:
