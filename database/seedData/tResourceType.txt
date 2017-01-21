@@ -104,20 +104,20 @@ crystalline_seafah_jewel	Seafah Jewel Crystalline Gemstone	mineral	gemstone_crys
 crystalline_sormahil_firegem	Sormahil Fire Gem Crystalline Gemstone	mineral	gemstone_crystalline	1	2	588	788	0	0	588	788	0	0	876	936	235	315	0	0	1	1000	711	851	711	851	794	894	gemstone	gemstone	0
 crystalline_vertex	Vertex Crystalline Gemstone	mineral	gemstone_crystalline	1	2	838	1000	0	0	838	1000	0	0	951	1000	335	400	0	0	1	1000	886	1000	886	1000	919	1000	gemstone	gemstone	0
 degraded_fuel_petrochem_solid	Degraded Solid Petrochem Fuel	mineral	fuel_petrochem_solid	0	1	0	0	0	0	200	200	0	0	0	0	0	0	200	200	200	200	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	0
-energy_renewable_site_limited_geothermal_corellia	Corellian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	1
-energy_renewable_site_limited_geothermal_dantooine	Dantooine Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	2
-energy_renewable_site_limited_geothermal_dathomir	Dathomirian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	3
-energy_renewable_site_limited_geothermal_endor	Endorian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	4
-energy_renewable_site_limited_geothermal_hoth	Hothian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	11
-energy_renewable_site_limited_geothermal_kaas	Kaasian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	12
-energy_renewable_site_limited_geothermal_lok	Lokian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	5
-energy_renewable_site_limited_geothermal_mandalore	Mandalore Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	14
-energy_renewable_site_limited_geothermal_naboo	Nabooian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	6
-energy_renewable_site_limited_geothermal_rori	Rori Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	7
-energy_renewable_site_limited_geothermal_talus	Talusian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	8
-energy_renewable_site_limited_geothermal_tatooine	Tatooinian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	9
+energy_renewable_site_limited_geothermal_corellia	Corellian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	energy	energy	1
+energy_renewable_site_limited_geothermal_dantooine	Dantooine Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	energy	energy	2
+energy_renewable_site_limited_geothermal_dathomir	Dathomirian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	energy	energy	3
+energy_renewable_site_limited_geothermal_endor	Endorian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	energy	energy	4
+energy_renewable_site_limited_geothermal_hoth	Hothian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	energy	energy	11
+energy_renewable_site_limited_geothermal_kaas	Kaasian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	energy	energy	12
+energy_renewable_site_limited_geothermal_lok	Lokian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	energy	energy	5
+energy_renewable_site_limited_geothermal_mandalore	Mandalore Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	energy	energy	14
+energy_renewable_site_limited_geothermal_naboo	Nabooian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	energy	energy	6
+energy_renewable_site_limited_geothermal_rori	Rori Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	energy	energy	7
+energy_renewable_site_limited_geothermal_talus	Talusian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	energy	energy	8
+energy_renewable_site_limited_geothermal_tatooine	Tatooinian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	energy	energy	9
 energy_renewable_site_limited_geothermal_weak	Weak Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	200	200	200	0	0	0	0	0	0	energy	energy	0
-energy_renewable_site_limited_geothermal_yavin4	Yavinian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	10
+energy_renewable_site_limited_geothermal_yavin4	Yavinian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	energy	energy	10
 energy_renewable_site_limited_hydron3_corellia	Corellian Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	1
 energy_renewable_site_limited_hydron3_dantooine	Dantooine Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	2
 energy_renewable_site_limited_hydron3_dathomir	Dathomirian Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	3
@@ -794,7 +794,7 @@ bone_horn_mustafar	Mustafarian Horn	creature_structural	bone_horn	1	1	0	0	0	0	20
 bone_mammal_mustafar	Mustafarian Animal Bones	creature_structural	bone	1	1	0	0	0	0	300	1000	0	0	0	0	1	500	0	0	1	1000	400	1000	1	1000	0	0	bone	bone	15
 corn_domesticated_mustafar	Mustafarian Domesticated Corn	flora_food	corn_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	corn	15
 corn_wild_mustafar	Mustafarian Wild Corn	flora_food	corn_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	corn	15
-energy_renewable_site_limited_geothermal_mustafar	Mustafarian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	15
+energy_renewable_site_limited_geothermal_mustafar	Mustafarian Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	energy	energy	15
 energy_renewable_site_limited_hydron3_mustafar	Mustafarian Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	15
 energy_renewable_site_limited_tidal_mustafar	Mustafarian Tidal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	15
 energy_renewable_unlimited_solar_mustafar	Mustafarian Solar Renewable Energy	energy	energy_renewable_unlimited_solar	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	600	500	500	0	0	0	0	0	0	energy	energy	15
@@ -854,7 +854,7 @@ bone_horn_taanab	Taanab Horn	creature_structural	bone_horn	1	1	0	0	0	0	200	1000	
 bone_mammal_taanab	Taanab Animal Bones	creature_structural	bone	1	1	0	0	0	0	300	1000	0	0	0	0	1	500	0	0	1	1000	400	1000	1	1000	0	0	bone	bone	16
 corn_domesticated_taanab	Taanab Domesticated Corn	flora_food	corn_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	corn	16
 corn_wild_taanab	Taanab Wild Corn	flora_food	corn_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	corn	16
-energy_renewable_site_limited_geothermal_taanab	Taanab Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	16
+energy_renewable_site_limited_geothermal_taanab	Taanab Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	energy	energy	16
 energy_renewable_site_limited_hydron3_taanab	Taanab Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	16
 energy_renewable_site_limited_tidal_taanab	Taanab Tidal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	16
 energy_renewable_unlimited_solar_taanab	Taanab Solar Renewable Energy	energy	energy_renewable_unlimited_solar	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	600	500	500	0	0	0	0	0	0	energy	energy	16
@@ -944,7 +944,7 @@ bone_horn_kashyyyk	Kashyyyk Horn	creature_structural	bone_horn	1	1	0	0	0	0	200	1
 bone_mammal_kashyyyk	Kashyyyk Animal Bones	creature_structural	bone	1	1	0	0	0	0	300	1000	0	0	0	0	1	500	0	0	1	1000	400	1000	1	1000	0	0	bone	bone	13
 corn_domesticated_kashyyyk	Kashyyyk Domesticated Corn	flora_food	corn_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	corn	13
 corn_wild_kashyyyk	Kashyyyk Wild Corn	flora_food	corn_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	corn	13
-energy_renewable_site_limited_geothermal_kashyyyk	Kashyyyk Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	13
+energy_renewable_site_limited_geothermal_kashyyyk	Kashyyyk Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	energy	energy	13
 energy_renewable_site_limited_hydron3_kashyyyk	Kashyyyk Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	13
 energy_renewable_site_limited_tidal_kashyyyk	Kashyyyk Tidal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	13
 energy_renewable_unlimited_solar_kashyyyk	Kashyyyk Solar Renewable Energy	energy	energy_renewable_unlimited_solar	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	600	500	500	0	0	0	0	0	0	energy	energy	13
@@ -1004,7 +1004,7 @@ bone_horn_lothal	Lothal Horn	creature_structural	bone_horn	1	1	0	0	0	0	200	1000	
 bone_mammal_lothal	Lothal Animal Bones	creature_structural	bone	1	1	0	0	0	0	300	1000	0	0	0	0	1	500	0	0	1	1000	400	1000	1	1000	0	0	bone	bone	17
 corn_domesticated_lothal	Lothal Domesticated Corn	flora_food	corn_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	corn	17
 corn_wild_lothal	Lothal Wild Corn	flora_food	corn_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	corn	17
-energy_renewable_site_limited_geothermal_lothal	Lothal Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	17
+energy_renewable_site_limited_geothermal_lothal	Lothal Geothermal Renewable Energy	energy	energy_renewable_site_limited	1	2	0	0	0	0	0	0	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	energy	energy	17
 energy_renewable_site_limited_hydron3_lothal	Lothal Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	17
 energy_renewable_site_limited_tidal_lothal	Lothal Tidal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	17
 energy_renewable_unlimited_solar_lothal	Lothal Solar Renewable Energy	energy	energy_renewable_unlimited_solar	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	600	500	500	0	0	0	0	0	0	energy	energy	17
@@ -1044,63 +1044,63 @@ water_vapor_lothal	Lothal Water Vapor	water	water	1	5	0	0	0	0	1	1000	0	0	0	0	0	0
 wheat_domesticated_lothal	Lothal Domesticated Wheat	flora_food	wheat_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	wheat	17
 wheat_wild_lothal	Lothal Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	wheat	17
 wood_deciduous_lothal	Lothal Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	17
-aluminum_jakku	Jakkuan Aluminum	mineral	aluminum	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	aluminum	aluminum	|PLANETID|
-copper_jakku	Jakkuan Copper	mineral	copper	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	copper	copper	|PLANETID|
-armophous_jakku	Jakkuan Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	|PLANETID|
-crystalline_jakku	Jakkuan Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	|PLANETID|
-gas_inert_jakku	Jakkuan Inert Gas	gas	gas_inert	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	|PLANETID|
-gas_reactive_jakku	Jakkuan Reactive Gas	gas	gas_reactive	1	1	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_reactive	gas_reactive	|PLANETID|
-iron_jakku	Jakkuan Iron	mineral	iron	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	iron	metal_ferrous	|PLANETID|
-ore_extrusive_jakku	Jakkuan Extrusive Ore	mineral	ore_extrusive	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	|PLANETID|
-ore_intrusive_jakku	Jakkuan Intrusive Ore	mineral	ore_intrusive	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	|PLANETID|
-ore_carbonate_jakku	Jakkuan Carbonate Ore	mineral	ore_carbonate	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_carbonate	ore_carbonate	|PLANETID|
-ore_siliclastic_jakku	Jakkuan Siliclastic Ore	mineral	ore_siliclastic	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_siliclastic	ore_siliclastic	|PLANETID|
-petrochem_fuel_liquid_jakku	Jakkuan Liquid Petrochem Fuel	chemical	fuel_petrochem_liquid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	|PLANETID|
-petrochem_fuel_solid_jakku	Jakkuan Solid Petrochem Fuel	mineral	fuel_petrochem_solid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	|PLANETID|
-radioactive_jakku	Jakkuan Radioactive	mineral	radioactive	1	2	0	0	0	0	1	800	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	radioactive	radioactive	|PLANETID|
-steel_jakku	Jakkuan Steel	mineral	steel	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	steel	steel	|PLANETID|
-bone_avian_jakku	Jakkuan Avian Bones	creature_structural	bone_avian	1	1	0	0	0	0	1	700	0	0	0	0	1	600	0	0	1	1000	100	500	1	500	0	0	bone	bone	|PLANETID|
-bone_horn_jakku	Jakkuan Horn	creature_structural	bone_horn	1	1	0	0	0	0	200	1000	0	0	0	0	1	500	0	0	1	1000	300	700	1	500	0	0	bone	bone_horn	|PLANETID|
-bone_mammal_jakku	Jakkuan Animal Bones	creature_structural	bone	1	1	0	0	0	0	300	1000	0	0	0	0	1	500	0	0	1	1000	400	1000	1	1000	0	0	bone	bone	|PLANETID|
-corn_domesticated_jakku	Jakkuan Domesticated Corn	flora_food	corn_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	corn	|PLANETID|
-corn_wild_jakku	Jakkuan Wild Corn	flora_food	corn_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	corn	|PLANETID|
-energy_renewable_site_limited_geothermal_jakku	Jakkuan Geothermal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	|PLANETID|
-energy_renewable_site_limited_hydron3_jakku	Jakkuan Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	|PLANETID|
-energy_renewable_site_limited_tidal_jakku	Jakkuan Tidal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	|PLANETID|
-energy_renewable_unlimited_solar_jakku	Jakkuan Solar Renewable Energy	energy	energy_renewable_unlimited_solar	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	600	500	500	0	0	0	0	0	0	energy	energy	|PLANETID|
-energy_renewable_unlimited_wind_jakku	Jakkuan Wind Renewable Energy	energy	energy_renewable_unlimited_wind	1	1	0	0	0	0	0	0	0	0	0	0	0	0	1	400	500	500	0	0	0	0	0	0	energy	energy	|PLANETID|
-fiberplast_jakku	Jakkuan Fiberplast	chemical	fiberplast	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	inorganic	fiberplast	|PLANETID|
-fruit_berries_jakku	Jakkuan Berry Fruit	flora_food	fruit_berries	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_berries	|PLANETID|
-fruit_flowers_jakku	Jakkuan Flower Fruit	flora_food	fruit_flowers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	seeds	fruit_berries	|PLANETID|
-fruit_fruits_jakku	Jakkuan Fruit	flora_food	fruit_fruits	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_fruits	|PLANETID|
-hide_bristley_jakku	Jakkuan Bristley Hide	creature_structural	hide_bristley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_bristley	|PLANETID|
-hide_leathery_jakku	Jakkuan Leathery Hide	creature_structural	hide_leathery	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_leathery	|PLANETID|
-hide_scaley_jakku	Jakkuan Scaley Hide	creature_structural	hide_scaley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_scaley	|PLANETID|
-hide_wooly_jakku	Jakkuan Wooly Hide	creature_structural	hide_wooly	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_wooly	|PLANETID|
-meat_avian_jakku	Jakkuan Avian Meat	creature_food	meat_avian	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
-meat_carnivore_jakku	Jakkuan Carnivore Meat	creature_food	meat_carnivore	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
-meat_domesticated_jakku	Jakkuan Domesticated Meat	creature_food	meat_domesticated	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
-meat_egg_jakku	Jakkuan Egg Meat	creature_food	meat_egg	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
-meat_herbivore_jakku	Jakkuan Herbivore Meat	creature_food	meat_herbivore	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
-meat_insect_jakku	Jakkuan Insect Meat	creature_food	meat_insect	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
-meat_reptillian_jakku	Jakkuan Reptillian Meat	creature_food	meat_reptillian	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
-meat_wild_jakku	Jakkuan Wild Meat	creature_food	meat_wild	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
-milk_domesticated_jakku	Jakkuan Domesticated Milk	creature_food	milk_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	milk	milk	|PLANETID|
-milk_wild_jakku	Jakkuan Wild Milk	creature_food	milk_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	milk	milk	|PLANETID|
-oats_domesticated_jakku	Jakkuan Domesticated Oats	flora_food	oats_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	oats	|PLANETID|
-oats_wild_jakku	Jakkuan Wild Oats	flora_food	oats_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	oats	|PLANETID|
-rice_domesticated_jakku	Jakkuan Domesticated Rice	flora_food	rice_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	rice	|PLANETID|
-rice_wild_jakku	Jakkuan Wild Rice	flora_food	rice_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	rice	|PLANETID|
-seafood_crustacean_jakku	Jakkuan Crustacean Meat	creature_food	seafood_crustacean	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
-seafood_fish_jakku	Jakkuan Fish Meat	creature_food	seafood_fish	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
-seafood_mollusk_jakku	Jakkuan Mollusk Meat	creature_food	seafood_mollusk	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	|PLANETID|
-softwood_conifer_jakku	Jakkuan Conifer Wood	flora_structural	softwood	1	1	0	0	0	0	1	600	0	0	0	0	600	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	|PLANETID|
-softwood_evergreen_jakku	Jakkuan Evergreen Wood	flora_structural	softwood_evergreen	1	1	0	0	0	0	1	500	0	0	0	0	800	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	|PLANETID|
-vegetable_beans_jakku	Jakkuan Vegetable Beans	flora_food	vegetable_beans	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_beans	|PLANETID|
-vegetable_fungi_jakku	Jakkuan Vegetable Fungus	flora_food	vegetable_fungi	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_fungi	|PLANETID|
-vegetable_greens_jakku	Jakkuan Vegetable Greens	flora_food	vegetable_greens	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_greens	|PLANETID|
-vegetable_tubers_jakku	Jakkuan Vegetable Tubers	flora_food	vegetable_tubers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_tubers	|PLANETID|
-water_vapor_jakku	Jakkuan Water Vapor	water	water	1	5	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	600	1000	0	0	0	0	0	0	water	water	|PLANETID|
-wheat_domesticated_jakku	Jakkuan Domesticated Wheat	flora_food	wheat_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	wheat	|PLANETID|
-wheat_wild_jakku	Jakkuan Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	wheat	|PLANETID|
-wood_deciduous_jakku	Jakkuan Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	|PLANETID|
+aluminum_jakku	Jakkuan Aluminum	mineral	aluminum	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	aluminum	aluminum	18
+copper_jakku	Jakkuan Copper	mineral	copper	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	copper	copper	18
+armophous_jakku	Jakkuan Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	18
+crystalline_jakku	Jakkuan Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	18
+gas_inert_jakku	Jakkuan Inert Gas	gas	gas_inert	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	18
+gas_reactive_jakku	Jakkuan Reactive Gas	gas	gas_reactive	1	1	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_reactive	gas_reactive	18
+iron_jakku	Jakkuan Iron	mineral	iron	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	iron	metal_ferrous	18
+ore_extrusive_jakku	Jakkuan Extrusive Ore	mineral	ore_extrusive	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	18
+ore_intrusive_jakku	Jakkuan Intrusive Ore	mineral	ore_intrusive	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	18
+ore_carbonate_jakku	Jakkuan Carbonate Ore	mineral	ore_carbonate	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_carbonate	ore_carbonate	18
+ore_siliclastic_jakku	Jakkuan Siliclastic Ore	mineral	ore_siliclastic	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_siliclastic	ore_siliclastic	18
+petrochem_fuel_liquid_jakku	Jakkuan Liquid Petrochem Fuel	chemical	fuel_petrochem_liquid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	18
+petrochem_fuel_solid_jakku	Jakkuan Solid Petrochem Fuel	mineral	fuel_petrochem_solid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	18
+radioactive_jakku	Jakkuan Radioactive	mineral	radioactive	1	2	0	0	0	0	1	800	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	radioactive	radioactive	18
+steel_jakku	Jakkuan Steel	mineral	steel	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	steel	steel	18
+bone_avian_jakku	Jakkuan Avian Bones	creature_structural	bone_avian	1	1	0	0	0	0	1	700	0	0	0	0	1	600	0	0	1	1000	100	500	1	500	0	0	bone	bone	18
+bone_horn_jakku	Jakkuan Horn	creature_structural	bone_horn	1	1	0	0	0	0	200	1000	0	0	0	0	1	500	0	0	1	1000	300	700	1	500	0	0	bone	bone_horn	18
+bone_mammal_jakku	Jakkuan Animal Bones	creature_structural	bone	1	1	0	0	0	0	300	1000	0	0	0	0	1	500	0	0	1	1000	400	1000	1	1000	0	0	bone	bone	18
+corn_domesticated_jakku	Jakkuan Domesticated Corn	flora_food	corn_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	corn	18
+corn_wild_jakku	Jakkuan Wild Corn	flora_food	corn_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	corn	18
+energy_renewable_site_limited_geothermal_jakku	Jakkuan Geothermal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	energy	energy	18
+energy_renewable_site_limited_hydron3_jakku	Jakkuan Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	18
+energy_renewable_site_limited_tidal_jakku	Jakkuan Tidal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	18
+energy_renewable_unlimited_solar_jakku	Jakkuan Solar Renewable Energy	energy	energy_renewable_unlimited_solar	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	600	500	500	0	0	0	0	0	0	energy	energy	18
+energy_renewable_unlimited_wind_jakku	Jakkuan Wind Renewable Energy	energy	energy_renewable_unlimited_wind	1	1	0	0	0	0	0	0	0	0	0	0	0	0	1	400	500	500	0	0	0	0	0	0	energy	energy	18
+fiberplast_jakku	Jakkuan Fiberplast	chemical	fiberplast	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	inorganic	fiberplast	18
+fruit_berries_jakku	Jakkuan Berry Fruit	flora_food	fruit_berries	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_berries	18
+fruit_flowers_jakku	Jakkuan Flower Fruit	flora_food	fruit_flowers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	seeds	fruit_berries	18
+fruit_fruits_jakku	Jakkuan Fruit	flora_food	fruit_fruits	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_fruits	18
+hide_bristley_jakku	Jakkuan Bristley Hide	creature_structural	hide_bristley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_bristley	18
+hide_leathery_jakku	Jakkuan Leathery Hide	creature_structural	hide_leathery	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_leathery	18
+hide_scaley_jakku	Jakkuan Scaley Hide	creature_structural	hide_scaley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_scaley	18
+hide_wooly_jakku	Jakkuan Wooly Hide	creature_structural	hide_wooly	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_wooly	18
+meat_avian_jakku	Jakkuan Avian Meat	creature_food	meat_avian	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	18
+meat_carnivore_jakku	Jakkuan Carnivore Meat	creature_food	meat_carnivore	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	18
+meat_domesticated_jakku	Jakkuan Domesticated Meat	creature_food	meat_domesticated	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	18
+meat_egg_jakku	Jakkuan Egg Meat	creature_food	meat_egg	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	18
+meat_herbivore_jakku	Jakkuan Herbivore Meat	creature_food	meat_herbivore	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	18
+meat_insect_jakku	Jakkuan Insect Meat	creature_food	meat_insect	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	18
+meat_reptillian_jakku	Jakkuan Reptillian Meat	creature_food	meat_reptillian	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	18
+meat_wild_jakku	Jakkuan Wild Meat	creature_food	meat_wild	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	18
+milk_domesticated_jakku	Jakkuan Domesticated Milk	creature_food	milk_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	milk	milk	18
+milk_wild_jakku	Jakkuan Wild Milk	creature_food	milk_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	milk	milk	18
+oats_domesticated_jakku	Jakkuan Domesticated Oats	flora_food	oats_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	oats	18
+oats_wild_jakku	Jakkuan Wild Oats	flora_food	oats_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	oats	18
+rice_domesticated_jakku	Jakkuan Domesticated Rice	flora_food	rice_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	rice	18
+rice_wild_jakku	Jakkuan Wild Rice	flora_food	rice_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	rice	18
+seafood_crustacean_jakku	Jakkuan Crustacean Meat	creature_food	seafood_crustacean	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	18
+seafood_fish_jakku	Jakkuan Fish Meat	creature_food	seafood_fish	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	18
+seafood_mollusk_jakku	Jakkuan Mollusk Meat	creature_food	seafood_mollusk	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	18
+softwood_conifer_jakku	Jakkuan Conifer Wood	flora_structural	softwood	1	1	0	0	0	0	1	600	0	0	0	0	600	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	18
+softwood_evergreen_jakku	Jakkuan Evergreen Wood	flora_structural	softwood_evergreen	1	1	0	0	0	0	1	500	0	0	0	0	800	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	18
+vegetable_beans_jakku	Jakkuan Vegetable Beans	flora_food	vegetable_beans	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_beans	18
+vegetable_fungi_jakku	Jakkuan Vegetable Fungus	flora_food	vegetable_fungi	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_fungi	18
+vegetable_greens_jakku	Jakkuan Vegetable Greens	flora_food	vegetable_greens	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_greens	18
+vegetable_tubers_jakku	Jakkuan Vegetable Tubers	flora_food	vegetable_tubers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_tubers	18
+water_vapor_jakku	Jakkuan Water Vapor	water	water	1	5	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	600	1000	0	0	0	0	0	0	water	water	18
+wheat_domesticated_jakku	Jakkuan Domesticated Wheat	flora_food	wheat_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	wheat	18
+wheat_wild_jakku	Jakkuan Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	wheat	18
+wood_deciduous_jakku	Jakkuan Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	18
