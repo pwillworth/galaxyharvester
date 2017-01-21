@@ -115,6 +115,7 @@ else:
     else:
         cursor = conn.cursor()
         updatestr = "UPDATE tUsers SET verificationCode='" + verify_code + "', emailChange='" + email + "' WHERE userID='" + currentUser + "';"
+        cursor.execute(updatestr)
         sendVerificationMail(currentUser, email, verify_code)
         result = "E-Mail Address Update Verification Email Sent.  Check your e-mail at this new address to finalize the change."
         cursor.close()
