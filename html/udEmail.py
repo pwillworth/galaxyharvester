@@ -21,11 +21,18 @@
 """
 
 import os
+import sys
+import uuid
 import cgi
 import Cookie
 import MySQLdb
 import dbSession
 import dbShared
+sys.path.append("../")
+import dbInfo
+from mailer import Mailer
+from mailer import Message
+import mailInfo
 
 
 def sendVerificationMail(user, address, code):
@@ -97,6 +104,7 @@ if (logged_state == 0):
 if (errstr != ''):
     result = "Your E-mail Address could not be updated because of the following errors:\r\n" + errstr
 else:
+    verify_code = uuid.uuid4().hex
     conn = dbShared.ghConn()
     # Do not allow duplicate email
     ecursor = conn.cursor()
@@ -107,7 +115,7 @@ else:
     else:
         cursor = conn.cursor()
         updatestr = "UPDATE tUsers SET verificationCode='" + verify_code + "', emailChange='" + email + "' WHERE userID='" + currentUser + "';"
-        sendVerificationMail(uname, email, verify_code)
+        sendVerificationMail(currentUser, email, verify_code)
         result = "E-Mail Address Update Verification Email Sent.  Check your e-mail at this new address to finalize the change."
         cursor.close()
 
