@@ -57,13 +57,13 @@ else:
     row = cursor.fetchone()
     if row != None:
         timeSinceCreated = datetime.fromtimestamp(time.time()) - row[1]
-        if timeSinceCreated.days > 0:
+        if timeSinceCreated.days > 0 and verifytype != "mail":
             result = "verifyfail"
             errorstr = "That verification code is expired.  Please try joining again to get a new code."
         else:
-            if vt == "mail":
+            if verifytype == "mail":
                 result = "verifymailsuccess"
-                updatestr = "UPDATE tUsers SET emailChange=emailAddress, emailAddress=emailChange WHERE userID='" + currentUser + "';"
+                updatestr = "UPDATE tUsers SET emailAddress=emailChange WHERE userID='" + row[0] + "';"
             else:
                 updatestr = "UPDATE tUsers SET userState=1 WHERE userID='" + row[0] + "';"
             cursor.execute(updatestr)
