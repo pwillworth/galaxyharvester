@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2016 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -75,7 +75,7 @@ if (countsCursor):
 agingCursor = conn.cursor()
 if (agingCursor):
 	# Non JTL inorganics max spawn length 11 days
-	agingSQL = "SELECT spawnID, galaxy FROM tResources INNER JOIN tResourceType ON tResources.resourceType = tResourceType.resourceType INNER JOIN tResourceTypeGroup ON tResourceType.resourceType = tResourceTypeGroup.resourceType WHERE unavailableBy IS NULL AND entered < (NOW() - INTERVAL 11 DAY) AND tResourceTypeGroup.resourceGroup = 'inorganic' AND tResourceType.resourceType NOT IN ('aluminum_pervoskitic', 'copper_borocarbitic', 'ore_siliclastic_fermionic', 'radioactive_polymetric', 'steel_arveshian', 'steel_bicorbantium', 'fiberplast_gravitonic', 'gas_reactive_organometallic');"
+	agingSQL = "SELECT spawnID, galaxy FROM tResources INNER JOIN tResourceType ON tResources.resourceType = tResourceType.resourceType INNER JOIN tResourceTypeGroup ON tResourceType.resourceType = tResourceTypeGroup.resourceType WHERE unavailableBy IS NULL AND entered < (NOW() - INTERVAL 11 DAY) AND tResourceTypeGroup.resourceGroup = 'inorganic' AND tResourceType.resourceType NOT IN ('aluminum_perovskitic', 'copper_borocarbitic', 'ore_siliclastic_fermionic', 'radioactive_polymetric', 'steel_arveshian', 'steel_bicorbantium', 'fiberplast_gravitonic', 'gas_reactive_organometallic');"
 	agingCursor.execute(agingSQL)
 	sys.stdout.write("Updating " + str(agingCursor.rowcount) + " rows Non-JTL inorganics for auto mark unavailable.\n")
 	cleanupCursor = conn.cursor()
