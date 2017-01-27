@@ -761,8 +761,8 @@ wood_deciduous_tatooine	Tatooinian Deciduous Wood	flora_structural	wood_deciduou
 wood_deciduous_yavin4	Yavinian Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	10
 aluminum_hoth	Hothian Aluminum	mineral	aluminum	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	aluminum	aluminum	11
 copper_hoth	Hothian Copper	mineral	copper	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	copper	copper	11
-armophous_hoth	Hothian Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	11
-crystalline_hoth	Hothian Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	11
+armophous_hoth	Hothian Amorphous Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	11
+crystalline_hoth	Hothian Crystalline Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	11
 gas_inert_hoth	Hothian Inert Gas	gas	gas_inert	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	11
 gas_reactive_hoth	Hothian Reactive Gas	gas	gas_reactive	1	1	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_reactive	gas_reactive	11
 iron_hoth	Hothian Iron	mineral	iron	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	iron	metal_ferrous	11
@@ -776,8 +776,8 @@ radioactive_hoth	Hothian Radioactive	mineral	radioactive	1	2	0	0	0	0	1	800	0	0	0
 steel_hoth	Hothian Steel	mineral	steel	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	steel	steel	11
 aluminum_mustafar	Mustafarian Aluminum	mineral	aluminum	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	aluminum	aluminum	15
 copper_mustafar	Mustafarian Copper	mineral	copper	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	copper	copper	15
-armophous_mustafar	Mustafarian Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	15
-crystalline_mustafar	Mustafarian Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	15
+armophous_mustafar	Mustafarian Amorphous Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	15
+crystalline_mustafar	Mustafarian Crystalline Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	15
 gas_inert_mustafar	Mustafarian Inert Gas	gas	gas_inert	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	15
 gas_reactive_mustafar	Mustafarian Reactive Gas	gas	gas_reactive	1	1	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_reactive	gas_reactive	15
 iron_mustafar	Mustafarian Iron	mineral	iron	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	iron	metal_ferrous	15
@@ -836,8 +836,8 @@ wheat_wild_mustafar	Mustafarian Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1
 wood_deciduous_mustafar	Mustafarian Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	15
 aluminum_taanab	Taanab Aluminum	mineral	aluminum	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	aluminum	aluminum	16
 copper_taanab	Taanab Copper	mineral	copper	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	copper	copper	16
-armophous_taanab	Taanab Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	16
-crystalline_taanab	Taanab Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	16
+armophous_taanab	Taanab Amorphous Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	16
+crystalline_taanab	Taanab Crystalline Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	16
 gas_inert_taanab	Taanab Inert Gas	gas	gas_inert	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	16
 gas_reactive_taanab	Taanab Reactive Gas	gas	gas_reactive	1	1	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_reactive	gas_reactive	16
 iron_taanab	Taanab Iron	mineral	iron	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	iron	metal_ferrous	16
@@ -896,8 +896,8 @@ wheat_wild_taanab	Taanab Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000	300
 wood_deciduous_taanab	Taanab Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	16
 aluminum_kaas	Kaasian Aluminum	mineral	aluminum	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	aluminum	aluminum	12
 copper_kaas	Kaasian Copper	mineral	copper	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	copper	copper	12
-armophous_kaas	Kaasian Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	12
-crystalline_kaas	Kaasian Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	12
+armophous_kaas	Kaasian Amorphous Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	12
+crystalline_kaas	Kaasian Crystalline Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	12
 gas_inert_kaas	Kaasian Inert Gas	gas	gas_inert	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	12
 gas_reactive_kaas	Kaasian Reactive Gas	gas	gas_reactive	1	1	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_reactive	gas_reactive	12
 iron_kaas	Kaasian Iron	mineral	iron	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	iron	metal_ferrous	12
@@ -911,8 +911,8 @@ radioactive_kaas	Kaasian Radioactive	mineral	radioactive	1	2	0	0	0	0	1	800	0	0	0
 steel_kaas	Kaasian Steel	mineral	steel	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	steel	steel	12
 aluminum_mandalore	Mandalore Aluminum	mineral	aluminum	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	aluminum	aluminum	14
 copper_mandalore	Mandalore Copper	mineral	copper	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	copper	copper	14
-armophous_mandalore	Mandalore Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	14
-crystalline_mandalore	Mandalore Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	14
+armophous_mandalore	Mandalore Amorphous Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	14
+crystalline_mandalore	Mandalore Crystalline Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	14
 gas_inert_mandalore	Mandalore Inert Gas	gas	gas_inert	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	14
 gas_reactive_mandalore	Mandalore Reactive Gas	gas	gas_reactive	1	1	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_reactive	gas_reactive	14
 iron_mandalore	Mandalore Iron	mineral	iron	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	iron	metal_ferrous	14
@@ -926,8 +926,8 @@ radioactive_mandalore	Mandalore Radioactive	mineral	radioactive	1	2	0	0	0	0	1	80
 steel_mandalore	Mandalore Steel	mineral	steel	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	steel	steel	14
 aluminum_kashyyyk	Kashyyyk Aluminum	mineral	aluminum	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	aluminum	aluminum	13
 copper_kashyyyk	Kashyyyk Copper	mineral	copper	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	copper	copper	13
-armophous_kashyyyk	Kashyyyk Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	13
-crystalline_kashyyyk	Kashyyyk Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	13
+armophous_kashyyyk	Kashyyyk Amorphous Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	13
+crystalline_kashyyyk	Kashyyyk Crystalline Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	13
 gas_inert_kashyyyk	Kashyyyk Inert Gas	gas	gas_inert	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	13
 gas_reactive_kashyyyk	Kashyyyk Reactive Gas	gas	gas_reactive	1	1	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_reactive	gas_reactive	13
 iron_kashyyyk	Kashyyyk Iron	mineral	iron	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	iron	metal_ferrous	13
@@ -986,8 +986,8 @@ wheat_wild_kashyyyk	Kashyyyk Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000
 wood_deciduous_kashyyyk	Kashyyyk Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	13
 aluminum_lothal	Lothal Aluminum	mineral	aluminum	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	aluminum	aluminum	17
 copper_lothal	Lothal Copper	mineral	copper	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	copper	copper	17
-armophous_lothal	Lothal Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	17
-crystalline_lothal	Lothal Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	17
+armophous_lothal	Lothal Amorphous Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	17
+crystalline_lothal	Lothal Crystalline Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	17
 gas_inert_lothal	Lothal Inert Gas	gas	gas_inert	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	17
 gas_reactive_lothal	Lothal Reactive Gas	gas	gas_reactive	1	1	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_reactive	gas_reactive	17
 iron_lothal	Lothal Iron	mineral	iron	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	iron	metal_ferrous	17
@@ -1046,8 +1046,8 @@ wheat_wild_lothal	Lothal Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000	300
 wood_deciduous_lothal	Lothal Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	17
 aluminum_jakku	Jakkuan Aluminum	mineral	aluminum	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	aluminum	aluminum	18
 copper_jakku	Jakkuan Copper	mineral	copper	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	copper	copper	18
-armophous_jakku	Jakkuan Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	18
-crystalline_jakku	Jakkuan Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	18
+armophous_jakku	Jakkuan Amorphous Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	18
+crystalline_jakku	Jakkuan Crystalline Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	18
 gas_inert_jakku	Jakkuan Inert Gas	gas	gas_inert	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	18
 gas_reactive_jakku	Jakkuan Reactive Gas	gas	gas_reactive	1	1	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_reactive	gas_reactive	18
 iron_jakku	Jakkuan Iron	mineral	iron	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	iron	metal_ferrous	18

@@ -1,0 +1,17 @@
+use swgresource;
+UPDATE tResourceType SET resourceTypeName='Hothian Amorphous Gemstone' WHERE resourceType='armophous_hoth';
+UPDATE tResourceType SET resourceTypeName='Hothian Crystalline Gemstone' WHERE resourceType='crystalline_hoth';
+UPDATE tResourceType SET resourceTypeName='Mustafarian Amorphous Gemstone' WHERE resourceType='armophous_mustafar';
+UPDATE tResourceType SET resourceTypeName='Mustafarian Crystalline Gemstone' WHERE resourceType='crystalline_mustafar';
+UPDATE tResourceType SET resourceTypeName='Taanab Amorphous Gemstone' WHERE resourceType='armophous_taanab';
+UPDATE tResourceType SET resourceTypeName='Taanab Crystalline Gemstone' WHERE resourceType='crystalline_taanab';
+UPDATE tResourceType SET resourceTypeName='Kaasian Amorphous Gemstone' WHERE resourceType='armophous_kaas';
+UPDATE tResourceType SET resourceTypeName='Kaasian Crystalline Gemstone' WHERE resourceType='crystalline_kaas';
+UPDATE tResourceType SET resourceTypeName='Mandalore Amorphous Gemstone' WHERE resourceType='armophous_mandalore';
+UPDATE tResourceType SET resourceTypeName='Mandalore Crystalline Gemstone' WHERE resourceType='crystalline_mandalore';
+UPDATE tResourceType SET resourceTypeName='Kashyyyk Amorphous Gemstone' WHERE resourceType='armophous_kashyyyk';
+UPDATE tResourceType SET resourceTypeName='Kashyyyk Crystalline Gemstone' WHERE resourceType='crystalline_kashyyyk';
+UPDATE tResourceType SET resourceTypeName='Lothal Amorphous Gemstone' WHERE resourceType='armophous_lothal';
+UPDATE tResourceType SET resourceTypeName='Lothal Crystalline Gemstone' WHERE resourceType='crystalline_lothal';
+UPDATE tResourceType SET resourceTypeName='Jakkuan Amorphous Gemstone' WHERE resourceType='armophous_jakku';
+UPDATE tResourceType SET resourceTypeName='Jakkuan Crystalline Gemstone' WHERE resourceType='crystalline_jakku';
