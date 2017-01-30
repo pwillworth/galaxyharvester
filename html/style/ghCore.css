@@ -55,6 +55,18 @@ body {
 .logo13 {
 	background-image: url('/images/headers/tatooine01.png');
 }
+.logo14 {
+	background-image: url('/images/headers/lothal01.png');
+}
+.logo15 {
+	background-image: url('/images/headers/lothal02.png');
+}
+.logo16 {
+	background-image: url('/images/headers/mandalore01.png');
+}
+.logo17 {
+	background-image: url('/images/headers/taanab01.png');
+}
 .nameLink {
 	text-decoration: none;
 }

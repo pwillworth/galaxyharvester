@@ -29,7 +29,7 @@ import sys
 BASE_SCRIPT_URL = '/'
 DEFAULT_THEME = 'crafter'
 DEFAULT_GALAXY = '14'
-imgNum = random.randint(1,13)
+imgNum = random.randint(1,17)
 
 def timeAgo(theTime):
 	try:
