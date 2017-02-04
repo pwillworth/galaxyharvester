@@ -42,9 +42,24 @@ MIN_REP_VALS = {'VERIFY_RESOURCE': -99,
                 'EDIT_RESOURCE_GALAXY_NAME': 50,
                 'UPDATE_SCHEMATIC_IMAGE': 15,
                 'ADD_SCHEMATIC': 25,
-                'EDIT_OTHER_SCHEMATIC': 50,
+                'EDIT_OTHER_SCHEMATIC': 75,
                 'ADD_CREATURE': 10,
                 'EDIT_OTHER_CREATURE': 30}
+
+# Descriptions about abilities users can unlock
+ABILITY_DESCR = {'VERIFY_RESOURCE': 'verify resources',
+                'ADD_WAYPOINT': 'add waypoints',
+                'VERIFY_WAYPOINT': 'verify waypoints',
+                'ADD_RES_PLANET': 'add resources to planets',
+                'ADD_RESOURCE': 'add new resources',
+                'REMOVE_RESOURCE': 'mark resources unavailable',
+                'EDIT_RESOURCE_STATS_TYPE': 'edit resource stats and type',
+                'EDIT_RESOURCE_GALAXY_NAME': 'move resources to different galaxy or change their name',
+                'UPDATE_SCHEMATIC_IMAGE': 'update images on schematics',
+                'ADD_SCHEMATIC': 'add new schematics',
+                'EDIT_OTHER_SCHEMATIC': 'edit other users schematic entries',
+                'ADD_CREATURE': 'add new creature resource type data',
+                'EDIT_OTHER_CREATURE': 'edit other users creature data entries'}
 
 
 def timeAgo(theTime):

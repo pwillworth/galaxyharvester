@@ -446,7 +446,7 @@ table.quickAdd td {
 	text-decoration: none;
 	text-align: center;
 }
-ul.alert li {
+ul.alert li, ul.alert > li > div.tableHead {
 	margin: 2px;
 	border-radius: 2px;
 }

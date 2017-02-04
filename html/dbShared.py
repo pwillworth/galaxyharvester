@@ -30,6 +30,7 @@ import dbInfo
 import subprocess
 import ghObjects
 import ghNames
+import ghShared
 
 
 def ghConn():
@@ -94,6 +95,7 @@ def logEvent(sqlStr, eventType, user, galaxy, spawnID):
 			cursor.execute("UPDATE tUserStats SET waypoint = waypoint + 1 WHERE userID = '" + user + "' AND galaxy=" + str(galaxy) + ";")
 		elif eventType == '+':
 			cursor.execute("UPDATE tUserStats SET repGood = repGood + 1 WHERE userID = '" + user + "' AND galaxy=" + str(galaxy) + ";")
+			checkUserAbilities(conn, user, galaxy)
 		elif eventType == '-':
 			cursor.execute("UPDATE tUserStats SET repBad = repBad + 1 WHERE userID = '" + user + "' AND galaxy=" + str(galaxy) + ";")
 		cursor.close()
@@ -444,3 +446,19 @@ def getUserPostBlockedSecondsRemaining(userID, targetType):
 	cursor.close()
 	conn.close()
 	return retVal
+
+def checkUserAbilities(conn, userID, galaxy):
+	# See if Rep bonus has granted new ability and alert
+	stats = getUserStats(userID, galaxy).split(',')
+	reputation = int(stats[2])
+	for k, v in ghShared.MIN_REP_VALS.iteritems():
+		if v == reputation:
+			alertNewAbility(conn, userID, k, galaxy)
+
+def alertNewAbility(conn, userID, abilityKey, galaxy):
+    # Add alert with custom message about new ability user has unlocked
+	message = "Congratuations!  You have unlocked a new ability on Galaxy Harvester in {1} galaxy.  You can now {0}.  Thanks for your contributions, and keep the the good work!".format(ghShared.ABILITY_DESCR[abilityKey], ghNames.getGalaxyName(galaxy))
+	alertLink = "/user.py?uid={0}".format(userID)
+	alertcursor = conn.cursor()
+	alertcursor.execute("INSERT INTO tAlerts (userID, alertType, alertTime, alertMessage, alertLink, alertStatus) VALUES ('{0}', 1, NOW(), '{1}', '{2}', 0);".format(userID, message, alertLink))
+	alertcursor.close()
