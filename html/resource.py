@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2016 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -232,12 +232,8 @@ def main():
 				# Only show update tools if user logged in and has positive reputation
 				stats = dbShared.getUserStats(currentUser, galaxy).split(",")
 				userReputation = int(stats[2])
-				if userReputation < dbShared.MIN_REP_EDIT_RESOURCE or galaxyState != 1:
-					editable = 0
-				else:
-					editable = logged_state
 
-				resHTML = spawn.getHTML(editable, 0, "")
+				resHTML = spawn.getHTML(0, "", logged_state > 0 and galaxyState == 1, userReputation)
 
 				resHistory = getResourceHistory(conn, spawn.spawnID)
 			conn.close()
@@ -253,7 +249,7 @@ def main():
 	env.globals['BASE_SCRIPT_URL'] = ghShared.BASE_SCRIPT_URL
 	env.globals['MOBILE_PLATFORM'] = ghShared.getMobilePlatform(os.environ['HTTP_USER_AGENT'])
 	template = env.get_template('resource.html')
-	print template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), spawnName=spawnName, resHTML=resHTML, resHistory=resHistory, userReputation=userReputation, spawnID=spawnID, spawnGalaxy=galaxy)
+	print template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), spawnName=spawnName, resHTML=resHTML, resHistory=resHistory, showAdmin=(userReputation >= ghShared.MIN_REP_VALS['EDIT_RESOURCE_GALAXY_NAME']), spawnID=spawnID, spawnGalaxy=galaxy)
 
 
 if __name__ == "__main__":

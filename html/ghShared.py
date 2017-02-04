@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2016 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -30,6 +30,22 @@ BASE_SCRIPT_URL = '/'
 DEFAULT_THEME = 'crafter'
 DEFAULT_GALAXY = '14'
 imgNum = random.randint(1,17)
+
+# Minimum reputation needed to perform actions
+MIN_REP_VALS = {'VERIFY_RESOURCE': -99,
+                'ADD_WAYPOINT': -99,
+                'VERIFY_WAYPOINT': -99,
+                'ADD_RES_PLANET': -99,
+                'ADD_RESOURCE': -99,
+                'REMOVE_RESOURCE': 0,
+                'EDIT_RESOURCE_STATS_TYPE': 0,
+                'EDIT_RESOURCE_GALAXY_NAME': 50,
+                'UPDATE_SCHEMATIC_IMAGE': 15,
+                'ADD_SCHEMATIC': 25,
+                'EDIT_OTHER_SCHEMATIC': 50,
+                'ADD_CREATURE': 10,
+                'EDIT_OTHER_CREATURE': 30}
+
 
 def timeAgo(theTime):
 	try:

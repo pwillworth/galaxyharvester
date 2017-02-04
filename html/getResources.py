@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2016 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -28,7 +28,6 @@ import cgi
 import MySQLdb
 import time
 from datetime import timedelta, datetime
-import ghShared
 import ghLists
 import dbShared
 import ghObjects
@@ -59,7 +58,7 @@ def getResourceCountSQL(wpCriteria, favCols, joinStr, orderCol, orderStr, criter
 
 	return sqlStr1
 
-def getResourceData(conn, resSQL, editable, galaxyState, formatType):
+def getResourceData(conn, resSQL, userReputation, activeUser, formatType):
 	# get resource data for given criteria
 	resourceHTML = ''
 	s = None
@@ -130,13 +129,13 @@ def getResourceData(conn, resSQL, editable, galaxyState, formatType):
 				resourceHTML += '  <tr><td>'
 
 			if formatType == 'mobile':
-				resourceHTML += s.getMobileHTML(editable)
+				resourceHTML += s.getMobileHTML(activeUser)
 			elif formatType == 'compare':
-				resourceHTML += s.getHTML(editable, 1, '')
+				resourceHTML += s.getHTML(1, '', activeUser, userReputation)
 			elif formatType == 'json':
 				resourceHTML += s.getJSON()
 			else:
-				resourceHTML += s.getHTML(editable, 0, '')
+				resourceHTML += s.getHTML(0, '', activeUser, userReputation)
 
 			if formatType == 'json':
 				resourceHTML += '    },\n'
@@ -334,10 +333,7 @@ if lastValue != "":
 
 # Only show update tools if user logged in and has positive reputation
 stats = dbShared.getUserStats(currentUser, galaxy).split(",")
-if int(stats[2]) < dbShared.MIN_REP_EDIT_RESOURCE or galaxyState != 1:
-	editable = 0
-else:
-	editable = logged_state
+userReputation = int(stats[2])
 
 if formatType == 'json':
 	print 'Content-type: text/json\n'
@@ -350,7 +346,7 @@ if (errorStr == ""):
 	conn = dbShared.ghConn()
 	if (compare == '' or compare == 'undefined' or logged_state == 0):
 		resSQL = getResourceSQL(wpCriteria, favCols, joinStr, orderCol, orderStr, criteriaStr, galaxyCriteriaStr, '')
-		resData = getResourceData(conn, resSQL, editable, galaxyState, formatType)
+		resData = getResourceData(conn, resSQL, userReputation, logged_state > 0 and galaxyState == 1, formatType)
 		tokenPosition = resData.find('maxRowsReached')
 		if tokenPosition > -1:
 			resData += '<div style="text-align:center;"><button id="nextResourcesButton" class="ghButton" style="margin:10px;" onclick="moreResources(\''+ resData[tokenPosition+14:resData.find('</div>', tokenPosition)] + '\', \'next\');">Next 20</button></div>'
@@ -361,11 +357,11 @@ if (errorStr == ""):
 		resData += '<div class="inlineBlock" style="width:50%">'
 		resData += '<h4>Galaxy</h4>'
 		resSQL = getResourceSQL(wpCriteria, favCols, joinStr, orderCol, orderStr, criteriaStr, galaxyCriteriaStr, '')
-		resData += getResourceData(conn, resSQL, editable, galaxyState, formatType)
+		resData += getResourceData(conn, resSQL, userReputation, logged_state > 0 and galaxyState == 1, formatType)
 		resData += '</div><div class="inlineBlock" style="width:50%">'
 		resData += '<h4>My Inventory</h4>'
 		resSQL = getResourceSQL(wpCriteria, favCols, joinStr, orderCol, orderStr, criteriaStr, '', 'y')
-		resData += getResourceData(conn, resSQL, editable, galaxyState, formatType)
+		resData += getResourceData(conn, resSQL, userReputation, logged_state > 0 and galaxyState == 1, formatType)
 		resData += '</div></div>'
 		tokenPosition = resData.find('maxRowsReached')
 		if tokenPosition > -1:

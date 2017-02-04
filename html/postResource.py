@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2016 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -26,6 +26,7 @@ import re
 import Cookie
 import dbSession
 import dbShared
+import ghShared
 import cgi
 import MySQLdb
 from xml.dom import minidom
@@ -259,7 +260,7 @@ def addResStats(spawn, resType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER, forc
 			# update resource stats
 			# Only allow update if user has positive reputation
 			stats = dbShared.getUserStats(currentUser, galaxy).split(",")
-			if int(stats[2]) < dbShared.MIN_REP_EDIT_RESOURCE:
+			if int(stats[2]) < ghShared.MIN_REP_VALS['EDIT_RESOURCE_STATS_TYPE']:
 				returnStr = "Error: You must earn a little reputation on the site before you can edit resources.  Try adding or verifying some first. \r\n"
 			elif hasStats:
 				tempSQL = "UPDATE tResources SET enteredBy='" + currentUser + "', CR=" + n2n(CR) + ", CD=" + n2n(CD) + ", DR=" + n2n(DR) + ", FL=" + n2n(FL) + ", HR=" + n2n(HR) + ", MA=" + n2n(MA) + ", PE=" + n2n(PE) + ", OQ=" + n2n(OQ) + ", SR=" + n2n(SR) + ", UT=" + n2n(UT) + ", ER=" + n2n(ER) + " WHERE spawnID=" + str(spawn) + ";"

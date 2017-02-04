@@ -10,7 +10,7 @@ class TestObjects(unittest.TestCase):
 	def setUp(self):
 		# nothin yet
 		self.test = "rad"
-	
+
 	def test_spawnHTML(self):
 		# arrange
 		spawnName = "testspawn"
@@ -32,7 +32,7 @@ class TestObjects(unittest.TestCase):
 		s.stats.SR = 450
 		s.stats.UT = 800
 		s.stats.ER = 0
-		
+
 		s.percentStats.CR = None
 		s.percentStats.CD = None
 		s.percentStats.DR = 780.0/800
@@ -52,9 +52,9 @@ class TestObjects(unittest.TestCase):
 		s.unavailableBy = None
 		s.maxWaypointConc = None
 
-		# act		
+		# act
 		mobileHTML = s.getMobileHTML(0)
-		normalHTML = s.getHTML(0, 0, "")
+		normalHTML = s.getHTML(0, "", 0, 0)
 		rowHTML = s.getRow(0)
 		invHTML = s.getInventoryObject()
 
@@ -88,4 +88,3 @@ class TestObjects(unittest.TestCase):
 
 if __name__ == '__main__':
 	unittest.main()
-

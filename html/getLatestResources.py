@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2016 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -27,7 +27,6 @@ import dbSession
 import dbShared
 import cgi
 import MySQLdb
-import ghShared
 import ghLists
 import ghObjects
 #
@@ -82,10 +81,7 @@ if galaxy != '':
 
 	# Only show update tools if user logged in and has positive reputation
 	stats = dbShared.getUserStats(currentUser, galaxy).split(",")
-	if int(stats[2]) < dbShared.MIN_REP_EDIT_RESOURCE or galaxyState != 1:
-		editable = 0
-	else:
-		editable = logged_state
+	userReputation = int(stats[2])
 
 	cursor = conn.cursor()
 	if (cursor):
@@ -148,7 +144,7 @@ if galaxy != '':
 			s.planets = dbShared.getSpawnPlanets(conn, row[0], True, row[2])
 
 			print '  <tr><td>'
-			print s.getHTML(editable, 1, "")
+			print s.getHTML(1, "", logged_state > 0 and galaxyState == 1, userReputation)
 			print '</td></tr>'
 			row = cursor.fetchone()
 

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2016 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -91,7 +91,7 @@ class resourceSpawn:
 		result += '</ul>'
 		return result
 
-	def getHTML(self, editable, formatStyle, resBoxMargin):
+	def getHTML(self, formatStyle, resBoxMargin, loggedIn, reputation):
 		result = ''
 		unPlanetStr = ",'all'"
 		statHeads = ""
@@ -225,10 +225,10 @@ class resourceSpawn:
 			result += '    <div style="margin-bottom:4px;text-align:left;"><span style="font-size: 12px;"><a href="' + ghShared.BASE_SCRIPT_URL + 'resource.py/'+str(self.spawnGalaxy)+'/'+self.spawnName+'" class="nameLink">'+self.spawnName+'</a></span>'
 		else:
 			result += '    <div style="margin-bottom:4px;text-align:left;"><span style="font-size: 12px;font-weight: bold;"><a href="' + ghShared.BASE_SCRIPT_URL + 'resource.py/'+str(self.spawnGalaxy)+'/'+self.spawnName+'" class="nameLink">'+self.spawnName+'</a></span>'
-		if (editable > 0):
-			if formatStyle != 2:
+		if (loggedIn):
+			if formatStyle != 2 and reputation >= ghShared.MIN_REP_VALS['EDIT_RESOURCE_STATS_TYPE']:
 				result += '  <a alt="Edit Stats" style="cursor: pointer;" onclick="editStats(this, \''+self.spawnName+'\');">[Edit]</a>'
-			if formatStyle != 1:
+			if formatStyle != 1 and reputation >= ghShared.MIN_REP_VALS['REMOVE_RESOURCE']:
 				if formatStyle == 2:
 					result += '  <div style="width:100px;float:right;"><input type="checkbox" id="chkRemove_' + self.spawnName + '" />Remove</div>'
 				else:
@@ -249,7 +249,7 @@ class resourceSpawn:
 			result += ''
 
 		# favorite indicator
-		if editable > 0:
+		if loggedIn:
 			if self.favorite > 0:
 				result += '  <div class="inlineBlock" style="width:3%;float:left;"><a alt="Favorite" title="Favorite" style="cursor: pointer;" onclick="toggleFavorite(this, 1, \''+str(self.spawnID)+'\', '+str(self.spawnGalaxy)+');"><img src="/images/favorite16On.png" /></a></div>'
 			else:
@@ -281,7 +281,7 @@ class resourceSpawn:
 				if (self.verified != None):
 					result += '  <img src="/images/checkGreen16.png" alt="Verified" title="Verified" /><span style="vertical-align:4px;">' + ghShared.timeAgo(self.verified) + ' ago by <a href="/user.py?uid='+self.verifiedBy+'">'+self.verifiedBy+'</a></span>'
 				else:
-					if (self.unavailable == None and editable > 0):
+					if (self.unavailable == None and loggedIn and reputation >= ghShared.MIN_REP_VALS['VERIFY_RESOURCE']):
 						result += '  <span id="cont_verify_'+self.spawnName+'"><img src="/images/checkGrey16.png" alt="Not Verified" title="Not Verified" /><span style="vertical-align:4px;"><a alt="Verify Resource" style="cursor: pointer;" onclick="quickAdd(null, \''+self.spawnName+'\');">[Verify]</a></span></span>'
 				# unavailable
 				result += '  </div><div class="inlineBlock" style="width:32%;float:right;">'
@@ -292,13 +292,13 @@ class resourceSpawn:
 				result += '    <div style="width: 248px;clear:both;margin-left:64px;">'+self.getPlanetBar()+'</div>'
 
 		else:
-			if (self.unavailable == None and editable > 0 and ghShared.timeAgo(self.verified).find('minute') == -1):
+			if (self.unavailable == None and loggedIn and reputation >= ghShared.MIN_REP_VALS['VERIFY_RESOURCE'] and ghShared.timeAgo(self.verified).find('minute') == -1):
 				result += '  <div id="cont_verify_'+self.spawnName+'" style="width:100px;float:right;"><input type="checkbox" id="chkVerify_' + self.spawnName + '" />Verify</div>'
 
 		result += '  </div>'
 		return result
 
-	def getMobileHTML(self, editable):
+	def getMobileHTML(self, loggedIn, reputation):
 		result = ''
 		statHeads = ""
 		statVals = ""
@@ -350,7 +350,7 @@ class resourceSpawn:
 
 		# non-stat info
 		result += '&nbsp;entered&nbsp;'+ghShared.timeAgo(self.entered)+' ago by '+self.enteredBy
-		if (editable > 0):
+		if (loggedIn and reputation >= ghShared.MIN_REP_VALS['REMOVE_RESOURCE']):
 			result += '  <span title="Mark Unavailable" style="cursor: pointer;float:right;" onclick="markUnavailable(this, \''+self.spawnName+'\', '+str(self.spawnGalaxy)+',\'all\');"> [X]</span>'
 		result += '    </div>'
 
@@ -360,7 +360,7 @@ class resourceSpawn:
 		result += '  </div></div></a>'
 		return result
 
-	def getRow(self, editable):
+	def getRow(self, loggedIn):
 		result = ''
 		statVals = ""
 		titleStr = ""
@@ -368,7 +368,7 @@ class resourceSpawn:
 		result += '<tr id="cont_'+self.spawnName+'" name="cont_'+self.spawnName+'" class="statRow ui-draggable">'
 
 		# favorite indicator
-		if editable > 0:
+		if loggedIn:
 			if self.favorite > 0:
 				result += '  <td class="dragColumn" style="width:20px;"><a alt="Favorite" title="Favorite" style="cursor: pointer;" onclick="toggleFavorite(this, 1, \''+str(self.spawnID)+'\', '+str(self.spawnGalaxy)+');"><img src="/images/favorite16On.png" /></a></td>'
 			else:

@@ -37,7 +37,7 @@ function saveAdmin() {
 {{ blocks.headerSection(loggedin, currentUser, loginResult, linkappend, url, imgNum, galaxyList, pictureName) }}
 <div id="mainContent" class="wrapper">
   <div id="leftNavContent" class="ghCol">
-{% if userReputation > 50 %}
+{% if showAdmin %}
     <div id="resourceAdmin" class="ghWidgetBox">
     <div class="boxHeader">Resource Admin</div>
         <div class="helpTopic">Noobs will be noobs.  If someone has entered this resource with a misspelled name, or added it to the wrong galaxy, use these controls to fix it.</div>

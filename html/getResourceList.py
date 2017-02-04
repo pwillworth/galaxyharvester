@@ -224,10 +224,7 @@ if (errorStr == ""):
 	conn = dbShared.ghConn()
 	# Only show update tools if user logged in and has positive reputation
 	stats = dbShared.getUserStats(currentUser, galaxy).split(",")
-	if int(stats[2]) < dbShared.MIN_REP_EDIT_RESOURCE or galaxyState != 1:
-		editable = 0
-	else:
-		editable = logged_state
+	userReputation = int(stats[2])
 
 	cursor = conn.cursor()
 	if (cursor):
@@ -338,9 +335,9 @@ if (errorStr == ""):
 			print '  <tr><td>'
 
 			if formatType == 'mobile':
-				print s.getMobileHTML(editable)
+				print s.getMobileHTML(logged_state > 0, int(stats[2]))
 			else:
-				print s.getHTML(editable, formatStyle, resBoxMargin)
+				print s.getHTML(formatStyle, resBoxMargin, logged_state > 0 and galaxyState == 1, userReputation)
 
 			print '</td></tr>'
 			row = cursor.fetchone()

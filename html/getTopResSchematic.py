@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2016 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -27,7 +27,6 @@ import dbSession
 import dbShared
 import cgi
 import MySQLdb
-import ghShared
 import ghLists
 import ghObjects
 #
@@ -55,7 +54,7 @@ def getResourceSQL(maxCheckStr, favCols, joinStr, galaxy, resGroup, obyStr, obyS
 	sqlStr1 += ';'
 	return sqlStr1
 
-def getResourceData(conn, resSQL, logged_state, galaxyState, resourceFormat, editable):
+def getResourceData(conn, resSQL, logged_state, galaxyState, resourceFormat, reputation):
 	# get resource data for given criteria
 	resourceHTML = '<table width="100%" class=resourceStats>'
 	cursor = conn.cursor()
@@ -114,7 +113,7 @@ def getResourceData(conn, resSQL, logged_state, galaxyState, resourceFormat, edi
 					s.planets = dbShared.getSpawnPlanets(conn, row[0], True, row[2])
 
 					resourceHTML += '  <tr><td>'
-					resourceHTML += s.getHTML(editable, resourceFormat, "")
+					resourceHTML += s.getHTML(resourceFormat, "", logged_state > 0 and galaxyState == 1, reputation)
 					resourceHTML += '  </td></tr>'
 					row = cursor.fetchone()
 		else:
@@ -206,10 +205,7 @@ else:
 	conn = dbShared.ghConn()
 	# Only show update tools if user logged in and has positive reputation
 	stats = dbShared.getUserStats(currentUser, galaxy).split(",")
-	if int(stats[2]) < dbShared.MIN_REP_EDIT_RESOURCE or galaxyState != 1:
-		editable = 0
-	else:
-		editable = logged_state
+	userReputation = int(stats[2])
 
 	# first get list of non-component ingredients
 	ingCursor = conn.cursor()
@@ -261,7 +257,7 @@ else:
 				resourceFormat = 0
 				if compare == 'undefined' or logged_state == 0:
 					resSQL = getResourceSQL(maxCheckStr, favCols, joinStr, galaxy, resGroup, obyStr, obyStr2, '')
-					print getResourceData(conn, resSQL, logged_state, galaxyState, resourceFormat, editable)
+					print getResourceData(conn, resSQL, logged_state, galaxyState, resourceFormat, userReputation)
 				else:
 					# Include side by side comparison of inventory
 					resourceFormat = 1
@@ -269,11 +265,11 @@ else:
 					print '<div class="inlineBlock" style="width:50%">'
 					print '<h4>Galaxy</h4>'
 					resSQL = getResourceSQL(maxCheckStr, favCols, joinStr, galaxy, resGroup, obyStr, obyStr2, '')
-					print getResourceData(conn, resSQL, logged_state, galaxyState, resourceFormat, editable)
+					print getResourceData(conn, resSQL, logged_state, galaxyState, resourceFormat, userReputation)
 					print '</div><div class="inlineBlock" style="width:50%">'
 					print '<h4>My Inventory</h4>'
 					resSQL = getResourceSQL(maxCheckStr, favCols, joinStr, galaxy, resGroup, obyStr, obyStr2, 'y')
-					print getResourceData(conn, resSQL, logged_state, galaxyState, resourceFormat, editable)
+					print getResourceData(conn, resSQL, logged_state, galaxyState, resourceFormat, userReputation)
 					print '</div></div>'
 			else:
 				# no ingredient quality stats
