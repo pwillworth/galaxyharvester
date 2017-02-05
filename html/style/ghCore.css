@@ -746,3 +746,13 @@ ul.feedback li {
 	border-top-style: solid;
 	border-top-width: 2px;
 }
+.abilityBox {
+	font-size: 14px;
+	text-align: center;
+	width: 48%;
+	margin: 2px;
+	padding: 2px;
+	border-style: solid;
+	border-width: 2px;
+	border-radius: 4px;
+}

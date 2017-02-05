@@ -31,7 +31,7 @@ a:active, .groupText {
 #loginForm {
 	color: #000033;
 }
-.tableHead {
+.tableHead, .contrastStyle {
 	background: #000033;
 	color: #9999ff;
 }

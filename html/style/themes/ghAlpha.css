@@ -32,7 +32,7 @@ a:active, .groupText {
 #loginForm {
 	color: #c8f4f3;
 }
-.tableHead {
+.tableHead, .contrastStyle {
 	background: #003344;
 	color: #feffa1;
 }
@@ -111,4 +111,3 @@ a:hover div.resTreeItem, .slotIndicatorFilled {
 .slotIndicator {
 	border-color: #006b87;
 }
-

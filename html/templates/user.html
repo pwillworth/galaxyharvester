@@ -193,6 +193,12 @@ function udOther() {
 	        <div id="reputationInfo" style="text-align:center;" class="inlineBlock" title="Reputation Score"><span style="font-weight:bold;">{{ reputation }}</span><br/><img style="background-color: {{ repColor }};" src="/images/repIcon.png" /><br /></div>
 	      </div>
 	    </div>
+      <div id="userAbilities">
+        <h3>Unlocked Abilities</h3>
+      {% for ability in userAbilities %}
+        <div class="abilityBox inlineBlock contrastStyle">{{ ability.description }} ({{ ability.minReputation }})</div>
+      {% endfor %}
+      </div>
 {% else %}
 	    <h3>Top Harvesters Charts</h3>
 	    <div id="byCategoryCharts" class="charts">

@@ -35,6 +35,14 @@ from datetime import timedelta, datetime
 import urllib
 from jinja2 import Environment, FileSystemLoader
 
+
+class userAbility:
+	def __init__(self, key="", description="", unlocked=False):
+		self.key = key
+		self.description = description
+		self.unlocked = unlocked
+		self.minReputation = -99
+
 # Get current url
 try:
 	url = os.environ['REQUEST_URI']
@@ -174,6 +182,15 @@ if uid != '':
 		friendCountStr = '(' + str(row[0]) + ')'
 	cursor.close()
 	conn.close()
+
+    # Load list of unlocked abilities
+	abilities = []
+	for k, v in ghShared.ABILITY_DESCR.iteritems():
+		if reputation >= ghShared.MIN_REP_VALS[k] and ghShared.MIN_REP_VALS[k] != -99:
+			a = userAbility(k, v, True)
+			a.minReputation = ghShared.MIN_REP_VALS[k]
+			abilities.append(a)
+
 else:
 	# Only generate charts if generating stats page
 	chart1URL=ghCharts.getChartURL('bhs', '200x150', 'a', 'creature_resources', 0, 'user', galaxy)
@@ -217,5 +234,5 @@ env.globals['BASE_SCRIPT_URL'] = ghShared.BASE_SCRIPT_URL
 env.globals['MOBILE_PLATFORM'] = ghShared.getMobilePlatform(os.environ['HTTP_USER_AGENT'])
 template = env.get_template('user.html')
 print template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), themeList=ghLists.getThemeList(), uid=uid, convertGI=convertGI, sid=sid, avatarResult=avatarResult, email=email, donorBadge=donorBadge, joinedStr=joinedStr, userPictureName=userPictureName, tmpStat=tmpStat, userTitle=userTitle, friendCountStr=friendCountStr,
- chart1URL=chart1URL, chart2URL=chart2URL, chart3URL=chart3URL, chart4URL=chart4URL, chart5URL=chart5URL, chart6URL=chart6URL,
+ chart1URL=chart1URL, chart2URL=chart2URL, chart3URL=chart3URL, chart4URL=chart4URL, chart5URL=chart5URL, chart6URL=chart6URL, userAbilities=abilities,
  resScore=resScore, mapScore=mapScore, reputation=reputation, resColor=resColor, mapColor=mapColor, repColor=repColor, siteAlertCheckStr=siteAlertCheckStr, emailAlertCheckStr=emailAlertCheckStr, mobileAlertCheckStr=mobileAlertCheckStr)

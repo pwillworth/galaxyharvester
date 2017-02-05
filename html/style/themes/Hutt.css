@@ -41,7 +41,7 @@ a:active, .groupText {
 #loginForm {
 	color: #eaf6b8; /* use default text color, or link color */
 }
-.tableHead {
+.tableHead, .contrastStyle {
 	background: #002201; /* Stats table header background */
 	color: #f1f690; /* Stats table text */
 }
@@ -111,4 +111,3 @@ a:hover div.resTreeItem, .slotIndicatorFilled {
 .slotIndicator {
 	border-color: #00571b;
 }
-
