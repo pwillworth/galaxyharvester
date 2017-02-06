@@ -39,16 +39,16 @@ clist = '<table class="userData" width="100%">'
 conn = dbShared.ghConn()
 cursor = conn.cursor()
 if (cursor):
-	clist += '<thead><tr class="tableHead"><th>Creature</th><th>Yield</th></thead>'
-	sqlStr = 'SELECT speciesName, maxAmount FROM tResourceTypeCreature WHERE resourceType="' + resType + '" ORDER BY maxAmount DESC, speciesName'
+	clist += '<thead><tr class="tableHead"><th>Creature</th><th>Yield</th><th>Mission lvl</th></thead>'
+	sqlStr = 'SELECT speciesName, maxAmount, missionLevel FROM tResourceTypeCreature WHERE resourceType="' + resType + '" ORDER BY maxAmount DESC, speciesName'
 	cursor.execute(sqlStr)
 	row = cursor.fetchone()
 
 	while (row != None):
-		clist += '  <tr class="statRow"><td>' + str(row[0]).replace('_',' ') + '</td><td>' + str(row[1]) + '</td>'
+		clist += '  <tr class="statRow"><td>' + str(row[0]).replace('_',' ') + '</td><td>' + str(row[1]) + '</td><td>' + str(row[2]) + '</td>'
 		clist += '  </tr>'
 		row = cursor.fetchone()
-        
+
 	cursor.close()
 conn.close()
 clist += '  </table>'

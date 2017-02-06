@@ -6,6 +6,14 @@
 <script type="text/javascript" src="/js/ghShared.js"></script>
 <script type="text/javascript" src="/js/jquery.min.js"></script>
 <script type="text/javascript">
+function refreshCreatureData() {
+  $("#resCreatures").load(BASE_SCRIPT_URL + "getCreatureList.py",{
+      resType: "{{ typeID }}",
+      groupType: "res"},
+      function() {
+          $("#busyImgFindCreatures").css("display","none");
+  });
+}
 $(document).ready(function() {
     $("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
     $(".window .close").click(function(e) {
@@ -31,12 +39,7 @@ $(document).ready(function() {
 {% endif %}
 {% if typeGroup == 'type' %}
 	{% if (creature > -1) %}
-		    $("#resCreatures").load(BASE_SCRIPT_URL + "getCreatureList.py",{
-		        resType: "{{ typeID }}",
-		        groupType: "res"},
-		        function() {
-		            $("#busyImgFindCreatures").css("display","none");
-		    });
+      refreshCreatureData();
 	{% endif %}
 {% else %}
 	    $("#resChildren").load(BASE_SCRIPT_URL + "getResourceTypeList.py",{
@@ -90,7 +93,11 @@ $(document).ready(function() {
 	{% if typeGroup == 'type' %}
 		{% if (creature > -1) %}
 			<div id="creatureInfo" class="ghWidgetBox">
-			<div class="boxHeader">Creatures</div>
+			<div class="boxHeader">Creatures
+      {% if loggedin == 1 and editCreatures %}
+      	<div style="float:right;"><button type=button value="Add Creature" class="ghButton" onclick="addCreature();">Add Creature</button></div>
+      {% endif %}
+      </div>
 			  <div id="busyImgFindCreatures" style="display:none;"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
 			  <div id="resCreatures"></div>
 			</div>
@@ -124,5 +131,26 @@ $(document).ready(function() {
 {{ blocks.pageFooter() }}
 {{ blocks.resourceForm() }}
 {{ blocks.joinForm(loggedin, ['?src_url={{ BASE_SCRIPT_URL }}resource.py&', linkappend]|join, url) }}
+{% if loggedin != 0 %}
+	<div id="creatureDialog" class="window">
+	    <form name="addcreatureform">
+	    <table class="bigForm"><tr><td colspan="2"><h2 id="creatureFormTitle">New Creature Data</h2></td>
+	    <td align="right"><a href="#" class="close">Close</a></td></tr>
+	    <tr><td align="right" width="140">Creature Name: </td>
+	    <td><input type="text" name="creatureName" id="creatureName" tabindex="120" size="20" maxlength="63" onchange="valMinLength(this, document.getElementById('creatureNameInf'),1);" /></td>
+	    <td><span id="addInfo"></span><span id="creatureNameInf" class="formMsg">Creature name is not valid.</span><span id="creatureNameInfo" class="content"></span><br /></td></tr>
+	    <tr><td align="right">Harvest Yield: </td>
+	    <td><input type="text" name="harvestYield" tabindex="122" size="5" maxlength="5" id="harvestYield" onchange="valInteger(this, document.getElementById('yieldInf'))" /></td>
+	    <td><span id="yieldInf" class="formMsg">Enter a valid integer for harvest yield amount.</span><br /></td></tr>
+	    <tr><td align="right">Mission Level: </td>
+	    <td><span id="missionLevelEntry"><input type="text" name="missionLevel" tabindex="122" size="5" maxlength="5" id="missionLevel" onchange="valInteger(this, document.getElementById('missionLevelInf'));" /></span></td>
+	    <td><span id="missionLevelInf" class="formMsg">Enter a valid interger for mission level.</td></tr>
+	    </table>
+      <input type="hidden" name="resourceType" id="resourceType" value="{{ resourceType }}" />
+	    <div id="busyImgAddCreature" style="display:none;float:right;"><img src="/images/ghWait.gif" /></div>
+	    <div style="text-align: center;padding: 20px;"><button type="button" id="sendCreatureData" tabIndex="123" class="ghButton" onclick="postCreature()">Add Creature</button></div></form>
+	    <div id="addCreatureInfo"></div>
+	</div>
+{% endif %}
 <div id="mask"></div>
 </body></html>

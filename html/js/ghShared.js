@@ -1365,7 +1365,9 @@ function updateAlerts() {
 			}
 		}
 		// See if zero has been entered
-		if (CRs.indexOf(",0") > -1 || CDs.indexOf(",0") > -1 || DRs.indexOf(",0") > -1 || FLs.indexOf(",0") > -1 || HRs.indexOf(",0") > -1 || MAs.indexOf(",0") > -1 || PEs.indexOf(",0") > -1 || OQs.indexOf(",0") > -1 || SRs.indexOf(",0") > -1 || UTs.indexOf(",0") > -1 || ERs.indexOf(",0") > -1) {
+		if (CRs.indexOf(",0") > -1 || CDs.indexOf(",0") > -1 || DRs.indexOf(",0") > -1 || FLs.indexOf(",0") > -1 || HRs.indexOf(",0") > -1
+        || MAs.indexOf(",0") > -1 || PEs.indexOf(",0") > -1 || OQs.indexOf(",0") > -1 || SRs.indexOf(",0") > -1 || UTs.indexOf(",0") > -1
+        || ERs.indexOf(",0") > -1) {
 			alert("You have entered zero for one of the minimum stat values.  This will cause the stat to be ignored.  If you want to be alerted if the stat is of any value, enter 1 for the minimum value.");
 		}
 		var doit = false;
@@ -1531,6 +1533,34 @@ function postFeedback(feedbackID, feedbackText) {
 				$('#busyImgAdd').css('display','none');
 				$("#mask, .window").hide(3000);
 				loadFeedback();
+			}, "xml");
+	}
+	return true;
+}
+
+/*      Resource Type Stuff     */
+// Present blank form for adding a new creature data
+function addCreature(resourceType) {
+	$("#creatureFormTitle").html('New Creature');
+	$('#creatureName').val('');
+	$('#harvestYield').val('');
+	$('#missionLevel').val('');
+	$('#sendCreatureData').text('Add It');
+	showWindow('#creatureDialog');
+	return true;
+}
+// try to add creature data
+function postCreature() {
+	if (true) {
+		$('#busyImgAdd').css('display','block');
+		$("#addInfo").html('');
+		$.post(BASE_SCRIPT_URL + "postCreature.py", { resourceType: $("#resourceType").val(), galaxy: $("#galaxySel option:selected").val(), creatureName: $("#creatureName").val(), harvestYield: $("#harvestYield").val(), missionLevel: $("#missionLevel").val() },
+			function(data) {
+				var result = $(data).find('resultText').eq(0).text();
+				$("#addCreatureInfo").html(result);
+				$('#busyImgAddCreature').css('display','none');
+				//$("#mask, .window").hide();
+				refreshCreatureData();
 			}, "xml");
 	}
 	return true;
