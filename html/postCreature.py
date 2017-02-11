@@ -30,6 +30,8 @@ import cgi
 import MySQLdb
 from xml.dom import minidom
 import ghNames
+import ghShared
+
 #
 # Get current url
 try:
@@ -93,6 +95,8 @@ def addCreature(resourceType, creatureName, harvestYield, missionLevel, galaxy):
 	result = 0
 	conn = dbShared.ghConn()
 	cursor = conn.cursor()
+	if missionLevel == "":
+		missionLevel = None
 	tempSQL = "INSERT INTO tResourceTypeCreature (resourceType, speciesName, maxAmount, missionLevel, galaxy, enteredBy) VALUES (%s, %s, %s, %s, %s, %s);"
 	try:
 		cursor.execute(tempSQL, (resourceType, creatureName, harvestYield, missionLevel, galaxy, currentUser))
@@ -111,7 +115,9 @@ def updateCreature(resourceType, creatureName, harvestYield, missionLevel, galax
 	returnStr = ""
 	conn = dbShared.ghConn()
 	cursor = conn.cursor()
-	tempSQL = "UPDATE tResourceTypeCreature SET maxAmount=%s, missionLevel=%s WHERE resourceType=%s and creatureName=%s and galaxy=%s;"
+	if missionLevel == "":
+		missionLevel = None
+	tempSQL = "UPDATE tResourceTypeCreature SET maxAmount=%s, missionLevel=%s WHERE resourceType=%s and speciesName=%s and galaxy=%s;"
 	cursor.execute(tempSQL, (harvestYield, missionLevel, resourceType, creatureName, galaxy))
 	result = cursor.rowcount
 	if (result < 1):
@@ -143,6 +149,9 @@ if (len(missionLevel) > 0 and missionLevel.isdigit() != True):
 if (errstr == ""):
 	result = ""
 	if (logged_state > 0):
+		# Get user reputation for later checking
+		stats = dbShared.getUserStats(currentUser, galaxy).split(",")
+		userReputation = int(stats[2])
 		# data already entered?
 		if (forceOp == "edit"):
 			# check owner
@@ -153,7 +162,7 @@ if (errstr == ""):
 				result = "Error: could not connect to database"
 
 			if (cursor):
-				cursor.execute('SELECT enteredBy FROM tResourceTypeCreature WHERE resourceType=%s AND creatureName=%s AND galaxy=%s;', (resourceType, creatureName, galaxy))
+				cursor.execute('SELECT enteredBy FROM tResourceTypeCreature WHERE resourceType=%s AND speciesName=%s AND galaxy=%s;', (resourceType, creatureName, galaxy))
 				row = cursor.fetchone()
 
 				if (row != None):
@@ -164,19 +173,20 @@ if (errstr == ""):
 				cursor.close()
 
 				# edit it
-				if owner == currentUser:
+				if owner == currentUser or userReputation >= ghShared.MIN_REP_VALS['EDIT_OTHER_CREATURE']:
 					result = "edit: "
 					result = result + updateCreature(resourceType, creatureName, harvestYield, missionLevel, galaxy)
 				else:
-					result = "Error: You are not the owner of that creature data."
+					result = "Error: You do not yet have permission to edit others' creature data."
 			else:
 				result = "Error: No database connection"
 			conn.close()
 
 		else:
-
-			result = addCreature(resourceType, creatureName, harvestYield, missionLevel, galaxy)
-
+			if userReputation >= ghShared.MIN_REP_VALS['ADD_CREATURE']:
+				result = addCreature(resourceType, creatureName, harvestYield, missionLevel, galaxy)
+			else:
+				result = "Error: You don't have permission to add creature data yet."
 	else:
 		result = "Error: must be logged in to add creature data"
 else:

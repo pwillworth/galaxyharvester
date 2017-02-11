@@ -148,6 +148,7 @@ $(document).ready(function() {
 	    <td><span id="missionLevelInf" class="formMsg">Enter a valid interger for mission level.</td></tr>
 	    </table>
       <input type="hidden" name="resourceType" id="resourceType" value="{{ resourceType }}" />
+      <input type="hidden" name="operation" id="operation" value="" />
 	    <div id="busyImgAddCreature" style="display:none;float:right;"><img src="/images/ghWait.gif" /></div>
 	    <div style="text-align: center;padding: 20px;"><button type="button" id="sendCreatureData" tabIndex="123" class="ghButton" onclick="postCreature()">Add Creature</button></div></form>
 	    <div id="addCreatureInfo"></div>

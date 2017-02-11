@@ -1541,11 +1541,30 @@ function postFeedback(feedbackID, feedbackText) {
 /*      Resource Type Stuff     */
 // Present blank form for adding a new creature data
 function addCreature(resourceType) {
-	$("#creatureFormTitle").html('New Creature');
+	$("#creatureFormTitle").html('New Creature Data');
 	$('#creatureName').val('');
+  $('#creatureName').attr('disabled', false);
 	$('#harvestYield').val('');
 	$('#missionLevel').val('');
 	$('#sendCreatureData').text('Add It');
+  $('#addCreatureInfo').html('');
+  $('#operation').val('');
+	showWindow('#creatureDialog');
+	return true;
+}
+// Present populated form for editing creature data
+function editCreatureData(creatureName, harvestYield, missionLevel) {
+	$("#creatureFormTitle").html('Edit Creature Data');
+	$('#creatureName').val(creatureName);
+  $('#creatureName').attr('disabled', true);
+	$('#harvestYield').val(harvestYield);
+  if (missionLevel == 'None') {
+    missionLevel = '';
+  }
+	$('#missionLevel').val(missionLevel);
+	$('#sendCreatureData').text('Update It');
+  $('#addCreatureInfo').html('');
+  $('#operation').val('edit');
 	showWindow('#creatureDialog');
 	return true;
 }
@@ -1554,7 +1573,7 @@ function postCreature() {
 	if (true) {
 		$('#busyImgAdd').css('display','block');
 		$("#addInfo").html('');
-		$.post(BASE_SCRIPT_URL + "postCreature.py", { resourceType: $("#resourceType").val(), galaxy: $("#galaxySel option:selected").val(), creatureName: $("#creatureName").val(), harvestYield: $("#harvestYield").val(), missionLevel: $("#missionLevel").val() },
+		$.post(BASE_SCRIPT_URL + "postCreature.py", { resourceType: $("#resourceType").val(), galaxy: $("#galaxySel option:selected").val(), creatureName: $("#creatureName").val(), harvestYield: $("#harvestYield").val(), missionLevel: $("#missionLevel").val(), forceOp: $("#operation").val() },
 			function(data) {
 				var result = $(data).find('resultText').eq(0).text();
 				$("#addCreatureInfo").html(result);
