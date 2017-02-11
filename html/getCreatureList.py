@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2012 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -26,12 +26,46 @@ import dbSession
 import dbShared
 import cgi
 import MySQLdb
+import ghShared
 #
 form = cgi.FieldStorage()
+# Get Cookies
+errorstr = ''
+result = ''
+cookies = Cookie.SimpleCookie()
+try:
+	cookies.load(os.environ['HTTP_COOKIE'])
+except KeyError:
+	errorstr = 'no cookies\n'
+
+if errorstr == '':
+	try:
+		currentUser = cookies['userID'].value
+	except KeyError:
+		currentUser = ''
+	try:
+		sid = cookies['gh_sid'].value
+	except KeyError:
+		sid = form.getfirst('gh_sid', '')
+else:
+	currentUser = ''
+	sid = form.getfirst('gh_sid', '')
+
+# Get a session
+logged_state = 0
 
 resType = form.getfirst('resType', '')
+galaxy = form.getfirst('galaxy', '')
 # escape input to prevent sql injection
 resType = dbShared.dbInsertSafe(resType)
+sid = dbShared.dbInsertSafe(sid)
+galaxy = dbShared.dbInsertSafe(galaxy)
+
+sess = dbSession.getSession(sid, 2592000)
+if (sess != ''):
+	logged_state = 1
+	currentUser = sess
+
 
 # Main program
 print 'Content-type: text/html\n'
@@ -39,13 +73,21 @@ clist = '<table class="userData" width="100%">'
 conn = dbShared.ghConn()
 cursor = conn.cursor()
 if (cursor):
+	if logged_state == 1:
+		# Only allow update if user has positive reputation
+		stats = dbShared.getUserStats(currentUser, galaxy).split(",")
+		userReputation = int(stats[2])
+
 	clist += '<thead><tr class="tableHead"><th>Creature</th><th>Yield</th><th>Mission lvl</th></thead>'
-	sqlStr = 'SELECT speciesName, maxAmount, missionLevel FROM tResourceTypeCreature WHERE resourceType="' + resType + '" ORDER BY maxAmount DESC, speciesName'
-	cursor.execute(sqlStr)
+	sqlStr = 'SELECT speciesName, maxAmount, missionLevel, galaxy, enteredBy FROM tResourceTypeCreature WHERE resourceType=%s AND galaxy IN (0, %s) ORDER BY maxAmount DESC, speciesName'
+	cursor.execute(sqlStr, (resType, galaxy))
 	row = cursor.fetchone()
 
 	while (row != None):
-		clist += '  <tr class="statRow"><td>' + str(row[0]).replace('_',' ') + '</td><td>' + str(row[1]) + '</td><td>' + str(row[2]) + '</td>'
+		clist += '  <tr class="statRow"><td>' + str(row[0]).replace('_',' ') + '</td><td>' + str(row[1]) + '</td><td>' + str(row[2])
+		if logged_state == 1 and row[3] != 0 and (row[4] == currentUser or userReputation >= ghShared.MIN_REP_VALS['EDIT_OTHER_CREATURE']):
+			clist += '<div style="float:right;"><a style="cursor: pointer;" onclick="removeCreatureResource({0}, \'{1}\', \'{2}\')"><img src="/images/xRed16.png" alt="Remove"/></a></div>'.format(str(row[3]), resType, row[0])
+		clist += '</td>'
 		clist += '  </tr>'
 		row = cursor.fetchone()
 

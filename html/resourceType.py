@@ -197,7 +197,6 @@ def main():
 	# Get reputation to determine editing abilities
 	stats = dbShared.getUserStats(currentUser, galaxy).split(",")
 	userReputation = int(stats[2])
-	sys.stderr.write(str(userReputation) + '\n')
 	print 'Content-type: text/html\n'
 	env = Environment(loader=FileSystemLoader('templates'))
 	env.globals['BASE_SCRIPT_URL'] = ghShared.BASE_SCRIPT_URL

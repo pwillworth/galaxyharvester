@@ -9,6 +9,7 @@
 function refreshCreatureData() {
   $("#resCreatures").load(BASE_SCRIPT_URL + "getCreatureList.py",{
       resType: "{{ typeID }}",
+      galaxy: $("#galaxySel").val(),
       groupType: "res"},
       function() {
           $("#busyImgFindCreatures").css("display","none");

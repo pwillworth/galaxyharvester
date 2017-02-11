@@ -1565,6 +1565,20 @@ function postCreature() {
 	}
 	return true;
 }
+// Remove custom creature data
+function removeCreatureResource(galaxy, resourceType, creature) {
+  var doit = confirm("Do you really want to remove custom creature data for " + creature + "?");
+
+  if (doit) {
+      $.get(BASE_SCRIPT_URL + "delCreatureResource.py", {resType: resourceType, galaxy: galaxy, creatureName: creature, rid: new Date()}, function(data) {
+      if (data.indexOf("Error:")>-1) {
+        alert(data);
+      } else {
+        refreshCreatureData();
+      }
+    });
+  }
+}
 
 /*      Other Shared Stuff     */
 
