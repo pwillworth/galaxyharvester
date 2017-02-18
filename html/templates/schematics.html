@@ -140,6 +140,45 @@ $(document).ready(function() {
 	        $("#objectTypeSel").append("<option value='" + $(this).val() + "'>"+$(this).text()+"</option>");
 	    });
 	}
+  function refreshSkillGroups() {
+    $("#skillGroupList").load(BASE_SCRIPT_URL + "getSkillGroupList.py", { prof: $("#schemProfSel").val() })
+  }
+  function refreshSchematicCopyList() {
+    $("#schemCopySel").load(BASE_SCRIPT_URL + "getSchematicList.py",{
+        groupType: "prof",
+        profession: $("#schemProfSel").val(),
+        listFormat: "option"
+      });
+  }
+  function addSchematic() {
+    refreshSkillGroups();
+    refreshSchematicCopyList();
+    $("#schematicName").val("");
+    $("#uploadLua").val("");
+    detailsOption = getCookie("schemDetailsGroup", "DetailsManual");
+    $("#oDetails").val(detailsOption);
+    updateDetailsOption();
+    showWindow("#schematicDialog");
+  }
+  // Customize add schematic screen based on detail entry option
+  function updateDetailsOption() {
+    if ($("#oDetailsCopy").attr("checked") == "checked") {
+        $("#schemLuaFile").css("display","none");
+        $("#schemCopy").css("display","block");
+        $("#schematicNameInput").css("display","block");
+        setCookie("schemDetailsGroup","DetailsCopy",7);
+    } else if ($("#oDetailsLua").attr("checked") == "checked") {
+      $("#schemLuaFile").css("display","block");
+      $("#schemCopy").css("display","none");
+      $("#schematicNameInput").css("display","none");
+      setCookie("schemDetailsGroup","DetailsLua",7);
+    } else {
+        setCookie("schemDetailsGroup","DetailsManual",7);
+        $("#schemLuaFile").css("display","none");
+        $("#schemCopy").css("display","none");
+        $("#schematicNameInput").css("display","block");
+    }
+  }
 {% endif %}
 function refreshSchematics() {
     var groupBy = "prof";
@@ -249,7 +288,11 @@ function refreshRecipes() {
 {% endif %}
 
 {% if schematicID == 'home' %}
-    <h1>Crafting Schematics</h1>
+    <h1>Crafting Schematics
+      <div style="float:right;">
+        <button type=button value="New Schematic" class="ghButton" onclick="addSchematic();">New Schematic</button>
+      </div>
+    </h1>
 {% endif %}
 
 {% if (schematicID != '' and schematicID != 'index' and schematicID != 'home') %}
@@ -328,7 +371,7 @@ function refreshRecipes() {
 	      <select name="resGroup" id="resGroup" onchange="findSchematics();"><option value="none">&lt;Select&gt;</option>
 	{{ resourceGroupList }}
 	      </select>
-	      <input type="radio" name="oFindType" id="oType" value="ByType" onclick="findSchematics()" />Type&nbsp;'
+	      <input type="radio" name="oFindType" id="oType" value="ByType" onclick="findSchematics()" />Type&nbsp;
 	      <select name="resType" id="resType" onchange="findSchematics();" disabled="disabled"><option value="none">&lt;Select&gt;</option>
 	{{ noenergyTypeList }}
 	      </select>
@@ -361,5 +404,29 @@ function refreshRecipes() {
 </div>
 {{ blocks.pageFooter() }}
 {{ blocks.joinForm(loggedin, ['?src_url={{ BASE_SCRIPT_URL }}schematics.py&', linkappend]|join, url) }}
+<div id="schematicDialog" class="window">
+  <h2 style="display: inline;">New Schematic</h2><div style="float: right;postion: relative;top:0px;"><a href="#" class="close">Close</a></div>
+  <form name="createuform" method="post" action="{{ BASE_SCRIPT_URL }}postSchematic.py" enctype="application/x-www-form-urlencoded">
+  <div class="searchInput">Profession:
+    <select name="schemProfSel" id="schemProfSel" onchange="setCookie('schemProfSel',this.value,7);refreshSkillGroups();refreshSchematicCopyList();"><option value=0>Select Profession</option>
+    {{ professionList }}
+    </select>
+    Skill Group: <select name="skillGroupList" id="skillGroupList" onchange="setCookie('schemSkillGroupSel',this.value,7);"></select>
+  </div>
+  <div class="searchInput">Schematic Details:<br />
+    <input type="radio" name="oDetails" id="oDetailsManual" value="DetailsManual" checked="checked" onclick="updateDetailsOption()" />Enter Manually
+    <input type="radio" name="oDetails" id="oDetailsCopy" value="DetailsCopy" onclick="updateDetailsOption()" /> Copy From Another Schematic
+    <input type="radio" name="oDetails" id="oDetailsLua" value="DetailsLua" onclick="updateDetailsOption()" /> Upload Lua File
+  </div>
+  <div class="searchInput" id="schemCopy" style="display:none;">Copy Details From:<select name="schemCopySel" id="schemCopySel"></select></div>
+  <div class="searchInput" id="schemLuaFile" style="display:none;">Upload .lua File:
+    <input type="file" id="uploadLua" name="uploadLua" accept="text/lua" />
+  </div>
+    <div class="searchInput" id="schematicNameInput">Schematic Name:<br /> <input type="text" id="schematicName" size="60" maxlength="255" value="" /></div>
+  <div id="busyImgAdd" style="display:none;float:right;"><img src="/images/ghWait.gif" /></div>
+  <span id="addInfo"></span>
+  <div style="float:right;margin:6px;padding-top:40px;"><input type="submit" class="ghButton" name="gocreate" value="Create" id="gocreate" /></div>
+  </form>
+</div>
 <div id="mask"></div>
 </body></html>

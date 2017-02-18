@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2012 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -60,6 +60,8 @@ if (cursor):
 			print '<option value="'+str(row[0])+'" title="'+row[2]+'">'+row[1]+'</option>'
 		row = cursor.fetchone()
 
+	cursor.close()
+conn.close()
+
 if outType == 'links':
 	print '</ul>'
-
