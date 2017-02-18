@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2016 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -33,9 +33,9 @@ PAGE_SIZE = 42
 
 def getHistorySQL(uid, timeCriteria, galaxy):
 	if uid == '':
-		return 'SELECT userID, eventTime, spawnName, eventType, planetName, tResources.resourceType, tResourceType.resourceTypeName, containerType FROM tResourceEvents INNER JOIN tResources ON tResourceEvents.spawnID = tResources.spawnID INNER JOIN tResourceType ON tResources.resourceType = tResourceType.resourceType LEFT JOIN tPlanet ON tResourceEvents.planetID = tPlanet.planetID WHERE tResourceEvents.galaxy=' + galaxy + timeCriteria + ' ORDER BY eventTime DESC LIMIT ' + str(PAGE_SIZE) + ';'
+		return 'SELECT userID, eventTime, spawnName, eventType, planetName, tResources.resourceType, tResourceType.resourceTypeName, containerType, tResources.galaxy FROM tResourceEvents INNER JOIN tResources ON tResourceEvents.spawnID = tResources.spawnID INNER JOIN tResourceType ON tResources.resourceType = tResourceType.resourceType LEFT JOIN tPlanet ON tResourceEvents.planetID = tPlanet.planetID WHERE tResourceEvents.galaxy=' + galaxy + timeCriteria + ' ORDER BY eventTime DESC LIMIT ' + str(PAGE_SIZE) + ';'
 	else:
-		return 'SELECT galaxyName, eventTime, spawnName, eventType, planetName, tResources.resourceType, tResourceType.resourceTypeName, containerType FROM tResourceEvents INNER JOIN tResources ON tResourceEvents.spawnID = tResources.spawnID INNER JOIN tGalaxy ON tResourceEvents.galaxy = tGalaxy.galaxyID INNER JOIN tResourceType ON tResources.resourceType = tResourceType.resourceType LEFT JOIN tPlanet ON tResourceEvents.planetID = tPlanet.planetID WHERE userID="' + uid + '"' + timeCriteria + ' ORDER BY eventTime DESC LIMIT ' + str(PAGE_SIZE) + ';'
+		return 'SELECT galaxyName, eventTime, spawnName, eventType, planetName, tResources.resourceType, tResourceType.resourceTypeName, containerType, tResources.galaxy FROM tResourceEvents INNER JOIN tResources ON tResourceEvents.spawnID = tResources.spawnID INNER JOIN tGalaxy ON tResourceEvents.galaxy = tGalaxy.galaxyID INNER JOIN tResourceType ON tResources.resourceType = tResourceType.resourceType LEFT JOIN tPlanet ON tResourceEvents.planetID = tPlanet.planetID WHERE userID="' + uid + '"' + timeCriteria + ' ORDER BY eventTime DESC LIMIT ' + str(PAGE_SIZE) + ';'
 
 
 form = cgi.FieldStorage()
@@ -95,7 +95,7 @@ if (cursor and errors == ''):
 			responseData += '    "container_type" : "' + row[7] + '"\n'
 			responseData += '  },\n'
 		else:
-			responseData += '  <tr class="statRow"><td>' + row[0] + '</td><td>' + str(row[1]) + '</td><td><a href="' + ghShared.BASE_SCRIPT_URL + 'resource.py/' + str(galaxy) + '/' + row[2] + '" class="nameLink">' + row[2] + '</a></td><td><a href="' + ghShared.BASE_SCRIPT_URL + 'resourceType.py/' + row[5] + '" class="nameLink">' + row[6] + '</a></td><td>' + ghShared.getActionName(row[3]) + '</td><td>' + str(row[4]) + '</td>'
+			responseData += '  <tr class="statRow"><td>' + row[0] + '</td><td>' + str(row[1]) + '</td><td><a href="' + ghShared.BASE_SCRIPT_URL + 'resource.py/' + str(row[8]) + '/' + row[2] + '" class="nameLink">' + row[2] + '</a></td><td><a href="' + ghShared.BASE_SCRIPT_URL + 'resourceType.py/' + row[5] + '" class="nameLink">' + row[6] + '</a></td><td>' + ghShared.getActionName(row[3]) + '</td><td>' + str(row[4]) + '</td>'
 			responseData += '  </tr>'
 		lastTime = row[0]
 		row = cursor.fetchone()

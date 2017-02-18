@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2016 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -124,7 +124,7 @@ chart3URL=''
 chart4URL=''
 chart5URL=''
 chart6URL=''
-
+abilities = []
 # get user attributes
 if uid != '':
 	created = dbShared.getUserAttr(uid, 'created')
@@ -184,7 +184,6 @@ if uid != '':
 	conn.close()
 
     # Load list of unlocked abilities
-	abilities = []
 	for k, v in ghShared.ABILITY_DESCR.iteritems():
 		if reputation >= ghShared.MIN_REP_VALS[k] and ghShared.MIN_REP_VALS[k] != -99:
 			a = userAbility(k, v, True)
