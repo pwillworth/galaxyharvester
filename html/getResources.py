@@ -146,10 +146,10 @@ def getResourceData(conn, resSQL, userReputation, activeUser, formatType):
 
 			row = cursor.fetchone()
 
-		if formatType == 'json':
-			resourceHTML += '  ]'
-		else:
-			resourceHTML += '  </table>'
+			if formatType == 'json':
+				resourceHTML += '  ]'
+			else:
+				resourceHTML += '  </table>'
 
 		if fetchSize.isdigit() and cursor.rowcount == int(fetchSize):
 			if formatType == 'json':
@@ -287,13 +287,13 @@ else:
 if (userBy != '' and userAction != ''):
 	galaxyCriteriaStr += (" AND {0}By='{1}'").format(userAction, userBy)
 
-if available != 'undefined':
+if available != 'undefined' and available != '':
 	galaxyCriteriaStr += ' AND tResources.unavailable IS NULL'
 else:
 	if not fetchSize.isdigit() or len(fetchSize) > 2:
 		errorStr = "Error: Invalid fetch size when including unavailable resources."
 
-if verified != 'undefined':
+if verified != 'undefined' and verified != '':
 	galaxyCriteriaStr += ' AND tResources.verified IS NOT NULL'
 
 mins = minVals.split(",")
@@ -386,7 +386,7 @@ if (errorStr == ""):
 			cursor.close()
 			responseData += ' "server_time" : "' + datetime.fromtimestamp(time.time()).strftime("%Y-%m-%d %H:%M:%S") + '",\n'
 		print responseData + ' "resources" : '
-        resData += '\n  }\n}'
+		resData += '\n  }\n}'
 
 	conn.close()
 	print resData
