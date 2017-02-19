@@ -23,6 +23,7 @@
 import cgi
 import MySQLdb
 import dbShared
+import sys
 #
 form = cgi.FieldStorage()
 

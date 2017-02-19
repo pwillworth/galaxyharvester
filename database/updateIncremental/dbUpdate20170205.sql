@@ -7,3 +7,5 @@ ALTER TABLE tSchematic ADD COLUMN enteredBy VARCHAR(31);
 
 ALTER TABLE tResourceTypeCreature DROP PRIMARY KEY;
 ALTER TABLE tResourceTypeCreature ADD PRIMARY KEY (resourceType, speciesName, galaxy);
+
+ALTER TABLE tSchematic ADD INDEX IX_schem_galaxy (galaxy);

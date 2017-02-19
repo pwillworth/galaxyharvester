@@ -141,7 +141,7 @@ $(document).ready(function() {
 	    });
 	}
   function refreshSkillGroups() {
-    $("#skillGroupList").load(BASE_SCRIPT_URL + "getSkillGroupList.py", { prof: $("#schemProfSel").val() })
+    $("#skillGroupSel").load(BASE_SCRIPT_URL + "getSkillGroupList.py", { prof: $("#schemProfSel").val() })
   }
   function refreshSchematicCopyList() {
     $("#schemCopySel").load(BASE_SCRIPT_URL + "getSchematicList.py",{
@@ -157,6 +157,7 @@ $(document).ready(function() {
     $("#uploadLua").val("");
     detailsOption = getCookie("schemDetailsGroup", "DetailsManual");
     $("#oDetails").val(detailsOption);
+    $("#schemGalaxy").val($("#galaxySel").val())
     updateDetailsOption();
     showWindow("#schematicDialog");
   }
@@ -289,9 +290,11 @@ function refreshRecipes() {
 
 {% if schematicID == 'home' %}
     <h1>Crafting Schematics
+  {% if loggedin == 1 %}
       <div style="float:right;">
         <button type=button value="New Schematic" class="ghButton" onclick="addSchematic();">New Schematic</button>
       </div>
+  {% endif %}
     </h1>
 {% endif %}
 
@@ -406,25 +409,27 @@ function refreshRecipes() {
 {{ blocks.joinForm(loggedin, ['?src_url={{ BASE_SCRIPT_URL }}schematics.py&', linkappend]|join, url) }}
 <div id="schematicDialog" class="window">
   <h2 style="display: inline;">New Schematic</h2><div style="float: right;postion: relative;top:0px;"><a href="#" class="close">Close</a></div>
-  <form name="createuform" method="post" action="{{ BASE_SCRIPT_URL }}postSchematic.py" enctype="application/x-www-form-urlencoded">
+  <form name="postschemform" method="post" action="{{ BASE_SCRIPT_URL }}postSchematic.py" enctype="multipart/form-data">
   <div class="searchInput">Profession:
     <select name="schemProfSel" id="schemProfSel" onchange="setCookie('schemProfSel',this.value,7);refreshSkillGroups();refreshSchematicCopyList();"><option value=0>Select Profession</option>
     {{ professionList }}
     </select>
-    Skill Group: <select name="skillGroupList" id="skillGroupList" onchange="setCookie('schemSkillGroupSel',this.value,7);"></select>
+    Skill Group: <select name="skillGroupSel" id="skillGroupSel" onchange="setCookie('schemSkillGroupSel',this.value,7);"></select>
   </div>
   <div class="searchInput">Schematic Details:<br />
     <input type="radio" name="oDetails" id="oDetailsManual" value="DetailsManual" checked="checked" onclick="updateDetailsOption()" />Enter Manually
     <input type="radio" name="oDetails" id="oDetailsCopy" value="DetailsCopy" onclick="updateDetailsOption()" /> Copy From Another Schematic
     <input type="radio" name="oDetails" id="oDetailsLua" value="DetailsLua" onclick="updateDetailsOption()" /> Upload Lua File
   </div>
+  <div class="footer"></div>
   <div class="searchInput" id="schemCopy" style="display:none;">Copy Details From:<select name="schemCopySel" id="schemCopySel"></select></div>
-  <div class="searchInput" id="schemLuaFile" style="display:none;">Upload .lua File:
-    <input type="file" id="uploadLua" name="uploadLua" accept="text/lua" />
+  <div class="searchInput" id="schemLuaFile" style="display:none;">
+    Schematic .lua File: <input type="file" id="schematicLua" name="schematicLua" accept="text/lua" /><br />
+    Object .lua file: <input type="file" id="objectLua" name="objectLua" accept="text/lua" />
   </div>
-    <div class="searchInput" id="schematicNameInput">Schematic Name:<br /> <input type="text" id="schematicName" size="60" maxlength="255" value="" /></div>
+    <div class="searchInput" id="schematicNameInput">Schematic Name:<br /> <input type="text" name="schematicName" id="schematicName" size="60" maxlength="255" value="" /></div>
   <div id="busyImgAdd" style="display:none;float:right;"><img src="/images/ghWait.gif" /></div>
-  <span id="addInfo"></span>
+  <input type="hidden" name="galaxy" id="schemGalaxy" value="" />
   <div style="float:right;margin:6px;padding-top:40px;"><input type="submit" class="ghButton" name="gocreate" value="Create" id="gocreate" /></div>
   </form>
 </div>

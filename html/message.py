@@ -110,6 +110,8 @@ elif (messageAction == 'verifymailsuccess'):
     theMessage = 'Your e-mail address change is now verified.  Your user profile should now reflect the change.'
 elif (messageAction == 'verifyfail'):
     theMessage = 'Account verification failed: ' + messageReason
+elif (messageAction == 'addschematicfail'):
+    theMessage = 'Add Schematic Action failed: ' + messageReason
 else:
 	theMessage = 'Welcome to Galaxy Harvester!  Be sure to visit the help section (from the link at the bottom of any page) to get the most out of your time here.'
 
