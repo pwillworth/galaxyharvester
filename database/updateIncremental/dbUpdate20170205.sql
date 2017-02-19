@@ -9,3 +9,4 @@ ALTER TABLE tResourceTypeCreature DROP PRIMARY KEY;
 ALTER TABLE tResourceTypeCreature ADD PRIMARY KEY (resourceType, speciesName, galaxy);
 
 ALTER TABLE tSchematic ADD INDEX IX_schem_galaxy (galaxy);
+UPDATE tObjectType SET typeName = 'Other', craftingTab = 524288 WHERE objectType = 0;

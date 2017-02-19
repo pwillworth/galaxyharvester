@@ -244,6 +244,19 @@ function viewSchematic(e, schematicID) {
 function refreshRecipes() {
     document.location.href="{{ BASE_SCRIPT_URL }}recipe.py/" + newRecipeID;
 }
+function deleteSchematic() {
+  doit = confirm("Do you really want to PERMANENTLY delete this schematic?");
+  if (doit) {
+      $.get(BASE_SCRIPT_URL + "delSchematic.py", {schematicID: "{{ schematicID }}", rid: new Date()}, function(data) {
+        if (data.indexOf("Error:")>-1) {
+          alert(data);
+        } else {
+          alert(data + "  Redirecting to schematics home.");
+          document.location.href="/schematics.py/home";
+        }
+    });
+  }
+}
 </script>
 {{ blocks.pageTracker() }}
 <body>
@@ -303,6 +316,9 @@ function refreshRecipes() {
     {% if loggedin == 1 %}
         {{ favHTML }}
         <button type=button value="New Recipe" class="ghButton" onclick="newRecipe('{{ schematicID }}','{{ schematic.schematicName }} Recipe', $('#galaxySel').val());">New Recipe</button><div id="busyImgAdd" style="display:none;float:right;"><img src="/images/ghWait.gif" /></div>
+        <div style="float:right;">
+          <button type=button value="Delete Schematic" class="ghButton" onclick="deleteSchematic();">Delete Schematic</button>
+        </div>
     {% endif %}
     <div style="float:right;font-weight:normal"> (XP: {{ schematic.xpAmount }}, Complexity: {{ schematic.complexity }})</div></h2>
     <table width="100%"><tr>

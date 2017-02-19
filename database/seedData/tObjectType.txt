@@ -1,4 +1,3 @@
-objectType	typeName	craftingTab
 0	Other	524288
 257	Body Armor	2
 258	Head Armor	2
