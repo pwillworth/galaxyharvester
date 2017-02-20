@@ -120,5 +120,5 @@ def getProfessionList():
 	return listStr
 
 def getObjectTypeList():
-	listStr = getOptionList('SELECT objectType, typeName, craftingTab FROM tObjectType ORDER BY typeName;')
+	listStr = getOptionList('SELECT objectType, typeName FROM tObjectType ORDER BY typeName;')
 	return listStr

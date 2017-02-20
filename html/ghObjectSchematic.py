@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2013 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -38,7 +38,7 @@ class schematicQualityGroup:
 
 	def groupName(self):
 		return self.group.replace('_','')
-		
+
 class schematicQualityProperty:
 	def __init__(self, prop = "", weightTotal = 0):
 		self.prop = prop
@@ -54,13 +54,13 @@ class schematicStatWeight:
 		self.stat = stat
 		self.statWeight = statWeight
 		self.propWeightTotal = propWeightTotal
-		
+
 	def statName (self):
 		return ghNames.getStatName(self.stat)
-		
+
 	def weightPercent(self):
 		return '%.0f' % ((self.statWeight*1.0/self.propWeightTotal)*100) + '%'
-		
+
 class schematic:
 	def __init__(self):
 		self.schematicID = ""
@@ -68,7 +68,8 @@ class schematic:
 		self.complexity = 0
 		self.xpAmount = 0
 		self.schematicImage = "none.jpg"
+		self.galaxy = 0
+		self.enteredBy = ""
 		self.ingredients = []
 		self.qualityGroups = []
 		self.schematicsUsedIn = []
-		

@@ -36,6 +36,8 @@ outType = dbShared.dbInsertSafe(outType)
 print 'Content-type: text/html\n'
 if outType == 'links':
 	print '<ul class="plain">'
+elif outType == 'graphic':
+	print ''
 else:
 	print '<option value="none" title="p00000000000">None</option>'
 
@@ -47,15 +49,19 @@ else:
 conn = dbShared.ghConn()
 cursor = conn.cursor()
 if (cursor):
-	cursor.execute('SELECT resourceType, resourceTypeName, CONCAT("p", CASE WHEN CRmax>0 THEN "1" ELSE "0" END, CASE WHEN CDmax>0 THEN "1" ELSE "0" END, CASE WHEN DRmax>0 THEN "1" ELSE "0" END, CASE WHEN FLmax>0 THEN "1" ELSE "0" END, CASE WHEN HRmax>0 THEN "1" ELSE "0" END, CASE WHEN MAmax>0 THEN "1" ELSE "0" END, CASE WHEN PEmax>0 THEN "1" ELSE "0" END, CASE WHEN OQmax>0 THEN "1" ELSE "0" END, CASE WHEN SRmax>0 THEN "1" ELSE "0" END, CASE WHEN UTmax>0 THEN "1" ELSE "0" END, CASE WHEN ERmax>0 THEN "1" ELSE "0" END) AS statMask FROM tResourceType WHERE enterable>0' + criteriaStr + ' ORDER BY resourceTypeName;')
+	cursor.execute('SELECT resourceType, resourceTypeName, CONCAT("p", CASE WHEN CRmax>0 THEN "1" ELSE "0" END, CASE WHEN CDmax>0 THEN "1" ELSE "0" END, CASE WHEN DRmax>0 THEN "1" ELSE "0" END, CASE WHEN FLmax>0 THEN "1" ELSE "0" END, CASE WHEN HRmax>0 THEN "1" ELSE "0" END, CASE WHEN MAmax>0 THEN "1" ELSE "0" END, CASE WHEN PEmax>0 THEN "1" ELSE "0" END, CASE WHEN OQmax>0 THEN "1" ELSE "0" END, CASE WHEN SRmax>0 THEN "1" ELSE "0" END, CASE WHEN UTmax>0 THEN "1" ELSE "0" END, CASE WHEN ERmax>0 THEN "1" ELSE "0" END) AS statMask, containerType FROM tResourceType WHERE enterable>0' + criteriaStr + ' ORDER BY resourceTypeName;')
 	row = cursor.fetchone()
 	if row == None and len(resGroup) > 0:
-		cursor.execute('select rgc.resourceGroup, rg.groupName, "p11111111111" AS statMask  FROM tResourceGroupCategory rgc INNER JOIN tResourceGroup rg ON rgc.resourceGroup = rg.resourceGroup WHERE rgc.resourceCategory="' + resGroup + '";')
+		cursor.execute('select rgc.resourceGroup, rg.groupName, "p11111111111" AS statMask, containerType FROM tResourceGroupCategory rgc INNER JOIN tResourceGroup rg ON rgc.resourceGroup = rg.resourceGroup WHERE rgc.resourceCategory="' + resGroup + '";')
 		row = cursor.fetchone()
 
 	while (row != None):
 		if outType == 'links':
 			print '<li><a href="' + ghShared.BASE_SCRIPT_URL + 'resourceType.py/' + row[0] + '">' + row[1] + '</a></li>'
+		elif outType == 'graphic':
+			print "<div id='resInventory{0}' class='inventoryItem inlineBlock' style='background-image:url(/images/resources/{2}.png);background-size:64px 64px;' tag='{1}'>".format(row[0], row[2], row[3])
+			print "<div style='position: absolute;bottom:0;width:100%'>{0}</div>".format(row[1])
+			print "</div>"
 		else:
 			print '<option value="'+str(row[0])+'" title="'+row[2]+'">'+row[1]+'</option>'
 		row = cursor.fetchone()

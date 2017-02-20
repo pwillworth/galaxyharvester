@@ -1,0 +1,176 @@
+{% import 'blocks.html' as blocks %}
+<!DOCTYPE html>
+<html lang="en"><head><title>Schematic Editor - Galaxy Harvester</title>
+<link rel="stylesheet" href="/style/ghCore.css" type="text/css" />
+<link rel="stylesheet" href="/style/themes/{{ uiTheme }}.css" type="text/css" />
+<script type="text/javascript" src="/js/ghShared.js"></script>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery-ui-1.8.20.custom.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+  $("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
+  refreshSkillGroups();
+  $("#skillGroupSel").val({{ schematic.skillGroup }});
+  $("#craftingTabSel").val({{ schematic.craftingTab }});
+  $("#objectTypeSel").val({{ schematic.objectType }});
+	loadIngredientPicker();
+  $(".window .close").click(function(e) {
+		e.preventDefault();
+		$("#mask, .window").hide();
+	});
+	$("#mask").click(function() {
+		$(this).hide();
+		$(".window").hide();
+	});
+});
+function ingredientPickerItemClick() {
+    inv = this;
+    $("#inventory").find("div.inventoryItem").css("border", "none");
+    $("#inventory").find("div.inventoryItem").css("margin", "4px");
+    $(this).css("border", "1px solid");
+    $(this).css("margin", "3px");
+}
+function ingredientPickerItemDoubleClick() {
+    inv = this;
+    // Code to add this item as new ingredient
+}
+function loadIngredientPicker() {
+    $("#busyImg").css("display","block");
+    var ingredientService = "";
+    if ($("#oResType").attr("checked") == "checked") {
+      ingredientService = "getResourceTypeList.py";
+      $("#tabSel").css("display","none");
+      $("#resGroupSel").css("display","block");
+      $("#resGroupShortSel").css("display","none");
+    } else if ($("#oResGroup").attr("checked") == "checked") {
+      ingredientService = "getResourceGroupList.py";
+      $("#tabSel").css("display","none");
+      $("#resGroupSel").css("display","none");
+      $("#resGroupShortSel").css("display","block");
+    } else {
+      ingredientService = "getComponentList.py";
+      $("#tabSel").css("display","block");
+      $("#resGroupSel").css("display","none");
+      $("#resGroupShortSel").css("display","none");
+    }
+
+    $("#ingredientPickerList").load(BASE_SCRIPT_URL + ingredientService,{
+        galaxy: $("#galaxySel").val(),
+        outType: "graphic",
+        resCategory: $("#resGroupShortSel").val(),
+        resGroup: $("#resGroupSel").val(),
+        craftingTab: $("#tabSel").val()},
+        function() {
+            var ipl = $("#ingredientPickerList");
+            ipl.find("div.inventoryItem").draggable({
+                stack: ".inventoryItem",
+                revert: "invalid",
+                appendTo: "body",
+                helper: "clone"}).click(ingredientPickerItemClick).dblclick(ingredientPickerItemDoubleClick);
+            $("#busyImgList").css("display","none");
+        });
+    return false;
+}
+function refreshSkillGroups() {
+	$("#skillGroupSel").load(BASE_SCRIPT_URL + "getSkillGroupList.py", { prof: $("#schemProfSel").val() })
+}
+</script>
+{{ blocks.pageTracker() }}
+<body>
+{{ blocks.headerSection(loggedin, currentUser, loginResult, linkappend, url, imgNum, galaxyList, pictureName) }}
+<div id="mainContent" class="wrapper">
+  <div id="leftNavContent" class="ghCol">
+    <div id="schemList" class="ghWidgetBox">
+      <div class="boxHeader">Ingredient Selector
+        <span style="float:right;font-weight:normal;font-size:.9em;"><a href="{{ BASE_SCRIPT_URL }}schematics.py/home" title="Go back to the schematics home page">[Home]</a></span>
+		  </div>
+      <div>View: <span style="font-weight:normal;">
+        <input type="radio" name="oSelectType" id="oResGroup" value="ByResGroup" checked="checked" onclick="loadIngredientPicker()" />Resource Groups &nbsp;
+        <input type="radio" name="oSelectType" id="oResType" value="ByResType" onclick="loadIngredientPicker()" />Resource Types
+        <input type="radio" name="oSelectType" id="oComponent" value="ByComponent" onclick="loadIngredientPicker())" />Components
+        </span>
+		  </div>
+      Filter:
+      <select name="resGroupShortSel" id="resGroupShortSel" style="display:none;" onchange="setCookie('ingListResGroupShortSel',this.value,7);loadIngredientPicker();">
+        {{ resourceGroupListShort }}
+      </select>
+      <select name="resGroupSel" id="resGroupSel" style="display:none;" onchange="setCookie('ingListResGroupSel',this.value,7);loadIngredientPicker();">
+        {{ resourceGroupList }}
+      </select>
+      <select name="tabSel" id="tabSel" style="display:none;" onchange="setCookie('ingListTabSel',this.value,7);loadIngredientPicker();">
+        {{ schematicTabList }}
+      </select>
+      <div id=busyImgList><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+      <div id="ingredientPickerList"></div>
+    </div>
+  </div>
+  <div id="rightMainContent" class="ghCol">
+    <div class="ghWidgetBox">
+			<div class="bigLink">Schematic: <input type="text" name="schematicName" value="{{ schematic.schematicName }}" size="60" maxlength="255" />
+			{% if loggedin == 1 %}
+					<div style="float:right;">
+            <button type=button value="Cancel" class="ghButton" onclick="document.location.href='/schematics.py/{{ schematicID }}';">Cancel</button>
+						<button type=button value="Save Schematic" class="ghButton" onclick="saveSchematic();">Save Schematic</button>
+					</div>
+			{% endif %}
+      </div>
+			<table width="100%">
+				<tr>
+					<td valign="top" width="240px"><h3>Ingredients</h3>
+						<table style="margin-top:6px;">
+					{% for ingredient in schematic.ingredients %}
+							<tr><td style="padding-right:4px;">{{ ingredient.ingredientQuantity }}</td><td>
+							{{ ingredient.objectLink }}
+							</td></tr>
+					{% endfor %}
+					  </table>
+					</td>
+
+					<td valign="top"><h3>Qualities</h3><div>Uncheck to remove from best resources calculation.</div><ul id="qualitiesList" style="margin-top:6px;">
+					{% for qualityGroup in schematic.qualityGroups %}
+							<h4 style="color:#e8d43d;">{{ qualityGroup.groupName() }}</h4>
+							{% for expProp in qualityGroup.properties %}
+									<li style="padding-left:10px;font-weight:bold;">{{ expProp.propertyName() }}</li>
+									{% for statWeight in expProp.statWeights %}
+											<li style="padding-left:20px;"><span class="inlineBlock" style="width:100px;">{{ statWeight.statName() }}: </span><span>{{ statWeight.weightPercent() }}</span></li>
+									{% endfor %}
+							{% endfor %}
+					{% endfor %}
+					</ul></td>
+
+					<td valign="top" width="325px"><img src="/images/schematics/{{ schematic.schematicImage }}" class="schematics" />
+					  <div id="udInfo">{{ schemImageAttempt }}</div>
+				{% if loggedin == 1 %}
+					  <form enctype="multipart/form-data" name="udImageForm" method="post" action="{{ BASE_SCRIPT_URL }}udSchematicImage.py">
+					  <div class="inlineBlock" style="width:120px;font-weight:bold;">Add Image</div><div class="inlineBlock" style="text-align:right;">Use image from another schematic: <input type="checkbox" name="useExisting" id="useExisting" onclick="switchImageInput();" /></div>
+					  <select id="copyFromSchem" name="copyFromSchem" style="display:none;"></select>
+					  <input type="file" id="schemImage" name="schemImage" accept="image/gif, image/jpeg, image/png" />
+					  <input type="hidden" name="schematicID" value="{{ schematicID }}" />
+					  <input type="hidden" name="src_url" value="{{ BASE_SCRIPT_URL }}schematics.py" />
+					  <input type="submit" value="Add" name="gosi" id="gosi" class="ghButton" />
+					  </form>
+
+						<div id="professionEditor">Profession: <select name="schemProfSel" id="schemProfSel" onchange="refreshSkillGroups()"><option value=0>Select Profession</option>
+				    {{ professionList }}
+					  </select></div>
+						<div id="skillGroupEditor">Skill Group: <select name="skillGroupSel" id="skillGroupSel"></select></div>
+						<div id="craftingTabEditor">Crafting Tab: <select name="craftingTagSel" id="craftingTabSel">
+            {{ schematicTabList }}
+            </select></div>
+						<div id="objectTypeEditor">Object Type: <select name="objectTypeSel" id="objectTypeSel">
+            {{ objectTypeList }}
+            </select></div>
+						<div id="xpAmountEditor">XP: <input type="text" name="xpAmount" size="4" maxlength="5" value="{{ schematic.xpAmount }}" /></div>
+						<div id="complexityEditor">Complexity: <input type="text" name="complexity" size="3" maxlength="5" value="{{ schematic.complexity }}" /></div>
+				{% endif %}
+					</td>
+			  </tr>
+			</table>
+	    <div class="footer" style="margin-top:12px;"></div>
+    </div>
+	</div>
+</div>
+{{ blocks.pageFooter() }}
+{{ blocks.joinForm(loggedin, ['?src_url={{ BASE_SCRIPT_URL }}schematics.py&', linkappend]|join, url) }}
+<div id="mask"></div>
+</body></html>

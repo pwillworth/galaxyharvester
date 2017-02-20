@@ -48,7 +48,6 @@ $(document).ready(function() {
 	    }
 	    if ($("#tabSelRes").val() != "") {
 	        getTypeRes();
-	        updateObjectTypes($("#tabSelRes").val());
 	    }
 	    if (getCookie("schemFindMethod") == "type") {
 	        $("#oType").attr("checked", "checked");
@@ -132,13 +131,6 @@ $(document).ready(function() {
 	                $("#busyImgFindProfRes").css("display","none");
 	        });
 	    }
-	}
-	function updateObjectTypes(craftingTab) {
-	    $("#objectTypeSel").html("");
-	    $("#objectTypeSel").append("<option value=''>Any</option>");
-	    $("#objectTypeAll option[group='" + craftingTab + "']").each(function () {
-	        $("#objectTypeSel").append("<option value='" + $(this).val() + "'>"+$(this).text()+"</option>");
-	    });
 	}
   function refreshSkillGroups() {
     $("#skillGroupSel").load(BASE_SCRIPT_URL + "getSkillGroupList.py", { prof: $("#schemProfSel").val() })
@@ -315,10 +307,13 @@ function deleteSchematic() {
     <h2>{{ schematic.schematicName }}
     {% if loggedin == 1 %}
         {{ favHTML }}
+        {% if canEdit %}
+          <div class="inlineBlock" style="width:3%;float:left;"><a alt="Edit Schematic" title="Edit Schematic" style="cursor: pointer;" onclick="document.location.href='?forceOp=edit'"><img src="/images/editBlue16.png" /></a></div>
+          <div style="float:right;">
+            <button type=button value="Delete Schematic" class="ghButton" onclick="deleteSchematic();">Delete Schematic</button>
+          </div>
+        {% endif %}
         <button type=button value="New Recipe" class="ghButton" onclick="newRecipe('{{ schematicID }}','{{ schematic.schematicName }} Recipe', $('#galaxySel').val());">New Recipe</button><div id="busyImgAdd" style="display:none;float:right;"><img src="/images/ghWait.gif" /></div>
-        <div style="float:right;">
-          <button type=button value="Delete Schematic" class="ghButton" onclick="deleteSchematic();">Delete Schematic</button>
-        </div>
     {% endif %}
     <div style="float:right;font-weight:normal"> (XP: {{ schematic.xpAmount }}, Complexity: {{ schematic.complexity }})</div></h2>
     <table width="100%"><tr>
@@ -405,15 +400,13 @@ function deleteSchematic() {
 	    </div>
 	    <div class="footer" style="margin-top:20px;">&nbsp;</div>
 	    <div class="resourceBox"><h2>Top Available Resources By Crafting Type</h2>
-	      <div><select id="tabSelRes" onchange="setCookie('schemTabSelRes',this.value,7);updateObjectTypes(this.value);getTypeRes();"><option value="">Select Crafting Tab</option>
+	      <div><select id="tabSelRes" onchange="setCookie('schemTabSelRes',this.value,7);getTypeRes();"><option value="">Select Crafting Tab</option>
 	{{ schematicTabList }}
 	      </select>
 	      <img src="/images/rightArrowGrey16.png" style="vertical-align:-4px;" /><select id="objectTypeSel" onchange="setCookie('schemTypeSelRes',this.value,7);getTypeRes();"><option value="">Any</option>
 	{{ objectTypeList }}
 	      </select>
-	      <select id="objectTypeAll" style="display: none;">
-	{{ objectTypeList }}
-	      </select></div>
+        </div>
 	    <div id="profResList"></div>
 	    <div id="busyImgFindProfRes" style="display:none;"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
 	    </div>

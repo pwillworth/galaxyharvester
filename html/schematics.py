@@ -146,6 +146,7 @@ def main():
 		schemImageAttempt = form.getfirst('schemImageAttempt', '')
 		galaxy = form.getfirst('galaxy', ghShared.DEFAULT_GALAXY)
 
+	forceOp = form.getfirst('forceOp', '')
 	# escape input to prevent sql injection
 	sid = dbShared.dbInsertSafe(sid)
 	# Get a session
@@ -175,6 +176,7 @@ def main():
 		path = [p for p in path if p != '']
 
 	favHTML = ''
+	canEdit = False
 	if len(path) > 0:
 		schematicID = dbShared.dbInsertSafe(path[0])
 		url = url + '/' + schematicID
@@ -186,8 +188,12 @@ def main():
 			except Exception:
 				errorstr = "Error: could not connect to database"
 
+			# Lookup reputation for edit tool option
+			stats = dbShared.getUserStats(currentUser, galaxy).split(",")
+			userReputation = int(stats[2])
+
 			if (cursor):
-				cursor.execute('SELECT schematicName, complexity, xpAmount, (SELECT imageName FROM tSchematicImages tsi WHERE tsi.schematicID=tSchematic.schematicID AND tsi.imageType=1) AS schemImage FROM tSchematic WHERE schematicID="' + schematicID + '";')
+				cursor.execute('SELECT schematicName, complexity, xpAmount, (SELECT imageName FROM tSchematicImages tsi WHERE tsi.schematicID=tSchematic.schematicID AND tsi.imageType=1) AS schemImage, galaxy, enteredBy FROM tSchematic WHERE schematicID=%s;', (schematicID))
 				row = cursor.fetchone()
 
 				if (row != None):
@@ -203,6 +209,8 @@ def main():
 					s.complexity = row[1]
 					s.xpAmount = row[2]
 					s.schematicImage = schemImageName
+					s.galaxy = row[4]
+					s.enteredBy = row[5]
 
 					ingCursor = conn.cursor()
 					ingCursor.execute('SELECT ingredientName, ingredientType, ingredientObject, ingredientQuantity, res.resName FROM tSchematicIngredients LEFT JOIN (SELECT resourceGroup AS resID, groupName AS resName FROM tResourceGroup UNION ALL SELECT resourceType, resourceTypeName FROM tResourceType) res ON ingredientObject = res.resID WHERE schematicID="' + schematicID + '" ORDER BY ingredientType, ingredientQuantity DESC;')
@@ -278,6 +286,9 @@ def main():
 							favHTML = '  <div class="inlineBlock" style="width:3%;float:left;"><a alt="Favorite" title="Favorite" style="cursor: pointer;" onclick="toggleFavorite(this, 4, \''+ schematicID +'\', $(\'#galaxySel\').val());"><img src="/images/favorite16Off.png" /></a></div>'
 						favCursor.close()
 
+						if currentUser == s.enteredBy or (s.galaxy != 0 and userReputation >= ghShared.MIN_REP_VALS['EDIT_OTHER_SCHEMATIC']):
+							canEdit = True
+
 				cursor.close()
 
 			conn.close()
@@ -287,8 +298,13 @@ def main():
 	env = Environment(loader=FileSystemLoader('templates'))
 	env.globals['BASE_SCRIPT_URL'] = ghShared.BASE_SCRIPT_URL
 	env.globals['MOBILE_PLATFORM'] = ghShared.getMobilePlatform(os.environ['HTTP_USER_AGENT'])
-	template = env.get_template('schematics.html')
-	print template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), professionList=ghLists.getProfessionList(), schematicTabList=ghLists.getSchematicTabList(), objectTypeList=ghLists.getObjectTypeList(), noenergyTypeList=ghLists.getOptionList('SELECT resourceType, resourceTypeName FROM tResourceType WHERE resourceCategory != "energy" ORDER BY resourceTypeName;'), resourceGroupList=ghLists.getResourceGroupList(), schematicID=schematicID, schematic=s, favHTML=favHTML)
+	groupListShort = ""
+	if forceOp == 'edit':
+		groupListShort=ghLists.getResourceGroupListShort()
+		template = env.get_template('schematiceditor.html')
+	else:
+		template = env.get_template('schematics.html')
+	print template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), professionList=ghLists.getProfessionList(), schematicTabList=ghLists.getSchematicTabList(), objectTypeList=ghLists.getObjectTypeList(), noenergyTypeList=ghLists.getOptionList('SELECT resourceType, resourceTypeName FROM tResourceType WHERE resourceCategory != "energy" ORDER BY resourceTypeName;'), resourceGroupList=ghLists.getResourceGroupList(), resourceGroupListShort=groupListShort, schematicID=schematicID, schematic=s, favHTML=favHTML, canEdit=canEdit)
 
 
 if __name__ == "__main__":
