@@ -14,6 +14,7 @@ $(document).ready(function() {
   $("#craftingTabSel").val({{ schematic.craftingTab }});
   $("#objectTypeSel").val({{ schematic.objectType }});
 	loadIngredientPicker();
+
   $(".window .close").click(function(e) {
 		e.preventDefault();
 		$("#mask, .window").hide();
@@ -23,6 +24,10 @@ $(document).ready(function() {
 		$(".window").hide();
 	});
 });
+function handleIngredientDrop(event, ui) {
+  $(this).next().append(ui.helper.find("tr"));
+  ui.draggable.remove();
+}
 function ingredientPickerItemClick() {
     inv = this;
     $("#inventory").find("div.inventoryItem").css("border", "none");
@@ -64,12 +69,44 @@ function loadIngredientPicker() {
             var ipl = $("#ingredientPickerList");
             ipl.find("div.inventoryItem").draggable({
                 stack: ".inventoryItem",
-                revert: "invalid",
+                cursor: "grab",
+                revert: "true",
                 appendTo: "body",
                 helper: "clone"}).click(ingredientPickerItemClick).dblclick(ingredientPickerItemDoubleClick);
+            $("#schematicIngredients").droppable({
+                drop: handleIngredientDrop,
+                hoverClass: "control"
+            });
             $("#busyImgList").css("display","none");
         });
     return false;
+}
+function slotHoverCheck(e) {
+    var tt = $("#tooltip");
+    var ri = $("#schematicIngredients").find(".ingredientRow");
+    var cOffset = $("#schematicIngredients").offset();
+    var cX = e.pageX - cOffset.left;
+    var cY = e.pageY - cOffset.top;
+    var found = false;
+    for (i=0;i<ri.length;i++) {
+        ing = $(ri.eq(i));
+        wpX = ing.position().left;
+        wpY = ing.position().top;
+        if (cX > wpX && cX < (wpX + ing.width()) && cY > wpY && cY < (wpY + ing.height())) {
+            if (ing.attr("tt") != undefined) {
+                slotData = ing.attr("tt");
+                tt.html(slotData);
+                tt.css("left", e.pageX + 6);
+                tt.css("top", e.pageY + 6);
+                tt.show();
+                found = true;
+                break;
+            }
+        }
+    }
+    if (!found) {
+        tt.hide();
+    }
 }
 function refreshSkillGroups() {
 	$("#skillGroupSel").load(BASE_SCRIPT_URL + "getSkillGroupList.py", { prof: $("#schemProfSel").val() })
@@ -116,17 +153,21 @@ function refreshSkillGroups() {
       </div>
 			<table width="100%">
 				<tr>
-					<td valign="top" width="240px"><h3>Ingredients</h3>
-						<table style="margin-top:6px;">
+					<td valign="top" width="360px"><h3>Ingredients</h3>
+            <div id="schematicIngredients" onmousemove="slotHoverCheck(event)">
+						<table>
 					{% for ingredient in schematic.ingredients %}
-							<tr><td style="padding-right:4px;">{{ ingredient.ingredientQuantity }}</td><td>
-							{{ ingredient.objectLink }}
-							</td></tr>
+							<tr class="ingredientRow" tt="{{ ingredient.objectName }}">
+                <td><input type="text" name="ingName_{{ ingredient.ingredientName }}" value="{{ ingredient.ingredientName }}"  /></td>
+                <td style="padding-right:4px;"><input type="text" name="ing_{{ ingredient.ingredientName }}" size="5" maxlength="5" value="{{ ingredient.ingredientQuantity }}" /></td>
+                <td><img src="{{ ingredient.objectImage }}" class="schematicIngredient" /></td>
+						  </tr>
 					{% endfor %}
 					  </table>
+            </div>
 					</td>
 
-					<td valign="top"><h3>Qualities</h3><div>Uncheck to remove from best resources calculation.</div><ul id="qualitiesList" style="margin-top:6px;">
+					<td valign="top"><h3>Qualities</h3><div>Quick Add: <select></select></div><ul id="qualitiesList" style="margin-top:6px;">
 					{% for qualityGroup in schematic.qualityGroups %}
 							<h4 style="color:#e8d43d;">{{ qualityGroup.groupName() }}</h4>
 							{% for expProp in qualityGroup.properties %}
@@ -173,4 +214,5 @@ function refreshSkillGroups() {
 {{ blocks.pageFooter() }}
 {{ blocks.joinForm(loggedin, ['?src_url={{ BASE_SCRIPT_URL }}schematics.py&', linkappend]|join, url) }}
 <div id="mask"></div>
+<div id="tooltip"></div>
 </body></html>

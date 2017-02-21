@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2016 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -73,26 +73,17 @@ def getComponentLink(cn, objectPath, ingredientType):
 			schemImageName = compRow[4]
 		else:
 			schemImageName = 'none.jpg'
-		tempStr += '<img src="/images/schematics/' + schemImageName + '" class="schematicIngredient" />'
-		tempStr += '</td><td>'
-		tempStr += '<div class="schematicIngredient">'
-		if ingredientType > 2:
-			tempStr += '(Optional) '
+
 		while compRow != None:
 			# Add each potential component
 			if tempStr.find('href') > -1:
 				tempStr += ' or '
 			tempStr += '<a href="' + compRow[0] + '">' + compRow[1] + '</a>'
 			compRow = compCursor.fetchone()
-		tempStr += '</div>'
 	else:
-		tempStr = '</td><td><div>'
-		if ingredientType > 2:
-			tempStr += '(Optional) '
-		tempStr += objectPath[objectPath.rfind('/')+1:-4].replace('_',' ')
-		tempStr += '</div>'
+		tempStr = objectPath[objectPath.rfind('/')+1:-4].replace('_',' ')
 
-	return tempStr
+	return "/images/schematics/{0}|{1}".format(schemImageName, tempStr)
 
 
 def main():
@@ -213,22 +204,26 @@ def main():
 					s.enteredBy = row[5]
 
 					ingCursor = conn.cursor()
-					ingCursor.execute('SELECT ingredientName, ingredientType, ingredientObject, ingredientQuantity, res.resName FROM tSchematicIngredients LEFT JOIN (SELECT resourceGroup AS resID, groupName AS resName FROM tResourceGroup UNION ALL SELECT resourceType, resourceTypeName FROM tResourceType) res ON ingredientObject = res.resID WHERE schematicID="' + schematicID + '" ORDER BY ingredientType, ingredientQuantity DESC;')
+					ingCursor.execute('SELECT ingredientName, ingredientType, ingredientObject, ingredientQuantity, res.resName, containerType FROM tSchematicIngredients LEFT JOIN (SELECT resourceGroup AS resID, groupName AS resName, containerType FROM tResourceGroup UNION ALL SELECT resourceType, resourceTypeName, containerType FROM tResourceType) res ON ingredientObject = res.resID WHERE schematicID="' + schematicID + '" ORDER BY ingredientType, ingredientQuantity DESC;')
 					ingRow = ingCursor.fetchone()
 					while (ingRow != None):
 						tmpName = ingRow[2]
 						tmpName = tmpName.replace('shared_','')
 						if (ingRow[1] == 0):
+							tmpImage = '/images/resources/{0}.png'.format(ingRow[5])
 							# resource
 							if (ingRow[4] != None):
-								tmpLink = '</td><td><a href="' + ghShared.BASE_SCRIPT_URL + 'resourceType.py/' + ingRow[2] + '">' + ingRow[4] + '</a>'
+								tmpName = ingRow[4]
+								tmpLink = '<a href="' + ghShared.BASE_SCRIPT_URL + 'resourceType.py/' + ingRow[2] + '">' + tmpName + '</a>'
 							else:
-								tmpLink = '</td><td><a href="' + ghShared.BASE_SCRIPT_URL + 'resourceType.py/' + ingRow[2] + '">' + ingRow[2] + '</a>'
+								tmpLink = '<a href="' + ghShared.BASE_SCRIPT_URL + 'resourceType.py/' + ingRow[2] + '">' + tmpName + '</a>'
 						else:
 							# component
-							tmpLink = getComponentLink(conn, tmpName, ingRow[1])
+							results = getComponentLink(conn, tmpName, ingRow[1]).split('|')
+							tmpLink = results[1]
+							tmpImage = results[0]
 
-						s.ingredients.append(ghObjectSchematic.schematicIngredient(ingRow[0], ingRow[1], tmpName, ingRow[3], ingRow[4], tmpLink))
+						s.ingredients.append(ghObjectSchematic.schematicIngredient(ingRow[0], ingRow[1], tmpName, ingRow[3], ingRow[4], tmpLink, tmpImage, tmpName))
 						ingRow = ingCursor.fetchone()
 
 					ingCursor.close()

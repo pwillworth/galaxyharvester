@@ -23,13 +23,38 @@
 import ghNames
 
 class schematicIngredient:
-	def __init__(self, ingredientName = "", ingredientType = 0, ingredientObject = "", ingredientQuantity = 0, resourceName = "", objectLink = ""):
+	def __init__(self, ingredientName = "", ingredientType = 0, ingredientObject = "", ingredientQuantity = 0, resourceName = "", objectLink = "", objectImage = "", objectName = ""):
 		self.ingredientName = ingredientName
 		self.ingredientType = ingredientType
 		self.ingredientObject = ingredientObject
 		self.ingredientQuantity = ingredientQuantity
 		self.resourceName = resourceName
 		self.objectLink = objectLink
+		self.objectImage = objectImage
+		self.objectName = objectName
+
+	def getDisplayRow(self):
+		if self.ingredientType == 0:
+			return '<tr><td>' + str(self.ingredientQuantity) + '</td><td style="padding-right:4px;"></td><td>' + self.objectLink + '</td></tr>'
+		else:
+			tempStr = '<tr><td>' + str(self.ingredientQuantity) + '</td><td style="padding-right:4px;">'
+			if (self.objectImage != ""):
+				# use first image for slot
+				tempStr += '<img src="' + self.objectImage + '" class="schematicIngredient" />'
+				tempStr += '</td><td>'
+				tempStr += '<div class="schematicIngredient">'
+				if self.ingredientType > 2:
+					tempStr += '(Optional) '
+				tempStr += self.objectLink
+				tempStr += '</div>'
+			else:
+				tempStr = '</td><td><div>'
+				if self.ingredientType > 2:
+					tempStr += '(Optional) '
+				tempStr += self.objectLink
+				tempStr += '</div>'
+
+			return tempStr
 
 class schematicQualityGroup:
 	def __init__(self, group = ""):

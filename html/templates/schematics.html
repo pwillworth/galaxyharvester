@@ -319,9 +319,7 @@ function deleteSchematic() {
     <table width="100%"><tr>
         <td valign="top" width="240px"><h3>Ingredients</h3><table style="margin-top:6px;">
         {% for ingredient in schematic.ingredients %}
-            <tr><td style="padding-right:4px;">{{ ingredient.ingredientQuantity }}</td><td>
-            {{ ingredient.objectLink }}
-            </td></tr>
+            {{ ingredient.getDisplayRow() }}
         {% endfor %}
         </table>
         <h3>This schematic is an ingredient in the following schematics:</h3>
