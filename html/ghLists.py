@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2016 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -26,6 +26,21 @@ import cgi
 import MySQLdb
 import dbShared
 
+
+def getStatList():
+	result = ''
+	result += '    <option value="ER">Entangle Resist</option>'
+	result += '    <option value="CR">Cold Resist</option>'
+	result += '    <option value="CD">Conductivity</option>'
+	result += '    <option value="DR">Decay Resist</option>'
+	result += '    <option value="FL">Flavor</option>'
+	result += '    <option value="HR">Heat Resist</option>'
+	result += '    <option value="MA">Malleability</option>'
+	result += '    <option value="PE">Potential Energy</option>'
+	result += '    <option value="OQ">Overall Quality</option>'
+	result += '    <option value="SR">Shock Resist</option>'
+	result += '    <option value="UT">Unit Toughness</option>'
+	return result
 
 def getThemeList():
 	result = ''

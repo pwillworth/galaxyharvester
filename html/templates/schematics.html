@@ -335,7 +335,7 @@ function deleteSchematic() {
             {% for expProp in qualityGroup.properties %}
                 <li style="padding-left:10px;font-weight:bold;">{{ expProp.propertyName() }}</li>
                 {% for statWeight in expProp.statWeights %}
-                    <li style="padding-left:20px;"><span class="inlineBlock" style="width:100px;">{{ statWeight.statName() }}: </span><span>{{ statWeight.weightPercent() }}</span></li>
+                    <li style="padding-left:20px;"><span class="inlineBlock" style="width:100px;">{{ statWeight.statName() }}: </span><span>{{ statWeight.weightPercent() }}%</span></li>
                 {% endfor %}
             {% endfor %}
         {% endfor %}

@@ -303,7 +303,7 @@ def main():
 		template = env.get_template('schematiceditor.html')
 	else:
 		template = env.get_template('schematics.html')
-	print template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), professionList=ghLists.getProfessionList(), schematicTabList=ghLists.getSchematicTabList(), objectTypeList=ghLists.getObjectTypeList(), noenergyTypeList=ghLists.getOptionList('SELECT resourceType, resourceTypeName FROM tResourceType WHERE resourceCategory != "energy" ORDER BY resourceTypeName;'), resourceGroupList=ghLists.getResourceGroupList(), resourceGroupListShort=groupListShort, schematicID=schematicID, schematic=s, favHTML=favHTML, canEdit=canEdit)
+	print template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), professionList=ghLists.getProfessionList(), schematicTabList=ghLists.getSchematicTabList(), objectTypeList=ghLists.getObjectTypeList(), noenergyTypeList=ghLists.getOptionList('SELECT resourceType, resourceTypeName FROM tResourceType WHERE resourceCategory != "energy" ORDER BY resourceTypeName;'), resourceGroupList=ghLists.getResourceGroupList(), resourceGroupListShort=groupListShort, statList=ghLists.getStatList(), schematicID=schematicID, schematic=s, favHTML=favHTML, canEdit=canEdit)
 
 
 if __name__ == "__main__":

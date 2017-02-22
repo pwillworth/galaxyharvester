@@ -14,6 +14,9 @@ $(document).ready(function() {
   $("#craftingTabSel").val({{ schematic.craftingTab }});
   $("#objectTypeSel").val({{ schematic.objectType }});
 	loadIngredientPicker();
+  $(".statSelector").each( function(i, obj) {
+    $(obj).val($(obj).attr('tag'));
+  });
 
   $(".window .close").click(function(e) {
 		e.preventDefault();
@@ -184,11 +187,14 @@ function refreshSkillGroups() {
 
 					<td valign="top"><h3>Qualities</h3><div>Quick Add: <select></select></div><ul id="qualitiesList" style="margin-top:6px;">
 					{% for qualityGroup in schematic.qualityGroups %}
-							<h4 style="color:#e8d43d;">{{ qualityGroup.groupName() }}</h4>
+							<h4><input type="text" name="qg_{{ qualityGroup.groupName() }}" value="{{ qualityGroup.groupName() }}" /></h4>
 							{% for expProp in qualityGroup.properties %}
-									<li style="padding-left:10px;font-weight:bold;">{{ expProp.propertyName() }}</li>
+									<li style="padding-left:10px;font-weight:bold;"><input type="text" name="sq_{{ expProp.propertyName() }}" value="{{ expProp.propertyName() }}" /></li>
 									{% for statWeight in expProp.statWeights %}
-											<li style="padding-left:20px;"><span class="inlineBlock" style="width:100px;">{{ statWeight.statName() }}: </span><span>{{ statWeight.weightPercent() }}</span></li>
+											<li style="padding-left:20px;"><span class="inlineBlock" style="width:120px;">
+                        <select class="statSelector" name="sw_{{ statWeight.qualityID }}_{{ statWeight.stat }}" tag="{{ statWeight.stat }}">{{ statList }}</select>: </span>
+                        <span><input type="text" name="swp_{{ statWeight.statName() }}" size="2" maxlength="3" value="{{ statWeight.weightPercent() }}" />%</span>
+                      </li>
 									{% endfor %}
 							{% endfor %}
 					{% endfor %}

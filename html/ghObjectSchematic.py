@@ -84,7 +84,7 @@ class schematicStatWeight:
 		return ghNames.getStatName(self.stat)
 
 	def weightPercent(self):
-		return '%.0f' % ((self.statWeight*1.0/self.propWeightTotal)*100) + '%'
+		return '%.0f' % ((self.statWeight*1.0/self.propWeightTotal)*100)
 
 class schematic:
 	def __init__(self):
