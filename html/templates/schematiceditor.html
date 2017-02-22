@@ -25,19 +25,33 @@ $(document).ready(function() {
 	});
 });
 function handleIngredientDrop(event, ui) {
-  $(this).next().append(ui.helper.find("tr"));
-  ui.draggable.remove();
+  transmuteIngredient(ui.draggable);
 }
 function ingredientPickerItemClick() {
     inv = this;
-    $("#inventory").find("div.inventoryItem").css("border", "none");
-    $("#inventory").find("div.inventoryItem").css("margin", "4px");
+    $("#ingredientPickerList").find("div.inventoryItem").css("border", "none");
+    $("#ingredientPickerList").find("div.inventoryItem").css("margin", "4px");
     $(this).css("border", "1px solid");
     $(this).css("margin", "3px");
 }
 function ingredientPickerItemDoubleClick() {
-    inv = this;
-    // Code to add this item as new ingredient
+    transmuteIngredient(this);
+}
+function transmuteIngredient(ingredientObject) {
+  var objectName = $(ingredientObject).children('div').html();
+  var objectID = $(ingredientObject).attr('id').substr(14);
+  var imageName = $(ingredientObject).css('background-image').replace('url("', '').replace('")', '');
+
+  addSchematicIngredient(objectID, objectName, imageName);
+}
+function addSchematicIngredient(objectID, objectName, imagePath) {
+  // Add new ingredient row
+  $('#ingredientTable').append('							<tr class="ingredientRow" tt="'+objectName+'">'+
+                  '<td><img src="/images/xRed16.png" alt="Remove Ingredient" title="Remove Ingredient" style="cursor:pointer;" onclick="$(this).parent().parent().remove();"/></td>'+
+                  '<td><input type="text" name="ing_name_new_'+objectID+'" value=""  /></td>'+
+                  '<td style="padding-right:4px;"><input type="text" name="ing_qty_new_'+objectID+'" size="5" maxlength="5" value="" /></td>'+
+                  '<td><img src="'+imagePath+'" class="schematicIngredient" /></td>'+
+  						  '</tr>');
 }
 function loadIngredientPicker() {
     $("#busyImg").css("display","block");
@@ -155,11 +169,12 @@ function refreshSkillGroups() {
 				<tr>
 					<td valign="top" width="360px"><h3>Ingredients</h3>
             <div id="schematicIngredients" onmousemove="slotHoverCheck(event)">
-						<table>
+						<table id="ingredientTable">
 					{% for ingredient in schematic.ingredients %}
 							<tr class="ingredientRow" tt="{{ ingredient.objectName }}">
-                <td><input type="text" name="ingName_{{ ingredient.ingredientName }}" value="{{ ingredient.ingredientName }}"  /></td>
-                <td style="padding-right:4px;"><input type="text" name="ing_{{ ingredient.ingredientName }}" size="5" maxlength="5" value="{{ ingredient.ingredientQuantity }}" /></td>
+                <td><img src="/images/xRed16.png" alt="Remove Ingredient" title="Remove Ingredient" style="cursor:pointer;" onclick="$(this).parent().parent().remove();"/></td>
+                <td><input type="text" name="ing_name_{{ ingredient.ingredientName }}" value="{{ ingredient.ingredientName }}"  /></td>
+                <td style="padding-right:4px;"><input type="text" name="ing_qty_{{ ingredient.ingredientName }}" size="5" maxlength="5" value="{{ ingredient.ingredientQuantity }}" /></td>
                 <td><img src="{{ ingredient.objectImage }}" class="schematicIngredient" /></td>
 						  </tr>
 					{% endfor %}
