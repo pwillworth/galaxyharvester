@@ -49,7 +49,7 @@ function addSchematicIngredient(objectID, objectName, imagePath) {
   $('#ingredientTable').append('							<tr class="ingredientRow" tt="'+objectName+'">'+
                   '<td><img src="/images/xRed16.png" alt="Remove Ingredient" title="Remove Ingredient" style="cursor:pointer;" onclick="$(this).parent().parent().remove();"/></td>'+
                   '<td><input type="text" name="ing_name_new_'+objectID+'" value=""  /></td>'+
-                  '<td style="padding-right:4px;"><input type="text" name="ing_qty_new_'+objectID+'" size="5" maxlength="5" value="" /></td>'+
+                  '<td style="padding-right:4px;"><input type="text" name="ing_qty_new_'+objectID+'" size="5" maxlength="7" value="" /></td>'+
                   '<td><img src="'+imagePath+'" class="schematicIngredient" /></td>'+
   						  '</tr>');
 }
@@ -174,7 +174,7 @@ function refreshSkillGroups() {
 							<tr class="ingredientRow" tt="{{ ingredient.objectName }}">
                 <td><img src="/images/xRed16.png" alt="Remove Ingredient" title="Remove Ingredient" style="cursor:pointer;" onclick="$(this).parent().parent().remove();"/></td>
                 <td><input type="text" name="ing_name_{{ ingredient.ingredientName }}" value="{{ ingredient.ingredientName }}"  /></td>
-                <td style="padding-right:4px;"><input type="text" name="ing_qty_{{ ingredient.ingredientName }}" size="5" maxlength="5" value="{{ ingredient.ingredientQuantity }}" /></td>
+                <td style="padding-right:4px;"><input type="text" name="ing_qty_{{ ingredient.ingredientName }}" size="5" maxlength="7" value="{{ ingredient.ingredientQuantity }}" /></td>
                 <td><img src="{{ ingredient.objectImage }}" class="schematicIngredient" /></td>
 						  </tr>
 					{% endfor %}
@@ -205,19 +205,21 @@ function refreshSkillGroups() {
 					  <input type="hidden" name="src_url" value="{{ BASE_SCRIPT_URL }}schematics.py" />
 					  <input type="submit" value="Add" name="gosi" id="gosi" class="ghButton" />
 					  </form>
-
-						<div id="professionEditor">Profession: <select name="schemProfSel" id="schemProfSel" onchange="refreshSkillGroups()"><option value=0>Select Profession</option>
-				    {{ professionList }}
-					  </select></div>
-						<div id="skillGroupEditor">Skill Group: <select name="skillGroupSel" id="skillGroupSel"></select></div>
-						<div id="craftingTabEditor">Crafting Tab: <select name="craftingTagSel" id="craftingTabSel">
-            {{ schematicTabList }}
-            </select></div>
-						<div id="objectTypeEditor">Object Type: <select name="objectTypeSel" id="objectTypeSel">
-            {{ objectTypeList }}
-            </select></div>
-						<div id="xpAmountEditor">XP: <input type="text" name="xpAmount" size="4" maxlength="5" value="{{ schematic.xpAmount }}" /></div>
-						<div id="complexityEditor">Complexity: <input type="text" name="complexity" size="3" maxlength="5" value="{{ schematic.complexity }}" /></div>
+            <div class="footer"></div>
+            <table>
+						  <tr><td>Profession: </td><td><select name="schemProfSel" id="schemProfSel" onchange="refreshSkillGroups()"><option value=0>Select Profession</option>
+				      {{ professionList }}
+              </select></td></tr>
+						  <tr><td>Skill Group: </td><td><select name="skillGroupSel" id="skillGroupSel"></select></td></tr>
+						  <tr><td>Crafting Tab: </td><td><select name="craftingTagSel" id="craftingTabSel">
+              {{ schematicTabList }}
+              </select></td></tr>
+						  <tr><td>Object Type: </td><td><select name="objectTypeSel" id="objectTypeSel">
+              {{ objectTypeList }}
+              </select></td></tr>
+						  <tr><td>XP: </td><td><input type="text" name="xpAmount" size="4" maxlength="5" value="{{ schematic.xpAmount }}" /></td></tr>
+						  <tr><td>Complexity: </td><td><input type="text" name="complexity" size="4" maxlength="5" value="{{ schematic.complexity }}" /></td></tr>
+            </table>
 				{% endif %}
 					</td>
 			  </tr>

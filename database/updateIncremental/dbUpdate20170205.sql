@@ -10,3 +10,5 @@ ALTER TABLE tResourceTypeCreature ADD PRIMARY KEY (resourceType, speciesName, ga
 
 ALTER TABLE tSchematic ADD INDEX IX_schem_galaxy (galaxy);
 UPDATE tObjectType SET typeName = 'Other', craftingTab = 524288 WHERE objectType = 0;
+
+ALTER TABLE tSchematicIngredients MODIFY COLUMN ingredientQuantity INT;
