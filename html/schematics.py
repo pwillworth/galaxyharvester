@@ -68,8 +68,10 @@ def getComponentLink(cn, objectPath, ingredientType):
 	compRow = compCursor.fetchone()
 	tempStr = ''
 	schemImageName = ''
+	schemName = ''
 	if (compRow != None):
 		# use first image for slot
+		schemName = compRow[1]
 		if (compRow[4] != None):
 			schemImageName = compRow[4]
 		else:
@@ -84,7 +86,7 @@ def getComponentLink(cn, objectPath, ingredientType):
 	else:
 		tempStr = objectPath[objectPath.rfind('/')+1:-4].replace('_',' ')
 
-	return "/images/schematics/{0}|{1}".format(schemImageName, tempStr)
+	return "/images/schematics/{0}|{1}|{2}".format(schemImageName, tempStr, schemName)
 
 
 def main():
@@ -208,8 +210,8 @@ def main():
 					ingCursor.execute('SELECT ingredientName, ingredientType, ingredientObject, ingredientQuantity, res.resName, containerType FROM tSchematicIngredients LEFT JOIN (SELECT resourceGroup AS resID, groupName AS resName, containerType FROM tResourceGroup UNION ALL SELECT resourceType, resourceTypeName, containerType FROM tResourceType) res ON ingredientObject = res.resID WHERE schematicID="' + schematicID + '" ORDER BY ingredientType, ingredientQuantity DESC;')
 					ingRow = ingCursor.fetchone()
 					while (ingRow != None):
-						tmpName = ingRow[2]
-						tmpName = tmpName.replace('shared_','')
+						tmpObject = ingRow[2]
+						tmpObject = tmpObject.replace('shared_','')
 						if (ingRow[1] == 0):
 							tmpImage = '/images/resources/{0}.png'.format(ingRow[5])
 							# resource
@@ -220,9 +222,10 @@ def main():
 								tmpLink = '<a href="' + ghShared.BASE_SCRIPT_URL + 'resourceType.py/' + ingRow[2] + '">' + tmpName + '</a>'
 						else:
 							# component
-							results = getComponentLink(conn, tmpName, ingRow[1]).split('|')
+							results = getComponentLink(conn, tmpObject, ingRow[1]).split('|')
 							tmpLink = results[1]
 							tmpImage = results[0]
+							tmpName = results[2]
 
 						s.ingredients.append(ghObjectSchematic.schematicIngredient(ingRow[0], ingRow[1], tmpName, ingRow[3], ingRow[4], tmpLink, tmpImage, tmpName))
 						ingRow = ingCursor.fetchone()
