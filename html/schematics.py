@@ -67,6 +67,7 @@ def getComponentLink(cn, objectPath, ingredientType):
 	compCursor.execute('SELECT schematicID, schematicName, complexity, xpAmount, (SELECT imageName FROM tSchematicImages tsi WHERE tsi.schematicID=tSchematic.schematicID AND tsi.imageType=1) AS schemImage FROM tSchematic WHERE objectPath="' + objectPath + '" OR objectGroup="' + objectPath + '";')
 	compRow = compCursor.fetchone()
 	tempStr = ''
+	schemImageName = ''
 	if (compRow != None):
 		# use first image for slot
 		if (compRow[4] != None):

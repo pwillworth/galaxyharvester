@@ -3,6 +3,7 @@ dist/
 html/temp/
 html/exports/
 html/images/users/
+html/images/schematics/*
 test/pyunit/.coverage
 test/pyunit/coverage.xml
 test/pyunit/nosetests.xml
