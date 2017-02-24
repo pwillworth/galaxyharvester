@@ -149,7 +149,7 @@ function refreshSkillGroups() {
 	$("#skillGroupSel").load(BASE_SCRIPT_URL + "getSkillGroupList.py", { prof: $("#schemProfSel").val() })
 }
 function newExpGroup(groupName) {
-  $('#qualitiesList').append('<div><img src="/images/xRed16.png" alt="Remove Group" title="Remove Group" style="cursor:pointer;" onclick="$(this).parent().remove();"/><input type="text" value="' + groupName + '" /></div>')
+  $('#qualitiesList').append('<div class="expQualityGroup"><img src="/images/xRed16.png" alt="Remove Group" title="Remove Group" style="cursor:pointer;" onclick="$(this).parent().remove();"/><input type="text" value="' + groupName + '" /></div>')
 }
 function addExpQuality(quickAddType) {
   quickAddStats = quickAddGroups[quickAddType].split(',');
@@ -233,8 +233,8 @@ function addExpQuality(quickAddType) {
 					</td>
 
 					<td valign="top"><h3>Qualities</h3>
-            <div>Add Group: <input type="text" id="addExpGroupName" maxlength="31" /><button type=button value="Add" class="ghButton" onclick="newExpGroup($('#addExpGroupName').val());">Add</button></div>
-            <div>Add Quality: <select id="qualityAddSel" onchange="addExpQuality(this.value);">
+            <table><tr><td>Add Group:</td><td><input type="text" id="addExpGroupName" maxlength="31" /></td><td><button type=button value="Add" class="ghButton" onclick="newExpGroup($('#addExpGroupName').val());">Add</button></td></tr>
+            <tr><td>Add Quality:</td><td><select id="qualityAddSel">
               <option value="architectExtraction">Architect Extraction</option>
               <option value="architectHopperSize">Architect Hopper Size</option>
               <option value="armorsmithDurability">Armorsmith Durability</option>
@@ -254,7 +254,7 @@ function addExpQuality(quickAddType) {
               <option value="generalEffectiveness">General Effectiveness</option>
               <option value="weaponsmithRanged">Weaponsmith Ranged</option>
               <option value="weaponsmithMelee">Weaponsmith Melee</option>
-            </select></div>
+            </select></td><td><button type=button value="Add" class="ghButton" onclick="addExpQuality($('#qualityAddSel').val());">Add</button></td></tr></table>
             <ul id="qualitiesList" style="margin-top:6px;">
 					{% for qualityGroup in schematic.qualityGroups %}
 							<div class="expQualityGroup"><img src="/images/xRed16.png" alt="Remove Group" title="Remove Group" style="cursor:pointer;" onclick="$(this).parent().remove();"/><input type="text" name="qg_{{ qualityGroup.groupName() }}" value="{{ qualityGroup.groupName() }}" />
@@ -262,7 +262,7 @@ function addExpQuality(quickAddType) {
 									<li class="expQuality" style="padding-left:20px;font-weight:bold;"><img src="/images/xRed16.png" alt="Remove Exp. Quality" title="Remove Exp. Quality" style="cursor:pointer;" onclick="$(this).parent().remove();"/><input type="text" name="sq_{{ expProp.propertyName() }}" value="{{ expProp.propertyName() }}" />
 									{% for statWeight in expProp.statWeights %}
 											<li class="qualityStat" style="padding-left:40px;"><span class="inlineBlock" style="width:120px;">
-                        <select class="statSelector" name="sw_{{ statWeight.qualityID }}_{{ statWeight.stat }}" tag="{{ statWeight.stat }}">{{ statList }}</select>: </span>
+                        <select class="statSelector" name="sw_{{ statWeight.qualityID }}_{{ statWeight.stat }}" tag="{{ statWeight.stat }}">{{ statList }}</select></span>
                         <span><input type="text" name="swp_{{ statWeight.statName() }}" size="2" maxlength="3" value="{{ statWeight.weightPercent() }}" />%</span>
                       </li>
 									{% endfor %}
