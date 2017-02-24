@@ -7,6 +7,26 @@
 <script type="text/javascript" src="/js/jquery.min.js"></script>
 <script type="text/javascript" src="/js/jquery-ui-1.8.20.custom.min.js"></script>
 <script type="text/javascript">
+var quickAddGroups = {};
+quickAddGroups['architectExtraction'] = 'HR:25,SR:25,UT:50';
+quickAddGroups['architectHopperSize'] = 'MA:33,UT:67';
+quickAddGroups['armorsmithDurability'] = 'OQ:50,UT:50';
+quickAddGroups['armorsmithResistance'] = 'OQ:50,SR:50';
+quickAddGroups['armorsmithEncumbrance'] = 'MA:50,OQ:50';
+quickAddGroups['beEffectiveness'] = 'FL:20,OQ:50,PE:30';
+quickAddGroups['chefFilling'] = 'DR:75,OQ:25';
+quickAddGroups['chefFlavor'] = 'FL:67,OQ:33';
+quickAddGroups['chefNutrition'] = 'OQ:33,PE:67';
+quickAddGroups['chefQuantity'] = 'DR:25,PE:75';
+quickAddGroups['cmPower'] = 'OQ:67,PE:33';
+quickAddGroups['cmRange'] = 'CD:33,OQ:67';
+quickAddGroups['doctorCharges'] = 'OQ:67,UT:33';
+quickAddGroups['doctorDuration'] = 'DR:50,OQ:50';
+quickAddGroups['doctorPower'] = 'OQ:67,PE:33';
+quickAddGroups['generalEffectiveness'] = 'OQ:100';
+quickAddGroups['weaponsmithRange'] = 'CD:50,OQ:50';
+quickAddGroups['weaponsmithMelee'] = 'SR:100';
+
 $(document).ready(function() {
   $("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
   refreshSkillGroups();
@@ -128,6 +148,33 @@ function slotHoverCheck(e) {
 function refreshSkillGroups() {
 	$("#skillGroupSel").load(BASE_SCRIPT_URL + "getSkillGroupList.py", { prof: $("#schemProfSel").val() })
 }
+function newExpGroup(groupName) {
+  $('#qualitiesList').append('<div><img src="/images/xRed16.png" alt="Remove Group" title="Remove Group" style="cursor:pointer;" onclick="$(this).parent().remove();"/><input type="text" value="' + groupName + '" /></div>')
+}
+function addExpQuality(quickAddType) {
+  quickAddStats = quickAddGroups[quickAddType].split(',');
+  tmpID = new Date().getTime();
+  groupStr = '<li class="expQuality" style="padding-left:20px;font-weight:bold;"><img src="/images/xRed16.png" alt="Remove Exp. Quality" title="Remove Exp. Quality" style="cursor:pointer;" onclick="$(this).parent().remove();"/><input type="text" name="new_expQuality" value="' + quickAddType + '" />';
+  for (i = 0; i < quickAddStats.length; i++) {
+    statInfo = quickAddStats[i].split(':');
+    groupStr = groupStr + '<li class="qualityStat" style="padding-left:40px;">'
+               + '<span id="stat_new_' + statInfo[0] + '_' + tmpID + '" class="inlineBlock" style="width:120px;"></span>'
+               + '<span><input type="text" name="swp_new_' + statInfo[0] + '" size="2" maxlength="3" value="' + statInfo[1] + '" />%</span>'
+               + '</li>';
+  }
+  groupStr = groupStr + '</li>'
+
+  $('.expQualityGroup').last().append(groupStr);
+  // Add in the stat selector by cloning
+  for (i = 0; i < quickAddStats.length; i++) {
+    statInfo = quickAddStats[i].split(':');
+    newSelector = $('.statSelectorSource').clone();
+    newSelector.attr('class','');
+    newSelector.attr('id', 'statSel_new_' + statInfo[0] + '_' + tmpID);
+    $('#stat_new_' + statInfo[0] + '_' + tmpID).append(newSelector);
+    $('#statSel_new_' + statInfo[0] + '_' + tmpID).val(statInfo[0]);
+  }
+}
 </script>
 {{ blocks.pageTracker() }}
 <body>
@@ -185,20 +232,46 @@ function refreshSkillGroups() {
             </div>
 					</td>
 
-					<td valign="top"><h3>Qualities</h3><div>Quick Add: <select></select></div><ul id="qualitiesList" style="margin-top:6px;">
+					<td valign="top"><h3>Qualities</h3>
+            <div>Add Group: <input type="text" id="addExpGroupName" maxlength="31" /><button type=button value="Add" class="ghButton" onclick="newExpGroup($('#addExpGroupName').val());">Add</button></div>
+            <div>Add Quality: <select id="qualityAddSel" onchange="addExpQuality(this.value);">
+              <option value="architectExtraction">Architect Extraction</option>
+              <option value="architectHopperSize">Architect Hopper Size</option>
+              <option value="armorsmithDurability">Armorsmith Durability</option>
+              <option value="armorsmithResistance">Armorsmith Resistance</option>
+              <option value="armorsmithEncumbrance">Armorsmith Encumbrance</option>
+              <option value="beEffectiveness">Bio-Engineer Effectiveness</option>
+              <option value="chefFilling">Chef Filling</option>
+              <option value="chefFlavor">Chef Flavor</option>
+              <option value="chefNutrition">Chef Nutrition</option>
+              <option value="chefQuantity">Chef Quantity</option>
+              <option value="cmAreaEffect">CM Area Effect</option>
+              <option value="cmPower">Combat Medic Power</option>
+              <option value="cmRange">Combat Medic Range</option>
+              <option value="doctorCharges">Doctor Charges</option>
+              <option value="doctorDuration">Doctor Duration<option>
+              <option value="doctorPower">Doctor Power</option>
+              <option value="generalEffectiveness">General Effectiveness</option>
+              <option value="weaponsmithRanged">Weaponsmith Ranged</option>
+              <option value="weaponsmithMelee">Weaponsmith Melee</option>
+            </select></div>
+            <ul id="qualitiesList" style="margin-top:6px;">
 					{% for qualityGroup in schematic.qualityGroups %}
-							<h4><input type="text" name="qg_{{ qualityGroup.groupName() }}" value="{{ qualityGroup.groupName() }}" /></h4>
+							<div class="expQualityGroup"><img src="/images/xRed16.png" alt="Remove Group" title="Remove Group" style="cursor:pointer;" onclick="$(this).parent().remove();"/><input type="text" name="qg_{{ qualityGroup.groupName() }}" value="{{ qualityGroup.groupName() }}" />
 							{% for expProp in qualityGroup.properties %}
-									<li style="padding-left:10px;font-weight:bold;"><input type="text" name="sq_{{ expProp.propertyName() }}" value="{{ expProp.propertyName() }}" /></li>
+									<li class="expQuality" style="padding-left:20px;font-weight:bold;"><img src="/images/xRed16.png" alt="Remove Exp. Quality" title="Remove Exp. Quality" style="cursor:pointer;" onclick="$(this).parent().remove();"/><input type="text" name="sq_{{ expProp.propertyName() }}" value="{{ expProp.propertyName() }}" />
 									{% for statWeight in expProp.statWeights %}
-											<li style="padding-left:20px;"><span class="inlineBlock" style="width:120px;">
+											<li class="qualityStat" style="padding-left:40px;"><span class="inlineBlock" style="width:120px;">
                         <select class="statSelector" name="sw_{{ statWeight.qualityID }}_{{ statWeight.stat }}" tag="{{ statWeight.stat }}">{{ statList }}</select>: </span>
                         <span><input type="text" name="swp_{{ statWeight.statName() }}" size="2" maxlength="3" value="{{ statWeight.weightPercent() }}" />%</span>
                       </li>
 									{% endfor %}
+                  </li>
 							{% endfor %}
+              </div>
 					{% endfor %}
-					</ul></td>
+					  </ul>
+          </td>
 
 					<td valign="top" width="325px"><img src="/images/schematics/{{ schematic.schematicImage }}" class="schematics" />
 					  <div id="udInfo">{{ schemImageAttempt }}</div>
@@ -238,4 +311,5 @@ function refreshSkillGroups() {
 {{ blocks.joinForm(loggedin, ['?src_url={{ BASE_SCRIPT_URL }}schematics.py&', linkappend]|join, url) }}
 <div id="mask"></div>
 <div id="tooltip"></div>
+<div style="visibility:none;"><select class="statSelectorSource">{{ statList }}</select></div>
 </body></html>
