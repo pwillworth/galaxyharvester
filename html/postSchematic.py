@@ -403,11 +403,19 @@ if errstr == '':
 	conn.close()
 
 if errstr != '':
-	print 'Status: 303 See Other'
-	print 'Location: /message.py?action=addschematicfail&actionreason=' + errstr
-	print ''
+	if (forceOp == 'edit'):
+		print 'Content-type: text/html\n'
+		print errstr
+	else:
+		print 'Status: 303 See Other'
+		print 'Location: /message.py?action=addschematicfail&actionreason=' + errstr
+		print ''
 else:
-	# redirect to new/edited schematic
-	print 'Status: 303 See Other'
-	print 'Location: /schematics.py/{0}'.format(schematicID)
-	print ''
+	if (forceOp == 'edit'):
+		print 'Content-type: text/html\n'
+		print 'Schematic saved.'
+	else:
+		# redirect to new/edited schematic
+		print 'Status: 303 See Other'
+		print 'Location: /schematics.py/{0}'.format(schematicID)
+		print ''

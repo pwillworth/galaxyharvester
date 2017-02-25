@@ -78,7 +78,7 @@ function addSchematicIngredient(objectID, objectName, imagePath) {
   						  '</tr>');
 }
 function loadIngredientPicker() {
-    $("#busyImg").css("display","block");
+    $("#busyImgList").css("display","block");
     var ingredientService = "";
     if ($("#oResType").attr("checked") == "checked") {
       ingredientService = "getResourceTypeList.py";
@@ -150,6 +150,8 @@ function addExpQuality(quickAddType) {
   }
 }
 function saveSchematic() {
+  $("#busyImgSave").css("display","block");
+  var errors = '';
   // build object based on form for submittal
   var schematic = {};
   schematic.schematicID = '{{ schematicID }}';
@@ -160,10 +162,17 @@ function saveSchematic() {
   schematic.ingredients = [];
   schematic.qualityGroups = [];
 
+  if ( schematic.schematicName.length < 2 ) {
+    errors = errors + "  You must enter a valid schematic name.";
+  }
+
   ingredientRows = $('#ingredientTable').find('.ingredientRow');
   for ( i = 0; i < ingredientRows.length; i++ ) {
     var ingredient = {};
     ingredient.ingredientName = ingredientRows.eq(i).find('input[name="ing_name"]').eq(0).val();
+    if ( ingredient.ingredientName.length < 2 ) {
+      errors = errors + '  Ingredient ' + String(i + 1) + ' does not have a valid name entered.';
+    }
     ingredient.ingredientObject = ingredientRows.eq(i).attr('tag');
     if ( ingredient.ingredientObject.indexOf('object/') > -1 ) {
       if ( ingredientRows.eq(i).find('input[name="ing_req"]').eq(0).attr('checked') == 'checked' ) {
@@ -175,6 +184,9 @@ function saveSchematic() {
       ingredient.ingredientType = 0;
     }
     ingredient.ingredientQuantity = ingredientRows.eq(i).find('input[name="ing_qty"]').eq(0).val();
+    if ( isNaN(parseInt(ingredient.ingredientQuantity)) ) {
+      errors = errors + '  Ingredient ' + String(i + 1) + ' does not have a valid quantity entered.';
+    }
     schematic.ingredients.push(ingredient);
   }
 
@@ -182,13 +194,20 @@ function saveSchematic() {
   for ( i = 0; i < qualityGroups.length; i++ ) {
     var qualityGroup = {};
     qualityGroup.group = qualityGroups.eq(i).find('input[name="qualityGroupName"]').eq(0).val();
+    if ( qualityGroup.group.length < 2 ) {
+      errors = errors + '  Quality group ' + String(i + 1) + ' does not have a valid name entered.';
+    }
     qualityGroup.properties = []
 
     expProps = qualityGroups.eq(i).find('.expQuality');
     for ( x = 0; x < expProps.length; x++ ) {
       var expProp = {};
       expProp.prop = expProps.eq(x).find('input[name="expQualityName"]').eq(0).val();
+      if ( expProp.prop.length < 2 ) {
+        errors = errors + ' Experimental property ' + String(x + 1) + ' in quality group ' + String(i + 1) + ' does not have a valid name entered.';
+      }
       expProp.statWeights = [];
+      var weightCount = 0;
       var weightTotal = 0;
       statWeights = expProps.eq(x).find('.qualityStat');
       for ( y = 0; y < statWeights.length; y++ ) {
@@ -196,15 +215,31 @@ function saveSchematic() {
         schemStatWeight.stat = statWeights.eq(y).find('select[name="swSel"]').eq(0).val();
         schemStatWeight.weightPercent = statWeights.eq(y).find('input[name="swp"]').eq(0).val();
         expProp.statWeights.push(schemStatWeight);
-        console.log(schemStatWeight);
-        weightTotal++;
+        weightCount++;
+        if ( !isNaN(parseInt(schemStatWeight.weightPercent)) ) {
+          weightTotal = weightTotal + parseInt(schemStatWeight.weightPercent);
+        } else {
+          errors = errors + ' Stat weight percent not valid for ' + String(y + 1) + ' in quality group ' + String(i + 1) + ', experimental property ' + String(x + 1) + '.';
+        }
       }
-      expProp.weightTotal = weightTotal;
+      expProp.weightTotal = weightCount;
+      if ( weightTotal != 100 ) {
+        errors = errors + '  The total of the stat weights for experimental property ' + String(x + 1) + ' in quality group ' + String(i + 1) + ' does not equal 100.';
+      }
       qualityGroup.properties.push(expProp);
     }
     schematic.qualityGroups.push(qualityGroup);
   }
-  console.log(schematic);
+
+  if ( errors == '' ) {
+    $.post(BASE_SCRIPT_URL + "postSchematic.py", { gh_sid: "'+sid+'", forceOp: "edit", schematicID: schematic.schematicID, schematic: JSON.stringify(schematic), galaxy: $("#galaxySel option:selected").val() },
+      function(data) {
+        alert(data);
+      });
+  } else {
+    alert('There are some problems with your schematic, please correct: ' + errors);
+  }
+  $("#busyImgSave").css("display","none");
 }
 </script>
 {{ blocks.pageTracker() }}
@@ -239,6 +274,7 @@ function saveSchematic() {
   <div id="rightMainContent" class="ghCol">
     <div class="ghWidgetBox">
 			<div class="bigLink">Schematic: <input type="text" id="schematicName" name="schematicName" value="{{ schematic.schematicName }}" size="60" maxlength="255" />
+      <div id="busyImgSave" style="display:none;"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
 			{% if loggedin == 1 %}
 					<div style="float:right;">
             <button type=button value="Cancel" class="ghButton" onclick="document.location.href='/schematics.py/{{ schematicID }}';">Cancel</button>
