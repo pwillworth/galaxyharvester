@@ -73,6 +73,7 @@ function addSchematicIngredient(objectID, objectName, imagePath) {
                   '<td><img src="/images/xRed16.png" alt="Remove Ingredient" title="Remove Ingredient" style="cursor:pointer;" onclick="$(this).parent().parent().remove();"/></td>'+
                   '<td><input type="text" name="ing_name_new_'+objectID+'" value=""  /></td>'+
                   '<td style="padding-right:4px;"><input type="text" name="ing_qty_new_'+objectID+'" size="5" maxlength="7" value="" /></td>'+
+                  '<td><input type="checkbox" name="ing_required_' + objectID + '" checked="checked" /></td>' +
                   '<td><img src="'+imagePath+'" class="schematicIngredient" /></td>'+
   						  '</tr>');
 }
@@ -118,33 +119,6 @@ function loadIngredientPicker() {
         });
     return false;
 }
-function slotHoverCheck(e) {
-    var tt = $("#tooltip");
-    var ri = $("#schematicIngredients").find(".ingredientRow");
-    var cOffset = $("#schematicIngredients").offset();
-    var cX = e.pageX - cOffset.left;
-    var cY = e.pageY - cOffset.top;
-    var found = false;
-    for (i=0;i<ri.length;i++) {
-        ing = $(ri.eq(i));
-        wpX = ing.position().left;
-        wpY = ing.position().top;
-        if (cX > wpX && cX < (wpX + ing.width()) && cY > wpY && cY < (wpY + ing.height())) {
-            if (ing.attr("tt") != undefined) {
-                slotData = ing.attr("tt");
-                tt.html(slotData);
-                tt.css("left", e.pageX + 6);
-                tt.css("top", e.pageY + 6);
-                tt.show();
-                found = true;
-                break;
-            }
-        }
-    }
-    if (!found) {
-        tt.hide();
-    }
-}
 function refreshSkillGroups() {
 	$("#skillGroupSel").load(BASE_SCRIPT_URL + "getSkillGroupList.py", { prof: $("#schemProfSel").val() })
 }
@@ -174,6 +148,9 @@ function addExpQuality(quickAddType) {
     $('#stat_new_' + statInfo[0] + '_' + tmpID).append(newSelector);
     $('#statSel_new_' + statInfo[0] + '_' + tmpID).val(statInfo[0]);
   }
+}
+function saveSchematic() {
+
 }
 </script>
 {{ blocks.pageTracker() }}
@@ -215,17 +192,24 @@ function addExpQuality(quickAddType) {
 					</div>
 			{% endif %}
       </div>
+      <div class="footer"></div>
 			<table width="100%">
 				<tr>
 					<td valign="top" width="360px"><h3>Ingredients</h3>
-            <div id="schematicIngredients" onmousemove="slotHoverCheck(event)">
+            <div id="schematicIngredients">
 						<table id="ingredientTable">
+              <tr><th></th><th>Ingredient Name</th><th title="Quantity - Resource amount or number of components.">Qty.</th><th title="Is ingredient required?">Req?</th><th></th></tr>
 					{% for ingredient in schematic.ingredients %}
 							<tr class="ingredientRow" tt="{{ ingredient.objectName }}">
                 <td><img src="/images/xRed16.png" alt="Remove Ingredient" title="Remove Ingredient" style="cursor:pointer;" onclick="$(this).parent().parent().remove();"/></td>
                 <td><input type="text" name="ing_name_{{ ingredient.ingredientName }}" value="{{ ingredient.ingredientName }}"  /></td>
                 <td style="padding-right:4px;"><input type="text" name="ing_qty_{{ ingredient.ingredientName }}" size="5" maxlength="7" value="{{ ingredient.ingredientQuantity }}" /></td>
-                <td><img src="{{ ingredient.objectImage }}" class="schematicIngredient" /></td>
+              {% if ingredient.ingredientType > 2 %}
+                <td><input type="checkbox" name="ing_required_{{ ingredient.ingredientName }}" /></td>
+              {% else %}
+                <td><input type="checkbox" name="ing_required_{{ ingredient.ingredientName }}" checked="checked" /></td>
+              {% endif %}
+                <td><img src="{{ ingredient.objectImage }}" class="schematicIngredient" title="{{ ingredient.objectName }}" /></td>
 						  </tr>
 					{% endfor %}
 					  </table>
@@ -233,7 +217,7 @@ function addExpQuality(quickAddType) {
 					</td>
 
 					<td valign="top"><h3>Qualities</h3>
-            <table><tr><td>Add Group:</td><td><input type="text" id="addExpGroupName" maxlength="31" /></td><td><button type=button value="Add" class="ghButton" onclick="newExpGroup($('#addExpGroupName').val());">Add</button></td></tr>
+            <div><table><tr><td>Add Group:</td><td><input type="text" id="addExpGroupName" maxlength="31" /></td><td><button type=button value="Add" class="ghButton" onclick="newExpGroup($('#addExpGroupName').val());">Add</button></td></tr>
             <tr><td>Add Quality:</td><td><select id="qualityAddSel">
               <option value="architectExtraction">Architect Extraction</option>
               <option value="architectHopperSize">Architect Hopper Size</option>
@@ -271,20 +255,10 @@ function addExpQuality(quickAddType) {
               </div>
 					{% endfor %}
 					  </ul>
+          </div>
           </td>
 
-					<td valign="top" width="325px"><img src="/images/schematics/{{ schematic.schematicImage }}" class="schematics" />
-					  <div id="udInfo">{{ schemImageAttempt }}</div>
-				{% if loggedin == 1 %}
-					  <form enctype="multipart/form-data" name="udImageForm" method="post" action="{{ BASE_SCRIPT_URL }}udSchematicImage.py">
-					  <div class="inlineBlock" style="width:120px;font-weight:bold;">Add Image</div><div class="inlineBlock" style="text-align:right;">Use image from another schematic: <input type="checkbox" name="useExisting" id="useExisting" onclick="switchImageInput();" /></div>
-					  <select id="copyFromSchem" name="copyFromSchem" style="display:none;"></select>
-					  <input type="file" id="schemImage" name="schemImage" accept="image/gif, image/jpeg, image/png" />
-					  <input type="hidden" name="schematicID" value="{{ schematicID }}" />
-					  <input type="hidden" name="src_url" value="{{ BASE_SCRIPT_URL }}schematics.py" />
-					  <input type="submit" value="Add" name="gosi" id="gosi" class="ghButton" />
-					  </form>
-            <div class="footer"></div>
+					<td valign="top" width="325px">
             <table>
 						  <tr><td>Profession: </td><td><select name="schemProfSel" id="schemProfSel" onchange="refreshSkillGroups()"><option value=0>Select Profession</option>
 				      {{ professionList }}
@@ -299,7 +273,16 @@ function addExpQuality(quickAddType) {
 						  <tr><td>XP: </td><td><input type="text" name="xpAmount" size="4" maxlength="5" value="{{ schematic.xpAmount }}" /></td></tr>
 						  <tr><td>Complexity: </td><td><input type="text" name="complexity" size="4" maxlength="5" value="{{ schematic.complexity }}" /></td></tr>
             </table>
-				{% endif %}
+            <img src="/images/schematics/{{ schematic.schematicImage }}" class="schematics" />
+  					<div id="udInfo">{{ schemImageAttempt }}</div>
+            <form enctype="multipart/form-data" name="udImageForm" method="post" action="{{ BASE_SCRIPT_URL }}udSchematicImage.py">
+            <div class="inlineBlock" style="width:120px;font-weight:bold;">Add Image</div><div class="inlineBlock" style="text-align:right;">Use image from another schematic: <input type="checkbox" name="useExisting" id="useExisting" onclick="switchImageInput();" /></div>
+            <select id="copyFromSchem" name="copyFromSchem" style="display:none;"></select>
+            <input type="file" id="schemImage" name="schemImage" accept="image/gif, image/jpeg, image/png" />
+            <input type="hidden" name="schematicID" value="{{ schematicID }}" />
+            <input type="hidden" name="src_url" value="{{ BASE_SCRIPT_URL }}schematics.py" />
+            <input type="submit" value="Add" name="gosi" id="gosi" class="ghButton" />
+            </form>
 					</td>
 			  </tr>
 			</table>
