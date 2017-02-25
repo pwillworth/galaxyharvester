@@ -53,7 +53,7 @@ if (cursor):
 			else:
 				imageName = 'none.jpg'
 
-			print "<div id='schemComponent{0}' class='inventoryItem inlineBlock' style='background-image:url(/images/schematics/{2});background-size:64px 64px;' tag='{1}'>".format(row[0], row[2], imageName)
+			print "<div id='schemComponent{1}' class='inventoryItem inlineBlock' style='background-image:url(/images/schematics/{2});background-size:64px 64px;' tag='{0}'>".format(row[0], row[2], imageName)
 			print "<div style='position: absolute;bottom:0;width:100%'>{0}</div>".format(row[1])
 			print "</div>"
 		else:

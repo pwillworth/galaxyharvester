@@ -25,6 +25,12 @@ import ghNames
 class schematicIngredient:
 	def __init__(self, ingredientName = "", ingredientType = 0, ingredientObject = "", ingredientQuantity = 0, resourceName = "", objectLink = "", objectImage = "", objectName = ""):
 		self.ingredientName = ingredientName
+		# ingredientType values
+		#  0 = required resource type/group
+		#  1 = required identical component
+		#  2 = required similar component
+		#  3 = optional identical component
+		#  4 = optional similar component
 		self.ingredientType = ingredientType
 		self.ingredientObject = ingredientObject
 		self.ingredientQuantity = ingredientQuantity

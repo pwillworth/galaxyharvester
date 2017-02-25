@@ -62,19 +62,19 @@ function ingredientPickerItemDoubleClick() {
 }
 function transmuteIngredient(ingredientObject) {
   var objectName = $(ingredientObject).children('div').html();
-  var objectID = $(ingredientObject).attr('id').substr(14);
+  var objectID = $(ingredientObject).attr('id').replace('resInventory', '').replace('schemComponent', '');
   var imageName = $(ingredientObject).css('background-image').replace('url("', '').replace('")', '');
 
   addSchematicIngredient(objectID, objectName, imageName);
 }
 function addSchematicIngredient(objectID, objectName, imagePath) {
   // Add new ingredient row
-  $('#ingredientTable').append('							<tr class="ingredientRow" tt="'+objectName+'">'+
+  $('#ingredientTable').append('							<tr class="ingredientRow" tag="' + objectID + '">'+
                   '<td><img src="/images/xRed16.png" alt="Remove Ingredient" title="Remove Ingredient" style="cursor:pointer;" onclick="$(this).parent().parent().remove();"/></td>'+
-                  '<td><input type="text" name="ing_name_new_'+objectID+'" value=""  /></td>'+
-                  '<td style="padding-right:4px;"><input type="text" name="ing_qty_new_'+objectID+'" size="5" maxlength="7" value="" /></td>'+
-                  '<td><input type="checkbox" name="ing_required_' + objectID + '" checked="checked" /></td>' +
-                  '<td><img src="'+imagePath+'" class="schematicIngredient" /></td>'+
+                  '<td><input type="text" name="ing_name" value=""  /></td>'+
+                  '<td style="padding-right:4px;"><input type="text" name="ing_qty" size="5" maxlength="7" value="" /></td>'+
+                  '<td><input type="checkbox" name="ing_req" checked="checked" /></td>' +
+                  '<td><img src="'+imagePath+'" class="schematicIngredient" title="' + objectName + '"/></td>'+
   						  '</tr>');
 }
 function loadIngredientPicker() {
@@ -150,7 +150,61 @@ function addExpQuality(quickAddType) {
   }
 }
 function saveSchematic() {
+  // build object based on form for submittal
+  var schematic = {};
+  schematic.schematicID = '{{ schematicID }}';
+  schematic.galaxy = '{{ schematic.galaxy }}';
+  schematic.schematicName = $('#schematicName').val();
+  schematic.complexity = $('#complexity').val();
+  schematic.xpAmount = $('#xpAmount').val();
+  schematic.ingredients = [];
+  schematic.qualityGroups = [];
 
+  ingredientRows = $('#ingredientTable').find('.ingredientRow');
+  for ( i = 0; i < ingredientRows.length; i++ ) {
+    var ingredient = {};
+    ingredient.ingredientName = ingredientRows.eq(i).find('input[name="ing_name"]').eq(0).val();
+    ingredient.ingredientObject = ingredientRows.eq(i).attr('tag');
+    if ( ingredient.ingredientObject.indexOf('object/') > -1 ) {
+      if ( ingredientRows.eq(i).find('input[name="ing_req"]').eq(0).attr('checked') == 'checked' ) {
+        ingredient.ingredientType = 1;
+      } else {
+        ingredient.ingredientType = 3;
+      }
+    } else {
+      ingredient.ingredientType = 0;
+    }
+    ingredient.ingredientQuantity = ingredientRows.eq(i).find('input[name="ing_qty"]').eq(0).val();
+    schematic.ingredients.push(ingredient);
+  }
+
+  qualityGroups = $('#qualitiesList').find('.expQualityGroup');
+  for ( i = 0; i < qualityGroups.length; i++ ) {
+    var qualityGroup = {};
+    qualityGroup.group = qualityGroups.eq(i).find('input[name="qualityGroupName"]').eq(0).val();
+    qualityGroup.properties = []
+
+    expProps = qualityGroups.eq(i).find('.expQuality');
+    for ( x = 0; x < expProps.length; x++ ) {
+      var expProp = {};
+      expProp.prop = expProps.eq(x).find('input[name="expQualityName"]').eq(0).val();
+      expProp.statWeights = [];
+      var weightTotal = 0;
+      statWeights = expProps.eq(x).find('.qualityStat');
+      for ( y = 0; y < statWeights.length; y++ ) {
+        var schemStatWeight = {};
+        schemStatWeight.stat = statWeights.eq(y).find('select[name="swSel"]').eq(0).val();
+        schemStatWeight.weightPercent = statWeights.eq(y).find('input[name="swp"]').eq(0).val();
+        expProp.statWeights.push(schemStatWeight);
+        console.log(schemStatWeight);
+        weightTotal++;
+      }
+      expProp.weightTotal = weightTotal;
+      qualityGroup.properties.push(expProp);
+    }
+    schematic.qualityGroups.push(qualityGroup);
+  }
+  console.log(schematic);
 }
 </script>
 {{ blocks.pageTracker() }}
@@ -184,7 +238,7 @@ function saveSchematic() {
   </div>
   <div id="rightMainContent" class="ghCol">
     <div class="ghWidgetBox">
-			<div class="bigLink">Schematic: <input type="text" name="schematicName" value="{{ schematic.schematicName }}" size="60" maxlength="255" />
+			<div class="bigLink">Schematic: <input type="text" id="schematicName" name="schematicName" value="{{ schematic.schematicName }}" size="60" maxlength="255" />
 			{% if loggedin == 1 %}
 					<div style="float:right;">
             <button type=button value="Cancel" class="ghButton" onclick="document.location.href='/schematics.py/{{ schematicID }}';">Cancel</button>
@@ -200,14 +254,14 @@ function saveSchematic() {
 						<table id="ingredientTable">
               <tr><th></th><th>Ingredient Name</th><th title="Quantity - Resource amount or number of components.">Qty.</th><th title="Is ingredient required?">Req?</th><th></th></tr>
 					{% for ingredient in schematic.ingredients %}
-							<tr class="ingredientRow" tt="{{ ingredient.objectName }}">
+							<tr class="ingredientRow" tag="{{ ingredient.ingredientObject }}">
                 <td><img src="/images/xRed16.png" alt="Remove Ingredient" title="Remove Ingredient" style="cursor:pointer;" onclick="$(this).parent().parent().remove();"/></td>
-                <td><input type="text" name="ing_name_{{ ingredient.ingredientName }}" value="{{ ingredient.ingredientName }}"  /></td>
-                <td style="padding-right:4px;"><input type="text" name="ing_qty_{{ ingredient.ingredientName }}" size="5" maxlength="7" value="{{ ingredient.ingredientQuantity }}" /></td>
+                <td><input type="text" name="ing_name" value="{{ ingredient.ingredientName }}"  /></td>
+                <td style="padding-right:4px;"><input type="text" name="ing_qty" size="5" maxlength="7" value="{{ ingredient.ingredientQuantity }}" /></td>
               {% if ingredient.ingredientType > 2 %}
-                <td><input type="checkbox" name="ing_required_{{ ingredient.ingredientName }}" /></td>
+                <td><input type="checkbox" name="ing_req" /></td>
               {% else %}
-                <td><input type="checkbox" name="ing_required_{{ ingredient.ingredientName }}" checked="checked" /></td>
+                <td><input type="checkbox" name="ing_req" checked="checked" /></td>
               {% endif %}
                 <td><img src="{{ ingredient.objectImage }}" class="schematicIngredient" title="{{ ingredient.objectName }}" /></td>
 						  </tr>
@@ -241,16 +295,18 @@ function saveSchematic() {
             </select></td><td><button type=button value="Add" class="ghButton" onclick="addExpQuality($('#qualityAddSel').val());">Add</button></td></tr></table>
             <ul id="qualitiesList" style="margin-top:6px;">
 					{% for qualityGroup in schematic.qualityGroups %}
-							<div class="expQualityGroup"><img src="/images/xRed16.png" alt="Remove Group" title="Remove Group" style="cursor:pointer;" onclick="$(this).parent().remove();"/><input type="text" name="qg_{{ qualityGroup.groupName() }}" value="{{ qualityGroup.groupName() }}" />
+							<div class="expQualityGroup"><img src="/images/xRed16.png" alt="Remove Group" title="Remove Group" style="cursor:pointer;" onclick="$(this).parent().remove();"/><input type="text" name="qualityGroupName" value="{{ qualityGroup.groupName() }}" />
 							{% for expProp in qualityGroup.properties %}
-									<li class="expQuality" style="padding-left:20px;font-weight:bold;"><img src="/images/xRed16.png" alt="Remove Exp. Quality" title="Remove Exp. Quality" style="cursor:pointer;" onclick="$(this).parent().remove();"/><input type="text" name="sq_{{ expProp.propertyName() }}" value="{{ expProp.propertyName() }}" />
+									<div class="expQuality" style="padding-left:20px;font-weight:bold;">
+                    <img src="/images/xRed16.png" alt="Remove Exp. Quality" title="Remove Exp. Quality" style="cursor:pointer;" onclick="$(this).parent().remove();"/>
+                    <input type="text" name="expQualityName" value="{{ expProp.propertyName() }}" />
 									{% for statWeight in expProp.statWeights %}
-											<li class="qualityStat" style="padding-left:40px;"><span class="inlineBlock" style="width:120px;">
-                        <select class="statSelector" name="sw_{{ statWeight.qualityID }}_{{ statWeight.stat }}" tag="{{ statWeight.stat }}">{{ statList }}</select></span>
-                        <span><input type="text" name="swp_{{ statWeight.statName() }}" size="2" maxlength="3" value="{{ statWeight.weightPercent() }}" />%</span>
-                      </li>
+										<li class="qualityStat" style="padding-left:40px;" tag="{{ statWeight.qualityID }}"><span class="inlineBlock" style="width:120px;">
+                      <select class="statSelector" name="swSel" tag="{{ statWeight.stat }}">{{ statList }}</select></span>
+                      <span><input type="text" name="swp" size="2" maxlength="3" value="{{ statWeight.weightPercent() }}" />%</span>
+                    </li>
 									{% endfor %}
-                  </li>
+                </div>
 							{% endfor %}
               </div>
 					{% endfor %}
@@ -270,8 +326,8 @@ function saveSchematic() {
 						  <tr><td>Object Type: </td><td><select name="objectTypeSel" id="objectTypeSel">
               {{ objectTypeList }}
               </select></td></tr>
-						  <tr><td>XP: </td><td><input type="text" name="xpAmount" size="4" maxlength="5" value="{{ schematic.xpAmount }}" /></td></tr>
-						  <tr><td>Complexity: </td><td><input type="text" name="complexity" size="4" maxlength="5" value="{{ schematic.complexity }}" /></td></tr>
+						  <tr><td>XP: </td><td><input type="text" id="xpAmount" name="xpAmount" size="4" maxlength="5" value="{{ schematic.xpAmount }}" /></td></tr>
+						  <tr><td>Complexity: </td><td><input type="text" id="complexity" name="complexity" size="4" maxlength="5" value="{{ schematic.complexity }}" /></td></tr>
             </table>
             <img src="/images/schematics/{{ schematic.schematicImage }}" class="schematics" />
   					<div id="udInfo">{{ schemImageAttempt }}</div>

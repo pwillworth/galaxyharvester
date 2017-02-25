@@ -227,7 +227,7 @@ def main():
 							tmpImage = results[0]
 							tmpName = results[2]
 
-						s.ingredients.append(ghObjectSchematic.schematicIngredient(ingRow[0], ingRow[1], tmpName, ingRow[3], ingRow[4], tmpLink, tmpImage, tmpName))
+						s.ingredients.append(ghObjectSchematic.schematicIngredient(ingRow[0], ingRow[1], tmpObject, ingRow[3], ingRow[4], tmpLink, tmpImage, tmpName))
 						ingRow = ingCursor.fetchone()
 
 					ingCursor.close()
