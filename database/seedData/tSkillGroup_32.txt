@@ -1,0 +1,102 @@
+19	craftAntiqueDealerNovice	Novice Antique Dealer
+19	craftAntiquePaintingsGroupA	Skilled Antique Paintings
+19	craftAntiquePaintingsGroupB	Advanced Antique Paintings
+19	craftAntiquePaintingsGroupC	Expert Antique Paintings
+19	craftAntiquePaintingsGroupD	Master Antique Paintings
+19	craftAntiqueHologramsGroupA	Skilled Antique Holograms
+19	craftAntiqueHologramsGroupB	Advanced Antique Holograms
+19	craftAntiqueHologramsGroupC	Expert Antique Holograms
+19	craftAntiqueHologramsGroupD	Master Antique Holograms
+19	craftAntiqueStatuettesGroupA	Skilled Antique Statuettes
+19	craftAntiqueStatuettesGroupB	Advanced Antique Statuettes
+19	craftAntiqueStatuettesGroupC	Expert Antique Statuettes
+19	craftAntiqueStatuettesGroupD	Master Antique Statuettes
+19	craftAntiqueJunkGroupA	Skilled Antique Junk
+19	craftAntiqueJunkGroupB	Advanced Antique Junk
+19	craftAntiqueJunkGroupC	Expert Antique Junk
+19	craftAntiqueJunkGroupD	Master Antique Junk
+19	craftAntiqueDealerMaster	Master Antique Dealer
+20	craftDarkJediJourneymanApprentice	Dark Jedi Journeyman Apprentice
+20	craftDarkJediJourneymanManipulationB	Journeyman Manipulation II
+20	craftDarkJediJourneymanManipulationD	Journeyman Manipulation IV
+20	craftDarkJediJourneymanHealingD	Journeyman Healing IV
+20	craftDarkJediJourneymanMaster	Dark Jedi Journeyman Master
+21	craftDarkJediKightElect	Dark Jedi Knight Elect
+22	craftArsenalistNovice	Elite Arsenalist Novice
+22	craftArsenalistRifleGroupA	Skilled Rifle Crafting Techniques
+22	craftArsenalistRifleGroupB	Advanced Rifle Crafting Techniques
+22	craftArsenalistRifleGroupC	Expert Rifle Crafting Techniques
+22	craftArsenalistRifleGroupD	Master Rifle Crafting Techniques
+22	craftArsenalistCarbineGroupA	Skilled Carbine Crafting Techniques
+22	craftArsenalistCarbineGroupB	Advanced Carbine Crafting Techniques
+22	craftArsenalistCarbineGroupC	Expert Carbine Crafting Techniques
+22	craftArsenalistCarbineGroupD	Master Carbine Crafting Techniques
+22	craftArsenalistPistolGroupA	Skilled Pistol Crafting Techniques
+22	craftArsenalistPistolGroupB	Advanced Pistol Crafting Techniques
+22	craftArsenalistPistolGroupC	Expert Pistol Crafting Techniques
+22	craftArsenalistPistolGroupD	Master Pistol Crafting Techniques
+22	craftArsenalistMeleeGroupA	Skilled Melee Crafting Techniques
+22	craftArsenalistMeleeGroupB	Advanced Melee Crafting Techniques
+22	craftArsenalistMeleeGroupC	Expert Melee Crafting Techniques
+22	craftArsenalistMeleeGroupD	Master Melee Crafting Techniques
+22	craftArsenalistMaster	Elite Master Arsenalist
+23	craftBlacksmithNovice	Elite Blacksmith Novice
+23	craftBlacksmithRebelGroupA	Skilled Rebel Crafting Techniques
+23	craftBlacksmithRebelGroupB	Advanced Rebel Crafting Techniques
+23	craftBlacksmithRebelGroupC	Expert Rebel Crafting Techniques
+23	craftBlacksmithRebelGroupD	Master Rebel Crafting Techniques
+23	craftBlacksmithImperialGroupA	Skilled Imperial Crafting Techniques
+23	craftBlacksmithImperialGroupB	Advanced Imperial Crafting Techniques
+23	craftBlacksmithImperialGroupC	Expert Imperial Crafting Techniques
+23	craftBlacksmithImperialGroupD	Master Imperial Crafting Techniques
+23	craftBlacksmithNeutralGroupA	Skilled Neutral Crafting Techniques
+23	craftBlacksmithNeutralGroupB	Advanced Neutral Crafting Techniques
+23	craftBlacksmithNeutralGroupC	Expert Neutral Crafting Techniques
+23	craftBlacksmithNeutralGroupD	Master Neutral Crafting Techniques
+23	craftBlacksmithSegmentGroupA	Skilled Segment Crafting Techniques
+23	craftBlacksmithSegmentGroupB	Advanced Segment Crafting Techniques
+23	craftBlacksmithSegmentGroupC	Expert Segment Crafting Techniques
+23	craftBlacksmithSegmentGroupD	Master Segment Crafting Techniques
+23	craftBlacksmithMaster	Elite Master Blacksmith
+24	craftJediJourneymanApprentice	Jedi Journeyman Apprentice
+24	craftJediJourneymanManipulationB	Journeyman Manipulation II
+24	craftJediJourneymanManipulationD	Journeyman Manipulation IV
+24	craftJediJourneymanHealingD	Journeyman Healing IV
+24	craftJediJourneymanMaster	Jedi Journeyman Master
+25	craftJediKightElect	Jedi Knight Elect
+26	craftMechanicNovice	Novice Mechanic
+26	craftMechanicBikerGroupA	Biker Mechanic Basic
+26	craftMechanicBikerGroupB	Biker Mechanic Intermediate
+26	craftMechanicBikerGroupC	Biker Mechanic Advanced
+26	craftMechanicBikerGroupD	Biker Mechanic Elite
+26	craftMechanicPodRacerGroupA	Pod Racer Engineer Basic
+26	craftMechanicPodRacerGroupB	Pod Racer Engineer Intermediate
+26	craftMechanicPodRacerGroupC	Pod Racer Engineer Advanced
+26	craftMechanicPodRacerGroupD	Pod Racer Engineer Elite
+26	craftMechanicSpeederGroupA	Land Speeder Engineer Basic
+26	craftMechanicSpeederGroupB	Land Speeder Engineer Intermediate
+26	craftMechanicSpeederGroupC	Land Speeder Engineer Advanced
+26	craftMechanicSpeederGroupD	Land Speeder Engineer Elite
+26	craftMechanicVehicleGroupA	Vehicle Specialist Basic
+26	craftMechanicVehicleGroupB	Vehicle Specialist Intermediate
+26	craftMechanicVehicleGroupC	Vehicle Specialist Advanced
+26	craftMechanicVehicleGroupD	Vehicle Specialist Elite
+26	craftMechanicMaster	Master Mechanic
+27	craftMinerNovice	Novice Miner
+27	craftMinerMineralGroupA	Intermediate Mineral Mining
+27	craftMinerMineralGroupB	Advanced Mineral Mining
+27	craftMinerMineralGroupC	Expert Mineral Mining
+27	craftMinerMineralGroupD	Master Mineral Mining
+27	craftMinerLiquidGroupA	Intermediate Liquid Mining
+27	craftMinerLiquidGroupB	Advanced Liquid Mining
+27	craftMinerLiquidGroupC	Expert Liquid Mining
+27	craftMinerLiquidGroupD	Master Liquid Mining
+27	craftMinerEnergyGroupA	Intermediate Energy Mining
+27	craftMinerEnergyGroupB	Advanced Energy Mining
+27	craftMinerEnergyGroupC	Expert Energy Mining
+27	craftMinerEnergyGroupD	Master Energy Mining
+27	craftMinerFloraGroupA	Intermediate Flora Growth
+27	craftMinerFloraGroupB	Advanced Flora Growth
+27	craftMinerFloraGroupC	Expert Flora Growth
+27	craftMinerFloraGroupD	Master Flora Growth
+27	craftMinerMaster	Master Miner

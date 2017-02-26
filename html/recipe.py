@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2016 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -90,10 +90,15 @@ def main():
 			uiTheme = cookies['uiTheme'].value
 		except KeyError:
 			uiTheme = ''
+		try:
+			galaxy = cookies['galaxy'].value
+		except KeyError:
+			galaxy = form.getfirst('galaxy', ghShared.DEFAULT_GALAXY)
 	else:
 		currentUser = ''
 		loginResult = form.getfirst('loginAttempt', '')
 		sid = form.getfirst('gh_sid', '')
+		galaxy = form.getfirst('galaxy', ghShared.DEFAULT_GALAXY)
 
 	# escape input to prevent sql injection
 	sid = dbShared.dbInsertSafe(sid)
@@ -240,7 +245,7 @@ def main():
 	env.globals['BASE_SCRIPT_URL'] = ghShared.BASE_SCRIPT_URL
 	env.globals['MOBILE_PLATFORM'] = ghShared.getMobilePlatform(os.environ['HTTP_USER_AGENT'])
 	template = env.get_template('recipe.html')
-	print template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), professionList=ghLists.getProfessionList(), recipeHTML=recipeHTML, slotHTML=slotHTML, schematicDetailsHTML=schematicDetailsHTML, ingTypes=ingTypes, ingGroups=ingGroups, pageType=pageType, recipeID=r.recipeID, recipeName=r.recipeName, schemImageName=schemImageName)
+	print template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), professionList=ghLists.getProfessionList(galaxy), recipeHTML=recipeHTML, slotHTML=slotHTML, schematicDetailsHTML=schematicDetailsHTML, ingTypes=ingTypes, ingGroups=ingGroups, pageType=pageType, recipeID=r.recipeID, recipeName=r.recipeName, schemImageName=schemImageName)
 
 
 if __name__ == "__main__":

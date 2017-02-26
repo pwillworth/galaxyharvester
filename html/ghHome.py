@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2016 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -129,4 +129,4 @@ env = Environment(loader=FileSystemLoader('templates'))
 env.globals['BASE_SCRIPT_URL'] = ghShared.BASE_SCRIPT_URL
 env.globals['MOBILE_PLATFORM'] = ghShared.getMobilePlatform(os.environ['HTTP_USER_AGENT'])
 template = env.get_template('home.html')
-print template.render(uiTheme=uiTheme, galaxy=galaxy, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, totalAmt=totalAmt, percentOfGoal=percentOfGoal, imgNum=ghShared.imgNum, resourceGroupListShort=ghLists.getResourceGroupListShort(), professionList=ghLists.getProfessionList(), planetList=ghLists.getPlanetList(galaxy), resourceGroupList=ghLists.getResourceGroupList(), resourceTypeList=ghLists.getResourceTypeList(), galaxyList=ghLists.getGalaxyList())
+print template.render(uiTheme=uiTheme, galaxy=galaxy, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, totalAmt=totalAmt, percentOfGoal=percentOfGoal, imgNum=ghShared.imgNum, resourceGroupListShort=ghLists.getResourceGroupListShort(), professionList=ghLists.getProfessionList(galaxy), planetList=ghLists.getPlanetList(galaxy), resourceGroupList=ghLists.getResourceGroupList(), resourceTypeList=ghLists.getResourceTypeList(), galaxyList=ghLists.getGalaxyList())

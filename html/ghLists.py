@@ -130,8 +130,11 @@ def getPlanetList(galaxy):
 		listStr = getOptionList('SELECT DISTINCT tPlanet.planetID, planetName FROM tPlanet, tGalaxyPlanet WHERE (tPlanet.planetID < 11) OR (tPlanet.planetID = tGalaxyPlanet.planetID AND tGalaxyPlanet.galaxyID = {0}) ORDER BY planetName;'.format(galaxy))
 	return listStr
 
-def getProfessionList():
-	listStr = getOptionList('SELECT profID, profName FROM tProfession ORDER BY profName;')
+def getProfessionList(galaxy):
+	if galaxy == -1 or galaxy == '':
+		listStr = getOptionList('SELECT profID, profName FROM tProfession WHERE galaxy=0 ORDER BY profName;')
+	else:
+		listStr = getOptionList('SELECT profID, profName FROM tProfession WHERE galaxy IN (0,{0}) ORDER BY profName'.format(str(galaxy)))
 	return listStr
 
 def getObjectTypeList():
