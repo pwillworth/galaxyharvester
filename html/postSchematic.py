@@ -29,7 +29,7 @@ import dbShared
 import ghShared
 import cgi
 import MySQLdb
-import re
+import json
 
 # create a URL safe schematic id based on proposed name
 def generateSchematicID(schematicName, galaxy):
@@ -243,6 +243,48 @@ def addSchematicSkeleton(conn, skillGroup, schematicName, galaxy, userID):
 
 	return '{0}|{1}'.format(schematicID, result)
 
+# Update values of existing schematic
+def updateSchematic(conn, schematicID, schematic):
+	try:
+		schem = json.loads(schematic)
+	except ValueError as e:
+		return 'Error: invalid schematic object {0}'.format(e)
+
+	cursor = conn.cursor()
+	if (cursor == None):
+		return 'Error: database unavailable'
+
+	schemSQL = "UPDATE tSchematic SET schematicName=%s, craftingTab=%s, skillGroup=%s, complexity=%s, xpAmount=%s WHERE schematicID=%s;"
+	try:
+		cursor.execute(schemSQL, (schem['schematicName'], schem['craftingTab'], schem['skillGroup'], schem['complexity'], schem['xpAmount'], schematicID))
+	except KeyError as e:
+		return 'Error: Schematic object is missing required data: {0}'.format(e)
+
+	# Update ingredients
+	schemSQL = "DELETE FROM tSchematicIngredients WHERE schematicID=%s;"
+	cursor.execute(schemSQL, (schematicID))
+	for ing in schem['ingredients']:
+		ingSQL = "INSERT INTO tSchematicIngredients (schematicID, ingredientName, ingredientType, ingredientObject, ingredientQuantity, ingredientContribution) VALUES (%s, %s, %s, %s, %s, %s);"
+		cursor.execute(ingSQL, (schematicID, ing['ingredientName'], ing['ingredientType'], ing['ingredientObject'], ing['ingredientQuantity'], 100))
+
+	# Update Experimental Qualities
+	schemSQL = "DELETE FROM tSchematicResWeights WHERE expQualityID IN (SELECT expQualityID FROM tSchematicQualities WHERE schematicID=%s);"
+	cursor.execute(schemSQL, (schematicID))
+	schemSQL = "DELETE FROM tSchematicQualities WHERE schematicID=%s;"
+	cursor.execute(schemSQL, (schematicID))
+	for expgroup in schem['qualityGroups']:
+		# Update all properties in the groups
+		for expProp in expgroup['properties']:
+			weightTotal = 0
+			schemSQL = "INSERT INTO tSchematicQualities (schematicID, expProperty, expGroup, weightTotal) VALUES (%s, %s, %s, %s);"
+			cursor.execute(schemSQL, (schematicID, expProp['prop'], expgroup['group'], expProp['weightTotal']))
+			# Update all resource weights in the properties
+			for resWeight in expProp['statWeights']:
+				schemSQL = "INSERT INTO tSchematicResWeights (expQualityID, statName, statWeight) VALUES (LAST_INSERT_ID(), %s, %s);"
+				cursor.execute(schemSQL, (resWeight['stat'], resWeight['statWeight']))
+
+	cursor.close()
+	return ''
 
 # Get current url
 try:
@@ -286,6 +328,7 @@ copyFromSchem = form.getfirst('schemCopySel', '')
 schematicName = form.getfirst('schematicName', '')
 forceOp = form.getfirst('forceOp', '')
 schematicID = form.getfirst('schematicID', '')
+schematic = form.getfirst('schematic', '')
 
 # escape input to prevent sql injection
 sid = dbShared.dbInsertSafe(sid)
@@ -395,8 +438,11 @@ if errstr == '':
 				errstr = errstr + 'Error: That schematic is part of the core game schematics and cannot be edited.'
 			elif checkRow[0] != currentUser and userReputation < ghShared.MIN_REP_VALS['EDIT_OTHER_SCHEMATIC']:
 				errstr = errstr + 'Error: You do not have high enough reputation to edit other users\' schematic data yet.'
+		else:
+			errstr = errstr + 'Error: Schematic with that ID could not be found for editing.'
 
-		errstr = 'Error: Not implemented yet'
+		if errstr == '':
+			errstr = updateSchematic(conn, schematicID, schematic)
 
 	checkCursor.close()
 

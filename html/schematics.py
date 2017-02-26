@@ -88,6 +88,16 @@ def getComponentLink(cn, objectPath, ingredientType):
 
 	return "/images/schematics/{0}|{1}|{2}".format(schemImageName, tempStr, schemName)
 
+# Helper function to look up profession for schematic since its not a property of schem but inferrable by skill group
+def getProfession(conn, skillGroup):
+	profCursor = conn.cursor()
+	profCursor.execute('SELECT profID FROM tSkillGroup WHERE skillGroup=%s;', (skillGroup))
+	profRow = profCursor.fetchone()
+	if profRow != None:
+		return profRow[0]
+	else:
+		return 0
+	profCursor.close()
 
 def main():
 	# Get current url
@@ -171,6 +181,7 @@ def main():
 
 	favHTML = ''
 	canEdit = False
+	profession = ''
 	if len(path) > 0:
 		schematicID = dbShared.dbInsertSafe(path[0])
 		url = url + '/' + schematicID
@@ -187,7 +198,7 @@ def main():
 			userReputation = int(stats[2])
 
 			if (cursor):
-				cursor.execute('SELECT schematicName, complexity, xpAmount, (SELECT imageName FROM tSchematicImages tsi WHERE tsi.schematicID=tSchematic.schematicID AND tsi.imageType=1) AS schemImage, galaxy, enteredBy FROM tSchematic WHERE schematicID=%s;', (schematicID))
+				cursor.execute('SELECT schematicName, complexity, xpAmount, (SELECT imageName FROM tSchematicImages tsi WHERE tsi.schematicID=tSchematic.schematicID AND tsi.imageType=1) AS schemImage, galaxy, enteredBy, craftingTab, skillGroup, objectType FROM tSchematic WHERE schematicID=%s;', (schematicID))
 				row = cursor.fetchone()
 
 				if (row != None):
@@ -205,6 +216,11 @@ def main():
 					s.schematicImage = schemImageName
 					s.galaxy = row[4]
 					s.enteredBy = row[5]
+					s.craftingTab = row[6]
+					s.skillGroup = row[7]
+					s.objectType = row[8]
+
+					profession = getProfession(conn, s.skillGroup)
 
 					ingCursor = conn.cursor()
 					ingCursor.execute('SELECT ingredientName, ingredientType, ingredientObject, ingredientQuantity, res.resName, containerType FROM tSchematicIngredients LEFT JOIN (SELECT resourceGroup AS resID, groupName AS resName, containerType FROM tResourceGroup UNION ALL SELECT resourceType, resourceTypeName, containerType FROM tResourceType) res ON ingredientObject = res.resID WHERE schematicID="' + schematicID + '" ORDER BY ingredientType, ingredientQuantity DESC;')
@@ -303,7 +319,7 @@ def main():
 		template = env.get_template('schematiceditor.html')
 	else:
 		template = env.get_template('schematics.html')
-	print template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), professionList=ghLists.getProfessionList(), schematicTabList=ghLists.getSchematicTabList(), objectTypeList=ghLists.getObjectTypeList(), noenergyTypeList=ghLists.getOptionList('SELECT resourceType, resourceTypeName FROM tResourceType WHERE resourceCategory != "energy" ORDER BY resourceTypeName;'), resourceGroupList=ghLists.getResourceGroupList(), resourceGroupListShort=groupListShort, statList=ghLists.getStatList(), schematicID=schematicID, schematic=s, favHTML=favHTML, canEdit=canEdit)
+	print template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), professionList=ghLists.getProfessionList(), schematicTabList=ghLists.getSchematicTabList(), objectTypeList=ghLists.getObjectTypeList(), noenergyTypeList=ghLists.getOptionList('SELECT resourceType, resourceTypeName FROM tResourceType WHERE resourceCategory != "energy" ORDER BY resourceTypeName;'), resourceGroupList=ghLists.getResourceGroupList(), resourceGroupListShort=groupListShort, statList=ghLists.getStatList(), schematicID=schematicID, schematic=s, favHTML=favHTML, canEdit=canEdit, profession=profession)
 
 
 if __name__ == "__main__":

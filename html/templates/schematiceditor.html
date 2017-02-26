@@ -8,31 +8,31 @@
 <script type="text/javascript" src="/js/jquery-ui-1.8.20.custom.min.js"></script>
 <script type="text/javascript">
 var quickAddGroups = {};
-quickAddGroups['architectExtraction'] = 'HR:25,SR:25,UT:50';
-quickAddGroups['architectHopperSize'] = 'MA:33,UT:67';
-quickAddGroups['armorsmithDurability'] = 'OQ:50,UT:50';
-quickAddGroups['armorsmithResistance'] = 'OQ:50,SR:50';
-quickAddGroups['armorsmithEncumbrance'] = 'MA:50,OQ:50';
-quickAddGroups['beEffectiveness'] = 'FL:20,OQ:50,PE:30';
-quickAddGroups['chefFilling'] = 'DR:75,OQ:25';
-quickAddGroups['chefFlavor'] = 'FL:67,OQ:33';
-quickAddGroups['chefNutrition'] = 'OQ:33,PE:67';
-quickAddGroups['chefQuantity'] = 'DR:25,PE:75';
-quickAddGroups['cmPower'] = 'OQ:67,PE:33';
-quickAddGroups['cmRange'] = 'CD:33,OQ:67';
-quickAddGroups['doctorCharges'] = 'OQ:67,UT:33';
-quickAddGroups['doctorDuration'] = 'DR:50,OQ:50';
-quickAddGroups['doctorPower'] = 'OQ:67,PE:33';
-quickAddGroups['generalEffectiveness'] = 'OQ:100';
-quickAddGroups['weaponsmithRange'] = 'CD:50,OQ:50';
-quickAddGroups['weaponsmithMelee'] = 'SR:100';
+quickAddGroups['architectExtraction'] = 'HR:25:1,SR:25:1,UT:50:2';
+quickAddGroups['architectHopperSize'] = 'MA:33:1,UT:67:2';
+quickAddGroups['armorsmithDurability'] = 'OQ:50:1,UT:50:1';
+quickAddGroups['armorsmithResistance'] = 'OQ:50:1,SR:50:1';
+quickAddGroups['armorsmithEncumbrance'] = 'MA:50:1,OQ:50:1';
+quickAddGroups['beEffectiveness'] = 'FL:20:2,OQ:50:5,PE:30:3';
+quickAddGroups['chefFilling'] = 'DR:75:3,OQ:25:1';
+quickAddGroups['chefFlavor'] = 'FL:67:2,OQ:33:1';
+quickAddGroups['chefNutrition'] = 'OQ:33:1,PE:67:2';
+quickAddGroups['chefQuantity'] = 'DR:25:1,PE:75:3';
+quickAddGroups['cmPower'] = 'OQ:67:2,PE:33:1';
+quickAddGroups['cmRange'] = 'CD:33:1,OQ:67:2';
+quickAddGroups['doctorCharges'] = 'OQ:67:2,UT:33:1';
+quickAddGroups['doctorDuration'] = 'DR:50:1,OQ:50:1';
+quickAddGroups['doctorPower'] = 'OQ:67:2,PE:33:1';
+quickAddGroups['generalEffectiveness'] = 'OQ:100:1';
+quickAddGroups['weaponsmithRange'] = 'CD:50:1,OQ:50:1';
+quickAddGroups['weaponsmithMelee'] = 'SR:100:1';
 
 $(document).ready(function() {
   $("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
-  refreshSkillGroups();
-  $("#skillGroupSel").val({{ schematic.skillGroup }});
-  $("#craftingTabSel").val({{ schematic.craftingTab }});
-  $("#objectTypeSel").val({{ schematic.objectType }});
+  $('#schemProfSel').val({{ profession }})
+  refreshSkillGroups('{{ schematic.skillGroup }}');
+  $('#craftingTabSel').val('{{ schematic.craftingTab }}');
+  $("#objectTypeSel").val('{{ schematic.objectType }}');
 	loadIngredientPicker();
   $(".statSelector").each( function(i, obj) {
     $(obj).val($(obj).attr('tag'));
@@ -119,8 +119,11 @@ function loadIngredientPicker() {
         });
     return false;
 }
-function refreshSkillGroups() {
-	$("#skillGroupSel").load(BASE_SCRIPT_URL + "getSkillGroupList.py", { prof: $("#schemProfSel").val() })
+function refreshSkillGroups(selValue) {
+  // Selects a value after updating list so correct value is selected on page load
+	$("#skillGroupSel").load(BASE_SCRIPT_URL + "getSkillGroupList.py", { prof: $("#schemProfSel").val() }, function() {
+    $('#skillGroupSel').val(selValue);
+  })
 }
 function newExpGroup(groupName) {
   $('#qualitiesList').append('<div class="expQualityGroup"><img src="/images/xRed16.png" alt="Remove Group" title="Remove Group" style="cursor:pointer;" onclick="$(this).parent().remove();"/><input type="text" value="' + groupName + '" /></div>')
@@ -128,15 +131,17 @@ function newExpGroup(groupName) {
 function addExpQuality(quickAddType) {
   quickAddStats = quickAddGroups[quickAddType].split(',');
   tmpID = new Date().getTime();
-  groupStr = '<li class="expQuality" style="padding-left:20px;font-weight:bold;"><img src="/images/xRed16.png" alt="Remove Exp. Quality" title="Remove Exp. Quality" style="cursor:pointer;" onclick="$(this).parent().remove();"/><input type="text" name="new_expQuality" value="' + quickAddType + '" />';
+  groupStr = '<div class="expQuality" style="padding-left:20px;font-weight:bold;">'
+             + '<img src="/images/xRed16.png" alt="Remove Exp. Quality" title="Remove Exp. Quality" style="cursor:pointer;" onclick="$(this).parent().remove();"/>'
+             + '<input type="text" name="expQualityName" value="' + quickAddType + '" />';
   for (i = 0; i < quickAddStats.length; i++) {
     statInfo = quickAddStats[i].split(':');
     groupStr = groupStr + '<li class="qualityStat" style="padding-left:40px;">'
                + '<span id="stat_new_' + statInfo[0] + '_' + tmpID + '" class="inlineBlock" style="width:120px;"></span>'
-               + '<span><input type="text" name="swp_new_' + statInfo[0] + '" size="2" maxlength="3" value="' + statInfo[1] + '" />%</span>'
+               + '<span name="swVal" tag="' + statInfo[2] + '">' + statInfo[1] + '%</span>'
                + '</li>';
   }
-  groupStr = groupStr + '</li>'
+  groupStr = groupStr + '</div>'
 
   $('.expQualityGroup').last().append(groupStr);
   // Add in the stat selector by cloning
@@ -145,6 +150,7 @@ function addExpQuality(quickAddType) {
     newSelector = $('.statSelectorSource').clone();
     newSelector.attr('class','');
     newSelector.attr('id', 'statSel_new_' + statInfo[0] + '_' + tmpID);
+    newSelector.attr('name', 'swSel');
     $('#stat_new_' + statInfo[0] + '_' + tmpID).append(newSelector);
     $('#statSel_new_' + statInfo[0] + '_' + tmpID).val(statInfo[0]);
   }
@@ -157,6 +163,9 @@ function saveSchematic() {
   schematic.schematicID = '{{ schematicID }}';
   schematic.galaxy = '{{ schematic.galaxy }}';
   schematic.schematicName = $('#schematicName').val();
+  schematic.craftingTab = $('#craftingTabSel').val();
+  schematic.skillGroup = $('#skillGroupSel').val();
+  schematic.objectType = $('#objectTypeSel').val();
   schematic.complexity = $('#complexity').val();
   schematic.xpAmount = $('#xpAmount').val();
   schematic.ingredients = [];
@@ -207,25 +216,16 @@ function saveSchematic() {
         errors = errors + ' Experimental property ' + String(x + 1) + ' in quality group ' + String(i + 1) + ' does not have a valid name entered.';
       }
       expProp.statWeights = [];
-      var weightCount = 0;
       var weightTotal = 0;
       statWeights = expProps.eq(x).find('.qualityStat');
       for ( y = 0; y < statWeights.length; y++ ) {
         var schemStatWeight = {};
         schemStatWeight.stat = statWeights.eq(y).find('select[name="swSel"]').eq(0).val();
-        schemStatWeight.weightPercent = statWeights.eq(y).find('input[name="swp"]').eq(0).val();
+        schemStatWeight.statWeight = statWeights.eq(y).find('span[name="swVal"]').eq(0).attr('tag');
         expProp.statWeights.push(schemStatWeight);
-        weightCount++;
-        if ( !isNaN(parseInt(schemStatWeight.weightPercent)) ) {
-          weightTotal = weightTotal + parseInt(schemStatWeight.weightPercent);
-        } else {
-          errors = errors + ' Stat weight percent not valid for ' + String(y + 1) + ' in quality group ' + String(i + 1) + ', experimental property ' + String(x + 1) + '.';
-        }
+        weightTotal = weightTotal + parseInt(schemStatWeight.statWeight);
       }
-      expProp.weightTotal = weightCount;
-      if ( weightTotal != 100 ) {
-        errors = errors + '  The total of the stat weights for experimental property ' + String(x + 1) + ' in quality group ' + String(i + 1) + ' does not equal 100.';
-      }
+      expProp.weightTotal = weightTotal;
       qualityGroup.properties.push(expProp);
     }
     schematic.qualityGroups.push(qualityGroup);
@@ -285,7 +285,7 @@ function saveSchematic() {
       <div class="footer"></div>
 			<table width="100%">
 				<tr>
-					<td valign="top" width="360px"><h3>Ingredients</h3>
+					<td valign="top" width="340px"><h3>Ingredients</h3>
             <div id="schematicIngredients">
 						<table id="ingredientTable">
               <tr><th></th><th>Ingredient Name</th><th title="Quantity - Resource amount or number of components.">Qty.</th><th title="Is ingredient required?">Req?</th><th></th></tr>
@@ -339,7 +339,7 @@ function saveSchematic() {
 									{% for statWeight in expProp.statWeights %}
 										<li class="qualityStat" style="padding-left:40px;" tag="{{ statWeight.qualityID }}"><span class="inlineBlock" style="width:120px;">
                       <select class="statSelector" name="swSel" tag="{{ statWeight.stat }}">{{ statList }}</select></span>
-                      <span><input type="text" name="swp" size="2" maxlength="3" value="{{ statWeight.weightPercent() }}" />%</span>
+                      <span name="swVal" tag="{{ statWeight.statWeight }}">{{ statWeight.weightPercent() }}%</span>
                     </li>
 									{% endfor %}
                 </div>
@@ -350,7 +350,7 @@ function saveSchematic() {
           </div>
           </td>
 
-					<td valign="top" width="325px">
+					<td valign="top" width="340px">
             <table>
 						  <tr><td>Profession: </td><td><select name="schemProfSel" id="schemProfSel" onchange="refreshSkillGroups()"><option value=0>Select Profession</option>
 				      {{ professionList }}

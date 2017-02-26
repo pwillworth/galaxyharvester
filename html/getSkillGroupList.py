@@ -31,7 +31,7 @@ profID = form.getfirst('prof', '')
 
 print 'Content-type: text/html\n'
 
-if len(profID) > 0 and profID.isdigit():
+if len(profID) > 0 and profID.isdigit() and int(profID) > 0:
 	criteriaStr = ' WHERE profID={0}'.format(profID)
 else:
 	criteriaStr = ' WHERE 1=1'

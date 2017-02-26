@@ -96,6 +96,8 @@ class schematic:
 	def __init__(self):
 		self.schematicID = ""
 		self.schematicName = ""
+		self.craftingTab = 0
+		self.skillGroup = ""
 		self.complexity = 0
 		self.xpAmount = 0
 		self.schematicImage = "none.jpg"
