@@ -260,31 +260,45 @@ def updateSchematic(conn, schematicID, schematic):
 	except KeyError as e:
 		return 'Error: Schematic object is missing required data: {0}'.format(e)
 
+	ingredientsBefore = 0
+	ingredientsAfter = 0
+	ingredientsChanged = 0
+	qualitiesBefore = 0
+	qualitiesAfter = 0
+	qualitiesChanged = 0
+	weightsBefore = 0
+	weightsAfter = 0
 	# Update ingredients
 	schemSQL = "DELETE FROM tSchematicIngredients WHERE schematicID=%s;"
 	cursor.execute(schemSQL, (schematicID))
+	ingredientsBefore = cursor.rowcount
 	for ing in schem['ingredients']:
 		ingSQL = "INSERT INTO tSchematicIngredients (schematicID, ingredientName, ingredientType, ingredientObject, ingredientQuantity, ingredientContribution) VALUES (%s, %s, %s, %s, %s, %s);"
 		cursor.execute(ingSQL, (schematicID, ing['ingredientName'], ing['ingredientType'], ing['ingredientObject'], ing['ingredientQuantity'], 100))
+		ingredientsAfter = ingredientsAfter + cursor.rowcount
 
 	# Update Experimental Qualities
 	schemSQL = "DELETE FROM tSchematicResWeights WHERE expQualityID IN (SELECT expQualityID FROM tSchematicQualities WHERE schematicID=%s);"
 	cursor.execute(schemSQL, (schematicID))
+	weightsBefore = cursor.rowcount
 	schemSQL = "DELETE FROM tSchematicQualities WHERE schematicID=%s;"
 	cursor.execute(schemSQL, (schematicID))
+	qualitiesBefore = cursor.rowcount
 	for expgroup in schem['qualityGroups']:
 		# Update all properties in the groups
 		for expProp in expgroup['properties']:
 			weightTotal = 0
 			schemSQL = "INSERT INTO tSchematicQualities (schematicID, expProperty, expGroup, weightTotal) VALUES (%s, %s, %s, %s);"
 			cursor.execute(schemSQL, (schematicID, expProp['prop'], expgroup['group'], expProp['weightTotal']))
+			qualitiesAfter = qualitiesAfter + cursor.rowcount
 			# Update all resource weights in the properties
 			for resWeight in expProp['statWeights']:
 				schemSQL = "INSERT INTO tSchematicResWeights (expQualityID, statName, statWeight) VALUES (LAST_INSERT_ID(), %s, %s);"
 				cursor.execute(schemSQL, (resWeight['stat'], resWeight['statWeight']))
+				weightsAfter = weightsAfter + cursor.rowcount
 
 	cursor.close()
-	return ''
+	return 'Schematic Updated.  Ingredients {0} (was {1}), Qualities {2} (was {3}), Weights {4} (was {5}).'.format(ingredientsAfter, ingredientsBefore, qualitiesAfter, qualitiesBefore, weightsAfter, weightsBefore)
 
 # Get current url
 try:
@@ -429,6 +443,8 @@ if errstr == '':
 
 			if result.find("Error:") > -1:
 				errstr = result
+			else:
+				dbShared.logSchematicEvent(0, galaxy, schematicID, currentUser, 'a', 'Added new schematic {0} using {1}.'.format(schematicName, detailsMethod))
 	else:
 		# Update existing schematic
 		checkCursor.execute('SELECT enteredBy FROM tSchematic WHERE schematicID=%s', (schematicID))
@@ -442,7 +458,11 @@ if errstr == '':
 			errstr = errstr + 'Error: Schematic with that ID could not be found for editing.'
 
 		if errstr == '':
-			errstr = updateSchematic(conn, schematicID, schematic)
+			result = updateSchematic(conn, schematicID, schematic)
+			if result.find("Error:") > -1:
+				errstr = result
+			else:
+				dbShared.logSchematicEvent(0, galaxy, schematicID, currentUser, 'e', result)
 
 	checkCursor.close()
 

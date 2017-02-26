@@ -126,7 +126,7 @@ function refreshSkillGroups(selValue) {
   })
 }
 function newExpGroup(groupName) {
-  $('#qualitiesList').append('<div class="expQualityGroup"><img src="/images/xRed16.png" alt="Remove Group" title="Remove Group" style="cursor:pointer;" onclick="$(this).parent().remove();"/><input type="text" value="' + groupName + '" /></div>')
+  $('#qualitiesList').append('<div class="expQualityGroup"><img src="/images/xRed16.png" alt="Remove Group" title="Remove Group" style="cursor:pointer;" onclick="$(this).parent().remove();"/><input type="text" name="qualityGroupName" value="' + groupName + '" /></div>')
 }
 function addExpQuality(quickAddType) {
   quickAddStats = quickAddGroups[quickAddType].split(',');
@@ -319,7 +319,6 @@ function saveSchematic() {
               <option value="chefFlavor">Chef Flavor</option>
               <option value="chefNutrition">Chef Nutrition</option>
               <option value="chefQuantity">Chef Quantity</option>
-              <option value="cmAreaEffect">CM Area Effect</option>
               <option value="cmPower">Combat Medic Power</option>
               <option value="cmRange">Combat Medic Range</option>
               <option value="doctorCharges">Doctor Charges</option>
