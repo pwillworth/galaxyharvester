@@ -138,7 +138,7 @@ $(document).ready(function() {
   function refreshSchematicCopyList() {
     $("#schemCopySel").load(BASE_SCRIPT_URL + "getSchematicList.py",{
         groupType: "prof",
-        profession: $("#schemProfSel").val(),
+        profession: $("#schemCopyProfSel").val(),
         listFormat: "option"
       });
   }
@@ -418,7 +418,7 @@ function deleteSchematic() {
   <h2 style="display: inline;">New Schematic</h2><div style="float: right;postion: relative;top:0px;"><a href="#" class="close">Close</a></div>
   <form name="postschemform" method="post" action="{{ BASE_SCRIPT_URL }}postSchematic.py" enctype="multipart/form-data">
   <div class="searchInput">Profession:
-    <select name="schemProfSel" id="schemProfSel" onchange="setCookie('schemProfSel',this.value,7);refreshSkillGroups();refreshSchematicCopyList();"><option value=0>Select Profession</option>
+    <select name="schemProfSel" id="schemProfSel" onchange="setCookie('schemProfSel',this.value,7);refreshSkillGroups();"><option value=0>Select Profession</option>
     {{ professionList }}
     </select>
     Skill Group: <select name="skillGroupSel" id="skillGroupSel" onchange="setCookie('schemSkillGroupSel',this.value,7);"></select>
@@ -429,7 +429,12 @@ function deleteSchematic() {
     <input type="radio" name="oDetails" id="oDetailsLua" value="DetailsLua" onclick="updateDetailsOption()" /> Upload Lua File
   </div>
   <div class="footer"></div>
-  <div class="searchInput" id="schemCopy" style="display:none;">Copy Details From:<select name="schemCopySel" id="schemCopySel"></select></div>
+  <div class="searchInput" id="schemCopy" style="display:none;">Copy Details From:<br />
+    Profession: <select name="schemCopyProfSel" id="schemCopyProfSel" onchange="setCookie('schemCopyProfSel',this.value,7);refreshSchematicCopyList();"><option value=0>Select Profession</option>
+    {{ professionList }}
+    </select><br />
+    Schematic: <select name="schemCopySel" id="schemCopySel"></select>
+  </div>
   <div class="searchInput" id="schemLuaFile" style="display:none;">
     Schematic .lua File: <input type="file" id="schematicLua" name="schematicLua" accept="text/lua" /><br />
     Object .lua file: <input type="file" id="objectLua" name="objectLua" accept="text/lua" />
