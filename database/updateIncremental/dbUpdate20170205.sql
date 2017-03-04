@@ -22,3 +22,5 @@ LOAD DATA LOCAL INFILE '/var/www/database/seedData/tSkillGroup_32.txt' INTO TABL
 ALTER TABLE tSchematicEvents DROP PRIMARY KEY (spawnID, schematicID, expGroup);
 ALTER TABLE tSchematicEvents DROP INDEX spawnID;
 ALTER TABLE tSchematicEvents ADD INDEX IX_schemevt_spawnschemexpgrp (spawnID, schematicID, expGroup);
+LOAD DATA LOCAL INFILE '/var/www/database/seedData/professions_48.csv' INTO TABLE tProfession FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"' (profID, profName, craftingQuality, galaxy);
+LOAD DATA LOCAL INFILE '/var/www/database/seedData/tSkillGroup_48.txt' INTO TABLE tSkillGroup;
