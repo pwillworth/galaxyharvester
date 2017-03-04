@@ -37,7 +37,7 @@ $(document).ready(function() {
   $(".statSelector").each( function(i, obj) {
     $(obj).val($(obj).attr('tag'));
   });
-
+  $("#schematicHistory").load(BASE_SCRIPT_URL + "getSchematicEvents.py", { schematicID: "{{ schematicID }}" });
   $(".window .close").click(function(e) {
 		e.preventDefault();
 		$("#mask, .window").hide();
@@ -329,6 +329,7 @@ function saveSchematic() {
               <option value="weaponsmithRanged">Weaponsmith Ranged</option>
               <option value="weaponsmithMelee">Weaponsmith Melee</option>
             </select></td><td><button type=button value="Add" class="ghButton" onclick="addExpQuality($('#qualityAddSel').val());">Add</button></td></tr></table>
+            <div class="footer"/>
             <ul id="qualitiesList" style="margin-top:6px;">
 					{% for qualityGroup in schematic.qualityGroups %}
 							<div class="expQualityGroup"><img src="/images/xRed16.png" alt="Remove Group" title="Remove Group" style="cursor:pointer;" onclick="$(this).parent().remove();"/><input type="text" name="qualityGroupName" value="{{ qualityGroup.groupName() }}" />
@@ -379,6 +380,9 @@ function saveSchematic() {
 			  </tr>
 			</table>
 	    <div class="footer" style="margin-top:12px;"></div>
+      <div class="boxHeader">Schematic Edit History</div>
+      <div id="schematicHistory"></div>
+      </div>
     </div>
 	</div>
 </div>

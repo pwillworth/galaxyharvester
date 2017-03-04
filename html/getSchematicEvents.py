@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2016 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -34,6 +34,7 @@ form = cgi.FieldStorage()
 
 spawnID = form.getfirst('spawnID', '')
 formatType = form.getfirst('formatType', '')
+schematicID = form.getfirst('schematicID', '')
 
 errors = ''
 responseData = ''
@@ -44,21 +45,33 @@ if formatType == 'json':
 else:
 	print 'Content-type: text/html\n'
 
-if spawnID.isdigit() == False:
-	errors = 'Error: you must provide a spawn to get schematic event history for.'
+if spawnID.isdigit() == False and schematicID == '':
+	errors = 'Error: you must provide a spawn to get schematic event history for, or a schematicID to get edit history for.'
 
 conn = dbShared.ghConn()
 cursor = conn.cursor()
 if (cursor and errors == ''):
+	if spawnID.isdigit():
+		criteriaStr = ' WHERE spawnID={0}'.format(spawnID)
+	else:
+		criteriaStr = ' WHERE spawnID=0 AND tSchematicEvents.schematicID="{0}"'.format(schematicID)
+
 	if formatType == 'json':
 		responseData = '{\n'
 		responseData += ' "server_time" : "' + datetime.fromtimestamp(time.time()).strftime("%Y-%m-%d %H:%M:%S") + '",\n'
 		responseData += ' "events" : [\n'
 	else:
-		responseData = '<table class="userData" width="680">\n'
-		responseData += '<thead><tr class="tableHead"><td width="100">Profession</td><td width="265">Schematic</td><td width="75">Property</td><td width="90">Rank</td></th></thead>\n'
+		responseData = '<table class="userData" width="100%">\n'
+		if spawnID.isdigit():
+			responseData += '<thead><tr class="tableHead"><td width="100">Profession</td><td width="265">Schematic</td><td width="75">Property</td><td width="90">Rank</td></th></thead>\n'
+		else:
+			responseData += '<thead><tr class="tableHead"><td width="100">When</td><td width="65">Who</td><td width="45">Action</td><td width="460">Details</td></th></thead>\n'
 
-	cursor.execute("SELECT profName, tSchematicEvents.schematicID, schematicName, expGroup, eventType FROM tSchematicEvents INNER JOIN tSchematic ON tSchematicEvents.schematicID = tSchematic.schematicID INNER JOIN tSkillGroup ON tSchematic.skillGroup = tSkillGroup.skillGroup INNER JOIN tProfession ON tSkillGroup.profID = tProfession.profID WHERE spawnID={0} ORDER BY profName, schematicName, expGroup".format(spawnID))
+	if spawnID.isdigit():
+		cursor.execute("SELECT profName, tSchematicEvents.schematicID, schematicName, expGroup, eventType FROM tSchematicEvents INNER JOIN tSchematic ON tSchematicEvents.schematicID = tSchematic.schematicID INNER JOIN tSkillGroup ON tSchematic.skillGroup = tSkillGroup.skillGroup INNER JOIN tProfession ON tSkillGroup.profID = tProfession.profID{0} ORDER BY profName, schematicName, expGroup".format(criteriaStr))
+	else:
+		cursor.execute("SELECT eventTime, expGroup, eventType, eventDetail FROM tSchematicEvents{0} ORDER BY eventTime".format(criteriaStr))
+
 	row = cursor.fetchone()
 
 	while (row != None):
@@ -71,12 +84,20 @@ if (cursor and errors == ''):
 			responseData += '    "rank" : "' + row[4] + '",\n'
 			responseData += '  },\n'
 		else:
-			if row[4] != '1':
-				rankStr = 'Almost ({0})'.format(row[4])
+			if spawnID.isdigit():
+				if row[4] != '1':
+					rankStr = 'Almost ({0})'.format(row[4])
+				else:
+					rankStr = 'New Server Best'
+				responseData = ''.join((responseData, '  <tr class="statRow"><td>', row[0], '</td><td><a href="', ghShared.BASE_SCRIPT_URL, 'schematics.py/', row[1] + '">', row[2], '</a></td><td>', row[3].replace('exp_','').replace('exp','').replace('_', ' '), '</td><td>', rankStr, '</td>'))
+				responseData += '  </tr>'
 			else:
-				rankStr = 'New Server Best'
-			responseData = ''.join((responseData, '  <tr class="statRow"><td>', row[0], '</td><td><a href="', ghShared.BASE_SCRIPT_URL, 'schematics.py/', row[1] + '">', row[2], '</a></td><td>', row[3].replace('exp_','').replace('exp','').replace('_', ' '), '</td><td>', rankStr, '</td>'))
-			responseData += '  </tr>'
+				if row[2] == 'a':
+					actionStr = 'Added'
+				else:
+					actionStr = 'Edited'
+				responseData = ''.join((responseData, '  <tr class="statRow"><td>', str(row[0]), '</td><td><a href="', ghShared.BASE_SCRIPT_URL, 'user.py?userID=', row[1] + '">', row[1], '</a></td><td>', actionStr, '</td><td>', row[3], '</td>'))
+				responseData += '  </tr>'
 		lastTime = row[0]
 		row = cursor.fetchone()
 
