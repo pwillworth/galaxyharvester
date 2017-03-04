@@ -21,20 +21,20 @@ $(document).ready(function() {
     }
 
 {% if schematicID == 'index' %}
-	    $("#tab1").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 1});
-	    $("#tab2").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 2});
-	    $("#tab4").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 4});
-	    $("#tab8").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 8});
-	    $("#tab16").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 16});
-	    $("#tab32").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 32});
-	    $("#tab64").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 64});
-	    $("#tab128").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 128});
-	    $("#tab256").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 256});
-	    $("#tab512").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 512});
-	    $("#tab1024").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 1024});
-	    $("#tab2048").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 2048});
-	    $("#tab8192").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 8192});
-	    $("#tab32767").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 32767});
+	    $("#tab1").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 1, galaxy: $("#galaxySel").val()});
+	    $("#tab2").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 2, galaxy: $("#galaxySel").val()});
+	    $("#tab4").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 4, galaxy: $("#galaxySel").val()});
+	    $("#tab8").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 8, galaxy: $("#galaxySel").val()});
+	    $("#tab16").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 16, galaxy: $("#galaxySel").val()});
+	    $("#tab32").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 32, galaxy: $("#galaxySel").val()});
+	    $("#tab64").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 64, galaxy: $("#galaxySel").val()});
+	    $("#tab128").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 128, galaxy: $("#galaxySel").val()});
+	    $("#tab256").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 256, galaxy: $("#galaxySel").val()});
+	    $("#tab512").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 512, galaxy: $("#galaxySel").val()});
+	    $("#tab1024").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 1024, galaxy: $("#galaxySel").val()});
+	    $("#tab2048").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 2048, galaxy: $("#galaxySel").val()});
+	    $("#tab8192").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 8192, galaxy: $("#galaxySel").val()});
+	    $("#tab32767").load(BASE_SCRIPT_URL + "getSchematicList.py",{groupType: "tab", craftingTab: 32767, galaxy: $("#galaxySel").val()});
 {% else %}
 	    $("#profSel").val(getCookie("schemListProfSel"));
 	    $("#tabSel").val(getCookie("schemListTabSel"));
@@ -106,7 +106,8 @@ $(document).ready(function() {
 	    $("#schemFinderList").load(BASE_SCRIPT_URL + "getSchematicList.py",{
 	        groupType: "res",
 	        resGroup: rg,
-	        resType: rt},
+	        resType: rt,
+		galaxy: $("#galaxySel").val()},
 	        function() {
 	            $("#busyImgFindSchem").css("display","none");
 	    });
@@ -115,7 +116,8 @@ $(document).ready(function() {
 	        groupType: "res",
 	        resSecondary: "1",
 	        resGroup: rg,
-	        resType: rt},
+	        resType: rt,
+		galaxy: $("#galaxySel").val()},
 	        function() {
 	            $("#busyImgFindSchemRelated").css("display","none");
 	    });
@@ -195,7 +197,8 @@ function refreshSchematics() {
         groupType: groupBy,
         profession: $("#profSel").val(),
         craftingTab: $("#tabSel").val(),
-        selectSchematic: "{{ schematicID }}"
+        selectSchematic: "{{ schematicID }}",
+	galaxy: $("#galaxySel").val()
         },
         function() {$("#busyImgList").css("display","none");});
     refreshSchematicResources();

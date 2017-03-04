@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2016 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -67,6 +67,7 @@ resSecondary = form.getfirst('resSecondary', '')
 resGroup = form.getfirst('resGroup', '')
 selectSchematic = form.getfirst('selectSchematic', '')
 listFormat = form.getfirst('listFormat', 'list')
+galaxy = form.getfirst('galaxy', '')
 # escape input to prevent sql injection
 groupType = dbShared.dbInsertSafe(groupType)
 profession = dbShared.dbInsertSafe(profession)
@@ -77,6 +78,7 @@ resGroup = dbShared.dbInsertSafe(resGroup)
 selectSchematic = dbShared.dbInsertSafe(selectSchematic)
 listFormat = dbShared.dbInsertSafe(listFormat)
 
+# groupType determines the filtering method for narrowing down schematic list
 filterStr = ''
 joinStr = ''
 if (groupType == 'prof'):
@@ -101,7 +103,11 @@ elif (groupType == 'favorite'):
 	filterStr = ' WHERE tFavorites.userID = "' + currentUser + '" AND favType = 4'
 	joinStr = ' INNER JOIN tFavorites ON tSchematic.schematicID = tFavorites.favGroup'
 
-# Main program
+# Some schematics are custom entered per galaxy but those with galaxyID 0 are for all
+if galaxy.isdigit():
+	filterStr = filterStr + ' AND tSchematic.galaxy IN (0, {0})'.format(galaxy)
+
+# We output an unordered list or a bunch of select element options depending on listFormat
 currentGroup = ''
 currentIngredient = ''
 print 'Content-type: text/html\n'

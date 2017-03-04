@@ -33,7 +33,8 @@ $(document).ready(function() {
 	{% elif (typeGroup == 'type') %}
 		        resType: "{{ typeID }}",
 	{% endif %}
-	        groupType: "res"},
+	        groupType: "res",
+		galaxy: $("#galaxySel").val()},
 	        function() {
 	            $("#busyImgFindSchem").css("display","none");
 	    });

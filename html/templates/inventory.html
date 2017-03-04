@@ -103,7 +103,8 @@ function addRecipe() {
 	    $("#schematicList").load(BASE_SCRIPT_URL + "getSchematicList.py",{
 	        listFormat: "option",
 	        groupType: "prof",
-	        profession: $("#profSel").val()
+	        profession: $("#profSel").val(),
+		galaxy: $("#galaxySel").val()
 	        },
 	        function() {$("#schematicList").removeAttr("disabled");$("#recipeName").val($("#schematicList option:selected").text());});
 	}
