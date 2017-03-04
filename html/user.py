@@ -88,7 +88,7 @@ else:
 	loginResult = form.getfirst('loginAttempt', '')
 	avatarResult = form.getfirst('avatarAttempt', '')
 	sid = form.getfirst('gh_sid', '')
-	galaxy = '14'
+	galaxy = form.getfirst('galaxy', '14')
 
 uid = form.getfirst('uid', '')
 # escape input to prevent sql injection
@@ -139,7 +139,7 @@ if uid != '':
 		emailAlertCheckStr = ' checked="checked"'
 	donateTotal = dbShared.getUserDonated(uid)
 	userTitle = dbShared.getUserTitle(uid)
-	userStats = dbShared.getUserStats(uid, 0).split(',')
+	userStats = dbShared.getUserStats(uid, galaxy).split(',')
 	resScore = int(userStats[0])
 	mapScore = int(userStats[1])
 	reputation = int(userStats[2])

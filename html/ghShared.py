@@ -41,7 +41,7 @@ MIN_REP_VALS = {'VERIFY_RESOURCE': -99,
                 'EDIT_RESOURCE_STATS_TYPE': 5,
                 'EDIT_RESOURCE_GALAXY_NAME': 50,
                 'UPDATE_SCHEMATIC_IMAGE': 15,
-                'ADD_SCHEMATIC': 25,
+                'ADD_SCHEMATIC': 15,
                 'EDIT_OTHER_SCHEMATIC': 75,
                 'ADD_CREATURE': 10,
                 'EDIT_OTHER_CREATURE': 30}
