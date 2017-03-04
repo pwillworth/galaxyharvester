@@ -122,7 +122,7 @@ else:
 				newwidth = xsize * (320.0/ysize)
 				newheight = 320
 		try:
-			im.thumbnail((newwidth,newheight))
+			im.thumbnail((int(newwidth),int(newheight)))
 		except IOError:
 			result = "I can't handle that type of image file, please try a different one."
 
@@ -181,4 +181,3 @@ if src_url != None:
 	print '<html><head><script type=text/javascript>document.location.href="' + src_url + '?' + linkappend + '"</script></head><body></body></html>'
 else:
 	print result
-
