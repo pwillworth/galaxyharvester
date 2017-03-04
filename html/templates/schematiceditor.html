@@ -235,6 +235,7 @@ function saveSchematic() {
     $.post(BASE_SCRIPT_URL + "postSchematic.py", { gh_sid: "'+sid+'", forceOp: "edit", schematicID: schematic.schematicID, schematic: JSON.stringify(schematic), galaxy: $("#galaxySel option:selected").val() },
       function(data) {
         alert(data);
+        document.location.href='/schematics.py/{{ schematicID }}';
       });
   } else {
     alert('There are some problems with your schematic, please correct: ' + errors);
