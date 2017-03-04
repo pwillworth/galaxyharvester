@@ -19,7 +19,7 @@ ALTER TABLE tSkillGroup MODIFY COLUMN skillGroup VARCHAR(31) PRIMARY KEY;
 ALTER TABLE tProfession ADD COLUMN galaxy INT DEFAULT 0 NOT NULL;
 LOAD DATA LOCAL INFILE '/var/www/database/seedData/professions_32.csv' INTO TABLE tProfession FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"' (profID, profName, craftingQuality, galaxy);
 LOAD DATA LOCAL INFILE '/var/www/database/seedData/tSkillGroup_32.txt' INTO TABLE tSkillGroup;
-ALTER TABLE tSchematicEvents DROP PRIMARY KEY (spawnID, schematicID, expGroup);
+ALTER TABLE tSchematicEvents DROP PRIMARY KEY;
 ALTER TABLE tSchematicEvents DROP INDEX spawnID;
 ALTER TABLE tSchematicEvents ADD INDEX IX_schemevt_spawnschemexpgrp (spawnID, schematicID, expGroup);
 LOAD DATA LOCAL INFILE '/var/www/database/seedData/professions_48.csv' INTO TABLE tProfession FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"' (profID, profName, craftingQuality, galaxy);
