@@ -82,13 +82,13 @@ if useCookies:
 	try:
 		galaxy = cookies['galaxy'].value
 	except KeyError:
-		galaxy = '14'
+		galaxy = ghShared.DEFAULT_GALAXY
 else:
 	currentUser = ''
 	loginResult = form.getfirst('loginAttempt', '')
 	avatarResult = form.getfirst('avatarAttempt', '')
 	sid = form.getfirst('gh_sid', '')
-	galaxy = form.getfirst('galaxy', '14')
+	galaxy = form.getfirst('galaxy', ghShared.DEFAULT_GALAXY)
 
 uid = form.getfirst('uid', '')
 # escape input to prevent sql injection

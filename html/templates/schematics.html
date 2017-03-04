@@ -298,7 +298,7 @@ function deleteSchematic() {
 
 {% if schematicID == 'home' %}
     <h1>Crafting Schematics
-  {% if loggedin == 1 %}
+  {% if canAdd %}
       <div style="float:right;">
         <button type=button value="New Schematic" class="ghButton" onclick="addSchematic();">New Schematic</button>
       </div>

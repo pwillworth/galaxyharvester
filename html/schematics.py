@@ -181,10 +181,16 @@ def main():
 
 	favHTML = ''
 	canEdit = False
+	canAdd = False
 	profession = ''
 	if len(path) > 0:
 		schematicID = dbShared.dbInsertSafe(path[0])
 		url = url + '/' + schematicID
+		# Lookup reputation for edit tool option
+		stats = dbShared.getUserStats(currentUser, galaxy).split(",")
+		userReputation = int(stats[2])
+		canAdd = userReputation >= ghShared.MIN_REP_VALS['ADD_SCHEMATIC']
+
 		if (schematicID != 'index') and (schematicID != 'home'):
 			# Build the schematic object
 			try:
@@ -192,10 +198,6 @@ def main():
 				cursor = conn.cursor()
 			except Exception:
 				errorstr = "Error: could not connect to database"
-
-			# Lookup reputation for edit tool option
-			stats = dbShared.getUserStats(currentUser, galaxy).split(",")
-			userReputation = int(stats[2])
 
 			if (cursor):
 				cursor.execute('SELECT schematicName, complexity, xpAmount, (SELECT imageName FROM tSchematicImages tsi WHERE tsi.schematicID=tSchematic.schematicID AND tsi.imageType=1) AS schemImage, galaxy, enteredBy, craftingTab, skillGroup, objectType FROM tSchematic WHERE schematicID=%s;', (schematicID))
@@ -319,7 +321,7 @@ def main():
 		template = env.get_template('schematiceditor.html')
 	else:
 		template = env.get_template('schematics.html')
-	print template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), professionList=ghLists.getProfessionList(galaxy), schematicTabList=ghLists.getSchematicTabList(), objectTypeList=ghLists.getObjectTypeList(), noenergyTypeList=ghLists.getOptionList('SELECT resourceType, resourceTypeName FROM tResourceType WHERE resourceCategory != "energy" ORDER BY resourceTypeName;'), resourceGroupList=ghLists.getResourceGroupList(), resourceGroupListShort=groupListShort, statList=ghLists.getStatList(), schematicID=schematicID, schematic=s, favHTML=favHTML, canEdit=canEdit, profession=profession)
+	print template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), professionList=ghLists.getProfessionList(galaxy), schematicTabList=ghLists.getSchematicTabList(), objectTypeList=ghLists.getObjectTypeList(), noenergyTypeList=ghLists.getOptionList('SELECT resourceType, resourceTypeName FROM tResourceType WHERE resourceCategory != "energy" ORDER BY resourceTypeName;'), resourceGroupList=ghLists.getResourceGroupList(), resourceGroupListShort=groupListShort, statList=ghLists.getStatList(), schematicID=schematicID, schematic=s, favHTML=favHTML, canEdit=canEdit, profession=profession, canAdd=canAdd)
 
 
 if __name__ == "__main__":
