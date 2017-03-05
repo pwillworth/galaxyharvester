@@ -287,7 +287,7 @@ function saveSchematic() {
 			<table width="100%">
 				<tr>
 					<td valign="top" width="340px"><h3>Ingredients</h3>
-            <div id="schematicIngredients">
+            <div id="schematicIngredients" style="min-height:76px;:">
 						<table id="ingredientTable">
               <tr><th></th><th>Ingredient Name</th><th title="Quantity - Resource amount or number of components.">Qty.</th><th title="Is ingredient required?">Req?</th><th></th></tr>
 					{% for ingredient in schematic.ingredients %}
@@ -329,7 +329,6 @@ function saveSchematic() {
               <option value="weaponsmithRanged">Weaponsmith Ranged</option>
               <option value="weaponsmithMelee">Weaponsmith Melee</option>
             </select></td><td><button type=button value="Add" class="ghButton" onclick="addExpQuality($('#qualityAddSel').val());">Add</button></td></tr></table>
-            <div class="footer"/>
             <ul id="qualitiesList" style="margin-top:6px;">
 					{% for qualityGroup in schematic.qualityGroups %}
 							<div class="expQualityGroup"><img src="/images/xRed16.png" alt="Remove Group" title="Remove Group" style="cursor:pointer;" onclick="$(this).parent().remove();"/><input type="text" name="qualityGroupName" value="{{ qualityGroup.groupName() }}" />

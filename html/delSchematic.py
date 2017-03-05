@@ -43,9 +43,13 @@ def deleteSchematic(conn, schematicID):
 	# Remove ingredients and main schematic record.
 	delCursor.execute('DELETE FROM tSchematicIngredients WHERE schematicID=%s;', (schematicID))
 	delCursor.execute('DELETE FROM tSchematic WHERE schematicID=%s;', (schematicID))
+	schemDeleted = cursor.rowcount
 	delCursor.close()
 
-	return 'Schematic deleted.'
+	if schemDeleted > 0:
+		return 'Schematic deleted.'
+	else:
+		return 'Error: No records to delete were found, could not find schematic.'
 
 # Get current url
 try:
@@ -96,6 +100,7 @@ if (sess != ''):
 # Main program
 owner = ''
 galaxy = 0
+schematicName = ''
 print 'Content-type: text/html\n'
 if (logged_state > 0):
 	try:
@@ -106,12 +111,13 @@ if (logged_state > 0):
 
 	if (cursor):
 		# check owner
-		cursor.execute('SELECT enteredBy, galaxy FROM tSchematic WHERE schematicID=%s;', (schematicID))
+		cursor.execute('SELECT enteredBy, galaxy, schematicName FROM tSchematic WHERE schematicID=%s;', (schematicID))
 		row = cursor.fetchone()
 		cursor.close()
 		if (row != None):
 			owner = row[0]
 			galaxy = row[1]
+			schematicName = row[2]
 
 		# Lookup reputation to validate abilities
 		stats = dbShared.getUserStats(currentUser, galaxy).split(",")
@@ -125,6 +131,8 @@ if (logged_state > 0):
 			else:
 				result = 'Error: Core game schematics cannot be deleted.'
 
+		if result.find("Error:") < 0:
+			dbShared.logSchematicEvent(0, galaxy, schematicID, currentUser, 'd', 'Deleted custom schematic {0}.'.format(schematicName))
 	else:
 		result = "Error: No data connection"
 	conn.close()
@@ -132,6 +140,7 @@ else:
 	result = "Error: You must be logged in delete schematics."
 
 print result
+
 if (result.find("Error:") > -1):
 	sys.exit(500)
 else:

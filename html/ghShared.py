@@ -142,3 +142,9 @@ def getMobilePlatform(agentString):
 		mobilePlatform = 'amazon'
 
 	return mobilePlatform
+
+# Translation of schematic event types to names
+SCHEMATIC_EVENT_NAMES = {'a': 'Added',
+                'e': 'Edited',
+                'd': 'Deleted',
+                'i': 'Updated Image'}

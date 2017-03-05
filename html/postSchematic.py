@@ -254,9 +254,9 @@ def updateSchematic(conn, schematicID, schematic):
 	if (cursor == None):
 		return 'Error: database unavailable'
 
-	schemSQL = "UPDATE tSchematic SET schematicName=%s, craftingTab=%s, skillGroup=%s, complexity=%s, xpAmount=%s WHERE schematicID=%s;"
+	schemSQL = "UPDATE tSchematic SET schematicName=%s, craftingTab=%s, skillGroup=%s, complexity=%s, xpAmount=%s, objectType=%s WHERE schematicID=%s;"
 	try:
-		cursor.execute(schemSQL, (schem['schematicName'], schem['craftingTab'], schem['skillGroup'], schem['complexity'], schem['xpAmount'], schematicID))
+		cursor.execute(schemSQL, (schem['schematicName'], schem['craftingTab'], schem['skillGroup'], schem['complexity'], schem['xpAmount'], schem['objectType'], schematicID))
 	except KeyError as e:
 		return 'Error: Schematic object is missing required data: {0}'.format(e)
 

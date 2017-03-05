@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2010 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -164,6 +164,11 @@ else:
 
 		if imageType == 1:
 			result = "Image Added"
+			if copyFromSchem == '':
+				updateType = 'New upload'
+			else:
+				updateType = 'Copy from {0}'.format(copyFromSchem)
+			dbShared.logSchematicEvent(0, 0, schematicID, currentUser, 'i', 'Updated schematic image to {0} by {1}.'.format(imageName, updateType))
 		else:
 			result = "Image has been added and will become active as the new image for this schematic after it has been reviewed."
 	conn.close()
