@@ -144,11 +144,13 @@ def logUserEvent(user, galaxy, targetType, targetID, eventType):
 
 		if (eventType == "n" or eventType == "g") and expGood == True:
 			# Get target user that entered the resource that is being corrected
-			cursor.execute("SELECT userID FROM tResourceEvents WHERE spawnID=%s AND eventType IN ('a','{0}') ORDER BY eventTime DESC;".format(eventType), targetID)
+			cursor.execute("SELECT userID, eventTime FROM tResourceEvents WHERE spawnID=%s AND eventType IN ('a','{0}') ORDER BY eventTime DESC;".format(eventType), targetID)
 			eventRow = cursor.fetchone()
 			targetUser = ''
 			while eventRow != None:
-				if eventRow[0] != user:
+				tt = datetime.fromtimestamp(time.time()) - eventRow[1]
+				# Ignore if user is correcting themself or the previous action was too long ago
+				if eventRow[0] != user and tt.days < 28:
 					targetUser = eventRow[0]
 				eventRow = cursor.fetchone()
 			# Decrement rep on target user for entering a resource with a misspelled name or wrong galaxy
@@ -166,11 +168,13 @@ def logUserEvent(user, galaxy, targetType, targetID, eventType):
 
 		if eventType == "p" and expGood == True:
 			# Get target user that marked the resource unavailable that is being corrected
-			cursor.execute("SELECT userID FROM tResourceEvents WHERE spawnID=%s AND eventType IN ('r') ORDER BY eventTime DESC;", targetID)
+			cursor.execute("SELECT userID, eventTime FROM tResourceEvents WHERE spawnID=%s AND eventType IN ('r') ORDER BY eventTime DESC;", targetID)
 			eventRow = cursor.fetchone()
 			targetUser = ''
 			while eventRow != None:
-				if eventRow[0] != user:
+				tt = datetime.fromtimestamp(time.time()) - eventRow[1]
+				# Ignore if user is correcting themself or the previous action was too long ago
+				if eventRow[0] != user and tt.days < 28:
 					targetUser = eventRow[0]
 				eventRow = cursor.fetchone()
 			# Decrement rep on target user for marking resource unavailable that is still available

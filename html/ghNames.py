@@ -23,7 +23,7 @@
 import MySQLdb
 import dbShared
 #
-    
+
 def getItemName(sqlStr):
     result = ""
     conn = dbShared.ghConn()
@@ -38,11 +38,11 @@ def getItemName(sqlStr):
     return result
 
 def getPlanetName(planetid):
-    nameStr = getItemName('SELECT planetID, planetName FROM tPlanet WHERE planetID='+dbShared.dbInsertSafe(planetid)+';')
+    nameStr = getItemName('SELECT planetID, planetName FROM tPlanet WHERE planetID='+dbShared.dbInsertSafe(str(planetid))+';')
     return nameStr
 
 def getSpawnName(spawnid):
-    nameStr = getItemName('SELECT spawnID, spawnName FROM tResources WHERE spawnID='+dbShared.dbInsertSafe(spawnid)+';')
+    nameStr = getItemName('SELECT spawnID, spawnName FROM tResources WHERE spawnID='+dbShared.dbInsertSafe(str(spawnid))+';')
     return nameStr
 
 def getResourceTypeName(typeid):
@@ -82,4 +82,3 @@ def getStatName(stat):
 		return 'Entangle Resist'
 	else:
 		return stat
-
