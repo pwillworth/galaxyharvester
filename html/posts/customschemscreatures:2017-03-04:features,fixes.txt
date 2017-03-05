@@ -1,0 +1,21 @@
+Custom Schematics and Creatures
+
+<p>The variety of SWG play servers and custom content on them continually expands.  Some servers add new professions and/or new schematics, and some servers are running NGE professions which have some new schematics that were part of NGE.  Until now, there was really no way to take advantage of the schematic based tools on Galaxy Harvester for these custom schematics.  With today's update comes the ability to create custom schematics that show up in Galaxy Harvester just for a particular server/galaxy.  Assuming the schematic is entered correctly, it will then be available to all users viewing that galaxy on Galaxy Harvester to base recipes on, and get server best alerts on.  For more information on this feature, visit the <a href="/help.py#customschems">help page</a> section on it.</p>
+
+<p>If any servers have custom schematics related to the existing base SWG professions, those can be added with no custom setup.  However if a server has custom professions, or NGE professions, we need to do some setup in the background to make those profession selections available for adding schematics to for that server.  I encourage server admins to send us a note at the contact address link at the bottom of the page with any custom professions that need to be added here.  There are two servers where we have already gotten requests for this feature on though, and they have already had their professions added on Galaxy Harvester:</p>
+<ul>
+  <li>Rogue One Server: Custom professions (Antique Dealer, Elite Arsenalist, Elite Blacksmith, Mechanic, Miner, Jedi Knight/Journeyman)</li>
+  <li>SWG Legends Server: NGE Trader professions</li>
+</ul>
+<br/>
+<p>We have another update as well related to custom play server content.  You can now add custom creature data to the <a href="/resourceType.py">resource type</a> pages of creature resources.  You can also enter base harvest yield and mission level of the creature to help other players decide what creatures to hunt.  Just browse to the resource type page of the resource type that the creature drops and click the Add Creature button.</p>
+
+<p>Keep in mind that in order to help ensure knowledgeable players are entering this data, you must have unlocked the ability to use the custom schematic and custom creature data entry features.  So, if you are logged into Galaxy Harvester and don't see the Add Schematic or Add Creature buttons yet, I encourage you to keep contributing to the site by posting resource data to build your reputation until you unlock these abilities.</p>
+
+<p>Other release notes:</p>
+<ul>
+  <li>Added list of unlocked abilities to user profile page.</li>
+	<li>Added notifications for users when new abilities are unlocked.</li>
+  <li>Fix bug in resource find list "Next 20" button not returning more results.</li>
+<ul>
+<p>-ioscode</p>
