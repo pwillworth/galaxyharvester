@@ -129,6 +129,10 @@ function newExpGroup(groupName) {
   $('#qualitiesList').append('<div class="expQualityGroup"><img src="/images/xRed16.png" alt="Remove Group" title="Remove Group" style="cursor:pointer;" onclick="$(this).parent().remove();"/><input type="text" name="qualityGroupName" value="' + groupName + '" /></div>')
 }
 function addExpQuality(quickAddType) {
+  if ($('.expQualityGroup').length < 1) {
+    alert('There are no quality groups defined yet.  You need to add a quality group first so the new quality weights can go under it.');
+    return false;  
+  }
   quickAddStats = quickAddGroups[quickAddType].split(',');
   tmpID = new Date().getTime();
   groupStr = '<div class="expQuality" style="padding-left:20px;font-weight:bold;">'
