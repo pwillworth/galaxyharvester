@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2016 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -176,7 +176,7 @@ def checkServerBest(conn, spawnID, spawnName, galaxy):
 			schematicStr = schematicStr[1:]
 		# open people with favorites for the professions involved
 		cursor = conn.cursor()
-		cursor.execute("SELECT tFavorites.userID, defaultAlertTypes, profName FROM tFavorites INNER JOIN tUsers ON tFavorites.userID = tUsers.userID INNER JOIN tProfession ON tFavorites.itemID = tProfession.profID WHERE galaxy={1} AND favType=3 AND itemID={0} GROUP BY tFavorites.userID, defaultAlertTypes, profName;".format(result[0][x], galaxy))
+		cursor.execute("SELECT tFavorites.userID, defaultAlertTypes, profName FROM tFavorites INNER JOIN tUsers ON tFavorites.userID = tUsers.userID INNER JOIN tProfession ON tFavorites.itemID = tProfession.profID WHERE tFavorites.galaxy={1} AND favType=3 AND itemID={0} GROUP BY tFavorites.userID, defaultAlertTypes, profName;".format(result[0][x], galaxy))
 		row = cursor.fetchone()
 		# Add alert for each user watching for profession server bests hit by this spawn
 		while row != None:
@@ -187,7 +187,7 @@ def checkServerBest(conn, spawnID, spawnName, galaxy):
 
 		# open people with favorites for the schematics involved
 		cursor = conn.cursor()
-		cursor.execute("SELECT tFavorites.userID, defaultAlertTypes, schematicID, schematicName FROM tFavorites INNER JOIN tUsers ON tFavorites.userID = tUsers.userID INNER JOIN tSchematic ON tFavorites.favGroup = tSchematic.schematicID WHERE galaxy={1} AND favType=4 AND favGroup IN ({0}) GROUP BY tFavorites.userID, defaultAlertTypes, schematicID, schematicName;".format(schematicStr, galaxy))
+		cursor.execute("SELECT tFavorites.userID, defaultAlertTypes, schematicID, schematicName FROM tFavorites INNER JOIN tUsers ON tFavorites.userID = tUsers.userID INNER JOIN tSchematic ON tFavorites.favGroup = tSchematic.schematicID WHERE tFavorites.galaxy={1} AND favType=4 AND favGroup IN ({0}) GROUP BY tFavorites.userID, defaultAlertTypes, schematicID, schematicName;".format(schematicStr, galaxy))
 		row = cursor.fetchone()
 		# Add alert for each user watching for schematic server bests hit by this spawn
 		while row != None:

@@ -63,7 +63,10 @@ def getProfOrder(profID):
 		if len(obyStr2)>1:
 			obyStr2 = obyStr2[1:]
 
-		return ' ((' + obyStr + ')*1000) / (' + obyStr2 + ')'
+		if len(obyStr) > 0 and len(obyStr2) > 0:
+			return ' ((' + obyStr + ')*1000) / (' + obyStr2 + ')'
+		else:
+			return 'OQ'
 	else:
 		return 'OQ'
 #
