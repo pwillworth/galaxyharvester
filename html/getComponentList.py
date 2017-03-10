@@ -43,7 +43,7 @@ else:
 conn = dbShared.ghConn()
 cursor = conn.cursor()
 if (cursor):
-	cursor.execute('SELECT tSchematic.schematicID, schematicName, objectPath, imageName FROM tSchematic LEFT JOIN (SELECT schematicID, imageName FROM tSchematicImages WHERE imageType=1) tsi ON tSchematic.schematicID=tsi.schematicID WHERE (objectPath IN (SELECT ingredientObject FROM tSchematicIngredients WHERE ingredientType>0) OR objectGroup LIKE "%component%")' + criteriaStr + ' ORDER BY schematicName;')
+	cursor.execute('SELECT tSchematic.schematicID, schematicName, objectPath, imageName FROM tSchematic LEFT JOIN (SELECT schematicID, imageName FROM tSchematicImages WHERE imageType=1) tsi ON tSchematic.schematicID=tsi.schematicID WHERE (objectPath IN (SELECT ingredientObject FROM tSchematicIngredients WHERE ingredientType>0) OR objectGroup LIKE "%component%" OR objectType=262144)' + criteriaStr + ' ORDER BY schematicName;')
 	row = cursor.fetchone()
 
 	while (row != None):

@@ -200,7 +200,7 @@ def addSchematicByCopy(conn, skillGroup, sourceSchematic, schematicName, galaxy,
 	if checkRow == None:
 		# Proceed with schematic copy
 		cursor = conn.cursor()
-		schemSQL = "INSERT INTO tSchematic (schematicID, schematicName, craftingTab, skillGroup, objectType, complexity, objectSize, xpType, xpAmount, objectPath, objectGroup, galaxy, enteredBy) SELECT %s, %s, craftingTab, %s, objectType, complexity, objectSize, xpType, xpAmount, '', objectGroup, %s, %s FROM tSchematic WHERE schematicID=%s;"
+		schemSQL = "INSERT INTO tSchematic (schematicID, schematicName, craftingTab, skillGroup, objectType, complexity, objectSize, xpType, xpAmount, objectPath, objectGroup, galaxy, enteredBy) SELECT %s, %s, craftingTab, %s, objectType, complexity, objectSize, xpType, xpAmount, 'object/{0}', objectGroup, %s, %s FROM tSchematic WHERE schematicID=%s;".format(schematicID)
 		cursor.execute(schemSQL, (schematicID, schematicName, skillGroup, galaxy, userID, sourceSchematic))
 		ingSQL = "INSERT INTO tSchematicIngredients (schematicID, ingredientName, ingredientType, ingredientObject, ingredientQuantity, ingredientContribution) SELECT %s, ingredientName, ingredientType, ingredientObject, ingredientQuantity, ingredientContribution FROM tSchematicIngredients WHERE schematicID=%s;"
 		cursor.execute(ingSQL, (schematicID, sourceSchematic))
@@ -234,7 +234,7 @@ def addSchematicSkeleton(conn, skillGroup, schematicName, galaxy, userID):
 		# Proceed with schematic copy
 		cursor = conn.cursor()
 		schemSQL = "INSERT INTO tSchematic (schematicID, schematicName, craftingTab, skillGroup, objectType, complexity, objectSize, xpType, xpAmount, objectPath, objectGroup, galaxy, enteredBy) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
-		cursor.execute(schemSQL, (schematicID, schematicName, 524288, skillGroup, 0, 0, 0, 'unknown', 0, '', '', galaxy, userID))
+		cursor.execute(schemSQL, (schematicID, schematicName, 524288, skillGroup, 0, 0, 0, 'unknown', 0, 'object/{0}'.format(schematicID), '', galaxy, userID))
 		cursor.close()
 
 		result = 'Schematic created.'
