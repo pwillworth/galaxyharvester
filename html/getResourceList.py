@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2016 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -334,10 +334,15 @@ if (errorStr == ""):
 
 			print '  <tr><td>'
 
-			if formatType == 'mobile':
-				print s.getMobileHTML(logged_state > 0, int(stats[2]))
+			if logged_state > 0 and galaxyState == 1:
+				controlsUser = currentUser
 			else:
-				print s.getHTML(formatStyle, resBoxMargin, logged_state > 0 and galaxyState == 1, userReputation)
+				controlsUser = ''
+
+			if formatType == 'mobile':
+				print s.getMobileHTML(controlsUser, int(stats[2]))
+			else:
+				print s.getHTML(formatStyle, resBoxMargin, controlsUser, userReputation)
 
 			print '</td></tr>'
 			row = cursor.fetchone()

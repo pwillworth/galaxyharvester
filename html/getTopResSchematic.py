@@ -113,7 +113,11 @@ def getResourceData(conn, resSQL, logged_state, galaxyState, resourceFormat, rep
 					s.planets = dbShared.getSpawnPlanets(conn, row[0], True, row[2])
 
 					resourceHTML += '  <tr><td>'
-					resourceHTML += s.getHTML(resourceFormat, "", logged_state > 0 and galaxyState == 1, reputation)
+					if logged_state > 0 and galaxyState == 1:
+						controlsUser = currentUser
+					else:
+						controlsUser = ''
+					resourceHTML += s.getHTML(resourceFormat, "", controlsUser, reputation)
 					resourceHTML += '  </td></tr>'
 					row = cursor.fetchone()
 		else:

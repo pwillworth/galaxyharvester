@@ -144,7 +144,11 @@ if galaxy != '':
 			s.planets = dbShared.getSpawnPlanets(conn, row[0], True, row[2])
 
 			print '  <tr><td>'
-			print s.getHTML(1, "", logged_state > 0 and galaxyState == 1, userReputation)
+			if logged_state > 0 and galaxyState == 1:
+				controlsUser = currentUser
+			else:
+				controlsUser = ''
+			print s.getHTML(1, "", controlsUser, userReputation)
 			print '</td></tr>'
 			row = cursor.fetchone()
 

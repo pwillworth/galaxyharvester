@@ -53,9 +53,9 @@ class TestObjects(unittest.TestCase):
 		s.maxWaypointConc = None
 
 		# act
-		mobileHTML = s.getMobileHTML(0)
-		normalHTML = s.getHTML(0, "", 0, 0)
-		rowHTML = s.getRow(0)
+		mobileHTML = s.getMobileHTML("", 0)
+		normalHTML = s.getHTML(0, "", "", 0)
+		rowHTML = s.getRow("")
 		invHTML = s.getInventoryObject()
 
 		#assert

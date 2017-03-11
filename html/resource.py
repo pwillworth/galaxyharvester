@@ -233,7 +233,12 @@ def main():
 				stats = dbShared.getUserStats(currentUser, galaxy).split(",")
 				userReputation = int(stats[2])
 
-				resHTML = spawn.getHTML(0, "", logged_state > 0 and galaxyState == 1, userReputation)
+				if logged_state > 0 and galaxyState == 1:
+					controlsUser = currentUser
+				else:
+					controlsUser = ''
+
+				resHTML = spawn.getHTML(0, "", controlsUser, userReputation)
 
 				resHistory = getResourceHistory(conn, spawn.spawnID)
 			conn.close()

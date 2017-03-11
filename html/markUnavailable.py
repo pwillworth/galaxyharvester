@@ -92,7 +92,7 @@ if (logged_state > 0):
 	if (cursor):
 		if (dbShared.galaxyState(galaxy) == 1):
 			markAll = 0
-			cursor.execute('SELECT spawnID, resourceType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER, unavailable FROM tResources WHERE galaxy=' + galaxy + ' AND spawnName="' + spawnName + '";')
+			cursor.execute('SELECT spawnID, resourceType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER, unavailable, enteredBy FROM tResources WHERE galaxy=' + galaxy + ' AND spawnName="' + spawnName + '";')
 			row = cursor.fetchone()
 
 			if (row != None):
@@ -109,7 +109,7 @@ if (logged_state > 0):
 
 			# Only allow removal if user has positive reputation
 			stats = dbShared.getUserStats(currentUser, galaxy).split(",")
-			if int(stats[2]) < ghShared.MIN_REP_VALS['REMOVE_RESOURCE']:
+			if int(stats[2]) < ghShared.MIN_REP_VALS['REMOVE_RESOURCE'] or row[14] == currentUser:
 				result = "Error: You must earn a little reputation on the site before you can remove resources.  Try adding or verifying some first. \r\n"
 			elif row[13] != None:
 				result = "Error: You cannot remove that resource because it is already removed."

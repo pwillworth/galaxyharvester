@@ -242,7 +242,7 @@ def addResStats(spawn, resType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER, forc
 
 	conn = dbShared.ghConn()
 	cursor = conn.cursor()
-	cursor.execute("SELECT CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER, CRmax, CDmax, DRmax, FLmax, HRmax, MAmax, PEmax, OQmax, SRmax, UTmax, ERmax, tResources.resourceType FROM tResources INNER JOIN tResourceType ON tResources.resourceType=tResourceType.resourceType WHERE spawnID=" + str(spawn) + ";")
+	cursor.execute("SELECT CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER, CRmax, CDmax, DRmax, FLmax, HRmax, MAmax, PEmax, OQmax, SRmax, UTmax, ERmax, tResources.resourceType, enteredBy FROM tResources INNER JOIN tResourceType ON tResources.resourceType=tResourceType.resourceType WHERE spawnID=" + str(spawn) + ";")
 	row = cursor.fetchone()
 	if row != None:
 		for i in range(11):
@@ -258,9 +258,9 @@ def addResStats(spawn, resType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER, forc
 			returnStr = "Resource stats already entered."
 		else:
 			# update resource stats
-			# Only allow update if user has positive reputation
+			# Only allow update if user has positive reputation or was the one who entered resource
 			stats = dbShared.getUserStats(currentUser, galaxy).split(",")
-			if int(stats[2]) < ghShared.MIN_REP_VALS['EDIT_RESOURCE_STATS_TYPE']:
+			if int(stats[2]) < ghShared.MIN_REP_VALS['EDIT_RESOURCE_STATS_TYPE'] and row[23] != currentUser:
 				returnStr = "Error: You must earn a little reputation on the site before you can edit resources.  Try adding or verifying some first. \r\n"
 			elif hasStats:
 				tempSQL = "UPDATE tResources SET enteredBy='" + currentUser + "', CR=" + n2n(CR) + ", CD=" + n2n(CD) + ", DR=" + n2n(DR) + ", FL=" + n2n(FL) + ", HR=" + n2n(HR) + ", MA=" + n2n(MA) + ", PE=" + n2n(PE) + ", OQ=" + n2n(OQ) + ", SR=" + n2n(SR) + ", UT=" + n2n(UT) + ", ER=" + n2n(ER) + " WHERE spawnID=" + str(spawn) + ";"

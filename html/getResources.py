@@ -344,9 +344,13 @@ if (errorStr == ""):
 	resData = ''
 	tokenPosition = -1
 	conn = dbShared.ghConn()
+	if logged_state > 0 and galaxyState == 1:
+		activeUser = currentUser
+	else:
+		activeUser = ''
 	if (compare == '' or compare == 'undefined' or logged_state == 0):
 		resSQL = getResourceSQL(wpCriteria, favCols, joinStr, orderCol, orderStr, criteriaStr, galaxyCriteriaStr, '')
-		resData = getResourceData(conn, resSQL, userReputation, logged_state > 0 and galaxyState == 1, formatType)
+		resData = getResourceData(conn, resSQL, userReputation, activeUser, formatType)
 		tokenPosition = resData.find('maxRowsReached')
 		if tokenPosition > -1:
 			resData += '<div style="text-align:center;"><button id="nextResourcesButton" class="ghButton" style="margin:10px;" onclick="moreResources(\''+ resData[tokenPosition+14:resData.find('</div>', tokenPosition)] + '\', \'next\');">Next 20</button></div>'
@@ -357,11 +361,11 @@ if (errorStr == ""):
 		resData += '<div class="inlineBlock" style="width:50%">'
 		resData += '<h4>Galaxy</h4>'
 		resSQL = getResourceSQL(wpCriteria, favCols, joinStr, orderCol, orderStr, criteriaStr, galaxyCriteriaStr, '')
-		resData += getResourceData(conn, resSQL, userReputation, logged_state > 0 and galaxyState == 1, formatType)
+		resData += getResourceData(conn, resSQL, userReputation, activeUser, formatType)
 		resData += '</div><div class="inlineBlock" style="width:50%">'
 		resData += '<h4>My Inventory</h4>'
 		resSQL = getResourceSQL(wpCriteria, favCols, joinStr, orderCol, orderStr, criteriaStr, '', 'y')
-		resData += getResourceData(conn, resSQL, userReputation, logged_state > 0 and galaxyState == 1, formatType)
+		resData += getResourceData(conn, resSQL, userReputation, activeUser, formatType)
 		resData += '</div></div>'
 		tokenPosition = resData.find('maxRowsReached')
 		if tokenPosition > -1:

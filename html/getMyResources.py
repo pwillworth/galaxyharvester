@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2016 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -251,10 +251,10 @@ if logged_state > 0:
 					result += ','.join((s.favGroup, s.spawnName, s.resourceType, s.resourceTypeName, xstr(s.stats.ER), xstr(s.stats.CR), xstr(s.stats.CD), xstr(s.stats.DR), xstr(s.stats.FL), xstr(s.stats.HR), xstr(s.stats.MA), xstr(s.stats.PE), xstr(s.stats.OQ), xstr(s.stats.SR), xstr(s.stats.UT), str(s.units), xstr(s.entered), xstr(s.unavailable)))
 					result += '\n'
 				else:
-					if galaxyState == 1:
-						groupResult += s.getRow(logged_state)
+					if logged_state == 1:
+						groupResult += s.getRow(currentUser)
 					else:
-						groupResult += s.getRow(0)
+						groupResult += s.getRow("")
 					groupCount += 1
 
 				row = cursor.fetchone()
