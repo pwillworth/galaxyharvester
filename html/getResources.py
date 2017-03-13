@@ -138,7 +138,7 @@ def getResourceData(conn, resSQL, userReputation, activeUser, formatType):
 				resourceHTML += s.getHTML(0, '', activeUser, userReputation)
 
 			if formatType == 'json':
-				resourceHTML += '    },\n'
+				resourceHTML += '    }'
 			else:
 				resourceHTML += '</td></tr>'
 
@@ -147,13 +147,13 @@ def getResourceData(conn, resSQL, userReputation, activeUser, formatType):
 			row = cursor.fetchone()
 
 			if formatType == 'json':
-				resourceHTML += '  ]'
+				resourceHTML += '  ,\n'
 			else:
 				resourceHTML += '  </table>'
 
 		if fetchSize.isdigit() and cursor.rowcount == int(fetchSize):
 			if formatType == 'json':
-				resourceHTML += ',\n  "last_value" : ' + str(lastValue)
+				resourceHTML += '],\n  "last_value" : ' + str(lastValue)
 			else:
 				resourceHTML += '<div style="display:none;">maxRowsReached' + str(lastValue) + '</div>'
 
