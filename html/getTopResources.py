@@ -66,9 +66,9 @@ def getProfOrder(profID):
 		if len(obyStr) > 0 and len(obyStr2) > 0:
 			return ' ((' + obyStr + ')*1000) / (' + obyStr2 + ')'
 		else:
-			return 'OQ'
+			return ' OQ'
 	else:
-		return 'OQ'
+		return ' OQ'
 #
 def getTypeOrder(tabID, typeID):
 	stats = {}
@@ -107,7 +107,7 @@ def getTypeOrder(tabID, typeID):
 			obyStr2 = obyStr2[1:]
 		return ' (' + obyStr + ') / (' + obyStr2 + ')'
 	else:
-		return 'OQ'
+		return ' OQ'
 
 # get comma separated list of resource categories to exclude for a set of schematics
 def getTypeResGroups(tabID, typeID):
