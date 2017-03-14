@@ -1726,7 +1726,7 @@ function maskStats(typeSel, clearStats) {
 	}
 }
 function switchGalaxy(galaxy) {
-	setCookie("galaxy",galaxy,365);
+	setCookie("galaxy",galaxy);
 	window.location.reload();
 }
 function toggleSection(aimg, id) {
