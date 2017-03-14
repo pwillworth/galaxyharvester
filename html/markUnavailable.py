@@ -109,7 +109,7 @@ if (logged_state > 0):
 
 			# Only allow removal if user has positive reputation
 			stats = dbShared.getUserStats(currentUser, galaxy).split(",")
-			if int(stats[2]) < ghShared.MIN_REP_VALS['REMOVE_RESOURCE'] or row[14] == currentUser:
+			if int(stats[2]) < ghShared.MIN_REP_VALS['REMOVE_RESOURCE'] and row[14] != currentUser:
 				result = "Error: You must earn a little reputation on the site before you can remove resources.  Try adding or verifying some first. \r\n"
 			elif row[13] != None:
 				result = "Error: You cannot remove that resource because it is already removed."
