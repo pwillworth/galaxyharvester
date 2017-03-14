@@ -132,7 +132,7 @@ function newExpGroup(groupName) {
 function addExpQuality(quickAddType) {
   if ($('.expQualityGroup').length < 1) {
     alert('There are no quality groups defined yet.  You need to add a quality group first so the new quality weights can go under it.');
-    return false;  
+    return false;
   }
   quickAddStats = quickAddGroups[quickAddType].split(',');
   tmpID = new Date().getTime();
@@ -240,7 +240,10 @@ function saveSchematic() {
     $.post(BASE_SCRIPT_URL + "postSchematic.py", { gh_sid: "'+sid+'", forceOp: "edit", schematicID: schematic.schematicID, schematic: JSON.stringify(schematic), galaxy: $("#galaxySel option:selected").val() },
       function(data) {
         alert(data);
-        document.location.href='/schematics.py/{{ schematicID }}';
+        // Only leave schematic editor if no error message returned.
+        if (data.indexOf("Error:") < 0) {
+          document.location.href='/schematics.py/{{ schematicID }}';
+        }
       });
   } else {
     alert('There are some problems with your schematic, please correct: ' + errors);
