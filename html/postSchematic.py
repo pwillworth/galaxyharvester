@@ -260,6 +260,13 @@ def updateSchematic(conn, schematicID, schematic):
 	except KeyError as e:
 		return 'Error: Schematic object is missing required data: {0}'.format(e)
 
+	ingCheck = {}
+	for ing in schem['ingredients']:
+		if ing['ingredientName'] in ingCheck:
+			return 'Error: You have multiple ingredients with the same name.  Each ingredient name must be different.  Please update and try saving again.'
+		else:
+			ingCheck[ing['ingredientName']] = ''
+
 	ingredientsBefore = 0
 	ingredientsAfter = 0
 	ingredientsChanged = 0
