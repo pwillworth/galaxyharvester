@@ -35,7 +35,7 @@ import json
 def generateSchematicID(schematicName, galaxy):
 	galaxyLen = len(str(galaxy))
 	newID = schematicName.replace(' ', '_')
-	newID = newID.translate(None, ';/?:@=&"<>#%\{\}|\^~[]`')
+	newID = newID.translate(None, ';/?:@=&"<>#%\{\}|\^~[]`\'')
 	newID = newID[:127-galaxyLen] + str(galaxy)
 
 	return newID
