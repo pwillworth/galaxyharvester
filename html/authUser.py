@@ -56,8 +56,8 @@ passp = form.getfirst('passu')
 passc = form.getfirst('passc')
 persist = form.getfirst('persist')
 push_key = form.getfirst('push_key')
-#sessions persist up to 30 days
-duration = 2592000
+#sessions persist up to 90 days
+duration = 7776000
 #escape input to prevent sql injection
 loginp = dbShared.dbInsertSafe(loginp)
 sid = dbShared.dbInsertSafe(sid)
