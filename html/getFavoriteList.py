@@ -70,11 +70,11 @@ def main():
 
 	tmpStr = ''
 	if galaxy.isdigit():
-		galaxyCriteria = ' AND galaxy=' + galaxy
+		galaxyCriteria = ' AND galaxy IN (0, {0})'.format(galaxy)
 
 	if logged_state > 0:
 		if favType == 'p':
-			sqlStr = ''.join(('SELECT profID, profName, favs.galaxy FROM tProfession LEFT JOIN (SELECT itemID, galaxy FROM tFavorites WHERE favType=3 AND userID="', currentUser, '"', galaxyCriteria, ') favs ON tProfession.profID = favs.itemID WHERE tProfession.craftingQuality>0 ORDER BY profName;'))
+			sqlStr = ''.join(('SELECT profID, profName, favsgalaxy FROM tProfession LEFT JOIN (SELECT itemID, galaxy AS favsgalaxy FROM tFavorites WHERE favType=3 AND userID="', currentUser, '"', galaxyCriteria, ') favs ON tProfession.profID = favs.itemID WHERE tProfession.craftingQuality>0', galaxyCriteria, ' ORDER BY profName;'))
 		elif favType == 's':
 			sqlStr = ''.join(('SELECT schematicID, schematicName, tFavorites.galaxy FROM tFavorites INNER JOIN tSchematic ON tFavorites.favGroup = tSchematic.schematicID WHERE tFavorites.userID="', currentUser, '" AND tFavorites.favType=4 ORDER BY schematicName'))
 		else:
