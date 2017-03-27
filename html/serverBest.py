@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2016 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -79,7 +79,7 @@ def getPosition(conn, spawnID, galaxy, statWeights, resourceGroup):
 def checkSchematics(conn, spawnID, galaxy, prof, resourceTypes):
     bestPositions = {}
     # Select schematics where ingredient in type or groups of type
-    sqlStr2 = 'SELECT tSchematic.schematicID, ingredientObject, Sum(ingredientContribution), schematicName, resName FROM tSchematicIngredients INNER JOIN tSchematic ON tSchematicIngredients.schematicID = tSchematic.schematicID INNER JOIN tSkillGroup ON tSchematic.skillGroup = tSkillGroup.skillGroup  LEFT JOIN (SELECT resourceGroup AS resID, groupName AS resName FROM tResourceGroup UNION ALL SELECT resourceType, resourceTypeName FROM tResourceType) res ON ingredientObject = res.resID WHERE profID=' + str(prof) + ' AND ingredientObject IN (' + str(resourceTypes) + ') GROUP BY tSchematic.schematicID, ingredientObject ORDER BY tSchematic.schematicID, ingredientQuantity DESC, ingredientName;'
+    sqlStr2 = 'SELECT tSchematic.schematicID, ingredientObject, Sum(ingredientContribution), schematicName, resName FROM tSchematicIngredients INNER JOIN tSchematic ON tSchematicIngredients.schematicID = tSchematic.schematicID INNER JOIN tSkillGroup ON tSchematic.skillGroup = tSkillGroup.skillGroup  LEFT JOIN (SELECT resourceGroup AS resID, groupName AS resName FROM tResourceGroup UNION ALL SELECT resourceType, resourceTypeName FROM tResourceType) res ON ingredientObject = res.resID WHERE profID={0} AND tSchematic.galaxy IN (0, {1}) AND ingredientObject IN ({2}) GROUP BY tSchematic.schematicID, ingredientObject ORDER BY tSchematic.schematicID, ingredientQuantity DESC, ingredientName;'.format(prof, galaxy, resourceTypes)
     ingCursor = conn.cursor()
     ingCursor.execute(sqlStr2)
     ingRow = ingCursor.fetchone()
