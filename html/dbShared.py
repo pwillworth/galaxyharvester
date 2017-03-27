@@ -45,9 +45,9 @@ def dbInsertSafe(insertStr):
 	newStr = ""
 	if (insertStr != None):
 		for i in range(len(str(insertStr))):
-			if (insertStr[i] == "'"):
+			if (str(insertStr)[i] == "'"):
 				newStr = newStr + "'"
-			newStr = newStr + insertStr[i]
+			newStr = newStr + str(insertStr)[i]
 	return newStr
 
 def n2n(inVal):
