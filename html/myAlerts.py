@@ -96,12 +96,14 @@ emailAlertCheckStr = ''
 mobileAlertCheckStr = ''
 pictureName = dbShared.getUserAttr(currentUser, 'pictureName')
 defaultAlerts = dbShared.getUserAttr(currentUser, 'defaultAlertTypes')
-if defaultAlerts % 2 == 1:
-	siteAlertCheckStr = " checked='checked'"
-if defaultAlerts >= 4:
-	mobileAlertCheckStr = " checked='checked'"
-if defaultAlerts != 1 and defaultAlerts != 4 and defaultAlerts != 5:
-	emailAlertCheckStr = " checked='checked'"
+if defaultAlerts != '':
+	if defaultAlerts % 2 == 1:
+		siteAlertCheckStr = " checked='checked'"
+	if defaultAlerts >= 4:
+		mobileAlertCheckStr = " checked='checked'"
+	if defaultAlerts != 1 and defaultAlerts != 4 and defaultAlerts != 5:
+		emailAlertCheckStr = " checked='checked'"
+
 print 'Content-type: text/html\n'
 env = Environment(loader=FileSystemLoader('templates'))
 env.globals['BASE_SCRIPT_URL'] = ghShared.BASE_SCRIPT_URL

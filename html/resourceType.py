@@ -162,7 +162,7 @@ def main():
 					if row[1] != typeName:
 						resHTML += '<h3 style="margin-bottom:12px;">'
 						if row[26] != 'resource':
-							resHTML += '<a href="' + ghShared.BASE_SCRIPT_URL + 'resourceType.py/' + row[26] + '">' + row[1] + '</a>'
+							resHTML += '<a href="' + ghShared.BASE_SCRIPT_URL + 'resourceType.py/' + str(row[26]) + '">' + str(row[1]) + '</a>'
 						else:
 							resHTML += row[1]
 						if typeGroup == 'type':
