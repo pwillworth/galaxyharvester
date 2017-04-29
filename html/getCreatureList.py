@@ -61,7 +61,7 @@ resType = dbShared.dbInsertSafe(resType)
 sid = dbShared.dbInsertSafe(sid)
 galaxy = dbShared.dbInsertSafe(galaxy)
 
-sess = dbSession.getSession(sid, 2592000)
+sess = dbSession.getSession(sid)
 if (sess != ''):
 	logged_state = 1
 	currentUser = sess

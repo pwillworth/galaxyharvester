@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2010 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -49,7 +49,7 @@ except KeyError:
 # escape input to prevent sql injection
 sid = dbShared.dbInsertSafe(sid)
 
-sess = dbSession.getSession(sid, 2592000)
+sess = dbSession.getSession(sid)
 if (sess != ''):
     logged_state = 1
     currentUser = sess

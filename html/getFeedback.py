@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2015 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -42,12 +42,12 @@ def getFeedbackComments(conn, feedbackID):
 				userText = comrow[1]
 			else:
 				userText = '<a href="user.py?uid=' + comrow[1] + '" class="nameLink"><img src="/images/users/'+ comrow[3] + '" class="tinyAvatar" /><span style="vertical-align:4px;">'+ comrow[1] + '</span></a>'
-					
+
 			comments = comments + '<p class="commentItem">' + comrow[2] + '</p><p>' + userText + '</p>'
 			comrow = comcursor.fetchone()
-			
+
 		comcursor.close()
-		
+
 		return comments
 
 #
@@ -98,7 +98,7 @@ lastItem = dbShared.dbInsertSafe(lastItem)
 # Get a session
 logged_state = 0
 
-sess = dbSession.getSession(sid, 2592000)
+sess = dbSession.getSession(sid)
 if (sess != ''):
 	logged_state = 1
 	currentUser = sess
@@ -112,7 +112,7 @@ errstr = ""
 
 if (perPage.isdigit() != True):
 	errstr = errstr + "Error: Invalid number provided for number per page. \r\n"
-	
+
 if (sort == "time"):
     orderStr = " ORDER BY entered DESC"
 else:
@@ -159,38 +159,38 @@ if (errstr == ""):
 				if (row[6] < 0):
 					downColor = 'Red'
 					downVote = '0'
-					
+
 			voteTools = '<div><div class="inlineBlock" id="voteup_' + str(row[0]) + '"><a alt="I like this idea" title="Vote Up" style="cursor: pointer;" onclick="voteFeedback(this,' + str(row[0]) + ',' + upVote + ');"><img src="/images/check' + upColor + '24.png" style="padding:5px;"/></a></div><div class="inlineBlock" id="votedown_' + str(row[0]) + '"><a alt="Not so much." title="Vote Down" style="cursor: pointer;" onclick="voteFeedback(this,' + str(row[0]) + ',' + downVote + ');"><img src="/images/x' + downColor + '24.png" style="padding:5px;"/></a></div></div>'
 		else:
 			if (currentUser != row[2]):
 				voteTools = "<div>Login to vote</div>"
 			else:
 				voteTools = "<div>Yours, thanks!</div>"
-			
+
 		if (row[4] == None):
 			userText = row[2]
 		else:
 			userText = '<a href="user.py?uid=' + row[2] + '" class="nameLink"><img src="/images/users/'+ row[4] + '" class="tinyAvatar" /><span style="vertical-align:4px;">'+ row[2] + '</span></a>'
 		if logged_state > 0:
 			userText = userText + '<button type="button" id="addFeedbackComment_' + str(row[0]) + '" class="ghButton" onclick="addFeedbackComment(this)" style="float:right;">Add Comment</button>'
-				
+
 		result = result + '<li id="feedback_' + str(row[0]) + '"><div class="feedbackBox"><div class="inlineBlock" style="width:85%"><p class="feedbackItem">' + row[3] + '</p><p>' + userText + '</p>'
 		result = result + getFeedbackComments(conn, row[0])
 		result = result + '</div></div><div class="inlineBlock" style="padding: 8px;vertical-align:top;"><div class="standOut rankBox">rank<br/>' + str(int(row[5])) + '</div>' + voteTools + '</div></div></li>'
-		
+
 		if (sort == "rank"):
 			lastItem = row[5]
 		else:
 			lastItem = row[1]
 		row = cursor.fetchone()
-		
+
 	if result.find("<li") > -1:
 		result = result + "  </ul>"
 		if (str(cursor.rowcount) == perPage):
 			result = result + '<div style="text-align:center;"><button id="moreButton" class="ghButton" onclick="moreFeedback(\''+ str(lastItem) + '\');">More</button></div>'
 	else:
 		result = "No Feedback Yet"
-	
+
 	cursor.close()
 	conn.close()
 else:

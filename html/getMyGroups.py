@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2012 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -74,7 +74,7 @@ firstOption = dbShared.dbInsertSafe(firstOption)
 # Get a session
 logged_state = 0
 
-sess = dbSession.getSession(sid, 2592000)
+sess = dbSession.getSession(sid)
 if (sess != ''):
 	logged_state = 1
 	currentUser = sess

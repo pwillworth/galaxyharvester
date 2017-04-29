@@ -175,7 +175,7 @@ prof = dbShared.dbInsertSafe(prof)
 schematicID = dbShared.dbInsertSafe(schematicID)
 excludeGroups = dbShared.dbInsertSafe(excludeGroups)
 
-sess = dbSession.getSession(sid, 2592000)
+sess = dbSession.getSession(sid)
 if (sess != ''):
 	logged_state = 1
 	currentUser = sess

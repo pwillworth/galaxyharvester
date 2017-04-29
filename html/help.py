@@ -1,8 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2016 Paul Willworth <ioscode@gmail.com>
-
+ Copyright 2017
  This file is part of Galaxy Harvester.
 
  Galaxy Harvester is free software: you can redistribute it and/or modify
@@ -80,7 +79,7 @@ def main():
 	if loginResult == None:
 		loginResult = 'success'
 
-	sess = dbSession.getSession(sid, 2592000)
+	sess = dbSession.getSession(sid)
 	if (sess != ''):
 		logged_state = 1
 		currentUser = sess

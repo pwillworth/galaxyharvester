@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2011 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -123,7 +123,7 @@ result = ""
 # Get a session
 logged_state = 0
 
-sess = dbSession.getSession(sid, 2592000)
+sess = dbSession.getSession(sid)
 if (sess != ''):
 	logged_state = 1
 	currentUser = sess
@@ -201,7 +201,7 @@ if (errstr == ""):
 					cursor2.execute(tempSQL)
 					fltUpdated[x] = 1
 					udCount += cursor2.rowcount
-					
+
 					cursor2.close()
 
 			if fltFound == False:

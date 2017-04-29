@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2010 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -79,7 +79,7 @@ sid = dbShared.dbInsertSafe(sid)
 logged_state = 0
 linkappend = ''
 
-sess = dbSession.getSession(sid, 2592000)
+sess = dbSession.getSession(sid)
 if (sess != ''):
 	logged_state = 1
 	currentUser = sess
@@ -100,7 +100,7 @@ if (errstr != ''):
 	result = "Your Avatar could not be updated because of the following errors:\r\n" + errstr
 else:
 	result = ''
-	
+
 	#resize if too big
 	xsize, ysize = im.size
 	newwidth = xsize
@@ -154,4 +154,3 @@ if src_url != None:
 	print '<html><head><script type=text/javascript>document.location.href="' + src_url + '?uid=' + currentUser + '&' + linkappend + '"</script></head><body></body></html>'
 else:
 	print result
-

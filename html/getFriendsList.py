@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2010 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -66,7 +66,7 @@ rowStr = ""
 # Get a session
 logged_state = 0
 
-sess = dbSession.getSession(sid, 2592000)
+sess = dbSession.getSession(sid)
 if (sess != ''):
 	logged_state = 1
 	currentUser = sess
@@ -122,7 +122,7 @@ if (cursor and tmpStr == ''):
 			tmpStr = tmpStr + rowStr
 
 		row = cursor.fetchone()
-        
+
 	if tmpStr != 'Error: No Data':
 		tmpStr = headStr + tmpStr + '  </table>'
 		# Print paging controls
@@ -138,5 +138,3 @@ conn.close()
 
 print 'Content-type: text/html\n'
 print tmpStr
-
-

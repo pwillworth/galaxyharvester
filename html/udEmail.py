@@ -88,7 +88,7 @@ email = dbShared.dbInsertSafe(email)
 logged_state = 0
 linkappend = ''
 
-sess = dbSession.getSession(sid, 2592000)
+sess = dbSession.getSession(sid)
 if (sess != ''):
     logged_state = 1
     currentUser = sess

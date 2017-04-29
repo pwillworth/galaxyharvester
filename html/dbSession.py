@@ -38,7 +38,7 @@ def verifySessionDB():
 	conn.close()
 
 # look up a session id and see if it is valid
-def getSession(sid, duration):
+def getSession(sid):
 	conn = dbShared.ghConn()
 	cursor = conn.cursor()
 	cursor.execute("SELECT userID, expires FROM tSessions WHERE sid='" + sid + "'")

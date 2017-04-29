@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2015 Paul Willworth <ioscode@gmail.com>
+ Copyright 2017 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -62,7 +62,7 @@ else:
 	currentUser = ''
 	loginResult = 'success'
 	sid = form.getfirst('gh_sid', '')
-	
+
 itemID = form.getfirst("itemID", "0")
 voteValue = form.getfirst("voteValue")
 suggestion = form.getfirst("suggestion", "")
@@ -73,7 +73,7 @@ suggestion = dbShared.dbInsertSafe(suggestion)
 logged_state = 0
 linkappend = ''
 
-sess = dbSession.getSession(sid, 2592000)
+sess = dbSession.getSession(sid)
 if (sess != ''):
 	logged_state = 1
 	currentUser = sess
@@ -97,7 +97,7 @@ if (logged_state == 0):
 if re.search("[><&]", suggestion):
 	errstr = errstr + "There are illegal characters in your suggestion.  No HTML allowed."
 
-	
+
 if (len(errstr) < 5):
 	cconn = dbShared.ghConn()
 	if (suggestion == ""):
@@ -143,7 +143,7 @@ if (len(errstr) < 5):
 			result = addType + " recorded"
 		else:
 			result = "Error: " + addType + " not recorded.  Invalid ID."
-		
+
 	cconn.close()
 
 else:
@@ -169,4 +169,3 @@ if (result.find("Error:") > -1):
 	sys.exit(500)
 else:
 	sys.exit(200)
-

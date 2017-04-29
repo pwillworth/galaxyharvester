@@ -199,7 +199,7 @@ resGroup = dbShared.dbInsertSafe(resGroup)
 resType = dbShared.dbInsertSafe(resType)
 boxFormat = dbShared.dbInsertSafe(boxFormat)
 
-sess = dbSession.getSession(sid, 2592000)
+sess = dbSession.getSession(sid)
 if (sess != ''):
 	logged_state = 1
 	currentUser = sess
