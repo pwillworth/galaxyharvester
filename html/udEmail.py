@@ -28,6 +28,7 @@ import Cookie
 import MySQLdb
 import dbSession
 import dbShared
+from smtplib import SMTPRecipientsRefused
 sys.path.append("../")
 import dbInfo
 from mailer import Mailer
@@ -44,7 +45,11 @@ def sendVerificationMail(user, address, code):
     message.Html = "<div><img src='http://galaxyharvester.net/images/ghLogoLarge.png'/></div><p>Hello " + user + ",</p><br/><p>You have updated your e-mail address on galaxyharvester.net to this email address.  You must verify this email with us by clicking the link below before the change can be completed.  If the link does not work, please copy the link and paste it into your browser address box.</p><p><a style='text-decoration:none;' href='" + link + "'><div style='width:170px;font-size:18px;font-weight:600;color:#feffa1;background-color:#003344;padding:8px;margin:4px;border:1px solid black;'>Click Here To Verify</div></a><br/>or copy and paste link: " + link + "</p><br/><p>Thanks,</p><p>-Galaxy Harvester Administrator</p>"
     mailer = Mailer(mailInfo.MAIL_HOST)
     mailer.login(mailInfo.REGMAIL_USER, mailInfo.MAIL_PASS)
-    mailer.send(message)
+    try:
+        mailer.send(message)
+    except SMTPRecipientsRefused:
+        return 'email not valid'
+
     return 'email sent'
 
 
@@ -116,8 +121,11 @@ else:
         cursor = conn.cursor()
         updatestr = "UPDATE tUsers SET verificationCode='" + verify_code + "', emailChange='" + email + "' WHERE userID='" + currentUser + "';"
         cursor.execute(updatestr)
-        sendVerificationMail(currentUser, email, verify_code)
-        result = "E-Mail Address Update Verification Email Sent.  Check your e-mail at this new address to finalize the change."
+        mailResult = sendVerificationMail(currentUser, email, verify_code)
+        if mailResult == "email sent":
+            result = "E-Mail Address Update Verification Email Sent.  Check your e-mail at this new address to finalize the change."
+        else:
+            result = "Your E-mail address could not be updated: " + mailResult
         cursor.close()
 
     conn.close()
