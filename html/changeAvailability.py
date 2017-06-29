@@ -99,6 +99,7 @@ if (logged_state > 0):
 
 	if (cursor):
 		row = None
+		enteredBy = ''
 		# lookup spawn id if it was not passed
 		if (spawnID == ''):
 			if galaxy != '':
@@ -107,6 +108,7 @@ if (logged_state > 0):
 
 			if (row != None):
 				spawnID = str(row[0])
+				enteredBy = row[13]
 		# lookup galaxy if it was not passed
 		if (galaxy == ''):
 			cursor.execute('SELECT galaxy FROM tResources WHERE spawnID=' + spawnID + ';')
@@ -117,11 +119,12 @@ if (logged_state > 0):
 
 		# lookup spawn name if it was not passed
 		if (spawnName == ''):
-			cursor.execute('SELECT spawnName FROM tResources WHERE spawnID=' + spawnID + ';')
+			cursor.execute('SELECT spawnName, enteredBy FROM tResources WHERE spawnID=' + spawnID + ';')
 			row = cursor.fetchone()
 
 			if (row != None):
 				spawnName = row[0]
+				enteredBy = row[1]
 
 		sqlStr = ""
 		if (spawnID != '' and galaxy != ''):
@@ -149,7 +152,7 @@ if (logged_state > 0):
 
 				# Only allow update if user has positive reputation
 				stats = dbShared.getUserStats(currentUser, galaxy).split(",")
-				if (int(stats[2]) < ghShared.MIN_REP_VALS['REMOVE_RESOURCE'] and row[13] != currentUser) and availability == "0":
+				if (int(stats[2]) < ghShared.MIN_REP_VALS['REMOVE_RESOURCE'] and enteredBy != currentUser) and availability == "0":
 					result = "Error: You must earn a little reputation on the site before you can edit resources.  Try adding or verifying some first. \r\n"
 				else:
 					cursor.execute(sqlStr)
