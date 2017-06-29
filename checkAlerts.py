@@ -312,7 +312,7 @@ def main():
 	else:
 		# look up the spawn info
 		cursor = conn.cursor()
-		cursor.execute("SELECT spawnName, galaxy, enteredBy, resourceType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER, galaxyName, unavailable, spawnID FROM tResources INNER JOIN tGalaxy ON tResources.galaxy = tGalaxy.galaxyID WHERE entered >= '" + lastAddedCheckTime + "';")
+		cursor.execute("SELECT spawnName, galaxy, enteredBy, resourceType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER, galaxyName, unavailable, spawnID FROM tResources INNER JOIN tGalaxy ON tResources.galaxy = tGalaxy.galaxyID WHERE entered >= '" + lastAddedCheckTime + "' AND galaxyState=1 and unavailable IS NULL ORDER BY entered;")
 		row = cursor.fetchone()
 		while row != None:
 			alertValue = row[3]
