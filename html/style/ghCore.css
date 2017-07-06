@@ -120,6 +120,7 @@ ul.plain li {
 }
 #topRightColumn {
 	width: 33%;
+	float: right;
 }
 .wrapper {
 	min-width: 800px;
