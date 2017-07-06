@@ -66,6 +66,8 @@ if (sess != ''):
 	logged_state = 1
 	currentUser = sess
 
+# Should we display the resource type column? (optional)
+showType = form.getfirst('showType', '') == "True"
 
 # Main program
 conn = dbShared.ghConn()
@@ -79,6 +81,10 @@ if (cursor):
 
     clist = '<table class="userData" width="100%">'
     clist += '<thead><tr class="tableHead"><th>Creature</th>'
+
+    # Show the type column data if requested
+    if showType:
+        clist += '<th>Type</th>'
 
     clist += '<th>Yield</th><th>Mission lvl</th></thead>'
 
@@ -102,12 +108,17 @@ if (cursor):
             ORDER BY tResourceTypeCreature.maxAmount DESC
     """
 
-    # Execute SQL and get first row
+    # Execute SQL and fetch first row
     cursor.execute(sqlStr, (resType, resType, resType, resType, galaxy))
     row = cursor.fetchone()
 
     while (row != None):
         clist += '  <tr class="statRow"><td>' + str(row[0]).replace('_',' ')
+
+        # Show the type column data if requested
+        if showType:
+            clist += '</td><td><a href="/creatureList.py/' + str(row[6])
+            clist += '">' + str(row[5]).replace('_',' ') + '</a>'
 
         clist += '</td><td>' + str(row[1]) + '</td><td>' + str(row[2])
 

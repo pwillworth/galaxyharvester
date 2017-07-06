@@ -1,0 +1,116 @@
+{% import 'blocks.html' as blocks %}
+<!DOCTYPE html>
+<html lang="en"><head><title>Creature Harvesting - Galaxy Harvester</title>
+<link rel="stylesheet" href="/style/ghCore.css" type="text/css" />
+<link rel="stylesheet" href="/style/themes/{{ uiTheme }}.css" type="text/css" />
+<link rel="stylesheet" href="/style/autocomplete.css" type="text/css" />
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery.autocomplete-min.js"></script>
+<script type="text/javascript" src="/js/Colors.js"></script>
+<script src="/js/ghShared.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
+    refreshResourceGroups();
+
+  {% if (validResource) %}
+    refreshCreatureData();
+    refreshResourceTypes();
+  {% endif %}
+});
+
+function refreshCreatureData() {
+  $("#resCreatures").load(BASE_SCRIPT_URL + "getCreatureList.py",{
+      resType: "{{ typeID }}",
+      galaxy: $("#galaxySel").val(),
+      showType: "{{ showType }}"},
+      function() {
+          $("#busyImgFindCreatures").css("display","none");
+  });
+}
+
+function refreshResourceGroups() {
+  $("#resGroups").load(BASE_SCRIPT_URL + "getCreatureResourceGroups.py",{
+      galaxy: $("#galaxySel").val()},
+      function() {
+          $("#busyImgFindGroups").css("display","none");
+  });
+}
+
+function refreshResourceTypes() {
+  $("#resTypes").load(BASE_SCRIPT_URL + "getCreatureResourceTypes.py",{
+      resGroup: "{{ typeID }}",
+      galaxy: $("#galaxySel").val()},
+      function() {
+          $("#busyImgFindTypes").css("display","none");
+  });
+}
+
+</script>
+{{ blocks.pageTracker() }}
+<body>
+{{ blocks.headerSection(loggedin, currentUser, loginResult, linkappend, url, imgNum, galaxyList, pictureName) }}
+<div id="mainContent" class="wrapper">
+  <div id="leftNavContent" class="ghCol">
+  {% if (validResource) %}
+    <div id="creatureListNav" class="ghWidgetBox">
+      <div class="boxHeader">
+        <a href="/creatureList.py">Creature Harvesting Home</a>
+      </div>
+    </div>
+  {% endif %}
+    <div id="groupsInfo" class="ghWidgetBox">
+      <div class="boxHeader">Resource Groups</div>
+      <div id="busyImgFindGroups">
+        <img src="/images/ghWait.gif" alt="waiting..." border=0 />
+      </div>
+      <div id="resGroups"></div>
+    </div>
+  {% if (validResource and showType) %}
+    <div id="typesInfo" class="ghWidgetBox">
+      <div class="boxHeader">Types</div>
+      <div id="busyImgFindTypes">
+        <img src="/images/ghWait.gif" alt="waiting..." border=0 />
+      </div>
+      <div id="resTypes"></div>
+    </div>
+  {% endif %}
+  </div>
+  <div id="rightMainContent" class="ghCol">
+    <div id="creaturesBox" class="ghWidgetBox" style="min-width:820px;">
+      <div style="font-size:16px;font-weight:bold;">
+        Creature Harvesting
+        {% if (containerType) %}
+          <div style="float:right;"><img src="/images/resources/{{ containerType }}.png"></div>
+        {% endif %}
+      </div>
+      <h3 style="margin-bottom:12px;">
+        {{ breadcrumbHTML }}
+      </h3>
+      <div class="footer"></div>
+    {% if (validResource) %}
+      <div id="busyImgFindCreatures">
+        <img src="/images/ghWait.gif" alt="waiting..." border=0 />
+      </div>
+      <div id="resCreatures"></div>
+    {% else %}
+      <div class="selectContainer">
+      {% for type in ['bone', 'hide', 'meat'] %}
+        <div>
+          <p>
+            <a href="/creatureList.py/{{ type }}" class="bigLink">
+              <img src="/images/resources/{{ type }}.png"><span>{{ type.title() }}</span>
+            </a>
+          </p>
+        </div>
+      {% endfor %}
+      </div>
+    {% endif %}
+    </div>
+  </div>
+</div>
+{{ blocks.pageFooter() }}
+{{ blocks.joinForm(loggedin, ['?src_url=creatureList.py&', linkappend]|join, url) }}
+<div id="tooltip"></div>
+<div id="mask"> </div>
+</body></html>
