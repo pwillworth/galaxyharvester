@@ -159,7 +159,7 @@ ul.plain li {
 	width: 100%;
 	border-top-style: solid;
 	border-top-width: 1px;
-	padding: 2px;
+	padding: 2px 0;
 }
 .ghWidgetBox {
 	position: relative;
