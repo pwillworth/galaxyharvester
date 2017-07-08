@@ -66,32 +66,75 @@ if (sess != ''):
 	logged_state = 1
 	currentUser = sess
 
+# Should we display the resource type column? (optional)
+showType = form.getfirst('showType', '') == "True"
 
 # Main program
-print 'Content-type: text/html\n'
-clist = '<table class="userData" width="100%">'
 conn = dbShared.ghConn()
 cursor = conn.cursor()
+
 if (cursor):
-	if logged_state == 1:
-		# Get user reputation for later checking
-		stats = dbShared.getUserStats(currentUser, galaxy).split(",")
-		userReputation = int(stats[2])
+    if logged_state == 1:
+        # Get user reputation for later checking
+        stats = dbShared.getUserStats(currentUser, galaxy).split(",")
+        userReputation = int(stats[2])
 
-	clist += '<thead><tr class="tableHead"><th>Creature</th><th>Yield</th><th>Mission lvl</th></thead>'
-	sqlStr = 'SELECT speciesName, maxAmount, missionLevel, galaxy, enteredBy FROM tResourceTypeCreature WHERE resourceType=%s AND galaxy IN (0, %s) ORDER BY maxAmount DESC, speciesName'
-	cursor.execute(sqlStr, (resType, galaxy))
-	row = cursor.fetchone()
+    clist = '<table class="userData" width="100%">'
+    clist += '<thead><tr class="tableHead"><th>Creature</th>'
 
-	while (row != None):
-		clist += '  <tr class="statRow"><td>' + str(row[0]).replace('_',' ') + '</td><td>' + str(row[1]) + '</td><td>' + str(row[2])
-		if logged_state == 1 and row[3] != 0 and (row[4] == currentUser or userReputation >= ghShared.MIN_REP_VALS['EDIT_OTHER_CREATURE']):
-			clist += '<div style="float:right;"><a style="cursor: pointer;" onclick="editCreatureData(\'{2}\', \'{3}\', \'{4}\')"><img src="/images/editBlue16.png" alt="Edit Info"/></a><a style="cursor: pointer;" onclick="removeCreatureResource({0}, \'{1}\', \'{2}\')"><img src="/images/xRed16.png" alt="Remove"/></a></div>'.format(str(row[3]), resType, row[0], row[1], row[2])
-		clist += '</td>'
-		clist += '  </tr>'
-		row = cursor.fetchone()
+    # Show the type column data if requested
+    if showType:
+        clist += '<th>Type</th>'
 
-	cursor.close()
+    clist += '<th>Yield</th><th>Mission lvl</th></thead>'
+
+    sqlStr = """
+        SELECT tResourceTypeCreature.speciesName,
+               tResourceTypeCreature.maxAmount,
+               tResourceTypeCreature.missionLevel,
+               tResourceTypeCreature.galaxy,
+               tResourceTypeCreature.enteredBy,
+               tResourceType.resourceTypeName,
+               tResourceType.resourceType,
+               tResourceType.containerType
+            FROM tResourceTypeCreature
+                INNER JOIN tResourceType
+                    ON tResourceType.resourceType = tResourceTypeCreature.resourceType
+            WHERE (tResourceType.resourceCategory = %s
+                    OR tResourceType.containerType = %s
+                    OR tResourceType.resourceGroup = %s
+                    OR tResourceType.resourceType = %s)
+                AND tResourceTypeCreature.galaxy IN (0, %s)
+            ORDER BY tResourceTypeCreature.maxAmount DESC
+    """
+
+    # Execute SQL and fetch first row
+    cursor.execute(sqlStr, (resType, resType, resType, resType, galaxy))
+    row = cursor.fetchone()
+
+    while (row != None):
+        clist += '  <tr class="statRow"><td>' + str(row[0]).replace('_',' ')
+
+        # Show the type column data if requested
+        if showType:
+            clist += '</td><td><a href="/creatureList.py/' + str(row[6])
+            clist += '">' + str(row[5]).replace('_',' ') + '</a>'
+
+        clist += '</td><td>' + str(row[1]) + '</td><td>' + str(row[2])
+
+        # Display creature edit/dit if user has enough reputation
+        if logged_state == 1 and row[3] != 0 and (row[4] == currentUser or userReputation >= ghShared.MIN_REP_VALS['EDIT_OTHER_CREATURE']):
+            clist += '<div style="float:right;"><a style="cursor: pointer;" onclick="editCreatureData(\'{2}\', \'{3}\', \'{4}\')"><img src="/images/editBlue16.png" alt="Edit Info"/></a><a style="cursor: pointer;" onclick="removeCreatureResource({0}, \'{1}\', \'{2}\')"><img src="/images/xRed16.png" alt="Remove"/></a></div>'.format(str(row[3]), resType, row[0], row[1], row[2])
+
+        clist += '</td>'
+        clist += '  </tr>'
+
+        row = cursor.fetchone()
+
+    cursor.close()
 conn.close()
+
 clist += '  </table>'
+
+print 'Content-type: text/html\n'
 print clist

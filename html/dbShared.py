@@ -244,7 +244,7 @@ def getUserAttr(user, attr):
 def getUserDonated(user):
 	conn = ghConn()
 	cursor = conn.cursor()
-	cursor.execute('SELECT Sum(paymentGross) FROM tPayments WHERE payerEmail = (SELECT emailAddress FROM tUsers WHERE userID=%s)', (user))
+	cursor.execute('SELECT Sum(paymentGross) FROM tPayments WHERE payerEmail = (SELECT emailAddress FROM tUsers WHERE userID=%s)', (user,))
 	row = cursor.fetchone()
 	if (row != None and row[0] != None):
 		retAttr = str(row[0])
@@ -312,7 +312,7 @@ def getUserStats(user, galaxy):
 	cursor = conn.cursor()
     # Galaxy 0 passed just combine stats for all galaxies
 	if (galaxy == 0):
-		cursor.execute('SELECT Sum(added), Sum(planet), Sum(edited), Sum(removed), Sum(verified), Sum(waypoint), Sum(repGood), Sum(repBad) FROM tUserStats WHERE userID = %s', (user))
+		cursor.execute('SELECT Sum(added), Sum(planet), Sum(edited), Sum(removed), Sum(verified), Sum(waypoint), Sum(repGood), Sum(repBad) FROM tUserStats WHERE userID = %s', (user,))
 	else:
 		cursor.execute('SELECT added, planet, edited, removed, verified, waypoint, repGood, repBad FROM tUserStats WHERE userID = %s AND galaxy = %s', (user, galaxy))
 	row = cursor.fetchone()
