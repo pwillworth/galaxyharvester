@@ -115,11 +115,12 @@ ul.plain li {
 	width: 33%;
 }
 #topCenterColumn {
-	width: 33%;
+	width: 34%;
 	text-align: center;
 }
 #topRightColumn {
 	width: 33%;
+	float: right;
 }
 .wrapper {
 	min-width: 800px;
@@ -159,7 +160,7 @@ ul.plain li {
 	width: 100%;
 	border-top-style: solid;
 	border-top-width: 1px;
-	padding: 2px;
+	padding: 2px 0;
 }
 .ghWidgetBox {
 	position: relative;
