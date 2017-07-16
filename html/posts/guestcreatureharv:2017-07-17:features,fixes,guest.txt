@@ -1,0 +1,7 @@
+Guest Feature: Creature Harvesting
+
+<p>Earlier this year, the source code for Galaxy Harvester was opened up for collaboration on GitHub.  I am happy bring you the first feature provided by a guest developer through collaboration on GitHub today. GitHub user, <a href="https://github.com/cbortz">cbortz</a> provided a new feature called creature harvesting, as well as a few display fixes.</p>
+
+<p>The <a href="http://galaxyharvester.net/creatureList.py">creature harvesting feature</a> is tool that allows you to look at the creature data on galaxy harvester from a higher level.  Feel free to take a look, maybe it will prove helpful to some of you other scouts out there.
+
+<p>-ioscode</p>
