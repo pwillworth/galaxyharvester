@@ -111,7 +111,7 @@ def logUserEvent(user, galaxy, targetType, targetID, eventType):
 		# Check if user is experienced enough to give rep bonus
 		expGood = False
 		# Exclude automated users
-		if (user != "etas" and user != "c0pp3r"):
+		if (user != "etas" and user != "c0pp3r" and user != "RogueOne" and user != "SRAlderaan"):
 			cursor.execute("SELECT added, repBad FROM tUserStats WHERE userID=%s AND galaxy=%s;", (user, galaxy))
 			row = cursor.fetchone()
 			if (row != None and row[0] != None):
@@ -244,7 +244,7 @@ def getUserAttr(user, attr):
 def getUserDonated(user):
 	conn = ghConn()
 	cursor = conn.cursor()
-	cursor.execute('SELECT Sum(paymentGross) FROM tPayments WHERE payerEmail = (SELECT emailAddress FROM tUsers WHERE userID=%s)', (user,))
+	cursor.execute('SELECT Sum(paymentGross) FROM tPayments WHERE payerEmail = (SELECT emailAddress FROM tUsers WHERE userID=%s)', (user))
 	row = cursor.fetchone()
 	if (row != None and row[0] != None):
 		retAttr = str(row[0])
@@ -312,7 +312,7 @@ def getUserStats(user, galaxy):
 	cursor = conn.cursor()
     # Galaxy 0 passed just combine stats for all galaxies
 	if (galaxy == 0):
-		cursor.execute('SELECT Sum(added), Sum(planet), Sum(edited), Sum(removed), Sum(verified), Sum(waypoint), Sum(repGood), Sum(repBad) FROM tUserStats WHERE userID = %s', (user,))
+		cursor.execute('SELECT Sum(added), Sum(planet), Sum(edited), Sum(removed), Sum(verified), Sum(waypoint), Sum(repGood), Sum(repBad) FROM tUserStats WHERE userID = %s', (user))
 	else:
 		cursor.execute('SELECT added, planet, edited, removed, verified, waypoint, repGood, repBad FROM tUserStats WHERE userID = %s AND galaxy = %s', (user, galaxy))
 	row = cursor.fetchone()
