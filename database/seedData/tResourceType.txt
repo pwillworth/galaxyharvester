@@ -1104,3 +1104,48 @@ water_vapor_jakku	Jakkuan Water Vapor	water	water	1	5	0	0	0	0	1	1000	0	0	0	0	0	0
 wheat_domesticated_jakku	Jakkuan Domesticated Wheat	flora_food	wheat_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	wheat	18
 wheat_wild_jakku	Jakkuan Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	wheat	18
 wood_deciduous_jakku	Jakkuan Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	18
+bone_avian_chandrila	Chandrilan Avian Bones	creature_structural	bone_avian	1	1	0	0	0	0	1	700	0	0	0	0	1	600	0	0	1	1000	100	500	1	500	0	0	bone	bone	19
+bone_horn_chandrila	Chandrilan Horn	creature_structural	bone_horn	1	1	0	0	0	0	200	1000	0	0	0	0	1	500	0	0	1	1000	300	700	1	500	0	0	bone	bone_horn	19
+bone_mammal_chandrila	Chandrilan Animal Bones	creature_structural	bone	1	1	0	0	0	0	300	1000	0	0	0	0	1	500	0	0	1	1000	400	1000	1	1000	0	0	bone	bone	19
+corn_domesticated_chandrila	Chandrilan Domesticated Corn	flora_food	corn_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	corn	19
+corn_wild_chandrila	Chandrilan Wild Corn	flora_food	corn_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	corn	19
+energy_renewable_site_limited_geothermal_chandrila	Chandrilan Geothermal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	19
+energy_renewable_site_limited_hydron3_chandrila	Chandrilan Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	19
+energy_renewable_site_limited_tidal_chandrila	Chandrilan Tidal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	19
+energy_renewable_unlimited_solar_chandrila	Chandrilan Solar Renewable Energy	energy	energy_renewable_unlimited_solar	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	600	500	500	0	0	0	0	0	0	energy	energy	19
+energy_renewable_unlimited_wind_chandrila	Chandrilan Wind Renewable Energy	energy	energy_renewable_unlimited_wind	1	1	0	0	0	0	0	0	0	0	0	0	0	0	1	400	500	500	0	0	0	0	0	0	energy	energy	19
+fiberplast_chandrila	Chandrilan Fiberplast	chemical	fiberplast	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	inorganic	fiberplast	19
+fruit_berries_chandrila	Chandrilan Berry Fruit	flora_food	fruit_berries	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_berries	19
+fruit_flowers_chandrila	Chandrilan Flower Fruit	flora_food	fruit_flowers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	seeds	fruit_berries	19
+fruit_fruits_chandrila	Chandrilan Fruit	flora_food	fruit_fruits	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_fruits	19
+hide_bristley_chandrila	Chandrilan Bristley Hide	creature_structural	hide_bristley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_bristley	19
+hide_leathery_chandrila	Chandrilan Leathery Hide	creature_structural	hide_leathery	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_leathery	19
+hide_scaley_chandrila	Chandrilan Scaley Hide	creature_structural	hide_scaley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_scaley	19
+hide_wooly_chandrila	Chandrilan Wooly Hide	creature_structural	hide_wooly	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_wooly	19
+meat_avian_chandrila	Chandrilan Avian Meat	creature_food	meat_avian	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	19
+meat_carnivore_chandrila	Chandrilan Carnivore Meat	creature_food	meat_carnivore	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	19
+meat_domesticated_chandrila	Chandrilan Domesticated Meat	creature_food	meat_domesticated	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	19
+meat_egg_chandrila	Chandrilan Egg Meat	creature_food	meat_egg	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	19
+meat_herbivore_chandrila	Chandrilan Herbivore Meat	creature_food	meat_herbivore	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	19
+meat_insect_chandrila	Chandrilan Insect Meat	creature_food	meat_insect	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	19
+meat_reptillian_chandrila	Chandrilan Reptillian Meat	creature_food	meat_reptillian	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	19
+meat_wild_chandrila	Chandrilan Wild Meat	creature_food	meat_wild	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	19
+milk_domesticated_chandrila	Chandrilan Domesticated Milk	creature_food	milk_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	milk	milk	19
+milk_wild_chandrila	Chandrilan Wild Milk	creature_food	milk_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	milk	milk	19
+oats_domesticated_chandrila	Chandrilan Domesticated Oats	flora_food	oats_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	oats	19
+oats_wild_chandrila	Chandrilan Wild Oats	flora_food	oats_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	oats	19
+rice_domesticated_chandrila	Chandrilan Domesticated Rice	flora_food	rice_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	rice	19
+rice_wild_chandrila	Chandrilan Wild Rice	flora_food	rice_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	rice	19
+seafood_crustacean_chandrila	Chandrilan Crustacean Meat	creature_food	seafood_crustacean	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	19
+seafood_fish_chandrila	Chandrilan Fish Meat	creature_food	seafood_fish	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	19
+seafood_mollusk_chandrila	Chandrilan Mollusk Meat	creature_food	seafood_mollusk	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	19
+softwood_conifer_chandrila	Chandrilan Conifer Wood	flora_structural	softwood	1	1	0	0	0	0	1	600	0	0	0	0	600	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	19
+softwood_evergreen_chandrila	Chandrilan Evergreen Wood	flora_structural	softwood_evergreen	1	1	0	0	0	0	1	500	0	0	0	0	800	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	19
+vegetable_beans_chandrila	Chandrilan Vegetable Beans	flora_food	vegetable_beans	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_beans	19
+vegetable_fungi_chandrila	Chandrilan Vegetable Fungus	flora_food	vegetable_fungi	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_fungi	19
+vegetable_greens_chandrila	Chandrilan Vegetable Greens	flora_food	vegetable_greens	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_greens	19
+vegetable_tubers_chandrila	Chandrilan Vegetable Tubers	flora_food	vegetable_tubers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_tubers	19
+water_vapor_chandrila	Chandrilan Water Vapor	water	water	1	5	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	600	1000	0	0	0	0	0	0	water	water	19
+wheat_domesticated_chandrila	Chandrilan Domesticated Wheat	flora_food	wheat_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	wheat	19
+wheat_wild_chandrila	Chandrilan Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	wheat	19
+wood_deciduous_chandrila	Chandrilan Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	19

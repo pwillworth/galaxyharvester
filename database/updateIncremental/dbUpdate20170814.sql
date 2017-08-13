@@ -1,0 +1,10 @@
+use swgresource;
+INSERT INTO tPlanet (planetName) VALUES ('Chandrila');
+INSERT INTO tPlanet (planetName) VALUES ('Hutta');
+INSERT INTO tGalaxyPlanet (galaxyID, planetID) VALUES (72, 12);
+INSERT INTO tGalaxyPlanet (galaxyID, planetID) VALUES (72, 19);
+INSERT INTO tGalaxyPlanet (galaxyID, planetID) VALUES (72, 20);
+DELETE FROM tResourceType;
+LOAD DATA LOCAL INFILE '/var/www/database/seedData/tResourceType.txt' INTO TABLE tResourceType;
+DELETE FROM tResourceTypeGroup;
+LOAD DATA LOCAL INFILE '/var/www/database/seedData/typegroup.csv' INTO TABLE tResourceTypeGroup FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"';
