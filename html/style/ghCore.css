@@ -279,6 +279,11 @@ input.ghButton[disabled] {
 .feedList li div {
 	margin-left: 8px;
 }
+.Chandrila {
+	/*background-color: #32cd99;*/
+	background-image: url(/images/spriteCircles16.png);
+	background-position: -10px -82px;
+}
 .Corellia {
 	/*background-color: #26466d;*/
 	background-image: url(/images/spriteCircles16.png);
@@ -298,6 +303,11 @@ input.ghButton[disabled] {
 	/*background-color: #3b5323;*/
 	background-image: url(/images/spriteCircles16.png);
 	background-position: -10px -154px;
+}
+.Hutta {
+	/*background-color: #ffcc11;*/
+	background-image: url(/images/spriteCircles16.png);
+	background-position: -10px -262px;
 }
 .Lok {
 	/*background-color: #666600;*/
