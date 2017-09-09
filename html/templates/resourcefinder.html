@@ -42,7 +42,7 @@ $(document).ready(function() {
 	    width:120,
 	    params: {galaxy: $("#galaxySel").val()}
 	});
-    $("#typeSel").load(BASE_SCRIPT_URL + "getResourceTypeList.py");
+    $("#typeSel").load(BASE_SCRIPT_URL + "getResourceTypeList.py", {galaxy:$("#galaxySel").val()});
     $(".window .close").click(function(e) {
         e.preventDefault();
         $("#mask, .window").hide();

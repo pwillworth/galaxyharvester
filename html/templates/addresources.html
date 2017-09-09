@@ -35,7 +35,7 @@
 	        "<td><input type='text' size=2 maxlength=4 id='UT"+rownum+"' name='UT"+rownum+"'></td>"+
 	        "<td><div id='addInfo"+rownum+"'></div></td>"+
 	        "</tr>");
-	      $("#"+typeBox).load("getResourceTypeList.py");
+	      $("#"+typeBox).load("getResourceTypeList.py", {galaxy:$("#galaxySel").val()});
 	      rownum+=1;
 	    }
 	}

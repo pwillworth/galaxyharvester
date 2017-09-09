@@ -29,9 +29,11 @@ form = cgi.FieldStorage()
 
 resGroup = form.getfirst('resGroup', '')
 outType = form.getfirst('outType', '')
+galaxy = form.getfirst('galaxy', '-1')
 # escape input to prevent sql injection
 resGroup = dbShared.dbInsertSafe(resGroup)
 outType = dbShared.dbInsertSafe(outType)
+galaxy = dbShared.dbInsertSafe(galaxy)
 
 print 'Content-type: text/html\n'
 if outType == 'links':
@@ -45,6 +47,9 @@ if len(resGroup) > 0:
 	criteriaStr = ' AND (resourceGroup = "' + resGroup + '" OR resourceCategory = "' + resGroup + '")'
 else:
 	criteriaStr = ''
+
+if len(galaxy) > 0:
+	criteriaStr = criteriaStr + ' AND (specificPlanet = 0 OR specificPlanet IN (SELECT DISTINCT tPlanet.planetID FROM tPlanet, tGalaxyPlanet WHERE (tPlanet.planetID < 11) OR (tPlanet.planetID = tGalaxyPlanet.planetID AND tGalaxyPlanet.galaxyID = {0})))'.format(galaxy)
 
 conn = dbShared.ghConn()
 cursor = conn.cursor()

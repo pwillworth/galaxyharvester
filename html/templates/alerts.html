@@ -49,7 +49,7 @@ function loadSchematicFavs() {
 }
 function setTGlist(rownum) {
     if ($("#oType" + rownum).attr("checked") == "checked") {
-        $("#typeGroupSel"+rownum).load("getResourceTypeList.py", function() {$(this).val($(this).attr("tag"));maskStats(this);});
+        $("#typeGroupSel"+rownum).load("getResourceTypeList.py", {galaxy:$("#galaxySel").val()}, function() {$(this).val($(this).attr("tag"));maskStats(this);});
     } else {
         $("#typeGroupSel"+rownum).load("getResourceGroupList.py", function() {$(this).val($(this).attr("tag"));maskStats(this);});
     }

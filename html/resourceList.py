@@ -63,10 +63,15 @@ if useCookies:
 		uiTheme = cookies['uiTheme'].value
 	except KeyError:
 		uiTheme = ''
+	try:
+		galaxy = cookies['galaxy'].value
+	except KeyError:
+		galaxy = form.getfirst('galaxy', ghShared.DEFAULT_GALAXY)
 else:
 	currentUser = ''
 	loginResult = form.getfirst('loginAttempt', '')
 	sid = form.getfirst('gh_sid', '')
+	galaxy = form.getfirst('galaxy', ghShared.DEFAULT_GALAXY)
 
 # escape input to prevent sql injection
 sid = dbShared.dbInsertSafe(sid)
@@ -97,4 +102,4 @@ env = Environment(loader=FileSystemLoader('templates'))
 env.globals['BASE_SCRIPT_URL'] = ghShared.BASE_SCRIPT_URL
 env.globals['MOBILE_PLATFORM'] = ghShared.getMobilePlatform(os.environ['HTTP_USER_AGENT'])
 template = env.get_template('resourcelist.html')
-print template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), resourceTypeList=ghLists.getResourceTypeList(), resourceGroupList=ghLists.getResourceGroupList(), planetList=ghLists.getPlanetList(-1), resCategories=resCategories, resCategoryIDs=resCategoryIDs)
+print template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), resourceTypeList=ghLists.getResourceTypeList(galaxy), resourceGroupList=ghLists.getResourceGroupList(), planetList=ghLists.getPlanetList(galaxy), resCategories=resCategories, resCategoryIDs=resCategoryIDs)

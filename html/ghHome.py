@@ -67,12 +67,12 @@ if useCookies:
 	try:
 		galaxy = cookies['galaxy'].value
 	except KeyError:
-		galaxy = "14"
+		galaxy = form.getfirst('galaxy', ghShared.DEFAULT_GALAXY)
 else:
 	currentUser = ''
 	loginResult = form.getfirst('loginAttempt', '')
 	sid = form.getfirst('gh_sid', '')
-	galaxy = '14'
+	galaxy = form.getfirst('galaxy', ghShared.DEFAULT_GALAXY)
 
 # escape input to prevent sql injection
 sid = dbShared.dbInsertSafe(sid)
@@ -129,4 +129,4 @@ env = Environment(loader=FileSystemLoader('templates'))
 env.globals['BASE_SCRIPT_URL'] = ghShared.BASE_SCRIPT_URL
 env.globals['MOBILE_PLATFORM'] = ghShared.getMobilePlatform(os.environ['HTTP_USER_AGENT'])
 template = env.get_template('home.html')
-print template.render(uiTheme=uiTheme, galaxy=galaxy, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, totalAmt=totalAmt, percentOfGoal=percentOfGoal, imgNum=ghShared.imgNum, resourceGroupListShort=ghLists.getResourceGroupListShort(), professionList=ghLists.getProfessionList(galaxy), planetList=ghLists.getPlanetList(galaxy), resourceGroupList=ghLists.getResourceGroupList(), resourceTypeList=ghLists.getResourceTypeList(), galaxyList=ghLists.getGalaxyList())
+print template.render(uiTheme=uiTheme, galaxy=galaxy, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, totalAmt=totalAmt, percentOfGoal=percentOfGoal, imgNum=ghShared.imgNum, resourceGroupListShort=ghLists.getResourceGroupListShort(), professionList=ghLists.getProfessionList(galaxy), planetList=ghLists.getPlanetList(galaxy), resourceGroupList=ghLists.getResourceGroupList(), resourceTypeList=ghLists.getResourceTypeList(galaxy), galaxyList=ghLists.getGalaxyList())

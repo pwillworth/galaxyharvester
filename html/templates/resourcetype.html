@@ -25,7 +25,7 @@ $(document).ready(function() {
         $(".window").hide();
     });
 {% if typeID != '' %}
-	    $("#typeSel").load(BASE_SCRIPT_URL + "getResourceTypeList.py");
+	    $("#typeSel").load(BASE_SCRIPT_URL + "getResourceTypeList.py", {galaxy:$("#galaxySel").val()});
 	    $("#resSchematics").load(BASE_SCRIPT_URL + "getSchematicList.py",{
 	{% if (typeGroup == 'group') %}
 		        resGroup: "{{ typeID }}",
@@ -44,7 +44,8 @@ $(document).ready(function() {
 	{% endif %}
 {% else %}
 	    $("#resChildren").load(BASE_SCRIPT_URL + "getResourceTypeList.py",{
-	        resGroup: "{{ typeID }}",
+	        galaxy: $("#galaxySel").val(),
+          resGroup: "{{ typeID }}",
 	        outType: "links"},
 	        function() {
 	            $("#busyImgFindChildren").css("display","none");

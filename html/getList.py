@@ -34,6 +34,7 @@ listType = form.getfirst('listType', '')
 galaxy = form.getfirst('galaxy', '-1')
 # escape input to prevent sql injection
 listType = dbShared.dbInsertSafe(listType)
+galaxy = dbShared.dbInsertSafe(galaxy)
 
 def getArrayList(listType, sqlStr):
 	vResult = '<' + listType + '_values>'

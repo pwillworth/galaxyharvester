@@ -43,7 +43,7 @@ $(document).ready(function() {
     var statType = getCookie("resListStatSel");
     if (statType != "") $("#statSel").val(statType);
     filterResources();
-    $("#typeSel").load(BASE_SCRIPT_URL + "getResourceTypeList.py");
+    $("#typeSel").load(BASE_SCRIPT_URL + "getResourceTypeList.py", {galaxy:$("#galaxySel").val()});
     $(".window .close").click(function(e) {
         e.preventDefault();
         $("#mask, .window").hide();
