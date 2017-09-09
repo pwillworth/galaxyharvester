@@ -28,6 +28,14 @@ $(document).ready(function() {
       loadProfessionFavs();
       loadSchematicFavs();
 {% endif %}
+    $(".window .close").click(function(e) {
+        e.preventDefault();
+        $("#mask, .window").hide();
+    });
+    $("#mask").click(function() {
+        $(this).hide();
+        $(".window").hide();
+    });
 });
 function loadProfessionFavs() {
   $("#favProfessionList").load(BASE_SCRIPT_URL + "getFavoriteList.py",{
@@ -63,7 +71,7 @@ function addFilterRow(numset) {
     }
     if (true) {
       var typeGroupBox = "typeGroupSel" + numset;
-      $("#addAlertTable").append("<tr height=16px valign=middle id='resRow"+numset+"'><td><input type='radio' name='oResTG"+numset+"' id='oType"+numset+"' value='ByType' checked='checked' onclick='setTGlist("+numset+")' />By Type<input type='radio' name='oResTG"+numset+"' id='oGroup"+numset+"' value='ByGroup' onclick='setTGlist("+numset+")' />By Group</td>"+
+      $("#addAlertTable").append("<tr height=16px valign=middle id='resRow"+numset+"' class='filterRow'><td><input type='radio' name='oResTG"+numset+"' id='oType"+numset+"' value='ByType' checked='checked' onclick='setTGlist("+numset+")' />By Type<input type='radio' name='oResTG"+numset+"' id='oGroup"+numset+"' value='ByGroup' onclick='setTGlist("+numset+")' />By Group</td>"+
         "<td><select name='"+typeGroupBox+"' id='"+typeGroupBox+"' style='width:200px;' onchange='maskStats(this);'></select></td>"+
         "<td><input type='text' size=2 maxlength=4 id='ER"+numset+"' name='ER"+numset+"'></td>"+
         "<td><input type='text' size=2 maxlength=4 id='CR"+numset+"' name='CR"+numset+"'></td>"+
@@ -80,6 +88,7 @@ function addFilterRow(numset) {
         "<td align='center'><input type='checkbox'{{ emailAlertCheckStr }} id='oEmail"+numset+"'/></td>"+
         "<td align='center'><input type='checkbox'{{ mobileAlertCheckStr }} id='oMobile"+numset+"'/></td>"+
         "<td><img src='/images/xRed16.png' alt='red x' title='Remove this row' style='cursor:pointer' onclick='removeRow("+numset+")'/></td>"+
+        "<td style='padding-left:6px;'><input id='fltGroup"+numset+"' type='text' size=14 maxlength=255></input></td>"+
         "</tr>");
       rownum = numset + 1;
     }
@@ -199,7 +208,7 @@ function maskStats(typeSel) {
       <div style="position:relative;"><div id="alertMask" class="disabledDark" style="display:none;"><div id="udBusyImg" style="display:none;"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div></div>
       <table id="addAlertTable"><thead>
       <tr class="tableHead"><td colspan=2 style="text-align:center;">Resource Types</td><td colspan=11 style="font-weight:bold;text-align:center;">Minimum Stat Values</td><td colspan=3 style="font-weight:bold;text-align:center;">Alert Types</td></tr>
-      <tr><td>Select Type</td><td>Resource</td><td>ER</td><td>CR</td><td>CD</td><td>DR</td><td>FL</td><td>HR</td><td>MA</td><td>PE</td><td>OQ</td><td>SR</td><td>UT</td><td width="40" align="center">Site</td><td width="40" align="center">E-Mail</td><td width="40" align="center">Mobile</td></tr>
+      <tr><td>Select Type</td><td>Resource</td><td>ER</td><td>CR</td><td>CD</td><td>DR</td><td>FL</td><td>HR</td><td>MA</td><td>PE</td><td>OQ</td><td>SR</td><td>UT</td><td width="40" align="center">Site</td><td width="40" align="center">E-Mail</td><td width="40" align="center">Mobile</td><td></td><td style='padding-lef:8px;'>Group/Note</td></tr>
       </thead></table>
       <img src="/images/plusGreen32.png" alt="plus sign" title="Add another filter definition row" onclick="addFilterRow()" style="cursor:pointer;margin-right:120px;"/>
       <button type="button" id="sendData" class="ghButton"{{ disableStr }} onclick="updateAlerts()">Update Alerts</button>
@@ -216,4 +225,5 @@ function maskStats(typeSel) {
 </div>
 {{ blocks.pageFooter() }}
 {{ blocks.joinForm(loggedin, ['?src_url=myAlerts.py&', linkappend]|join, url) }}
+<div id="mask"></div>
 </body></html>

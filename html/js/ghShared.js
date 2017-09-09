@@ -1225,7 +1225,7 @@ function removeFriend(uid) {
 
 // load existing saved alert filters
 function loadAlerts() {
-	var rownum = 0;
+	var maxRow = 0;
 	// Fetch filter data
 	$.post(BASE_SCRIPT_URL + "getFilters.py", { gh_sid: "'+sid+'", galaxy: $("#galaxySel option:selected").val()},
 		function(data) {
@@ -1288,15 +1288,19 @@ function loadAlerts() {
 					if ($(this).find('ERmin').eq(0).text() != "0") {
 						$('#ER' + fltOrder).val($(this).find('ERmin').eq(0).text());
 					}
-					rownum = parseInt(fltOrder) + 1;
+          $('#fltGroup' + fltOrder).val($(this).find('fltGroup').eq(0).text());
+					tmpRow = parseInt(fltOrder);
+          if (tmpRow > maxRow) {
+            maxRow = tmpRow;
+          }
 				});
 			var result = $(data).find('resultText').eq(0).text();
 			$("#sentMessage").html(result);
 			$("#alertMask").css("display","none");
 			$("#udBusyImg").css("display","none");
 			$("#sendResponse").html($(data).find('fltCount').eq(0).text());
-			addFilterRow(rownum);
-			setTGlist(rownum);
+			addFilterRow(maxRow + 1);
+			setTGlist(maxRow + 1);
 		}, "xml");
 	return;
 }
@@ -1326,9 +1330,11 @@ function updateAlerts() {
 		SRs = "";
 		UTs = "";
 		ERs = "";
+    groups = "";
 		// Compile comma separate list of each column value
-		for (x=0;x<rownum;x++) {
+		$(".filterRow").each (function() {
 			fltType = "";
+      x = $(this).attr("id").substr(6);
 			fltValue = $("#typeGroupSel"+x+" option:selected").val();
 			alertTypes = 0;
 			if (fltValue != null && fltValue != "none") {
@@ -1362,8 +1368,9 @@ function updateAlerts() {
 				UTs = UTs + "," + $("#UT"+x).val();
 				ERs = ERs + "," + $("#ER"+x).val();
 				alerts = alerts + "," + alertTypes;
+        groups = groups + "," + $("#fltGroup"+x).val();
 			}
-		}
+		});
 		// See if zero has been entered
 		if (CRs.indexOf(",0") > -1 || CDs.indexOf(",0") > -1 || DRs.indexOf(",0") > -1 || FLs.indexOf(",0") > -1 || HRs.indexOf(",0") > -1
         || MAs.indexOf(",0") > -1 || PEs.indexOf(",0") > -1 || OQs.indexOf(",0") > -1 || SRs.indexOf(",0") > -1 || UTs.indexOf(",0") > -1
@@ -1391,8 +1398,9 @@ function updateAlerts() {
 			UTs = UTs.substr(1);
 			ERs = ERs.substr(1);
 			alerts = alerts.substr(1);
+      groups = groups.substr(1);
 			// Sync server with selections
-			$.post(BASE_SCRIPT_URL + "updateFilters.py", { gh_sid: "'+sid+'", galaxy: $("#galaxySel option:selected").val(), fltCount: numRes, fltOrders: orders, fltTypes: types, fltValues: values, CRmins: CRs, CDmins: CDs, DRmins: DRs, FLmins: FLs, HRmins: HRs, MAmins: MAs, PEmins: PEs, OQmins: OQs, SRmins: SRs, UTmins: UTs, ERmins: ERs, alertTypes: alerts },
+			$.post(BASE_SCRIPT_URL + "updateFilters.py", { gh_sid: "'+sid+'", galaxy: $("#galaxySel option:selected").val(), fltCount: numRes, fltOrders: orders, fltTypes: types, fltValues: values, CRmins: CRs, CDmins: CDs, DRmins: DRs, FLmins: FLs, HRmins: HRs, MAmins: MAs, PEmins: PEs, OQmins: OQs, SRmins: SRs, UTmins: UTs, ERmins: ERs, alertTypes: alerts, fltGroups: groups },
 				function(data) {
 					var result = $(data).find('resultText').eq(0).text();
 					$("#sentMessage").html(result);

@@ -171,7 +171,7 @@ function addRecipe() {
     <div class="boxHeader" style="height:24px;"><div style="float:left;">My Resources<button type=button value="Export" class="ghButton" onclick="exportInventory('csv');" style="margin-left:20px;">Export</button></div>
 {% if loggedin == 1 %}
 	        <div style="float:right;">
-	        Add by name:<input type="text" name="findSpawn" id="findSpawn" tabindex="20" size="16" maxlength=64" />
+	        Add by name:<input type="text" name="findSpawn" id="findSpawn" tabindex="20" size="16" maxlength="64" />
 	        <button type=button value="Add" class="ghButton" onclick="addFavorite($('#galaxySel').val(), $('#findSpawn').val());" style="margin-right:20px;">Add</button>
 	        <button type=button value="Move Checked" class="ghButton" onclick="getMoveGroup();">Move Checked</button></div>
 {% endif %}
