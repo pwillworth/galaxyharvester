@@ -451,7 +451,7 @@ if errstr == '':
 			if result.find("Error:") > -1:
 				errstr = result
 			else:
-				dbShared.logSchematicEvent(0, galaxy, schematicID, currentUser, 'a', 'Added new schematic {0} using {1}.'.format(schematicName, detailsMethod))
+				dbShared.logSchematicEvent(0, galaxy, schematicID, currentUser, 'a', 'Added new schematic {0} using {1}.'.format(schematicName, detailsMethod), 'history')
 	else:
 		# Update existing schematic
 		checkCursor.execute('SELECT enteredBy FROM tSchematic WHERE schematicID=%s', (schematicID))
@@ -469,7 +469,7 @@ if errstr == '':
 			if result.find("Error:") > -1:
 				errstr = result
 			else:
-				dbShared.logSchematicEvent(0, galaxy, schematicID, currentUser, 'e', result)
+				dbShared.logSchematicEvent(0, galaxy, schematicID, currentUser, 'e', result, 'history')
 
 	checkCursor.close()
 

@@ -28,13 +28,37 @@ import time
 from datetime import timedelta, datetime
 import ghShared
 import dbShared
+import serverBest
 
+
+def refreshServerBestStatus(spawnID):
+    # Calculate new current Server Best info for spawn only if it has not been calculated within last 2 hours
+    result = ''
+    sqlStr = 'SELECT eventTime FROM tServerBestStatus WHERE spawnID={0};'.format(spawnID)
+    checkCursor = conn.cursor()
+    checkCursor.execute(sqlStr)
+    checkRow = checkCursor.fetchone()
+    checkCursor.close()
+    if checkRow != None:
+        timeAgo = datetime.fromtimestamp(time.time()) - checkRow[0]
+        hoursAgo = timeAgo.seconds / 3600
+        if hoursAgo > 1:
+            cleanCursor = conn.cursor()
+            cleanCursor.execute('DELETE FROM tServerBestStatus WHERE spawnID=%s;', [spawnID])
+            cleanCursor.close()
+            result = serverBest.checkSpawn(spawnID, 'current')
+        else:
+            result = 'Current best use info was calculated for this resource {0} minutes ago, so displaying those results below.  Current best calculations cannot be run more than every 2 hours.\n'.format(str(timeAgo.seconds/60))
+    else:
+        result = serverBest.checkSpawn(spawnID, 'current')
+    return result
 
 form = cgi.FieldStorage()
 
 spawnID = form.getfirst('spawnID', '')
 formatType = form.getfirst('formatType', '')
 schematicID = form.getfirst('schematicID', '')
+serverBestMode = form.getfirst('serverBestMode', 'history')
 
 errors = ''
 responseData = ''
@@ -68,12 +92,20 @@ if (cursor and errors == ''):
 			responseData += '<thead><tr class="tableHead"><td width="100">When</td><td width="65">Who</td><td width="65">Action</td><td width="440">Details</td></th></thead>\n'
 
 	if spawnID.isdigit():
-		cursor.execute("SELECT profName, tSchematicEvents.schematicID, schematicName, expGroup, eventType FROM tSchematicEvents INNER JOIN tSchematic ON tSchematicEvents.schematicID = tSchematic.schematicID INNER JOIN tSkillGroup ON tSchematic.skillGroup = tSkillGroup.skillGroup INNER JOIN tProfession ON tSkillGroup.profID = tProfession.profID{0} ORDER BY profName, schematicName, expGroup".format(criteriaStr))
+		if serverBestMode == 'current':
+			eventTable = 'tServerBestStatus'
+			result = refreshServerBestStatus(spawnID)
+			if len(result) != 2:
+				responseData += result
+		else:
+			eventTable = 'tSchematicEvents'
+		cursor.execute("SELECT profName, {1}.schematicID, schematicName, expGroup, eventType FROM {1} INNER JOIN tSchematic ON {1}.schematicID = tSchematic.schematicID INNER JOIN tSkillGroup ON tSchematic.skillGroup = tSkillGroup.skillGroup INNER JOIN tProfession ON tSkillGroup.profID = tProfession.profID{0} ORDER BY profName, schematicName, expGroup".format(criteriaStr, eventTable))
 	else:
 		cursor.execute("SELECT eventTime, expGroup, eventType, eventDetail FROM tSchematicEvents{0} ORDER BY eventTime".format(criteriaStr))
 
 	row = cursor.fetchone()
 
+	lastTime = ''
 	while (row != None):
 		if formatType == 'json':
 			responseData += '  {\n'
@@ -86,9 +118,15 @@ if (cursor and errors == ''):
 		else:
 			if spawnID.isdigit():
 				if row[4] != '1':
-					rankStr = 'Almost ({0})'.format(row[4])
+					if serverBestMode == 'current':
+						rankStr = row[4]
+					else:
+						rankStr = 'Almost ({0})'.format(row[4])
 				else:
-					rankStr = 'New Server Best'
+					if serverBestMode == 'current':
+						rankStr = 'Current Server Best'
+					else:
+						rankStr = 'New Server Best'
 				responseData = ''.join((responseData, '  <tr class="statRow"><td>', row[0], '</td><td><a href="', ghShared.BASE_SCRIPT_URL, 'schematics.py/', row[1] + '">', row[2], '</a></td><td>', row[3].replace('exp_','').replace('exp','').replace('_', ' '), '</td><td>', rankStr, '</td>'))
 				responseData += '  </tr>'
 			else:
@@ -96,6 +134,8 @@ if (cursor and errors == ''):
 				responseData += '  </tr>'
 		lastTime = row[0]
 		row = cursor.fetchone()
+	if len(lastTime) == 0:
+		responseData += 'It seems this resource is not really good for much.'
 
 	if formatType == 'json':
 		responseData += '],\n}'

@@ -132,7 +132,7 @@ if (logged_state > 0):
 				result = 'Error: Core game schematics cannot be deleted.'
 
 		if result.find("Error:") < 0:
-			dbShared.logSchematicEvent(0, galaxy, schematicID, currentUser, 'd', 'Deleted custom schematic {0}.'.format(schematicName))
+			dbShared.logSchematicEvent(0, galaxy, schematicID, currentUser, 'd', 'Deleted custom schematic {0}.'.format(schematicName), 'history')
 	else:
 		result = "Error: No data connection"
 	conn.close()

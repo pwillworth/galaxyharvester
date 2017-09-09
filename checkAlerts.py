@@ -164,7 +164,7 @@ def checkDespawnAlerts(conn, spawnID, spawnName, galaxyName, unavailable, galaxy
 	cursor.close()
 
 def checkServerBest(conn, spawnID, spawnName, galaxy):
-	result = serverBest.checkSpawn(spawnID)
+	result = serverBest.checkSpawn(spawnID, 'history')
 	for x in range(len(result[1])):
 		schematicStr = ''
 		bestStr = ''

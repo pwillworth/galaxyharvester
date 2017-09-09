@@ -168,7 +168,7 @@ else:
 				updateType = 'New upload'
 			else:
 				updateType = 'Copy from {0}'.format(copyFromSchem)
-			dbShared.logSchematicEvent(0, 0, schematicID, currentUser, 'i', 'Updated schematic image to {0} by {1}.'.format(imageName, updateType))
+			dbShared.logSchematicEvent(0, 0, schematicID, currentUser, 'i', 'Updated schematic image to {0} by {1}.'.format(imageName, updateType), 'history')
 		else:
 			result = "Image has been added and will become active as the new image for this schematic after it has been reviewed."
 	conn.close()

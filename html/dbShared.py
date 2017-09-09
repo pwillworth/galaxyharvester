@@ -195,16 +195,22 @@ def logUserEvent(user, galaxy, targetType, targetID, eventType):
 		cursor.close()
 	conn.close()
 
-def logSchematicEvent(spawnID, galaxy, schematicID, expGroup, eventType, eventDetail):
+def logSchematicEvent(spawnID, galaxy, schematicID, expGroup, eventType, eventDetail, serverBestMode):
+	if serverBestMode == 'current':
+		eventTable = 'tServerBestStatus'
+	else:
+		eventTable = 'tSchematicEvents'
+
 	conn = ghConn()
 	cursor = conn.cursor()
 	try:
-		cursor.execute('INSERT INTO tSchematicEvents (galaxy, eventTime, eventType, schematicID, expGroup, spawnID, eventDetail) VALUES (%s, NOW(), %s, %s, %s, %s, %s);', [galaxy, eventType, schematicID, expGroup, spawnID, eventDetail])
+		cursor.execute('INSERT INTO {0} (galaxy, eventTime, eventType, schematicID, expGroup, spawnID, eventDetail) VALUES (%s, NOW(), %s, %s, %s, %s, %s);'.format(eventTable), [galaxy, eventType, schematicID, expGroup, spawnID, eventDetail])
 	except MySQLdb.IntegrityError as e:
 		sys.stderr.write('Tried to insert duplicate schematic event: ' + eventDetail)
 	result = cursor.rowcount
 	if result < 1:
 		sys.stderr.write('Failed to insert schematic event: ' + eventDetail)
+
 	cursor.close()
 	conn.close()
 

@@ -76,7 +76,7 @@ def getPosition(conn, spawnID, galaxy, statWeights, resourceGroup):
 
     return spawnPos
 
-def checkSchematics(conn, spawnID, galaxy, prof, resourceTypes):
+def checkSchematics(conn, spawnID, galaxy, prof, resourceTypes, serverBestMode):
     bestPositions = {}
     # Select schematics where ingredient in type or groups of type
     sqlStr2 = 'SELECT tSchematic.schematicID, ingredientObject, Sum(ingredientContribution), schematicName, resName FROM tSchematicIngredients INNER JOIN tSchematic ON tSchematicIngredients.schematicID = tSchematic.schematicID INNER JOIN tSkillGroup ON tSchematic.skillGroup = tSkillGroup.skillGroup  LEFT JOIN (SELECT resourceGroup AS resID, groupName AS resName FROM tResourceGroup UNION ALL SELECT resourceType, resourceTypeName FROM tResourceType) res ON ingredientObject = res.resID WHERE profID={0} AND tSchematic.galaxy IN (0, {1}) AND ingredientObject IN ({2}) GROUP BY tSchematic.schematicID, ingredientObject ORDER BY tSchematic.schematicID, ingredientQuantity DESC, ingredientName;'.format(prof, galaxy, resourceTypes)
@@ -111,7 +111,7 @@ def checkSchematics(conn, spawnID, galaxy, prof, resourceTypes):
                             bestPositions[ingRow[0]].append(eventDetail)
                         else:
                             bestPositions[ingRow[0]] = [eventDetail]
-                        dbShared.logSchematicEvent(spawnID, galaxy, ingRow[0], tmpGroup, str(spawnPosition), eventDetail)
+                        dbShared.logSchematicEvent(spawnID, galaxy, ingRow[0], tmpGroup, str(spawnPosition), eventDetail, serverBestMode)
                     lastStats = stats
                     stats = {}
                 tmpGroup = expRow[0]
@@ -134,7 +134,7 @@ def checkSchematics(conn, spawnID, galaxy, prof, resourceTypes):
                 bestPositions[ingRow[0]].append(eventDetail)
             else:
                 bestPositions[ingRow[0]] = [eventDetail]
-            dbShared.logSchematicEvent(spawnID, galaxy, ingRow[0], tmpGroup, str(spawnPosition), eventDetail)
+            dbShared.logSchematicEvent(spawnID, galaxy, ingRow[0], tmpGroup, str(spawnPosition), eventDetail, serverBestMode)
         expCursor.close()
 
         ingRow = ingCursor.fetchone()
@@ -142,10 +142,11 @@ def checkSchematics(conn, spawnID, galaxy, prof, resourceTypes):
 
     return bestPositions
 
-def checkSpawn(spawnID):
+def checkSpawn(spawnID, serverBestMode):
     # Look up additional spawn info needed
     professions = []
     profresults = []
+    hasResults = False
     conn = dbShared.ghConn()
     cursor = conn.cursor()
     cursor.execute('SELECT galaxy, resourceType, (SELECT GROUP_CONCAT(resourceGroup SEPARATOR "\',\'") FROM tResourceTypeGroup rtg WHERE rtg.resourceType=tResources.resourceType) FROM tResources WHERE spawnID=%s;', spawnID)
@@ -156,12 +157,16 @@ def checkSpawn(spawnID):
         pc.execute('SELECT profID, profName FROM tProfession WHERE craftingQuality > 0;')
         pcRow = pc.fetchone()
         while pcRow != None:
-            result = checkSchematics(conn, str(spawnID), row[0], pcRow[0], "".join(("'", row[1], "','", str(row[2]), "'")))
+            result = checkSchematics(conn, str(spawnID), row[0], pcRow[0], "".join(("'", row[1], "','", str(row[2]), "'")), serverBestMode)
             if result != None and len(result) > 0:
                 professions.append(str(pcRow[0]))
                 profresults.append(result)
+                hasResults = True
 
             pcRow = pc.fetchone()
+
+        if len(profresults) == 0:
+            dbShared.logSchematicEvent(spawnID, row[0], '', 'Good For Nada', '0', 'Found no server best results.', serverBestMode)
     else:
         sys.stderr.write('Could not find that spawn.')
     cursor.close()
@@ -178,7 +183,7 @@ def main():
 	    sys.stderr.write("missing required options.\n")
 	    exit(-1)
     else:
-        print checkSpawn(opts.spawn)
+        print checkSpawn(opts.spawn, 'history')
 
 if __name__ == "__main__":
     main()
