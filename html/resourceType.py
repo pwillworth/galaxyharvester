@@ -241,7 +241,7 @@ def getResourceTree():
 	for level in currentLevelNodes:
 		treeHTML = '<div>' + level + '</div>' + treeHTML
 
-	return '<div id="resourceTree">' + treeHTML + '</div>'
+	return '<div style="height:1500px;"><div id="resourceTree">' + treeHTML + '</div></div>'
 
 def getResourceGroupsPlain():
 	treeHTML = ''
