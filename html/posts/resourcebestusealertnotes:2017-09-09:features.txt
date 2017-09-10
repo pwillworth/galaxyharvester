@@ -1,0 +1,15 @@
+Resource Best Use and Alert Filter Groups
+
+<p>Decided to pick off the top two items on the <a href="http://galaxyharvester.net/feedback/py">Suggestions</a> page today.  Here are the features involved:</p>
+
+<p>The first feature is all about checking what a resource might currently be good for.  The way this has been implemented is a button on each
+ individual resource page labeled "Check Current Best Uses".  When you click this button Galaxy Harvester will go out and essentially redo the
+ lookups for server best resource, then replace the currently displayed list of server best events that triggered when the resource spawned with
+ a new list showing what schematics it currently scores well on.  The criteria is a little more lax when running this operation compared with
+ the initial spawn server best checks, to show more possibilities.</p>
+
+<p>Second up is a new field on the <a href="http://galaxyharvester.net/myAlerts.py">My Alert Filters</a> screen where you can now add a group name
+ or note to each filter.  You might use this area to group together similar filters by profession or some other general grouping (the rows will
+ sort by it), or just a general note to help remind you what you set the alert for.</p>
+
+<p>-ioscode</p>
