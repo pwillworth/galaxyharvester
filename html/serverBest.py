@@ -26,7 +26,7 @@ import dbShared
 import optparse
 
 # Return position among server best
-def getPosition(conn, spawnID, galaxy, statWeights, resourceGroup):
+def getPosition(conn, spawnID, galaxy, statWeights, resourceGroup, serverBestMode):
     obyStr = ''
     obyStr2 = ''
     maxCheckStr = ''
@@ -38,7 +38,6 @@ def getPosition(conn, spawnID, galaxy, statWeights, resourceGroup):
         obyStr2 = ''.join((obyStr2, '+', weightVal))
         maxCheckStr = ''.join((maxCheckStr, '+', k, 'max'))
 
-    #sys.stderr.write(' (' + obyStr + ') / (' + obyStr2 + ')\n')
     if (obyStr != ''):
         obyStr = obyStr[1:]
         obyStr2 = obyStr2[1:]
@@ -46,6 +45,11 @@ def getPosition(conn, spawnID, galaxy, statWeights, resourceGroup):
     else:
         # No stat weights to calculate
         return 0
+
+    if serverBestMode == 'current':
+        minimumPercentOfBest = .8
+    else:
+        minimumPercentOfBest = .95
 
     sqlStr1 = ''.join(('SELECT spawnID, (', obyStr, ') / (', obyStr2, ') AS overallScore, ', maxCheckStr, ' FROM tResources INNER JOIN tResourceType ON tResources.resourceType = tResourceType.resourceType',
               ' INNER JOIN (SELECT resourceType FROM tResourceTypeGroup WHERE resourceGroup="', resourceGroup, '" OR resourceType="', resourceGroup, '" GROUP BY resourceType) rtg ON tResources.resourceType = rtg.resourceType'
@@ -57,13 +61,13 @@ def getPosition(conn, spawnID, galaxy, statWeights, resourceGroup):
     if (cursor):
         cursor.execute(sqlStr1)
         row = cursor.fetchone()
-        # Check is spawn in top 3 or within 5% quality of 1st
+        # Check is spawn in top 8 and within 5% quality of 1st
         rowPos = 1
         topScore = 0.0
         while row != None and row[1] != None:
             if rowPos == 1:
                 topScore = row[1]
-            if row[1] / topScore < .95:
+            if row[1] / topScore < minimumPercentOfBest:
                 break
             if str(row[0]) == spawnID and row[2] != 0:
                 spawnPos = rowPos
@@ -100,7 +104,7 @@ def checkSchematics(conn, spawnID, galaxy, prof, resourceTypes, serverBestMode):
                 if tmpGroup != '':
                     # Check for top 3 status
                     if stats != lastStats:
-                        spawnPosition = getPosition(conn, spawnID, galaxy, stats, ingRow[1])
+                        spawnPosition = getPosition(conn, spawnID, galaxy, stats, ingRow[1], serverBestMode)
                     if spawnPosition > 0:
                         if spawnPosition == 1:
                             eventDetail = ''.join(('New server best spawn for ', ingRow[3], ' ', tmpGroup.replace('exp_','').replace('exp','').replace('_', ' '), ', ingredient ', ingRow[4], '.'))
@@ -123,7 +127,7 @@ def checkSchematics(conn, spawnID, galaxy, prof, resourceTypes, serverBestMode):
 
         # Check for top 3 status on last ingredient
         if stats != lastStats:
-            spawnPosition = getPosition(conn, spawnID, galaxy, stats, ingRow[1])
+            spawnPosition = getPosition(conn, spawnID, galaxy, stats, ingRow[1], serverBestMode)
         if spawnPosition > 0:
             if spawnPosition == 1:
                 eventDetail = ''.join(('New server best spawn for ', ingRow[3], ' ', tmpGroup.replace('exp_','').replace('exp','').replace('_', ' '), ', ingredient ', ingRow[4], '.'))
