@@ -1172,7 +1172,7 @@ function findWaypoints(displayType) {
 }
 
 function getWaypointCommandInput(planet, lat, lon, spawn, resType, conc) {
-	// add data for user waypoints to data table
+	// prepare an input element with value of waypoint creation command for ingame which browser can copy to clipboard
 	var waypointCommand = '/waypoint ' + planet.replace(' ', '').replace('YavinIV', 'yavin4') + ' ' + lat + ' ' + lon + ' ' + spawn + ' ' + resType + ' ' + conc;
 	var commandInput = '<input type="text" value="' + waypointCommand + '"></input>';
 	return commandInput;
