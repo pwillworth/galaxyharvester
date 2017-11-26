@@ -14,18 +14,6 @@ $(document).ready(function() {
     $("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
     loadPlanetButtons($("#galaxySel option:selected").val());
     mapPlanet = getCookie("mapPlanet","corellia");
-    if (getCookie("waypointsIncludeMine",true) == "false") {
-        $("#oMine").attr("checked",false);
-    }
-    if (getCookie("waypointsIncludeFriends",true) == "false") {
-        $("#oFriends").attr("checked",false);
-    }
-    if (getCookie("waypointsIncludePublic",true) == "false") {
-        $("#oPublic").attr("checked",false);
-    }
-    if (getCookie("waypointsIncludeShared",true) == "false") {
-        $("#oShared").attr("checked",false);
-    }
     if (getCookie("waypointsShowNoBuild",true) == "false") {
         $("#oNoBuildZones").attr("checked",false);
     }
@@ -168,12 +156,6 @@ function loadPlanetButtons(galaxy) {
     </div>
     <div id="mapControls" class="ghWidgetBox">
       <div class="boxHeader">Planet Filters</div>
-      <div id="ownerFilters" class="searchInput" style="visibility:hidden;">
-      <input type="checkbox" checked="" id="oMine" tabindex=4 title="Show waypoints you created." onchange="updateMap(document.getElementById('btn' + mapPlanet));setCookie('waypointsIncludeMine',this.checked,365);" />Mine
-      <input type="checkbox" checked="" id="oFriends" tabindex=5 title="Show waypoints your friends have shared." onchange="updateMap(document.getElementById('btn' + mapPlanet));setCookie('waypointsIncludeFriends',this.checked,365);" />Friends
-      <input type="checkbox" checked="" id="oPublic" tabindex=6 title="Show waypoints that are shared publicly." onchange="updateMap(document.getElementById('btn' + mapPlanet));setCookie('waypointsIncludePublic',this.checked,365);" />Public
-      <input type="checkbox" checked="" id="oShared" tabindex=7 title="Show waypoints that are shared privately." onchange="updateMap(document.getElementById('btn' + mapPlanet));setCookie('waypointsIncludeShared',this.checked,365);" />Shared
-      </div>
       <div id="concFilter">
       <div class="searchInput">Concentration at least:<input type="text" id="minConcentration" tabindex="10" size="4" maxlength=3" onblur="updateMap(document.getElementById('btn' + mapPlanet));setCookie('waypointsMinConcentration',this.value,365);" />%</div>
       </div>
@@ -207,20 +189,6 @@ function loadPlanetButtons(galaxy) {
 {{ blocks.pageFooter() }}
 {{ blocks.joinForm(loggedin, ['?src_url=waypointMaps.py&', linkappend]|join, url) }}
 {{ blocks.waypointForm(loggedin) }}
-<div id="shareDialog" class="window">
-    <form name="sharewpform">
-    <table class="bigForm"><tr><td colspan="2"><h2>Share Waypoint</h2></td>
-    <td align="right"><a href="#" class="close">Close</a></td></tr>
-    <tr><td align="right">Share with User: </td>
-    <td><input type="text" name="shareUserID" tabindex="30" size="22" maxlength="64" id="shareUserID" /></td>
-    <td><span id="userInf" class="formMsg">Name must not be blank.</span><br /></td></tr>
-    </table>
-    <input type="hidden" name="sharewpID" id="sharewpID" />
-    <div style="text-align: center;padding: 20px;"><button type="button" id="sendShare" class="ghButton" onclick="postWaypointShare()">Share</button></div></form>
-    <div id="addInfoShare"></div>
-    <div id="shareNote">Attention: If you share a waypoint with someone, there is NO WAY to "unshare" it.</div>
-    <div id="busyImgShare" style="text-align:center;display:none;"><img src="/images/ghWait.gif" /></div>
-</div>
 <div id="tooltip"></div>
 <div id="mask"> </div>
 </body></html>

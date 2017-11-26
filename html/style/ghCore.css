@@ -793,3 +793,11 @@ ul.feedback li {
 	padding: 0.5em;
 	text-align: left;
 }
+
+.waypointRow {
+	cursor: pointer;
+}
+.waypointRow input {
+	position: absolute;
+	left: -9999px;
+}

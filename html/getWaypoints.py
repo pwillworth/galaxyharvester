@@ -60,10 +60,6 @@ galaxy = form.getfirst('galaxy', '')
 planet = form.getfirst('planetName', '')
 wpID = form.getfirst('wpID', '')
 spawnName = form.getfirst('spawnName', '')
-mine = form.getfirst('mine','undefined')
-friends = form.getfirst('friends','undefined')
-pub = form.getfirst('pub','undefined')
-dshared = form.getfirst('dshared','undefined')
 minCon = form.getfirst('minCon','')
 uweeks = form.getfirst('uweeks','')
 sortType = form.getfirst('sortType','')
@@ -73,10 +69,6 @@ galaxy = dbShared.dbInsertSafe(galaxy)
 planet = dbShared.dbInsertSafe(planet)
 wpID = dbShared.dbInsertSafe(wpID)
 spawnName = dbShared.dbInsertSafe(spawnName)
-mine = dbShared.dbInsertSafe(mine)
-friends = dbShared.dbInsertSafe(friends)
-pub = dbShared.dbInsertSafe(pub)
-dshared = dbShared.dbInsertSafe(dshared)
 minCon = dbShared.dbInsertSafe(minCon)
 uweeks = dbShared.dbInsertSafe(uweeks)
 
@@ -94,7 +86,6 @@ if (sess != ''):
 result = ''
 setCriteria = ''
 rowLimitStr = ''
-ownerCriteria = ''
 sortString = ''
 print 'Content-type: text/xml\n'
 doc = minidom.Document()
@@ -107,11 +98,6 @@ eRoot.appendChild(eGroup)
 errstr = ""
 if (galaxy.isdigit() == False):
 	errstr = errstr + "Error: no galaxy selected. \r\n"
-if mine != 'on' and friends != 'on' and pub != 'on' and dshared != 'on' and len(wpID) < 1:
-	errstr = errstr + "Error: you must select at least one waypoint owner type in filters. \r\n"
-
-#if (planet == "" and wpID == "" and spawnName == ""):
-#	errstr = errstr + "Error: you must provide a planet, waypoint id, or spawn name criteria. \r\n"
 
 if errstr == "":
 	try:
@@ -152,29 +138,7 @@ if errstr == "":
 		if minCon.isdigit() and minCon > 0:
 			setCriteria += ' AND concentration >=' + minCon
 
-		# set waypoint owner criteria
-		#for later when nonpublic waypoints in
-		#if logged_state == 1:
-		#	if mine == 'on' or len(wpID) > 0:
-		#		ownerCriteria += 'owner="' + currentUser + '"'
-		#	if friends == 'on':
-		#		ownerCriteria += ' OR (shareLevel=64 AND owner IN (SELECT f1.friendID FROM tUserFriends f1 INNER JOIN tUserFriends f2 ON f1.userID=f2.friendID WHERE f1.userID="' + currentUser + '"))'
-		#	if pub == 'on':
-		#		ownerCriteria += ' OR waypointID IN (SELECT uw.waypointID FROM tUserWaypoints uw WHERE unlocked IS NOT NULL AND uw.userID="' + currentUser + '")'
-		#else:
-		#	ownerCriteria += ' owner=""'
-
-		if dshared == 'on':
-			ownerCriteria += ' OR shareLevel=256'
-
-		if ownerCriteria[0:4] == ' OR ':
-			ownerCriteria = ownerCriteria[4:]
-
-		if len(ownerCriteria) > 0:
-			ownerCriteria = ' AND (' + ownerCriteria + ')'
-
-		#sys.stderr.write('WHERE (CASE WHEN galaxy IS NULL THEN ' + galaxy + ' ELSE galaxy END)=' + galaxy + ' AND (' + ownerCriteria + ')' + setCriteria + sortString + rowLimitStr + ';')
-		wpSql = 'SELECT waypointID, spawnName, owner, concentration, lattitude, longitude, waypointType, waypointName, price, shareLevel, planetName, tWaypoint.entered, tResources.resourceType, resourceTypeName, (SELECT Count(userID) FROM tUserEvents ue WHERE ue.targetType=\'w\' AND ue.targetID=waypointID AND ue.eventType=\'r\') AS delCount, (SELECT Count(userID) FROM tUserEvents ue WHERE ue.targetType=\'w\' AND ue.targetID=waypointID AND ue.eventType=\'v\') AS verCount FROM tWaypoint LEFT JOIN tResources ON tWaypoint.spawnID = tResources.spawnID LEFT JOIN tResourceType ON tResources.resourceType = tResourceType.resourceType INNER JOIN tPlanet ON tWaypoint.planetID = tPlanet.planetID WHERE (CASE WHEN tResources.galaxy IS NULL THEN ' + galaxy + ' ELSE tResources.galaxy END)=' + galaxy + ownerCriteria + setCriteria + sortString + rowLimitStr + ';'
+		wpSql = 'SELECT waypointID, spawnName, owner, concentration, lattitude, longitude, waypointType, waypointName, price, shareLevel, planetName, tWaypoint.entered, tResources.resourceType, resourceTypeName, (SELECT Count(userID) FROM tUserEvents ue WHERE ue.targetType=\'w\' AND ue.targetID=waypointID AND ue.eventType=\'r\') AS delCount, (SELECT Count(userID) FROM tUserEvents ue WHERE ue.targetType=\'w\' AND ue.targetID=waypointID AND ue.eventType=\'v\') AS verCount FROM tWaypoint LEFT JOIN tResources ON tWaypoint.spawnID = tResources.spawnID LEFT JOIN tResourceType ON tResources.resourceType = tResourceType.resourceType INNER JOIN tPlanet ON tWaypoint.planetID = tPlanet.planetID WHERE (CASE WHEN tResources.galaxy IS NULL THEN ' + galaxy + ' ELSE tResources.galaxy END)=' + galaxy + setCriteria + sortString + rowLimitStr + ';'
 		cursor.execute(wpSql)
 		row = cursor.fetchone()
 

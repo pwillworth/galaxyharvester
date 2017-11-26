@@ -943,29 +943,7 @@ function deleteWaypoint(id) {
     }
 	return true;
 }
-// Share a waypoint with someone
-function shareWaypoint(id) {
-	$('#shareUserID').val('');
-	$('#sharewpID').val(id);
-	showWindow('#shareDialog');
-	var a = $('#shareUserID').autocomplete({
-		serviceUrl:BASE_SCRIPT_URL + 'getCurrentUserNames.py',
-		maxHeight:160,
-		width:180
-    });
-	return true;
-}
-// try to share waypoint
-function postWaypointShare() {
-	$('#busyImgShare').css('display','block');
-	$('#addInfoShare').html('');
-	$.get(BASE_SCRIPT_URL + 'shareWaypoint.py', { wpID: $('#sharewpID').val(), galaxy: $('#galaxySel option:selected').val(), userID: $('#shareUserID').val(), rid: new Date() },
-		function(data) {
-			$('#busyImgShare').css('display','none');
-			$('#addInfoShare').html(data);
-		});
-	return true;
-}
+
 // Verify a waypoint
 function verifyWaypoint(id) {
     var doit = false;
@@ -1038,27 +1016,26 @@ function drawWaypoints(planet, ctx) {
 						verString = '<span style="color:green;" title="' + verCount + ' people have verified this waypoint.">(' + verCount + ')</span>';
 					}
 
-					if (shareType != null && shareType != '' && owner == fetcher) {
-						shareStr = '<td style="visibility:hidden;"><button type="button" class="ghButton" onclick="shareWaypoint(' + wpID + ')">Share</button></td>'
-					}
 					// draw on map
 					if (ctx && (showNoBuild == "on" || wpType == 'u')) {
 						drawWaypoint(parseInt(conc), (parseInt(lat) + 8192) / 20, (-parseInt(lon) + 8192) / 20, wpType, ctx, delCount);
 					}
 					// add data for user waypoints to data table last cell is data for tooltip
+					commandInput = getWaypointCommandInput(planet, lat, lon, spawn, resType, conc);
 					if (wpType == 'u') {
 						if (owner == fetcher) {
 							// Include edit links for owner
-							rowStr = '<tr alt="' + wpID + '" class="statRow" id="row_wp_' + wpID + '">' + shareStr + '<td><a href="' + BASE_SCRIPT_URL + 'resource.py/' + $("#galaxySel option:selected").val() + '/' + spawn + '" class="nameLink" title="View more information about this resource spawn">' + spawn + '</a> <a style="cursor:pointer;" onclick="editWaypoint(' + wpID + ');" title="Click to edit waypoint">[Edit]</a></td><td>' + conc + '%</td><td><a href="' + BASE_SCRIPT_URL + 'resourceType.py/' + resTypeID + '" class="nameLink">' + resType + '</a></td><td>' + title + '</td><td>' + lat + '</td><td>' + lon + '</td>';
+							rowStr = '<tr alt="' + wpID + '" class="statRow" id="row_wp_' + wpID + '"><td class="waypointRow">Copy</td><td><a href="' + BASE_SCRIPT_URL + 'resource.py/' + $("#galaxySel option:selected").val() + '/' + spawn + '" class="nameLink" title="View more information about this resource spawn">' + spawn + '</a> <a style="cursor:pointer;" onclick="editWaypoint(' + wpID + ');" title="Click to edit waypoint">[Edit]</a></td><td>' + conc + '%</td><td><a href="' + BASE_SCRIPT_URL + 'resourceType.py/' + resTypeID + '" class="nameLink">' + resType + '</a></td><td>' + title + '</td><td>' + lat + '</td><td>' + lon + '</td>';
 							rowStr += '<td><img src="/images/checkGreen16.png" alt="check mark" title="Click to verify this waypoint" style="cursor:pointer;" onclick="verifyWaypoint(' + wpID + ');" />' + verString + '</td><td><a href="' + BASE_SCRIPT_URL + 'user.py?uid=' + owner + '" class="nameLink" title="Go to user profile.">' + owner + '</a></td><td><a style="cursor:pointer;" onclick="deleteWaypoint(' + wpID + ');" title="Click to remove this waypoint">[X]</a>' + delString + '</td>';
-							rowStr += '<td style="display:none;">&lt;span style="font-weight:bold;"&gt;' + spawn + '&lt;/span&gt; &lt;a style="cursor:pointer;" onclick="editWaypoint(' + wpID + ');"&gt;[Edit]&lt;/a&gt; &lt;div class="standOut"&gt;' + conc + '%&lt;/div&gt;' + lat + ', ' + lon + ' &lt;a style="cursor:pointer;" onclick="deleteWaypoint(' + wpID + ');"&gt;[X]&lt;/a&gt;</td></tr>';
+							rowStr += '<td style="display:none;">&lt;span style="font-weight:bold;"&gt;' + spawn + '&lt;/span&gt; &lt;a style="cursor:pointer;" onclick="editWaypoint(' + wpID + ');"&gt;[Edit]&lt;/a&gt; &lt;div class="standOut"&gt;' + conc + '%&lt;/div&gt;' + lat + ', ' + lon + ' &lt;a style="cursor:pointer;" onclick="deleteWaypoint(' + wpID + ');"&gt;[X]&lt;/a&gt;' + commandInput + '</td></tr>';
 						} else {
-							rowStr = '<tr alt="' + wpID + '" class="statRow" id="row_wp_' + wpID + '">' + shareStr + '<td><a href="' + BASE_SCRIPT_URL + 'resource.py/' + $("#galaxySel option:selected").val() + '/' + spawn + '" class="nameLink" title="View more information about this resource spawn">' + spawn + '</a></td><td>' + conc + '%</td><td><a href="' + BASE_SCRIPT_URL + 'resourceType.py/' + resTypeID + '" class="nameLink">' + resType + '</a></td><td>' + title + '</td><td>' + lat + '</td><td>' + lon + '</td><td><img src="/images/checkGreen16.png" alt="check mark" title="Click to verify this waypoint" style="cursor:pointer;" onclick="verifyWaypoint(' + wpID + ');" />' + verString + '</td>';
-							rowStr += '<td><a href="' + BASE_SCRIPT_URL + 'user.py?uid=' + owner + '" class="nameLink" title="Go to user profile.">' + owner + '</a></td><td><a style="cursor:pointer;" onclick="deleteWaypoint(' + wpID + ');" title="Click to remove this waypoint">[X]</a>' + delString + '</td><td style="display:none;">&lt;span style="font-weight:bold;"&gt;' + spawn + '&lt;/span&gt;  &lt;div class="standOut"&gt;' + conc + '%&lt;/div&gt;' + lat + ', ' + lon + ' &lt;a style="cursor:pointer;" onclick="deleteWaypoint(' + wpID + ');"&gt;[X]&lt;/a&gt;</td></tr>';
+							rowStr = '<tr alt="' + wpID + '" class="statRow" id="row_wp_' + wpID + '"><td class="waypointRow">Copy</td><td><a href="' + BASE_SCRIPT_URL + 'resource.py/' + $("#galaxySel option:selected").val() + '/' + spawn + '" class="nameLink" title="View more information about this resource spawn">' + spawn + '</a></td><td>' + conc + '%</td><td><a href="' + BASE_SCRIPT_URL + 'resourceType.py/' + resTypeID + '" class="nameLink">' + resType + '</a></td><td>' + title + '</td><td>' + lat + '</td><td>' + lon + '</td><td><img src="/images/checkGreen16.png" alt="check mark" title="Click to verify this waypoint" style="cursor:pointer;" onclick="verifyWaypoint(' + wpID + ');" />' + verString + '</td>';
+							rowStr += '<td><a href="' + BASE_SCRIPT_URL + 'user.py?uid=' + owner + '" class="nameLink" title="Go to user profile.">' + owner + '</a></td><td><a style="cursor:pointer;" onclick="deleteWaypoint(' + wpID + ');" title="Click to remove this waypoint">[X]</a>' + delString + '</td><td style="display:none;">&lt;span style="font-weight:bold;"&gt;' + spawn + '&lt;/span&gt;  &lt;div class="standOut"&gt;' + conc + '%&lt;/div&gt;' + lat + ', ' + lon + ' &lt;a style="cursor:pointer;" onclick="deleteWaypoint(' + wpID + ');"&gt;[X]&lt;/a&gt;' + commandInput + '</td></tr>';
 						}
 						$('#waypointData').append(rowStr);
 					}
 				}
+				addWaypointCopy();
 			}
 			$("#busyImgDrawWaypoints").hide();
 		}, "xml");
@@ -1146,6 +1123,8 @@ function findWaypoints(displayType) {
 				var price = null;
 				var wpColor = null;
 				var resType = null;
+        var waypointCommand = null;
+        var commandInput = null;
 				for (i=0;i<wps.length;i++) {
 					// get data for this waypoint
 					wp = wps.eq(i);
@@ -1175,20 +1154,40 @@ function findWaypoints(displayType) {
 						price = wp.find('price').eq(0).text() + 'c';
 					}
 					// add data for user waypoints to data table
+					commandInput = getWaypointCommandInput(planet, lat, lon, spawn, resType, conc);
 					if (wpType == 'u') {
 						if (displayType == 'recent') {
-							$('#findWaypointsList').append('<tr alt="' + wpID + '" class="statRow" title="' + resType + ': ' + title + '"><td><a href="' + BASE_SCRIPT_URL + 'resource.py/' + $("#galaxySel option:selected").val() + '/' + spawn + '">' + spawn + '</a></td><td>' + conc + '%</td><td><a href="' + BASE_SCRIPT_URL + 'user.py?uid=' + owner + '">' + owner + '</a></td><td>' + added + ' ago</td><td><div class="triangle1" style="border-color:transparent ' + wpColor.HexString() + ' transparent transparent;"></div></td><td></td></tr>');
+							$('#findWaypointsList').append('<tr alt="' + wpID + '" class="statRow waypointRow" title="' + resType + ': ' + title + '"><td><a href="' + BASE_SCRIPT_URL + 'resource.py/' + $("#galaxySel option:selected").val() + '/' + spawn + '">' + spawn + '</a></td><td>' + conc + '%</td><td><a href="' + BASE_SCRIPT_URL + 'user.py?uid=' + owner + '">' + owner + '</a></td><td>' + added + ' ago</td><td><div class="triangle1" style="border-color:transparent ' + wpColor.HexString() + ' transparent transparent;"></div></td><td>' + commandInput + '</td></tr>');
 						} else if (displayType == 'spawn') {
-							$('#findWaypointsList').append('<tr alt="' + wpID + '" class="statRow"><td>' + added + ' ago</td><td>' + conc + '%</td><td>' + planet + '</td><td>' + lat + '</td><td>' + lon + '</td><td></td></tr>');
+							$('#findWaypointsList').append('<tr alt="' + wpID + '" class="statRow waypointRow"><td>' + added + ' ago</td><td>' + conc + '%</td><td>' + planet + '</td><td>' + lat + '</td><td>' + lon + '</td><td>' + commandInput + '</td></tr>');
 						} else {
-							$('#findWaypointsList').append('<tr alt="' + wpID + '" class="statRow"><td><a href="' + BASE_SCRIPT_URL + 'resource.py/' + $("#galaxySel option:selected").val() + '/' + spawn + '">' + spawn + '</a></td><td>' + conc + '%</td><td>' + planet + '</td><td>' + lat + '</td><td>' + lon + '</td><td></td></tr>');
+							$('#findWaypointsList').append('<tr alt="' + wpID + '" class="statRow waypointRow"><td><a href="' + BASE_SCRIPT_URL + 'resource.py/' + $("#galaxySel option:selected").val() + '/' + spawn + '">' + spawn + '</a></td><td>' + conc + '%</td><td>' + planet + '</td><td>' + lat + '</td><td>' + lon + '</td><td>' + commandInput + '</td></tr>');
 						}
 					}
 				}
+				addWaypointCopy();
 			}
 			$('#busyImgWaypointSearch').css('display','none');
 		}, "xml");
 	return true;
+}
+
+function getWaypointCommandInput(planet, lat, lon, spawn, resType, conc) {
+	// add data for user waypoints to data table
+	waypointCommand = '/waypoint ' + planet.replace(' ', '').replace('YavinIV', 'yavin4') + ' ' + lat + ' ' + lon + ' ' + spawn + ' ' + resType + ' ' + conc;
+	commandInput = '<input type="text" value="' + waypointCommand + '"></input>';
+	return commandInput;
+}
+
+function addWaypointCopy() {
+	// Add click function to all waypoint rows for copying waypoint command to clipboard
+	$('.waypointRow').click( function() {
+		var copySource = $(this).find('input[type="text"]:first');
+		copySource.select();
+		document.execCommand('Copy');
+		alert('Waypoint copied to clipboard.');
+		this.focus()
+	});
 }
 
 /*     Friend Functions    */

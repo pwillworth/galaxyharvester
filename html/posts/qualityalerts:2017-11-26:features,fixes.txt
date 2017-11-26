@@ -6,6 +6,7 @@ Quality Based Alerts
 
 <ul>
   <li>Fixed favorite schematics on alerts page not filtering by selected galaxy.</li>
+  <li>Add ability to click on a waypoint row to copy in-game create waypoint command to clipboard.</li>
 </ul>
 
 <p>-ioscode</p>
