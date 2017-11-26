@@ -1123,8 +1123,7 @@ function findWaypoints(displayType) {
 				var price = null;
 				var wpColor = null;
 				var resType = null;
-        var waypointCommand = null;
-        var commandInput = null;
+				var commandInput = null;
 				for (i=0;i<wps.length;i++) {
 					// get data for this waypoint
 					wp = wps.eq(i);
@@ -1174,8 +1173,8 @@ function findWaypoints(displayType) {
 
 function getWaypointCommandInput(planet, lat, lon, spawn, resType, conc) {
 	// add data for user waypoints to data table
-	waypointCommand = '/waypoint ' + planet.replace(' ', '').replace('YavinIV', 'yavin4') + ' ' + lat + ' ' + lon + ' ' + spawn + ' ' + resType + ' ' + conc;
-	commandInput = '<input type="text" value="' + waypointCommand + '"></input>';
+	var waypointCommand = '/waypoint ' + planet.replace(' ', '').replace('YavinIV', 'yavin4') + ' ' + lat + ' ' + lon + ' ' + spawn + ' ' + resType + ' ' + conc;
+	var commandInput = '<input type="text" value="' + waypointCommand + '"></input>';
 	return commandInput;
 }
 
