@@ -70,13 +70,14 @@ def main():
 
 	tmpStr = ''
 	if galaxy.isdigit():
-		galaxyCriteria = ' AND galaxy IN (0, {0})'.format(galaxy)
+		galaxyCriteria = ' AND tFavorites.galaxy IN (0, {0})'.format(galaxy)
+		galaxyCriteriaProf = ' AND tProfession.galaxy IN (0, {0})'.format(galaxy)
 
 	if logged_state > 0:
 		if favType == 'p':
-			sqlStr = ''.join(('SELECT profID, profName, favsgalaxy FROM tProfession LEFT JOIN (SELECT itemID, galaxy AS favsgalaxy FROM tFavorites WHERE favType=3 AND userID="', currentUser, '"', galaxyCriteria, ') favs ON tProfession.profID = favs.itemID WHERE tProfession.craftingQuality>0', galaxyCriteria, ' ORDER BY profName;'))
+			sqlStr = ''.join(('SELECT profID, profName, favsgalaxy FROM tProfession LEFT JOIN (SELECT itemID, galaxy AS favsgalaxy FROM tFavorites WHERE favType=3 AND userID="', currentUser, '"', galaxyCriteria, ') favs ON tProfession.profID = favs.itemID WHERE tProfession.craftingQuality>0', galaxyCriteriaProf, ' ORDER BY profName;'))
 		elif favType == 's':
-			sqlStr = ''.join(('SELECT schematicID, schematicName, tFavorites.galaxy FROM tFavorites INNER JOIN tSchematic ON tFavorites.favGroup = tSchematic.schematicID WHERE tFavorites.userID="', currentUser, '" AND tFavorites.favType=4 ORDER BY schematicName'))
+			sqlStr = ''.join(('SELECT schematicID, schematicName, tFavorites.galaxy FROM tFavorites INNER JOIN tSchematic ON tFavorites.favGroup = tSchematic.schematicID WHERE tFavorites.userID="', currentUser, '" AND tFavorites.favType=4', galaxyCriteria, ' ORDER BY schematicName'))
 		else:
 			sqlStr = ''.join(('SELECT favGroup, CASE WHEN resourceTypeName IS NULL THEN groupName ELSE resourceTypeName END, resourceCategory FROM tFavorites LEFT JOIN tResourceType ON tFavorites.favGroup=tResourceType.resourceType LEFT JOIN tResourceGroup ON tFavorites.favGroup=tResourceGroup.resourceGroup WHERE tFavorites.userID="', currentUser, '" AND tFavorites.favType=2 ORDER BY CASE WHEN tResourceGroup.resourceGroup IS NULL THEN tResourceType.resourceGroup ELSE tResourceGroup.resourceGroup END, resourceType'))
 		conn = dbShared.ghConn()
