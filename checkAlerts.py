@@ -126,21 +126,38 @@ def checkSpawnAlerts(conn, spawnName, alertValue, galaxy, enteredBy, stats, gala
 	statNames = ["CR","CD","DR","FL","HR","MA","PE","OQ","SR","UT","ER"]
 	# open filters for the type
 	cursor = conn.cursor()
-	cursor.execute("SELECT userID, alertTypes, CRmin, CDmin, DRmin, FLmin, HRmin, MAmin, PEmin, OQmin, SRmin, UTmin, ERmin, fltType, fltValue FROM tFilters WHERE galaxy=" + str(galaxy) + " AND alertTypes > 0 AND ((fltType = 1 AND fltValue = '" + alertValue + "') OR (fltType = 2 AND '" + alertValue + "' IN (SELECT resourceType FROM tResourceTypeGroup WHERE resourceGroup=fltValue)))")
+	cursor.execute("SELECT userID, alertTypes, CRmin, CDmin, DRmin, FLmin, HRmin, MAmin, PEmin, OQmin, SRmin, UTmin, ERmin, fltType, fltValue, minQuality FROM tFilters WHERE galaxy=" + str(galaxy) + " AND alertTypes > 0 AND ((fltType = 1 AND fltValue = '" + alertValue + "') OR (fltType = 2 AND '" + alertValue + "' IN (SELECT resourceType FROM tResourceTypeGroup WHERE resourceGroup=fltValue)))")
 	row = cursor.fetchone()
-	# check each filter for this resource type to see if min stats hit
+	# check each filter for this resource type/group
 	while row != None:
 		sendAlert = True
 		statStr = ""
-		for x in range(11):
-			if (row[x+2]) > 0:
-				if (stats[x] < row[x+2]):
-					sendAlert = False
-				else:
-					statStr = statStr + statNames[x] + ": " + str(stats[x]) + ", "
-		if len(statStr) > 1:
-			statStr = statStr[:-2]
-		# add alert records if no stats were under min
+		alertMessage = ""
+		if row[15] > 0:
+			# Check resource to see if it hits min quality
+			qualityTotal = 0.0
+			for x in range(11):
+				if (row[x+2]) > 0:
+					thisValue = 1.0*stats[x]*(row[x+2]/100.0)
+					qualityTotal = qualityTotal + thisValue
+					statStr = statStr + statNames[x] + " " + str(row[x+2]) + "% "
+			if qualityTotal < row[15]:
+				sendAlert = False
+			else:
+				alertMessage = ' named {0} added to {1} with quality score {2:.0f} for {3}'.format(spawnName, galaxyName, qualityTotal, statStr)
+		else:
+			# check  to see if min stats hit
+			for x in range(11):
+				if (row[x+2]) > 0:
+					if (stats[x] < row[x+2]):
+						sendAlert = False
+					else:
+						statStr = statStr + statNames[x] + ": " + str(stats[x]) + ", "
+			if len(statStr) > 1:
+				statStr = statStr[:-2]
+			if sendAlert:
+				alertMessage = ' named {0} added to {1} with stats {2}'.format(spawnName, galaxyName, statStr)
+		# add alert records if stats or quality triggered
 		if sendAlert:
 			# Look up the name for the alert value
 			typeGroup = row[14]
@@ -149,7 +166,8 @@ def checkSpawnAlerts(conn, spawnName, alertValue, galaxy, enteredBy, stats, gala
 			else:
 				typeGroup = ghNames.getResourceGroupName(row[14])
 
-			addAlert(row[0], row[1], typeGroup + ' named ' + spawnName + ' added to ' + galaxyName + ' with stats ' + statStr, 'http://galaxyharvester.net/resource.py/' + str(galaxy) + '/' + spawnName, 'Resource Spawn Alert')
+			addAlert(row[0], row[1], typeGroup + alertMessage, 'http://galaxyharvester.net/resource.py/' + str(galaxy) + '/' + spawnName, 'Resource Spawn Alert')
+
 		row = cursor.fetchone()
 	cursor.close()
 

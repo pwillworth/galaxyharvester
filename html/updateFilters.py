@@ -81,6 +81,7 @@ OQmins = form.getfirst("OQmins", "")
 SRmins = form.getfirst("SRmins", "")
 UTmins = form.getfirst("UTmins", "")
 ERmins = form.getfirst("ERmins", "")
+qualityMins = form.getfirst("qualityMins", "")
 alertTypes = form.getfirst("alertTypes", "")
 fltGroups = form.getfirst("fltGroups", "")
 # escape input to prevent sql injection
@@ -101,6 +102,7 @@ OQmins = dbShared.dbInsertSafe(OQmins)
 SRmins = dbShared.dbInsertSafe(SRmins)
 UTmins = dbShared.dbInsertSafe(UTmins)
 ERmins = dbShared.dbInsertSafe(ERmins)
+qualityMins = dbShared.dbInsertSafe(qualityMins)
 alertTypes = dbShared.dbInsertSafe(alertTypes)
 fltGroups = dbShared.dbInsertSafe(fltGroups)
 
@@ -119,6 +121,7 @@ OQmins = OQmins.split(",")
 SRmins = SRmins.split(",")
 UTmins = UTmins.split(",")
 ERmins = ERmins.split(",")
+qualityMins = qualityMins.split(",")
 alertTypes = alertTypes.split(",")
 fltGroups = fltGroups.split(",")
 
@@ -143,7 +146,7 @@ errstr = ""
 fc = len(fltValues)
 if (galaxy == ""):
 	errstr = errstr + "Error: no galaxy selected. \r\n"
-if fc == len(fltOrders) and fc == len(fltTypes) and fc == len(alertTypes) and fc == len(CRmins) and fc == len(CDmins) and fc == len(DRmins) and fc == len(FLmins) and fc == len(HRmins) and fc == len(MAmins) and fc == len(PEmins) and fc == len(OQmins) and fc == len(SRmins) and fc == len(UTmins) and fc == len(ERmins) and fc == len(fltGroups):
+if fc == len(fltOrders) and fc == len(fltTypes) and fc == len(alertTypes) and fc == len(CRmins) and fc == len(CDmins) and fc == len(DRmins) and fc == len(FLmins) and fc == len(HRmins) and fc == len(MAmins) and fc == len(PEmins) and fc == len(OQmins) and fc == len(SRmins) and fc == len(UTmins) and fc == len(ERmins) and fc == len(fltGroups) and fc == len(qualityMins):
 	for x in range(len(fltValues)):
 		if fltValues[x] != "":
 			if (fltTypes[x].isdigit() != True):
@@ -172,6 +175,8 @@ if fc == len(fltOrders) and fc == len(fltTypes) and fc == len(alertTypes) and fc
 				UTmins[x] = 0
 			if (ERmins[x].isdigit() != True):
 				ERmins[x] = 0
+			if (qualityMins[x].isdigit() != True):
+				qualityMins[x] = 0
 			fltUpdated[x] = 0
 else:
 	errstr = errstr + "Error: One of the filters sent is missing a type, alert, group, or stat. Orders: " + str(len(fltOrders)) + " Types: " + str(len(fltTypes)) + " Values: " + str(fc) + " AlertTypes: " + str(len(alertTypes)) + " Groups: " + str(len(fltGroups)) + " CRs: " + str(len(CRmins)) + " CDs: " + str(len(CDmins)) + " DRs: " + str(len(DRmins)) + " FLs: " + str(len(FLmins)) + " HRs: " + str(len(HRmins)) + " MAs: " + str(len(MAmins)) + " PEs: " + str(len(PEmins)) + " OQs: " + str(len(OQmins)) + " SRs: " + str(len(SRmins)) + " UTs: " + str(len(UTmins)) + " ERs: " + str(len(ERmins)) + "\r\n"
@@ -200,7 +205,7 @@ if (errstr == ""):
 					fltFound = True
 					# update details of filter
 					cursor2 = conn.cursor()
-					tempSQL = "UPDATE tFilters SET alertTypes=" + str(alertTypes[x]) + ", CRmin=" + str(CRmins[x]) + ", CDmin=" + str(CDmins[x]) + ", DRmin=" + str(DRmins[x]) + ", FLmin=" + str(FLmins[x]) + ", HRmin=" + str(HRmins[x]) + ", MAmin=" + str(MAmins[x]) + ", PEmin=" + str(PEmins[x]) + ", OQmin=" + str(OQmins[x]) + ", SRmin=" + str(SRmins[x]) + ", UTmin=" + str(UTmins[x]) + ", ERmin=" + str(ERmins[x]) + ", fltGroup='" + fltGroups[x] + "' WHERE userID='" + currentUser + "' AND galaxy=" + str(galaxy) + " AND rowOrder=" + str(rowOrder) + " AND fltType=" + str(fltType) + " AND fltValue='" + fltValue + "';"
+					tempSQL = "UPDATE tFilters SET alertTypes=" + str(alertTypes[x]) + ", CRmin=" + str(CRmins[x]) + ", CDmin=" + str(CDmins[x]) + ", DRmin=" + str(DRmins[x]) + ", FLmin=" + str(FLmins[x]) + ", HRmin=" + str(HRmins[x]) + ", MAmin=" + str(MAmins[x]) + ", PEmin=" + str(PEmins[x]) + ", OQmin=" + str(OQmins[x]) + ", SRmin=" + str(SRmins[x]) + ", UTmin=" + str(UTmins[x]) + ", ERmin=" + str(ERmins[x]) + ", minQuality=" + str(qualityMins[x]) + ", fltGroup='" + fltGroups[x] + "' WHERE userID='" + currentUser + "' AND galaxy=" + str(galaxy) + " AND rowOrder=" + str(rowOrder) + " AND fltType=" + str(fltType) + " AND fltValue='" + fltValue + "';"
 					cursor2.execute(tempSQL)
 					fltUpdated[x] = 1
 					udCount += cursor2.rowcount
@@ -224,7 +229,7 @@ if (errstr == ""):
 			if fltValues[x] != "" and fltUpdated[x] == 0:
 				# if the filter was not marked as updated previously, it does not exist and we need to add it
 				cursor2 = conn.cursor()
-				tempSQL = "INSERT INTO tFilters (userID, galaxy, rowOrder, fltType, fltValue, alertTypes, CRmin, CDmin, DRmin, FLmin, HRmin, MAmin, PEmin, OQmin, SRmin, UTmin, ERmin, fltGroup) VALUES ('" + currentUser + "', " + str(galaxy) + ", " + str(fltOrders[x]) + ", " + str(fltTypes[x]) + ", '" + fltValues[x] + "', " + str(alertTypes[x]) + ", " + str(CRmins[x]) + ", " + str(CDmins[x]) + ", " + str(DRmins[x]) + ", " + str(FLmins[x]) + ", " + str(HRmins[x]) + ", " + str(MAmins[x]) + ", " + str(PEmins[x]) + ", " + str(OQmins[x]) + ", " + str(SRmins[x]) + ", " + str(UTmins[x]) + ", " + str(ERmins[x]) + ", '" + fltGroups[x] + "');"
+				tempSQL = "INSERT INTO tFilters (userID, galaxy, rowOrder, fltType, fltValue, alertTypes, CRmin, CDmin, DRmin, FLmin, HRmin, MAmin, PEmin, OQmin, SRmin, UTmin, ERmin, fltGroup, minQuality) VALUES ('" + currentUser + "', " + str(galaxy) + ", " + str(fltOrders[x]) + ", " + str(fltTypes[x]) + ", '" + fltValues[x] + "', " + str(alertTypes[x]) + ", " + str(CRmins[x]) + ", " + str(CDmins[x]) + ", " + str(DRmins[x]) + ", " + str(FLmins[x]) + ", " + str(HRmins[x]) + ", " + str(MAmins[x]) + ", " + str(PEmins[x]) + ", " + str(OQmins[x]) + ", " + str(SRmins[x]) + ", " + str(UTmins[x]) + ", " + str(ERmins[x]) + ", '" + fltGroups[x] + "', " + str(qualityMins[x]) + ");"
 				cursor2.execute(tempSQL)
 				addCount += cursor2.rowcount
 				cursor2.close()

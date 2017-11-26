@@ -1231,7 +1231,12 @@ function loadAlerts() {
 		function(data) {
 			$(data).find('filter').each (function() {
 					fltOrder = $(this).find('fltOrder').eq(0).text();
-					addFilterRow(fltOrder);
+          fltQuality = $(this).find('fltQuality').eq(0).text();
+          if ( fltQuality != "0" && fltQuality != "None" ) {
+            addFilterRow('addQualityAlertTable', fltOrder);
+          } else {
+					  addFilterRow('addAlertTable', fltOrder);
+          }
 					if ($(this).find('fltType').eq(0).text() == "2") {
 						$('#oGroup' + fltOrder).attr("checked","checked");
 					}
@@ -1288,6 +1293,9 @@ function loadAlerts() {
 					if ($(this).find('ERmin').eq(0).text() != "0") {
 						$('#ER' + fltOrder).val($(this).find('ERmin').eq(0).text());
 					}
+          if ( fltQuality != "0" && fltQuality != "None" ) {
+            $('#minQuality' + fltOrder).val($(this).find('fltQuality').eq(0).text());
+          }
           $('#fltGroup' + fltOrder).val($(this).find('fltGroup').eq(0).text());
 					tmpRow = parseInt(fltOrder);
           if (tmpRow > maxRow) {
@@ -1299,8 +1307,10 @@ function loadAlerts() {
 			$("#alertMask").css("display","none");
 			$("#udBusyImg").css("display","none");
 			$("#sendResponse").html($(data).find('fltCount').eq(0).text());
-			addFilterRow(maxRow + 1);
+      addFilterRow("addQualityAlertTable", maxRow + 1);
+			addFilterRow("addAlertTable", maxRow + 2);
 			setTGlist(maxRow + 1);
+      setTGlist(maxRow + 2);
 		}, "xml");
 	return;
 }
@@ -1330,15 +1340,21 @@ function updateAlerts() {
 		SRs = "";
 		UTs = "";
 		ERs = "";
+    qualities = "";
     groups = "";
+    errors = 0;
 		// Compile comma separate list of each column value
 		$(".filterRow").each (function() {
 			fltType = "";
       x = $(this).attr("id").substr(6);
 			fltValue = $("#typeGroupSel"+x+" option:selected").val();
 			alertTypes = 0;
+      qualityRow = 0;
 			if (fltValue != null && fltValue != "none") {
 				numRes += 1;
+        if ( $("#minQuality"+x).val() != null && isNaN(parseInt($("#minQuality"+x).val())) ) {
+          errors += 1;
+        }
 				if ($("#oType" + x).attr("checked") == "checked") {
 					fltType = "1"
 				} else {
@@ -1367,6 +1383,7 @@ function updateAlerts() {
 				SRs = SRs + "," + $("#SR"+x).val();
 				UTs = UTs + "," + $("#UT"+x).val();
 				ERs = ERs + "," + $("#ER"+x).val();
+        qualities = qualities + "," + $("#minQuality"+x).val();
 				alerts = alerts + "," + alertTypes;
         groups = groups + "," + $("#fltGroup"+x).val();
 			}
@@ -1377,6 +1394,12 @@ function updateAlerts() {
         || ERs.indexOf(",0") > -1) {
 			alert("You have entered zero for one of the minimum stat values.  This will cause the stat to be ignored.  If you want to be alerted if the stat is of any value, enter 1 for the minimum value.");
 		}
+    if (errors > 0) {
+      alert("You have selected a type for a Quality Based alert but not specified a minimum quality.  Please enter a valid minimum quality (1-1000) to continue.");
+      $("#alertMask").css("display","none");
+      $("#udBusyImg").css("display","none");
+      return true;
+    }
 		var doit = false;
 		if (!values.length > 0) {
 			doit = confirm("This will delete all of your Alert filters, are you sure you want to do this?");
@@ -1397,10 +1420,11 @@ function updateAlerts() {
 			SRs = SRs.substr(1);
 			UTs = UTs.substr(1);
 			ERs = ERs.substr(1);
+      qualities = qualities.substr(1);
 			alerts = alerts.substr(1);
       groups = groups.substr(1);
 			// Sync server with selections
-			$.post(BASE_SCRIPT_URL + "updateFilters.py", { gh_sid: "'+sid+'", galaxy: $("#galaxySel option:selected").val(), fltCount: numRes, fltOrders: orders, fltTypes: types, fltValues: values, CRmins: CRs, CDmins: CDs, DRmins: DRs, FLmins: FLs, HRmins: HRs, MAmins: MAs, PEmins: PEs, OQmins: OQs, SRmins: SRs, UTmins: UTs, ERmins: ERs, alertTypes: alerts, fltGroups: groups },
+			$.post(BASE_SCRIPT_URL + "updateFilters.py", { gh_sid: "'+sid+'", galaxy: $("#galaxySel option:selected").val(), fltCount: numRes, fltOrders: orders, fltTypes: types, fltValues: values, CRmins: CRs, CDmins: CDs, DRmins: DRs, FLmins: FLs, HRmins: HRs, MAmins: MAs, PEmins: PEs, OQmins: OQs, SRmins: SRs, UTmins: UTs, ERmins: ERs, alertTypes: alerts, fltGroups: groups, qualityMins: qualities },
 				function(data) {
 					var result = $(data).find('resultText').eq(0).text();
 					$("#sentMessage").html(result);

@@ -110,7 +110,7 @@ if (errstr == ""):
 		conn = dbShared.ghConn()
 		# open list of users existing filters
 		cursor = conn.cursor()
-		cursor.execute("SELECT rowOrder, fltType, fltValue, alertTypes, CRmin, CDmin, DRmin, FLmin, HRmin, MAmin, PEmin, OQmin, SRmin, UTmin, ERmin, groupName, fltGroup FROM tFilters LEFT JOIN (SELECT resourceGroup, groupName FROM tResourceGroup UNION ALL SELECT resourceType, resourceTypeName FROM tResourceType) typegroup ON tFilters.fltValue = typegroup.resourceGroup WHERE galaxy=" + str(galaxy) + " AND userID='" + currentUser + "' ORDER BY fltGroup, rowOrder;")
+		cursor.execute("SELECT rowOrder, fltType, fltValue, alertTypes, CRmin, CDmin, DRmin, FLmin, HRmin, MAmin, PEmin, OQmin, SRmin, UTmin, ERmin, groupName, fltGroup, minQuality FROM tFilters LEFT JOIN (SELECT resourceGroup, groupName FROM tResourceGroup UNION ALL SELECT resourceType, resourceTypeName FROM tResourceType) typegroup ON tFilters.fltValue = typegroup.resourceGroup WHERE galaxy=" + str(galaxy) + " AND userID='" + currentUser + "' ORDER BY fltGroup, rowOrder;")
 		row = cursor.fetchone()
 		while row != None:
 			fltType = row[1]
@@ -187,6 +187,12 @@ if (errstr == ""):
 			tER = doc.createTextNode(str(row[14]))
 			eER.appendChild(tER)
 			eFilter.appendChild(eER)
+
+			eQuality = doc.createElement("fltQuality")
+			tQuality = doc.createTextNode(str(row[17]))
+			eQuality.appendChild(tQuality)
+			eFilter.appendChild(eQuality)
+
 			eName = doc.createElement("valueName")
 			tName = doc.createTextNode(str(row[15]))
 			eName.appendChild(tName)
