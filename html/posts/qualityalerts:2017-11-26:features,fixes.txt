@@ -1,0 +1,11 @@
+Quality Based Alerts
+
+<p>Hi harvesters, the main feature coming to you today is a new way to set up your resource spawn alerts.  You will now find a new separate table on the <a href="/myAlerts.py">My Alerts</a> page where you can define alert filters a little differently.  Instead of specifying minimum stat values, you specify some combination of percentage weights for stats and a minimum quality value.  Galaxy Harvester will check new spawns of that resource type/group to see if the calculation of their quality score meets your specified min based on the stat weights you specified and alert you if the quality score is at least the minimum.</p>
+
+<p>As usual, there's a few other minor fixes, etc. also, here they are:</p>
+
+<ul>
+  <li>Fixed favorite schematics on alerts page not filtering by selected galaxy.</li>
+</ul>
+
+<p>-ioscode</p>
