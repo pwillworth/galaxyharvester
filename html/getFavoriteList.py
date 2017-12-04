@@ -98,7 +98,7 @@ def main():
 					if favType == 'p':
 						tmpStr = ''.join((tmpStr, '<div class="inlineBlock profToggle"><div style="width:16px;height:16px;float:left;cursor: pointer;" onclick="toggleFavorite(this, 3, \'', str(row[0]), '\', ', galaxy, ');" title="Click to toggle favorite">', favImg, '</div>', row[1], '</div>'))
 					elif favType == 's':
-						tmpStr = ''.join((tmpStr, '<div class="schemToggle"><div style="width:16px;height:16px;float:left;cursor: pointer;" onclick="toggleFavorite(this, 3, \'', str(row[0]), '\', ', galaxy, ');" title="Click to toggle favorite">', favImg, '</div><a href="/schematics.py/', row[0], '">', row[1], '</a></div>'))
+						tmpStr = ''.join((tmpStr, '<div class="schemToggle"><div style="width:16px;height:16px;float:left;cursor: pointer;" onclick="toggleFavorite(this, 4, \'', str(row[0]), '\', ', galaxy, ');" title="Click to toggle favorite">', favImg, '</div><a href="/schematics.py/', row[0], '">', row[1], '</a></div>'))
 					else:
 						tmpStr = ''.join((tmpStr, '<li>&nbsp;&nbsp;<a href="/resourceType.py/', row[0], '">', str(row[1]), '</a></li>'))
 				else:
