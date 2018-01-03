@@ -30,6 +30,7 @@ form = cgi.FieldStorage()
 resGroup = form.getfirst('resGroup', '')
 outType = form.getfirst('outType', '')
 galaxy = form.getfirst('galaxy', '-1')
+planetID = form.getfirst('planetID', '')
 # escape input to prevent sql injection
 resGroup = dbShared.dbInsertSafe(resGroup)
 outType = dbShared.dbInsertSafe(outType)
@@ -48,8 +49,11 @@ if len(resGroup) > 0:
 else:
 	criteriaStr = ''
 
-if len(galaxy) > 0:
-	criteriaStr = criteriaStr + ' AND (specificPlanet = 0 OR specificPlanet IN (SELECT DISTINCT tPlanet.planetID FROM tPlanet, tGalaxyPlanet WHERE (tPlanet.planetID < 11) OR (tPlanet.planetID = tGalaxyPlanet.planetID AND tGalaxyPlanet.galaxyID = {0})))'.format(galaxy)
+if planetID.isdigit() and int(planetID) > 0:
+	criteriaStr = criteriaStr + ' AND (specificPlanet = 0 OR specificPlanet = {0})'.format(planetID)
+else:
+	if galaxy.isdigit() and int(galaxy) > 0:
+		criteriaStr = criteriaStr + ' AND (specificPlanet = 0 OR specificPlanet IN (SELECT DISTINCT tPlanet.planetID FROM tPlanet, tGalaxyPlanet WHERE (tPlanet.planetID < 11) OR (tPlanet.planetID = tGalaxyPlanet.planetID AND tGalaxyPlanet.galaxyID = {0})))'.format(galaxy)
 
 conn = dbShared.ghConn()
 cursor = conn.cursor()

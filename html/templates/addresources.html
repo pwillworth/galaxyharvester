@@ -9,19 +9,22 @@
 	var rownum = 0;
 	$(document).ready(function() {
 	    $("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
+    	    if (getCookie("addResourcesFilterTypes",true) == "false") {
+        	$("#oFilterTypes").removeAttr("checked");
+    	    }
 	    if ($("#galaxySel option:selected").attr("group") == "Inactive") {
 	        $("#addResMask").addClass("disabled");
 	        $("#addResMask").html("Inactive Galaxy");
 	        $("#sendData").attr("disabled","disabled");
 	    }
-			loadPlanetSel($("#galaxySel option:selected").val(), '<option value=0>&lt;Select&gt;</option>');
+	    loadPlanetSel($("#galaxySel option:selected").val(), '<option value=0>&lt;Select&gt;</option>');
 	    addResourceRow();
 	});
 	function addResourceRow() {
 	    if (true) {
 	      var typeBox = "typeSel" + rownum;
 	      $("#addResourceTable").append("<tr height=16px valign=middle id='resRow"+rownum+"'><td><input type='text' size=14 maxlength=255 id='resName"+rownum+"' onblur='getResource(this);'{{ disableStr }}></td>"+
-	        "<td><select name='"+typeBox+"' id='"+typeBox+"' style='width:200px;' onchange='maskStats(this);' onblur='getResourceFuzzy(this,"+rownum+");'></select></td>"+
+	        "<td><select name='"+typeBox+"' id='"+typeBox+"' class='resourceTypeSelector' style='width:200px;' onchange='maskStats(this);' onblur='getResourceFuzzy(this,"+rownum+");'></select></td>"+
 	        "<td><input type='text' size=2 maxlength=4 id='ER"+rownum+"' name='ER"+rownum+"'></td>"+
 	        "<td><input type='text' size=2 maxlength=4 id='CR"+rownum+"' name='CR"+rownum+"'></td>"+
 	        "<td><input type='text' size=2 maxlength=4 id='CD"+rownum+"' name='CD"+rownum+"'></td>"+
@@ -35,9 +38,19 @@
 	        "<td><input type='text' size=2 maxlength=4 id='UT"+rownum+"' name='UT"+rownum+"'></td>"+
 	        "<td><div id='addInfo"+rownum+"'></div></td>"+
 	        "</tr>");
-	      $("#"+typeBox).load("getResourceTypeList.py", {galaxy:$("#galaxySel").val()});
+	      loadTypes("#"+typeBox);
 	      rownum+=1;
 	    }
+	}
+	// Load the Resource Type Drop down(s) based on option
+	function loadTypes(typeBoxSelector) {
+	    var galaxyFilter = $("#galaxySel").val();
+	    var planetVal = $("#planetSel").val();
+            if ( $("#oFilterTypes").attr("checked") == undefined ) {
+	        galaxyFilter = -1;
+		planetVal = -1;
+	    }
+	    $(typeBoxSelector).load("getResourceTypeList.py", {galaxy:galaxyFilter, planetID:planetVal});
 	}
 	function maskStats(typeSel) {
 	    var statMask = "p11111111111";
@@ -115,8 +128,11 @@
     <div id="addResBox" class="ghWidgetBox">
     <div class="boxHeader">Add Resources</div>
     <form name="faddres" id="faddres" onsubmit="return postResources()">
-    Planet: <select name="planetSel" id="planetSel"{{ disableStr }}>
-    </select><span id="sentMessage" style="margin-left: 20px;"></span>
+    <div>
+        Planet: <select name="planetSel" id="planetSel"{{ disableStr }} onchange="loadTypes('.resourceTypeSelector');"></select>
+        Filter Types: <input type="checkbox" id="oFilterTypes" checked="checked" title="Filter the resource type drop downs to only include resources possible for the selected galaxy and planet" onchange="loadTypes('.resourceTypeSelector');setCookie('addResourcesFilterTypes',this.checked,365);" />
+        <span id="sentMessage" style="margin-left: 20px;"></span>
+    <div>
     <div id="resourceData" style="margin-top:12px;">
     <div style="position:relative;"><div id="resMask" class="disabledDark" style="display:none;"></div>
     <table id="addResourceTable"><thead>
