@@ -139,7 +139,7 @@ if (cursor):
 			if (groupType == 'res'):
 				if (currentIngredient != row[5]):
 					print '  </ul>'
-					print '  <div  style="margin-top:14px;"><a class="bigLink" href="' + ghShared.BASE_SCRIPT_URL + 'resourceType.py/' + row[4] + '">' + row[5] + '</a></div>'
+					print '  <div  style="margin-top:14px;"><a class="bigLink" href="' + ghShared.BASE_SCRIPT_URL + 'resourceType.py/' + str(row[4]) + '">' + str(row[5]) + '</a></div>'
 					print '  <ul class="schematics">'
 					currentIngredient = row[5]
 					currentGroup = ''
