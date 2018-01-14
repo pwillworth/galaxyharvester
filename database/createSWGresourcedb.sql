@@ -39,7 +39,7 @@ CREATE TABLE tFeedbackVotes (feedbackID INT NOT NULL, entered DATETIME NOT NULL,
 CREATE TABLE tFeedbackComments (commentID INT AUTO_INCREMENT PRIMARY KEY, feedbackID INT NOT NULL, entered DATETIME NOT NULL, userID VARCHAR(31), comment VARCHAR(1023), INDEX IX_feedbackcomments_feedback (feedbackID));
 
 
-GRANT SELECT,INSERT,UPDATE,DELETE ON swgresource.* TO webusr;
+GRANT SELECT,INSERT,UPDATE,DELETE ON swgresource.* TO 'webusr'@'localhost';
 INSERT INTO tGalaxy (galaxyName, galaxyState) VALUES ('Test Galaxy', 1);
 INSERT INTO tUsers (userID) VALUES ('default');
 LOAD DATA LOCAL INFILE '/var/www/database/seedData/planet.csv' INTO TABLE tPlanet FIELDS ENCLOSED BY '"' (planetName);
