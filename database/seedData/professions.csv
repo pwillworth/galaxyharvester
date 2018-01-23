@@ -1,18 +1,22 @@
-"Artisan",1
-"Entertainer",0
-"Medic",1
-"Scout",0
-"Architect",1
-"Armorsmith",1
-"Bio-Engineer",1
-"Chef",1
-"Combat Medic",1
-"Doctor",1
-"Droid Engineer",1
-"Musician",0
-"Ranger",0
-"Shipwright",1
-"Smuggler",1
-"Tailor",0
-"Weaponsmith",1
-"Jedi",1
+1,"Artisan",1,0
+2,"Entertainer",0,0
+3,"Medic",1,0
+4,"Scout",0,0
+5,"Architect",1,0
+6,"Armorsmith",1,0
+7,"Bio-Engineer",1,0
+8,"Chef",1,0
+9,"Combat Medic",1,0
+10,"Doctor",1,0
+11,"Droid Engineer",1,0
+12,"Musician",0,0
+13,"Ranger",0,0
+14,"Shipwright",1,0
+15,"Smuggler",1,0
+16,"Tailor",0,0
+17,"Weaponsmith",1,0
+18,"Jedi",1,1337
+28,"Trader Structures",1,-1
+29,"Trader Domestic",1,-1
+30,"Trader Munitions",1,-1
+31,"Trader Engineering",1,-1

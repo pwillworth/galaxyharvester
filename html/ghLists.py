@@ -134,10 +134,22 @@ def getPlanetList(galaxy):
 	return listStr
 
 def getProfessionList(galaxy):
+	# Determine set of base professions to include by checking if galaxy is flagged NGE
+	baseProfs = '0, 1337'
+	conn = dbShared.ghConn()
+	cursor = conn.cursor()
+	if (cursor):
+		cursor.execute('SELECT galaxyNGE FROM tGalaxy WHERE galaxyID={0};'.format(str(galaxy)))
+		row = cursor.fetchone()
+		if (row != None) and (row[0] > 0):
+			baseProfs = '-1, 1337'
+		cursor.close()
+	conn.close()
+
 	if galaxy == -1 or galaxy == '':
 		listStr = getOptionList('SELECT profID, profName FROM tProfession WHERE galaxy=0 ORDER BY profName;')
 	else:
-		listStr = getOptionList('SELECT profID, profName FROM tProfession WHERE galaxy IN (0,{0}) ORDER BY profName'.format(str(galaxy)))
+		listStr = getOptionList('SELECT profID, profName FROM tProfession WHERE galaxy IN ({1},{0}) ORDER BY profName'.format(str(galaxy), baseProfs))
 	return listStr
 
 def getObjectTypeList():

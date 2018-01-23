@@ -103,9 +103,18 @@ elif (groupType == 'favorite'):
 	filterStr = ' WHERE tFavorites.userID = "' + currentUser + '" AND favType = 4'
 	joinStr = ' INNER JOIN tFavorites ON tSchematic.schematicID = tFavorites.favGroup'
 
+conn = dbShared.ghConn()
 # Some schematics are custom entered per galaxy but those with galaxyID 0 are for all
 if galaxy.isdigit():
-	filterStr = filterStr + ' AND tSchematic.galaxy IN (0, {0})'.format(galaxy)
+	baseProfs = '0, 1337'
+	checkCursor = conn.cursor()
+	if (checkCursor):
+		checkCursor.execute('SELECT galaxyNGE FROM tGalaxy WHERE galaxyID={0};'.format(str(galaxy)))
+		checkRow = checkCursor.fetchone()
+		if (checkRow != None) and (checkRow[0] > 0):
+			baseProfs = '-1, 1337'
+		checkCursor.close()
+	filterStr = filterStr + ' AND tSchematic.galaxy IN ({1}, {0})'.format(galaxy, baseProfs)
 
 # We output an unordered list or a bunch of select element options depending on listFormat
 currentGroup = ''
@@ -114,7 +123,6 @@ print 'Content-type: text/html\n'
 if listFormat != 'option':
 	print '  <ul class="schematics">'
 
-conn = dbShared.ghConn()
 cursor = conn.cursor()
 if (cursor):
 	if (groupType == 'tab' or groupType == 'favorite'):
