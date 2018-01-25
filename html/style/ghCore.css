@@ -182,7 +182,7 @@ ul.plain li {
 .bigForm, .bigForm input {
 	font-size: 14px;
 }
-input[type=text], input[type=password], input[type=submit], input[type=reset], textarea, button, select {
+input[type=text], input[type=password], input[type=submit], input[type=reset], input[type=button], textarea, button, select {
 	border: 1px solid #99ccff;
 	color: #000;
 	font-size: 11px;

@@ -83,7 +83,7 @@ function saveGalaxy() {
     <div id="helpTopics" class="ghWidgetBox">
     <div class="boxHeader">Galaxy Admin</div>
       <p>You are designated admin on the galaxies listed below, select one to edit it.</p>
-      <select size="20" name="galaxyAdminSel" onchange="document.location.href='/galaxy.py/'+this.value;">{{ galaxyAdminList }}</select>
+      <select size="20" id="galaxyAdminSel" style="min-width: 120px;" onchange="document.location.href='/galaxy.py/'+this.value;">{{ galaxyAdminList }}</select>
     </div>
   </div>
   <div id="rightMainContent" class="ghCol">
@@ -91,24 +91,24 @@ function saveGalaxy() {
       <h4 id="galaxyMessage">{{ msgHTML }}</h4>
       <form>
         <table class="bigForm">
-          <tr><td>Name:</td><td><input id="galaxyName" size="20" maxlength="127" value="{{ galaxyName }}"/></td></tr>
+          <tr><td><div title="This name will display in the galaxy drop down list.">Name:</div></td><td><input type="text" id="galaxyName" size="20" maxlength="127" value="{{ galaxyName }}" /></td></tr>
 {% if galaxyID != 'new' and galaxyID != '' %}
-          <tr><td>Status:</td><td><select id="galaxyStatus">{{ galaxyStatusList }}</select></td></tr>
+          <tr><td><div title="Inactive galaxies are 'read only', Removed galaxies no longer show in the galaxy drop down list.">Status:</div></td><td><select id="galaxyStatus" style="min-width: 100px;">{{ galaxyStatusList }}</select></td></tr>
 {% endif %}
-          <tr><td>Is NGE:</td><td><input id="oGalaxyNGE" type="checkbox" {{ galaxyCheckedNGE }}/></td></tr>
-          <tr><td>Website:</td><td><input id="galaxyWebsite" size="40" maxlength="1023" value="{{ galaxyWebsite }}"/></td></tr>
-          <tr><td colspan=2><h3>Extra Planets:</h3></td></tr>
+          <tr><td><div title="Check this box if this galaxy has NGE style Trader crafting professions rather than the Pre-CU ones.">Is NGE:</div></td><td><input id="oGalaxyNGE" type="checkbox" {{ galaxyCheckedNGE }}/></td></tr>
+          <tr><td><div title="Please enter the web address where people can go to get info on how to sign up and play on your server.">Website:</div></td><td><input type="text" id="galaxyWebsite" size="40" maxlength="1023" value="{{ galaxyWebsite }}"/></td></tr>
+          <tr><td colspan=2><h3 title="If your server has additional planets where players can collect resources, add them here.">Extra Planets:</h3></td></tr>
           <tr>
-            <td>Available:<input type="button" value="Add" onclick="addPlanets();"><br/><select multiple size="12" id="planetsAvailable">{{ availablePlanetList }}</select></td>
-            <td>Selected:<input type="button" value="Remove" onclick="removePlanets();"><br/><select multiple size="12" id="planetsSelected">{{ galaxyPlanetList }}</select></td>
+            <td>Available:<input type="button" class="ghButton" value="Add" onclick="addPlanets();"></input><br/><select multiple size="12" id="planetsAvailable" style="min-width: 120px;">{{ availablePlanetList }}</select></td>
+            <td>Selected:<input type="button" class="ghButton" value="Remove" onclick="removePlanets();"></input><br/><select multiple size="12" id="planetsSelected" style="min-width: 120px;">{{ galaxyPlanetList }}</select></td>
           </tr>
-          <tr><td>Galaxy Admins:</td><td></td></tr>
-          <tr><td colspan="2"><div id="adminUsers" class="inlineItemBlockList"><input id="adminUserAdd" size="12" />
+          <tr><td><div title="List any Galaxy Harvester users that should be able to come to this screen and edit this galaxy's details.">Galaxy Admins:</div></td><td></td></tr>
+          <tr><td colspan="2"><div id="adminUsers" class="inlineItemBlockList"><input id="adminUserAdd" type="text" size="12" />
 {% for admin in galaxyAdmins %}
             <div class="blockUserItem">{{ admin }}<img src='/images/xRed16.png' alt='Remove' title='Remove' onclick='this.parentNode.remove();'></img></div>
 {% endfor %}          
           </div></td></tr>
-          <tr><td><div id="busyImgSave" style="display: none;"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div></td><td><input type="button" value="Save" onclick="saveGalaxy();"/></td></tr>
+          <tr><td><div id="busyImgSave" style="display: none;"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div></td><td><input type="button" value="Save" class="ghButton" onclick="saveGalaxy();"/></input></td></tr>
         </table>
       </form>
     </div>
