@@ -60,6 +60,7 @@ def main():
 	galaxyName = ''
 	galaxyState = 0
 	galaxyCheckedNGE = ''
+	galaxyWebsite = ''
 	galaxyAdminList = []
 	galaxyPlanetList = []
 	availablePlanetList = []
@@ -132,13 +133,14 @@ def main():
 		availablePlanetList = getPlanetList(conn, galaxy, 1)
 		if galaxy.isdigit():
 			galaxyCursor = conn.cursor()
-			galaxyCursor.execute('SELECT galaxyName, galaxyState, galaxyNGE FROM tGalaxy WHERE galaxyID={0};'.format(galaxy))
+			galaxyCursor.execute('SELECT galaxyName, galaxyState, galaxyNGE, website FROM tGalaxy WHERE galaxyID={0};'.format(galaxy))
 			galaxyRow = galaxyCursor.fetchone()
 			if galaxyRow != None:
 				galaxyName = galaxyRow[0]
 				galaxyState = galaxyRow[1]
 				if galaxyRow[2] > 0:
 					galaxyCheckedNGE = 'checked'
+				galaxyWebsite = galaxyRow[3]
 			galaxyCursor.close()
 			galaxyPlanetList = getPlanetList(conn, galaxy, 0)
 			galaxyAdmins = dbShared.getGalaxyAdmins(conn, galaxy)
@@ -155,7 +157,7 @@ def main():
 	env.globals['BASE_SCRIPT_URL'] = ghShared.BASE_SCRIPT_URL
 	env.globals['MOBILE_PLATFORM'] = ghShared.getMobilePlatform(os.environ['HTTP_USER_AGENT'])
 	template = env.get_template('galaxy.html')
-	print template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, pictureName=pictureName, loginResult=loginResult, linkappend=linkappend, url=url, imgNum=ghShared.imgNum, galaxyID=galaxy, galaxyList=ghLists.getGalaxyList(), msgHTML=msgHTML, galaxyName=galaxyName, galaxyState=galaxyState, galaxyCheckedNGE=galaxyCheckedNGE, galaxyStatusList=ghLists.getGalaxyStatusList(), galaxyPlanetList=galaxyPlanetList, availablePlanetList=availablePlanetList, galaxyAdminList=galaxyAdminList, galaxyAdmins=galaxyAdmins)
+	print template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, pictureName=pictureName, loginResult=loginResult, linkappend=linkappend, url=url, imgNum=ghShared.imgNum, galaxyID=galaxy, galaxyList=ghLists.getGalaxyList(), msgHTML=msgHTML, galaxyName=galaxyName, galaxyState=galaxyState, galaxyCheckedNGE=galaxyCheckedNGE, galaxyWebsite=galaxyWebsite, galaxyStatusList=ghLists.getGalaxyStatusList(), galaxyPlanetList=galaxyPlanetList, availablePlanetList=availablePlanetList, galaxyAdminList=galaxyAdminList, galaxyAdmins=galaxyAdmins)
 
 
 if __name__ == "__main__":

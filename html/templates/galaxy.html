@@ -64,7 +64,7 @@ function saveGalaxy() {
     admins += ($(this).text() + ',');
   });
   // send data
-  $.post(BASE_SCRIPT_URL + 'postGalaxy.py', { galaxyID: '{{ galaxyID }}', galaxyName: $('#galaxyName').val(), galaxyState: $('#galaxyStatus').val(), galaxyNGE: $('#oGalaxyNGE').attr('checked'), galaxyPlanets: planets, galaxyAdmins: admins },
+  $.post(BASE_SCRIPT_URL + 'postGalaxy.py', { galaxyID: '{{ galaxyID }}', galaxyName: $('#galaxyName').val(), galaxyState: $('#galaxyStatus').val(), galaxyNGE: $('#oGalaxyNGE').attr('checked'), galaxyWebsite: $('#galaxyWebsite').val(), galaxyPlanets: planets, galaxyAdmins: admins },
     function(data) {
       var result = $(data).find('resultText').eq(0).text();
       $('#busyImgSave').css('display','none');
@@ -96,6 +96,7 @@ function saveGalaxy() {
           <tr><td>Status:</td><td><select id="galaxyStatus">{{ galaxyStatusList }}</select></td></tr>
 {% endif %}
           <tr><td>Is NGE:</td><td><input id="oGalaxyNGE" type="checkbox" {{ galaxyCheckedNGE }}/></td></tr>
+          <tr><td>Website:</td><td><input id="galaxyWebsite" size="40" maxlength="1023" value="{{ galaxyWebsite }}"/></td></tr>
           <tr><td colspan=2><h3>Extra Planets:</h3></td></tr>
           <tr>
             <td>Available:<input type="button" value="Add" onclick="addPlanets();"><br/><select multiple size="12" id="planetsAvailable">{{ availablePlanetList }}</select></td>

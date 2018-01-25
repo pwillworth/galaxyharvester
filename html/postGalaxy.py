@@ -71,6 +71,7 @@ galaxy = form.getfirst("galaxyID", "")
 galaxyName = form.getfirst("galaxyName", "")
 galaxyState = form.getfirst("galaxyState", "")
 galaxyNGE = form.getfirst("galaxyNGE", "")
+galaxyWebsite = form.getfirst("galaxyWebsite", "")
 galaxyPlanets = form.getfirst("galaxyPlanets", "")
 galaxyAdmins = form.getfirst("galaxyAdmins", "")
 # escape input to prevent sql injection
@@ -79,6 +80,7 @@ galaxy = dbShared.dbInsertSafe(galaxy)
 galaxyName = dbShared.dbInsertSafe(galaxyName)
 galaxyState = dbShared.dbInsertSafe(galaxyState)
 galaxyNGE = dbShared.dbInsertSafe(galaxyNGE)
+galaxyWebsite = dbShared.dbInsertSafe(galaxyWebsite)
 galaxyPlanets = dbShared.dbInsertSafe(galaxyPlanets)
 galaxyAdmins = dbShared.dbInsertSafe(galaxyAdmins)
 
@@ -95,16 +97,16 @@ if (sess != ''):
 	currentUser = sess
 
 
-def addGalaxy(galaxyName, galaxyNGE, galaxyPlanets, userID, galaxyAdmins):
+def addGalaxy(galaxyName, galaxyNGE, galaxyWebsite, galaxyPlanets, userID, galaxyAdmins):
 	# Add new draft galaxy
 	returnStr = "Galaxy submit failed."
 	result = 0
 	conn = dbShared.ghConn()
 	cursor = conn.cursor()
 	
-	tempSQL = "INSERT INTO tGalaxy (galaxyName, galaxyState, galaxyNGE, submittedBy) VALUES (%s, %s, %s, %s);"
+	tempSQL = "INSERT INTO tGalaxy (galaxyName, galaxyState, galaxyNGE, website, submittedBy) VALUES (%s, %s, %s, %s, %s);"
 	try:
-		cursor.execute(tempSQL, (galaxyName, 0, galaxyNGE, userID))
+		cursor.execute(tempSQL, (galaxyName, 0, galaxyNGE, galaxyWebsite, userID))
 		result = cursor.rowcount
 	except Exception, e:
 		returnStr = 'Error: Add Failed. {0}'.format(e)
@@ -124,15 +126,15 @@ def addGalaxy(galaxyName, galaxyNGE, galaxyPlanets, userID, galaxyAdmins):
 	conn.close()
 	return returnStr
 
-def updateGalaxy(galaxyID, galaxyName, galaxyState, galaxyNGE, galaxyPlanets, galaxyAdmins):
+def updateGalaxy(galaxyID, galaxyName, galaxyState, galaxyNGE, galaxyWebsite, galaxyPlanets, galaxyAdmins):
 	# Update galaxy information
 	returnStr = ""
 	result = 0
 	conn = dbShared.ghConn()
 	cursor = conn.cursor()
 	
-	tempSQL = "UPDATE tGalaxy SET galaxyName=%s, galaxyState=%s, galaxyNGE=%s WHERE galaxyID=%s;"
-	cursor.execute(tempSQL, (galaxyName, galaxyState, galaxyNGE, galaxyID))
+	tempSQL = "UPDATE tGalaxy SET galaxyName=%s, galaxyState=%s, galaxyNGE=%s, website=%s WHERE galaxyID=%s;"
+	cursor.execute(tempSQL, (galaxyName, galaxyState, galaxyNGE, galaxyWebsite, galaxyID))
 	result = cursor.rowcount
 
 	cursor.execute("DELETE FROM tGalaxyPlanet WHERE galaxyID=%s;", [galaxyID])
@@ -158,9 +160,10 @@ def updateGalaxy(galaxyID, galaxyName, galaxyState, galaxyNGE, galaxyPlanets, ga
 #  Check for errors
 errstr = ""
 
-if (galaxyName == ""):
-	errstr = errstr + "Error: You must include the Galaxy name. \r\n"
-
+if not len(galaxyName) > 3:
+	errstr = errstr + "Error: You must include the Galaxy name longer than 3 letters. \r\n"
+if not len(galaxyWebsite) > 7 or not galaxyWebsite.startswith("http"):
+	errstr = errstr + "Error: You must include a valid website so public server access can be verified.\r\n"
 if (len(galaxy) > 0 and galaxy != 'new' and galaxy.isdigit() != True):
 	errstr = errstr + "Error: Galaxy ID was not a valid number.\n"
 if len(galaxy) > 0 and galaxy != 'new' and galaxyState.isdigit() != True:
@@ -197,7 +200,7 @@ if (errstr == ""):
 					# Get user galaxy admin status
 					adminList = dbShared.getGalaxyAdminList(conn, currentUser)
 					if '<option value="{0}">'.format(galaxy) in adminList:
-						result = updateGalaxy(galaxy, galaxyName, galaxyState, galaxyNGE, galaxyPlanets, galaxyAdmins)
+						result = updateGalaxy(galaxy, galaxyName, galaxyState, galaxyNGE, galaxyWebsite, galaxyPlanets, galaxyAdmins)
 					else:
 						result = "Error: You are not listed as an administrator of that galaxy."
 			else:
@@ -206,7 +209,7 @@ if (errstr == ""):
 
 		else:
 			if 0 == 0:
-				result = addGalaxy(galaxyName, galaxyNGE, galaxyPlanets, currentUser, galaxyAdmins)
+				result = addGalaxy(galaxyName, galaxyNGE, galaxyWebsite, galaxyPlanets, currentUser, galaxyAdmins)
 			else:
 				result = "Error: You don't have permission to add creature data yet."
 	else:
