@@ -606,7 +606,7 @@ a div.resTreeItem {
 .ingredientSlot {
 	width: 84px;
 	height: 84px;
-	margin: 6px;0px;6px;0px;
+	margin: 6px 0px 6px 0px;
 	border-style: solid;
 	border-width: 1px;
 	border-radius: 8px;
@@ -735,6 +735,31 @@ ul.feedback li {
 	max-height: 75px;
 	margin: 10px;
 }
+
+.inlineItemBlockList {
+	min-height: 24px;
+	width: 100%;
+	border-style: solid;
+	border-width: 2px;
+}
+div.blockUserItem {
+	padding: 4px;
+	margin: 2px;
+	display: inline-block;
+	zoom:1;
+	*display:inline;
+	border-style: dotted;
+	border-width: 1px;
+	border-radius: 8px;
+}
+div.blockUserItem img {
+	position: relative;
+	top: 2px;
+	max-height: 12px;
+	cursor: pointer;
+	opacity: 40%;
+}
+
 .sorted {
 	background-image: url(/images/downArrowGrey16.png);
 	background-repeat: no-repeat;

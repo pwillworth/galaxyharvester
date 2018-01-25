@@ -119,6 +119,12 @@ if (cursor):
 	if row[0] != None:
 		totalAmt = float(row[0])
 cursor.close()
+
+adminList = dbShared.getGalaxyAdminList(conn, currentUser).split('/option')[0]
+if len(adminList) > 0:
+	galaxyAdmin = int(adminList[15:adminList.rfind('"')])
+else:
+	galaxyAdmin = 0
 conn.close()
 
 percentOfGoal = totalAmt/20
@@ -134,4 +140,4 @@ if 'HTTP_USER_AGENT' in os.environ:
 env.globals['MOBILE_PLATFORM'] = ghShared.getMobilePlatform(os.environ['HTTP_USER_AGENT'])
 
 template = env.get_template('home.html')
-print template.render(uiTheme=uiTheme, galaxy=galaxy, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, totalAmt=totalAmt, percentOfGoal=percentOfGoal, imgNum=ghShared.imgNum, resourceGroupListShort=ghLists.getResourceGroupListShort(), professionList=ghLists.getProfessionList(galaxy), planetList=ghLists.getPlanetList(galaxy), resourceGroupList=ghLists.getResourceGroupList(), resourceTypeList=ghLists.getResourceTypeList(galaxy), galaxyList=ghLists.getGalaxyList())
+print template.render(uiTheme=uiTheme, galaxy=galaxy, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, totalAmt=totalAmt, percentOfGoal=percentOfGoal, imgNum=ghShared.imgNum, resourceGroupListShort=ghLists.getResourceGroupListShort(), professionList=ghLists.getProfessionList(galaxy), planetList=ghLists.getPlanetList(galaxy), resourceGroupList=ghLists.getResourceGroupList(), resourceTypeList=ghLists.getResourceTypeList(galaxy), galaxyList=ghLists.getGalaxyList(), galaxyAdmin=galaxyAdmin)

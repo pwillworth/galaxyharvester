@@ -48,7 +48,7 @@ a:active, .groupText {
 .resourceBox, #header, #footer {
 	background: #ccddff;
 }
-.standOut {
+.standOut, div.blockUserItem {
 	color: white;
 	background-color: #000033;
 }

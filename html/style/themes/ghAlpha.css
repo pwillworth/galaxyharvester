@@ -49,7 +49,7 @@ a:active, .groupText {
 .resourceBox, #header, #footer {
 	background: #589bac;
 }
-.standOut {
+.standOut, div.blockUserItem {
 	color: white;
 	background-color: #003344;
 }

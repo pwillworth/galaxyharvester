@@ -49,7 +49,7 @@ a:active, .groupText {
 .resourceBox, #header, #footer {
 	background: #bababa;
 }
-.standOut {
+.standOut, div.blockUserItem {
 	color: white;
 	background-color: #3d3d3d;
 }
@@ -113,4 +113,7 @@ a:hover div.resTreeItem, .slotIndicatorFilled {
 }
 #myShortcuts {
 	background: #1f1f1f;
+}
+div.inlineItemBlockList {
+	border-color: #3d3d3d;
 }

@@ -50,7 +50,7 @@ a:active, .groupText {
 	background: #000154; /* Body interior color */
 	color: #ffffff; /* Default text color */
 }
-.standOut {
+.standOut, div.blockUserItem {
 	color: white;
 	background-color: #000000; /* Use default background color */
 }

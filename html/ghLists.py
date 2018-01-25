@@ -76,6 +76,14 @@ def getSchematicTabList():
 	result += '    <option value="524288">Misc</option>'
 	return result
 
+def getGalaxyStatusList():
+	result = ''
+	result += '    <option value="0">Draft</option>'
+	result += '    <option value="1">Active</option>'
+        result += '    <option value="2">Inactive</option>'
+	result += '    <option value="3">Removed</option>'
+	return result
+
 def getOptionList(sqlStr):
 	result = ""
 	thisGroup = ""
@@ -123,7 +131,7 @@ def getResourceGroupListShort():
 	return listStr
 
 def getGalaxyList():
-	listStr = getOptionList('SELECT galaxyID, galaxyName, CASE WHEN galaxyState=1 THEN "Active" ELSE "Inactive" END FROM tGalaxy WHERE galaxyState < 3 ORDER BY galaxyState, galaxyName;')
+	listStr = getOptionList('SELECT galaxyID, galaxyName, CASE WHEN galaxyState=1 THEN "Active" ELSE "Inactive" END FROM tGalaxy WHERE galaxyState > 0 AND galaxyState < 3 ORDER BY galaxyState, galaxyName;')
 	return listStr
 
 def getPlanetList(galaxy):

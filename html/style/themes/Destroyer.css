@@ -58,7 +58,7 @@ a:active, .groupText {
 .resourceBox {
 	background: #639299; /* Body interior color */
 }
-.standOut {
+.standOut, div.blockUserItem {
 	color: white;
 	background-color: #1a3133;
 }

@@ -250,7 +250,7 @@ def getUserAttr(user, attr):
 def getUserDonated(user):
 	conn = ghConn()
 	cursor = conn.cursor()
-	cursor.execute('SELECT Sum(paymentGross) FROM tPayments WHERE payerEmail = (SELECT emailAddress FROM tUsers WHERE userID=%s)', (user))
+	cursor.execute('SELECT Sum(paymentGross) FROM tPayments WHERE payerEmail = (SELECT emailAddress FROM tUsers WHERE userID=%s)', [user])
 	row = cursor.fetchone()
 	if (row != None and row[0] != None):
 		retAttr = str(row[0])
@@ -318,9 +318,9 @@ def getUserStats(user, galaxy):
 	cursor = conn.cursor()
     # Galaxy 0 passed just combine stats for all galaxies
 	if (galaxy == 0):
-		cursor.execute('SELECT Sum(added), Sum(planet), Sum(edited), Sum(removed), Sum(verified), Sum(waypoint), Sum(repGood), Sum(repBad) FROM tUserStats WHERE userID = %s', (user))
+		cursor.execute('SELECT Sum(added), Sum(planet), Sum(edited), Sum(removed), Sum(verified), Sum(waypoint), Sum(repGood), Sum(repBad) FROM tUserStats WHERE userID = %s', [user])
 	else:
-		cursor.execute('SELECT added, planet, edited, removed, verified, waypoint, repGood, repBad FROM tUserStats WHERE userID = %s AND galaxy = %s', (user, galaxy))
+		cursor.execute('SELECT added, planet, edited, removed, verified, waypoint, repGood, repBad FROM tUserStats WHERE userID = %s AND galaxy = %s', [user, galaxy])
 	row = cursor.fetchone()
 	if (row != None and row[0] != None):
 		# build composite scores
@@ -333,6 +333,17 @@ def getUserStats(user, galaxy):
 	cursor.close()
 	conn.close()
 	return '{0},{1},{2}'.format(resScore, mapScore, repScore)
+
+def getGalaxyAdminList(conn, userID):
+        listHTML = ''
+        cursor = conn.cursor()
+        cursor.execute("SELECT tGalaxyUser.galaxyID, galaxyName FROM tGalaxyUser INNER JOIN tGalaxy ON tGalaxyUser.galaxyID = tGalaxy.galaxyID WHERE tGalaxyUser.userID='{0}' AND roleType='a';".format(userID))
+        row = cursor.fetchone()
+        while row != None:
+                listHTML += '<option value="{0}">{1}</option>'.format(row[0], row[1])
+                row = cursor.fetchone()
+        cursor.close()
+        return listHTML
 
 def getLastResourceChange():
 	conn = ghConn()
@@ -390,6 +401,17 @@ def galaxyState(galaxyID):
 	cursor.close()
 	conn.close()
 	return retVal
+
+def getGalaxyAdmins(conn, galaxyID):
+        admins = []
+        cursor = conn.cursor()
+        cursor.execute("SELECT userID FROM tGalaxyUser WHERE galaxyID=%s AND roleType='a';", [galaxyID])
+        row = cursor.fetchone()
+        while row != None:
+                admins.append(row[0])
+                row = cursor.fetchone()
+        cursor.close()
+        return admins
 
 def friendStatus(uid, ofUser):
 	# 0 = None, 1 = Added, 2 = Reciprocated

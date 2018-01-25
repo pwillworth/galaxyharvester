@@ -1,0 +1,124 @@
+{% import 'blocks.html' as blocks %}
+<!DOCTYPE html>
+<html lang="en"><head><title>Galaxy Admin - Galaxy Harvester</title>
+<link rel="stylesheet" href="/style/ghCore.css" type="text/css" />
+<link rel="stylesheet" href="/style/themes/{{ uiTheme }}.css" type="text/css" />
+<link rel="stylesheet" href="/style/autocomplete.css" type="text/css" />
+<script type="text/javascript" src="/js/ghShared.js"></script>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery.autocomplete-min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
+    $("#galaxyStatus").val("{{ galaxyState }}");
+    $(".window .close").click(function(e) {
+        e.preventDefault();
+        $("#mask, .window").hide();
+    });
+    $("#mask").click(function() {
+        $(this).hide();
+        $(".window").hide();
+    });
+    var a = $('#adminUserAdd').autocomplete({
+	      serviceUrl:BASE_SCRIPT_URL + "getUserNames.py",
+        maxHeight:200,
+        width:200,
+        onSelect: function(value,data) {addAdmin(value);$('#adminUserAdd').val('')}
+    });
+
+});
+// Add admin user
+function addAdmin(userID) {
+  foundUser = false;
+  $('#adminUsers > div').each(function () {
+    if ( $(this).text() == userID ) {
+      foundUser = true;
+    }
+  });
+  if ( foundUser == false ) {
+    $("#adminUsers").append("<div class='blockUserItem'>" + userID + "<img src='/images/xRed16.png' alt='Remove' title='Remove' onclick='this.parentNode.remove();'></img></div>");
+  }
+}
+// Managed planet list functions
+function addPlanets() {
+  $("#planetsAvailable > option:selected").each(function() {
+    $("#planetsSelected").append(this);
+  });
+}
+function removePlanets() {
+  $("#planetsSelected > option:selected").each(function() {
+    this.remove();
+  });
+}
+// Send galaxy details
+function saveGalaxy() {
+  $('#busyImgSave').css('display','block');
+  // build comma separated list of planets.
+  var planets = '';
+  $('#planetsSelected > option').each(function() {
+    planets += ($(this).attr('value') + ',');
+  });
+  // build list of admin users.
+  var admins = '';
+  $('#adminUsers > div').each(function() {
+    admins += ($(this).text() + ',');
+  });
+  // send data
+  $.post(BASE_SCRIPT_URL + 'postGalaxy.py', { galaxyID: '{{ galaxyID }}', galaxyName: $('#galaxyName').val(), galaxyState: $('#galaxyStatus').val(), galaxyNGE: $('#oGalaxyNGE').attr('checked'), galaxyPlanets: planets, galaxyAdmins: admins },
+    function(data) {
+      var result = $(data).find('resultText').eq(0).text();
+      $('#busyImgSave').css('display','none');
+      $('#galaxyMessage').hide();
+      $('#galaxyMessage').html(result);
+      $('#galaxyMessage').show(1000);
+    }, 'xml');
+}
+</script>
+{{ blocks.pageTracker() }}
+<body>
+{{ blocks.headerSection(loggedin, currentUser, loginResult, linkappend, url, imgNum, galaxyList, pictureName) }}
+
+<div id="mainContent" class="wrapper">
+  <div id="leftNavContent" class="ghCol">
+    <div id="helpTopics" class="ghWidgetBox">
+    <div class="boxHeader">Galaxy Admin</div>
+      <p>You are designated admin on the galaxies listed below, select one to edit it.</p>
+      <select size="20" name="galaxyAdminSel" onchange="document.location.href='/galaxy.py/'+this.value;">{{ galaxyAdminList }}</select>
+    </div>
+  </div>
+  <div id="rightMainContent" class="ghCol">
+    <div class="ghWidgetBox">
+      <h4 id="galaxyMessage">{{ msgHTML }}</h4>
+      <form>
+        <table class="bigForm">
+          <tr><td>Name:</td><td><input id="galaxyName" size="20" maxlength="127" value="{{ galaxyName }}"/></td></tr>
+{% if galaxyID != 'new' and galaxyID != '' %}
+          <tr><td>Status:</td><td><select id="galaxyStatus">{{ galaxyStatusList }}</select></td></tr>
+{% endif %}
+          <tr><td>Is NGE:</td><td><input id="oGalaxyNGE" type="checkbox" {{ galaxyCheckedNGE }}/></td></tr>
+          <tr><td colspan=2><h3>Extra Planets:</h3></td></tr>
+          <tr>
+            <td>Available:<input type="button" value="Add" onclick="addPlanets();"><br/><select multiple size="12" id="planetsAvailable">{{ availablePlanetList }}</select></td>
+            <td>Selected:<input type="button" value="Remove" onclick="removePlanets();"><br/><select multiple size="12" id="planetsSelected">{{ galaxyPlanetList }}</select></td>
+          </tr>
+          <tr><td>Galaxy Admins:</td><td></td></tr>
+          <tr><td colspan="2"><div id="adminUsers" class="inlineItemBlockList"><input id="adminUserAdd" size="12" />
+{% for admin in galaxyAdmins %}
+            <div class="blockUserItem">{{ admin }}<img src='/images/xRed16.png' alt='Remove' title='Remove' onclick='this.parentNode.remove();'></img></div>
+{% endfor %}          
+          </div></td></tr>
+          <tr><td><div id="busyImgSave" style="display: none;"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div></td><td><input type="button" value="Save" onclick="saveGalaxy();"/></td></tr>
+        </table>
+      </form>
+    </div>
+{% if loggedin == 0 %}
+	    <div id="addGalaxyMask" class="disabled">Login First</div>
+{% else %}
+	    <div id="addGalaxyMask"></div>
+{% endif %}
+  </div>
+</div>
+{{ blocks.pageFooter() }}
+{{ blocks.joinForm(loggedin, ['?src_url=galaxy.py&', linkappend]|join, url) }}
+<div id="mask"></div>
+</body></html>

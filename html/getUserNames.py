@@ -34,15 +34,11 @@ except ImportError:
 form = cgi.FieldStorage()
 
 q = form.getfirst('query', '')
-galaxy = form.getfirst('galaxy', '')
 
 # escape input to prevent sql injection
 q = dbShared.dbInsertSafe(q)
-galaxy = dbShared.dbInsertSafe(galaxy)
 
 errstr = ''
-if galaxy.isdigit() == False:
-	errstr = 'Error: You must specify a galaxy.'
 
 users = ['']
 criteriaStr = ''

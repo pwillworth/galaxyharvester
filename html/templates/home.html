@@ -154,7 +154,10 @@ function filterTopResources() {
       <li><a href="{{ BASE_SCRIPT_URL }}help.py?{{ linkappend }}">Help</a></li>
 {% if loggedin == 1 %}
 	      <li><a href="/exports/current{{ galaxy }}.xml" target="_new">XML Export File</a></li>
-	      <li><a href="/exports/current{{ galaxy }}.csv" target="_new">CSV Export File</a></li>
+        <li><a href="/exports/current{{ galaxy }}.csv" target="_new">CSV Export File</a></li>
+{% if galaxyAdmin > 0 %}
+        <li><a href="{{ BASE_SCRIPT_URL }}galaxy.py/{{ galaxyAdmin }}?{{ linkappend }}">Galaxy Admin</a></li>
+{% endif %}
 {% endif %}
     <h3>Related Sites</h3>
       <li><a href="http://www.swgemu.com" target="_blank">SWG Emu</a></li>
