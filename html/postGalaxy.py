@@ -31,6 +31,10 @@ import MySQLdb
 from xml.dom import minidom
 import ghNames
 import ghShared
+sys.path.append("../")
+from mailer import Mailer
+from mailer import Message
+import mailInfo
 
 #
 # Get current url
@@ -70,7 +74,7 @@ else:
 galaxy = form.getfirst("galaxyID", "")
 galaxyName = form.getfirst("galaxyName", "")
 galaxyState = form.getfirst("galaxyState", "")
-galaxyNGE = form.getfirst("galaxyNGE", "")
+galaxyNGE = form.getfirst("galaxyNGE", "0")
 galaxyWebsite = form.getfirst("galaxyWebsite", "")
 galaxyPlanets = form.getfirst("galaxyPlanets", "")
 galaxyAdmins = form.getfirst("galaxyAdmins", "")
@@ -96,6 +100,17 @@ if (sess != ''):
 	logged_state = 1
 	currentUser = sess
 
+def sendGalaxyNotifyMail(galaxyID, galaxyName, user):
+	# send message
+	message = Message(From="\"Galaxy Harvester Registration\" <admin@galaxyharvester.net>",To="galaxyharvester@gmail.com")
+	message.Subject = "New Galaxy Submitted For Review"
+	link = "http://galaxyharvester.net/galaxy.py/{0}".format(galaxyID)
+	message.Body = user + " has submitted a new galaxy for review.\n\n" + link
+	message.Html = "<div><img src='http://galaxyharvester.net/images/ghLogoLarge.png'/></div><p>" + user + " has submitted a new galaxy for review.</p><p><a style='text-decoration:none;' href='" + link + "'><div style='width:170px;font-size:18px;font-weight:600;color:#feffa1;background-color:#003344;padding:8px;margin:4px;border:1px solid black;'>Click Here To Review</div></a><br/>or copy and paste link: " + link + "</p>"
+	mailer = Mailer(mailInfo.MAIL_HOST)
+	mailer.login(mailInfo.MAIL_USER, mailInfo.MAIL_PASS)
+	mailer.send(message)
+	return 'email sent'
 
 def addGalaxy(galaxyName, galaxyNGE, galaxyWebsite, galaxyPlanets, userID, galaxyAdmins):
 	# Add new draft galaxy
@@ -111,6 +126,13 @@ def addGalaxy(galaxyName, galaxyNGE, galaxyWebsite, galaxyPlanets, userID, galax
 	except Exception, e:
 		returnStr = 'Error: Add Failed. {0}'.format(e)
 
+	cursor.execute('SELECT LAST_INSERT_ID();')
+	row = cursor.fetchone()
+	if row != None:
+		galaxyID = row[0]
+	else:
+		galaxyID = 0
+
 	for planet in galaxyPlanets:
 		if planet.isdigit():
 			cursor.execute("INSERT INTO tGalaxyPlanet (galaxyID, planetID) VALUES (LAST_INSERT_ID(), %s)", [planet])
@@ -121,6 +143,7 @@ def addGalaxy(galaxyName, galaxyNGE, galaxyWebsite, galaxyPlanets, userID, galax
 			result = result + cursor.rowcount
 
 	if returnStr.find("Error:") == -1 and result > 0:
+		sendGalaxyNotifyMail(galaxyID, galaxyName, userID)
 		returnStr = "Galaxy submitted for review."
 	cursor.close()
 	conn.close()
@@ -168,8 +191,6 @@ if (len(galaxy) > 0 and galaxy != 'new' and galaxy.isdigit() != True):
 	errstr = errstr + "Error: Galaxy ID was not a valid number.\n"
 if len(galaxy) > 0 and galaxy != 'new' and galaxyState.isdigit() != True:
 	errstr = errstr + "Error: Galaxy State was not a valid number.\n"
-if (len(galaxyState) > 0 and galaxyState.isdigit() != True):
-	errstr = errstr + "Error: Galaxy State was not a valid number.\n"
 
 if galaxyNGE == '1' or galaxyNGE == 'checked':
 	galaxyNGE = 1
@@ -187,7 +208,7 @@ if (errstr == ""):
 				conn = dbShared.ghConn()
 				cursor = conn.cursor()
 			except Exception:
-				result = "Error: could not connect to database"
+				result = "Error: could not connect to database\n"
 
 			if (cursor):
 				# Forbid approval by normal users
@@ -195,25 +216,45 @@ if (errstr == ""):
 				row = cursor.fetchone()
 				cursor.close()
 				if row[0] == 0 and galaxyState != '0' and currentUser != 'ioscode':
-					result = "Error: You may not change the status of this galaxy until it has been approved by the site administrator."
+					result = "Error: You may not change the status of this galaxy until it has been approved by the site administrator.\n"
 				else:
 					# Get user galaxy admin status
 					adminList = dbShared.getGalaxyAdminList(conn, currentUser)
 					if '<option value="{0}">'.format(galaxy) in adminList:
 						result = updateGalaxy(galaxy, galaxyName, galaxyState, galaxyNGE, galaxyWebsite, galaxyPlanets, galaxyAdmins)
 					else:
-						result = "Error: You are not listed as an administrator of that galaxy."
+						result = "Error: You are not listed as an administrator of that galaxy.\n"
 			else:
-				result = "Error: No database connection"
+				result = "Error: No database connection\n"
 			conn.close()
 
 		else:
-			if 0 == 0:
-				result = addGalaxy(galaxyName, galaxyNGE, galaxyWebsite, galaxyPlanets, currentUser, galaxyAdmins)
+			try:
+				conn = dbShared.ghConn()
+				cursor = conn.cursor()
+			except Exception:
+				result = "Error: could not connect to database\n"
+
+			if (cursor):
+				cursor.execute("SELECT galaxyName FROM tGalaxy WHERE galaxyState=0 AND submittedBy=%s", [currentUser])
+				row = cursor.fetchone()
+				if row != None:
+					errstr = errstr + "Error: You already have a galaxy waiting for review ({0}).  Please wait until it is approved before submitting another.".format(row[0])
+				else:
+					cursor.execute("SELECT galaxyID FROM tGalaxy WHERE galaxyState < 3 AND galaxyName=%s", [galaxyName])
+					row = cursor.fetchone()
+					if row != None:
+						errstr = errstr + "Error: A galaxy already exists with that name, please choose a different name.\n"
+				cursor.close()
+
+				if errstr == "":
+					result = addGalaxy(galaxyName, galaxyNGE, galaxyWebsite, galaxyPlanets, currentUser, galaxyAdmins)
+				else:
+					result = errstr
 			else:
-				result = "Error: You don't have permission to add creature data yet."
+				result = "Error: No Database connection.\n"
 	else:
-		result = "Error: must be logged in to add galaxy data"
+		result = "Error: must be logged in to add galaxy data\n"
 else:
 	result = errstr
 

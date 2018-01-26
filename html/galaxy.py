@@ -32,6 +32,7 @@ import ghLists
 from jinja2 import Environment, FileSystemLoader
 
 
+# Get extra planets for a galaxy or the available ones they can add
 def getPlanetList(conn, galaxy, available):
 	listHTML = ''
 	if not galaxy.isdigit():
@@ -132,6 +133,7 @@ def main():
 		galaxyAdminList = dbShared.getGalaxyAdminList(conn, currentUser)
 		availablePlanetList = getPlanetList(conn, galaxy, 1)
 		if galaxy.isdigit():
+			# get the galaxy details for edit
 			galaxyCursor = conn.cursor()
 			galaxyCursor.execute('SELECT galaxyName, galaxyState, galaxyNGE, website FROM tGalaxy WHERE galaxyID={0};'.format(galaxy))
 			galaxyRow = galaxyCursor.fetchone()
