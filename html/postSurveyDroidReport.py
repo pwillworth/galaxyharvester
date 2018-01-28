@@ -71,18 +71,13 @@ def updatePlanetSpawns(planetID, resources, galaxyID, userID):
 					spawnVerifyCount += 1
 		else:
 			# Post as new resource
-			# try to figure out resource type id
-			cursor.execute("SELECT resourceType FROM tResourceType WHERE resourceTypeName=%s;", [spawn.resourceTypeName])
-			row = cursor.fetchone()
-			if row != None:
-				spawn.resourceType = row[0]
-				status = postResource.addResource(spawn.spawnName, galaxyID, spawn.resourceType, str(spawn.stats.CR), str(spawn.stats.CD), str(spawn.stats.DR), str(spawn.stats.FL), str(spawn.stats.HR), str(spawn.stats.MA), str(spawn.stats.PE), str(spawn.stats.OQ), str(spawn.stats.SR), str(spawn.stats.UT), str(spawn.stats.ER), userID)
-				spawnID = dbShared.getSpawnID(spawn.spawnName, galaxyID)
-				status = postResource.addResPlanet(spawnID, planetID, spawn.spawnName, userID, galaxyID) + '   ' + status
-				if (status.find("Error:") > -1):
-					spawnErrorCount += 1
-				else:
-					spawnAddCount += 1
+			status = postResource.addResource(spawn.spawnName, galaxyID, spawn.resourceType, str(spawn.stats.CR), str(spawn.stats.CD), str(spawn.stats.DR), str(spawn.stats.FL), str(spawn.stats.HR), str(spawn.stats.MA), str(spawn.stats.PE), str(spawn.stats.OQ), str(spawn.stats.SR), str(spawn.stats.UT), str(spawn.stats.ER), userID)
+			spawnID = dbShared.getSpawnID(spawn.spawnName, galaxyID)
+			status = postResource.addResPlanet(spawnID, planetID, spawn.spawnName, userID, galaxyID) + '   ' + status
+			if (status.find("Error:") > -1):
+				spawnErrorCount += 1
+			else:
+				spawnAddCount += 1
 
 	# Check for resources that have despawned
 	cursor.execute("SELECT tResources.spawnID, spawnName FROM tResources INNER JOIN tResourcePlanet ON tResources.spawnID = tResourcePlanet.spawnID WHERE tResources.galaxy=%s AND tResourcePlanet.unavailable IS NULL AND tResourcePlanet.planetID=%s;", [galaxyID, planetID])
@@ -106,6 +101,16 @@ def updatePlanetSpawns(planetID, resources, galaxyID, userID):
 	conn.close()
 
 	result = "Report Upload Complete...\n<br/>{0} Errors\n<br/>{1} Spawns Added\n<br/>{2} Spawns Verified\n<br/>{3} Spawns Removed.".format(spawnErrorCount, spawnAddCount, spawnVerifyCount, spawnRemovedCount)
+	return result
+
+def getSpawnsJSON(planetID, resources, message):
+	result = '{  "response" : { "message" : "' + message + '", "planet" : ' + str(planetID) + ', "resources" : ['
+	for spawn in resources:
+		result = result + '{'
+		result = result + spawn.getJSON()
+		result = result[:-2] + '},\n'
+
+	result = result[:-2] + '  ] } }\n'
 	return result
 
 
@@ -144,6 +149,7 @@ def main():
 		sid = form.getfirst('gh_sid', '')
 
 	errstr=''
+
 	if not form.has_key("reportFile"):
 		errstr = "No report file sent."
 	else:
@@ -152,6 +158,7 @@ def main():
 
 	src_url = form.getfirst('src_url', '/surveyList.py')
 	galaxyID = form.getfirst('reportGalaxy', '')
+	dataAction = form.getfirst('dataAction', '')
 	# escape input to prevent sql injection
 	sid = dbShared.dbInsertSafe(sid)
 	galaxyID = dbShared.dbInsertSafe(galaxyID)
@@ -191,6 +198,8 @@ def main():
 		typeMatch = None
 		nameMatch = None
 		statMatch = None
+		conn = dbShared.ghConn()
+
 		while 1:
 			line = rpt_data.file.readline()
 			if not line: break;
@@ -205,18 +214,23 @@ def main():
 					typeMatch = re.match("\t([a-zA-Z ]+)", line)
 					nameMatch = re.match("\t\t\\\#pcontrast1 (\w+)\\\#", line)
 					if typeMatch:
-						thisType = typeMatch.group(1)
+						thisType = dbShared.getResourceTypeID(conn, typeMatch.group(1))
+						thisTypeName = typeMatch.group(1)
 					if nameMatch:
 						if thisSpawn.spawnName != '':
 							resourcesFound.append(thisSpawn)
 						thisName = nameMatch.group(1)
 						thisSpawn = ghObjects.resourceSpawn()
 						thisSpawn.spawnName = thisName.lower()
-						thisSpawn.resourceTypeName = thisType
+						thisSpawn.resourceType = thisType
+						thisSpawn.resourceTypeName = thisTypeName
 					# Check for resource stats from enhanced droid reports
 					statMatch = re.match("\t\t\t(ER|CR|CD|DR|FL|HR|MA|PE|OQ|SR|UT): (\d+)", line)
 					if statMatch:
 						setattr(thisSpawn.stats, statMatch.group(1), int(statMatch.group(2)))
+
+		conn.close()
+
 		if thisSpawn.spawnName != '':
 			resourcesFound.append(thisSpawn)
 
@@ -229,22 +243,36 @@ def main():
 			result = "Error: No planet found in file header."
 
 		if planetID > 0:
-			result = updatePlanetSpawns(planetID, resourcesFound, galaxyID, currentUser)
+			if dataAction == 'returnJSON':
+				result = getSpawnsJSON(planetID, resourcesFound, "{0} spawns loaded from report".format(len(resourcesFound)))
+			else:
+				result = updatePlanetSpawns(planetID, resourcesFound, galaxyID, currentUser)
 		else:
 			result = "Error: Could not determine planet from file header."
 
-	if useCookies:
-		cookies['surveyReportAttempt'] = result
-		cookies['surveyReportAttempt']['max-age'] = 60
-		print cookies
-	else:
-		linkappend = linkappend + '&surveyReportAttempt=' + urllib.quote(result)
-
-	print "Content-Type: text/html\n"
-	if src_url != None:
-		print '<html><head><script type=text/javascript>document.location.href="' + src_url + linkappend + '"</script></head><body></body></html>'
-	else:
+	if dataAction == 'returnJSON':
+		# add resources page uses json data to populate grid
+		print "Content-Type: text/json\n"
 		print result
+	else:
+		# survey list page will load result message from cookie after redirect
+		if useCookies:
+			cookies['surveyReportAttempt'] = result
+			cookies['surveyReportAttempt']['max-age'] = 60
+			print cookies
+		else:
+			linkappend = linkappend + '&surveyReportAttempt=' + urllib.quote(result)
+
+		print "Content-Type: text/html\n"
+		if src_url != None:
+			print '<html><head><script type=text/javascript>document.location.href="' + src_url + linkappend + '"</script></head><body></body></html>'
+		else:
+			print result
+
+	if result.find("Error:") > -1:
+		sys.exit(500)
+	else:
+		sys.exit(200)
 
 if __name__ == "__main__":
         main()

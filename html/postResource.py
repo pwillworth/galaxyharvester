@@ -330,12 +330,12 @@ def main():
 					result = result + addResStats(spawnID, resType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER, forceOp, currentUser, galaxy)
 				else:
 					result = addResPlanet(spawnID, planet, spawnName, currentUser, galaxy)
-					result = result + '  ' + addResStats(spawnID, resType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER, forceOp, currentUser)
+					result = result + '  ' + addResStats(spawnID, resType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER, forceOp, currentUser, galaxy)
 			else:
 				# new spawn
 				result = addResource(spawnName, galaxy, resType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER, currentUser)
 				spawnID = dbShared.getSpawnID(spawnName, galaxy)
-				result = addResPlanet(spawnID, planet, spawnName, currentUser) + '  ' + result
+				result = addResPlanet(spawnID, planet, spawnName, currentUser, galaxy) + '  ' + result
 
 		else:
 			if logged_state > 0:

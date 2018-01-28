@@ -770,8 +770,8 @@ ore_extrusive_hoth	Hothian Extrusive Ore	mineral	ore_extrusive	1	2	200	1000	0	0	
 ore_intrusive_hoth	Hothian Intrusive Ore	mineral	ore_intrusive	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	11
 ore_carbonate_hoth	Hothian Carbonate Ore	mineral	ore_carbonate	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_carbonate	ore_carbonate	11
 ore_siliclastic_hoth	Hothian Siliclastic Ore	mineral	ore_siliclastic	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_siliclastic	ore_siliclastic	11
-petrochem_fuel_liquid_hoth	Hothian Liquid Petrochem Fuel	chemical	fuel_petrochem_liquid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	11
-petrochem_fuel_solid_hoth	Hothian Solid Petrochem Fuel	mineral	fuel_petrochem_solid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	11
+petrochem_fuel_liquid_hoth	Hothian Liquid Petro Fuel	chemical	fuel_petrochem_liquid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	11
+petrochem_fuel_solid_hoth	Hothian Solid Petro Fuel	mineral	fuel_petrochem_solid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	11
 radioactive_hoth	Hothian Radioactive	mineral	radioactive	1	2	0	0	0	0	1	800	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	radioactive	radioactive	11
 steel_hoth	Hothian Steel	mineral	steel	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	steel	steel	11
 aluminum_mustafar	Mustafarian Aluminum	mineral	aluminum	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	aluminum	aluminum	15
@@ -785,8 +785,8 @@ ore_extrusive_mustafar	Mustafarian Extrusive Ore	mineral	ore_extrusive	1	2	200	1
 ore_intrusive_mustafar	Mustafarian Intrusive Ore	mineral	ore_intrusive	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	15
 ore_carbonate_mustafar	Mustafarian Carbonate Ore	mineral	ore_carbonate	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_carbonate	ore_carbonate	15
 ore_siliclastic_mustafar	Mustafarian Siliclastic Ore	mineral	ore_siliclastic	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_siliclastic	ore_siliclastic	15
-petrochem_fuel_liquid_mustafar	Mustafarian Liquid Petrochem Fuel	chemical	fuel_petrochem_liquid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	15
-petrochem_fuel_solid_mustafar	Mustafarian Solid Petrochem Fuel	mineral	fuel_petrochem_solid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	15
+petrochem_fuel_liquid_mustafar	Mustafarian Liquid Petro Fuel	chemical	fuel_petrochem_liquid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	15
+petrochem_fuel_solid_mustafar	Mustafarian Solid Petro Fuel	mineral	fuel_petrochem_solid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	15
 radioactive_mustafar	Mustafarian Radioactive	mineral	radioactive	1	2	0	0	0	0	1	800	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	radioactive	radioactive	15
 steel_mustafar	Mustafarian Steel	mineral	steel	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	steel	steel	15
 bone_avian_mustafar	Mustafarian Avian Bones	creature_structural	bone_avian	1	1	0	0	0	0	1	700	0	0	0	0	1	600	0	0	1	1000	100	500	1	500	0	0	bone	bone	15
@@ -845,8 +845,8 @@ ore_extrusive_taanab	Taanab Extrusive Ore	mineral	ore_extrusive	1	2	200	1000	0	0
 ore_intrusive_taanab	Taanab Intrusive Ore	mineral	ore_intrusive	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	16
 ore_carbonate_taanab	Taanab Carbonate Ore	mineral	ore_carbonate	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_carbonate	ore_carbonate	16
 ore_siliclastic_taanab	Taanab Siliclastic Ore	mineral	ore_siliclastic	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_siliclastic	ore_siliclastic	16
-petrochem_fuel_liquid_taanab	Taanab Liquid Petrochem Fuel	chemical	fuel_petrochem_liquid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	16
-petrochem_fuel_solid_taanab	Taanab Solid Petrochem Fuel	mineral	fuel_petrochem_solid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	16
+petrochem_fuel_liquid_taanab	Taanab Liquid Petro Fuel	chemical	fuel_petrochem_liquid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	16
+petrochem_fuel_solid_taanab	Taanab Solid Petro Fuel	mineral	fuel_petrochem_solid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	16
 radioactive_taanab	Taanab Radioactive	mineral	radioactive	1	2	0	0	0	0	1	800	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	radioactive	radioactive	16
 steel_taanab	Taanab Steel	mineral	steel	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	steel	steel	16
 bone_avian_taanab	Taanab Avian Bones	creature_structural	bone_avian	1	1	0	0	0	0	1	700	0	0	0	0	1	600	0	0	1	1000	100	500	1	500	0	0	bone	bone	16
@@ -905,8 +905,8 @@ ore_extrusive_kaas	Kaasian Extrusive Ore	mineral	ore_extrusive	1	2	200	1000	0	0	
 ore_intrusive_kaas	Kaasian Intrusive Ore	mineral	ore_intrusive	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	12
 ore_carbonate_kaas	Kaasian Carbonate Ore	mineral	ore_carbonate	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_carbonate	ore_carbonate	12
 ore_siliclastic_kaas	Kaasian Siliclastic Ore	mineral	ore_siliclastic	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_siliclastic	ore_siliclastic	12
-petrochem_fuel_liquid_kaas	Kaasian Liquid Petrochem Fuel	chemical	fuel_petrochem_liquid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	12
-petrochem_fuel_solid_kaas	Kaasian Solid Petrochem Fuel	mineral	fuel_petrochem_solid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	12
+petrochem_fuel_liquid_kaas	Kaasian Liquid Petro Fuel	chemical	fuel_petrochem_liquid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	12
+petrochem_fuel_solid_kaas	Kaasian Solid Petro Fuel	mineral	fuel_petrochem_solid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	12
 radioactive_kaas	Kaasian Radioactive	mineral	radioactive	1	2	0	0	0	0	1	800	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	radioactive	radioactive	12
 steel_kaas	Kaasian Steel	mineral	steel	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	steel	steel	12
 aluminum_mandalore	Mandalore Aluminum	mineral	aluminum	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	aluminum	aluminum	14
@@ -920,8 +920,8 @@ ore_extrusive_mandalore	Mandalore Extrusive Ore	mineral	ore_extrusive	1	2	200	10
 ore_intrusive_mandalore	Mandalore Intrusive Ore	mineral	ore_intrusive	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	14
 ore_carbonate_mandalore	Mandalore Carbonate Ore	mineral	ore_carbonate	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_carbonate	ore_carbonate	14
 ore_siliclastic_mandalore	Mandalore Siliclastic Ore	mineral	ore_siliclastic	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_siliclastic	ore_siliclastic	14
-petrochem_fuel_liquid_mandalore	Mandalore Liquid Petrochem Fuel	chemical	fuel_petrochem_liquid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	14
-petrochem_fuel_solid_mandalore	Mandalore Solid Petrochem Fuel	mineral	fuel_petrochem_solid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	14
+petrochem_fuel_liquid_mandalore	Mandalore Liquid Petro Fuel	chemical	fuel_petrochem_liquid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	14
+petrochem_fuel_solid_mandalore	Mandalore Solid Petro Fuel	mineral	fuel_petrochem_solid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	14
 radioactive_mandalore	Mandalore Radioactive	mineral	radioactive	1	2	0	0	0	0	1	800	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	radioactive	radioactive	14
 steel_mandalore	Mandalore Steel	mineral	steel	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	steel	steel	14
 aluminum_kashyyyk	Kashyyyk Aluminum	mineral	aluminum	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	aluminum	aluminum	13
@@ -935,8 +935,8 @@ ore_extrusive_kashyyyk	Kashyyyk Extrusive Ore	mineral	ore_extrusive	1	2	200	1000
 ore_intrusive_kashyyyk	Kashyyyk Intrusive Ore	mineral	ore_intrusive	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	13
 ore_carbonate_kashyyyk	Kashyyyk Carbonate Ore	mineral	ore_carbonate	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_carbonate	ore_carbonate	13
 ore_siliclastic_kashyyyk	Kashyyyk Siliclastic Ore	mineral	ore_siliclastic	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_siliclastic	ore_siliclastic	13
-petrochem_fuel_liquid_kashyyyk	Kashyyyk Liquid Petrochem Fuel	chemical	fuel_petrochem_liquid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	13
-petrochem_fuel_solid_kashyyyk	Kashyyyk Solid Petrochem Fuel	mineral	fuel_petrochem_solid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	13
+petrochem_fuel_liquid_kashyyyk	Kashyyyk Liquid Petro Fuel	chemical	fuel_petrochem_liquid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	13
+petrochem_fuel_solid_kashyyyk	Kashyyyk Solid Petro Fuel	mineral	fuel_petrochem_solid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	13
 radioactive_kashyyyk	Kashyyyk Radioactive	mineral	radioactive	1	2	0	0	0	0	1	800	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	radioactive	radioactive	13
 steel_kashyyyk	Kashyyyk Steel	mineral	steel	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	steel	steel	13
 bone_avian_kashyyyk	Kashyyyk Avian Bones	creature_structural	bone_avian	1	1	0	0	0	0	1	700	0	0	0	0	1	600	0	0	1	1000	100	500	1	500	0	0	bone	bone	13
@@ -995,8 +995,8 @@ ore_extrusive_lothal	Lothal Extrusive Ore	mineral	ore_extrusive	1	2	200	1000	0	0
 ore_intrusive_lothal	Lothal Intrusive Ore	mineral	ore_intrusive	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	17
 ore_carbonate_lothal	Lothal Carbonate Ore	mineral	ore_carbonate	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_carbonate	ore_carbonate	17
 ore_siliclastic_lothal	Lothal Siliclastic Ore	mineral	ore_siliclastic	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_siliclastic	ore_siliclastic	17
-petrochem_fuel_liquid_lothal	Lothal Liquid Petrochem Fuel	chemical	fuel_petrochem_liquid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	17
-petrochem_fuel_solid_lothal	Lothal Solid Petrochem Fuel	mineral	fuel_petrochem_solid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	17
+petrochem_fuel_liquid_lothal	Lothal Liquid Petro Fuel	chemical	fuel_petrochem_liquid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	17
+petrochem_fuel_solid_lothal	Lothal Solid Petro Fuel	mineral	fuel_petrochem_solid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	17
 radioactive_lothal	Lothal Radioactive	mineral	radioactive	1	2	0	0	0	0	1	800	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	radioactive	radioactive	17
 steel_lothal	Lothal Steel	mineral	steel	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	steel	steel	17
 bone_avian_lothal	Lothal Avian Bones	creature_structural	bone_avian	1	1	0	0	0	0	1	700	0	0	0	0	1	600	0	0	1	1000	100	500	1	500	0	0	bone	bone	17
@@ -1055,8 +1055,8 @@ ore_extrusive_jakku	Jakkuan Extrusive Ore	mineral	ore_extrusive	1	2	200	1000	0	0
 ore_intrusive_jakku	Jakkuan Intrusive Ore	mineral	ore_intrusive	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	18
 ore_carbonate_jakku	Jakkuan Carbonate Ore	mineral	ore_carbonate	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_carbonate	ore_carbonate	18
 ore_siliclastic_jakku	Jakkuan Siliclastic Ore	mineral	ore_siliclastic	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_siliclastic	ore_siliclastic	18
-petrochem_fuel_liquid_jakku	Jakkuan Liquid Petrochem Fuel	chemical	fuel_petrochem_liquid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	18
-petrochem_fuel_solid_jakku	Jakkuan Solid Petrochem Fuel	mineral	fuel_petrochem_solid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	18
+petrochem_fuel_liquid_jakku	Jakkuan Liquid Petro Fuel	chemical	fuel_petrochem_liquid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	18
+petrochem_fuel_solid_jakku	Jakkuan Solid Petro Fuel	mineral	fuel_petrochem_solid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	18
 radioactive_jakku	Jakkuan Radioactive	mineral	radioactive	1	2	0	0	0	0	1	800	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	radioactive	radioactive	18
 steel_jakku	Jakkuan Steel	mineral	steel	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	steel	steel	18
 bone_avian_jakku	Jakkuan Avian Bones	creature_structural	bone_avian	1	1	0	0	0	0	1	700	0	0	0	0	1	600	0	0	1	1000	100	500	1	500	0	0	bone	bone	18

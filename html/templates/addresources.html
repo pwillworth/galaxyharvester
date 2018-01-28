@@ -8,49 +8,56 @@
 <script type="text/javascript">
 	var rownum = 0;
 	$(document).ready(function() {
-	    $("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
-    	    if (getCookie("addResourcesFilterTypes",true) == "false") {
+		$("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
+		$("#reportGalaxy").val($("#galaxySel").val());
+    	if (getCookie("addResourcesFilterTypes",true) == "false") {
         	$("#oFilterTypes").removeAttr("checked");
-    	    }
+    	}
 	    if ($("#galaxySel option:selected").attr("group") == "Inactive") {
 	        $("#addResMask").addClass("disabled");
 	        $("#addResMask").html("Inactive Galaxy");
 	        $("#sendData").attr("disabled","disabled");
 	    }
-	    loadPlanetSel($("#galaxySel option:selected").val(), '<option value=0>&lt;Select&gt;</option>');
+		loadPlanetSel($("#galaxySel option:selected").val(), '<option value=0>&lt;Select&gt;</option>');
 	    addResourceRow();
 	});
 	function addResourceRow() {
-	    if (true) {
-	      var typeBox = "typeSel" + rownum;
-	      $("#addResourceTable").append("<tr height=16px valign=middle id='resRow"+rownum+"'><td><input type='text' size=14 maxlength=255 id='resName"+rownum+"' onblur='getResource(this);'{{ disableStr }}></td>"+
-	        "<td><select name='"+typeBox+"' id='"+typeBox+"' class='resourceTypeSelector' style='width:200px;' onchange='maskStats(this);' onblur='getResourceFuzzy(this,"+rownum+");'></select></td>"+
-	        "<td><input type='text' size=2 maxlength=4 id='ER"+rownum+"' name='ER"+rownum+"'></td>"+
-	        "<td><input type='text' size=2 maxlength=4 id='CR"+rownum+"' name='CR"+rownum+"'></td>"+
-	        "<td><input type='text' size=2 maxlength=4 id='CD"+rownum+"' name='CD"+rownum+"'></td>"+
-	        "<td><input type='text' size=2 maxlength=4 id='DR"+rownum+"' name='DR"+rownum+"'></td>"+
-	        "<td><input type='text' size=2 maxlength=4 id='FL"+rownum+"' name='FL"+rownum+"'></td>"+
-	        "<td><input type='text' size=2 maxlength=4 id='HR"+rownum+"' name='HR"+rownum+"'></td>"+
-	        "<td><input type='text' size=2 maxlength=4 id='MA"+rownum+"' name='MA"+rownum+"'></td>"+
-	        "<td><input type='text' size=2 maxlength=4 id='PE"+rownum+"' name='PE"+rownum+"'></td>"+
-	        "<td><input type='text' size=2 maxlength=4 id='OQ"+rownum+"' name='OQ"+rownum+"'></td>"+
-	        "<td><input type='text' size=2 maxlength=4 id='SR"+rownum+"' name='SR"+rownum+"'></td>"+
-	        "<td><input type='text' size=2 maxlength=4 id='UT"+rownum+"' name='UT"+rownum+"'></td>"+
-	        "<td><div id='addInfo"+rownum+"'></div></td>"+
-	        "</tr>");
-	      loadTypes("#"+typeBox);
-	      rownum+=1;
-	    }
+	    var typeBox = 'typeSel' + rownum;
+		$('#addResourceTable').append('<tr height="16" valign="middle" id="resRow'+rownum+'">'+
+			'<td><input type="text" size="14" maxlength="255" id="resName'+rownum+'" onblur="getResource(this);"{{ disableStr }}></input></td>'+
+	        '<td><select name="'+typeBox+'" id="'+typeBox+'" class="resourceTypeSelector" style="width:200px;" onchange="maskStats(this);" onblur="getResourceFuzzy(this,'+rownum+');"></select></td>'+
+	        '<td><input type="text" size=2 maxlength=4 id="ER'+rownum+'" name="ER'+rownum+'"></input></td>'+
+	        '<td><input type="text" size=2 maxlength=4 id="CR'+rownum+'" name="CR'+rownum+'"></input></td>'+
+	        '<td><input type="text" size=2 maxlength=4 id="CD'+rownum+'" name="CD'+rownum+'"></input></td>'+
+	        '<td><input type="text" size=2 maxlength=4 id="DR'+rownum+'" name="DR'+rownum+'"></input></td>'+
+	        '<td><input type="text" size=2 maxlength=4 id="FL'+rownum+'" name="FL'+rownum+'"></input></td>'+
+	        '<td><input type="text" size=2 maxlength=4 id="HR'+rownum+'" name="HR'+rownum+'"></input></td>'+
+	        '<td><input type="text" size=2 maxlength=4 id="MA'+rownum+'" name="MA'+rownum+'"></input></td>'+
+	        '<td><input type="text" size=2 maxlength=4 id="PE'+rownum+'" name="PE'+rownum+'"></input></td>'+
+	        '<td><input type="text" size=2 maxlength=4 id="OQ'+rownum+'" name="OQ'+rownum+'"></input></td>'+
+	        '<td><input type="text" size=2 maxlength=4 id="SR'+rownum+'" name="SR'+rownum+'"></input></td>'+
+	        '<td><input type="text" size=2 maxlength=4 id="UT'+rownum+'" name="UT'+rownum+'"></input></td>'+
+	        '<td><div id="addInfo'+rownum+'"></div></td>'+
+	        '</tr>');
+	    loadTypes('#'+typeBox);
+	    rownum+=1;
 	}
 	// Load the Resource Type Drop down(s) based on option
 	function loadTypes(typeBoxSelector) {
 	    var galaxyFilter = $("#galaxySel").val();
 	    var planetVal = $("#planetSel").val();
-            if ( $("#oFilterTypes").attr("checked") == undefined ) {
+	    if ( $("#oFilterTypes").attr("checked") == undefined ) {
 	        galaxyFilter = -1;
-		planetVal = -1;
-	    }
-	    $(typeBoxSelector).load("getResourceTypeList.py", {galaxy:galaxyFilter, planetID:planetVal});
+	        planetVal = -1;
+		}
+		// Set value from tag after loading incase populating from survey droid report
+		$(typeBoxSelector).load("getResourceTypeList.py", {galaxy:galaxyFilter, planetID:planetVal},
+		function(data) {
+			if ( $(this).attr('tag') != '') {
+				$(this).val($(this).attr('tag'));
+				maskStats(this);
+			}
+		});
 	}
 	function maskStats(typeSel) {
 	    var statMask = "p11111111111";
@@ -119,35 +126,129 @@
 	        $("#ER"+thisRow).focus();
 	    }
 	}
-	</script>
+function processReportData() {
+	$.ajax({
+		dataType: 'json',
+        url: BASE_SCRIPT_URL + 'postSurveyDroidReport.py',
+        type: 'POST',
+        data: new FormData($('#udReportForm')[0]),
+
+        // Tell jQuery not to process data or worry about content-type
+        cache: false,
+        contentType: false,
+        processData: false,
+
+        // Custom XMLHttpRequest
+        xhr: function() {
+            var myXhr = $.ajaxSettings.xhr();
+            if (myXhr.upload) {
+                // For handling the progress of the upload
+                myXhr.upload.addEventListener('progress', function(e) {
+                    if (e.lengthComputable) {
+                        $('progress').attr({
+                            value: e.loaded,
+                            max: e.total,
+                        });
+                    }
+                } , false);
+            }
+            return myXhr;
+		},
+    }).complete(function( data ) {
+		dataLoaded = false;
+		try {
+			reportData = $.parseJSON(data['responseText']);
+			dataLoaded = true;
+		} catch(err) {
+			$('#droidReportInfo').html(data['responseText']);
+		}
+		if (dataLoaded) {
+			loadReportData(reportData);
+			$('#droidReportInfo').html(reportData.response.message);
+		}
+	});
+}
+// Put JSON data into the add resources area
+function loadReportData(reportData) {
+	$('#planetSel').val(reportData.response.planet);
+	for (var i=0; i < reportData.response.resources.length; i++) {
+		spawn = reportData.response.resources[i];
+		$('#resName'+i).val(spawn.spawn_name);
+		if ( spawn.ER != 0 ) { $('#ER'+i).val(spawn.ER) };
+		if ( spawn.CR != 0 ) { $('#CR'+i).val(spawn.CR) };
+		if ( spawn.CD != 0 ) { $('#CD'+i).val(spawn.CD) };
+		if ( spawn.DR != 0 ) { $('#DR'+i).val(spawn.DR) };
+		if ( spawn.FL != 0 ) { $('#FL'+i).val(spawn.FL) };
+		if ( spawn.HR != 0 ) { $('#HR'+i).val(spawn.HR) };
+		if ( spawn.MA != 0 ) { $('#MA'+i).val(spawn.MA) };
+		if ( spawn.PE != 0 ) { $('#PE'+i).val(spawn.PE) };
+		if ( spawn.OQ != 0 ) { $('#OQ'+i).val(spawn.OQ) };
+		if ( spawn.SR != 0 ) { $('#SR'+i).val(spawn.SR) };
+		if ( spawn.UT != 0 ) { $('#UT'+i).val(spawn.UT) };
+		$('#typeSel'+i).attr("tag", spawn.resource_type);
+		$('#typeSel'+i).val(spawn.resource_type);
+		if (i == 0) {
+			maskStats(document.getElementById('typeSel'+i));
+		}
+		addResourceRow();
+	}
+	for (var i=0; i < reportData.response.resources.length; i++) {
+		getResource(document.getElementById('resName'+i));
+	}
+}
+</script>
 {{ blocks.pageTracker() }}
 </head><body>
 {{ blocks.headerSection(loggedin, currentUser, loginResult, linkappend, url, imgNum, galaxyList, pictureName) }}
 
 <div id="mainContent" class="wrapper">
+  <div id="rightMainContent" class="ghCol">
     <div id="addResBox" class="ghWidgetBox">
-    <div class="boxHeader">Add Resources</div>
-    <form name="faddres" id="faddres" onsubmit="return postResources()">
-    <div>
+      <div class="boxHeader">Add Resources</div>
+      <form name="faddres" id="faddres" onsubmit="return postResources()">
+      <div>
         Planet: <select name="planetSel" id="planetSel"{{ disableStr }} onchange="loadTypes('.resourceTypeSelector');"></select>
         Filter Types: <input type="checkbox" id="oFilterTypes" checked="checked" title="Filter the resource type drop downs to only include resources possible for the selected galaxy and planet" onchange="loadTypes('.resourceTypeSelector');setCookie('addResourcesFilterTypes',this.checked,365);" />
         <span id="sentMessage" style="margin-left: 20px;"></span>
-    <div>
-    <div id="resourceData" style="margin-top:12px;">
-    <div style="position:relative;"><div id="resMask" class="disabledDark" style="display:none;"></div>
-    <table id="addResourceTable"><thead>
-    <tr><td>Name</td><td>Type</td><td>ER</td><td>CR</td><td>CD</td><td>DR</td><td>FL</td><td>HR</td><td>MA</td><td>PE</td><td>OQ</td><td>SR</td><td>UT</td></tr>
-    </thead></table>
-    <button type="button" id="sendData" class="ghButton"{{ disableStr }} onclick="postResources()">Send Resource Data</button>
-    <div id="sendResponse"></div>
-    </form>
+	  </div>
+      <div id="resourceData" style="margin-top:12px;">
+        <div style="position:relative;">
+		  <div id="resMask" class="disabledDark" style="display:none;"></div>
+          <table id="addResourceTable"><thead>
+            <tr><td>Name</td><td>Type</td><td>ER</td><td>CR</td><td>CD</td><td>DR</td><td>FL</td><td>HR</td><td>MA</td><td>PE</td><td>OQ</td><td>SR</td><td>UT</td></tr>
+          </thead></table>
+          <button type="button" id="sendData" class="ghButton"{{ disableStr }} onclick="postResources()">Send Resource Data</button>
+		  <div id="sendResponse"></div>
+		</div>
+	  </div>
+	  </form>
     </div>
 {% if loggedin == 0 %}
-	    <div id="addResMask" class="disabled">Login First</div>
+	<div id="addResMask" class="disabled">Login First</div>
 {% else %}
-	    <div id="addResMask"></div>
+	<div id="addResMask"></div>
 {% endif %}
-    </div>
+  </div>
+  <div id="rightColumn" class="ghCol">
+	<div id="surveyDroidInterface" class="ghWidgetBox">
+	  <div class="boxHeader">Survey Droid Interface</div>
+		<form enctype="multipart/form-data" id="udReportForm">
+		<input type="file" id="reportFile" name="reportFile" accept=".mail,text/plain" />
+		<input type="hidden" name="src_url" value="addResources.py" />
+		<input type="hidden" name="reportGalaxy" id="reportGalaxy" value="" />
+		<input type="hidden" name="dataAction" value="returnJSON" />
+		<input type="button" value="Send Report" class="ghButton" onclick="processReportData();" />
+		</form>
+		<table><tr>
+		  <td><div id="droidReportInfo">
+		  <p>Upload an Interplanetay Survey Droid Report to automatically populate this page with resources from the report.</p>
+		  <p>Use the /mailsave command in game to save your survey droid game mail to your SWG profiles folder on your computer, then choose the file here.</p>
+		  </div>
+		  <progress value="100" max="100" style="width:100%;"></progress></td>
+		  <td><img src="/images/surveyDroid.png" style="width:128px;"/></td>
+		</tr></table>
+	</div>
+  </div>
 </div>
 {{ blocks.pageFooter() }}
 {{ blocks.joinForm(loggedin, ['?src_url=addResources.py&', linkappend]|join, url) }}

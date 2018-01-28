@@ -1923,7 +1923,7 @@ function valMinValue(elm, infElm, minVal) {
     infElm.style.visibility = 'hidden';}
 }
 function getCookie(cName, defaultValue) {
-    if (document.cookie.length>0) {
+  if (document.cookie.length>0) {
 	cStart = document.cookie.indexOf(cName + "=");
 	if (cStart != -1) {
 	    cStart = cStart + cName.length+1;
@@ -1933,8 +1933,8 @@ function getCookie(cName, defaultValue) {
 	} else {
 		return defaultValue;
 	}
-    }
-    return defaultValue;
+  }
+  return defaultValue;
 }
 function setCookie(cName, value, expireDays) {
     var exdate = new Date();

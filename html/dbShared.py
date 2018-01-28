@@ -31,7 +31,7 @@ import subprocess
 import ghObjects
 import ghNames
 import ghShared
-
+import difflib
 
 def ghConn():
 	conn = MySQLdb.connect(host = dbInfo.DB_HOST,
@@ -465,6 +465,20 @@ def getSpawnPlanets(conn, spawnID, availableOnly, galaxy):
 			row = cursor.fetchone()
 	cursor.close()
 	return planets
+
+def getResourceTypeID(conn, resourceTypeName):
+	# try to figure out resource type id... sometimes name can different slighty from
+	# some sources like Corellia vs. Corellian
+	typeID = ''
+	cursor = conn.cursor()
+	cursor.execute("SELECT resourceType, resourceTypeName FROM tResourceType;")
+	row = cursor.fetchone()
+	while row != None:
+		if len(difflib.get_close_matches(resourceTypeName, [row[1]], 1, 0.95)) > 0:
+			typeID = row[0]
+		row = cursor.fetchone()
+	cursor.close()
+	return typeID
 
 def getUserPostBlockedSecondsRemaining(userID, targetType):
 	# Default not blocked
