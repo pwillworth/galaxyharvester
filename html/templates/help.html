@@ -57,7 +57,8 @@ $(document).ready(function() {
     <a href="help.py#alerts">Alerts</a><br />
     <a href="help.py#exports">Export Data</a><br />
     <a href="help.py#myResources">My Resources</a><br />
-    <a href="help.py#recipes">Recipes</a><br />
+		<a href="help.py#recipes">Recipes</a><br />
+		<a href="help.py#galaxyadmin">Galaxy Admin</a><br />
     </div>
     </div>
     <div class="bigLink standOut"><a href="/galaxy.py/new">Add your server to Galaxy Harvester</a></div>
@@ -91,7 +92,16 @@ $(document).ready(function() {
 	      </div>
 	      <a name="addingResources"></a><h3>Adding Resources</h3>
 	      <div class="helpTopic">
-	        <p>There are two ways to add resources, the quick add box on the <a href="ghHome.py">home</a> page, and the <a href="addResources.py">Add Resources</a> page.  For the quick add box, you can type in multiple resource names separated by any special character like a comma.  Select the planet the resources are on and click go, then you will be prompted one at a time for information on any of the resources that are not already entered with stats.  The add resources page provides a larger layout where you can enter as many resources as you want one at a time with the stats.  As you enter names, galaxy harvester will automatically look them up to see if they have already been entered.</p>
+					<p>There are two primary ways to add resources, the quick add box on the <a href="/ghHome.py">home</a> page and <a href="/surveyList.py">survey list</a> page, and the <a href="addResources.py">Add Resources</a> page.  For the quick add box, you can type in multiple resource names separated by any special character like a comma.  Select the planet the resources are on and click go, then you will be prompted one at a time for information on any of the resources that are not already entered with stats.  The add resources page provides a larger layout where you can enter as many resources as you want one at a time with the stats.  As you enter names, galaxy harvester will automatically look them up to see if they have already been entered.</p>
+					<p>Both pages also have a survey droid report upload feature.  This tool can save you a lot of work entering resources.  If you use it on the survey list page, it will add or verify all resources listed in a survey droid report mail and mark unavailable any resources of the report class that are listed on the site still but no longer on the report.  When uploading a report on the add resources page, the resources in the report will just be loaded onto the screen for you to review and submit.  If you are not familiar with how to get the survey droid reports for upload, follow these steps:</p>
+					<ul class="plain">
+						<li>Use an Interplanetary Survey Droid in game, you can get them from your local Droid Engineer.</li>
+						<li>Wait for the report to come it, after you get the in game mail, use the /mailsave command.</li>
+						<li>The command saves every mail in your character mailbox to your computer to a location like this: [SWG Install Location]\profiles\[user name]\[server]\mail_[character name]\</li>
+						<li>Look in that folder at the .mail files and check some of them out with Notepad so you know which file is for the survey report</li>
+						<li>When you choose the file on Galaxy Harvester for upload, browse to where you found the .mail files and pick the right one.</li>
+						<li>Click the Send Report button!</li>
+					</ul>
 	      </div>
 	      <a name="managingResources"></a><h3>Managing Resources</h3>
 	      <div class="helpTopic">
@@ -167,7 +177,11 @@ $(document).ready(function() {
 	      <p>When you click on a recipe in your list, it launches the recipe editor.  You should find the editor familiar to use, as it is designed to resemble the in-game assembly interface of the crafting process.  Simply double-click or drag an item in your inventory to add it to a slot in the ingredient slots.  You can change the recipe name by clicking on it above the ingredient slots.  Once your recipe is all set, just click the save button.</p>
 	      <p>The recipe home page provides a graphical inventory list as well as a list of your recipes.  If you have an unfinished recipe in your list, you can drag a resource from your inventory to that recipe in the list to fill any open slots in the recipe that resource can go in to.  The recipe home page also has a tool to suggest recipes for you.  If you select a profession, it will search your inventory for resources that can be used for schematics in that profession.  If you have all the resources needed for a schematic, it will suggest to you the best combination of resources it can come up with for that schematic.  If you want to save and tweak that suggestion, just click the save button to the right in the list of suggestions.</p>
 	        <div class="tip">Watch the tutorial video on the recipe feature <a href="help.py?v=vpdsb7qmhJE">here</a>.</div>
-	      </div>
+				</div>
+				<a name="galaxyadmin"></a><h3>Galaxy Admin</h3>
+				<div class="helpTopic">
+					<p>If you are an administration of a public SWG play server, you can use the <a href="/galaxy.py">Galaxy Admin</a> page to request your server to be listed on Galaxy Harvester and to managed properties of your galaxies that have already been listed.  When you submit a request for a new listing, make sure to put in a website so we can verify that you are running a public server.  After you save your draft, Galaxy Harvester admin will be notified, and if approved it will soon be active on the site.  If you server has extra plants available for players to collect resources from other than the core 10 planets, you can configure that in galaxy admin.  You can also add other Galaxy Harvester users to have permission to manage properties of the galaxy if you have multiple admins who should have that ability.</p>
+				</div>
 	    </div>
 	    </div>
 	    </div>
