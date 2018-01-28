@@ -376,12 +376,16 @@ def getLastExport(galaxy):
 def getPlanetID(planetName):
 	conn = ghConn()
 	cursor = conn.cursor()
-	cursor.execute('SELECT planetID FROM tPlanet WHERE LOWER(REPLACE(planetName," ","")) = "' + planetName + '";')
+	# Temporarily accept other form of Yavin IV during transition
+	if planetName == 'Yavin IV':
+		planetName = 'yavin4'
+	###
+	cursor.execute('SELECT planetID FROM tPlanet WHERE LOWER(REPLACE(planetName," ","")) = "' + planetName.lower() + '";')
 	row = cursor.fetchone()
 	if (row != None and row[0] != None):
 		retVal = str(row[0])
 	else:
-		retVal = ""
+		retVal = "0"
 
 	cursor.close()
 	conn.close()

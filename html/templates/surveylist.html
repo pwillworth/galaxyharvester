@@ -10,6 +10,7 @@ var surveyPlanet = "corellia";
 var surveyTool = "gas";
 $(document).ready(function() {
     $("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
+    $("#reportGalaxy").val($("#galaxySel").val());
     loadPlanetButtons($("#galaxySel option:selected").val());
     if ($("#galaxySel option:selected").attr("group") == "Inactive") {
         $("#quickAddMask").addClass("disabled");
@@ -158,6 +159,24 @@ function loadPlanetButtons(galaxy) {
 {% else %}
     <div id="quickAddMask"></div>
 {% endif %}
+    </div>
+    <div id="surveyDroidInterface" class="ghWidgetBox">
+        <div class="boxHeader">Survey Droid Interface</div>
+        <form enctype="multipart/form-data" name="udReportForm" method="post" action="postSurveyDroidReport.py">
+            <input type="file" id="reportFile" name="reportFile" accept=".mail,text/plain" />
+            <input type="hidden" name="src_url" value="surveyList.py" />
+            <input type="hidden" name="reportGalaxy" id="reportGalaxy" value="" />
+            <input type="submit" value="Send Report" name="goreport" id="goreport" class="ghButton" />
+        </form>
+      <table><tr><td>
+{% if reportResult != '' %}
+        <h3>{{ reportResult }}</h3>
+{% else %}
+        <p>Upload an Interplanetay Survey Droid Report to add/verify all resources in the report and mark unavailable any resources that are no longer on the planet.</p>
+        <p>Use the /mailsave command in game to save your survey droid game mail to your SWG profiles folder on your computer, then choose the file here.</p>
+{% endif %}
+      </td>
+      <td><img src="/images/surveyDroid.png" style="width:128px;"/></td></tr></table>
     </div>
   </div>
   <div id="rightMainContent" class="ghCol">

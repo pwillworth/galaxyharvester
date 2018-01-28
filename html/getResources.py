@@ -264,7 +264,7 @@ criteriaStr = "tResources.galaxy=" + galaxy
 
 if (planet == "" and planetName != ""):
 	planet = dbShared.getPlanetID(planetName)
-if (planet != "any" and planet != ""):
+if (planet != "any" and planet != "" and planet != "0"):
 	joinStr = joinStr + " INNER JOIN tResourcePlanet ON tResources.spawnID = tResourcePlanet.spawnID"
 	criteriaStr += " AND planetID=" + planet
 

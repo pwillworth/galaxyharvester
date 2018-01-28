@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2018 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -31,100 +31,16 @@ import cgi
 import MySQLdb
 from xml.dom import minidom
 import ghNames
-#
-# Get current url
-try:
-	url = os.environ['SCRIPT_NAME']
-except KeyError:
-	url = ''
 
-form = cgi.FieldStorage()
-# Get Cookies
-useCookies = 1
-cookies = Cookie.SimpleCookie()
-try:
-	cookies.load(os.environ['HTTP_COOKIE'])
-except KeyError:
-	useCookies = 0
-
-if useCookies:
-	try:
-		currentUser = cookies['userID'].value
-	except KeyError:
-		currentUser = ''
-	try:
-		loginResult = cookies['loginAttempt'].value
-	except KeyError:
-		loginResult = 'success'
-	try:
-		sid = cookies['gh_sid'].value
-	except KeyError:
-		sid = form.getfirst('gh_sid', '')
-else:
-	currentUser = ''
-	loginResult = 'success'
-	sid = form.getfirst('gh_sid', '')
-
-numRows = form.getfirst("numRows", "")
-# Get form info
-galaxy = form.getfirst("galaxy", "")
-planet = form.getfirst("planet", "")
-spawnID = form.getfirst("resID", "")
-spawnName = form.getfirst("resName", "")
-resType = form.getfirst("resType", "")
-forceOp = form.getfirst("forceOp", "")
-sourceRow = form.getfirst("sourceRow", "")
-CR = form.getfirst("CR", "")
-CD = form.getfirst("CD", "")
-DR = form.getfirst("DR", "")
-FL = form.getfirst("FL", "")
-HR = form.getfirst("HR", "")
-MA = form.getfirst("MA", "")
-PE = form.getfirst("PE", "")
-OQ = form.getfirst("OQ", "")
-SR = form.getfirst("SR", "")
-UT = form.getfirst("UT", "")
-ER = form.getfirst("ER", "")
-# escape input to prevent sql injection
-sid = dbShared.dbInsertSafe(sid)
-numRows = dbShared.dbInsertSafe(numRows)
-galaxy = dbShared.dbInsertSafe(galaxy)
-planet = dbShared.dbInsertSafe(planet)
-spawnID = dbShared.dbInsertSafe(spawnID)
-spawnName = dbShared.dbInsertSafe(spawnName)
-resType = dbShared.dbInsertSafe(resType)
-forceOp = dbShared.dbInsertSafe(forceOp)
-sourceRow = dbShared.dbInsertSafe(sourceRow)
-CR = dbShared.dbInsertSafe(CR)
-CD = dbShared.dbInsertSafe(CD)
-DR = dbShared.dbInsertSafe(DR)
-FL = dbShared.dbInsertSafe(FL)
-HR = dbShared.dbInsertSafe(HR)
-MA = dbShared.dbInsertSafe(MA)
-PE = dbShared.dbInsertSafe(PE)
-OQ = dbShared.dbInsertSafe(OQ)
-SR = dbShared.dbInsertSafe(SR)
-UT = dbShared.dbInsertSafe(UT)
-ER = dbShared.dbInsertSafe(ER)
-
-spawnName = spawnName.lower()
-
-# Get a session
-logged_state = 0
-
-sess = dbSession.getSession(sid)
-if (sess != ''):
-	logged_state = 1
-	currentUser = sess
 
 def n2n(inVal):
-	if (inVal == '' or inVal == None or inVal == 'undefined' or inVal == 'None'):
+	if (inVal == '' or inVal == None or inVal == 'undefined' or inVal == 'None' or inVal == '0'):
 		return 'NULL'
 	else:
 		return str(inVal)
 
 
-def addResource(resName, galaxy, resType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER):
+def addResource(resName, galaxy, resType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER, userID):
 	# Add new resource
 	returnStr = ""
 	conn = dbShared.ghConn()
@@ -147,7 +63,7 @@ def addResource(resName, galaxy, resType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT
 		if row[20] == 0: ER = ''
 
 
-	tempSQL = "INSERT INTO tResources (spawnName, galaxy, entered, enteredBy, resourceType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER) VALUES ('" + resName + "'," + n2n(galaxy) + ",NOW(),'" + currentUser + "','" + resType + "'," + n2n(CR) + "," + n2n(CD) + "," + n2n(DR) + "," + n2n(FL) + "," + n2n(HR) + "," + n2n(MA) + "," + n2n(PE) + "," + n2n(OQ) + "," + n2n(SR) + "," + n2n(UT) + "," + n2n(ER) + ");"
+	tempSQL = "INSERT INTO tResources (spawnName, galaxy, entered, enteredBy, resourceType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER) VALUES ('" + resName + "'," + n2n(galaxy) + ",NOW(),'" + userID + "','" + resType + "'," + n2n(CR) + "," + n2n(CD) + "," + n2n(DR) + "," + n2n(FL) + "," + n2n(HR) + "," + n2n(MA) + "," + n2n(PE) + "," + n2n(OQ) + "," + n2n(SR) + "," + n2n(UT) + "," + n2n(ER) + ");"
 	cursor.execute(tempSQL)
 	result = cursor.rowcount
 	if (result < 1):
@@ -155,15 +71,15 @@ def addResource(resName, galaxy, resType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT
 	else:
 		returnStr = "1st entry."
 	# add event for add if stats included
-	if OQ.isdigit():
+	if OQ.isdigit() and OQ != '0':
 		spawnID = dbShared.getSpawnID(resName,galaxy)
-		dbShared.logEvent("INSERT INTO tResourceEvents (galaxy, spawnID, userID, eventTime, eventType) VALUES (" + str(galaxy) + "," + str(spawnID) + ",'" + currentUser + "',NOW(),'a');","a", currentUser, galaxy, spawnID)
+		dbShared.logEvent("INSERT INTO tResourceEvents (galaxy, spawnID, userID, eventTime, eventType) VALUES (" + str(galaxy) + "," + str(spawnID) + ",'" + userID + "',NOW(),'a');","a", userID, galaxy, spawnID)
 
 	cursor.close()
 	conn.close()
 	return returnStr
 
-def addResPlanet(spawn, planet, spawnName):
+def addResPlanet(spawn, planet, spawnName, userID, galaxy):
 	# Add resource to a planet
 	returnStr = ""
 	detailCol = ""
@@ -174,7 +90,7 @@ def addResPlanet(spawn, planet, spawnName):
 	row = cursor.fetchone()
 	if row[3] == None:
 		# insert spawn planet record
-		tempSQL = "INSERT INTO tResourcePlanet (spawnID, planetID, entered, enteredBy) VALUES (" + str(spawn) + "," + str(planet) + ",NOW(),'" + currentUser + "');"
+		tempSQL = "INSERT INTO tResourcePlanet (spawnID, planetID, entered, enteredBy) VALUES (" + str(spawn) + "," + str(planet) + ",NOW(),'" + userID + "');"
 		cursor.execute(tempSQL)
 		result = cursor.rowcount
 		if (result < 1):
@@ -191,12 +107,12 @@ def addResPlanet(spawn, planet, spawnName):
 			detailVal = ", 'previously unavailable'"
 
 		# add resource planet add event
-		dbShared.logEvent("INSERT INTO tResourceEvents (galaxy, spawnID, userID, eventTime, eventType, planetID" + detailCol + ") VALUES (" + str(galaxy) + "," + str(spawn) + ",'" + currentUser + "',NOW(),'p'," + str(planet) + detailVal + ");", 'p', currentUser, galaxy, spawn)
+		dbShared.logEvent("INSERT INTO tResourceEvents (galaxy, spawnID, userID, eventTime, eventType, planetID" + detailCol + ") VALUES (" + str(galaxy) + "," + str(spawn) + ",'" + userID + "',NOW(),'p'," + str(planet) + detailVal + ");", 'p', userID, galaxy, spawn)
 	else:
 		if (row[1] == None and row[2] == None):
-			if ((row[0] == None) or (row[0].lower() != currentUser.lower() and row[4].lower() != currentUser.lower())):
-				if (row[6] == None or row[6].lower() != currentUser.lower()):
-					tempSQL = "UPDATE tResourcePlanet SET verified=NOW(), verifiedBy='" + currentUser + "' WHERE spawnID=" + str(spawn) + " AND planetID=" + str(planet) + ";"
+			if ((row[0] == None) or (row[0].lower() != userID.lower() and row[4].lower() != userID.lower())):
+				if (row[6] == None or row[6].lower() != userID.lower()):
+					tempSQL = "UPDATE tResourcePlanet SET verified=NOW(), verifiedBy='" + userID + "' WHERE spawnID=" + str(spawn) + " AND planetID=" + str(planet) + ";"
 					result = cursor.execute(tempSQL)
 					if (result < 1):
 						returnStr = "Error: Resource " + spawnName + " was marked available on " + str(ghNames.getPlanetName(planet)) + " by " + row[0] + " and there was an error entering your verification."
@@ -206,9 +122,9 @@ def addResPlanet(spawn, planet, spawnName):
 						if row[7] != None:
 							detailCol = ", eventDetail"
 							detailVal = ", 'previously verified by " + row[8] + " on " + str(row[7]) + "'"
-						dbShared.logEvent("INSERT INTO tResourceEvents (galaxy, spawnID, userID, eventTime, eventType, planetID" + detailCol + ") VALUES (" + str(galaxy) + "," + str(spawn) + ",'" + currentUser + "',NOW(),'v'," + str(planet) + detailVal + ");",'v',currentUser, galaxy, spawn)
+						dbShared.logEvent("INSERT INTO tResourceEvents (galaxy, spawnID, userID, eventTime, eventType, planetID" + detailCol + ") VALUES (" + str(galaxy) + "," + str(spawn) + ",'" + userID + "',NOW(),'v'," + str(planet) + detailVal + ");",'v', userID, galaxy, spawn)
 						# update main resource table when verifying
-						tempSQL = "UPDATE tResources SET verified=NOW(), verifiedBy='" + currentUser + "' WHERE spawnID = " + str(spawn) + ";"
+						tempSQL = "UPDATE tResources SET verified=NOW(), verifiedBy='" + userID + "' WHERE spawnID = " + str(spawn) + ";"
 						cursor.execute(tempSQL)
 				else:
 					returnStr = "You already verified " + spawnName + " on " + str(row[5]) + "."
@@ -226,13 +142,13 @@ def addResPlanet(spawn, planet, spawnName):
 			detailCol = ", eventDetail"
 			detailVal = ", 'previously unavailable'"
 			# add resource planet add event
-			dbShared.logEvent("INSERT INTO tResourceEvents (galaxy, spawnID, userID, eventTime, eventType, planetID" + detailCol + ") VALUES (" + str(galaxy) + "," + str(spawn) + ",'" + currentUser + "',NOW(),'p'," + str(planet) + detailVal + ");", 'p', currentUser, galaxy, spawn)
+			dbShared.logEvent("INSERT INTO tResourceEvents (galaxy, spawnID, userID, eventTime, eventType, planetID" + detailCol + ") VALUES (" + str(galaxy) + "," + str(spawn) + ",'" + userID + "',NOW(),'p'," + str(planet) + detailVal + ");", 'p', userID, galaxy, spawn)
 
 	cursor.close()
 	conn.close()
 	return returnStr
 
-def addResStats(spawn, resType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER, forceOp):
+def addResStats(spawn, resType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER, forceOp, userID, galaxy):
 	# Update stats for a spawn
 	returnStr = ""
 	needStat = 0
@@ -259,20 +175,20 @@ def addResStats(spawn, resType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER, forc
 		else:
 			# update resource stats
 			# Only allow update if user has positive reputation or was the one who entered resource
-			stats = dbShared.getUserStats(currentUser, galaxy).split(",")
-			if int(stats[2]) < ghShared.MIN_REP_VALS['EDIT_RESOURCE_STATS_TYPE'] and row[23] != currentUser:
+			stats = dbShared.getUserStats(userID, galaxy).split(",")
+			if int(stats[2]) < ghShared.MIN_REP_VALS['EDIT_RESOURCE_STATS_TYPE'] and row[23] != userID:
 				returnStr = "Error: You must earn a little reputation on the site before you can edit resources.  Try adding or verifying some first. \r\n"
 			elif hasStats:
-				tempSQL = "UPDATE tResources SET enteredBy='" + currentUser + "', CR=" + n2n(CR) + ", CD=" + n2n(CD) + ", DR=" + n2n(DR) + ", FL=" + n2n(FL) + ", HR=" + n2n(HR) + ", MA=" + n2n(MA) + ", PE=" + n2n(PE) + ", OQ=" + n2n(OQ) + ", SR=" + n2n(SR) + ", UT=" + n2n(UT) + ", ER=" + n2n(ER) + " WHERE spawnID=" + str(spawn) + ";"
+				tempSQL = "UPDATE tResources SET enteredBy='" + userID + "', CR=" + n2n(CR) + ", CD=" + n2n(CD) + ", DR=" + n2n(DR) + ", FL=" + n2n(FL) + ", HR=" + n2n(HR) + ", MA=" + n2n(MA) + ", PE=" + n2n(PE) + ", OQ=" + n2n(OQ) + ", SR=" + n2n(SR) + ", UT=" + n2n(UT) + ", ER=" + n2n(ER) + " WHERE spawnID=" + str(spawn) + ";"
 				#sys.stderr.write("sql: " + tempSQL + "\n")
 				cursor.execute(tempSQL)
 				result = cursor.rowcount
-				returnStr = str(spawnName) + " stats updated"
+				returnStr = "spawn " + str(spawn) + " stats updated"
 				# add resource edit event
 				if needStat:
-					dbShared.logEvent("INSERT INTO tResourceEvents (galaxy, spawnID, userID, eventTime, eventType) VALUES (" + str(galaxy) + "," + str(spawn) + ",'" + currentUser + "',NOW(),'a');", 'a', currentUser, galaxy, spawn)
+					dbShared.logEvent("INSERT INTO tResourceEvents (galaxy, spawnID, userID, eventTime, eventType) VALUES (" + str(galaxy) + "," + str(spawn) + ",'" + userID + "',NOW(),'a');", 'a', userID, galaxy, spawn)
 				else:
-					dbShared.logEvent("INSERT INTO tResourceEvents (galaxy, spawnID, userID, eventTime, eventType, eventDetail) VALUES (" + str(galaxy) + "," + str(spawn) + ",'" + currentUser + "',NOW(),'e', 'Previous stats: " + statStr + "');", 'e', currentUser, galaxy, spawn)
+					dbShared.logEvent("INSERT INTO tResourceEvents (galaxy, spawnID, userID, eventTime, eventType, eventDetail) VALUES (" + str(galaxy) + "," + str(spawn) + ",'" + userID + "',NOW(),'e', 'Previous stats: " + statStr + "');", 'e', userID, galaxy, spawn)
 
 		if (row[22] != resType and len(resType)>0):
 			tempSQL = "UPDATE tResources SET resourceType='" + resType + "' WHERE spawnID=" + str(spawn) + ";"
@@ -280,90 +196,178 @@ def addResStats(spawn, resType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER, forc
 			returnStr = returnStr + " type updated"
 
 	else:
-		returnStr = "Error: could not find that resource " + str(spawnName) + "."
+		returnStr = "Error: could not find that resource " + str(spawn) + "."
 
 	cursor.close()
 	conn.close()
 	return returnStr
 
+def main():
+	# Get current url
+	try:
+		url = os.environ['SCRIPT_NAME']
+	except KeyError:
+		url = ''
 
-#  Check for errors
-errstr = ""
-if (len(spawnName) < 1 and spawnID == ""):
-	errstr = errstr + "Error: no resource name. \r\n"
-if ((resType == "none" or len(resType) < 1) and spawnID == "" and forceOp != "verify"):
-	errstr = errstr + "Error: no resource type. \r\n"
-else:
-	#  Some automated updaters post reptillian meat as 'reptilian', normalize
-	resType = resType.replace("reptilian", "reptillian")
-if (spawnID == "" and galaxy == ""):
-	errstr = errstr + "Error: no galaxy selected. \r\n"
-else:
-	# try to look up spawnID for editing and verifying
-	if (spawnID == ""):
-		spawnID = dbShared.getSpawnID(spawnName, galaxy)
-if re.search('\W', spawnName):
-	errstr = errstr + "Error: spawn name contains illegal characters."
-if (forceOp != "edit" and planet.isdigit() == False):
-	# attempt to lookup planet by name
-	if planet != "":
-		planet = dbShared.getPlanetID(planet)
-	if planet.isdigit() == False:
-		errstr = errstr + "Error: planet must be provided to post resource unless editing."
+	form = cgi.FieldStorage()
+	# Get Cookies
+	useCookies = 1
+	cookies = Cookie.SimpleCookie()
+	try:
+		cookies.load(os.environ['HTTP_COOKIE'])
+	except KeyError:
+		useCookies = 0
 
-postBlockedSeconds = dbShared.getUserPostBlockedSecondsRemaining(currentUser, 'r')
-if dbShared.getUserPostBlockedSecondsRemaining(currentUser, 'r') > 0:
-	errstr = errstr + "Error: You are currently blocked from adding or updating resources due to recent activity.  Your cooldown ends in less than " + str((postBlockedSeconds / 3600) + 1) + " hours."
-
-if (errstr == ""):
-	result = ""
-	galaxyState = dbShared.galaxyState(galaxy)
-	if (logged_state > 0 and galaxyState == 1):
-		if (spawnName == "" or spawnName == None):
-			spawnName = ghNames.getSpawnName(spawnID)
-
-		if (spawnID>-1):
-			# spawn already entered
-			if (forceOp == "edit"):
-				result = "edit: "
-				result = result + addResStats(spawnID, resType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER, forceOp)
-			else:
-				result = addResPlanet(spawnID, planet, spawnName)
-				result = result + '  ' + addResStats(spawnID, resType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER, forceOp)
-		else:
-			# new spawn
-			result = addResource(spawnName, galaxy, resType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER)
-			spawnID = dbShared.getSpawnID(spawnName, galaxy)
-			result = addResPlanet(spawnID, planet, spawnName) + '  ' + result
-
+	if useCookies:
+		try:
+			currentUser = cookies['userID'].value
+		except KeyError:
+			currentUser = ''
+		try:
+			loginResult = cookies['loginAttempt'].value
+		except KeyError:
+			loginResult = 'success'
+		try:
+			sid = cookies['gh_sid'].value
+		except KeyError:
+			sid = form.getfirst('gh_sid', '')
 	else:
-		if logged_state > 0:
-			result = "Error: You cannot add resource data for an Inactive Galaxy."
+		currentUser = ''
+		loginResult = 'success'
+		sid = form.getfirst('gh_sid', '')
+
+	numRows = form.getfirst("numRows", "")
+	# Get form info
+	galaxy = form.getfirst("galaxy", "")
+	planet = form.getfirst("planet", "")
+	spawnID = form.getfirst("resID", "")
+	spawnName = form.getfirst("resName", "")
+	resType = form.getfirst("resType", "")
+	forceOp = form.getfirst("forceOp", "")
+	sourceRow = form.getfirst("sourceRow", "")
+	CR = form.getfirst("CR", "")
+	CD = form.getfirst("CD", "")
+	DR = form.getfirst("DR", "")
+	FL = form.getfirst("FL", "")
+	HR = form.getfirst("HR", "")
+	MA = form.getfirst("MA", "")
+	PE = form.getfirst("PE", "")
+	OQ = form.getfirst("OQ", "")
+	SR = form.getfirst("SR", "")
+	UT = form.getfirst("UT", "")
+	ER = form.getfirst("ER", "")
+	# escape input to prevent sql injection
+	sid = dbShared.dbInsertSafe(sid)
+	numRows = dbShared.dbInsertSafe(numRows)
+	galaxy = dbShared.dbInsertSafe(galaxy)
+	planet = dbShared.dbInsertSafe(planet)
+	spawnID = dbShared.dbInsertSafe(spawnID)
+	spawnName = dbShared.dbInsertSafe(spawnName)
+	resType = dbShared.dbInsertSafe(resType)
+	forceOp = dbShared.dbInsertSafe(forceOp)
+	sourceRow = dbShared.dbInsertSafe(sourceRow)
+	CR = dbShared.dbInsertSafe(CR)
+	CD = dbShared.dbInsertSafe(CD)
+	DR = dbShared.dbInsertSafe(DR)
+	FL = dbShared.dbInsertSafe(FL)
+	HR = dbShared.dbInsertSafe(HR)
+	MA = dbShared.dbInsertSafe(MA)
+	PE = dbShared.dbInsertSafe(PE)
+	OQ = dbShared.dbInsertSafe(OQ)
+	SR = dbShared.dbInsertSafe(SR)
+	UT = dbShared.dbInsertSafe(UT)
+	ER = dbShared.dbInsertSafe(ER)
+
+	spawnName = spawnName.lower()
+
+	# Get a session
+	logged_state = 0
+
+	sess = dbSession.getSession(sid)
+	if (sess != ''):
+		logged_state = 1
+		currentUser = sess
+
+	#  Check for errors
+	errstr = ""
+	if (len(spawnName) < 1 and spawnID == ""):
+		errstr = errstr + "Error: no resource name. \r\n"
+	if ((resType == "none" or len(resType) < 1) and spawnID == "" and forceOp != "verify"):
+		errstr = errstr + "Error: no resource type. \r\n"
+	else:
+		#  Some automated updaters post reptillian meat as 'reptilian', normalize
+		resType = resType.replace("reptilian", "reptillian")
+	if (spawnID == "" and galaxy == ""):
+		errstr = errstr + "Error: no galaxy selected. \r\n"
+	else:
+		# try to look up spawnID for editing and verifying
+		if (spawnID == ""):
+			spawnID = dbShared.getSpawnID(spawnName, galaxy)
+	if re.search('\W', spawnName):
+		errstr = errstr + "Error: spawn name contains illegal characters."
+	if (forceOp != "edit" and planet.isdigit() == False):
+		# attempt to lookup planet by name
+		if planet != "":
+			planet = dbShared.getPlanetID(planet)
+		if planet.isdigit() == False:
+			errstr = errstr + "Error: planet must be provided to post resource unless editing."
+
+	postBlockedSeconds = dbShared.getUserPostBlockedSecondsRemaining(currentUser, 'r')
+	if dbShared.getUserPostBlockedSecondsRemaining(currentUser, 'r') > 0:
+		errstr = errstr + "Error: You are currently blocked from adding or updating resources due to recent activity.  Your cooldown ends in less than " + str((postBlockedSeconds / 3600) + 1) + " hours."
+
+	if (errstr == ""):
+		result = ""
+		galaxyState = dbShared.galaxyState(galaxy)
+		if (logged_state > 0 and galaxyState == 1):
+			if (spawnName == "" or spawnName == None):
+				spawnName = ghNames.getSpawnName(spawnID)
+
+			if (spawnID>-1):
+				# spawn already entered
+				if (forceOp == "edit"):
+					result = "edit: "
+					result = result + addResStats(spawnID, resType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER, forceOp, currentUser, galaxy)
+				else:
+					result = addResPlanet(spawnID, planet, spawnName, currentUser, galaxy)
+					result = result + '  ' + addResStats(spawnID, resType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER, forceOp, currentUser)
+			else:
+				# new spawn
+				result = addResource(spawnName, galaxy, resType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER, currentUser)
+				spawnID = dbShared.getSpawnID(spawnName, galaxy)
+				result = addResPlanet(spawnID, planet, spawnName, currentUser) + '  ' + result
+
 		else:
-			result = "Error: must be logged in to add resources"
-else:
-	result = errstr
+			if logged_state > 0:
+				result = "Error: You cannot add resource data for an Inactive Galaxy."
+			else:
+				result = "Error: must be logged in to add resources"
+	else:
+		result = errstr
 
-print 'Content-type: text/xml\n'
-doc = minidom.Document()
-eRoot = doc.createElement("result")
-doc.appendChild(eRoot)
+	print 'Content-type: text/xml\n'
+	doc = minidom.Document()
+	eRoot = doc.createElement("result")
+	doc.appendChild(eRoot)
 
-eName = doc.createElement("spawnName")
-tName = doc.createTextNode(spawnName)
-eName.appendChild(tName)
-eRoot.appendChild(eName)
-eText = doc.createElement("resultText")
-tText = doc.createTextNode(result)
-eText.appendChild(tText)
-eRoot.appendChild(eText)
-eSource = doc.createElement("sourceRow")
-tSource = doc.createTextNode(sourceRow)
-eSource.appendChild(tSource)
-eRoot.appendChild(eSource)
-print doc.toxml()
+	eName = doc.createElement("spawnName")
+	tName = doc.createTextNode(spawnName)
+	eName.appendChild(tName)
+	eRoot.appendChild(eName)
+	eText = doc.createElement("resultText")
+	tText = doc.createTextNode(result)
+	eText.appendChild(tText)
+	eRoot.appendChild(eText)
+	eSource = doc.createElement("sourceRow")
+	tSource = doc.createTextNode(sourceRow)
+	eSource.appendChild(tSource)
+	eRoot.appendChild(eSource)
+	print doc.toxml()
 
-if (result.find("Error:") > -1):
-	sys.exit(500)
-else:
-	sys.exit(200)
+	if (result.find("Error:") > -1):
+		sys.exit(500)
+	else:
+		sys.exit(200)
+
+if __name__ == "__main__":
+        main()

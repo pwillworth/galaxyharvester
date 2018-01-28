@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2018 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -28,61 +28,10 @@ import dbShared
 import ghShared
 import cgi
 import MySQLdb
-#
-# Get current url
-try:
-	url = os.environ['SCRIPT_NAME']
-except KeyError:
-	url = ''
-
-form = cgi.FieldStorage()
-# Get Cookies
-useCookies = 1
-cookies = Cookie.SimpleCookie()
-try:
-	cookies.load(os.environ['HTTP_COOKIE'])
-except KeyError:
-	useCookies = 0
-
-if useCookies:
-	try:
-		currentUser = cookies['userID'].value
-	except KeyError:
-		currentUser = ''
-	try:
-		loginResult = cookies['loginAttempt'].value
-	except KeyError:
-		loginResult = 'success'
-	try:
-		sid = cookies['gh_sid'].value
-	except KeyError:
-		sid = form.getfirst('gh_sid', '')
-else:
-	currentUser = ''
-	sid = form.getfirst('gh_sid', '')
-
-spawnName = form.getfirst('spawn', '')
-galaxy = form.getfirst('galaxy', '')
-planets = form.getfirst('planets', '')
-# escape input to prevent sql injection
-sid = dbShared.dbInsertSafe(sid)
-spawnName = dbShared.dbInsertSafe(spawnName)
-galaxy = dbShared.dbInsertSafe(galaxy)
-planets = dbShared.dbInsertSafe(planets)
-
-# Get a session
-logged_state = 0
-
-sess = dbSession.getSession(sid)
-if (sess != ''):
-	logged_state = 1
-	currentUser = sess
 
 
-# Main program
-
-print 'Content-type: text/html\n'
-if (logged_state > 0):
+def removeSpawn(spawnID, planets, userID, galaxy):
+	markAll = 0
 	try:
 		conn = dbShared.ghConn()
 		cursor = conn.cursor()
@@ -90,48 +39,107 @@ if (logged_state > 0):
 		result = "Error: could not connect to database"
 
 	if (cursor):
-		if (dbShared.galaxyState(galaxy) == 1):
-			markAll = 0
-			cursor.execute('SELECT spawnID, resourceType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER, unavailable, enteredBy FROM tResources WHERE galaxy=' + galaxy + ' AND spawnName="' + spawnName + '";')
-			row = cursor.fetchone()
-
-			if (row != None):
-				spawnID = str(row[0])
-
-			if (planets == "all"):
-				markAll = 1
-				sqlStr = "UPDATE tResourcePlanet SET unavailable=NOW(), unavailableBy='" + currentUser + "' WHERE spawnID=" + spawnID + ";"
-			else:
-				# try to look up planet by name if an ID was not provided
-				if (planets.isdigit() != True):
-					planets = dbShared.getPlanetID(planets)
-				sqlStr = "UPDATE tResourcePlanet SET unavailable=NOW(), unavailableBy='" + currentUser + "' WHERE spawnID=" + spawnID + " AND planetID=" + planets + ";"
-
-			# Only allow removal if user has positive reputation
-			stats = dbShared.getUserStats(currentUser, galaxy).split(",")
-			if int(stats[2]) < ghShared.MIN_REP_VALS['REMOVE_RESOURCE'] and row[14] != currentUser:
-				result = "Error: You must earn a little reputation on the site before you can remove resources.  Try adding or verifying some first. \r\n"
-			elif row[13] != None:
-				result = "Error: You cannot remove that resource because it is already removed."
-			else:
-				cursor.execute(sqlStr)
-
-				# add cleanup event
-				if not planets.isdigit():
-					planets = 0
-				dbShared.logEvent("INSERT INTO tResourceEvents (galaxy, spawnID, userID, eventTime, eventType, planetID) VALUES (" + str(galaxy) + "," + str(spawnID) + ",'" + currentUser + "',NOW(),'r'," + str(planets) + ");", 'r', currentUser, galaxy, str(spawnID))
-				result = spawnName
-				cursor.close()
+		if (planets == "all"):
+			markAll = 1
+			sqlStr = "UPDATE tResourcePlanet SET unavailable=NOW(), unavailableBy='" + userID + "' WHERE spawnID=" + str(spawnID) + ";"
 		else:
-			result = "Error: That Galaxy is Inactive."
+			# try to look up planet by name if an ID was not provided
+			if (planets.isdigit() != True):
+				planets = dbShared.getPlanetID(planets)
+			sqlStr = "UPDATE tResourcePlanet SET unavailable=NOW(), unavailableBy='" + userID + "' WHERE spawnID=" + str(spawnID) + " AND planetID=" + str(planets) + ";"
+
+		# Only allow removal if user has positive reputation
+		stats = dbShared.getUserStats(userID, galaxy).split(",")
+		cursor.execute("SELECT enteredBy, unavailable FROM tResources WHERE spawnID=%s;", [spawnID])
+		row = cursor.fetchone()
+		if int(stats[2]) < ghShared.MIN_REP_VALS['REMOVE_RESOURCE'] and row[0] != userID:
+			result = "Error: You must earn a little reputation on the site before you can remove resources.  Try adding or verifying some first. \r\n"
+		elif row[1] != None:
+			result = "Error: You cannot remove that resource because it is already removed."
+		else:
+			cursor.execute(sqlStr)
+
+			# add cleanup event
+			if not planets.isdigit():
+				planets = 0
+			dbShared.logEvent("INSERT INTO tResourceEvents (galaxy, spawnID, userID, eventTime, eventType, planetID) VALUES (" + str(galaxy) + "," + str(spawnID) + ",'" + userID + "',NOW(),'r'," + str(planets) + ");", 'r', userID, galaxy, str(spawnID))
+			result = "Spawn marked unavailable."
+		cursor.close()
 	else:
 		result = "Error: Could not connect to database"
 	conn.close()
-else:
-	result = "Error: You must be logged in to mark a resource unavailable."
+	
+	return result
 
-print result
-if (result.find("Error:") > -1):
-	sys.exit(500)
-else:
-	sys.exit(200)
+
+def main():
+	# Get current url
+	try:
+		url = os.environ['SCRIPT_NAME']
+	except KeyError:
+		url = ''
+
+	form = cgi.FieldStorage()
+	# Get Cookies
+	useCookies = 1
+	cookies = Cookie.SimpleCookie()
+	try:
+		cookies.load(os.environ['HTTP_COOKIE'])
+	except KeyError:
+		useCookies = 0
+
+	if useCookies:
+		try:
+				currentUser = cookies['userID'].value
+		except KeyError:
+			currentUser = ''
+		try:
+			loginResult = cookies['loginAttempt'].value
+		except KeyError:
+			loginResult = 'success'
+		try:
+			sid = cookies['gh_sid'].value
+		except KeyError:
+			sid = form.getfirst('gh_sid', '')
+	else:
+		currentUser = ''
+		sid = form.getfirst('gh_sid', '')
+
+	spawnName = form.getfirst('spawn', '')
+	galaxy = form.getfirst('galaxy', '')
+	planets = form.getfirst('planets', '')
+	# escape input to prevent sql injection
+	sid = dbShared.dbInsertSafe(sid)
+	spawnName = dbShared.dbInsertSafe(spawnName)
+	galaxy = dbShared.dbInsertSafe(galaxy)
+	planets = dbShared.dbInsertSafe(planets)
+
+	# Get a session
+	logged_state = 0
+
+	sess = dbSession.getSession(sid)
+	if (sess != ''):
+		logged_state = 1
+		currentUser = sess
+
+
+	# Main program
+	print 'Content-type: text/html\n'
+	if (logged_state > 0):
+		if (dbShared.galaxyState(galaxy) == 1):
+			spawnID = dbShared.getSpawnID(spawnName, galaxy)
+			result = removeSpawn(spawnID, planets, currentUser, galaxy)
+		else:
+			result = "Error: That Galaxy is Inactive."
+
+	else:
+		result = "Error: You must be logged in to mark a resource unavailable."
+
+	print result
+	if (result.find("Error:") > -1):
+		sys.exit(500)
+	else:
+		sys.exit(200)
+
+if __name__ == "__main__":
+        main()

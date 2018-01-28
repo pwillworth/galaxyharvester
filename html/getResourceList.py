@@ -162,7 +162,7 @@ else:
 
 if (planet == "" and planetName != ""):
 	planet = dbShared.getPlanetID(planetName)
-if (planet != "any" and planet !="null" and planet != ""):
+if (planet != "any" and planet !="null" and planet != "" and planet != "0"):
 	unPlanetStr = ",'"+planet+"'"
 	criteriaStr = criteriaStr + " AND EXISTS (SELECT planetID FROM tResourcePlanet WHERE spawnID = tResources.spawnID AND planetID=" + planet + " AND unavailable IS NULL)"
 
