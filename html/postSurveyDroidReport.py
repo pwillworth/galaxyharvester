@@ -36,7 +36,7 @@ import postResource
 import markUnavailable
 
 
-def updatePlanetSpawns(planetID, resources, galaxyID, userID):
+def updatePlanetSpawns(planetID, classID, resources, galaxyID, userID):
 	result = ''
 	conn = dbShared.ghConn()
 	cursor = conn.cursor()
@@ -80,22 +80,23 @@ def updatePlanetSpawns(planetID, resources, galaxyID, userID):
 				spawnAddCount += 1
 
 	# Check for resources that have despawned
-	cursor.execute("SELECT tResources.spawnID, spawnName FROM tResources INNER JOIN tResourcePlanet ON tResources.spawnID = tResourcePlanet.spawnID WHERE tResources.galaxy=%s AND tResourcePlanet.unavailable IS NULL AND tResourcePlanet.planetID=%s;", [galaxyID, planetID])
-	row = cursor.fetchone()
-	while row != None:
-		stillAvailable = False
-		for spawn in resources:
-			if row[1] == spawn.spawnName:
-				stillAvailable = True
-		if not stillAvailable:
-			# available spawn was not in report, so mark it unavailable
-			status = markUnavailable.removeSpawn(row[0], planetID, userID, galaxyID)
-			if (status.find("Error:") > -1):
-				spawnErrorCount += 1
-			else:
-				spawnRemovedCount += 1
-
+	if classID != '':
+		cursor.execute("SELECT tResources.spawnID, spawnName FROM tResources INNER JOIN tResourcePlanet ON tResources.spawnID = tResourcePlanet.spawnID INNER JOIN (SELECT resourceType FROM tResourceTypeGroup WHERE resourceGroup='" + classID + "' GROUP BY resourceType) rtg ON tResources.resourceType = rtg.resourceType WHERE tResources.galaxy=%s AND tResourcePlanet.unavailable IS NULL AND tResourcePlanet.planetID=%s;", [galaxyID, planetID])
 		row = cursor.fetchone()
+		while row != None:
+			stillAvailable = False
+			for spawn in resources:
+				if row[1] == spawn.spawnName:
+					stillAvailable = True
+			if not stillAvailable:
+				# available spawn was not in report, so mark it unavailable
+				status = markUnavailable.removeSpawn(row[0], planetID, userID, galaxyID)
+				if (status.find("Error:") > -1):
+					spawnErrorCount += 1
+				else:
+					spawnRemovedCount += 1
+
+			row = cursor.fetchone()
 
 	cursor.close()
 	conn.close()
@@ -191,6 +192,7 @@ def main():
 		thisSpawn = ghObjects.resourceSpawn()
 		resourcesFound = []
 		planetID = 0
+		classID = ''
 		headerMatch = None
 		planetMatch = None
 		classMatch = None
@@ -237,16 +239,19 @@ def main():
 		# Update planet data if valid results
 		if headerMatch:
 			planetID = dbShared.getPlanetID(headerMatch.group(1))
+			classID = headerMatch.group(2).lower()
 		elif planetMatch:
 			planetID = dbShared.getPlanetID(planetMatch.group(1))
 		else:
 			result = "Error: No planet found in file header."
+		if classMatch:
+			classID = classMatch.group(1).lower()
 
 		if planetID > 0:
 			if dataAction == 'returnJSON':
 				result = getSpawnsJSON(planetID, resourcesFound, "{0} spawns loaded from report".format(len(resourcesFound)))
 			else:
-				result = updatePlanetSpawns(planetID, resourcesFound, galaxyID, currentUser)
+				result = updatePlanetSpawns(planetID, classID, resourcesFound, galaxyID, currentUser)
 		else:
 			result = "Error: Could not determine planet from file header."
 
