@@ -81,7 +81,7 @@ function saveGalaxy() {
 <div id="mainContent" class="wrapper">
   <div id="leftNavContent" class="ghCol">
     <div id="helpTopics" class="ghWidgetBox">
-    <div class="boxHeader">Galaxy Admin</div>
+    <div class="boxHeader">Galaxy Admin<button type="button" id="btnNewGalaxy" class="ghButton" style="float:right;" onclick="document.location.href='/galaxy.py/new'">New</button></div>
       <p>You are designated admin on the galaxies listed below, select one to edit it.</p>
       <select size="20" id="galaxyAdminSel" style="min-width: 120px;" onchange="document.location.href='/galaxy.py/'+this.value;">{{ galaxyAdminList }}</select>
     </div>
