@@ -512,3 +512,17 @@ def alertNewAbility(conn, userID, abilityKey, galaxy):
 	alertcursor = conn.cursor()
 	alertcursor.execute("INSERT INTO tAlerts (userID, alertType, alertTime, alertMessage, alertLink, alertStatus) VALUES ('{0}', 1, NOW(), '{1}', '{2}', 0);".format(userID, message, alertLink))
 	alertcursor.close()
+
+def getBaseProfs(galaxy):
+	# Determine set of base profession galaxy IDs to include by checking if galaxy is flagged NGE
+	baseProfs = '0, 1337'
+	conn = ghConn()
+	cursor = conn.cursor()
+	if (cursor):
+		cursor.execute('SELECT galaxyNGE FROM tGalaxy WHERE galaxyID={0};'.format(str(galaxy)))
+		row = cursor.fetchone()
+		if (row != None) and (row[0] > 0):
+			baseProfs = '-1, 1337'
+		cursor.close()
+	conn.close()
+	return baseProfs

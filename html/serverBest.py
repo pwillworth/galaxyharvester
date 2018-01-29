@@ -83,7 +83,7 @@ def getPosition(conn, spawnID, galaxy, statWeights, resourceGroup, serverBestMod
 def checkSchematics(conn, spawnID, galaxy, prof, resourceTypes, serverBestMode):
     bestPositions = {}
     # Select schematics where ingredient in type or groups of type
-    sqlStr2 = 'SELECT tSchematic.schematicID, ingredientObject, Sum(ingredientContribution), schematicName, resName FROM tSchematicIngredients INNER JOIN tSchematic ON tSchematicIngredients.schematicID = tSchematic.schematicID INNER JOIN tSkillGroup ON tSchematic.skillGroup = tSkillGroup.skillGroup  LEFT JOIN (SELECT resourceGroup AS resID, groupName AS resName FROM tResourceGroup UNION ALL SELECT resourceType, resourceTypeName FROM tResourceType) res ON ingredientObject = res.resID WHERE profID={0} AND tSchematic.galaxy IN (-1, 0, 1337, {1}) AND ingredientObject IN ({2}) GROUP BY tSchematic.schematicID, ingredientObject ORDER BY tSchematic.schematicID, ingredientQuantity DESC, ingredientName;'.format(prof, galaxy, resourceTypes)
+    sqlStr2 = 'SELECT tSchematic.schematicID, ingredientObject, Sum(ingredientContribution), schematicName, resName FROM tSchematicIngredients INNER JOIN tSchematic ON tSchematicIngredients.schematicID = tSchematic.schematicID INNER JOIN tSkillGroup ON tSchematic.skillGroup = tSkillGroup.skillGroup  LEFT JOIN (SELECT resourceGroup AS resID, groupName AS resName FROM tResourceGroup UNION ALL SELECT resourceType, resourceTypeName FROM tResourceType) res ON ingredientObject = res.resID WHERE profID={0} AND tSchematic.galaxy IN ({3}, {1}) AND ingredientObject IN ({2}) GROUP BY tSchematic.schematicID, ingredientObject, resName, ingredientQuantity, ingredientName ORDER BY tSchematic.schematicID, ingredientQuantity DESC, ingredientName;'.format(prof, galaxy, resourceTypes, dbShared.getBaseProfs(galaxy))
     ingCursor = conn.cursor()
     ingCursor.execute(sqlStr2)
     ingRow = ingCursor.fetchone()
@@ -153,7 +153,7 @@ def checkSpawn(spawnID, serverBestMode):
     hasResults = False
     conn = dbShared.ghConn()
     cursor = conn.cursor()
-    cursor.execute('SELECT galaxy, resourceType, (SELECT GROUP_CONCAT(resourceGroup SEPARATOR "\',\'") FROM tResourceTypeGroup rtg WHERE rtg.resourceType=tResources.resourceType) FROM tResources WHERE spawnID=%s;', spawnID)
+    cursor.execute('SELECT galaxy, resourceType, (SELECT GROUP_CONCAT(resourceGroup SEPARATOR "\',\'") FROM tResourceTypeGroup rtg WHERE rtg.resourceType=tResources.resourceType) FROM tResources WHERE spawnID=%s;', [spawnID])
     row = cursor.fetchone()
     if row != None:
         # Check each profession separately but ignore ones that do not care about quality
