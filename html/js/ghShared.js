@@ -29,8 +29,8 @@ function markUnavailable(linkFrom, resName, galaxy, planet) {
 	        alert(data);
 	    } else {
 	        //alert(data);
-			$("#cont_"+data).empty();
-	        $("#cont_"+data).css("display","none");
+			$("#cont_"+resName).empty();
+	        $("#cont_"+resName).css("display","none");
 	    }
 	});
     }
