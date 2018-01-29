@@ -4,6 +4,7 @@ ALTER TABLE tGalaxy ADD COLUMN submittedBy VARCHAR(31);
 ALTER TABLE tGalaxy ADD COLUMN website VARCHAR(1023);
 UPDATE tGalaxy SET galaxyNGE=1 WHERE galaxyID IN (48,74);
 UPDATE tProfession SET galaxy=1337 WHERE profID=18;
+UPDATE tProfession SET galaxy=-1 WHERE profID IN (28,29,30,31);
 UPDATE tSchematic SET galaxy=1337 WHERE galaxy=0 AND (skillGroup LIKE '%Jedi%' OR skillGroup LIKE '%Saber%');
 CREATE TABLE tGalaxyUser (galaxyID INT, userID VARCHAR(31), roleType CHAR(1), INDEX IX_galaxy_user_galaxy (galaxyID), INDEX IX_galaxy_user_user (userID));
 INSERT INTO tGalaxyUser (SELECT galaxyID, 'ioscode', 'a' FROM tGalaxy);
