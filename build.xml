@@ -19,12 +19,8 @@
     </target>
 
     <target name="unittest" depends="compile" description="Execute Unit Tests">
-        <exec executable="nosetests" dir="test/pyunit">
+        <exec executable="nose2" dir="test/pyunit">
             <arg value="--with-coverage"/>
-			<arg value="--cover-erase"/>
-			<arg value="--cover-inclusive"/>
-			<arg value="--cover-xml"/>
-			<arg value="--with-xunit"/>
         </exec>
     </target>
 

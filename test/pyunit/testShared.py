@@ -5,7 +5,7 @@ sys.path.append("../../config")
 sys.path.append("../../html")
 import ghShared
 
-class TestShared(unittest.TestCase):
+class testShared(unittest.TestCase):
 	def setUp(self):
 		# nothin yet
 		self.test = "rad"

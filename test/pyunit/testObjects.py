@@ -1,12 +1,13 @@
 import unittest
 from datetime import timedelta, datetime
 import sys
+import json
 sys.path.append("../../config")
 sys.path.append("../../html")
 import ghObjects
 import ghObjectRecipe
 
-class TestObjects(unittest.TestCase):
+class testObjects(unittest.TestCase):
 	def setUp(self):
 		# nothin yet
 		self.test = "rad"
@@ -57,12 +58,21 @@ class TestObjects(unittest.TestCase):
 		normalHTML = s.getHTML(0, "", "", 0)
 		rowHTML = s.getRow("")
 		invHTML = s.getInventoryObject()
+		spawnJSON = s.getJSON()
+		spawnJSON = "{ " + spawnJSON[:-2] + " }"
 
 		#assert
 		self.assertIn("ioscode", mobileHTML, "Username not in mobile HTML.")
 		self.assertIn("ioscode", normalHTML, "Username not in normal HTML.")
 		self.assertIn(spawnName, rowHTML, "No spawn name in row HTML.")
 		self.assertIn(spawnName, invHTML, "No spawn name in inventory HTML.")
+
+		try:
+			jsonObject = json.loads(spawnJSON)
+			jsonValid = True
+		except ValueError, e:
+			jsonValid = False
+		self.assertTrue(jsonValid, "Generated Spawn JSON output not valid.")
 
 	def test_recipeRender(self):
 		# arrage
