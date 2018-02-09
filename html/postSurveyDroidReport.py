@@ -80,7 +80,7 @@ def updatePlanetSpawns(planetID, classID, resources, galaxyID, userID):
 				spawnAddCount += 1
 
 	# Check for resources that have despawned
-	if classID != '':
+	if classID != '' and spawnErrorCount == 0:
 		cursor.execute("SELECT tResources.spawnID, spawnName FROM tResources INNER JOIN tResourcePlanet ON tResources.spawnID = tResourcePlanet.spawnID INNER JOIN (SELECT resourceType FROM tResourceTypeGroup WHERE resourceGroup='" + classID + "' GROUP BY resourceType) rtg ON tResources.resourceType = rtg.resourceType WHERE tResources.galaxy=%s AND tResourcePlanet.unavailable IS NULL AND tResourcePlanet.planetID=%s;", [galaxyID, planetID])
 		row = cursor.fetchone()
 		while row != None:
