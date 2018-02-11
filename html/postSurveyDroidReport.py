@@ -44,6 +44,7 @@ def updatePlanetSpawns(planetID, classID, resources, galaxyID, userID):
 	spawnVerifyCount = 0
 	spawnRemovedCount = 0
 	spawnErrorCount = 0
+	errors = ''
 
 	for spawn in resources:
 		# first check if spawn has been reported or not
@@ -58,6 +59,7 @@ def updatePlanetSpawns(planetID, classID, resources, galaxyID, userID):
 					status = postResource.addResPlanet(row[1], planetID, spawn.spawnName, userID, galaxyID)
 					if (status.find("Error:") > -1):
 						spawnErrorCount += 1
+						errors = errors + status + '\n<br />'
 					else:
 						spawnAddCount += 1
 			else:
@@ -67,6 +69,7 @@ def updatePlanetSpawns(planetID, classID, resources, galaxyID, userID):
 					status = postResource.addResStats(row[1], '', spawn.stats.CR, spawn.stats.CD, spawn.stats.DR, spawn.stats.FL, spawn.stats.HR, spawn.stats.MA, spawn.stats.PE, spawn.stats.OQ, spawn.stats.SR, spawn.stats.UT, spawn.stats.ER, '', userID, galaxyID) + '  ' + status
 				if (status.find("Error:") > -1):
 					spawnErrorCount += 1
+					errors = errors + status + '\n<br />'
 				else:
 					spawnVerifyCount += 1
 		else:
@@ -76,6 +79,7 @@ def updatePlanetSpawns(planetID, classID, resources, galaxyID, userID):
 			status = postResource.addResPlanet(spawnID, planetID, spawn.spawnName, userID, galaxyID) + '   ' + status
 			if (status.find("Error:") > -1):
 				spawnErrorCount += 1
+				errors = errors + status + '\n<br />'
 			else:
 				spawnAddCount += 1
 
@@ -93,6 +97,7 @@ def updatePlanetSpawns(planetID, classID, resources, galaxyID, userID):
 				status = markUnavailable.removeSpawn(row[0], planetID, userID, galaxyID)
 				if (status.find("Error:") > -1):
 					spawnErrorCount += 1
+					errors = errors + status + '\n<br />'
 				else:
 					spawnRemovedCount += 1
 
@@ -101,7 +106,7 @@ def updatePlanetSpawns(planetID, classID, resources, galaxyID, userID):
 	cursor.close()
 	conn.close()
 
-	result = "Report Upload Complete...\n<br/>{0} Errors\n<br/>{1} Spawns Added\n<br/>{2} Spawns Verified\n<br/>{3} Spawns Removed.".format(spawnErrorCount, spawnAddCount, spawnVerifyCount, spawnRemovedCount)
+	result = "Report Upload Complete...\n<br/>{0} Errors\n<br/>{1} Spawns Added\n<br/>{2} Spawns Verified\n<br/>{3} Spawns Removed.\n<br/>{4}".format(spawnErrorCount, spawnAddCount, spawnVerifyCount, spawnRemovedCount, errors)
 	return result
 
 def getSpawnsJSON(planetID, resources, message):
