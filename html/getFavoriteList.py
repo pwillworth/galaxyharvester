@@ -71,7 +71,7 @@ def main():
 	tmpStr = ''
 	if galaxy.isdigit():
 		galaxyCriteria = ' AND tFavorites.galaxy IN (0, {0})'.format(galaxy)
-		galaxyCriteriaProf = ' AND tProfession.galaxy IN (0, {0})'.format(galaxy)
+		galaxyCriteriaProf = ' AND tProfession.galaxy IN ({1}, {0})'.format(galaxy, dbShared.getBaseProfs(galaxy))
 
 	if logged_state > 0:
 		if favType == 'p':
