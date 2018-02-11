@@ -194,6 +194,7 @@ def main():
 		result = "Your report could not be posted because of the following errors:\r\n" + errstr
 	else:
 		result = ''
+		isNGE = False
 
 		# process file
 		thisSpawn = ghObjects.resourceSpawn()
@@ -208,6 +209,20 @@ def main():
 		nameMatch = None
 		statMatch = None
 		conn = dbShared.ghConn()
+		cursor = conn.cursor()
+		if (cursor):
+			cursor.execute('SELECT galaxyNGE FROM tGalaxy WHERE galaxyID={0};'.format(str(galaxyID)))
+			row = cursor.fetchone()
+			if (row != None) and (row[0] > 0):
+				isNGE = True
+			cursor.close()
+		# NGE version of droid report has different format with more indent and group levels
+		if isNGE:
+			typePattern = ' +([a-zA-Z][a-zA-Z0-9\- ]+)'
+			namePattern = ' +\\\#pcontrast1 (\w+)\\\#'
+		else:
+			typePattern = '\t([a-zA-Z0-9\- ]+)'
+			namePattern = '\t\t\\\#pcontrast1 (\w+)\\\#'
 
 		while 1:
 			line = rpt_data.file.readline()
@@ -220,8 +235,8 @@ def main():
 				if resourceStart == None:
 					resourceStart = re.match("\\\#pcontrast\d\sResources located.*", line)
 				else:
-					typeMatch = re.match("\t([a-zA-Z ]+)", line)
-					nameMatch = re.match("\t\t\\\#pcontrast1 (\w+)\\\#", line)
+					typeMatch = re.match(typePattern, line)
+					nameMatch = re.match(namePattern, line)
 					if typeMatch:
 						thisType = dbShared.getResourceTypeID(conn, typeMatch.group(1))
 						thisTypeName = typeMatch.group(1)
