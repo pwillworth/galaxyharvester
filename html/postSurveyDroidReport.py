@@ -116,7 +116,9 @@ def getSpawnsJSON(planetID, resources, message):
 		result = result + spawn.getJSON()
 		result = result[:-2] + '},\n'
 
-	result = result[:-2] + '  ] } }\n'
+	if len(resources) > 0:
+		result = result[:-2]
+	result = result + '  ] } }\n'
 	return result
 
 
