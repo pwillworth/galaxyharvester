@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2013 Paul Willworth <ioscode@gmail.com>
+ Copyright 2018 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -53,8 +53,7 @@ if errstr == '':
 	conn = dbShared.ghConn()
 	cursor = conn.cursor()
 	if (cursor):
-		sqlStr = 'SELECT userID FROM tUsers' + criteriaStr + ' ORDER BY userID'
-		#sys.stderr.write(sqlStr + '\n')
+		sqlStr = 'SELECT userID FROM tUsers' + criteriaStr + ' AND userState IN (1, 2) ORDER BY userID'
 		cursor.execute(sqlStr)
 		row = cursor.fetchone()
 

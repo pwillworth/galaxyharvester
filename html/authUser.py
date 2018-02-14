@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2016 Paul Willworth <ioscode@gmail.com>
+ Copyright 2018 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -74,6 +74,8 @@ else:
 		result = 'bad user'
 	elif not row[2] > 0:
 		result = 'unverified account'
+	elif row[2] == 3:
+		result = 'account deleted'
 	else:
 		exactUser = row[0]
         # New hash date is when salt that goes with password to create hash was

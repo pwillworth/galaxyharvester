@@ -205,7 +205,7 @@
 	    <table class="bigForm"><tr><td colspan="2"><h2 id="waypointFormTitle">New Waypoint</h2></td>
 	    <td align="right"><a href="#" class="close">Close</a></td></tr>
 	    <tr><td align="right" width="100">Spawn: </td>
-	    <td><input type="text" name="wpSpawn" id="wpSpawn" tabindex="20" size="16" maxlength=64" onchange="valMinLength(this, document.getElementById('spawnInf'),1);" onblur="checkResourceType(this.value)" /></td>
+	    <td><input type="text" name="wpSpawn" id="wpSpawn" tabindex="20" size="16" maxlength="64" onchange="valMinLength(this, document.getElementById('spawnInf'),1);" onblur="checkResourceType(this.value)" /></td>
 	    <td><span id="addInfo"></span><span id="spawnInf" class="formMsg">Spawn name is not valid.</span><span id="idInfo" class="content"></span><br /></td></tr>
 	    <tr><td align="right">Planet: </td>
 	    <td><select name="wpPlanetSel" id="wpPlanetSel" tabIndex="21" onchange="valMinValue(this,document.getElementById('PlanetInf'),0);">

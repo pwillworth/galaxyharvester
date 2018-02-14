@@ -53,6 +53,7 @@ function moreHistory(lastTime) {
             $("#userHistory").append(data);
         }, "html");
 }
+{% if (loggedin == 1 and currentUser == uid) %}
 function udPassword() {
     var thePwd = document.getElementById("userpass").value;
     var sid = "{{ sid }}";
@@ -84,6 +85,38 @@ function udOther() {
     $("#udInfo").load("udUserOther.py",{uiTheme:theTheme, inGameInfo: ign, defaultAlerts: alerts, gh_sid: "{{ sid }}"},
         function(){$("#udInfo").animate({opacity: 1.0, fontSize: "2em"}, 700);});
 }
+// Account removal initiation
+function deleteMe() {
+	$('#wpName').val('');
+	$("#addInfo").html('');
+	showWindow('#deleteMeDialog');
+	return true;
+}
+// Account removal completion
+function goDeleteMe(confirmationText) {
+    if ( confirmationText == 'delete' ) {
+		$("#busyImgDelete").show();
+        $.get(BASE_SCRIPT_URL + "delUser.py", {confirm: confirmationText, user: {{ uid }}, rid: new Date()}, function(data) {
+			if (data.indexOf("Error:")>-1) {
+				$("#delInfo").html(data);
+				$("#busyImgDelete").hide();
+			} else {
+				document.location.href=BASE_SCRIPT_URL + "logout.py?src_url=" + BASE_SCRIPT_URL + "ghHome.py";
+			}
+		});
+    } else {
+		alert('Confirmation text failed... maybe you don\'t really want to quit?');
+	}
+	return true;
+}
+function checkConfirmText(confirmationText) {
+	if ( confirmationText == 'delete' ) {
+		$('#confirmIt').css('color', 'red');
+	} else {
+		$('#confirmIt').css('color', 'black');
+	}
+}
+{% endif %}
 </script>
 {{ blocks.pageTracker() }}
 <body>
@@ -133,7 +166,10 @@ function udOther() {
                 <td align='center'><input type="checkbox"{{ emailAlertCheckStr }} id="oEmail"/></td>
                 <td align='center'><input type="checkbox"{{ mobileAlertCheckStr }} id="oMobile"/></td>
     	        </tr></table>
-    	      </div>
+			  </div>
+			  <div style="width:100%;height:12px;">
+				<div style="font-size: 9px;float: right;"><a href="#deleteMeDialog" id="goDeleteMe" onclick="deleteMe()" title="delete user account">I want to delete my account</a></div>
+			  </div>
     	    </div>
     {% endif %}
     <div id="userStats" class="ghWidgetBox">
@@ -225,5 +261,17 @@ function udOther() {
 </div>
 {{ blocks.pageFooter() }}
 {{ blocks.joinForm(loggedin, ['?src_url=user.py&', linkappend], url) }}
+{% if loginState != 0 %}
+	<div id="deleteMeDialog" class="window">
+	    <form name="deleteuserform">
+	    <h2 id="deleteUserFormTitle">Delete Your Account!<div style="float:right;"><a href="#" class="close">Close</a></div></h2>
+		<div class="standOut">Are you sure you want to delete your account?  This will remove all of your data from the site and is not reversible.  All of your favorites, inventory, recipes, etc.  will ALL be deleted.  You will not be able to join again with the same username.  It's not too late to turn back... if you want to take a break for a while you can just turn off alerts instead.</div>
+		<div>If you are really sure you want to do this, type <span class="alert">delete</span> in the box below, and click the Delete Me button.</div>
+	    <div style="width:100%;text-align:center;margin:6px;"><input style="height:28px;font-size:24px;text-align:center;" type="text" id="confirmIt" size="16" maxlength="32" onchange="checkConfirmText(this.value)" /></div>
+	    <div id="busyImgDelete" style="display:none;float:right;"><img src="/images/ghWait.gif" /></div>
+	    <div style="text-align: center;padding: 20px;"><button type="button" id="goDeleteButton" class="ghButton" onclick="goDeleteMe($('#confirmIt').val());">Delete Me</button></div>
+	    <div id="deleteInfo"></div>
+	</div>
+{% endif %}
 <div id="mask"></div>
 </body></html>
