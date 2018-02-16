@@ -61,6 +61,7 @@ else:
 	sid = form.getfirst('gh_sid', '')
 
 confirm = form.getfirst('confirm', '')
+user = form.getfirst('user', '')
 # escape input to prevent sql injection
 sid = dbShared.dbInsertSafe(sid)
 
@@ -74,7 +75,7 @@ if (sess != ''):
 
 
 # Main program
-if (logged_state > 0):
+if logged_state > 0 and user == currentUser:
 	try:
 		conn = dbShared.ghConn()
 		cursor = conn.cursor()

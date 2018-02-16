@@ -96,7 +96,7 @@ function deleteMe() {
 function goDeleteMe(confirmationText) {
     if ( confirmationText == 'delete' ) {
 		$("#busyImgDelete").show();
-        $.get(BASE_SCRIPT_URL + "delUser.py", {confirm: confirmationText, user: {{ uid }}, rid: new Date()}, function(data) {
+        $.get(BASE_SCRIPT_URL + "delUser.py", {confirm: confirmationText, user: "{{ uid }}", rid: new Date()}, function(data) {
 			if (data.indexOf("Error:")>-1) {
 				$("#delInfo").html(data);
 				$("#busyImgDelete").hide();
