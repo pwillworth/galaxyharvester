@@ -118,6 +118,10 @@ function loadPlanetButtons(galaxy) {
     }, "xml");
   return;
 }
+function confirmSurvey() {
+    doit = confirm('Are you sure you want to submit this report for ' + $('#galaxySel option:selected').text() + ' galaxy?');
+    return doit;
+}
 </script>
 {{ blocks.pageTracker() }}
 <body>
@@ -162,7 +166,7 @@ function loadPlanetButtons(galaxy) {
     </div>
     <div id="surveyDroidInterface" class="ghWidgetBox">
         <div class="boxHeader">Survey Droid Interface</div>
-        <form enctype="multipart/form-data" name="udReportForm" method="post" action="postSurveyDroidReport.py">
+        <form onsubmit="return confirmSurvey();" enctype="multipart/form-data" name="udReportForm" method="post" action="postSurveyDroidReport.py">
             <input type="file" id="reportFile" name="reportFile" accept=".mail,text/plain" />
             <input type="hidden" name="src_url" value="surveyList.py" />
             <input type="hidden" name="reportGalaxy" id="reportGalaxy" value="" />
