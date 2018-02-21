@@ -371,6 +371,14 @@ input.ghButton[disabled] {
 	background-image: url(/images/spriteCircles16.png);
 	background-position: -10px -262px;
 }
+.OrdMantell {
+	background-image: url(/images/spriteCircles16.png);
+	background-position: -10px -190px;
+}
+.Kuat {
+	background-image: url(/images/spriteCircles16.png);
+	background-position: -10px -154px;
+}
 .resourceStats td {
 	text-align: center;
 }
