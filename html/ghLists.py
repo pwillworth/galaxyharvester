@@ -131,7 +131,7 @@ def getResourceGroupListShort():
 	return listStr
 
 def getGalaxyList():
-	listStr = getOptionList('SELECT galaxyID, galaxyName, CASE WHEN galaxyState=1 THEN "Active" ELSE "Inactive" END FROM tGalaxy WHERE galaxyState > 0 AND galaxyState < 3 ORDER BY galaxyState, galaxyName;')
+	listStr = getOptionList('SELECT galaxyID, CASE WHEN galaxyNGE > 0 THEN CONCAT(galaxyName, \' [NGE]\') ELSE galaxyName END, CASE WHEN galaxyState=1 THEN "Active" ELSE "Inactive" END FROM tGalaxy WHERE galaxyState > 0 AND galaxyState < 3 ORDER BY galaxyState, galaxyName;')
 	return listStr
 
 def getPlanetList(galaxy):
