@@ -796,11 +796,42 @@ function getFactoryList(runAmount) {
 				result += '<li>' + (ingQuantity * runAmount) + ': ' + ingTitle.substr(13, ingTitle.indexOf('br')) + '</li>';
 			}
 		}
-		result += '</ul>'
+		result += '</ul>';
+		result += '<button type="button" value="Deduct From Inventory" class="ghButton" style="width:100%;" onclick="deductFromInventory(' + str(runAmount) + ', \'recipeIngredients\')">Deduct From Inventory</button>';
 	} else {
 		result = 'That is not a valid number';
 	}
 	$('#factoryResults').html(result);
+}
+// Automatically reduce user inventory amounts based on recipe run
+function deductFromInventory(runAmount, ingredientContainer) {
+	result = '';
+	$('#busyImgSave').css('display','block');
+	if (!isNaN(runAmount)) {
+		ings = $('#' + ingredientContainer).children();
+		result = '';
+		for (var i = 0; i < ings.length; i++) {
+			ingTitle = $($(ings[i]).children()[1]).attr('tt');
+			ingQuantity = $($(ings[i]).children()[1]).html().split('/')[1];
+			if (ingTitle != undefined) {
+				result += ',' + ingTitle.substr(13, ingTitle.indexOf('br')) + ':-' + (ingQuantity * runAmount);
+			}
+		}
+		if result.length() > 0 {
+			result = result.substring(1);
+			$.post(BASE_SCRIPT_URL + 'updateInventory.py', { galaxy: $('#galaxySel').val(), updateList: result },
+				function(data) {
+					var result = $(data).find('resultText').eq(0).text();
+					$('#busyImgSave').css('display','none');
+					$('#factoryResults').html(result);
+				}, 'xml');
+		}
+	} else {
+		result = 'That is not a valid number';
+		$('#factoryResults').html(result);
+	}
+	$('#busyImgSave').css('display','none');
+
 }
 
 // Return style to use for coloring on resource quality status preview
