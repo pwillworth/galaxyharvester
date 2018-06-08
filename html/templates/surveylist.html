@@ -30,7 +30,7 @@ $(document).ready(function() {
         $(this).addClass("btnSelected control");
         filterResources();
     });
-    $("#typeSel").load(BASE_SCRIPT_URL + "getResourceTypeList.py", {galaxy:$("#galaxySel").val()});
+    $("#typeSel").load(BASE_SCRIPT_URL + "getResourceTypeList.py", {galaxy:-1});
     $(".window .close").click(function(e) {
         e.preventDefault();
         $("#mask, .window").hide();

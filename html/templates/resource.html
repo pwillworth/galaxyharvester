@@ -19,7 +19,7 @@ $(document).ready(function() {
         $(".window").hide();
     });
     findWaypoints("spawn");
-    $("#typeSel").load(BASE_SCRIPT_URL + "getResourceTypeList.py", {galaxy:$("#galaxySel").val()});
+    $("#typeSel").load(BASE_SCRIPT_URL + "getResourceTypeList.py", {galaxy:-1});
     $("#newGalaxySel").val({{spawnGalaxy}});
     $("#bestSchematics").load(BASE_SCRIPT_URL + "getSchematicEvents.py",
       { spawnID: {{ spawnID }} },
