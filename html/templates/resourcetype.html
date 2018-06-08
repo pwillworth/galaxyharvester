@@ -25,12 +25,12 @@ $(document).ready(function() {
         $(".window").hide();
     });
 {% if typeID != '' %}
-	    $("#typeSel").load(BASE_SCRIPT_URL + "getResourceTypeList.py", {galaxy:$("#galaxySel").val()});
-	    $("#resSchematics").load(BASE_SCRIPT_URL + "getSchematicList.py",{
+	$("#typeSel").load(BASE_SCRIPT_URL + "getResourceTypeList.py", {galaxy:-1});
+	$("#resSchematics").load(BASE_SCRIPT_URL + "getSchematicList.py",{
 	{% if (typeGroup == 'group') %}
-		        resGroup: "{{ typeID }}",
+		resGroup: "{{ typeID }}",
 	{% elif (typeGroup == 'type') %}
-		        resType: "{{ typeID }}",
+		resType: "{{ typeID }}",
 	{% endif %}
 	        groupType: "res",
 		galaxy: $("#galaxySel").val()},

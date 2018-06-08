@@ -30,7 +30,7 @@ $(document).ready(function() {
     $("#harvesterData").load(BASE_SCRIPT_URL + "getHarvesterData.py",{galaxy:$("#galaxySel").val()},function(){$("#addBusyImgTH").css("display","none");});
     $("#newResourceData").load(BASE_SCRIPT_URL + "getLatestResources.py",{galaxy:$("#galaxySel").val()},function(){$("#addBusyImgNR").css("display","none");});
     $("#topResourceData").load(BASE_SCRIPT_URL + "getTopResources.py",{galaxy:$("#galaxySel").val(), prof: $("#profSel").val(), resGroup: $("#resTopGroup").val() },function(){$("#addBusyImgTR").css("display","none");});
-    $("#typeSel").load(BASE_SCRIPT_URL + "getResourceTypeList.py",{galaxy:$("#galaxySel").val()});
+    $("#typeSel").load(BASE_SCRIPT_URL + "getResourceTypeList.py",{galaxy:-1});
     $("#currentWaypointCount").load(BASE_SCRIPT_URL + "ghStats.py",{statID:"currentWaypoints",galaxy:$("#galaxySel").val()});
     findWaypoints("recent");
     $(".window .close").click(function(e) {
