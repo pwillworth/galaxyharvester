@@ -797,7 +797,7 @@ function getFactoryList(runAmount) {
 			}
 		}
 		result += '</ul>';
-		result += '<button type="button" value="Deduct From Inventory" class="ghButton" style="width:100%;" onclick="deductFromInventory(' + str(runAmount) + ', \'recipeIngredients\')">Deduct From Inventory</button>';
+		result += '<button type="button" value="Deduct From Inventory" class="ghButton" style="width:100%;" onclick="deductFromInventory(' + runAmount + ', \'recipeIngredients\')">Deduct From Inventory</button>';
 	} else {
 		result = 'That is not a valid number';
 	}
@@ -817,7 +817,7 @@ function deductFromInventory(runAmount, ingredientContainer) {
 				result += ',' + ingTitle.substr(13, ingTitle.indexOf('br')) + ':-' + (ingQuantity * runAmount);
 			}
 		}
-		if result.length() > 0 {
+		if (result.length > 0) {
 			result = result.substring(1);
 			$.post(BASE_SCRIPT_URL + 'updateInventory.py', { galaxy: $('#galaxySel').val(), updateList: result },
 				function(data) {

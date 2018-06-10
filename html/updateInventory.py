@@ -92,7 +92,7 @@ def n2n(inVal):
 
 #  Check for errors
 errstr = ""
-fc = len(fltValues)
+fc = len(updateList)
 if (galaxy == ""):
 	errstr = errstr + "Error: no galaxy selected. \r\n"
 if fc > 1:
