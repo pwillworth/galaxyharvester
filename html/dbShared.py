@@ -380,6 +380,9 @@ def getPlanetID(planetName):
 	if planetName == 'Yavin IV':
 		planetName = 'yavin4'
 	###
+	if planetName == 'Kaas':
+		planetName = 'dromundkaas'
+	###
 	cursor.execute('SELECT planetID FROM tPlanet WHERE LOWER(REPLACE(planetName," ","")) = "' + planetName.lower() + '";')
 	row = cursor.fetchone()
 	if (row != None and row[0] != None):
