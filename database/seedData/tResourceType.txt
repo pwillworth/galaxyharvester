@@ -761,8 +761,10 @@ wood_deciduous_tatooine	Tatooinian Deciduous Wood	flora_structural	wood_deciduou
 wood_deciduous_yavin4	Yavinian Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	10
 aluminum_hoth	Hothian Aluminum	mineral	aluminum	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	aluminum	aluminum	11
 copper_hoth	Hothian Copper	mineral	copper	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	copper	copper	11
-armophous_hoth	Hothian Amorphous Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	11
-crystalline_hoth	Hothian Crystalline Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	11
+armophous_hoth_1	Hothian Type 1 Amorphous Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	11
+crystalline_hoth_1	Hothian Type 1 Crystalline Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	11
+armophous_hoth_2	Hothian Type 2 Amorphous Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	11
+crystalline_hoth_2	Hothian Type 2 Crystalline Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	11
 gas_inert_hoth	Hothian Inert Gas	gas	gas_inert	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	11
 gas_reactive_hoth	Hothian Reactive Gas	gas	gas_reactive	1	1	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_reactive	gas_reactive	11
 iron_hoth	Hothian Iron	mineral	iron	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	iron	metal_ferrous	11
