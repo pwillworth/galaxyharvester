@@ -472,6 +472,10 @@ def getSpawnPlanets(conn, spawnID, availableOnly, galaxy):
 def getResourceTypeID(conn, resourceTypeName):
 	# try to figure out resource type id... sometimes name can different slighty from
 	# some sources like Corellia vs. Corellian
+
+	# Some servers like to be special and abbreviate the word Gemstone
+	if resourceTypeName in ['Hothian Type 1 Amorphous Gem', 'Hothian Type 2 Amorphous Gem', 'Hothian Type 1 Crystalline Gem', 'Hothian Type 2 Crystalline Gem']:
+		resourceTypeName = resourceTypeName + 'stone'
 	typeID = ''
 	cursor = conn.cursor()
 	cursor.execute("SELECT resourceType, resourceTypeName FROM tResourceType;")
