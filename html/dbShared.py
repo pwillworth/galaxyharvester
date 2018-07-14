@@ -477,7 +477,7 @@ def getResourceTypeID(conn, resourceTypeName):
 	cursor.execute("SELECT resourceType, resourceTypeName FROM tResourceType;")
 	row = cursor.fetchone()
 	while row != None:
-		if len(difflib.get_close_matches(resourceTypeName, [row[1]], 1, 0.95)) > 0:
+		if len(difflib.get_close_matches(resourceTypeName, [row[1]], 1, 0.97)) > 0:
 			typeID = row[0]
 		row = cursor.fetchone()
 	cursor.close()
