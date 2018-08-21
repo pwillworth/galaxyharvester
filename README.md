@@ -3,13 +3,13 @@
 ## Initial Setup
 
 ### Galaxy Harvester Server Requirements:
-The following software must be set up on the server prior to setting up Galaxy Harvester
+The following software must be set up on the server prior to setting up Galaxy Harvester (The versions listed reflect what the current code base is running on)
 
-* Webserver (Apache2 recommended)
-* MySQL Server
-* Python 2.x
- * module: python-MySQLdb
- * module: jinja2
+* Webserver (apache2 2.4)
+* MySQL Server (5.5)
+* Python (2.7)
+ * module: python-MySQLdb (1.2)
+ * module: jinja2 (2.7)
 
 ### Web Server Configuration:
 The web server being used must be configured to serve the Python based CGI scripts as follows
