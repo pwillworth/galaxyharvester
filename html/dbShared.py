@@ -111,7 +111,7 @@ def logUserEvent(user, galaxy, targetType, targetID, eventType):
 		# Check if user is experienced enough to give rep bonus
 		expGood = False
 		# Exclude automated users
-		if (user != "etas" and user != "c0pp3r" and user != "RogueOne" and user != "SRAlderaan"):
+		if (user not in ghShared.automatedUsers):
 			cursor.execute("SELECT added, repBad FROM tUserStats WHERE userID=%s AND galaxy=%s;", (user, galaxy))
 			row = cursor.fetchone()
 			if (row != None and row[0] != None):
