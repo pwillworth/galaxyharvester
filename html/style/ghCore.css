@@ -384,6 +384,14 @@ input.ghButton[disabled] {
 	background-image: url(/images/spriteCircles16.png);
 	background-position: -10px -154px;
 }
+.Moraband {
+	background-image: url(/images/spriteCircles16.png);
+	background-position: -10px -10px;
+}
+.Coruscant {
+	background-image: url(/images/spriteCircles16.png);
+	background-position: -10px -478px;
+}
 .resourceStats td {
 	text-align: center;
 }
