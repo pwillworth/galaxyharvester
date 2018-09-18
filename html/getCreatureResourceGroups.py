@@ -50,7 +50,7 @@ if (cursor):
     FROM tResourceGroup
       INNER JOIN tResourceType ON tResourceType.resourceGroup = tResourceGroup.resourceGroup
       INNER JOIN tResourceTypeCreature ON tResourceTypeCreature.resourceType = tResourceType.resourceType
-    WHERE tResourceGroup.containerType IN ('bone', 'hide', 'meat')
+    WHERE tResourceGroup.containerType IN ('bone', 'hide', 'meat', 'milk')
       AND tResourceTypeCreature.galaxy IN (0, %s)
     GROUP BY tResourceGroup.resourceGroup
     ORDER BY tResourceGroup.resourceGroup
