@@ -46,5 +46,5 @@ jobs:
       versionSpec: '2.x'
       architecture: 'x64'
 
-  - script: python setup.py sdist
-    displayName: 'Build sdist'
+  - script: tar -czf ghWebFiles.tgz --exclude=*.pyc html/
+    displayName: 'Build dist'
