@@ -31,7 +31,8 @@ jobs:
 
   - script: |
       pip install pytest
-      pytest test/pyunit --doctest-modules --junitxml=junit/test-results.xml
+      cd test/pyunit
+      pytest --doctest-modules --junitxml=junit/test-results.xml
     displayName: 'pytest'
 
   - task: PublishTestResults@2
