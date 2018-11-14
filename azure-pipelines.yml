@@ -30,14 +30,14 @@ jobs:
     displayName: 'Install dependencies'
 
   - script: |
-      pip install pytest
+      pip install nose2 node2-cov
       cd test/pyunit
-      pytest --doctest-modules --junitxml=junit/test-results.xml
+      nose2 --with-coverage
     displayName: 'pytest'
 
   - task: PublishTestResults@2
     inputs:
-      testResultsFiles: '**/test-results.xml'
+      testResultsFiles: '**/nose2-junit.xml'
       testRunTitle: 'Python $(python.version)'
     condition: succeededOrFailed()
 
