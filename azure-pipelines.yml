@@ -12,8 +12,6 @@ jobs:
     matrix:
       Python27:
         python.version: '2.7'
-      Python37:
-        python.version: '3.7'
     maxParallel: 2
 
   steps:
@@ -28,7 +26,7 @@ jobs:
   - script: |
       pip install nose2 nose2-cov
       cd test/pyunit
-      nose2 --with-coverage --junit-xml DEFAULT
+      nose2 --with-coverage --junit-xml
     displayName: 'pytest'
 
   - task: PublishTestResults@2
