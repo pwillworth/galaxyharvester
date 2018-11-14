@@ -1,2 +1,2 @@
-<MySQL-python>
-<Jinja>
+MySQL-python
+Jinja
