@@ -1376,3 +1376,10 @@ water_vapor_moraband	Moraband Water Vapor	water	water	1	5	0	0	0	0	1	1000	0	0	0	0
 wheat_domesticated_moraband	Moraband Domesticated Wheat	flora_food	wheat_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	wheat	27
 wheat_wild_moraband	Moraband Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	wheat	27
 wood_deciduous_moraband	Moraband Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	27
+aluminum_galvanicyn	Galvanicyn Aluminum	mineral	aluminum	1	1	1	1000	1	1000	1	1000	0	0	1	1000	1	1000	0	0	1	1000	1	1000	1	1000	0	0	aluminum	aluminum	0
+copper_cagunese	Cagunese Copper	mineral	copper	1	1	1	1000	1	1000	1	1000	0	0	1	1000	1	1000	0	0	1	1000	1	1000	1	1000	0	0	copper	copper	0
+gas_inert_rylon	Rylon Inert Gas	gas	gas_inert	1	1	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	0
+iron_hemalite	Hemalite Iron	mineral	iron	1	1	1	1000	1	1000	1	1000	0	0	1	1000	1	1000	0	0	1	1000	1	1000	1	1000	0	0	iron	metal_ferrous	0
+ore_carbonate_calabite	Calabite Carbonate Ore	mineral	ore_carbonate	1	1	1	1000	0	0	1	1000	0	0	1	1000	1	1000	0	0	1	1000	1	1000	1	1000	0	0	ore_carbonate	ore_carbonate	0
+ore_extrusive_maganite	Maganite Extrusive Ore	mineral	ore_extrusive	1	1	1	1000	0	0	1	1000	0	0	1	1000	1	1000	0	0	1	1000	1	1000	1	1000	0	0	ore_igneous	ore_igneous	0
+ore_intrusive_galatite	Galatite Intrusive Ore	mineral	ore_intrusive	1	1	1	1000	0	0	1	1000	0	0	1	1000	1	1000	0	0	1	1000	1	1000	1	1000	0	0	ore_igneous	ore_igneous	0
