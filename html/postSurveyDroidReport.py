@@ -74,14 +74,23 @@ def updatePlanetSpawns(planetID, classID, resources, galaxyID, userID):
 					spawnVerifyCount += 1
 		else:
 			# Post as new resource
-			status = postResource.addResource(spawn.spawnName, galaxyID, spawn.resourceType, str(spawn.stats.CR), str(spawn.stats.CD), str(spawn.stats.DR), str(spawn.stats.FL), str(spawn.stats.HR), str(spawn.stats.MA), str(spawn.stats.PE), str(spawn.stats.OQ), str(spawn.stats.SR), str(spawn.stats.UT), str(spawn.stats.ER), userID)
-			spawnID = dbShared.getSpawnID(spawn.spawnName, galaxyID)
-			status = postResource.addResPlanet(spawnID, planetID, spawn.spawnName, userID, galaxyID) + '   ' + status
-			if (status.find("Error:") > -1):
-				spawnErrorCount += 1
-				errors = errors + status + '\n<br />'
+			# Only post if a valid type was found
+			typecursor = conn.cursor()
+			typecursor.execute("SELECT resourceTypeName FROM tResourceType WHERE resourceType=%s", [spawn.resourceType])
+			typerow = typecursor.fetchone()
+			if typerow != None:
+				status = postResource.addResource(spawn.spawnName, galaxyID, spawn.resourceType, str(spawn.stats.CR), str(spawn.stats.CD), str(spawn.stats.DR), str(spawn.stats.FL), str(spawn.stats.HR), str(spawn.stats.MA), str(spawn.stats.PE), str(spawn.stats.OQ), str(spawn.stats.SR), str(spawn.stats.UT), str(spawn.stats.ER), userID)
+				spawnID = dbShared.getSpawnID(spawn.spawnName, galaxyID)
+				status = postResource.addResPlanet(spawnID, planetID, spawn.spawnName, userID, galaxyID) + '   ' + status
+				if (status.find("Error:") > -1):
+					spawnErrorCount += 1
+					errors = errors + status + '\n<br />'
+				else:
+					spawnAddCount += 1
 			else:
-				spawnAddCount += 1
+				spawnErrorCount += 1
+				errors = errors + 'Error: Resource type not found.\n<br />'
+			typecursor.close()
 
 	# Check for resources that have despawned
 	if len(resources) > 0 and classID != '' and spawnErrorCount == 0:
