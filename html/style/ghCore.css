@@ -392,6 +392,10 @@ input.ghButton[disabled] {
 	background-image: url(/images/spriteCircles16.png);
 	background-position: -10px -478px;
 }
+.Florrum {
+	background-image: url(/images/spriteCircles16.png);
+	background-position: -10px -190px;
+}
 .resourceStats td {
 	text-align: center;
 }
