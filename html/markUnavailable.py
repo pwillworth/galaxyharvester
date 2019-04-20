@@ -50,7 +50,7 @@ def removeSpawn(spawnID, planets, userID, galaxy):
 
 		# Only allow removal if user has positive reputation
 		stats = dbShared.getUserStats(userID, galaxy).split(",")
-		admin = dbShared.getUserAdmin(conn, currentUser, galaxy)
+		admin = dbShared.getUserAdmin(conn, userID, galaxy)
 		cursor.execute("SELECT enteredBy, unavailable FROM tResources WHERE spawnID=%s;", [spawnID])
 		row = cursor.fetchone()
 		if int(stats[2]) < ghShared.MIN_REP_VALS['REMOVE_RESOURCE'] and row[0] != userID and not admin:
