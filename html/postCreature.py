@@ -173,7 +173,7 @@ if (errstr == ""):
 				cursor.close()
 
 				# edit it
-				if owner == currentUser or userReputation >= ghShared.MIN_REP_VALS['EDIT_OTHER_CREATURE']:
+				if owner == currentUser or userReputation >= ghShared.MIN_REP_VALS['EDIT_OTHER_CREATURE'] or dbShared.getUserAdmin(conn, currentUser, galaxy):
 					result = "edit: "
 					result = result + updateCreature(resourceType, creatureName, harvestYield, missionLevel, galaxy)
 				else:
@@ -183,7 +183,7 @@ if (errstr == ""):
 			conn.close()
 
 		else:
-			if userReputation >= ghShared.MIN_REP_VALS['ADD_CREATURE']:
+			if userReputation >= ghShared.MIN_REP_VALS['ADD_CREATURE'] or dbShared.getUserAdmin(conn, currentUser, galaxy):
 				result = addCreature(resourceType, creatureName, harvestYield, missionLevel, galaxy)
 			else:
 				result = "Error: You don't have permission to add creature data yet."

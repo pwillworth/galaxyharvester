@@ -14,21 +14,22 @@ The following software must be set up on the server prior to setting up Galaxy H
 ### Web Server Configuration:
 The web server being used must be configured to serve the Python based CGI scripts as follows
 
-* Set "html" folder of this repo as web site root
-* Configure .py extension files as executable CGI
+* Set "html" folder of this repo as web site root (for apache2 update DocumentRoot in /etc/apache2/sites-enabled/000-default.conf)
+* Enable CGI in your webserver, for apache2 you can run "sudo a2enmod cgi" and add the line "AddHandler cgi-script .py" in /etc/apache2/conf-enabled/serve-cgi-bin.conf within the Directory block which should be updated to point to your html folder.
 * The folders should be writable by the web server: html/temp, html/images/users, html/images/schematics
 
 
 ### Database Creation:
 The database folder contains scripts and seed data to initialize a ready to use Galaxy Harvester database.
 
-1. Verify database/createSWGresourcedb.sql LOAD DATA commands reflect the absolute path of the seedData files and the grant statement targets your db user
+1. Verify database/createSWGresourcedb.sql LOAD DATA commands reflect the absolute path of the seedData files
+2. Change grant statements in database/createSWGresourcedb.sql to target your db user or create new default user in mysql: "CREATE USER 'webusr'@'localhost' IDENTIFIED BY '';"
 2. run "mysql -u root -p --local-infile < createSWGresourcedb.sql" to create the database
 
 ### Site Configuration:
 The site configuration files should exist in the folder above the web site root folder along with the maintenance job scripts, update the following 3 files with appropriate passwords, etc.
 
-* Update dbInfo.py so host, user, and password reflect your mysql server info OR add default user in mySQL (CREATE USER 'webusr'@'localhost' IDENTIFIED BY '';)
+* Update dbInfo.py so host, user, and password reflect your mysql server info if not using default webuser
 * Update mailInfo.py so outgoing mail server and login info is set properly
 * Check kukkaisvoima_settings.py for Blog admin settings customization
 

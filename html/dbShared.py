@@ -334,6 +334,17 @@ def getUserStats(user, galaxy):
 	conn.close()
 	return '{0},{1},{2}'.format(resScore, mapScore, repScore)
 
+def getUserAdmin(conn, user, galaxy):
+	admin = False
+	cursor = conn.cursor()
+	cursor.execute('SELECT roleType FROM tGalaxyUser WHERE userID=%s AND galaxyID=%s ORDER BY roleType;', [user, galaxy])
+	row = cursor.fetchone()
+	if (row != None and row[0] == 'a'):
+		admin = True
+
+	cursor.close()
+	return admin
+
 def getGalaxyAdminList(conn, userID):
         listHTML = ''
         cursor = conn.cursor()

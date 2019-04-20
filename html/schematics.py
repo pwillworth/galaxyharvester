@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2019 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -189,7 +189,8 @@ def main():
 		# Lookup reputation for edit tool option
 		stats = dbShared.getUserStats(currentUser, galaxy).split(",")
 		userReputation = int(stats[2])
-		canAdd = userReputation >= ghShared.MIN_REP_VALS['ADD_SCHEMATIC']
+		admin = dbShared.getUserAdmin(conn, currentUser, galaxy)
+		canAdd = userReputation >= ghShared.MIN_REP_VALS['ADD_SCHEMATIC'] or admin
 
 		if (schematicID != 'index') and (schematicID != 'home'):
 			# Build the schematic object
@@ -303,7 +304,7 @@ def main():
 							favHTML = '  <div class="inlineBlock" style="width:3%;float:left;"><a alt="Favorite" title="Favorite" style="cursor: pointer;" onclick="toggleFavorite(this, 4, \''+ schematicID +'\', $(\'#galaxySel\').val());"><img src="/images/favorite16Off.png" /></a></div>'
 						favCursor.close()
 
-						if currentUser == s.enteredBy or (s.galaxy != 0 and userReputation >= ghShared.MIN_REP_VALS['EDIT_OTHER_SCHEMATIC']):
+						if admin or currentUser == s.enteredBy or (s.galaxy != 0 and userReputation >= ghShared.MIN_REP_VALS['EDIT_OTHER_SCHEMATIC']):
 							canEdit = True
 
 				cursor.close()

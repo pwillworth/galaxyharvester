@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2019 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -374,6 +374,7 @@ if logged_state == 1:
 	# Lookup reputation to validate abilities
 	stats = dbShared.getUserStats(currentUser, galaxy).split(",")
 	userReputation = int(stats[2])
+	admin = dbShared.getUserAdmin(conn, currentUser, galaxy)
 else:
 	errstr = 'You must be logged in to add schematic data.'
 
@@ -385,7 +386,7 @@ else:
 		errstr = errstr + 'Error: Profession ID must be provided to add a new schematic.'
 	if len(skillGroup) < 3:
 		errstr = errstr + 'Error: Skill Group must be provided to add a new schematic.'
-	if userReputation < ghShared.MIN_REP_VALS['ADD_SCHEMATIC']:
+	if userReputation < ghShared.MIN_REP_VALS['ADD_SCHEMATIC'] and not admin:
 		errstr = errstr + 'Error: You have not yet built enough reputation to add schematic data.'
 	if galaxy.isdigit() == False or len(galaxy) > 5:
 		errstr = errstr + 'Error: A valid numeric galaxy id must be provided to add the new schematic to.'
@@ -459,7 +460,7 @@ if errstr == '':
 		if checkRow != None:
 			if checkRow[0] == None or checkRow[0] == '':
 				errstr = errstr + 'Error: That schematic is part of the core game schematics and cannot be edited.'
-			elif checkRow[0] != currentUser and userReputation < ghShared.MIN_REP_VALS['EDIT_OTHER_SCHEMATIC']:
+			elif checkRow[0] != currentUser and userReputation < ghShared.MIN_REP_VALS['EDIT_OTHER_SCHEMATIC'] and not admin:
 				errstr = errstr + 'Error: You do not have high enough reputation to edit other users\' schematic data yet.'
 		else:
 			errstr = errstr + 'Error: Schematic with that ID could not be found for editing.'

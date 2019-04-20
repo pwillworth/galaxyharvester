@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2019 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -117,7 +117,7 @@ def getResourceData(conn, resSQL, logged_state, galaxyState, resourceFormat, rep
 						controlsUser = currentUser
 					else:
 						controlsUser = ''
-					resourceHTML += s.getHTML(resourceFormat, "", controlsUser, reputation)
+					resourceHTML += s.getHTML(resourceFormat, "", controlsUser, reputation, dbShared.getUserAdmin(conn, currentUser, galaxy))
 					resourceHTML += '  </td></tr>'
 					row = cursor.fetchone()
 		else:

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2019 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -98,12 +98,13 @@ if result == "":
 		# Look up user reputation for later checks
 		stats = dbShared.getUserStats(currentUser, galaxy).split(",")
 		userReputation = int(stats[2])
+		admin = dbShared.getUserAdmin(conn, currentUser, galaxy)
 		# Lookup the data to remove
 		cursor.execute("SELECT enteredBy FROM tResourceTypeCreature WHERE galaxy=%s AND resourceType=%s AND speciesName=%s;", (galaxy, resourceType, creatureName))
 		row = cursor.fetchone()
 
 		# Check for ownership or reputation before removing
-		if row[0] == currentUser or userReputation >= ghShared.MIN_REP_VALS['EDIT_OTHER_CREATURE']:
+		if row[0] == currentUser or userReputation >= ghShared.MIN_REP_VALS['EDIT_OTHER_CREATURE'] or admin:
 			sqlStr = "DELETE FROM tResourceTypeCreature WHERE resourceType=%s AND speciesName=%s AND galaxy=%s;"
 			cursor.execute(sqlStr, (resourceType, creatureName, galaxy))
 			affRows = cursor.rowcount

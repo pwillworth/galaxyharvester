@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2019 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -152,7 +152,8 @@ if (logged_state > 0):
 
 				# Only allow update if user has positive reputation
 				stats = dbShared.getUserStats(currentUser, galaxy).split(",")
-				if (int(stats[2]) < ghShared.MIN_REP_VALS['REMOVE_RESOURCE'] and enteredBy != currentUser) and availability == "0":
+				admin = dbShared.getUserAdmin(conn, currentUser, galaxy)
+				if (int(stats[2]) < ghShared.MIN_REP_VALS['REMOVE_RESOURCE'] and enteredBy != currentUser) and availability == "0" and not admin:
 					result = "Error: You must earn a little reputation on the site before you can edit resources.  Try adding or verifying some first. \r\n"
 				else:
 					cursor.execute(sqlStr)

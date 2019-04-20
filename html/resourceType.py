@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2019 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -197,12 +197,13 @@ def main():
 	# Get reputation to determine editing abilities
 	stats = dbShared.getUserStats(currentUser, galaxy).split(",")
 	userReputation = int(stats[2])
+	admin = dbShared.getUserAdmin(conn, currentUser, galaxy)
 	print 'Content-type: text/html\n'
 	env = Environment(loader=FileSystemLoader('templates'))
 	env.globals['BASE_SCRIPT_URL'] = ghShared.BASE_SCRIPT_URL
 	env.globals['MOBILE_PLATFORM'] = ghShared.getMobilePlatform(os.environ['HTTP_USER_AGENT'])
 	template = env.get_template('resourcetype.html')
-	print template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), typeGroup=typeGroup, typeID=typeID, resHTML=resHTML, creature=creature, resTree=resTree, editCreatures=(userReputation>=ghShared.MIN_REP_VALS['ADD_CREATURE']), resourceType=typeID)
+	print template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), typeGroup=typeGroup, typeID=typeID, resHTML=resHTML, creature=creature, resTree=resTree, editCreatures=(userReputation>=ghShared.MIN_REP_VALS['ADD_CREATURE'] or admin), resourceType=typeID)
 
 
 def getResourceTree():

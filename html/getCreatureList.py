@@ -123,7 +123,7 @@ if (cursor):
         clist += '</td><td>' + str(row[1]) + '</td><td>' + str(row[2])
 
         # Display creature edit/dit if user has enough reputation
-        if logged_state == 1 and row[3] != 0 and (row[4] == currentUser or userReputation >= ghShared.MIN_REP_VALS['EDIT_OTHER_CREATURE']):
+        if logged_state == 1 and row[3] != 0 and (row[4] == currentUser or userReputation >= ghShared.MIN_REP_VALS['EDIT_OTHER_CREATURE'] or dbShared.getUserAdmin(conn, currentUser, galaxy)):
             clist += '<div style="float:right;"><a style="cursor: pointer;" onclick="editCreatureData(\'{2}\', \'{3}\', \'{4}\')"><img src="/images/editBlue16.png" alt="Edit Info"/></a><a style="cursor: pointer;" onclick="removeCreatureResource({0}, \'{1}\', \'{2}\')"><img src="/images/xRed16.png" alt="Remove"/></a></div>'.format(str(row[3]), resType, row[0], row[1], row[2])
 
         clist += '</td>'
