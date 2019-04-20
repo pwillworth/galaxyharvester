@@ -47,11 +47,10 @@ These jobs should be set up to run at regular intervals to maintain the site and
 ### Tools
 You'll want to have these additional tools available locally to build and test Galaxy Harvester
 
-* Ant
 * python-nose
 * python-nose-cov
 
-With those installed, you should be able to run Ant from the root of the repo to validate the code with a simple python compile and unit test run.
+With those installed, you should be able to run nose2 from the test/pyunit folder to validate the code with a unit test run.
 
 ### Seed Data Refresh
 Galaxy Harvester seed data includes creature and schematic data that is automatically generated from the SWGEmu source code repository.  The "scripts" folder contains utility scripts to extract this data from the SWGEmu code in the event that it needs to be regenerated after changes.  These scripts operate on a local database, so the process of refresh would look something like these steps:

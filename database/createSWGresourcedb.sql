@@ -42,6 +42,7 @@ CREATE TABLE tFeedbackComments (commentID INT AUTO_INCREMENT PRIMARY KEY, feedba
 
 GRANT SELECT,INSERT,UPDATE,DELETE ON swgresource.* TO 'webusr'@'localhost';
 INSERT INTO tGalaxy (galaxyName, galaxyState) VALUES ('Test Galaxy', 1);
+INSERT INTO tGalaxyPlanet (galaxyID, planetID) VALUES (1, 13);
 INSERT INTO tUsers (userID) VALUES ('default');
 LOAD DATA LOCAL INFILE '/var/www/database/seedData/planet.csv' INTO TABLE tPlanet FIELDS ENCLOSED BY '"' (planetName);
 LOAD DATA LOCAL INFILE '/var/www/database/seedData/waypointcity.csv' INTO TABLE tWaypoint FIELDS TERMINATED BY ',' (planetID, waypointName, waypointType, lattitude, longitude, concentration, shareLevel, entered);

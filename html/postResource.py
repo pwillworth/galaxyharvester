@@ -176,7 +176,7 @@ def addResStats(spawn, resType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER, forc
 			# update resource stats
 			# Only allow update if user has positive reputation or was the one who entered resource
 			stats = dbShared.getUserStats(userID, galaxy).split(",")
-			admin = dbShared.getUserAdmin(conn, currentUser, galaxy)
+			admin = dbShared.getUserAdmin(conn, userID, galaxy)
 			if int(stats[2]) < ghShared.MIN_REP_VALS['EDIT_RESOURCE_STATS_TYPE'] and row[23] != userID and not admin:
 				returnStr = "Error: You must earn a little reputation on the site before you can edit resources.  Try adding or verifying some first. \r\n"
 			elif hasStats:
