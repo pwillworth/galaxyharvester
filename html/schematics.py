@@ -91,7 +91,7 @@ def getComponentLink(cn, objectPath, ingredientType):
 # Helper function to look up profession for schematic since its not a property of schem but inferrable by skill group
 def getProfession(conn, skillGroup):
 	profCursor = conn.cursor()
-	profCursor.execute('SELECT profID FROM tSkillGroup WHERE skillGroup=%s;', (skillGroup))
+	profCursor.execute('SELECT profID FROM tSkillGroup WHERE skillGroup=%s;', [skillGroup])
 	profRow = profCursor.fetchone()
 	if profRow != None:
 		return profRow[0]
@@ -186,6 +186,10 @@ def main():
 	if len(path) > 0:
 		schematicID = dbShared.dbInsertSafe(path[0])
 		url = url + '/' + schematicID
+		try:
+			conn = dbShared.ghConn()
+		except Exception:
+			errorstr = "Error: could not connect to database"
 		# Lookup reputation for edit tool option
 		stats = dbShared.getUserStats(currentUser, galaxy).split(",")
 		userReputation = int(stats[2])
@@ -194,14 +198,9 @@ def main():
 
 		if (schematicID != 'index') and (schematicID != 'home'):
 			# Build the schematic object
-			try:
-				conn = dbShared.ghConn()
-				cursor = conn.cursor()
-			except Exception:
-				errorstr = "Error: could not connect to database"
-
+			cursor = conn.cursor()
 			if (cursor):
-				cursor.execute('SELECT schematicName, complexity, xpAmount, (SELECT imageName FROM tSchematicImages tsi WHERE tsi.schematicID=tSchematic.schematicID AND tsi.imageType=1) AS schemImage, galaxy, enteredBy, craftingTab, skillGroup, objectType FROM tSchematic WHERE schematicID=%s;', (schematicID))
+				cursor.execute('SELECT schematicName, complexity, xpAmount, (SELECT imageName FROM tSchematicImages tsi WHERE tsi.schematicID=tSchematic.schematicID AND tsi.imageType=1) AS schemImage, galaxy, enteredBy, craftingTab, skillGroup, objectType FROM tSchematic WHERE schematicID=%s;', [schematicID])
 				row = cursor.fetchone()
 
 				if (row != None):
@@ -309,7 +308,7 @@ def main():
 
 				cursor.close()
 
-			conn.close()
+		conn.close()
 
 	pictureName = dbShared.getUserAttr(currentUser, 'pictureName')
 	print 'Content-type: text/html\n'

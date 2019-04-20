@@ -114,15 +114,14 @@ def main():
 		path = os.environ['PATH_INFO'].split('/')[1:]
 		path = [p for p in path if p != '']
 
+	try:
+		conn = dbShared.ghConn()
+	except Exception:
+		errorstr = "Error: could not connect to database"
+
 	if path[0] != '':
 		typeID = dbShared.dbInsertSafe(path[0])
-
-		try:
-			conn = dbShared.ghConn()
-			cursor = conn.cursor()
-		except Exception:
-			errorstr = "Error: could not connect to database"
-
+		cursor = conn.cursor()
 		if (cursor):
 			cursor.execute('SELECT resourceTypeName, rg1.groupName, rg2.groupName, rt.containerType, CRmin, CRmax, CDmin, CDmax, DRmin, DRmax, FLmin, FLmax, HRmin, HRmax, MAmin, MAmax, PEmin, PEmax, OQmin, OQmax, SRmin, SRmax, UTmin, UTmax, ERmin, ERmax, rt.resourceCategory, rt.resourceGroup FROM tResourceType rt INNER JOIN tResourceGroup rg1 ON rt.resourceCategory = rg1.resourceGroup INNER JOIN tResourceGroup rg2 ON rt.resourceGroup = rg2.resourceGroup WHERE resourceType="' + typeID + '";')
 			row = cursor.fetchone()
@@ -177,8 +176,7 @@ def main():
 				else:
 					resHTML += '</div>'
 
-			cursor.close()
-		conn.close()
+		cursor.close()
 	else:
 		resHTML = '<h1>Resource Type Groups</h1>'
 		resHTML += '<div id="resTypeInfo">You have reached the resource type page.  From here, you can browse to any resource type and view things like: best spawns, schematics, creatures, and min/max stats.</div>'
@@ -198,6 +196,7 @@ def main():
 	stats = dbShared.getUserStats(currentUser, galaxy).split(",")
 	userReputation = int(stats[2])
 	admin = dbShared.getUserAdmin(conn, currentUser, galaxy)
+	conn.close()
 	print 'Content-type: text/html\n'
 	env = Environment(loader=FileSystemLoader('templates'))
 	env.globals['BASE_SCRIPT_URL'] = ghShared.BASE_SCRIPT_URL

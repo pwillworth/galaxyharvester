@@ -79,7 +79,7 @@ def addSchematicFromLua(conn, skillGroup, luaSchematic, luaObject, galaxy, userI
 		badSchem = True
 
 	checkCursor = conn.cursor()
-	checkCursor.execute('SELECT schematicName FROM tSchematic WHERE schematicID=%s;', (schemID))
+	checkCursor.execute('SELECT schematicName FROM tSchematic WHERE schematicID=%s;', [schemID])
 	checkRow = checkCursor.fetchone()
 	if checkRow != None:
 		result = 'Error: A schematic already exists with the same ID.  Check if you need to edit the existing one, or change the ID in lua file.'
@@ -133,7 +133,7 @@ def addSchematicFromLua(conn, skillGroup, luaSchematic, luaObject, galaxy, userI
 		# write schematic information to database
 		cursor = conn.cursor()
 		schemSQL = "INSERT INTO tSchematic (schematicID, schematicName, craftingTab, skillGroup, objectType, complexity, objectSize, xpType, xpAmount, objectPath, objectGroup, galaxy, enteredBy) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
-		cursor.execute(schemSQL, (schemID, schem["customObjectName"], craftingTab, skillGroup, objectType, complexity, schemSize, xpType, xp, schem["targetTemplate"], objectGroup, galaxy, userID))
+		cursor.execute(schemSQL, [schemID, schem["customObjectName"], craftingTab, skillGroup, objectType, complexity, schemSize, xpType, xp, schem["targetTemplate"], objectGroup, galaxy, userID])
 
 		# write ingredient information to database
 		ingredients = []
@@ -154,7 +154,7 @@ def addSchematicFromLua(conn, skillGroup, luaSchematic, luaObject, galaxy, userI
 
 			sys.stderr.write(ingredients[i] + '\n')
 			ingSQL = "INSERT INTO tSchematicIngredients (schematicID, ingredientName, ingredientType, ingredientObject, ingredientQuantity, ingredientContribution) VALUES (%s, %s, %s, %s, %s, %s);"
-			cursor.execute(ingSQL, (schemID, ingredients[i], ingTypes[i], ingObject, resQuantities[i], resContribution[i]))
+			cursor.execute(ingSQL, [schemID, ingredients[i], ingTypes[i], ingObject, resQuantities[i], resContribution[i]])
 
 		# write experimental property/quality info to database
 		expProps = None
@@ -178,12 +178,12 @@ def addSchematicFromLua(conn, skillGroup, luaSchematic, luaObject, galaxy, userI
 						weightTotal += int(expResWeights[weightPos+i2])
 				if (expProps[i] != "null"):
 					qualSQL = "INSERT INTO tSchematicQualities (schematicID, expProperty, expGroup, weightTotal) VALUES (%s, %s, %s, %s);"
-					cursor.execute(qualSQL, (schemID, expProps[i], expGroups[i], weightTotal))
+					cursor.execute(qualSQL, [schemID, expProps[i], expGroups[i], weightTotal])
 				# add resource properties according to count for this quality attribute
 				for i2 in range(int(expCounts[i])):
 					if (expResProps[weightPos+i2] != "XX"):
 						weightSQL = "INSERT INTO tSchematicResWeights (expQualityID, statName, statWeight) VALUES (LAST_INSERT_ID(), %s, %s);"
-						cursor.execute(weightSQL, (expResProps[weightPos+i2], expResWeights[weightPos+i2]))
+						cursor.execute(weightSQL, [expResProps[weightPos+i2], expResWeights[weightPos+i2]])
 
 				weightPos += int(expCounts[i])
 		cursor.close()
@@ -194,26 +194,26 @@ def addSchematicFromLua(conn, skillGroup, luaSchematic, luaObject, galaxy, userI
 def addSchematicByCopy(conn, skillGroup, sourceSchematic, schematicName, galaxy, userID):
 	schematicID = generateSchematicID(schematicName, galaxy)
 	checkCursor = conn.cursor()
-	checkCursor.execute('SELECT schematicName FROM tSchematic WHERE schematicID=%s;', (schematicID))
+	checkCursor.execute('SELECT schematicName FROM tSchematic WHERE schematicID=%s;', [schematicID])
 	checkRow = checkCursor.fetchone()
 	checkCursor.close()
 	if checkRow == None:
 		# Proceed with schematic copy
 		cursor = conn.cursor()
 		schemSQL = "INSERT INTO tSchematic (schematicID, schematicName, craftingTab, skillGroup, objectType, complexity, objectSize, xpType, xpAmount, objectPath, objectGroup, galaxy, enteredBy) SELECT %s, %s, craftingTab, %s, objectType, complexity, objectSize, xpType, xpAmount, 'object/{0}', objectGroup, %s, %s FROM tSchematic WHERE schematicID=%s;".format(schematicID)
-		cursor.execute(schemSQL, (schematicID, schematicName, skillGroup, galaxy, userID, sourceSchematic))
+		cursor.execute(schemSQL, [schematicID, schematicName, skillGroup, galaxy, userID, sourceSchematic])
 		ingSQL = "INSERT INTO tSchematicIngredients (schematicID, ingredientName, ingredientType, ingredientObject, ingredientQuantity, ingredientContribution) SELECT %s, ingredientName, ingredientType, ingredientObject, ingredientQuantity, ingredientContribution FROM tSchematicIngredients WHERE schematicID=%s;"
-		cursor.execute(ingSQL, (schematicID, sourceSchematic))
+		cursor.execute(ingSQL, [schematicID, sourceSchematic])
 		# Iterate over the quality groups so we can generate new sets of res weights records pointing to new auto increment ids
 		qualCursor = conn.cursor()
 		qualSQL = "SELECT expQualityID, expProperty, expGroup, weightTotal FROM tSchematicQualities WHERE schematicID=%s"
-		qualCursor.execute(qualSQL, (sourceSchematic))
+		qualCursor.execute(qualSQL, [sourceSchematic])
 		qualRow = qualCursor.fetchone()
 		while qualRow != None:
 			qualSQL = "INSERT INTO tSchematicQualities (schematicID, expProperty, expGroup, weightTotal) VALUES (%s, %s, %s, %s);"
-			cursor.execute(qualSQL, (schematicID, qualRow[1], qualRow[2], qualRow[3]))
+			cursor.execute(qualSQL, [schematicID, qualRow[1], qualRow[2], qualRow[3]])
 			weightSQL = "INSERT INTO tSchematicResWeights (expQualityID, statName, statWeight) SELECT LAST_INSERT_ID(), statName, statWeight FROM tSchematicResWeights WHERE expQualityID=%s;"
-			cursor.execute(weightSQL, qualRow[0])
+			cursor.execute(weightSQL, [qualRow[0]])
 			qualRow = qualCursor.fetchone()
 		qualCursor.close()
 		cursor.close()
@@ -227,14 +227,14 @@ def addSchematicByCopy(conn, skillGroup, sourceSchematic, schematicName, galaxy,
 def addSchematicSkeleton(conn, skillGroup, schematicName, galaxy, userID):
 	schematicID = generateSchematicID(schematicName, galaxy)
 	checkCursor = conn.cursor()
-	checkCursor.execute('SELECT schematicName FROM tSchematic WHERE schematicID=%s;', (schematicID))
+	checkCursor.execute('SELECT schematicName FROM tSchematic WHERE schematicID=%s;', [schematicID])
 	checkRow = checkCursor.fetchone()
 	checkCursor.close()
 	if checkRow == None:
 		# Proceed with schematic copy
 		cursor = conn.cursor()
 		schemSQL = "INSERT INTO tSchematic (schematicID, schematicName, craftingTab, skillGroup, objectType, complexity, objectSize, xpType, xpAmount, objectPath, objectGroup, galaxy, enteredBy) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
-		cursor.execute(schemSQL, (schematicID, schematicName, 524288, skillGroup, 0, 0, 0, 'unknown', 0, 'object/{0}'.format(schematicID), '', galaxy, userID))
+		cursor.execute(schemSQL, [schematicID, schematicName, 524288, skillGroup, 0, 0, 0, 'unknown', 0, 'object/{0}'.format(schematicID), '', galaxy, userID])
 		cursor.close()
 
 		result = 'Schematic created.'
@@ -256,7 +256,7 @@ def updateSchematic(conn, schematicID, schematic):
 
 	schemSQL = "UPDATE tSchematic SET schematicName=%s, craftingTab=%s, skillGroup=%s, complexity=%s, xpAmount=%s, objectType=%s WHERE schematicID=%s;"
 	try:
-		cursor.execute(schemSQL, (schem['schematicName'], schem['craftingTab'], schem['skillGroup'], schem['complexity'], schem['xpAmount'], schem['objectType'], schematicID))
+		cursor.execute(schemSQL, [schem['schematicName'], schem['craftingTab'], schem['skillGroup'], schem['complexity'], schem['xpAmount'], schem['objectType'], schematicID])
 	except KeyError as e:
 		return 'Error: Schematic object is missing required data: {0}'.format(e)
 
@@ -277,31 +277,31 @@ def updateSchematic(conn, schematicID, schematic):
 	weightsAfter = 0
 	# Update ingredients
 	schemSQL = "DELETE FROM tSchematicIngredients WHERE schematicID=%s;"
-	cursor.execute(schemSQL, (schematicID))
+	cursor.execute(schemSQL, [schematicID])
 	ingredientsBefore = cursor.rowcount
 	for ing in schem['ingredients']:
 		ingSQL = "INSERT INTO tSchematicIngredients (schematicID, ingredientName, ingredientType, ingredientObject, ingredientQuantity, ingredientContribution) VALUES (%s, %s, %s, %s, %s, %s);"
-		cursor.execute(ingSQL, (schematicID, ing['ingredientName'], ing['ingredientType'], ing['ingredientObject'], ing['ingredientQuantity'], 100))
+		cursor.execute(ingSQL, [schematicID, ing['ingredientName'], ing['ingredientType'], ing['ingredientObject'], ing['ingredientQuantity'], 100])
 		ingredientsAfter = ingredientsAfter + cursor.rowcount
 
 	# Update Experimental Qualities
 	schemSQL = "DELETE FROM tSchematicResWeights WHERE expQualityID IN (SELECT expQualityID FROM tSchematicQualities WHERE schematicID=%s);"
-	cursor.execute(schemSQL, (schematicID))
+	cursor.execute(schemSQL, [schematicID])
 	weightsBefore = cursor.rowcount
 	schemSQL = "DELETE FROM tSchematicQualities WHERE schematicID=%s;"
-	cursor.execute(schemSQL, (schematicID))
+	cursor.execute(schemSQL, [schematicID])
 	qualitiesBefore = cursor.rowcount
 	for expgroup in schem['qualityGroups']:
 		# Update all properties in the groups
 		for expProp in expgroup['properties']:
 			weightTotal = 0
 			schemSQL = "INSERT INTO tSchematicQualities (schematicID, expProperty, expGroup, weightTotal) VALUES (%s, %s, %s, %s);"
-			cursor.execute(schemSQL, (schematicID, expProp['prop'], expgroup['group'], expProp['weightTotal']))
+			cursor.execute(schemSQL, [schematicID, expProp['prop'], expgroup['group'], expProp['weightTotal']])
 			qualitiesAfter = qualitiesAfter + cursor.rowcount
 			# Update all resource weights in the properties
 			for resWeight in expProp['statWeights']:
 				schemSQL = "INSERT INTO tSchematicResWeights (expQualityID, statName, statWeight) VALUES (LAST_INSERT_ID(), %s, %s);"
-				cursor.execute(schemSQL, (resWeight['stat'], resWeight['statWeight']))
+				cursor.execute(schemSQL, [resWeight['stat'], resWeight['statWeight']])
 				weightsAfter = weightsAfter + cursor.rowcount
 
 	cursor.close()
@@ -372,6 +372,7 @@ errstr = ''
 result = ''
 if logged_state == 1:
 	# Lookup reputation to validate abilities
+	conn = dbShared.ghConn()
 	stats = dbShared.getUserStats(currentUser, galaxy).split(",")
 	userReputation = int(stats[2])
 	admin = dbShared.getUserAdmin(conn, currentUser, galaxy)
@@ -413,18 +414,17 @@ if detailsMethod == 'DetailsCopy':
 		errstr = errstr + 'Error: Valid schematic name must be provided.'
 
 if errstr == '':
-	conn = dbShared.ghConn()
 	checkCursor = conn.cursor()
 
 	if forceOp != 'edit':
 		# check valid profession
-		checkCursor.execute('SELECT profName FROM tProfession WHERE profID=%s', (profession))
+		checkCursor.execute('SELECT profName FROM tProfession WHERE profID=%s', [profession])
 		checkRow = checkCursor.fetchone()
 		if checkRow == None:
 			errstr = errstr + 'Error: Cannot find the profession for the id you provided.'
 		checkRow = None
 		# check for valid skill group
-		checkCursor.execute('SELECT skillGroupName FROM tSkillGroup WHERE skillGroup=%s', (skillGroup))
+		checkCursor.execute('SELECT skillGroupName FROM tSkillGroup WHERE skillGroup=%s', [skillGroup])
 		checkRow = checkCursor.fetchone()
 		if checkRow == None:
 			errstr = errstr + 'Error: Cannot find the skill group you provided.'
@@ -435,7 +435,7 @@ if errstr == '':
 				schematicID = results[0]
 				result = results[1]
 			elif detailsMethod == 'DetailsCopy':
-				checkCursor.execute('SELECT schematicName FROM tSchematic WHERE schematicID=%s;', (copyFromSchem))
+				checkCursor.execute('SELECT schematicName FROM tSchematic WHERE schematicID=%s;', [copyFromSchem])
 				row = checkCursor.fetchone()
 				checkCursor.close()
 				if row != None:
@@ -455,7 +455,7 @@ if errstr == '':
 				dbShared.logSchematicEvent(0, galaxy, schematicID, currentUser, 'a', 'Added new schematic {0} using {1}.'.format(schematicName, detailsMethod), 'history')
 	else:
 		# Update existing schematic
-		checkCursor.execute('SELECT enteredBy FROM tSchematic WHERE schematicID=%s', (schematicID))
+		checkCursor.execute('SELECT enteredBy FROM tSchematic WHERE schematicID=%s', [schematicID])
 		checkRow = checkCursor.fetchone()
 		if checkRow != None:
 			if checkRow[0] == None or checkRow[0] == '':
