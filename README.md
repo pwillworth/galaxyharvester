@@ -58,7 +58,7 @@ Galaxy Harvester seed data includes creature and schematic data that is automati
 1. Delete all data from the relevant tables in the local database
 2. Check out the SWGEmu Core3 git repository to the location referenced in utility script
 3. Execute the utility script (Depending on the state of the code you may need to delete or change some files and go back to step 1.  Sometimes there are invalid or duplicate lua files in the repository that cause problems.)
-4. Export the data from all relevant tables to the database/seedData folder overwriting the old seed data files.  Those can now be imported to other environments with on of the scripts in database/updateRefresh.
+4. Export the data from all relevant tables to the database/seedData folder overwriting the old seed data files.  Those can now be imported to other environments with one of the scripts in database/updateRefresh.
 
 ### Presentation Templates
 In most cases, Galaxy Harvester uses the [Jinja2](http://jinja.pocoo.org/) template engine to render any html to the user.  The html folder contains various scripts, some of which are called by AJAX from an already rendered page, and some of which render one of the templates under html/templates.  The blocks.html template is not rendered directly but has various blocks like headers and footers that are imported by the other templates.

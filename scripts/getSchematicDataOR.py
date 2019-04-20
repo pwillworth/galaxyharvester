@@ -4,8 +4,8 @@ import MySQLdb
 import os
 import sys
 
-SCHEM_DIR = "/home/pkw/workspace/Core3/MMOCoreORB/bin/scripts/object/draft_schematic"
-OBJECT_DIR = "/home/pkw/workspace/Core3/MMOCoreORB/bin/scripts/"
+SCHEM_DIR = "~/workspaces/SWGEmu/Core3/MMOCoreORB/bin/scripts/object/draft_schematic"
+OBJECT_DIR = "~/workspaces/SWGEmu/Core3/MMOCoreORB/bin/scripts/"
 conn = None
 cursor = None
 
