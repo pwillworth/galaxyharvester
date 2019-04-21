@@ -1,0 +1,11 @@
+Inventory Deduct
+
+<p>Added a small feature today on the <a href="http://galaxyharvester.net/recipe.py/home">recipe tool</a> from suggestions page.  This is to help you manage your inventory tracking easier if you like to keep track of your resource unit quantities on the <a href="http://galaxyharvester.net/myResources.py">favorites page</a>.  Now, after you use the factory run calculator tool on the recipe page, a button will show that you can click to automatically deduct the calculated resource amounts for the factory run from your inventory.  It should give you a warning message if your inventory gets depleted of an item or you didn't have some item in your inventory.</p>
+
+<p>Here are a couple small updates that happened as well</p>
+<ul>
+<li>Enabled all reputation gated tools for galaxy admins.  This means when a new galaxy is added the server admins can start adding custom schematics and other stuff right away.</li>
+<li>Base Emu Schematic and Creature data imported from SWGEmu pub9 code</li>
+</ul>
+
+<p>-ioscode</p>
