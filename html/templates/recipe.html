@@ -16,7 +16,7 @@ $(document).ready(function() {
     $("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
     $("#profSel").val(getCookie("schemPickerProfSel",0));
     $('#groupSel').load(BASE_SCRIPT_URL + 'getMyGroups.py',{favType:1,firstOption:'<option value="any">Group: Any</option>'});
-    loadInventory('{{ ingTypes }}','{{ ingGroups }}');
+    refreshInventory();
     $("#inventory").droppable({
         accept: ".ingredientSlot",
         drop: handleSlotDrop,
@@ -69,6 +69,9 @@ function handleResRecipeDrop(event, ui) {
     var spawn = $(ui.draggable).children(".resourceDetails").attr("id").substr(12);
     var recipe = $(this).attr("id").substr(6);
     addRecipeIngredient(recipe, spawn);
+}
+function refreshInventory() {
+    loadInventory('{{ ingTypes }}','{{ ingGroups }}');
 }
 function refreshRecipes() {
     $("#busyImgRecipeList").show();

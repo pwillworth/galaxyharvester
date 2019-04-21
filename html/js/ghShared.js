@@ -814,21 +814,22 @@ function deductFromInventory(runAmount, ingredientContainer) {
 			ingTitle = $($(ings[i]).children()[1]).attr('tt');
 			ingQuantity = $($(ings[i]).children()[1]).html().split('/')[1];
 			if (ingTitle != undefined) {
-				result += ',' + ingTitle.substr(13, ingTitle.indexOf('br')) + ':-' + (ingQuantity * runAmount);
+				result += ',' + ingTitle.substr(13, ingTitle.indexOf(',')-13) + ':' + (ingQuantity * runAmount);
 			}
 		}
 		if (result.length > 0) {
 			result = result.substring(1);
-			$.post(BASE_SCRIPT_URL + 'updateInventory.py', { galaxy: $('#galaxySel').val(), updateList: result },
+			$.post(BASE_SCRIPT_URL + 'updateInventory.py', { galaxy: $('#galaxySel').val(), operation: '-', updateList: result },
 				function(data) {
 					var result = $(data).find('resultText').eq(0).text();
 					$('#busyImgSave').css('display','none');
-					$('#factoryResults').html(result);
+					$('#recipeMessage').html(result);
+					refreshInventory();
 				}, 'xml');
 		}
 	} else {
 		result = 'That is not a valid number';
-		$('#factoryResults').html(result);
+		$('#recipeMessage').html(result);
 	}
 	$('#busyImgSave').css('display','none');
 

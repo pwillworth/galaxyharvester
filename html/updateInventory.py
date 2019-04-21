@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2018 Paul Willworth <ioscode@gmail.com>
+ Copyright 2019 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -67,11 +67,11 @@ else:
 # Get form info
 galaxy = form.getfirst("galaxy", "")
 updateList = form.getfirst("updateList", "")
+operation = form.getfirst("operation", "")
 # escape input to prevent sql injection
 sid = dbShared.dbInsertSafe(sid)
 galaxy = dbShared.dbInsertSafe(galaxy)
 updateList = dbShared.dbInsertSafe(updateList)
-
 updateList = updateList.split(",")
 
 result = ""
@@ -83,60 +83,68 @@ if (sess != ''):
 	logged_state = 1
 	currentUser = sess
 
-def n2n(inVal):
-	if (inVal == '' or inVal == None or inVal == 'undefined' or inVal == 'None'):
-		return 'NULL'
-	else:
-		return str(inVal)
-
-
 #  Check for errors
 errstr = ""
 fc = len(updateList)
 if (galaxy == ""):
 	errstr = errstr + "Error: no galaxy selected. \r\n"
-if fc > 1:
+if fc > 0:
 	for x in range(fc):
 		if updateList[x] != "":
 			thisUpdate = updateList[x].split(":")
-                        resName = thisUpdate[0]
-                        qtyAdjust = thisUpdate[1]
-			if (qtyAdjust.isdigit() != True):
-				errstr = errstr + "Error: Quantity for " + resName + " was not valid. \n"
+			if len(thisUpdate) != 2:
+				errstr = errstr + "Error: Malformed data in inventory adjustment."
+				sys.stderr.write(str(thisUpdate))
+			else:
+				resName = thisUpdate[0]
+				qtyAdjust = thisUpdate[1]
+			if qtyAdjust.isdigit() != True:
+				errstr = errstr + "Error: Quantity for {0} ({1}) was not valid. \n".format(resName, qtyAdjust)
 else:
 	errstr = errstr + "Error: No update data provided.\r\n"
 
+if operation not in ['-','+']:
+	errstr = errstr + "Error: Invalid operation ({0}).  - or + are allowed.".format(operation)
 
+udCount = 0
 # Only process if no errors
 if (errstr == ""):
 	result = ""
 	if (logged_state > 0):
 		# Alter inventory
-		udCount = 0
 		conn = dbShared.ghConn()
-	        # Open each item
-	        for x in range(fc):
-		    if updateList[x] != "":
-			thisUpdate = updateList[x].split(":")
-                        resName = thisUpdate[0]
-                        qtyAdjust = thisUpdate[1]
-		        cursor = conn.cursor()
-		        cursor.execute("SELECT amount FROM tFavorites WHERE galaxy=" + str(galaxy) + " AND userID='" + currentUser + "' and itemType=1 AND itemID='" + resName + "';")
-		        row = cursor.fetchone()
-		        if row != None:
-                            currentAmount = row[0]
-                            adjustedAmount = eval(str(currentAmount) + qtyAdjust)
-                            if adjustedAmount <= 0:
-                                result = result + " Warning: adjustment for " + resName + " resulted in depletion of inventory (" + str(adjustedAmount) + " units."
-                                adjustedAmount = 0
-                            cursor.execute("UPDATE tFavorites SET amount=" + str(adjustedAmount) + " WHERE galaxy=" + str(galaxy) + " AND userID='" + currentUser + "' AND itemType=1 AND itemID='" + resName + "';")
-
-		        cursor.close()
+		# Open each item
+		for x in range(fc):
+			if updateList[x] != "":
+				thisUpdate = updateList[x].split(":")
+				resName = thisUpdate[0]
+				resID = dbShared.getSpawnID(resName, galaxy)
+				qtyAdjust = thisUpdate[1]
+				cursor = conn.cursor()
+				cursor.execute("SELECT units FROM tFavorites WHERE galaxy=%s AND userID=%s and favType=1 AND itemID=%s;", [galaxy, currentUser, resID])
+				row = cursor.fetchone()
+				if row != None:
+					if row[0] == None:
+						currentAmount = 0
+					else:
+						currentAmount = row[0]
+					adjustedAmount = eval("{0} {1} {2}".format(str(currentAmount), operation, qtyAdjust))
+					if adjustedAmount < -2147483647 or adjustedAmount > 2147483647:
+						result = result + "I can't handle numbers that big for (" + resName + ")\n "
+						break
+					if adjustedAmount <= 0:
+						result = result + " Warning: adjustment for " + resName + " resulted in depletion of inventory (" + str(adjustedAmount) + " units."
+						adjustedAmount = 0
+					cursor.execute("UPDATE tFavorites SET units=%s WHERE galaxy=%s AND userID=%s AND favType=1 AND itemID=%s;", [adjustedAmount, galaxy, currentUser, resID])
+					udCount += 1
+				else:
+					result = result + "Warning: Did not find any (" + resName + ") in your favorites list.\n "
+				cursor.close()
 
 		conn.close()
-		result = "Inventory update complete: " + str(udCount) + " updated."
+		result = result + "Inventory update complete: " + str(udCount) + " updated."
 	else:
-		result = "Error: must be logged in to update inventory"
+		result = result + "Error: must be logged in to update inventory"
 else:
 	result = errstr
 
