@@ -16,3 +16,6 @@ UPDATE tSchematic SET skillGroup='variableLooted' WHERE skillGroup='';
 LOAD DATA LOCAL INFILE '/var/www/database/seedData/tSchematicIngredients.txt' INTO TABLE tSchematicIngredients;
 LOAD DATA LOCAL INFILE '/var/www/database/seedData/tSchematicQualities.txt' INTO TABLE tSchematicQualities;
 LOAD DATA LOCAL INFILE '/var/www/database/seedData/tSchematicResWeights.txt' INTO TABLE tSchematicResWeights;
+
+DELETE FROM tResourceTypeCreature WHERE galaxy=0;
+LOAD DATA LOCAL INFILE '/var/www/database/seedData/tResourceTypeCreature.txt' INTO TABLE tResourceTypeCreature;
