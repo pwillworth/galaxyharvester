@@ -4,8 +4,7 @@ import MySQLdb
 import os
 import sys
 
-#CREAT_DIR = "/home/pkw/files/dev/SWGemuResource/creatures"
-CREAT_DIR = "/home/pkw/workspace/Core3/MMOCoreORB/bin/scripts/mobile"
+CREAT_DIR = "~/workspaces/SWGEmu/Core3/MMOCoreORB/bin/scripts/mobile"
 
 conn = None
 cursor = None
@@ -23,8 +22,6 @@ def scrapeFile(f, n, planet):
 			creature[sName] = sVal.strip('"')
 			pos += 1
 
-	#for k, v in schem.iteritems():
-	#	print k, v
 	try:
 		print "saving: " + n + ": " + creature["objectName"]
 	except KeyError:
@@ -96,13 +93,13 @@ conn.autocommit(True)
 cursor = conn.cursor()
 #get argument for path or use current
 if len(sys.argv) > 1:
-	# do just the 1 passed schem
+	# do just the 1 passed
 	schemPath = sys.argv[1]
 	tmpFile = open(schemPath, 'r')
 	scrapeSchem(tmpFile)
 	tmpFile.close()
 else:
-	#loop dir and get schems
+	#loop dir and get creatures
 	for f in os.listdir(CREAT_DIR):
 		if os.path.isdir(CREAT_DIR+"/"+f) and f != '.' and f != '..':
 			# Planet directory

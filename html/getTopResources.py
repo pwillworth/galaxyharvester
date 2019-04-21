@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2019 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -317,7 +317,7 @@ if galaxy != '':
 				controlsUser = currentUser
 			else:
 				controlsUser = ''
-			print s.getHTML(formatStyle, "", controlsUser, int(stats[2]))
+			print s.getHTML(formatStyle, "", controlsUser, int(stats[2]), dbShared.getUserAdmin(conn, currentUser, galaxy))
 			print '</td></tr>'
 			row = cursor.fetchone()
 

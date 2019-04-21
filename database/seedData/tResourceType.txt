@@ -761,8 +761,10 @@ wood_deciduous_tatooine	Tatooinian Deciduous Wood	flora_structural	wood_deciduou
 wood_deciduous_yavin4	Yavinian Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	10
 aluminum_hoth	Hothian Aluminum	mineral	aluminum	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	aluminum	aluminum	11
 copper_hoth	Hothian Copper	mineral	copper	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	copper	copper	11
-armophous_hoth	Hothian Amorphous Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	11
-crystalline_hoth	Hothian Crystalline Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	11
+armophous_hoth_1	Hothian Type 1 Amorphous Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	11
+crystalline_hoth_1	Hothian Type 1 Crystalline Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	11
+armophous_hoth_2	Hothian Type 2 Amorphous Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	11
+crystalline_hoth_2	Hothian Type 2 Crystalline Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	11
 gas_inert_hoth	Hothian Inert Gas	gas	gas_inert	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	11
 gas_reactive_hoth	Hothian Reactive Gas	gas	gas_reactive	1	1	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_reactive	gas_reactive	11
 iron_hoth	Hothian Iron	mineral	iron	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	iron	metal_ferrous	11
@@ -1284,3 +1286,145 @@ water_vapor_nalhutta	Nal Hutta Water Vapor	water	water	1	5	0	0	0	0	1	1000	0	0	0	
 wheat_domesticated_nalhutta	Nal Hutta Domesticated Wheat	flora_food	wheat_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	wheat	20
 wheat_wild_nalhutta	Nal Hutta Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	wheat	20
 wood_deciduous_nalhutta	Nal Hutta Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	20
+bone_avian_ghomrassen	Ghomrassen Avian Bones	creature_structural	bone_avian	1	1	0	0	0	0	1	700	0	0	0	0	1	600	0	0	1	1000	100	500	1	500	0	0	bone	bone	23
+bone_horn_ghomrassen	Ghomrassen Horn	creature_structural	bone_horn	1	1	0	0	0	0	200	1000	0	0	0	0	1	500	0	0	1	1000	300	700	1	500	0	0	bone	bone_horn	23
+bone_mammal_ghomrassen	Ghomrassen Animal Bones	creature_structural	bone	1	1	0	0	0	0	300	1000	0	0	0	0	1	500	0	0	1	1000	400	1000	1	1000	0	0	bone	bone	23
+corn_domesticated_ghomrassen	Ghomrassen Domesticated Corn	flora_food	corn_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	corn	23
+corn_wild_ghomrassen	Ghomrassen Wild Corn	flora_food	corn_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	corn	23
+energy_renewable_site_limited_geothermal_ghomrassen	Ghomrassen Geothermal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	23
+energy_renewable_site_limited_hydron3_ghomrassen	Ghomrassen Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	23
+energy_renewable_site_limited_tidal_ghomrassen	Ghomrassen Tidal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	23
+energy_renewable_unlimited_solar_ghomrassen	Ghomrassen Solar Renewable Energy	energy	energy_renewable_unlimited_solar	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	600	500	500	0	0	0	0	0	0	energy	energy	23
+energy_renewable_unlimited_wind_ghomrassen	Ghomrassen Wind Renewable Energy	energy	energy_renewable_unlimited_wind	1	1	0	0	0	0	0	0	0	0	0	0	0	0	1	400	500	500	0	0	0	0	0	0	energy	energy	23
+fiberplast_ghomrassen	Ghomrassen Fiberplast	chemical	fiberplast	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	inorganic	fiberplast	23
+fruit_berries_ghomrassen	Ghomrassen Berry Fruit	flora_food	fruit_berries	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_berries	23
+fruit_flowers_ghomrassen	Ghomrassen Flower Fruit	flora_food	fruit_flowers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	seeds	fruit_berries	23
+fruit_fruits_ghomrassen	Ghomrassen Fruit	flora_food	fruit_fruits	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_fruits	23
+hide_bristley_ghomrassen	Ghomrassen Bristley Hide	creature_structural	hide_bristley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_bristley	23
+hide_leathery_ghomrassen	Ghomrassen Leathery Hide	creature_structural	hide_leathery	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_leathery	23
+hide_scaley_ghomrassen	Ghomrassen Scaley Hide	creature_structural	hide_scaley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_scaley	23
+hide_wooly_ghomrassen	Ghomrassen Wooly Hide	creature_structural	hide_wooly	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_wooly	23
+meat_avian_ghomrassen	Ghomrassen Avian Meat	creature_food	meat_avian	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	23
+meat_carnivore_ghomrassen	Ghomrassen Carnivore Meat	creature_food	meat_carnivore	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	23
+meat_domesticated_ghomrassen	Ghomrassen Domesticated Meat	creature_food	meat_domesticated	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	23
+meat_egg_ghomrassen	Ghomrassen Egg Meat	creature_food	meat_egg	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	23
+meat_herbivore_ghomrassen	Ghomrassen Herbivore Meat	creature_food	meat_herbivore	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	23
+meat_insect_ghomrassen	Ghomrassen Insect Meat	creature_food	meat_insect	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	23
+meat_reptillian_ghomrassen	Ghomrassen Reptillian Meat	creature_food	meat_reptillian	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	23
+meat_wild_ghomrassen	Ghomrassen Wild Meat	creature_food	meat_wild	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	23
+milk_domesticated_ghomrassen	Ghomrassen Domesticated Milk	creature_food	milk_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	milk	milk	23
+milk_wild_ghomrassen	Ghomrassen Wild Milk	creature_food	milk_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	milk	milk	23
+oats_domesticated_ghomrassen	Ghomrassen Domesticated Oats	flora_food	oats_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	oats	23
+oats_wild_ghomrassen	Ghomrassen Wild Oats	flora_food	oats_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	oats	23
+rice_domesticated_ghomrassen	Ghomrassen Domesticated Rice	flora_food	rice_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	rice	23
+rice_wild_ghomrassen	Ghomrassen Wild Rice	flora_food	rice_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	rice	23
+seafood_crustacean_ghomrassen	Ghomrassen Crustacean Meat	creature_food	seafood_crustacean	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	23
+seafood_fish_ghomrassen	Ghomrassen Fish Meat	creature_food	seafood_fish	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	23
+seafood_mollusk_ghomrassen	Ghomrassen Mollusk Meat	creature_food	seafood_mollusk	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	23
+softwood_conifer_ghomrassen	Ghomrassen Conifer Wood	flora_structural	softwood	1	1	0	0	0	0	1	600	0	0	0	0	600	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	23
+softwood_evergreen_ghomrassen	Ghomrassen Evergreen Wood	flora_structural	softwood_evergreen	1	1	0	0	0	0	1	500	0	0	0	0	800	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	23
+vegetable_beans_ghomrassen	Ghomrassen Vegetable Beans	flora_food	vegetable_beans	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_beans	23
+vegetable_fungi_ghomrassen	Ghomrassen Vegetable Fungus	flora_food	vegetable_fungi	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_fungi	23
+vegetable_greens_ghomrassen	Ghomrassen Vegetable Greens	flora_food	vegetable_greens	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_greens	23
+vegetable_tubers_ghomrassen	Ghomrassen Vegetable Tubers	flora_food	vegetable_tubers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_tubers	23
+water_vapor_ghomrassen	Ghomrassen Water Vapor	water	water	1	5	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	600	1000	0	0	0	0	0	0	water	water	23
+wheat_domesticated_ghomrassen	Ghomrassen Domesticated Wheat	flora_food	wheat_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	wheat	23
+wheat_wild_ghomrassen	Ghomrassen Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	wheat	23
+wood_deciduous_ghomrassen	Ghomrassen Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	23
+bone_avian_moraband	Moraband Avian Bones	creature_structural	bone_avian	1	1	0	0	0	0	1	700	0	0	0	0	1	600	0	0	1	1000	100	500	1	500	0	0	bone	bone	27
+bone_horn_moraband	Moraband Horn	creature_structural	bone_horn	1	1	0	0	0	0	200	1000	0	0	0	0	1	500	0	0	1	1000	300	700	1	500	0	0	bone	bone_horn	27
+bone_mammal_moraband	Moraband Animal Bones	creature_structural	bone	1	1	0	0	0	0	300	1000	0	0	0	0	1	500	0	0	1	1000	400	1000	1	1000	0	0	bone	bone	27
+corn_domesticated_moraband	Moraband Domesticated Corn	flora_food	corn_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	corn	27
+corn_wild_moraband	Moraband Wild Corn	flora_food	corn_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	corn	27
+energy_renewable_site_limited_geothermal_moraband	Moraband Geothermal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	27
+energy_renewable_site_limited_hydron3_moraband	Moraband Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	27
+energy_renewable_site_limited_tidal_moraband	Moraband Tidal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	27
+energy_renewable_unlimited_solar_moraband	Moraband Solar Renewable Energy	energy	energy_renewable_unlimited_solar	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	600	500	500	0	0	0	0	0	0	energy	energy	27
+energy_renewable_unlimited_wind_moraband	Moraband Wind Renewable Energy	energy	energy_renewable_unlimited_wind	1	1	0	0	0	0	0	0	0	0	0	0	0	0	1	400	500	500	0	0	0	0	0	0	energy	energy	27
+fiberplast_moraband	Moraband Fiberplast	chemical	fiberplast	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	inorganic	fiberplast	27
+fruit_berries_moraband	Moraband Berry Fruit	flora_food	fruit_berries	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_berries	27
+fruit_flowers_moraband	Moraband Flower Fruit	flora_food	fruit_flowers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	seeds	fruit_berries	27
+fruit_fruits_moraband	Moraband Fruit	flora_food	fruit_fruits	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_fruits	27
+hide_bristley_moraband	Moraband Bristley Hide	creature_structural	hide_bristley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_bristley	27
+hide_leathery_moraband	Moraband Leathery Hide	creature_structural	hide_leathery	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_leathery	27
+hide_scaley_moraband	Moraband Scaley Hide	creature_structural	hide_scaley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_scaley	27
+hide_wooly_moraband	Moraband Wooly Hide	creature_structural	hide_wooly	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_wooly	27
+meat_avian_moraband	Moraband Avian Meat	creature_food	meat_avian	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	27
+meat_carnivore_moraband	Moraband Carnivore Meat	creature_food	meat_carnivore	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	27
+meat_domesticated_moraband	Moraband Domesticated Meat	creature_food	meat_domesticated	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	27
+meat_egg_moraband	Moraband Egg Meat	creature_food	meat_egg	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	27
+meat_herbivore_moraband	Moraband Herbivore Meat	creature_food	meat_herbivore	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	27
+meat_insect_moraband	Moraband Insect Meat	creature_food	meat_insect	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	27
+meat_reptillian_moraband	Moraband Reptillian Meat	creature_food	meat_reptillian	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	27
+meat_wild_moraband	Moraband Wild Meat	creature_food	meat_wild	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	27
+milk_domesticated_moraband	Moraband Domesticated Milk	creature_food	milk_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	milk	milk	27
+milk_wild_moraband	Moraband Wild Milk	creature_food	milk_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	milk	milk	27
+oats_domesticated_moraband	Moraband Domesticated Oats	flora_food	oats_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	oats	27
+oats_wild_moraband	Moraband Wild Oats	flora_food	oats_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	oats	27
+rice_domesticated_moraband	Moraband Domesticated Rice	flora_food	rice_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	rice	27
+rice_wild_moraband	Moraband Wild Rice	flora_food	rice_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	rice	27
+seafood_crustacean_moraband	Moraband Crustacean Meat	creature_food	seafood_crustacean	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	27
+seafood_fish_moraband	Moraband Fish Meat	creature_food	seafood_fish	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	27
+seafood_mollusk_moraband	Moraband Mollusk Meat	creature_food	seafood_mollusk	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	27
+softwood_conifer_moraband	Moraband Conifer Wood	flora_structural	softwood	1	1	0	0	0	0	1	600	0	0	0	0	600	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	27
+softwood_evergreen_moraband	Moraband Evergreen Wood	flora_structural	softwood_evergreen	1	1	0	0	0	0	1	500	0	0	0	0	800	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	27
+vegetable_beans_moraband	Moraband Vegetable Beans	flora_food	vegetable_beans	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_beans	27
+vegetable_fungi_moraband	Moraband Vegetable Fungus	flora_food	vegetable_fungi	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_fungi	27
+vegetable_greens_moraband	Moraband Vegetable Greens	flora_food	vegetable_greens	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_greens	27
+vegetable_tubers_moraband	Moraband Vegetable Tubers	flora_food	vegetable_tubers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_tubers	27
+water_vapor_moraband	Moraband Water Vapor	water	water	1	5	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	600	1000	0	0	0	0	0	0	water	water	27
+wheat_domesticated_moraband	Moraband Domesticated Wheat	flora_food	wheat_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	wheat	27
+wheat_wild_moraband	Moraband Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	wheat	27
+wood_deciduous_moraband	Moraband Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	27
+bone_avian_florrum	Florrum Avian Bones	creature_structural	bone_avian	1	1	0	0	0	0	1	700	0	0	0	0	1	600	0	0	1	1000	100	500	1	500	0	0	bone	bone	28
+bone_horn_florrum	Florrum Horn	creature_structural	bone_horn	1	1	0	0	0	0	200	1000	0	0	0	0	1	500	0	0	1	1000	300	700	1	500	0	0	bone	bone_horn	28
+bone_mammal_florrum	Florrum Animal Bones	creature_structural	bone	1	1	0	0	0	0	300	1000	0	0	0	0	1	500	0	0	1	1000	400	1000	1	1000	0	0	bone	bone	28
+corn_domesticated_florrum	Florrum Domesticated Corn	flora_food	corn_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	corn	28
+corn_wild_florrum	Florrum Wild Corn	flora_food	corn_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	corn	28
+energy_renewable_site_limited_geothermal_florrum	Florrum Geothermal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	28
+energy_renewable_site_limited_hydron3_florrum	Florrum Hydron-3 Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	28
+energy_renewable_site_limited_tidal_florrum	Florrum Tidal Renewable Energy	energy	energy_renewable_site_limited	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	500	500	500	0	0	0	0	0	0	energy	energy	28
+energy_renewable_unlimited_solar_florrum	Florrum Solar Renewable Energy	energy	energy_renewable_unlimited_solar	1	1	0	0	0	0	0	0	0	0	0	0	0	0	200	600	500	500	0	0	0	0	0	0	energy	energy	28
+energy_renewable_unlimited_wind_florrum	Florrum Wind Renewable Energy	energy	energy_renewable_unlimited_wind	1	1	0	0	0	0	0	0	0	0	0	0	0	0	1	400	500	500	0	0	0	0	0	0	energy	energy	28
+fiberplast_florrum	Florrum Fiberplast	chemical	fiberplast	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	inorganic	fiberplast	28
+fruit_berries_florrum	Florrum Berry Fruit	flora_food	fruit_berries	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_berries	28
+fruit_flowers_florrum	Florrum Flower Fruit	flora_food	fruit_flowers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	seeds	fruit_berries	28
+fruit_fruits_florrum	Florrum Fruit	flora_food	fruit_fruits	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	fruit_fruits	28
+hide_bristley_florrum	Florrum Bristley Hide	creature_structural	hide_bristley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_bristley	28
+hide_leathery_florrum	Florrum Leathery Hide	creature_structural	hide_leathery	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_leathery	28
+hide_scaley_florrum	Florrum Scaley Hide	creature_structural	hide_scaley	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_scaley	28
+hide_wooly_florrum	Florrum Wooly Hide	creature_structural	hide_wooly	1	1	0	0	0	0	1	1000	0	0	0	0	1	1000	0	0	1	1000	1	1000	1	1000	0	0	hide	hide_wooly	28
+meat_avian_florrum	Florrum Avian Meat	creature_food	meat_avian	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	28
+meat_carnivore_florrum	Florrum Carnivore Meat	creature_food	meat_carnivore	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	28
+meat_domesticated_florrum	Florrum Domesticated Meat	creature_food	meat_domesticated	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	28
+meat_egg_florrum	Florrum Egg Meat	creature_food	meat_egg	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	28
+meat_herbivore_florrum	Florrum Herbivore Meat	creature_food	meat_herbivore	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	meat	meat	28
+meat_insect_florrum	Florrum Insect Meat	creature_food	meat_insect	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	28
+meat_reptillian_florrum	Florrum Reptillian Meat	creature_food	meat_reptillian	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	28
+meat_wild_florrum	Florrum Wild Meat	creature_food	meat_wild	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	meat	meat	28
+milk_domesticated_florrum	Florrum Domesticated Milk	creature_food	milk_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	milk	milk	28
+milk_wild_florrum	Florrum Wild Milk	creature_food	milk_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	milk	milk	28
+oats_domesticated_florrum	Florrum Domesticated Oats	flora_food	oats_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	oats	28
+oats_wild_florrum	Florrum Wild Oats	flora_food	oats_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	oats	28
+rice_domesticated_florrum	Florrum Domesticated Rice	flora_food	rice_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	rice	28
+rice_wild_florrum	Florrum Wild Rice	flora_food	rice_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	rice	28
+seafood_crustacean_florrum	Florrum Crustacean Meat	creature_food	seafood_crustacean	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	28
+seafood_fish_florrum	Florrum Fish Meat	creature_food	seafood_fish	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	28
+seafood_mollusk_florrum	Florrum Mollusk Meat	creature_food	seafood_mollusk	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	meat	meat	28
+softwood_conifer_florrum	Florrum Conifer Wood	flora_structural	softwood	1	1	0	0	0	0	1	600	0	0	0	0	600	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	28
+softwood_evergreen_florrum	Florrum Evergreen Wood	flora_structural	softwood_evergreen	1	1	0	0	0	0	1	500	0	0	0	0	800	1000	0	0	1	1000	1	400	1	300	0	0	flora_structural	wood	28
+vegetable_beans_florrum	Florrum Vegetable Beans	flora_food	vegetable_beans	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_beans	28
+vegetable_fungi_florrum	Florrum Vegetable Fungus	flora_food	vegetable_fungi	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_fungi	28
+vegetable_greens_florrum	Florrum Vegetable Greens	flora_food	vegetable_greens	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_greens	28
+vegetable_tubers_florrum	Florrum Vegetable Tubers	flora_food	vegetable_tubers	1	1	0	0	0	0	1	1000	1	1000	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	seeds	vegetable_tubers	28
+water_vapor_florrum	Florrum Water Vapor	water	water	1	5	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	600	1000	0	0	0	0	0	0	water	water	28
+wheat_domesticated_florrum	Florrum Domesticated Wheat	flora_food	wheat_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	wheat	28
+wheat_wild_florrum	Florrum Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	wheat	28
+wood_deciduous_florrum	Florrum Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	28
+aluminum_galvanicyn	Galvanicyn Aluminum	mineral	aluminum	1	1	1	1000	1	1000	1	1000	0	0	1	1000	1	1000	0	0	1	1000	1	1000	1	1000	0	0	aluminum	aluminum	0
+copper_cagunese	Cagunese Copper	mineral	copper	1	1	1	1000	1	1000	1	1000	0	0	1	1000	1	1000	0	0	1	1000	1	1000	1	1000	0	0	copper	copper	0
+gas_inert_rylon	Rylon Inert Gas	gas	gas_inert	1	1	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	0
+iron_hemalite	Hemalite Iron	mineral	iron	1	1	1	1000	1	1000	1	1000	0	0	1	1000	1	1000	0	0	1	1000	1	1000	1	1000	0	0	iron	metal_ferrous	0
+ore_carbonate_calabite	Calabite Carbonate Ore	mineral	ore_carbonate	1	1	1	1000	0	0	1	1000	0	0	1	1000	1	1000	0	0	1	1000	1	1000	1	1000	0	0	ore_carbonate	ore_carbonate	0
+ore_extrusive_maganite	Maganite Extrusive Ore	mineral	ore_extrusive	1	1	1	1000	0	0	1	1000	0	0	1	1000	1	1000	0	0	1	1000	1	1000	1	1000	0	0	ore_igneous	ore_igneous	0
+ore_intrusive_galatite	Galatite Intrusive Ore	mineral	ore_intrusive	1	1	1	1000	0	0	1	1000	0	0	1	1000	1	1000	0	0	1	1000	1	1000	1	1000	0	0	ore_igneous	ore_igneous	0

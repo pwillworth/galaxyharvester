@@ -111,7 +111,7 @@ def logUserEvent(user, galaxy, targetType, targetID, eventType):
 		# Check if user is experienced enough to give rep bonus
 		expGood = False
 		# Exclude automated users
-		if (user != "etas" and user != "c0pp3r" and user != "RogueOne" and user != "SRAlderaan"):
+		if (user not in ghShared.automatedUsers):
 			cursor.execute("SELECT added, repBad FROM tUserStats WHERE userID=%s AND galaxy=%s;", (user, galaxy))
 			row = cursor.fetchone()
 			if (row != None and row[0] != None):
@@ -334,6 +334,17 @@ def getUserStats(user, galaxy):
 	conn.close()
 	return '{0},{1},{2}'.format(resScore, mapScore, repScore)
 
+def getUserAdmin(conn, user, galaxy):
+	admin = False
+	cursor = conn.cursor()
+	cursor.execute('SELECT roleType FROM tGalaxyUser WHERE userID=%s AND galaxyID=%s ORDER BY roleType;', [user, galaxy])
+	row = cursor.fetchone()
+	if (row != None and row[0] == 'a'):
+		admin = True
+
+	cursor.close()
+	return admin
+
 def getGalaxyAdminList(conn, userID):
         listHTML = ''
         cursor = conn.cursor()
@@ -379,6 +390,9 @@ def getPlanetID(planetName):
 	# Temporarily accept other form of Yavin IV during transition
 	if planetName == 'Yavin IV':
 		planetName = 'yavin4'
+	###
+	if planetName == 'Kaas':
+		planetName = 'dromundkaas'
 	###
 	cursor.execute('SELECT planetID FROM tPlanet WHERE LOWER(REPLACE(planetName," ","")) = "' + planetName.lower() + '";')
 	row = cursor.fetchone()
@@ -469,12 +483,16 @@ def getSpawnPlanets(conn, spawnID, availableOnly, galaxy):
 def getResourceTypeID(conn, resourceTypeName):
 	# try to figure out resource type id... sometimes name can different slighty from
 	# some sources like Corellia vs. Corellian
+
+	# Some servers like to be special and abbreviate the word Gemstone
+	if resourceTypeName in ['Hothian Type 1 Amorphous Gem', 'Hothian Type 2 Amorphous Gem', 'Hothian Type 1 Crystalline Gem', 'Hothian Type 2 Crystalline Gem']:
+		resourceTypeName = resourceTypeName + 'stone'
 	typeID = ''
 	cursor = conn.cursor()
 	cursor.execute("SELECT resourceType, resourceTypeName FROM tResourceType;")
 	row = cursor.fetchone()
 	while row != None:
-		if len(difflib.get_close_matches(resourceTypeName, [row[1]], 1, 0.95)) > 0:
+		if len(difflib.get_close_matches(resourceTypeName, [row[1]], 1, 0.97)) > 0:
 			typeID = row[0]
 		row = cursor.fetchone()
 	cursor.close()

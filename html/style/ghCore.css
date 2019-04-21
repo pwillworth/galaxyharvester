@@ -304,6 +304,11 @@ input.ghButton[disabled] {
 	background-image: url(/images/spriteCircles16.png);
 	background-position: -10px -154px;
 }
+.Ghomrassen {
+	/*background-color: #ffcc11;*/
+	background-image: url(/images/spriteCircles16.png);
+	background-position: -10px -262px;
+}
 .NalHutta {
 	/*background-color: #ffcc11;*/
 	background-image: url(/images/spriteCircles16.png);
@@ -378,6 +383,18 @@ input.ghButton[disabled] {
 .Kuat {
 	background-image: url(/images/spriteCircles16.png);
 	background-position: -10px -154px;
+}
+.Moraband {
+	background-image: url(/images/spriteCircles16.png);
+	background-position: -10px -10px;
+}
+.Coruscant {
+	background-image: url(/images/spriteCircles16.png);
+	background-position: -10px -478px;
+}
+.Florrum {
+	background-image: url(/images/spriteCircles16.png);
+	background-position: -10px -190px;
 }
 .resourceStats td {
 	text-align: center;

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2019 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -91,7 +91,7 @@ class resourceSpawn:
 		result += '</ul>'
 		return result
 
-	def getHTML(self, formatStyle, resBoxMargin, currentUser, reputation):
+	def getHTML(self, formatStyle, resBoxMargin, currentUser, reputation, admin):
 		result = ''
 		unPlanetStr = ",'all'"
 		statHeads = ""
@@ -226,9 +226,9 @@ class resourceSpawn:
 		else:
 			result += '    <div style="margin-bottom:4px;text-align:left;"><span style="font-size: 12px;font-weight: bold;"><a href="' + ghShared.BASE_SCRIPT_URL + 'resource.py/'+str(self.spawnGalaxy)+'/'+self.spawnName+'" class="nameLink">'+self.spawnName+'</a></span>'
 		if (currentUser != ''):
-			if formatStyle != 2 and (reputation >= ghShared.MIN_REP_VALS['EDIT_RESOURCE_STATS_TYPE'] or currentUser == self.enteredBy):
+			if formatStyle != 2 and (reputation >= ghShared.MIN_REP_VALS['EDIT_RESOURCE_STATS_TYPE'] or currentUser == self.enteredBy or admin):
 				result += '  <a alt="Edit Stats" style="cursor: pointer;" onclick="editStats(this, \''+self.spawnName+'\');">[Edit]</a>'
-			if formatStyle != 1 and (reputation >= ghShared.MIN_REP_VALS['REMOVE_RESOURCE'] or currentUser == self.enteredBy):
+			if formatStyle != 1 and (reputation >= ghShared.MIN_REP_VALS['REMOVE_RESOURCE'] or currentUser == self.enteredBy or admin):
 				if formatStyle == 2:
 					result += '  <div style="width:100px;float:right;"><input type="checkbox" id="chkRemove_' + self.spawnName + '" />Remove</div>'
 				else:
@@ -298,7 +298,7 @@ class resourceSpawn:
 		result += '  </div>'
 		return result
 
-	def getMobileHTML(self, currentUser, reputation):
+	def getMobileHTML(self, currentUser, reputation, admin):
 		result = ''
 		statHeads = ""
 		statVals = ""
@@ -350,7 +350,7 @@ class resourceSpawn:
 
 		# non-stat info
 		result += '&nbsp;entered&nbsp;'+ghShared.timeAgo(self.entered)+' ago by '+self.enteredBy
-		if (currentUser != '' and (reputation >= ghShared.MIN_REP_VALS['REMOVE_RESOURCE'] or currentUser == self.enteredBy)):
+		if (currentUser != '' and (reputation >= ghShared.MIN_REP_VALS['REMOVE_RESOURCE'] or currentUser == self.enteredBy or admin)):
 			result += '  <span title="Mark Unavailable" style="cursor: pointer;float:right;" onclick="markUnavailable(this, \''+self.spawnName+'\', '+str(self.spawnGalaxy)+',\'all\');"> [X]</span>'
 		result += '    </div>'
 

@@ -89,11 +89,10 @@ if (sess != ''):
 	currentUser = sess
 
 
-def addCreature(resourceType, creatureName, harvestYield, missionLevel, galaxy):
+def addCreature(conn, resourceType, creatureName, harvestYield, missionLevel, galaxy):
 	# Add new creature data
 	returnStr = "Creature data not added."
 	result = 0
-	conn = dbShared.ghConn()
 	cursor = conn.cursor()
 	if missionLevel == "":
 		missionLevel = None
@@ -107,13 +106,11 @@ def addCreature(resourceType, creatureName, harvestYield, missionLevel, galaxy):
 	if result > 0:
 		returnStr = "Creature data added."
 	cursor.close()
-	conn.close()
 	return returnStr
 
-def updateCreature(resourceType, creatureName, harvestYield, missionLevel, galaxy):
+def updateCreature(conn, resourceType, creatureName, harvestYield, missionLevel, galaxy):
 	# Update creature information
 	returnStr = ""
-	conn = dbShared.ghConn()
 	cursor = conn.cursor()
 	if missionLevel == "":
 		missionLevel = None
@@ -126,7 +123,6 @@ def updateCreature(resourceType, creatureName, harvestYield, missionLevel, galax
 		returnStr = " creature data updated."
 
 	cursor.close()
-	conn.close()
 	return returnStr
 
 
@@ -149,17 +145,18 @@ if (len(missionLevel) > 0 and missionLevel.isdigit() != True):
 if (errstr == ""):
 	result = ""
 	if (logged_state > 0):
+		try:
+			conn = dbShared.ghConn()
+		except Exception:
+			result = "Error: could not connect to database"
+
 		# Get user reputation for later checking
 		stats = dbShared.getUserStats(currentUser, galaxy).split(",")
 		userReputation = int(stats[2])
 		# data already entered?
 		if (forceOp == "edit"):
 			# check owner
-			try:
-				conn = dbShared.ghConn()
-				cursor = conn.cursor()
-			except Exception:
-				result = "Error: could not connect to database"
+			cursor = conn.cursor()
 
 			if (cursor):
 				cursor.execute('SELECT enteredBy FROM tResourceTypeCreature WHERE resourceType=%s AND speciesName=%s AND galaxy=%s;', (resourceType, creatureName, galaxy))
@@ -173,20 +170,21 @@ if (errstr == ""):
 				cursor.close()
 
 				# edit it
-				if owner == currentUser or userReputation >= ghShared.MIN_REP_VALS['EDIT_OTHER_CREATURE']:
+				if owner == currentUser or userReputation >= ghShared.MIN_REP_VALS['EDIT_OTHER_CREATURE'] or dbShared.getUserAdmin(conn, currentUser, galaxy):
 					result = "edit: "
-					result = result + updateCreature(resourceType, creatureName, harvestYield, missionLevel, galaxy)
+					result = result + updateCreature(conn, resourceType, creatureName, harvestYield, missionLevel, galaxy)
 				else:
 					result = "Error: You do not yet have permission to edit others' creature data."
 			else:
 				result = "Error: No database connection"
-			conn.close()
 
 		else:
-			if userReputation >= ghShared.MIN_REP_VALS['ADD_CREATURE']:
-				result = addCreature(resourceType, creatureName, harvestYield, missionLevel, galaxy)
+			if userReputation >= ghShared.MIN_REP_VALS['ADD_CREATURE'] or dbShared.getUserAdmin(conn, currentUser, galaxy):
+				result = addCreature(conn, resourceType, creatureName, harvestYield, missionLevel, galaxy)
 			else:
 				result = "Error: You don't have permission to add creature data yet."
+
+		conn.close()
 	else:
 		result = "Error: must be logged in to add creature data"
 else:

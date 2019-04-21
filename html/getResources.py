@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2019 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -129,13 +129,13 @@ def getResourceData(conn, resSQL, userReputation, activeUser, formatType):
 				resourceHTML += '  <tr><td>'
 
 			if formatType == 'mobile':
-				resourceHTML += s.getMobileHTML(activeUser)
+				resourceHTML += s.getMobileHTML(activeUser, userReputation, dbShared.getUserAdmin(conn, currentUser, galaxy))
 			elif formatType == 'compare':
-				resourceHTML += s.getHTML(1, '', activeUser, userReputation)
+				resourceHTML += s.getHTML(1, '', activeUser, userReputation, dbShared.getUserAdmin(conn, currentUser, galaxy))
 			elif formatType == 'json':
 				resourceHTML += s.getJSON()
 			else:
-				resourceHTML += s.getHTML(0, '', activeUser, userReputation)
+				resourceHTML += s.getHTML(0, '', activeUser, userReputation, dbShared.getUserAdmin(conn, currentUser, galaxy))
 
 			if formatType == 'json':
 				resourceHTML += '    }'

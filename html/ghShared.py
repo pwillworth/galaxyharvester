@@ -30,6 +30,7 @@ BASE_SCRIPT_URL = '/'
 DEFAULT_THEME = 'crafter'
 DEFAULT_GALAXY = '14'
 imgNum = random.randint(1,17)
+automatedUsers = ["etas", "c0pp3r", "RogueOne", "SRAlderaan", "EiFScript", "RelicsAdmin", "SRUpdater", "SwgAwakening", "Europa", "swginfinity", "Xela_TheCreation", "Reckoning"]
 
 # Minimum reputation needed to perform actions
 MIN_REP_VALS = {'VERIFY_RESOURCE': -99,

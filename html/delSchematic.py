@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2019 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -122,12 +122,16 @@ if (logged_state > 0):
 		# Lookup reputation to validate abilities
 		stats = dbShared.getUserStats(currentUser, galaxy).split(",")
 		userReputation = int(stats[2])
+		admin = dbShared.getUserAdmin(conn, currentUser, galaxy)
 		# remove it
 		if owner == currentUser:
 			result = deleteSchematic(conn, schematicID)
 		else:
-			if galaxy != 0 and userReputation >= ghShared.MIN_REP_VALS['EDIT_OTHER_SCHEMATIC']:
-				result = deleteSchematic(conn, schematicID)
+			if galaxy != 0:
+				if admin or userReputation >= ghShared.MIN_REP_VALS['EDIT_OTHER_SCHEMATIC']:
+					result = deleteSchematic(conn, schematicID)
+				else:
+					result = 'Error: You do not have enough reputation to edit other users schematics.'
 			else:
 				result = 'Error: Core game schematics cannot be deleted.'
 
