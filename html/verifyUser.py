@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2019 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -53,7 +53,7 @@ if errorstr != "":
 else:
     conn = dbShared.ghConn()
     cursor = conn.cursor()
-    cursor.execute("SELECT userID, created FROM tUsers WHERE verificationCode='" + verifycode + "';")
+    cursor.execute("SELECT userID, created FROM tUsers WHERE verificationCode=%s;", [verifycode])
     row = cursor.fetchone()
     if row != None:
         timeSinceCreated = datetime.fromtimestamp(time.time()) - row[1]
@@ -63,9 +63,10 @@ else:
         else:
             if verifytype == "mail":
                 result = "verifymailsuccess"
-                updatestr = "UPDATE tUsers SET emailAddress=emailChange WHERE userID='" + row[0] + "';"
+                updatestr = "UPDATE tUsers SET emailAddress=emailChange WHERE userID='{0}';".format(row[0])
             else:
-                updatestr = "UPDATE tUsers SET userState=1 WHERE userID='" + row[0] + "';"
+                remoteIP = os.environ['REMOTE_ADDR']
+                updatestr = "UPDATE tUsers SET userState=1, emailVerifyDate=NOW(), emailVerifyIP='{0}' WHERE userID='{1}';".format(remoteIP, row[0])
             cursor.execute(updatestr)
             updatedCount = cursor.rowcount
             if not updatedCount > 0:
