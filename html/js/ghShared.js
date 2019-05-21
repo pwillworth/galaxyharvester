@@ -80,7 +80,7 @@ function removeOldCheck(spawnName) {
 			}, "xml");
 }
 // sends resource data to be posted from the addResource page
-function postResources() {
+function postResources(linkappend) {
 	resStr = "";
 	numReturns = 0;
 	numRes = 0;
@@ -93,7 +93,7 @@ function postResources() {
 			resStr = tmpNameBox.value.toLowerCase();
 			if (resStr != "") {
 				numRes += 1;
-				$.post(BASE_SCRIPT_URL + "postResource.py", { gh_sid: "'+sid+'", galaxy: $("#galaxySel option:selected").val(), planet: $("#planetSel option:selected").val(), resName: resStr, resType: $("#typeSel"+x+" option:selected").val(), sourceRow: x, CR: $("#CR"+x).val(), CD: $("#CD"+x).val(), DR: $("#DR"+x).val(), FL: $("#FL"+x).val(), HR: $("#HR"+x).val(), MA: $("#MA"+x).val(), PE: $("#PE"+x).val(), OQ: $("#OQ"+x).val(), SR: $("#SR"+x).val(), UT: $("#UT"+x).val(), ER: $("#ER"+x).val() },
+				$.post(BASE_SCRIPT_URL + "postResource.py&" + linkappend, { galaxy: $("#galaxySel option:selected").val(), planet: $("#planetSel option:selected").val(), resName: resStr, resType: $("#typeSel"+x+" option:selected").val(), sourceRow: x, CR: $("#CR"+x).val(), CD: $("#CD"+x).val(), DR: $("#DR"+x).val(), FL: $("#FL"+x).val(), HR: $("#HR"+x).val(), MA: $("#MA"+x).val(), PE: $("#PE"+x).val(), OQ: $("#OQ"+x).val(), SR: $("#SR"+x).val(), UT: $("#UT"+x).val(), ER: $("#ER"+x).val() },
 					function(data) {
 						var result = $(data).find('resultText').eq(0).text();
 						var spawnName = $(data).find("spawnName").eq(0).text();
@@ -1254,10 +1254,10 @@ function removeFriend(uid) {
 /*      Alert Filter Functions     */
 
 // load existing saved alert filters
-function loadAlerts() {
+function loadAlerts(linkappend) {
 	var maxRow = 0;
 	// Fetch filter data
-	$.post(BASE_SCRIPT_URL + "getFilters.py", { gh_sid: "'+sid+'", galaxy: $("#galaxySel option:selected").val()},
+	$.post(BASE_SCRIPT_URL + "getFilters.py&" + linkappend, { galaxy: $("#galaxySel option:selected").val()},
 		function(data) {
 			$(data).find('filter').each (function() {
 					fltOrder = $(this).find('fltOrder').eq(0).text();
@@ -1346,7 +1346,7 @@ function loadAlerts() {
 }
 
 // saves changes to user filters for alerts
-function updateAlerts() {
+function updateAlerts(linkappend) {
 	fltStr = "";
 	numRes = 0;
 	if ($("#galaxySel option:selected").val() == 0) {
@@ -1454,7 +1454,7 @@ function updateAlerts() {
 			alerts = alerts.substr(1);
 			groups = groups.substr(1);
 			// Sync server with selections
-			$.post(BASE_SCRIPT_URL + "updateFilters.py", { gh_sid: "'+sid+'", galaxy: $("#galaxySel option:selected").val(), fltCount: numRes, fltOrders: orders, fltTypes: types, fltValues: values, CRmins: CRs, CDmins: CDs, DRmins: DRs, FLmins: FLs, HRmins: HRs, MAmins: MAs, PEmins: PEs, OQmins: OQs, SRmins: SRs, UTmins: UTs, ERmins: ERs, alertTypes: alerts, fltGroups: groups, qualityMins: qualities },
+			$.post(BASE_SCRIPT_URL + "updateFilters.py&" + linkappend, { galaxy: $("#galaxySel option:selected").val(), fltCount: numRes, fltOrders: orders, fltTypes: types, fltValues: values, CRmins: CRs, CDmins: CDs, DRmins: DRs, FLmins: FLs, HRmins: HRs, MAmins: MAs, PEmins: PEs, OQmins: OQs, SRmins: SRs, UTmins: UTs, ERmins: ERs, alertTypes: alerts, fltGroups: groups, qualityMins: qualities },
 				function(data) {
 					var result = $(data).find('resultText').eq(0).text();
 					$("#sentMessage").html(result);
@@ -1515,8 +1515,8 @@ function toggleAlertType(elm, itemID, favType) {
 	$(elm).attr("onclick",tmpClick);
 }
 
-function loadDespawnAlerts() {
-	$("#despawnAlertsList").load(BASE_SCRIPT_URL + "getMyResources.py",{
+function loadDespawnAlerts(linkappend) {
+	$("#despawnAlertsList").load(BASE_SCRIPT_URL + "getMyResources.py&" + linkappend,{
         galaxy: $("#galaxySel").val(),
         formatType: "alerts",
         favGroup: "any"},
@@ -1526,13 +1526,13 @@ function loadDespawnAlerts() {
     return false;
 }
 
-function addDespawnAlert(spawnName, alertTypes) {
+function addDespawnAlert(spawnName, alertTypes, linkappend) {
 	if (spawnName) {
-        $.post(BASE_SCRIPT_URL + "setFavorite.py", {favType: 1, itemName: spawnName, galaxy: $("#galaxySel option:selected").val(), despawnAlert: 2}, function(data) {
+        $.post(BASE_SCRIPT_URL + "setFavorite.py&" + linkappend, {favType: 1, itemName: spawnName, galaxy: $("#galaxySel option:selected").val(), despawnAlert: 2}, function(data) {
 	    if (data.indexOf("Error:")>-1) {
 	        alert(data);
 	    } else {
-	        loadDespawnAlerts();
+	        loadDespawnAlerts(linkappend);
 	    }
 	});
     }

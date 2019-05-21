@@ -205,7 +205,7 @@ function loadReportData(reportData) {
   <div id="rightMainContent" class="ghCol">
     <div id="addResBox" class="ghWidgetBox">
       <div class="boxHeader">Add Resources</div>
-      <form name="faddres" id="faddres" onsubmit="return postResources()">
+      <form name="faddres" id="faddres" onsubmit="return postResources({{ linkappend }})">
       <div>
         Planet: <select name="planetSel" id="planetSel"{{ disableStr }} onchange="loadTypes('.resourceTypeSelector');"></select>
         Filter Types: <input type="checkbox" id="oFilterTypes" checked="checked" title="Filter the resource type drop downs to only include resources possible for the selected galaxy and planet" onchange="loadTypes('.resourceTypeSelector');setCookie('addResourcesFilterTypes',this.checked,365);" />
@@ -217,7 +217,7 @@ function loadReportData(reportData) {
           <table id="addResourceTable"><thead>
             <tr><td>Name</td><td>Type</td><td>ER</td><td>CR</td><td>CD</td><td>DR</td><td>FL</td><td>HR</td><td>MA</td><td>PE</td><td>OQ</td><td>SR</td><td>UT</td></tr>
           </thead></table>
-          <button type="button" id="sendData" class="ghButton"{{ disableStr }} onclick="postResources()">Send Resource Data</button>
+          <button type="button" id="sendData" class="ghButton"{{ disableStr }} onclick="postResources('{{ linkappend }}')">Send Resource Data</button>
 		  <div id="sendResponse"></div>
 		</div>
 	  </div>

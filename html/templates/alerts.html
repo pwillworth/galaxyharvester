@@ -8,6 +8,7 @@
 <script type="text/javascript" src="/js/jquery.min.js"></script>
 <script type="text/javascript" src="/js/jquery.autocomplete-min.js"></script>
 <script type="text/javascript">
+
 var rownum = 0;
 $(document).ready(function() {
     $("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
@@ -17,14 +18,14 @@ $(document).ready(function() {
         $("#sendData").attr("disabled","disabled");
     }
 {% if loggedin == 1 %}
-	    loadAlerts();
+	    loadAlerts('{{ linkappend }}');
 	    var a = $('#findSpawn').autocomplete({
 	        serviceUrl:'getSpawnNames.py',
 	        maxHeight:200,
 	        width:200,
 	        params: {galaxy: $("#galaxySel").val()}
 	    });
-	    loadDespawnAlerts();
+	    loadDespawnAlerts('{{ linkappend }}');
       loadProfessionFavs();
       loadSchematicFavs();
 {% endif %}
@@ -38,7 +39,7 @@ $(document).ready(function() {
     });
 });
 function loadProfessionFavs() {
-  $("#favProfessionList").load(BASE_SCRIPT_URL + "getFavoriteList.py",{
+  $("#favProfessionList").load(BASE_SCRIPT_URL + "getFavoriteList.py&{{ linkappend }}",{
         favType: "p",
         galaxy: $("#galaxySel").val()},
         function() {
@@ -47,7 +48,7 @@ function loadProfessionFavs() {
     return false;
 }
 function loadSchematicFavs() {
-  $("#favSchematicList").load(BASE_SCRIPT_URL + "getFavoriteList.py",{
+  $("#favSchematicList").load(BASE_SCRIPT_URL + "getFavoriteList.py&{{ linkappend }}",{
         favType: "s",
         galaxy: $("#galaxySel").val()},
         function() {

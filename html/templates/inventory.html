@@ -43,7 +43,7 @@ $(document).ready(function() {
 });
 function filterResources(sortColumn) {
     $("#busyImg").css("display","block");
-    $("#resourceData").load(BASE_SCRIPT_URL + "getMyResources.py",{
+    $("#resourceData").load(BASE_SCRIPT_URL + "getMyResources.py?{{ linkappend }}",{
         galaxy: $("#galaxySel").val(),
         resGroup: $("#resGroup").val(),
         resType: $("#resType").val(),
@@ -100,7 +100,7 @@ function addRecipe() {
 {% if loggedin == 1 %}
 	function refreshSchematics() {
 	    $("#schematicList").attr("disabled","disabled");
-	    $("#schematicList").load(BASE_SCRIPT_URL + "getSchematicList.py",{
+	    $("#schematicList").load(BASE_SCRIPT_URL + "getSchematicList.py?{{ linkappend }}",{
 	        listFormat: "option",
 	        groupType: "prof",
 	        profession: $("#profSel").val(),
@@ -110,7 +110,7 @@ function addRecipe() {
 	}
 	function refreshRecipes() {
 	    $("#busyImgRecipeList").show();
-	    $("#recipeList").load(BASE_SCRIPT_URL + "getRecipeList.py",{
+	    $("#recipeList").load(BASE_SCRIPT_URL + "getRecipeList.py?{{ linkappend }}",{
 	        listFormat: "table",
 	        galaxy: $("#galaxySel").val()
 	        },
@@ -118,14 +118,14 @@ function addRecipe() {
 	}
   function refreshFavoriteTypes() {
 	    $("#busyImgTypesList").show();
-	    $("#favoriteTypesList").load(BASE_SCRIPT_URL + "getFavoriteList.py",{
+	    $("#favoriteTypesList").load(BASE_SCRIPT_URL + "getFavoriteList.py?{{ linkappend }}",{
 	        listFormat: "table",
 	        galaxy: $("#galaxySel").val()
 	        },
 	        function() {$("#busyImgTypesList").hide();});
 	}
   function exportInventory(format) {
-    document.getElementById("download_frame").src = BASE_SCRIPT_URL + "getMyResources.py?formatType=" + format + "&galaxy=" + $("#galaxySel").val();
+    document.getElementById("download_frame").src = BASE_SCRIPT_URL + "getMyResources.py?formatType=" + format + "&galaxy=" + $("#galaxySel").val() + "&{{ linkappend }}";
   }
 {% endif %}
 </script>
@@ -151,13 +151,13 @@ function addRecipe() {
     </div>
     <div id="favoriteTypesTool" class="ghWidgetBox">
       <div class="boxHeader">Favorite Types
-	      <div style="float:right;"> [<a href="resourceType.py">Find More</a>]</div>
+	      <div style="float:right;"> [<a href="resourceType.py?{{ linkappend }}">Find More</a>]</div>
 	      <div id="busyImgTypesList" style="display:none;"><img src="/images/ghWait.gif" /></div>
 	      <div id="favoriteTypesList"></div>
       </div>
     </div>
     <div id="recipeTool" class="ghWidgetBox">
-      <div class="boxHeader">Recipes [<a href="{{ BASE_SCRIPT_URL }}recipe.py/home">Recipe Home</a>]
+      <div class="boxHeader">Recipes [<a href="{{ BASE_SCRIPT_URL }}recipe.py/home?{{ linkappend }}">Recipe Home</a>]
 {% if loggedin == 1 %}
 	      <div style="float:right;"><button type=button value="New Recipe" class="ghButton" onclick="addRecipe();">New Recipe</button></div></div>
 	      <div id="busyImgRecipeList" style="display:none;"><img src="/images/ghWait.gif" /></div>

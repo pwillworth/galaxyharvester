@@ -237,7 +237,7 @@ function saveSchematic() {
   }
 
   if ( errors == '' ) {
-    $.post(BASE_SCRIPT_URL + "postSchematic.py", { gh_sid: "'+sid+'", forceOp: "edit", schematicID: schematic.schematicID, schematic: JSON.stringify(schematic), galaxy: $("#galaxySel option:selected").val() },
+    $.post(BASE_SCRIPT_URL + "postSchematic.py?{{ linkappend }}", { forceOp: "edit", schematicID: schematic.schematicID, schematic: JSON.stringify(schematic), galaxy: $("#galaxySel option:selected").val() },
       function(data) {
         alert(data);
         // Only leave schematic editor if no error message returned.
@@ -258,7 +258,7 @@ function saveSchematic() {
   <div id="leftNavContent" class="ghCol">
     <div id="schemList" class="ghWidgetBox">
       <div class="boxHeader">Ingredient Selector
-        <span style="float:right;font-weight:normal;font-size:.9em;"><a href="{{ BASE_SCRIPT_URL }}schematics.py/home" title="Go back to the schematics home page">[Home]</a></span>
+        <span style="float:right;font-weight:normal;font-size:.9em;"><a href="{{ BASE_SCRIPT_URL }}schematics.py/home?{{ linkappend }}" title="Go back to the schematics home page">[Home]</a></span>
 		  </div>
       <div>View: <span style="font-weight:normal;">
         <input type="radio" name="oSelectType" id="oResGroup" value="ByResGroup" checked="checked" onclick="loadIngredientPicker()" />Resource Groups &nbsp;
@@ -286,7 +286,7 @@ function saveSchematic() {
       <div id="busyImgSave" style="display:none;"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
 			{% if loggedin == 1 %}
 					<div style="float:right;">
-            <button type=button value="Cancel" class="ghButton" onclick="document.location.href='/schematics.py/{{ schematicID }}';">Cancel</button>
+            <button type=button value="Cancel" class="ghButton" onclick="document.location.href='/schematics.py/{{ schematicID }}?{{ linkappend }}';">Cancel</button>
 						<button type=button value="Save Schematic" class="ghButton" onclick="saveSchematic();">Save Schematic</button>
 					</div>
 			{% endif %}

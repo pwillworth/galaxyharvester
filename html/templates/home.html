@@ -21,7 +21,7 @@ $(document).ready(function() {
         $("#quickAddGo").attr("disabled","disabled");
     }
 {% if loggedin == 1 %}
-	    $("#alertList").load(BASE_SCRIPT_URL + "getAlerts.py",{alertTypes:1},function(){$("#busyImgAlerts").css("display","none");if($("#alertList").html().trim() == "No Alerts"){$("#myAlerts").fadeOut(3000);}});
+	    $("#alertList").load(BASE_SCRIPT_URL + "getAlerts.py?{{ linkappend }}",{alertTypes: 1},function(){$("#busyImgAlerts").css("display","none");if($("#alertList").html().trim() == "No Alerts"){$("#myAlerts").fadeOut(3000);}});
 {% endif %}
     $("#newsList").load("/blog.py/smy");
     $("#topCurrentCount").load(BASE_SCRIPT_URL + "ghStats.py",{statID:"currentSpawns",galaxy:$("#galaxySel").val()});
