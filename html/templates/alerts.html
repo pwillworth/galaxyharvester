@@ -39,7 +39,7 @@ $(document).ready(function() {
     });
 });
 function loadProfessionFavs() {
-  $("#favProfessionList").load(BASE_SCRIPT_URL + "getFavoriteList.py&{{ linkappend }}",{
+  $("#favProfessionList").load(BASE_SCRIPT_URL + "getFavoriteList.py?{{ linkappend }}",{
         favType: "p",
         galaxy: $("#galaxySel").val()},
         function() {
@@ -48,7 +48,7 @@ function loadProfessionFavs() {
     return false;
 }
 function loadSchematicFavs() {
-  $("#favSchematicList").load(BASE_SCRIPT_URL + "getFavoriteList.py&{{ linkappend }}",{
+  $("#favSchematicList").load(BASE_SCRIPT_URL + "getFavoriteList.py?{{ linkappend }}",{
         favType: "s",
         galaxy: $("#galaxySel").val()},
         function() {
