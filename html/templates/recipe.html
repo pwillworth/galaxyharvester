@@ -208,7 +208,7 @@ function ingredientSlotDoubleClick() {
 }
 function loadInventory(filterTypes, filterGroups, favoriteGroup) {
     $("#busyImg").css("display","block");
-    $("#inventory").load(BASE_SCRIPT_URL + "getMyResources.py?{{ linkappend }}",{
+    $("#inventory").load(BASE_SCRIPT_URL + "getUserResources.py?{{ linkappend }}",{
         galaxy: $("#galaxySel").val(),
         formatType: "inventory",
         resGroups: filterGroups,

@@ -1516,7 +1516,7 @@ function toggleAlertType(elm, itemID, favType) {
 }
 
 function loadDespawnAlerts(linkappend) {
-	$("#despawnAlertsList").load(BASE_SCRIPT_URL + "getMyResources.py?" + linkappend,{
+	$("#despawnAlertsList").load(BASE_SCRIPT_URL + "getUserResources.py?" + linkappend,{
         galaxy: $("#galaxySel").val(),
         formatType: "alerts",
         favGroup: "any"},

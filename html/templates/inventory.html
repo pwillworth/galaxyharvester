@@ -43,7 +43,7 @@ $(document).ready(function() {
 });
 function filterResources(sortColumn) {
     $("#busyImg").css("display","block");
-    $("#resourceData").load(BASE_SCRIPT_URL + "getMyResources.py?{{ linkappend }}",{
+    $("#resourceData").load(BASE_SCRIPT_URL + "getUserResources.py?{{ linkappend }}",{
         galaxy: $("#galaxySel").val(),
         resGroup: $("#resGroup").val(),
         resType: $("#resType").val(),
@@ -125,7 +125,7 @@ function addRecipe() {
 	        function() {$("#busyImgTypesList").hide();});
 	}
   function exportInventory(format) {
-    document.getElementById("download_frame").src = BASE_SCRIPT_URL + "getMyResources.py?formatType=" + format + "&galaxy=" + $("#galaxySel").val() + "&{{ linkappend }}";
+    document.getElementById("download_frame").src = BASE_SCRIPT_URL + "getUserResources.py?formatType=" + format + "&galaxy=" + $("#galaxySel").val() + "&{{ linkappend }}";
   }
 {% endif %}
 </script>
