@@ -25,6 +25,7 @@ import sys
 import Cookie
 import dbSession
 import dbShared
+import ghShared
 import cgi
 import MySQLdb
 #
