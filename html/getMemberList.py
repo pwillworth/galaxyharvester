@@ -35,7 +35,7 @@ galaxy = form.getfirst('galaxy', '')
 # escape input to prevent sql injection
 galaxy = dbShared.dbInsertSafe(galaxy)
 
-# Main program
+# Main program returns a table with top 20 users in galaxy with most resource adds
 rowCount = 0
 print 'Content-type: text/html\n'
 print '<table class="userData" width="100%">'
