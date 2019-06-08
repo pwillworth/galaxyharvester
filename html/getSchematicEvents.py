@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2019 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -130,7 +130,7 @@ if (cursor and errors == ''):
 				responseData = ''.join((responseData, '  <tr class="statRow"><td>', row[0], '</td><td><a href="', ghShared.BASE_SCRIPT_URL, 'schematics.py/', row[1] + '">', row[2], '</a></td><td>', row[3].replace('exp_','').replace('exp','').replace('_', ' '), '</td><td>', rankStr, '</td>'))
 				responseData += '  </tr>'
 			else:
-				responseData = ''.join((responseData, '  <tr class="statRow"><td>', str(row[0]), '</td><td><a href="', ghShared.BASE_SCRIPT_URL, 'user.py?uid=', row[1] + '">', row[1], '</a></td><td>', ghShared.SCHEMATIC_EVENT_NAMES[row[2]], '</td><td>', row[3], '</td>'))
+				responseData = ''.join((responseData, '  <tr class="statRow"><td>', str(row[0]), '</td><td><a href="', ghShared.BASE_SCRIPT_URL, 'user.py/', row[1] + '">', row[1], '</a></td><td>', ghShared.SCHEMATIC_EVENT_NAMES[row[2]], '</td><td>', row[3], '</td>'))
 				responseData += '  </tr>'
 		lastTime = row[0]
 		row = cursor.fetchone()

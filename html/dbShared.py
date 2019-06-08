@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2019 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -526,7 +526,7 @@ def checkUserAbilities(conn, userID, galaxy):
 def alertNewAbility(conn, userID, abilityKey, galaxy):
     # Add alert with custom message about new ability user has unlocked
 	message = "Congratuations!  You have unlocked a new ability on Galaxy Harvester in {1} galaxy.  You can now {0}.  Thanks for your contributions, and keep the the good work!".format(ghShared.ABILITY_DESCR[abilityKey], ghNames.getGalaxyName(galaxy))
-	alertLink = "/user.py?uid={0}".format(userID)
+	alertLink = "{0}user.py/{1}".format(ghShared.BASE_SCRIPT_URL, userID)
 	alertcursor = conn.cursor()
 	alertcursor.execute("INSERT INTO tAlerts (userID, alertType, alertTime, alertMessage, alertLink, alertStatus) VALUES ('{0}', 1, NOW(), '{1}', '{2}', 0);".format(userID, message, alertLink))
 	alertcursor.close()

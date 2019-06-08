@@ -8,8 +8,9 @@ The following software must be set up on the server prior to setting up Galaxy H
 * Webserver (apache2 2.4)
 * MySQL Server (5.5)
 * Python (2.7)
- * module: python-MySQLdb (1.2)
- * module: jinja2 (2.7)
+ * module: MySQLdb (1.3)
+ * module: jinja2 (2.10)
+ * module: PIL (5.1)
 
 ### Web Server Configuration:
 The web server being used must be configured to serve the Python based CGI scripts as follows

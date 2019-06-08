@@ -41,7 +41,7 @@ def getFeedbackComments(conn, feedbackID):
 			if (comrow[3] == None):
 				userText = comrow[1]
 			else:
-				userText = '<a href="user.py?uid=' + comrow[1] + '" class="nameLink"><img src="/images/users/'+ comrow[3] + '" class="tinyAvatar" /><span style="vertical-align:4px;">'+ comrow[1] + '</span></a>'
+				userText = '<a href="' + ghShared.BASE_SCRIPT_URL + 'user.py/' + comrow[1] + '" class="nameLink"><img src="/images/users/'+ comrow[3] + '" class="tinyAvatar" /><span style="vertical-align:4px;">'+ comrow[1] + '</span></a>'
 
 			comments = comments + '<p class="commentItem">' + comrow[2] + '</p><p>' + userText + '</p>'
 			comrow = comcursor.fetchone()
@@ -170,7 +170,7 @@ if (errstr == ""):
 		if (row[4] == None):
 			userText = row[2]
 		else:
-			userText = '<a href="user.py?uid=' + row[2] + '" class="nameLink"><img src="/images/users/'+ row[4] + '" class="tinyAvatar" /><span style="vertical-align:4px;">'+ row[2] + '</span></a>'
+			userText = '<a href="' + ghShared.BASE_SCRIPT_URL + 'user.py/' + row[2] + '" class="nameLink"><img src="/images/users/'+ row[4] + '" class="tinyAvatar" /><span style="vertical-align:4px;">'+ row[2] + '</span></a>'
 		if logged_state > 0:
 			userText = userText + '<button type="button" id="addFeedbackComment_' + str(row[0]) + '" class="ghButton" onclick="addFeedbackComment(this)" style="float:right;">Add Comment</button>'
 

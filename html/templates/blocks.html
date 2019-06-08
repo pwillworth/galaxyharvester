@@ -32,16 +32,16 @@
 	  <a href="{{ BASE_SCRIPT_URL }}addResources.py?{{ linkappend }}"><img style="height:48px;" src="/images/ghAdd.png" alt="Add Resources" title="Add Resources" /></a>
 	  <a href="{{ BASE_SCRIPT_URL }}resourceList.py?{{ linkappend }}"><img style="height:48px;" src="/images/ghList.png" alt="Resource List" title="Resource List" /></a>
 	  <a href="{{ BASE_SCRIPT_URL }}waypointMaps.py?{{ linkappend }}"><img style="height:48px;" src="/images/ghMaps.png" alt="Waypoint Maps" title="Find and browse your waypoints on the planet maps" /></a>
-	  <a href="{{ BASE_SCRIPT_URL }}user.py?{{ linkappend }}"><img style="height:48px;" src="/images/ghStats.png" alt="Member Stats" title="Member Stats" /></a>
+	  <a href="{{ BASE_SCRIPT_URL }}stats.py?{{ linkappend }}"><img style="height:48px;" src="/images/ghStats.png" alt="Member Stats" title="Member Stats" /></a>
 	  <a href="{{ BASE_SCRIPT_URL }}resourceFinder.py?{{ linkappend }}"><img style="height:48px;" src="/images/ghFind.png" alt="Resource Finder" title="Resource Finder" /></a>
 {% endmacro %}
 
 {% macro loginForm(loginState, userID, loginResult, linkappend, url, galaxyList, pictureName) %}
 {% if (loginState == 1) %}
   <div id="loginForm"><div style="float:left;position:relative;"><span class="boxHeader">Hello, {{ userID }}</span><br />
-    <a href="{{ BASE_SCRIPT_URL }}user.py?uid={{ userID }}&{{ linkappend }}">profile</a> |
+    <a href="{{ BASE_SCRIPT_URL }}user.py/{{ userID }}?{{ linkappend }}">profile</a> |
     <a href="{{ BASE_SCRIPT_URL }}logout.py?src_url={{ url }}&{{ linkappend }}">logout</a></div>
-    <div style="float:right;position:relative;"><a href="{{ BASE_SCRIPT_URL }}user.py?uid={{ userID }}&{{ linkappend }}">
+    <div style="float:right;position:relative;"><a href="{{ BASE_SCRIPT_URL }}user.py/{{ userID }}?{{ linkappend }}">
     <img src="/images/users/{{ pictureName }}" class="smallAvatar" /></a></div>
     <div style="width:100%;height:48px;clear:both;vertical-align:bottom;">
     <div id="myShortcuts" style="float:left;position:relative;top:20px;"><a href="{{ BASE_SCRIPT_URL }}myAlerts.py?{{ linkappend }}"><img src="/images/alerts32.png" style="width:24px;height:24px;" alt="alert icon" title="Click to go to your alert filters page." /></a>

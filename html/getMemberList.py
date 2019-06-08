@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2010 Paul Willworth <ioscode@gmail.com>
+ Copyright 2019 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -48,7 +48,7 @@ if (cursor):
 
 	while (row != None):
 		rowCount += 1
-		print '  <tr class="statRow"><td>' + str(rowCount) + '</td><td><a href="user.py?uid=' + row[0] + '" class="nameLink"><img src="/images/users/'+str(row[2])+'" class="tinyAvatar" /><span style="vertical-align:4px;">'+ row[0] + '</span></a></td><td>' + str(row[1]) + '</td>'
+		print '  <tr class="statRow"><td>' + str(rowCount) + '</td><td><a href="' + ghShared.BASE_SCRIPT_URL + 'user.py/' + row[0] + '" class="nameLink"><img src="/images/users/'+str(row[2])+'" class="tinyAvatar" /><span style="vertical-align:4px;">'+ row[0] + '</span></a></td><td>' + str(row[1]) + '</td>'
 		print '  </tr>'
 		row = cursor.fetchone()
         

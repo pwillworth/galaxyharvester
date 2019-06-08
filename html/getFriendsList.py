@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2019 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -105,7 +105,7 @@ if (cursor and tmpStr == ''):
 		tmpStr = 'Error: No Data'
 
 	while (row != None):
-		rowStr = '  <tr class="statRow" id="frow_' + row[0] + '"><td><a href="user.py?uid=' + row[0] + '" class="nameLink"><img src="/images/users/'+str(row[2])+'" class="tinyAvatar" /><span style="vertical-align:4px;">'+ row[0] + '</span></a></td>'
+		rowStr = '  <tr class="statRow" id="frow_' + row[0] + '"><td><a href="' + ghShared.BASE_SCRIPT_URL + 'user.py/' + row[0] + '" class="nameLink"><img src="/images/users/'+str(row[2])+'" class="tinyAvatar" /><span style="vertical-align:4px;">'+ row[0] + '</span></a></td>'
 		if (logged_state == 1 and currentUser == uid):
 			if row[1] == None:
 				rowStr += '<td><img src="/images/eStar16.png" title="' + row[0] + ' has not added you to their friends list yet." /></td>'

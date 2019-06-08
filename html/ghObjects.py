@@ -240,7 +240,7 @@ class resourceSpawn:
 			result += '  <div class="inlineBlock" style="margin-top:2px;margin-right:4px;width:44%;text-align:right;float:right;">'+self.getPlanetBar()+'</div>'
 			result += '  </div><div><div style="height:32px;float:left;"><img src="/images/resources/'+self.containerType+'.png"/></div>'
 		elif formatStyle == 1:
-			result += '&nbsp;'+ghShared.timeAgo(self.entered)+' ago by <a href="user.py?uid='+self.enteredBy+'" class="nameLink">'+self.enteredBy+'</a>'
+			result += '&nbsp;'+ghShared.timeAgo(self.entered)+' ago by <a href="' + ghShared.BASE_SCRIPT_URL + 'user.py/'+self.enteredBy+'" class="nameLink">'+self.enteredBy+'</a>'
 			result += '    </div>'
 			result += '    <div>'
 			result += '      <div style="height:32px;float:left;"><img src="/images/resources/'+self.containerType+'.png" /></div>'
@@ -275,18 +275,18 @@ class resourceSpawn:
 				if self.maxWaypointConc != None:
 					result += '<div style="float:right;"><a href="' + ghShared.BASE_SCRIPT_URL + 'resource.py/'+str(self.spawnGalaxy)+'/'+self.spawnName+'"><img src="/images/waypointMarker.png" alt="waypoint marker" title="waypoint(s) available (best is ' + str(self.maxWaypointConc) + '%)" width="20" /></a></div>'
 				# entered
-				result += '  <div class="inlineBlock" style="width:33%;float:right;"><img src="/images/circleBlue16.png" alt="Entered" title="Entered" /><span style="vertical-align:4px;">' + ghShared.timeAgo(self.entered)+' ago by <a href="/user.py?uid='+self.enteredBy+'">'+self.enteredBy+'</a></span></div>'
+				result += '  <div class="inlineBlock" style="width:33%;float:right;"><img src="/images/circleBlue16.png" alt="Entered" title="Entered" /><span style="vertical-align:4px;">' + ghShared.timeAgo(self.entered)+' ago by <a href="' + ghShared.BASE_SCRIPT_URL + 'user.py/'+self.enteredBy+'">'+self.enteredBy+'</a></span></div>'
 				# verified
 				result += '  <div class="inlineBlock" style="width:33%;float:right;">'
 				if (self.verified != None):
-					result += '  <img src="/images/checkGreen16.png" alt="Verified" title="Verified" /><span style="vertical-align:4px;">' + ghShared.timeAgo(self.verified) + ' ago by <a href="/user.py?uid='+self.verifiedBy+'">'+self.verifiedBy+'</a></span>'
+					result += '  <img src="/images/checkGreen16.png" alt="Verified" title="Verified" /><span style="vertical-align:4px;">' + ghShared.timeAgo(self.verified) + ' ago by <a href="' + ghShared.BASE_SCRIPT_URL + 'user.py/'+self.verifiedBy+'">'+self.verifiedBy+'</a></span>'
 				else:
 					if (self.unavailable == None and currentUser != '' and reputation >= ghShared.MIN_REP_VALS['VERIFY_RESOURCE']):
 						result += '  <span id="cont_verify_'+self.spawnName+'"><img src="/images/checkGrey16.png" alt="Not Verified" title="Not Verified" /><span style="vertical-align:4px;"><a alt="Verify Resource" style="cursor: pointer;" onclick="quickAdd(null, \''+self.spawnName+'\');">[Verify]</a></span></span>'
 				# unavailable
 				result += '  </div><div class="inlineBlock" style="width:32%;float:right;">'
 				if (self.unavailable != None):
-					result += '  <img src="/images/xRed16.png" alt="Unavailable" title="Unavailable" /><span style="vertical-align:4px;">' + ghShared.timeAgo(self.unavailable) + ' ago by <a href="/user.py?uid='+self.unavailableBy+'">'+self.unavailableBy+'</a></span>'
+					result += '  <img src="/images/xRed16.png" alt="Unavailable" title="Unavailable" /><span style="vertical-align:4px;">' + ghShared.timeAgo(self.unavailable) + ' ago by <a href="' + ghShared.BASE_SCRIPT_URL + 'user.py/'+self.unavailableBy+'">'+self.unavailableBy+'</a></span>'
 				result += '  </div></div>'
 			else:
 				result += '    <div style="width: 248px;clear:both;margin-left:64px;">'+self.getPlanetBar()+'</div>'

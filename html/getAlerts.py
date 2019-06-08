@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2019 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -61,7 +61,7 @@ def getOutputHTML(cursor, userID):
 	output = '  <ul class="alert">'
 	row = cursor.fetchone()
 	while row != None:
-		if row[4] == "/user.py?uid={0}".format(userID):
+		if row[4] == "{0}user.py/{1}".format(ghShared.BASE_SCRIPT_URL, userID):
             # Ability Unlocks link to user profile and stand out
 			output = output + '<li id="alert_' + str(row[0]) + '"><div class="tableHead"><a href="' + row[4] + '"><div class="inlineBlock" style="width:90%;">' + ghShared.timeAgo(row[2]) + ' ago - ' + row[3] + '</div></a><div class="inlineBlock" style="vertical-align:top;min-width:20px;"><img src="/images/xRed16.png" style="cursor:pointer;" title="Click to remove this alert" alt="Red X" onclick="updateAlertStatus(' + str(row[0]) + ', 2)" /></div></div></li>'
 		else:

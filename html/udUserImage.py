@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2019 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -25,9 +25,13 @@ import os
 import cgi
 import Cookie
 import MySQLdb
+import ghShared
 import dbSession
 import dbShared
-import Image
+try:
+    from PIL import Image
+except ImportError:
+    import Image
 import urllib
 import time
 
@@ -71,7 +75,7 @@ else:
 	img_data = form["avatar"]
 	if not img_data.file: errstr = "avatar is not a file."
 
-src_url = form.getfirst('src_url', '/user.py?uid='+currentUser)
+src_url = form.getfirst('src_url', ghShared.BASE_SCRIPT_URL + 'user.py/' + currentUser)
 # escape input to prevent sql injection
 sid = dbShared.dbInsertSafe(sid)
 
@@ -120,6 +124,8 @@ else:
 	if result == '':
 		# write image file
 		imageName = currentUser + str(time.time()) + ".jpg"
+		# remove alpha channel incase its there so we are jpg compatible
+		im = im.convert("RGB")
 		im.save("images/users/"+imageName, "JPEG")
 
 		# update user record to point to file
@@ -149,8 +155,10 @@ if useCookies:
 else:
 	linkappend = linkappend + '&avatarAttempt=' + urllib.quote(result)
 
-print "Content-Type: text/html\n"
-if src_url != None:
-	print '<html><head><script type=text/javascript>document.location.href="' + src_url + '?uid=' + currentUser + '&' + linkappend + '"</script></head><body></body></html>'
+if currentUser != None:
+	# redirect back to user page
+	print 'Status: 303 See Other'
+	print 'Location: {0}user.py/{1}?{2}'.format(ghShared.BASE_SCRIPT_URL, currentUser, linkappend)
+	print ''
 else:
 	print result

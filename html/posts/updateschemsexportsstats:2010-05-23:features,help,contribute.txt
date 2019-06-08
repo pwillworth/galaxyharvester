@@ -8,7 +8,7 @@ Update: Schematics, Exports, and more Stats
 <ul>
 <li>Added Top Harvesters section on the home page showing top harvesters for current spawns.</li>
 <li>Made resource type names a link to other recent resource spawns of that same type.</li>
-<li>Added more user stats breakdowns to the <a href="/user.py">Stats page</a> as well as charts of the top 5 members in various categories.</li>
+<li>Added more user stats breakdowns to the <a href="/stats.py">Stats page</a> as well as charts of the top 5 members in various categories.</li>
 <li>Some new graphics for top links and other UI polishing</li>
 </ul>
 <br />

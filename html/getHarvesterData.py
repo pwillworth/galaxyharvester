@@ -27,6 +27,7 @@ import dbSession
 import dbShared
 import cgi
 import MySQLdb
+import ghShared
 #
 
 # Get current url
@@ -122,7 +123,7 @@ if errstr == "":
 		if uid == '':
 			print tableStart
 			while (row != None):
-				print '  <tr class="statRow"><td><a href="user.py?uid=' + row[0] + '" class="nameLink"><img src="/images/users/'+ row[3] + '" class="tinyAvatar" /><span style="vertical-align:4px;">'+ row[0] + '</span></a></td><td>', row[1], '</td><td>', str(row[2]), '</td>'
+				print '  <tr class="statRow"><td><a href="' + ghShared.BASE_SCRIPT_URL + 'user.py/' + row[0] + '" class="nameLink"><img src="/images/users/'+ row[3] + '" class="tinyAvatar" /><span style="vertical-align:4px;">'+ row[0] + '</span></a></td><td>', row[1], '</td><td>', str(row[2]), '</td>'
 				print '  </tr>'
 				row = cursor.fetchone()
 		else:

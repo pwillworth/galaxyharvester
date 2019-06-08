@@ -8,15 +8,9 @@
 <script type="text/javascript">
 $(document).ready(function() {
     $("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
-    $("#harvesterData").load("getHarvesterData.py",{galaxy:$("#galaxySel").val(), uid:"{{ uid }}"}, function(){$("#addBusyImgHD").css("display","none");});
-    $("#userHistory").load("getUserHistory.py",{galaxy:$("#galaxySel").val(), uid:"{{ uid }}"}, function(){$("#addBusyImgUH").css("display","none");});
-{% if uid|length < 1 %}
-	    $("#harvesterDataC").load("getHarvesterData.py",{galaxy:$("#galaxySel").val(),period:"current"},function(){$("#addBusyImgHDC").css("display","none");});
-	    $("#harvesterDataG").load("getHarvesterData.py",{galaxy:$("#galaxySel").val(),period:"category"},function(){$("#addBusyImgHDG").css("display","none");});
-	    $("#memberData").load("getMemberList.py",{galaxy:$("#galaxySel").val()}, function(){$("#addBusyImgMD").css("display","none");});
-{% else %}
-	    $("#friendList").load("getFriendsList.py",{uid:"{{ uid }}"}, function(){$("#flBusyImg").css("display","none");});
-{% endif %}
+    $("#harvesterData").load(BASE_SCRIPT_URL + "getHarvesterData.py",{galaxy:$("#galaxySel").val(), uid:"{{ uid }}"}, function(){$("#addBusyImgHD").css("display","none");});
+    $("#userHistory").load(BASE_SCRIPT_URL + "getUserHistory.py",{galaxy:$("#galaxySel").val(), uid:"{{ uid }}"}, function(){$("#addBusyImgUH").css("display","none");});
+	  $("#friendList").load(BASE_SCRIPT_URL + "getFriendsList.py",{uid:"{{ uid }}"}, function(){$("#flBusyImg").css("display","none");});
     $(".window .close").click(function(e) {
         e.preventDefault();
         $("#mask, .window").hide();
@@ -36,7 +30,7 @@ $(document).ready(function() {
 });
 function moreFriends(lastFriend, dir) {
     $('#friendList').html('<div id="flBusyImg"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>');
-    $.get("getFriendsList.py",{uid:"{{ uid }}", lastUser: lastFriend, direction: dir},
+    $.get(BASE_SCRIPT_URL + "getFriendsList.py",{uid:"{{ uid }}", lastUser: lastFriend, direction: dir},
         function(data) {
             if (data.indexOf("Error:") == -1) {
                 $("#friendList").html(data);
@@ -47,7 +41,7 @@ function moreFriends(lastFriend, dir) {
         }, "html");
 }
 function moreHistory(lastTime) {
-    $.get("getUserHistory.py",{galaxy:$("#galaxySel").val(), uid:"{{ uid }}", lastTime: lastTime},
+    $.get(BASE_SCRIPT_URL + "getUserHistory.py",{galaxy:$("#galaxySel").val(), uid:"{{ uid }}", lastTime: lastTime},
         function(data) {
             $("#moreButton").remove();
             $("#userHistory").append(data);
@@ -57,12 +51,12 @@ function moreHistory(lastTime) {
 function udPassword() {
     var thePwd = document.getElementById("userpass").value;
     var sid = "{{ sid }}";
-    $("#udInfo").load("udPassword.py",{userpass:thePwd,gh_sid:sid});
+    $("#udInfo").load(BASE_SCRIPT_URL + "udPassword.py",{userpass:thePwd,gh_sid:sid});
 }
 function udEmail() {
     var theEmail = document.getElementById("email").value;
     var sid = "{{ sid }}";
-    $("#udInfo").load("udEmail.py",{email:theEmail,gh_sid:sid});
+    $("#udInfo").load(BASE_SCRIPT_URL + "udEmail.py",{email:theEmail,gh_sid:sid});
 }
 function udOther() {
     var theTheme = document.getElementById("themeSel").value;
@@ -82,7 +76,7 @@ function udOther() {
         return false;
     }
     $("#udInfo").animate({opacity: 0.0, fontSize: "1em"}, 200);
-    $("#udInfo").load("udUserOther.py",{uiTheme:theTheme, inGameInfo: ign, defaultAlerts: alerts, gh_sid: "{{ sid }}"},
+    $("#udInfo").load(BASE_SCRIPT_URL + "udUserOther.py",{uiTheme:theTheme, inGameInfo: ign, defaultAlerts: alerts, gh_sid: "{{ sid }}"},
         function(){$("#udInfo").animate({opacity: 1.0, fontSize: "2em"}, 700);});
 }
 // Account removal initiation
@@ -131,9 +125,8 @@ function checkConfirmText(confirmationText) {
     	{% endif %}
     	      </span>
     	      <div class="boxHeader">User Controls</div>
-    	      <div class="newsItem"><h3>Avatar</h3><form enctype="multipart/form-data" name="udAvatarForm" method="post" action="udUserImage.py">
+    	      <div class="newsItem"><h3>Avatar</h3><form enctype="multipart/form-data" name="udAvatarForm" method="post" action="/udUserImage.py">
     	      <input type="file" id="avatar" name="avatar" accept="image/gif, image/jpeg, image/png" />
-    	      <input type="hidden" name="src_url" value="user.py" />
     	      <input type="submit" value="Update" name="goavatar" id="goavatar" class="ghButton" />
     	      </form></div>
     	      <div class="newsItem"><h3>E-mail Address</h3>
@@ -174,27 +167,9 @@ function checkConfirmText(confirmationText) {
     {% endif %}
     <div id="userStats" class="ghWidgetBox">
     <div class="boxHeader">User Stats</div>
-{% if uid|length < 1 %}
-	    <h4 class="sectionHead">All Time</h4>
-{% endif %}
     <div id="harvesterData"></div>
-    <div id=addBusyImgHD><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
-{% if uid|length < 1 %}
-	    <h4 class="sectionHead">Adds by Category</h4>
-	    <div id="harvesterDataG"></div>
-	    <div id=addBusyImgHDG><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
-	    <h4 class="sectionHead">Current Spawns</h4>
-	    <div id="harvesterDataC"></div>
-	    <div id=addBusyImgHDC><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
-{% endif %}
+    <div id="addBusyImgHD"><img src="/images/ghWait.gif" alt="waiting..." border="0" /></div>
     </div>
-{% if uid|length < 1 %}
-	    <div id="userList" class="ghWidgetBox">
-	    <div class="boxHeader">All Time Resource Add Ranking</div>
-	    <div id="memberData"></div>
-	    <div id=addBusyImgMD><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
-	    </div>
-{% endif %}
   </div>
   <div class="ghCol" style="width:65%;">
     <div class="ghWidgetBox">
@@ -236,31 +211,16 @@ function checkConfirmText(confirmationText) {
       {% endfor %}
       </div>
 {% else %}
-	    <h3>Top Harvesters Charts</h3>
-	    <div id="byCategoryCharts" class="charts">
-	    <div class="inlineBlock">All Time Top Creature Resource Adders<br />
-	    <img src="{{ chart1URL }}" alt="Top Creature Resource Adders" title="Top Creature Resource Adders" /></div>
-	    <div class="inlineBlock">All Time Top Inorganic Resource Adders<br />
-	    <img src="{{ chart2URL }}" alt="Top Inorganic Resource Adders" title="Top Inorganic Resource Adders" /></div>
-	    <div class="inlineBlock">All Time Top Flora Resource Adders<br />
-	    <img src="{{ chart3URL }}" alt="Top Flora Resource Adders" title="Top Flora Resource Adders" /></div>
-	    </div><div id="byActionCharts" class="charts">
-	    <div class="inlineBlock">All Time Top Cleanup<br />
-	    <img src="{{ chart4URL }}" alt="Top Cleanup" title="Top Cleanup" /></div>
-	    <div class="inlineBlock">All Time Top Planet Adds<br />
-	    <img src="{{ chart5URL }}" alt="Top Planet Adders" title="Top Planet Adders" /></div>
-	    <div class="inlineBlock">All Time Top Verifiers<br />
-	    <img src="{{ chart6URL }}" alt="Top Veifiers" title="Top Resource Verifiers" /></div>
-	    </div>
+	    <h3>No User</h3>
 {% endif %}
     <br /><h3 style="clear:both;">Recent Activity</h3>
     <div id="userHistory"></div>
-    <div id=addBusyImgUH><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+    <div id="addBusyImgUH"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
     </div>
   </div>
 </div>
 {{ blocks.pageFooter() }}
-{{ blocks.joinForm(loggedin, ['?src_url=user.py&', linkappend], url) }}
+{{ blocks.joinForm(loggedin, ['?src_url=/user.py/{{ uid }}&', linkappend], url) }}
 {% if loginState != 0 %}
 	<div id="deleteMeDialog" class="window">
 	    <form name="deleteuserform">
