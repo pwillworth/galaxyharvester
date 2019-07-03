@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2019 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -32,23 +32,28 @@ import ghLists
 import ghObjects
 #
 
-def getTableHeader(sortBy):
-    dbCols = ['spawnName','resourceTypeName','ER','CR','CD','DR','FL','HR','MA','PE','OQ','SR','UT','units']
-    headerCols = ['Name','Type','ER','CR','CD','DR','FL','HR','MA','PE','OQ','SR','UT','units']
-    headerString = '<tr><th></th>'
-    for col in range(len(headerCols)):
-        if (sortBy == dbCols[col]):
-            headerStyle = 'sorted'
-        else:
-            headerStyle = 'tableHead'
-        headerString = ''.join((headerString, '<th class="', headerStyle, '" onclick="filterResources(\'', dbCols[col], '\')">', headerCols[col], '</th>'))
+def getTableHeader(sortBy, editable):
+	dbCols = ['spawnName','resourceTypeName','ER','CR','CD','DR','FL','HR','MA','PE','OQ','SR','UT','units']
+	headerCols = ['Name','Type','ER','CR','CD','DR','FL','HR','MA','PE','OQ','SR','UT','units']
+	if editable:
+		headerString = '<tr><th></th>'
+	else:
+		headerString = '<tr>'
+	for col in range(len(headerCols)):
+		if (sortBy == dbCols[col]):
+			headerStyle = 'sorted'
+		else:
+			headerStyle = 'tableHead'
+		headerString = ''.join((headerString, '<th class="', headerStyle, '" onclick="filterResources(\'', dbCols[col], '\')">', headerCols[col], '</th>'))
 
-    headerString = ''.join((headerString, '<th style="background-image:url(/images/xRed16.png);background-repeat:no-repeat;background-position:0px 0px;" title="Despawn Alert"></th><th></th></tr>'))
+	if editable:
+		headerString = ''.join((headerString, '<th style="background-image:url(/images/xRed16.png);background-repeat:no-repeat;background-position:0px 0px;" title="Despawn Alert"></th><th></th>'))
+	headerString = ''.join((headerString, '</tr>'))
 
-    return headerString
+	return headerString
 
 def xstr(s):
-    return '' if s is None else str(s)
+	return '' if s is None else str(s)
 
 
 form = cgi.FieldStorage()
@@ -77,6 +82,7 @@ else:
 # Get a session
 logged_state = 0
 galaxy = form.getfirst('galaxy', '')
+uid = form.getfirst('uid', '')
 resGroup = form.getfirst('resGroup', '')
 resType = form.getfirst('resType', '')
 unitsGT = form.getfirst('unitsGT', '')
@@ -90,6 +96,7 @@ sortBy = form.getfirst('sortBy', '')
 # escape input to prevent sql injection
 sid = dbShared.dbInsertSafe(sid)
 galaxy = dbShared.dbInsertSafe(galaxy)
+uid = dbShared.dbInsertSafe(uid)
 resGroup = dbShared.dbInsertSafe(resGroup)
 resType = dbShared.dbInsertSafe(resType)
 unitsGT = dbShared.dbInsertSafe(unitsGT)
@@ -104,9 +111,13 @@ if (sess != ''):
 	logged_state = 1
 	currentUser = sess
 
+if uid == '':
+	uid = currentUser
+
 joinStr = ""
 criteriaStr = ""
 
+# Build Criteria to Limit list
 if (resType != "any" and resType != ""):
 	criteriaStr = criteriaStr + " AND tResources.resourceType='" + resType + "'"
 if (resGroup != "any" and resGroup != ""):
@@ -128,6 +139,31 @@ if favGroup != "any" and favGroup != "undefined" and favGroup != "":
 if formatType == 'alerts':
 	criteriaStr = criteriaStr + " AND despawnAlert > 0 AND unavailable IS NULL"
 
+# Restrict returned results if user is not sharing inventory
+accessString = 'My'
+if uid != currentUser:
+	invShared = dbShared.getUserAttr(uid, 'sharedInventory')
+	if invShared > 1:
+		# Publicly shared
+		accessString = '{0} Public'.format(uid)
+	elif invShared > 0:
+		# Shared with friends
+		conn = dbShared.ghConn()
+		cursor = conn.cursor()
+		if (cursor):
+			cursor.execute("SELECT added FROM tUserFriends WHERE userID=%s AND friendID=%s", [uid, currentUser])
+			row = cursor.fetchone()
+			if row == None:
+				criteriaStr = criteriaStr + " AND 1=0"
+		cursor.close()
+		conn.close()
+		accessString = '{0} Shared'.format(uid)
+	else:
+		# not shared
+		criteriaStr = criteriaStr + " AND 1=0"
+		accessString = 'No Shared'
+
+# Build sorting clause
 if formatType == 'inventory':
 	orderStr = " ORDER BY tResourceType.resourceCategory, tResourceType.resourceGroup, tResources.resourceType"
 if formatType == 'alerts':
@@ -149,7 +185,8 @@ if formatType == 'csv':
 	print 'Content-disposition: attachment; filename="inventory.csv"\n'
 else:
 	print 'Content-type: text/html\n'
-if logged_state > 0:
+
+if uid != '':
 	if galaxy.isdigit():
 		galaxyState = dbShared.galaxyState(galaxy)
 		conn = dbShared.ghConn()
@@ -168,13 +205,15 @@ if logged_state > 0:
 			sqlStr1 += ' CASE WHEN SRmax > 0 THEN (((CASE WHEN SR IS NULL THEN 0 ELSE SR END)-SRmin) / (SRmax-SRmin))*100 ELSE NULL END AS SRperc,'
 			sqlStr1 += ' CASE WHEN UTmax > 0 THEN (((CASE WHEN UT IS NULL THEN 0 ELSE UT END)-UTmin) / (UTmax-UTmin))*100 ELSE NULL END AS UTperc,'
 			sqlStr1 += ' CASE WHEN ERmax > 0 THEN (((CASE WHEN ER IS NULL THEN 0 ELSE ER END)-ERmin) / (ERmax-ERmin))*100 ELSE NULL END AS ERperc,'
-			sqlStr1 += ' tResourceType.containerType, verified, verifiedBy, unavailable, unavailableBy, favGroup, units, inventoryType, groupName, (SELECT GROUP_CONCAT(resourceGroup SEPARATOR ",") FROM tResourceTypeGroup rtg WHERE rtg.resourceType=tResources.resourceType), despawnAlert FROM tResources INNER JOIN tResourceType ON tResources.resourceType = tResourceType.resourceType INNER JOIN tResourceGroup ON tResourceType.resourceGroup = tResourceGroup.resourceGroup INNER JOIN tFavorites ON tResources.spawnID = tFavorites.itemID' + joinStr + ' WHERE userID="' + currentUser + '" AND favType=1 AND tResources.galaxy=' + galaxy + criteriaStr + orderStr + ';'
+			sqlStr1 += ' tResourceType.containerType, verified, verifiedBy, unavailable, unavailableBy, favGroup, units, inventoryType, groupName, (SELECT GROUP_CONCAT(resourceGroup SEPARATOR ",") FROM tResourceTypeGroup rtg WHERE rtg.resourceType=tResources.resourceType), despawnAlert FROM tResources'
+			sqlStr1 += ' INNER JOIN tResourceType ON tResources.resourceType = tResourceType.resourceType INNER JOIN tResourceGroup ON tResourceType.resourceGroup = tResourceGroup.resourceGroup INNER JOIN tFavorites ON tResources.spawnID = tFavorites.itemID' + joinStr
+			sqlStr1 += ' WHERE userID="' + uid + '" AND favType=1 AND tResources.galaxy=' + galaxy + criteriaStr + orderStr + ';'
 			cursor.execute(sqlStr1)
 			row = cursor.fetchone()
 			if row != None:
 				currentGroup = row[35]
 			else:
-				result += 'No Matching Resources.'
+				result += accessString + ' - No Matching Resources.'
 
 			if formatType == 'alerts':
 				result += '<table id="tbl_despawnAlerts" class="resourceStats">'
@@ -186,7 +225,7 @@ if logged_state > 0:
 					# print group table
 					result += '<h2 class="categoryHead" style="margin-top:10px;" tag="' + currentGroup + '">' + currentGroup.replace('_',' ') + ' (' + str(groupCount) + ' resources, ' + str(groupUnits) + ' units)</h2>'
 					result += '<table id="tbl_' + currentGroup + '" style="width:770px;" class="resourceStats">'
-					result += getTableHeader(sortBy)
+					result += getTableHeader(sortBy, uid==currentUser and logged_state==1)
 					result += groupResult
 					result += '</table>'
 					currentGroup = row[35]
@@ -251,10 +290,7 @@ if logged_state > 0:
 					result += ','.join((s.favGroup, s.spawnName, s.resourceType, s.resourceTypeName, xstr(s.stats.ER), xstr(s.stats.CR), xstr(s.stats.CD), xstr(s.stats.DR), xstr(s.stats.FL), xstr(s.stats.HR), xstr(s.stats.MA), xstr(s.stats.PE), xstr(s.stats.OQ), xstr(s.stats.SR), xstr(s.stats.UT), str(s.units), xstr(s.entered), xstr(s.unavailable)))
 					result += '\n'
 				else:
-					if logged_state == 1:
-						groupResult += s.getRow(currentUser)
-					else:
-						groupResult += s.getRow("")
+					groupResult += s.getRow(uid == currentUser and logged_state==1)
 					groupCount += 1
 
 				row = cursor.fetchone()
@@ -265,7 +301,7 @@ if logged_state > 0:
 			# print last group
 			result += '<h2 class="categoryHead" style="margin-top:10px;" tag="' + currentGroup + '">' + currentGroup.replace('_',' ') + ' (' + str(groupCount) + ' resources, ' + str(groupUnits) + ' units)</h2>'
 			result += '<table id="tbl_' + currentGroup + '" style="width:760px;" class="resourceStats">'
-			result += getTableHeader(sortBy)
+			result += getTableHeader(sortBy, uid==currentUser and logged_state==1)
 			result += groupResult
 			result += '</table>'
 		if formatType == 'alerts':
@@ -273,6 +309,6 @@ if logged_state > 0:
 	else:
 		result = "Error: No galaxy specified"
 else:
-	result = "Error: You must be logged in to get your resource list."
+	result = "Error: No user specified."
 
 print result

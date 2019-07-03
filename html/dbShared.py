@@ -217,7 +217,7 @@ def logSchematicEvent(spawnID, galaxy, schematicID, expGroup, eventType, eventDe
 def getUserAttr(user, attr):
 	conn = ghConn()
 	cursor = conn.cursor()
-	cursor.execute('SELECT pictureName, emailAddress, themeName, created, inGameInfo, paidThrough, defaultAlertTypes FROM tUsers WHERE userID="' + user + '"')
+	cursor.execute('SELECT pictureName, emailAddress, themeName, created, inGameInfo, paidThrough, defaultAlertTypes, sharedInventory, sharedRecipes FROM tUsers WHERE userID="' + user + '"')
 	row = cursor.fetchone()
 	if (row != None):
 		if attr == 'themeName':
@@ -237,6 +237,10 @@ def getUserAttr(user, attr):
 			retAttr = row[5]
 		elif (attr == 'defaultAlertTypes'):
 			retAttr = row[6]
+		elif (attr == 'sharedInventory'):
+			retAttr = row[7]
+		elif (attr == 'sharedRecipes'):
+			retAttr = row[8]
 		else:
 			retAttr = ''
 	else:

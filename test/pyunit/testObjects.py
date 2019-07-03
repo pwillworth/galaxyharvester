@@ -56,7 +56,7 @@ class testObjects(unittest.TestCase):
 		# act
 		mobileHTML = s.getMobileHTML("", 0, 0)
 		normalHTML = s.getHTML(0, "", "", 0, 0)
-		rowHTML = s.getRow("")
+		rowHTML = s.getRow(False)
 		invHTML = s.getInventoryObject()
 		spawnJSON = s.getJSON()
 		spawnJSON = "{ " + spawnJSON[:-2] + " }"

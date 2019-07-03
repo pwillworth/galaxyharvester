@@ -360,15 +360,19 @@ class resourceSpawn:
 		result += '  </div></div></a>'
 		return result
 
-	def getRow(self, currentUser):
+	def getRow(self, editable):
 		result = ''
-		statVals = ""
-		titleStr = ""
+		statVals = ''
+		titleStr = ''
+		rowClassAdd = ''
+		cellClassAdd = ''
 
-		result += '<tr id="cont_'+self.spawnName+'" name="cont_'+self.spawnName+'" class="statRow ui-draggable">'
+		if editable:
+			rowClassAdd = ' ui-draggable'
+		result += '<tr id="cont_'+self.spawnName+'" name="cont_'+self.spawnName+'" class="statRow'+rowClassAdd+'">'
 
 		# favorite indicator
-		if currentUser != '':
+		if editable:
 			if self.favorite > 0:
 				result += '  <td class="dragColumn" style="width:20px;"><a alt="Favorite" title="Favorite" style="cursor: pointer;" onclick="toggleFavorite(this, 1, \''+str(self.spawnID)+'\', '+str(self.spawnGalaxy)+');"><img src="/images/favorite16On.png" /></a></td>'
 			else:
@@ -382,9 +386,10 @@ class resourceSpawn:
 		else:
 			styleAdd = "background-image:url(/images/circleBlue16.png);background-repeat:no-repeat;background-position:2px 2px;"
 
-		result += '    <td class="dragColumn" style="width:90px;' + styleAdd + '"><span style="font-size: 12px;font-weight: bold;"><a href="' + ghShared.BASE_SCRIPT_URL + 'resource.py/'+str(self.spawnGalaxy)+'/'+self.spawnName+'" class="nameLink">'+self.spawnName+'</a></td>'
-
-		result += '  <td class="dragColumn" style="width:200px"><a href="' + ghShared.BASE_SCRIPT_URL + 'resourceType.py/'+self.resourceType+'" title="View recent spawns of this type" class="nameLink">'+self.resourceTypeName+'</a></td>'
+		if editable:
+			cellClassAdd = ' class="dragColumn"'
+		result += '    <td'+cellClassAdd+' style="width:90px;' + styleAdd + '"><span style="font-size: 12px;font-weight: bold;"><a href="' + ghShared.BASE_SCRIPT_URL + 'resource.py/'+str(self.spawnGalaxy)+'/'+self.spawnName+'" class="nameLink">'+self.spawnName+'</a></td>'
+		result += '  <td'+cellClassAdd+' style="width:200px"><a href="' + ghShared.BASE_SCRIPT_URL + 'resourceType.py/'+self.resourceType+'" title="View recent spawns of this type" class="nameLink">'+self.resourceTypeName+'</a></td>'
 
 		# prepare stat value table contents
 		if (self.stats.ER != None and self.percentStats.ER != None):
@@ -465,7 +470,11 @@ class resourceSpawn:
 			statVals = statVals + "<td style='width:30px;'></td>"
 
 		result += statVals
-		result += "<td><input type='text' id='units_" + str(self.spawnID) + "' size='10' maxlength='13' tag='" + str(self.units) + "' value='" + str(self.units) + "' onblur='updateFavoriteAmount(this, \"" + str(self.spawnID) + "\",this.value);' onkeyup='if($(this).attr(\"tag\")==this.value){$(this).css(\"color\",\"black\");}else{$(this).css(\"color\",\"red\");}' /></td>"
+		if editable:
+			result += "<td><input type='text' id='units_" + str(self.spawnID) + "' size='10' maxlength='13' tag='" + str(self.units) + "' value='" + str(self.units) + "' onblur='updateFavoriteAmount(this, \"" + str(self.spawnID) + "\",this.value);' onkeyup='if($(this).attr(\"tag\")==this.value){$(this).css(\"color\",\"black\");}else{$(this).css(\"color\",\"red\");}' /></td>"
+		else:
+			result += "<td><span id='units_" + str(self.spawnID) + " tag='" + str(self.units) + "'>" + str(self.units) + "</span></td>"
+		
 		# resource despawn alert
 		if self.despawnAlert == 2:
 			despawnStyle = "background-image:url(/images/email16.png);background-repeat:no-repeat;background-position:0px 0px;"
@@ -480,8 +489,9 @@ class resourceSpawn:
 			despawnStyle = "background-image:url(/images/none16.png);background-repeat:no-repeat;background-position:0px 0px;"
 			despawnTitle = "none"
 
-		result += "<td style='width:16px;{0}' tag='{1}' onclick='toggleAlertType(this, \"{2}\", 1);' title='{3}'></td>".format(despawnStyle, self.despawnAlert, self.spawnID, despawnTitle)
-		result += "<td style='width:20px'><input type='checkbox' id='chkMove_" + str(self.spawnID) + "' /></td>"
+		if editable:
+			result += "<td style='width:16px;{0}' tag='{1}' onclick='toggleAlertType(this, \"{2}\", 1);' title='{3}'></td>".format(despawnStyle, self.despawnAlert, self.spawnID, despawnTitle)
+			result += "<td style='width:20px'><input type='checkbox' id='chkMove_" + str(self.spawnID) + "' /></td>"
 
 		return result
 

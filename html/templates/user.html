@@ -25,7 +25,9 @@ $(document).ready(function() {
     });
 {% if (loggedin == 1 and currentUser == uid) %}
 	    $("#themeSel").val("{{ uiTheme }}");
-	    $("#inGameInfo").val("{{ convertGI }}");
+			$("#inGameInfo").val("{{ convertGI }}");
+			$("#inventoryShareSel").val("{{ sharedInventory }}");
+			$("#recipeShareSel").val("{{ sharedRecipes }}");
 {% endif %}
 });
 function moreFriends(lastFriend, dir) {
@@ -59,7 +61,9 @@ function udEmail() {
     $("#udInfo").load(BASE_SCRIPT_URL + "udEmail.py",{email:theEmail,gh_sid:sid});
 }
 function udOther() {
-    var theTheme = document.getElementById("themeSel").value;
+		var theTheme = document.getElementById("themeSel").value;
+		var shareInventory = document.getElementById("inventoryShareSel").value;
+		var shareRecipes = document.getElementById("recipeShareSel").value;
     var ign = document.getElementById("inGameInfo").value;
     var alerts = 0;
     if ($("#oHome").attr("checked") == "checked") {
@@ -76,7 +80,7 @@ function udOther() {
         return false;
     }
     $("#udInfo").animate({opacity: 0.0, fontSize: "1em"}, 200);
-    $("#udInfo").load(BASE_SCRIPT_URL + "udUserOther.py",{uiTheme:theTheme, inGameInfo: ign, defaultAlerts: alerts, gh_sid: "{{ sid }}"},
+    $("#udInfo").load(BASE_SCRIPT_URL + "udUserOther.py",{uiTheme:theTheme, sharedInventory:shareInventory, sharedRecipes:shareRecipes, inGameInfo: ign, defaultAlerts: alerts, gh_sid: "{{ sid }}"},
         function(){$("#udInfo").animate({opacity: 1.0, fontSize: "2em"}, 700);});
 }
 // Account removal initiation
@@ -118,52 +122,54 @@ function checkConfirmText(confirmationText) {
 <div id="mainContent" class="wrapper">
   <div class="ghCol" style="width:35%;">
     {% if (loggedin == 1 and currentUser == uid) %}
-    	    <div id="userForm" class="ghWidgetBox">
-    	      <span id="udInfo">
+    	<div id="userForm" class="ghWidgetBox">
+    	  <span id="udInfo">
     	{% if avatarResult != '' %}
     		{{ avatarResult }}
     	{% endif %}
-    	      </span>
-    	      <div class="boxHeader">User Controls</div>
-    	      <div class="newsItem"><h3>Avatar</h3><form enctype="multipart/form-data" name="udAvatarForm" method="post" action="/udUserImage.py">
-    	      <input type="file" id="avatar" name="avatar" accept="image/gif, image/jpeg, image/png" />
-    	      <input type="submit" value="Update" name="goavatar" id="goavatar" class="ghButton" />
-    	      </form></div>
-    	      <div class="newsItem"><h3>E-mail Address</h3>
-    	      <input type="text" id="email" size="24" maxlength="255" onchange="valEmail(this)" value="{{ email }}"/>
-    	      <button name="goemail" id="goemail" onClick="udEmail()" class="ghButton">Update e-mail</button>
-    	      <span id="emailInf" class="formMsg">Please enter a valid e-mail address.</span>
-    	      </div>
-    	      <div class="newsItem"><h3>Password Change</h3>
-              <button name="gopwd" id="gopwd" onClick="udPassword()" class="ghButton" style="float:right;">Update Password</button>
-    	        <span>Password: </span>
-    	        <input type="password" id="userpass" size="12" maxlength="16" onchange="valPass(this)" id="userpass" />
-    	        <span id="passInf" class="formMsg">Password must be at least 6 characters.</span><br />
-    	        <span>Verify Pwd: </span>
-    	        <input type="password" id="verifypass" size="12" maxlength="16" onchange="valVpass(&quot;userpass&quot;,this)" />
-    	        <span id="vpassInf" class="formMsg">Passwords do not match.</span>
-            </div>
-    	      <div class="newsItem"><h3>Other Info</h3>
-              <button name="goother" id="goother" onClick="udOther()" class="ghButton" style="float:right;">Save</button>
-    	        <h3>In Game Names:</h3><textarea id="inGameInfo" rows="3" cols="20"></textarea>
-    	        <h3>Theme: </h3><select id="themeSel" name="themeSel">
-    	{{ themeList }}
-    	        </select>
-              <h3>Default Alert Types</h3>
-              <table class="resourceStats"><tr>
-                <th class="tableHead"><img src="/images/browser16.png"/>Site</th>
-                <th class="tableHead"><img src="/images/email16.png"/>E-mail</th>
-                <th class="tableHead"><img src="/images/mobile16.png"/>Mobile</th>
-              </tr><tr class="statRow">
-                <td align='center'><input type="checkbox"{{ siteAlertCheckStr }} id="oHome" /></td>
-                <td align='center'><input type="checkbox"{{ emailAlertCheckStr }} id="oEmail"/></td>
-                <td align='center'><input type="checkbox"{{ mobileAlertCheckStr }} id="oMobile"/></td>
-    	        </tr></table>
+    	  </span>
+    	  <div class="boxHeader">User Controls</div>
+    	  <div class="newsItem"><h3>Avatar</h3><form enctype="multipart/form-data" name="udAvatarForm" method="post" action="/udUserImage.py">
+    	    <input type="file" id="avatar" name="avatar" accept="image/gif, image/jpeg, image/png" />
+    	    <input type="submit" value="Update" name="goavatar" id="goavatar" class="ghButton" />
+    	  </form></div>
+    	  <div class="newsItem"><h3>E-mail Address</h3>
+    	    <input type="text" id="email" size="24" maxlength="255" onchange="valEmail(this)" value="{{ email }}"/>
+    	    <button name="goemail" id="goemail" onClick="udEmail()" class="ghButton">Update e-mail</button>
+    	    <span id="emailInf" class="formMsg">Please enter a valid e-mail address.</span>
+    	  </div>
+    	  <div class="newsItem"><h3>Password Change</h3>
+          <button name="gopwd" id="gopwd" onClick="udPassword()" class="ghButton" style="float:right;">Update Password</button>
+    	    <span>Password: </span>
+    	    <input type="password" id="userpass" size="12" maxlength="16" onchange="valPass(this)" id="userpass" />
+    	    <span id="passInf" class="formMsg">Password must be at least 6 characters.</span><br />
+    	    <span>Verify Pwd: </span>
+    	    <input type="password" id="verifypass" size="12" maxlength="16" onchange="valVpass(&quot;userpass&quot;,this)" />
+    	    <span id="vpassInf" class="formMsg">Passwords do not match.</span>
+        </div>
+    	  <div class="newsItem"><h3>Other Info</h3>
+					<button name="goother" id="goother" onClick="udOther()" class="ghButton" style="float:right;">Save</button>
+					<table style="padding: 4px;">
+						<tr><td class="boxHeader">Theme:</td><td><select id="themeSel" name="themeSel">{{ themeList }}</select></td></tr>
+						<tr><td class="boxHeader">Inventory Sharing:</td><td><select id="inventoryShareSel"><option value="0">None</option><option value="1">Only Friends</option><option value="2">Public</option></select></td></tr>
+						<tr><td class="boxHeader">Recipe Sharing:</td><td><select id="recipeShareSel"><option value="0">None</option><option value="1">Only Friends</option><option value="2">Public</option></select></td></tr>
+					</table>
+          <h3>Default Alert Types:</h3>
+          <table class="resourceStats"><tr>
+            <th class="tableHead"><img src="/images/browser16.png"/>Site</th>
+            <th class="tableHead"><img src="/images/email16.png"/>E-mail</th>
+            <th class="tableHead"><img src="/images/mobile16.png"/>Mobile</th>
+          </tr><tr class="statRow">
+            <td align='center'><input type="checkbox"{{ siteAlertCheckStr }} id="oHome" /></td>
+            <td align='center'><input type="checkbox"{{ emailAlertCheckStr }} id="oEmail"/></td>
+            <td align='center'><input type="checkbox"{{ mobileAlertCheckStr }} id="oMobile"/></td>
+					</tr></table>
+					<h3>In Game Names:</h3><textarea id="inGameInfo" rows="3" cols="20"></textarea>
 			  </div>
-			  <div style="width:100%;height:12px;">
+				<div style="width:100%;height:12px;">
 				<div style="font-size: 9px;float: right;"><a href="#deleteMeDialog" id="goDeleteMe" onclick="deleteMe()" title="delete user account">I want to delete my account</a></div>
-			  </div>
-    	    </div>
+			</div>
+    </div>
     {% endif %}
     <div id="userStats" class="ghWidgetBox">
     <div class="boxHeader">User Stats</div>

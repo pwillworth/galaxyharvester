@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2019 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -21,15 +21,11 @@
 """
 
 import os
-import sys
 import cgi
 import Cookie
 import dbSession
 import dbShared
 import MySQLdb
-import ghShared
-import ghLists
-from jinja2 import Environment, FileSystemLoader
 
 # Get current url
 try:
@@ -52,26 +48,12 @@ if useCookies:
 	except KeyError:
 		currentUser = ''
 	try:
-		loginResult = cookies['loginAttempt'].value
-	except KeyError:
-		loginResult = 'success'
-	try:
 		sid = cookies['gh_sid'].value
 	except KeyError:
 		sid = form.getfirst('gh_sid', '')
-	try:
-		uiTheme = cookies['uiTheme'].value
-	except KeyError:
-		uiTheme = ''
-	try:
-		galaxy = cookies['galaxy'].value
-	except KeyError:
-		galaxy = form.getfirst('galaxy', ghShared.DEFAULT_GALAXY)
 else:
 	currentUser = ''
-	loginResult = form.getfirst('loginAttempt', '')
 	sid = form.getfirst('gh_sid', '')
-	galaxy = form.getfirst('galaxy', ghShared.DEFAULT_GALAXY)
 
 # escape input to prevent sql injection
 sid = dbShared.dbInsertSafe(sid)
@@ -86,18 +68,10 @@ sess = dbSession.getSession(sid)
 if (sess != ''):
 	logged_state = 1
 	currentUser = sess
-	if (uiTheme == ''):
-		uiTheme = dbShared.getUserAttr(currentUser, 'themeName')
 	if (useCookies == 0):
 		linkappend = 'gh_sid=' + sid
-else:
-	if (uiTheme == ''):
-		uiTheme = 'crafter'
 
-pictureName = dbShared.getUserAttr(currentUser, 'pictureName')
-print 'Content-type: text/html\n'
-env = Environment(loader=FileSystemLoader('templates'))
-env.globals['BASE_SCRIPT_URL'] = ghShared.BASE_SCRIPT_URL
-env.globals['MOBILE_PLATFORM'] = ghShared.getMobilePlatform(os.environ['HTTP_USER_AGENT'])
-template = env.get_template('inventory.html')
-print template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), professionList=ghLists.getProfessionList(galaxy), resourceGroupList=ghLists.getResourceGroupList(), resourceTypeList=ghLists.getResourceTypeList(galaxy))
+# redirect to url for current user inventory
+print 'Status: 303 See Other'
+print 'Location: {0}user.py/{1}/inventory?{2}'.format(ghShared.BASE_SCRIPT_URL, currentUser, linkappend)
+print ''

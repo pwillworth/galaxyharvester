@@ -107,6 +107,8 @@ def main():
 	donorBadge = ''
 	email = ''
 	defaultAlertTypes = 0
+	sharedInventory = 0
+	sharedRecipes = 0
 	siteAlertCheckStr = ''
 	emailAlertCheckStr = ''
 	mobileAlertCheckStr = ''
@@ -143,6 +145,8 @@ def main():
 
 	path = []
 	uid = ''
+	template = 'user.html'
+	userPage = 'root'
 	if os.environ.has_key('PATH_INFO'):
 		path = os.environ['PATH_INFO'].split('/')[1:]
 		path = [p for p in path if p != '']
@@ -150,63 +154,70 @@ def main():
 	# get user attributes
 	if len(path) > 0:
 		uid = dbShared.dbInsertSafe(path[0])
-		created = dbShared.getUserAttr(uid, 'created')
-		inGameInfo = dbShared.getUserAttr(uid, 'inGameInfo')
-		userPictureName = dbShared.getUserAttr(uid, 'pictureName')
-		defaultAlerts = dbShared.getUserAttr(uid, 'defaultAlertTypes')
-		if defaultAlerts > 0:
-			if defaultAlerts % 2 == 1:
-				siteAlertCheckStr = ' checked="checked"'
-			if defaultAlerts >= 4:
-				mobileAlertCheckStr = ' checked="checked"'
-			if defaultAlerts != 1 and defaultAlerts != 4 and defaultAlerts != 5:
-				emailAlertCheckStr = ' checked="checked"'
+		if len(path) > 1:
+			userPage = path[1]
+		if userPage == 'inventory':
+			template = 'inventory.html'
+		else:
+			created = dbShared.getUserAttr(uid, 'created')
+			inGameInfo = dbShared.getUserAttr(uid, 'inGameInfo')
+			userPictureName = dbShared.getUserAttr(uid, 'pictureName')
+			defaultAlerts = dbShared.getUserAttr(uid, 'defaultAlertTypes')
+			if defaultAlerts > 0:
+				if defaultAlerts % 2 == 1:
+					siteAlertCheckStr = ' checked="checked"'
+				if defaultAlerts >= 4:
+					mobileAlertCheckStr = ' checked="checked"'
+				if defaultAlerts != 1 and defaultAlerts != 4 and defaultAlerts != 5:
+					emailAlertCheckStr = ' checked="checked"'
+			sharedInventory = dbShared.getUserAttr(uid, 'sharedInventory')
+			sharedRecipes = dbShared.getUserAttr(uid, 'sharedRecipes')
 
-		donateTotal = dbShared.getUserDonated(uid)
-		userTitle = dbShared.getUserTitle(uid)
-		userStats = dbShared.getUserStats(uid, galaxy).split(',')
-		resScore = int(userStats[0])
-		mapScore = int(userStats[1])
-		reputation = int(userStats[2])
-		if resScore != None:
-			if resScore > 2000:
-				resColor = '#ffcc00'
-			elif resScore > 500:
-				resColor = '#3366ff'
-			elif resScore > 25:
-				resColor = '#009933'
+			donateTotal = dbShared.getUserDonated(uid)
+			userTitle = dbShared.getUserTitle(uid)
+			userStats = dbShared.getUserStats(uid, galaxy).split(',')
+			resScore = int(userStats[0])
+			mapScore = int(userStats[1])
+			reputation = int(userStats[2])
+			if resScore != None:
+				if resScore > 2000:
+					resColor = '#ffcc00'
+				elif resScore > 500:
+					resColor = '#3366ff'
+				elif resScore > 25:
+					resColor = '#009933'
 
-		if mapScore != None:
-			if mapScore > 400:
-				mapColor = '#ffcc00'
-			elif mapScore > 100:
-				mapColor = '#3366ff'
-			elif mapScore > 5:
-				mapColor = '#009933'
+			if mapScore != None:
+				if mapScore > 400:
+					mapColor = '#ffcc00'
+				elif mapScore > 100:
+					mapColor = '#3366ff'
+				elif mapScore > 5:
+					mapColor = '#009933'
 
-		if reputation != None:
-			if reputation > 100:
-				repColor = '#ffcc00'
-			elif reputation > 50:
-				repColor = '#3366ff'
-			elif reputation > 10:
-				repColor = '#009933'
-			elif reputation < 0:
-				repColor = '#800000'
+			if reputation != None:
+				if reputation > 100:
+					repColor = '#ffcc00'
+				elif reputation > 50:
+					repColor = '#3366ff'
+				elif reputation > 10:
+					repColor = '#009933'
+				elif reputation < 0:
+					repColor = '#800000'
 
-		if userPictureName == '':
-			userPictureName = 'default.jpg'
-		if donateTotal != '':
-			donorBadge = '<img src="/images/coinIcon.png" width="16" title="This user has donated to the site" alt="coin" />'
-		# get friend count
-		conn = dbShared.ghConn()
-		cursor = conn.cursor()
-		cursor.execute('SELECT Count(uf1.added) FROM tUserFriends uf1 INNER JOIN tUserFriends uf2 ON uf1.friendID=uf2.userID AND uf1.userID=uf2.friendID WHERE uf1.userID="' + uid + '"')
-		row = cursor.fetchone()
-		if (row != None):
-			friendCountStr = '(' + str(row[0]) + ')'
-		cursor.close()
-		conn.close()
+			if userPictureName == '':
+				userPictureName = 'default.jpg'
+			if donateTotal != '':
+				donorBadge = '<img src="/images/coinIcon.png" width="16" title="This user has donated to the site" alt="coin" />'
+			# get friend count
+			conn = dbShared.ghConn()
+			cursor = conn.cursor()
+			cursor.execute('SELECT Count(uf1.added) FROM tUserFriends uf1 INNER JOIN tUserFriends uf2 ON uf1.friendID=uf2.userID AND uf1.userID=uf2.friendID WHERE uf1.userID="' + uid + '"')
+			row = cursor.fetchone()
+			if (row != None):
+				friendCountStr = '(' + str(row[0]) + ')'
+			cursor.close()
+			conn.close()
 
 		# Load list of unlocked abilities
 		for k, v in ghShared.ABILITY_DESCR.iteritems():
@@ -224,9 +235,12 @@ def main():
 	env = Environment(loader=FileSystemLoader('templates'))
 	env.globals['BASE_SCRIPT_URL'] = ghShared.BASE_SCRIPT_URL
 	env.globals['MOBILE_PLATFORM'] = ghShared.getMobilePlatform(os.environ['HTTP_USER_AGENT'])
-	template = env.get_template('user.html')
-	print template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), themeList=ghLists.getThemeList(), uid=uid, convertGI=convertGI, sid=sid, avatarResult=avatarResult, email=email, donorBadge=donorBadge, joinedStr=joinedStr, userPictureName=userPictureName, tmpStat=tmpStat, userTitle=userTitle, friendCountStr=friendCountStr,
-	userAbilities=abilities, resScore=resScore, mapScore=mapScore, reputation=reputation, resColor=resColor, mapColor=mapColor, repColor=repColor, siteAlertCheckStr=siteAlertCheckStr, emailAlertCheckStr=emailAlertCheckStr, mobileAlertCheckStr=mobileAlertCheckStr)
+	template = env.get_template(template)
+	if userPage == 'inventory':
+		print template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), professionList=ghLists.getProfessionList(galaxy), resourceGroupList=ghLists.getResourceGroupList(), resourceTypeList=ghLists.getResourceTypeList(galaxy), uid=uid, editable=(uid == currentUser and logged_state==1))
+	else:
+		print template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), themeList=ghLists.getThemeList(), uid=uid, convertGI=convertGI, sid=sid, avatarResult=avatarResult, email=email, donorBadge=donorBadge, joinedStr=joinedStr, userPictureName=userPictureName, tmpStat=tmpStat, userTitle=userTitle, friendCountStr=friendCountStr,
+		userAbilities=abilities, resScore=resScore, mapScore=mapScore, reputation=reputation, resColor=resColor, mapColor=mapColor, repColor=repColor, siteAlertCheckStr=siteAlertCheckStr, emailAlertCheckStr=emailAlertCheckStr, mobileAlertCheckStr=mobileAlertCheckStr, sharedInventory=sharedInventory, sharedRecipes=sharedRecipes)
 
 if __name__ == "__main__":
 	main()

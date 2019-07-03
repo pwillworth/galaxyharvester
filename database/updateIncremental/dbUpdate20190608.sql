@@ -1,0 +1,3 @@
+use swgresource;
+ALTER TABLE tUsers ADD COLUMN sharedInventory SMALLINT DEFAULT 0;
+ALTER TABLE tUsers ADD COLUMN sharedRecipes SMALLINT DEFAULT 0;

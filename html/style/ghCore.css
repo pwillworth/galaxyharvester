@@ -398,6 +398,7 @@ input.ghButton[disabled] {
 }
 .resourceStats td {
 	text-align: center;
+	height: 16px;
 }
 .resourceStats th {
 	font-size: 1.4em;

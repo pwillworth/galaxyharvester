@@ -64,6 +64,8 @@ else:
 uiTheme = form.getfirst('uiTheme', '')
 inGameInfo = form.getfirst('inGameInfo', '')
 defaultAlerts = form.getfirst('defaultAlerts', '')
+sharedInventory = form.getfirst('sharedInventory', '0')
+sharedRecipes = form.getfirst('sharedRecipes', '0')
 # escape input to prevent sql injection
 sid = dbShared.dbInsertSafe(sid)
 uiTheme = dbShared.dbInsertSafe(uiTheme)
@@ -91,12 +93,16 @@ if re.search('[><&]', inGameInfo):
     errstr = errstr + "Error: game info contains illegal characters (no HTML allowed)."
 if defaultAlerts.isdigit() == False:
     errstr = errstr + "Error: Default alerts invalid or not passed."
+if sharedInventory.isdigit() == False:
+	errstr = errstr + "Error: Shared Inventory invalid or not passed."
+if sharedRecipes.isdigit() == False:
+	errstr = errstr + "Error: Shared Recipes invalid or not passed."
 if (errstr != ''):
 	result = "Your other info could not be updated because of the following errors:\r\n" + errstr
 else:
 	conn = dbShared.ghConn()
 	cursor = conn.cursor()
-	cursor.execute("UPDATE tUsers SET themeName='{0}', inGameInfo='{1}', defaultAlertTypes={2} WHERE userID='{3}';".format(uiTheme, inGameInfo, defaultAlerts, currentUser))
+	cursor.execute("UPDATE tUsers SET themeName='{0}', inGameInfo='{1}', defaultAlertTypes={2}, sharedInventory={3}, sharedRecipes={4} WHERE userID='{5}';".format(uiTheme, inGameInfo, defaultAlerts, sharedInventory, sharedRecipes, currentUser))
 
 	cursor.close()
 	conn.close()

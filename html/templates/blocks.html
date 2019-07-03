@@ -45,7 +45,7 @@
     <img src="/images/users/{{ pictureName }}" class="smallAvatar" /></a></div>
     <div style="width:100%;height:48px;clear:both;vertical-align:bottom;">
     <div id="myShortcuts" style="float:left;position:relative;top:20px;"><a href="{{ BASE_SCRIPT_URL }}myAlerts.py?{{ linkappend }}"><img src="/images/alerts32.png" style="width:24px;height:24px;" alt="alert icon" title="Click to go to your alert filters page." /></a>
-    <a href="{{ BASE_SCRIPT_URL }}myResources.py?{{ linkappend }}"><img src="/images/inventory32.png" style="width:24px;height:24px;" alt="inventory icon" title="Click to manage your resource inventory." /></a>
+    <a href="{{ BASE_SCRIPT_URL }}user.py/{{ userID }}/inventory?{{ linkappend }}"><img src="/images/inventory32.png" style="width:24px;height:24px;" alt="inventory icon" title="Click to manage your resource inventory." /></a>
     <a href="{{ BASE_SCRIPT_URL }}recipe.py/home?{{ linkappend }}"><img src="/images/recipes32.png" style="width:24px;height:24px;" alt="recipes icon" title="Manage the recipes you have created and see suggested recipes based on your resources." /></a></div>
     <div style="float:right;position:relative;top:20px;">Galaxy: <select name="galaxySel" id="galaxySel" onchange="switchGalaxy(this.value);">
 {{ galaxyList }}
