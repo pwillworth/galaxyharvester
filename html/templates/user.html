@@ -151,7 +151,7 @@ function checkConfirmText(confirmationText) {
 					<button name="goother" id="goother" onClick="udOther()" class="ghButton" style="float:right;">Save</button>
 					<table style="padding: 4px;">
 						<tr><td class="boxHeader">Theme:</td><td><select id="themeSel" name="themeSel">{{ themeList }}</select></td></tr>
-						<tr><td class="boxHeader">Inventory Sharing:</td><td><select id="inventoryShareSel"><option value="0">None</option><option value="1">Only Friends</option><option value="2">Public</option></select></td></tr>
+						<tr><td class="boxHeader">Inventory Sharing:</td><td><select id="inventoryShareSel"><option value="0">None</option><option value="1">Only Friends</option><option value="2">Public</option></select>URL to share: http://galaxyharvester.net/user.py/{{ currentUser }}/inventory</td></tr>
 						<tr><td class="boxHeader">Recipe Sharing:</td><td><select id="recipeShareSel"><option value="0">None</option><option value="1">Only Friends</option><option value="2">Public</option></select></td></tr>
 					</table>
           <h3>Default Alert Types:</h3>
@@ -199,7 +199,11 @@ function checkConfirmText(confirmationText) {
 	      <div style="float:left;height:140px;"><img class="largeAvatar" src="/images/users/{{ userPictureName }}" /></div>
 	      <div style="float:left;height:128px;padding:4px;"><div style="font-size: 14px;font-weight:bold;">{{ userTitle }}</div>
 	      <div>{{ joinedStr }}</div>
-	      <br /><h4>In Game Info</h4>{{ convertGI }}</div>
+	      <br /><h4>In Game Info</h4>{{ convertGI }}
+				{% if sharedInventory > 0 %}
+			  <h4>Shared Inventory Link:</h4><a href="{{ BASE_SCRIPT_URL }}user.py/{{ uid }}/inventory?{{ linkappend }}">http://galaxyharvester.net/user.py/{{ uid }}/inventory</a>
+			  {% endif %}
+			  </div>
 	      <div style="float:right;"><h4>Friends {{ friendCountStr }}</h4><div id="friendList">
 	      <div id="flBusyImg"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div></div>
 	      </div>
