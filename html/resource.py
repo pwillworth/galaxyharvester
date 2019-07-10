@@ -159,6 +159,7 @@ def main():
 	uiTheme = ''
 	galaxyState = 0
 	userReputation = 0
+	admin = False
 	# Get current url
 	try:
 		url = os.environ['SCRIPT_NAME']
