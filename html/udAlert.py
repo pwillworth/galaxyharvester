@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2019 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -59,8 +59,10 @@ else:
 	currentUser = ''
 	loginResult = 'success'
 	sid = form.getfirst('gh_sid', '')
-alert = form.getfirst("alert")
+
+alert = form.getfirst("alert", "")
 status = form.getfirst("status")
+alertType = form.getfirst("alertType", "")
 # escape input to prevent sql injection
 sid = dbShared.dbInsertSafe(sid)
 # Get a session
@@ -73,35 +75,47 @@ if (sess != ''):
 	currentUser = sess
 	linkappend = 'gh_sid=' + sid
 
+alertCriteria = ' WHERE 0 = 1'
+
 #  Check for errors
 errstr=''
-if (not alert.isdigit()):
-	errstr = errstr + "That is not a valid alert id. \r\n"
+if (not alert.isdigit() and not alertType.isdigit()):
+	errstr = errstr + "You must provide a valid alert id or alert type. \r\n"
 if (not status.isdigit()):
 	errstr = errstr + "That is not a valid status id. \r\n"
 if (logged_state == 0):
 	errstr = errstr + "You must be logged in to update alert status. \r\n"
-if (errstr != ''):
+
+if alertType.isdigit():
+	alertCriteria = " WHERE userID='{0}'".format(currentUser)
+
+if alert.isdigit():
 	cconn = dbShared.ghConn()
-	ccursor = conn.cursor()
+	ccursor = cconn.cursor()
+
 	ccursor.execute("SELECT userID FROM tAlerts WHERE alertID=" + str(alert) + ";")
 	row = ccursor.fetchone()
 	if row != None:
 		alertUser = row[0]
 	if alertUser != currentUser:
 		errstr = errstr + "That alert does not belong to you."
+
 	ccursor.close()
 	cconn.close()
+	alertCriteria = " WHERE alertID={0}".format(alert)
+
 if (errstr != ''):
 	result = "Error: Alert could not be updated because of the following errors:\r\n" + errstr
 else:
 	conn = dbShared.ghConn()
 	cursor = conn.cursor()
-	cursor.execute("UPDATE tAlerts SET alertStatus=" + str(status) + ", statusChanged=NOW() WHERE alertID=" + str(alert) + ";")
-
+	cursor.execute("UPDATE tAlerts SET alertStatus=" + str(status) + ", statusChanged=NOW()" + alertCriteria + ";")
+	if alert.isdigit():
+		result = alert
+	else:
+		result = "{0} alerts updated".format(cursor.rowcount)
 	cursor.close()
 	conn.close()
-	result = alert
 
 
 print "Content-Type: text/html\n"

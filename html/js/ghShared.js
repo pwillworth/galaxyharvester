@@ -1468,12 +1468,12 @@ function updateAlerts(linkappend) {
 
 // Update status of an alert usually to dismiss it
 function updateAlertStatus(alertID, newStatus) {
+
     if (alertID) {
         $.post(BASE_SCRIPT_URL + "udAlert.py", {alert: alertID, status: newStatus}, function(data) {
 	    if (data.indexOf("Error:")>-1) {
 	        alert(data);
 	    } else {
-	        //alert(data);
 			$("#alert_"+data).fadeOut(300,function(){$("#alert_"+data).remove();});
 	    }
 	});
@@ -1533,6 +1533,21 @@ function addDespawnAlert(spawnName, alertTypes, linkappend) {
 	        alert(data);
 	    } else {
 	        loadDespawnAlerts(linkappend);
+	    }
+	});
+    }
+}
+
+function clearAlerts(alertType) {
+	var doit = false;
+	doit = confirm("Are you sure you want to clear all website alerts?");
+
+	if (doit) {
+        $.post(BASE_SCRIPT_URL + "udAlert.py", {alertType: alertType, status: 2}, function(data) {
+	    if (data.indexOf("Error:")>-1) {
+	        alert(data);
+	    } else {
+	        refreshAlerts();
 	    }
 	});
     }

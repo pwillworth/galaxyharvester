@@ -21,7 +21,7 @@ $(document).ready(function() {
         $("#quickAddGo").attr("disabled","disabled");
     }
 {% if loggedin == 1 %}
-	    $("#alertList").load(BASE_SCRIPT_URL + "getAlerts.py?{{ linkappend }}",{alertTypes: 1},function(){$("#busyImgAlerts").css("display","none");if($("#alertList").html().trim() == "No Alerts"){$("#myAlerts").fadeOut(3000);}});
+	    refreshAlerts();
 {% endif %}
     $("#newsList").load("/blog.py/smy");
     $("#topCurrentCount").load(BASE_SCRIPT_URL + "ghStats.py",{statID:"currentSpawns",galaxy:$("#galaxySel").val()});
@@ -43,6 +43,16 @@ $(document).ready(function() {
     });
     loadPlanetSel($("#galaxySel option:selected").val(), '', '#wpPlanetSel');
 });
+function refreshAlerts() {
+  $("#alertList").load(BASE_SCRIPT_URL + "getAlerts.py?{{ linkappend }}",{alertTypes: 1},
+    function() {
+      $("#busyImgAlerts").css("display","none");
+      if($("#alertList").html().trim() == "No Alerts"){
+        $("#myAlerts").fadeOut(3000);
+      }
+    }
+  );
+}
 function filterTopResources() {
     $("#topResourceData").load(BASE_SCRIPT_URL + "getTopResources.py",{galaxy:$("#galaxySel").val(), prof: $("#profSel").val(), resGroup: $("#resTopGroup").val() });
 }
@@ -56,7 +66,9 @@ function filterTopResources() {
   <div id="leftColumn" class="ghCol">
 {% if loggedin == 1 %}
 	<div id="myAlerts" class="ghWidgetBox">
-	<div class="boxHeader">My Alerts [<a href="myAlerts.py">Manage</a>]</div>
+  <div class="boxHeader">My Alerts [<a href="myAlerts.py">Manage</a>]
+    <button type=button value="Clear" class="ghButton" style="float:right;" onclick="clearAlerts(1);">Clear</button>
+  </div>
 	<div id="alertList"></div>
 	<div id=busyImgAlerts><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
 	</div>
