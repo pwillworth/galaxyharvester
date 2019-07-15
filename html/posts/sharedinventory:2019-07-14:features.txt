@@ -1,0 +1,7 @@
+Shared Inventory
+
+<p>Today you will find a new setting in your profile in the "Other Info" section.  You can select to make your inventory list public or shared with people on your friends list.  The link you can use to share it with others should be displayed on your profile page, or you can just copy it from the URL in your browser when on your inventory page because they are one and the same.</p>
+
+<p>In the minor updates category there are a couple things.  For one, more of the site should be usable if you have cookies disabled now, and there is a "Clear" button added to the site alerts list on the homepage now so you can dismiss them all easier.</p>
+
+<p>-ioscode</p>
