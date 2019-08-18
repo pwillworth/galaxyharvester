@@ -1,0 +1,10 @@
+Server Maintenance
+
+<p>There are two upcoming server maintenance windows where Galaxy Harvester will be unavailable for a short time.  Our hosting provider is doing operating system upgrades on the servers that Galaxy Harvester runs un.  The site will be unavailable for up to two hours sometime in both of these windows:</p>
+
+<ul>
+  <li>August 20th 6:00pm - 10:00pm PDT</li>
+  <li>August 21st 6:00pm - 10:00pm PDT</li>
+</ul>
+
+<p>-ioscode</p>
