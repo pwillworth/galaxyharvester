@@ -352,7 +352,7 @@ def getUserAdmin(conn, user, galaxy):
 def getGalaxyAdminList(conn, userID):
         listHTML = ''
         cursor = conn.cursor()
-        cursor.execute("SELECT tGalaxyUser.galaxyID, galaxyName FROM tGalaxyUser INNER JOIN tGalaxy ON tGalaxyUser.galaxyID = tGalaxy.galaxyID WHERE tGalaxyUser.userID='{0}' AND roleType='a';".format(userID))
+        cursor.execute("SELECT tGalaxyUser.galaxyID, galaxyName FROM tGalaxyUser INNER JOIN tGalaxy ON tGalaxyUser.galaxyID = tGalaxy.galaxyID WHERE tGalaxyUser.userID='{0}' AND roleType='a' ORDER BY galaxyName;".format(userID))
         row = cursor.fetchone()
         while row != None:
                 listHTML += '<option value="{0}">{1}</option>'.format(row[0], row[1])
@@ -392,10 +392,10 @@ def getPlanetID(planetName):
 	conn = ghConn()
 	cursor = conn.cursor()
 	# Temporarily accept other form of Yavin IV during transition
-	if planetName == 'Yavin IV':
+	if 'avin' in planetName.lower():
 		planetName = 'yavin4'
 	###
-	if planetName == 'Kaas':
+	if 'kaas' in planetName.lower():
 		planetName = 'dromundkaas'
 	###
 	cursor.execute('SELECT planetID FROM tPlanet WHERE LOWER(REPLACE(planetName," ","")) = "' + planetName.lower() + '";')
