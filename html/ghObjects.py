@@ -97,6 +97,7 @@ class resourceSpawn:
 		statHeads = ""
 		statVals = ""
 		titleStr = ""
+		copyVals = ""
 
 		# style 0 is wide format
 		if formatStyle == 0:
@@ -113,6 +114,7 @@ class resourceSpawn:
 			statHeads = statHeads + "<td class='header'><span>ER</span></td>"
 			if (self.stats.ER != None and self.percentStats.ER != None):
 				statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.ER)+"'><span>" + str(self.stats.ER) + "<br />(" + ("%.0f" % float(self.percentStats.ER)) + "%)</span></td>"
+				copyVals = copyVals + "ER " + str(self.stats.ER) + " "
 			elif (self.percentStats.ER != None):
 				statVals = statVals + "<td>?</td>"
 			else:
@@ -122,6 +124,7 @@ class resourceSpawn:
 			statHeads = statHeads + "<td class='header'><span>CR</span></td>"
 			if (self.stats.CR != None and self.percentStats.CR != None):
 				statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.CR)+"'><span>" + str(self.stats.CR) + "<br />(" + ("%.0f" % float(self.percentStats.CR)) + "%)</span></td>"
+				copyVals = copyVals + "CR " + str(self.stats.CR) + " "
 			elif (self.percentStats.CR != None):
 				statVals = statVals + "<td>?</td>"
 			else:
@@ -131,6 +134,7 @@ class resourceSpawn:
 			statHeads = statHeads + "<td class='header'><span>CD</span></td>"
 			if (self.stats.CD != None and self.percentStats.CD != None):
 				statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.CD)+"'><span>" + str(self.stats.CD) + "<br />(" + ("%.0f" % float(self.percentStats.CD)) + "%)</span></td>"
+				copyVals = copyVals + "CD " + str(self.stats.CD) + " "
 			elif (self.percentStats.CD != None):
 				statVals = statVals + "<td>?</td>"
 			else:
@@ -140,6 +144,7 @@ class resourceSpawn:
 			statHeads = statHeads + "<td class='header'><span>DR</span></td>"
 			if (self.stats.DR != None and self.percentStats.DR != None):
 				statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.DR)+"'><span>" + str(self.stats.DR) + "<br />(" + ("%.0f" % float(self.percentStats.DR)) + "%)</span></td>"
+				copyVals = copyVals + "DR " + str(self.stats.DR) + " "
 			elif (self.percentStats.DR != None):
 				statVals = statVals + "<td>?</td>"
 			else:
@@ -149,6 +154,7 @@ class resourceSpawn:
 			statHeads = statHeads + "<td class='header'><span>FL</span></td>"
 			if (self.stats.FL != None and self.percentStats.FL != None):
 				statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.FL)+"'><span>" + str(self.stats.FL) + "<br />(" + ("%.0f" % float(self.percentStats.FL)) + "%)</span></td>"
+				copyVals = copyVals + "FL " + str(self.stats.FL) + " "
 			elif (self.percentStats.FL != None):
 				statVals = statVals + "<td>?</td>"
 			else:
@@ -158,6 +164,7 @@ class resourceSpawn:
 			statHeads = statHeads + "<td class='header'><span>HR</span></td>"
 			if (self.stats.HR != None and self.percentStats.HR != None):
 				statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.HR)+"'><span>" + str(self.stats.HR) + "<br />(" + ("%.0f" % float(self.percentStats.HR)) + "%)</span></td>"
+				copyVals = copyVals + "HR " + str(self.stats.HR) + " "
 			elif (self.percentStats.HR != None):
 				statVals = statVals + "<td>?</td>"
 			else:
@@ -167,6 +174,7 @@ class resourceSpawn:
 			statHeads = statHeads + "<td class='header'><span>MA</span></td>"
 			if (self.stats.MA != None and self.percentStats.MA != None):
 				statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.MA)+"'><span>" + str(self.stats.MA) + "<br />(" + ("%.0f" % float(self.percentStats.MA)) + "%)</span></td>"
+				copyVals = copyVals + "MA " + str(self.stats.MA) + " "
 			elif (self.percentStats.MA != None):
 				statVals = statVals + "<td>?</td>"
 			else:
@@ -176,6 +184,7 @@ class resourceSpawn:
 			statHeads = statHeads + "<td class='header'><span>PE</span></td>"
 			if (self.stats.PE != None and self.percentStats.PE != None):
 				statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.PE)+"'><span>" + str(self.stats.PE) + "<br />(" + ("%.0f" % float(self.percentStats.PE)) + "%)</span></td>"
+				copyVals = copyVals + "PE " + str(self.stats.PE) + " "
 			elif (self.percentStats.PE != None):
 				statVals = statVals + "<td>?</td>"
 			else:
@@ -185,6 +194,7 @@ class resourceSpawn:
 			statHeads = statHeads + "<td class='header'><span>OQ</span></td>"
 			if (self.stats.OQ != None and self.percentStats.OQ != None):
 				statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.OQ)+"'><span>" + str(self.stats.OQ) + "<br />(" + ("%.0f" % float(self.percentStats.OQ)) + "%)</span></td>"
+				copyVals = copyVals + "OQ " + str(self.stats.OQ) + " "
 			elif (self.percentStats.OQ != None):
 				statVals = statVals + "<td>?</td>"
 			else:
@@ -194,6 +204,7 @@ class resourceSpawn:
 			statHeads = statHeads + "<td class='header'><span>SR</span></td>"
 			if (self.stats.SR != None and self.percentStats.SR != None):
 				statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.SR)+"'><span>" + str(self.stats.SR) + "<br />(" + ("%.0f" % float(self.percentStats.SR)) + "%)</span></td>"
+				copyVals = copyVals + "SR " + str(self.stats.SR) + " "
 			elif (self.percentStats.SR != None):
 				statVals = statVals + "<td>?</td>"
 			else:
@@ -203,6 +214,7 @@ class resourceSpawn:
 			statHeads = statHeads + "<td class='header'><span>UT</span></td>"
 			if (self.stats.UT != None and self.percentStats.UT != None):
 				statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.UT)+"'><span>" + str(self.stats.UT) + "<br />(" + ("%.0f" % float(self.percentStats.UT)) + "%)</span></td>"
+				copyVals = copyVals + "UT " + str(self.stats.UT)
 			elif (self.percentStats.UT != None):
 				statVals = statVals + "<td>?</td>"
 			else:
@@ -264,7 +276,7 @@ class resourceSpawn:
 			result += ''
 
 		if formatStyle != 2:
-			result += '  <table class="resAttr"><tr>' + statHeads + '</tr><tr>' + statVals + '</tr>'
+			result += '  <table class="resAttr" style="cursor: pointer;" onclick="addResourceCopy(\''+self.spawnName+'\')" data-resource="'+self.spawnName+'" data-stats="'+self.spawnName+' ('+self.resourceTypeName+') '+ copyVals +'"><tr>' + statHeads + '</tr><tr>' + statVals + '</tr>'
 			result += '  </table></div></div>'
 
 			if formatStyle == 0:
@@ -474,7 +486,7 @@ class resourceSpawn:
 			result += "<td><input type='text' id='units_" + str(self.spawnID) + "' size='10' maxlength='13' tag='" + str(self.units) + "' value='" + str(self.units) + "' onblur='updateFavoriteAmount(this, \"" + str(self.spawnID) + "\",this.value);' onkeyup='if($(this).attr(\"tag\")==this.value){$(this).css(\"color\",\"black\");}else{$(this).css(\"color\",\"red\");}' /></td>"
 		else:
 			result += "<td><span id='units_" + str(self.spawnID) + " tag='" + str(self.units) + "'>" + str(self.units) + "</span></td>"
-		
+
 		# resource despawn alert
 		if self.despawnAlert == 2:
 			despawnStyle = "background-image:url(/images/email16.png);background-repeat:no-repeat;background-position:0px 0px;"
