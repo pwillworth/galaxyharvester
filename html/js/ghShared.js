@@ -1221,6 +1221,8 @@ function addWaypointCopy() {
 	});
 }
 
+
+
 /*     Friend Functions    */
 
 function addFriend(uid) {
@@ -1988,4 +1990,17 @@ function setCookie(cName, value, expireDays) {
     exdate.setDate(exdate.getDate()+expireDays);
     document.cookie=cName + "=" + escape(value)+((expireDays==null) ? "" : ";expires="+exdate.toUTCString()) + ";path=/";
     document.cookie=cName + "=" + escape(value)+((expireDays==null) ? "" : ";expires="+exdate.toUTCString()) + ";path=/resourceType.py";
+}
+/* Resource Stat Copy */
+function addResourceCopy(resName) {
+    var copySource = $("[data-resource='"+resName+"']").data("stats");
+    var copyElement = document.createElement('input');
+    copyElement.setAttribute('type', 'text');
+    copyElement.setAttribute('value', copySource);
+    copyElement = document.body.appendChild(copyElement);
+    copyElement.select();
+    document.execCommand('copy');
+    document.body.removeChild(copyElement);
+		alert(resName + ' resource data copied to clipboard.');
+		this.focus()
 }

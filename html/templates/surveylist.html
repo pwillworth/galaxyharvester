@@ -11,6 +11,7 @@ var surveyTool = "gas";
 $(document).ready(function() {
     $("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
     $("#reportGalaxy").val($("#galaxySel").val());
+    $("#goreport").val("Send Report - " + $("#galaxySel option:selected").text());
     loadPlanetButtons($("#galaxySel option:selected").val());
     if ($("#galaxySel option:selected").attr("group") == "Inactive") {
         $("#quickAddMask").addClass("disabled");
