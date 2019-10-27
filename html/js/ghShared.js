@@ -1993,9 +1993,7 @@ function setCookie(cName, value, expireDays) {
 }
 /* Resource Stat Copy */
 function addResourceCopy(resName) {
-    var resName = resName;
-    //var resName = $(".resAttr").data("resource");
-		var copySource = $("[data-resource='"+resName+"']").data("stats");
+    var copySource = $("[data-resource='"+resName+"']").data("stats");
     var copyElement = document.createElement('input');
     copyElement.setAttribute('type', 'text');
     copyElement.setAttribute('value', copySource);
