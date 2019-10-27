@@ -396,6 +396,10 @@ input.ghButton[disabled] {
 	background-image: url(/images/spriteCircles16.png);
 	background-position: -10px -190px;
 }
+.Sullust {
+	background-image: url(/images/spriteCircles16.png);
+	background-position: -10px -478px;
+}
 .resourceStats td {
 	text-align: center;
 	height: 16px;
