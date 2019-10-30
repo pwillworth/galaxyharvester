@@ -38,9 +38,9 @@ def getPlanetList(conn, galaxy, available):
 	if not galaxy.isdigit():
 		galaxy = 0
 	if available > 0:
-		planetSQL = 'SELECT planetID, planetName FROM tPlanet WHERE planetID > 10 AND planetID NOT IN (SELECT planetID FROM tGalaxyPlanet WHERE galaxyID={0});'.format(galaxy)
+		planetSQL = 'SELECT planetID, planetName FROM tPlanet WHERE planetID > 10 AND planetID NOT IN (SELECT planetID FROM tGalaxyPlanet WHERE galaxyID={0}) ORDER BY planetName;'.format(galaxy)
 	else:
-		planetSQL = 'SELECT tGalaxyPlanet.planetID, planetName FROM tGalaxyPlanet INNER JOIN tPlanet ON tGalaxyPlanet.planetID=tPlanet.planetID WHERE tGalaxyPlanet.planetID > 10 AND tGalaxyPlanet.galaxyID={0};'.format(galaxy)
+		planetSQL = 'SELECT tGalaxyPlanet.planetID, planetName FROM tGalaxyPlanet INNER JOIN tPlanet ON tGalaxyPlanet.planetID=tPlanet.planetID WHERE tGalaxyPlanet.planetID > 10 AND tGalaxyPlanet.galaxyID={0} ORDER BY planetName;'.format(galaxy)
 	cursor = conn.cursor()
 	cursor.execute(planetSQL)
 	row = cursor.fetchone()

@@ -1,0 +1,9 @@
+Guest Feature: Copy Stats
+
+<p>Today we release the second guest feature submitted to the Galaxy Harvester open source code base.  . GitHub user, <a href="https://github.com/MrKraken">MrKraken</a> provided a new feature which allows you to copy a resources stats to your clipboard by clicking anywhere its stats are displayed.</p>
+
+<p>An update was also made to the survey droid report submit button to call out what galaxy you are about to submit for to hopefully cut down on some accidental wrong galaxy submissions.
+
+<p>Thanks MrKraken!</p>
+
+<p>-ioscode</p>
