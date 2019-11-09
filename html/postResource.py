@@ -298,12 +298,14 @@ def main():
 	else:
 		#  Some automated updaters post reptillian meat as 'reptilian', normalize
 		resType = resType.replace("reptilian", "reptillian")
-	if (spawnID == "" and galaxy == ""):
-		errstr = errstr + "Error: no galaxy selected. \r\n"
-	else:
-		# try to look up spawnID for editing and verifying
-		if (spawnID == ""):
+
+	if spawnID == "":
+		if galaxy == "":
+			errstr = errstr + "Error: no galaxy selected. \r\n"
+		else:
+			# try to look up spawnID for editing and verifying
 			spawnID = dbShared.getSpawnID(spawnName, galaxy)
+
 	if re.search('\W', spawnName):
 		errstr = errstr + "Error: spawn name contains illegal characters."
 	if (forceOp != "edit" and planet.isdigit() == False):
