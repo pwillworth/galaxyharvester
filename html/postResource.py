@@ -41,42 +41,47 @@ def n2n(inVal):
 
 
 def addResource(resName, galaxy, resType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER, userID):
-	# Add new resource
 	returnStr = ""
-	conn = dbShared.ghConn()
-	cursor = conn.cursor()
-	# clear invalid stat values incase type was switched in the UI
-	tempSQL = "SELECT CRmin, CRMax, CDmin, CDmax, DRmin, DRmax, FLmin, FLmax, HRmin, HRmax, MAmin, MAmax, PEmin, PEmax, OQmin, OQmax, SRmin, SRmax, UTmin, UTmax, ERmin, ERmax FROM tResourceType WHERE resourceType='" + resType + "';"
-	cursor.execute(tempSQL)
-	row = cursor.fetchone()
-	if row != None:
-		if row[0] == 0: CR = ''
-		if row[2] == 0: CD = ''
-		if row[4] == 0: DR = ''
-		if row[6] == 0: FL = ''
-		if row[8] == 0: HR = ''
-		if row[10] == 0: MA = ''
-		if row[12] == 0: PE = ''
-		if row[14] == 0: OQ = ''
-		if row[16] == 0: SR = ''
-		if row[18] == 0: UT = ''
-		if row[20] == 0: ER = ''
+	spawnID = dbShared.getSpawnID(resName,galaxy)
+	if spawnID > -1:
+		# Add new resource
+		conn = dbShared.ghConn()
+		cursor = conn.cursor()
+		# clear invalid stat values incase type was switched in the UI
+		tempSQL = "SELECT CRmin, CRMax, CDmin, CDmax, DRmin, DRmax, FLmin, FLmax, HRmin, HRmax, MAmin, MAmax, PEmin, PEmax, OQmin, OQmax, SRmin, SRmax, UTmin, UTmax, ERmin, ERmax FROM tResourceType WHERE resourceType='" + resType + "';"
+		cursor.execute(tempSQL)
+		row = cursor.fetchone()
+		if row != None:
+			if row[0] == 0: CR = ''
+			if row[2] == 0: CD = ''
+			if row[4] == 0: DR = ''
+			if row[6] == 0: FL = ''
+			if row[8] == 0: HR = ''
+			if row[10] == 0: MA = ''
+			if row[12] == 0: PE = ''
+			if row[14] == 0: OQ = ''
+			if row[16] == 0: SR = ''
+			if row[18] == 0: UT = ''
+			if row[20] == 0: ER = ''
 
 
-	tempSQL = "INSERT INTO tResources (spawnName, galaxy, entered, enteredBy, resourceType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER) VALUES ('" + resName + "'," + n2n(galaxy) + ",NOW(),'" + userID + "','" + resType + "'," + n2n(CR) + "," + n2n(CD) + "," + n2n(DR) + "," + n2n(FL) + "," + n2n(HR) + "," + n2n(MA) + "," + n2n(PE) + "," + n2n(OQ) + "," + n2n(SR) + "," + n2n(UT) + "," + n2n(ER) + ");"
-	cursor.execute(tempSQL)
-	result = cursor.rowcount
-	if (result < 1):
-		returnStr = "Error: resource not added."
+		tempSQL = "INSERT INTO tResources (spawnName, galaxy, entered, enteredBy, resourceType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER) VALUES ('" + resName + "'," + n2n(galaxy) + ",NOW(),'" + userID + "','" + resType + "'," + n2n(CR) + "," + n2n(CD) + "," + n2n(DR) + "," + n2n(FL) + "," + n2n(HR) + "," + n2n(MA) + "," + n2n(PE) + "," + n2n(OQ) + "," + n2n(SR) + "," + n2n(UT) + "," + n2n(ER) + ");"
+		cursor.execute(tempSQL)
+		result = cursor.rowcount
+		if (result < 1):
+			returnStr = "Error: resource not added."
+		else:
+			returnStr = "1st entry."
+		# add event for add if stats included
+		if OQ.isdigit() and OQ != '0':
+			spawnID = dbShared.getSpawnID(resName,galaxy)
+			dbShared.logEvent("INSERT INTO tResourceEvents (galaxy, spawnID, userID, eventTime, eventType) VALUES (" + str(galaxy) + "," + str(spawnID) + ",'" + userID + "',NOW(),'a');","a", userID, galaxy, spawnID)
+
+		cursor.close()
+		conn.close()
 	else:
-		returnStr = "1st entry."
-	# add event for add if stats included
-	if OQ.isdigit() and OQ != '0':
-		spawnID = dbShared.getSpawnID(resName,galaxy)
-		dbShared.logEvent("INSERT INTO tResourceEvents (galaxy, spawnID, userID, eventTime, eventType) VALUES (" + str(galaxy) + "," + str(spawnID) + ",'" + userID + "',NOW(),'a');","a", userID, galaxy, spawnID)
+		returnStr = "Error: A resource with that name already exists in that galaxy."
 
-	cursor.close()
-	conn.close()
 	return returnStr
 
 def addResPlanet(spawn, planet, spawnName, userID, galaxy):

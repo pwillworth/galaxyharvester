@@ -80,8 +80,10 @@ def updatePlanetSpawns(planetID, classID, resources, galaxyID, userID):
 			typerow = typecursor.fetchone()
 			if typerow != None:
 				status = postResource.addResource(spawn.spawnName, galaxyID, spawn.resourceType, str(spawn.stats.CR), str(spawn.stats.CD), str(spawn.stats.DR), str(spawn.stats.FL), str(spawn.stats.HR), str(spawn.stats.MA), str(spawn.stats.PE), str(spawn.stats.OQ), str(spawn.stats.SR), str(spawn.stats.UT), str(spawn.stats.ER), userID)
-				spawnID = dbShared.getSpawnID(spawn.spawnName, galaxyID)
-				status = postResource.addResPlanet(spawnID, planetID, spawn.spawnName, userID, galaxyID) + '   ' + status
+				if (status.find("Error:") == -1):
+					spawnID = dbShared.getSpawnID(spawn.spawnName, galaxyID)
+					status = postResource.addResPlanet(spawnID, planetID, spawn.spawnName, userID, galaxyID) + '   ' + status
+
 				if (status.find("Error:") > -1):
 					spawnErrorCount += 1
 					errors = errors + status + '\n<br />'
