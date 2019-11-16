@@ -97,7 +97,7 @@ if (cursor and errors == ''):
 		else:
 			responseData += '  <tr class="statRow"><td>' + row[0] + '</td><td>' + str(row[1]) + '</td><td><a href="' + ghShared.BASE_SCRIPT_URL + 'resource.py/' + str(row[8]) + '/' + row[2] + '" class="nameLink">' + row[2] + '</a></td><td><a href="' + ghShared.BASE_SCRIPT_URL + 'resourceType.py/' + row[5] + '" class="nameLink">' + row[6] + '</a></td><td>' + ghShared.getActionName(row[3]) + '</td><td>' + str(row[4]) + '</td>'
 			responseData += '  </tr>'
-		lastTime = row[0]
+		lastTime = row[1]
 		row = cursor.fetchone()
 
 	if formatType == 'json':
