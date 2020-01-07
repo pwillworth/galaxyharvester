@@ -43,7 +43,7 @@ def n2n(inVal):
 def addResource(resName, galaxy, resType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER, userID):
 	returnStr = ""
 	spawnID = dbShared.getSpawnID(resName,galaxy)
-	if spawnID > -1:
+	if spawnID < 0:
 		# Add new resource
 		conn = dbShared.ghConn()
 		cursor = conn.cursor()
