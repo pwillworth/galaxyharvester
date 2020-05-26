@@ -138,33 +138,47 @@ def addSchematicFromLua(conn, skillGroup, luaSchematic, luaObject, galaxy, userI
 		# write ingredient information to database
 		ingredients = []
 		try:
-			ingredients = schem["ingredientTitleNames"].strip('{').strip('}').split(", ")
-			ingTypes = schem["ingredientSlotType"].strip('{').strip('}').split(", ")
-			ingObjects = schem["resourceTypes"].strip('{').strip('}').split(", ")
-			resQuantities = schem["resourceQuantities"].strip('{').strip('}').split(", ")
-			resContribution = schem["contribution"].strip('{').strip('}').split(", ")
+			ingredients = schem["ingredientTitleNames"].strip('{').strip('}').split(",")
+			ingTypes = schem["ingredientSlotType"].strip('{').strip('}').split(",")
+			ingObjects = schem["resourceTypes"].strip('{').strip('}').split(",")
+			resQuantities = schem["resourceQuantities"].strip('{').strip('}').split(",")
+			resContribution = schem["contribution"].strip('{').strip('}').split(",")
+			# Git rid of whitespace that may be present after items
+			ingredients = map(str.strip, ingredients)
+			ingTypes = map(str.strip, ingTypes)
+			ingObjects = map(str.strip, ingObjects)
+			resQuantities = map(str.strip, resQuantities)
+			resContribution = map(str.strip, resContribution)
 		except KeyError:
 			result = '{0}  Could not determine ingredient data from schematic lua file.  Ingredients will need to entered manually or delete schematic, correct lua file, and try again.'.format(result)
 
-		for i in range(len(ingredients)):
-			if ingObjects[i][-5:] == ".iff\"":
-				ingObject = ingObjects[i].replace("shared_","")
-			else:
-				ingObject = ingObjects[i]
+		if len(ingredients) == len(ingObjects):
+			for i in range(len(ingredients)):
+				if ingObjects[i][-5:] == ".iff\"":
+					ingObject = ingObjects[i].replace("shared_","")
+				else:
+					ingObject = ingObjects[i]
 
-			sys.stderr.write(ingredients[i] + '\n')
-			ingSQL = "INSERT INTO tSchematicIngredients (schematicID, ingredientName, ingredientType, ingredientObject, ingredientQuantity, ingredientContribution) VALUES (%s, %s, %s, %s, %s, %s);"
-			cursor.execute(ingSQL, [schemID, ingredients[i], ingTypes[i], ingObject, resQuantities[i], resContribution[i]])
+				ingSQL = "INSERT INTO tSchematicIngredients (schematicID, ingredientName, ingredientType, ingredientObject, ingredientQuantity, ingredientContribution) VALUES (%s, %s, %s, %s, %s, %s);"
+				cursor.execute(ingSQL, [schemID, ingredients[i], ingTypes[i], ingObject, resQuantities[i], resContribution[i]])
+		else:
+			result = '{0}  Count of ingredientTitleNames and resourceTypes does not match.'.format(result)
 
 		# write experimental property/quality info to database
 		expProps = None
 		try:
-			expProps = schem["experimentalSubGroupTitles"].strip('{').strip('}').split(", ")
-			expGroups = schem["experimentalGroupTitles"].strip('{').strip('}').split(", ")
-			expCounts = schem["numberExperimentalProperties"].strip('{').strip('}').split(", ")
+			expProps = schem["experimentalSubGroupTitles"].strip('{').strip('}').split(",")
+			expGroups = schem["experimentalGroupTitles"].strip('{').strip('}').split(",")
+			expCounts = schem["numberExperimentalProperties"].strip('{').strip('}').split(",")
 			# res data
-			expResProps = schem["experimentalProperties"].strip('{').strip('}').split(", ")
-			expResWeights = schem["experimentalWeights"].strip('{').strip('}').split(", ")
+			expResProps = schem["experimentalProperties"].strip('{').strip('}').split(",")
+			expResWeights = schem["experimentalWeights"].strip('{').strip('}').split(",")
+			# git rid of whitespace that may be present after items
+			expProps = map(str.strip, expProps)
+			expGroups = map(str.strip, expGroups)
+			expCounts = map(str.strip, expCounts)
+			expResProps = map(str.strip, expResProps)
+			expResWeights = map(str.strip, expResWeights)
 		except KeyError:
 			result = '{0}  No schematic qualities data could be extracted from the object lua.  Qualities will need to be entered manually or delete schematic, correct lua file and try again.'.format(result)
 

@@ -190,11 +190,17 @@ def scrapeSchem(f):
 		cursor.execute(schemSQL)
 		conn.commit()
 		# write ingredient information to database
-		ingredients = schem["ingredientTitleNames"].strip('{').strip('}').split(", ")
-		ingTypes = schem["ingredientSlotType"].strip('{').strip('}').split(", ")
-		ingObjects = schem["resourceTypes"].strip('{').strip('}').split(", ")
-		resQuantities = schem["resourceQuantities"].strip('{').strip('}').split(", ")
-		resContribution = schem["contribution"].strip('{').strip('}').split(", ")
+		ingredients = schem["ingredientTitleNames"].strip('{').strip('}').split(",")
+		ingTypes = schem["ingredientSlotType"].strip('{').strip('}').split(",")
+		ingObjects = schem["resourceTypes"].strip('{').strip('}').split(",")
+		resQuantities = schem["resourceQuantities"].strip('{').strip('}').split(",")
+		resContribution = schem["contribution"].strip('{').strip('}').split(",")
+		# Git rid of whitespace that may be present after items
+		ingredients = map(str.strip, ingredients)
+		ingTypes = map(str.strip, ingTypes)
+		ingObjects = map(str.strip, ingObjects)
+		resQuantities = map(str.strip, resQuantities)
+		resContribution = map(str.strip, resContribution)
 		for i in range(len(ingredients)):
 			# print str(len(ingObjects)) + ": " + str(ingObjects)
 			if ingObjects[i][-5:] == ".iff\"":
@@ -207,12 +213,18 @@ def scrapeSchem(f):
 		# write experimental property/quality info to database
 		expProps = None
 		try:
-			expProps = schem["experimentalSubGroupTitles"].strip('{').strip('}').split(", ")
-			expGroups = schem["experimentalGroupTitles"].strip('{').strip('}').split(", ")
-			expCounts = schem["numberExperimentalProperties"].strip('{').strip('}').split(", ")
+			expProps = schem["experimentalSubGroupTitles"].strip('{').strip('}').split(",")
+			expGroups = schem["experimentalGroupTitles"].strip('{').strip('}').split(",")
+			expCounts = schem["numberExperimentalProperties"].strip('{').strip('}').split(",")
 			# res data
-			expResProps = schem["experimentalProperties"].strip('{').strip('}').split(", ")
-			expResWeights = schem["experimentalWeights"].strip('{').strip('}').split(", ")
+			expResProps = schem["experimentalProperties"].strip('{').strip('}').split(",")
+			expResWeights = schem["experimentalWeights"].strip('{').strip('}').split(",")
+			# git rid of whitespace that may be present after items
+			expProps = map(str.strip, expProps)
+			expGroups = map(str.strip, expGroups)
+			expCounts = map(str.strip, expCounts)
+			expResProps = map(str.strip, expResProps)
+			expResWeights = map(str.strip, expResWeights)
 		except KeyError:
 			print "No schematic qualities data available for: " + schemID
 
