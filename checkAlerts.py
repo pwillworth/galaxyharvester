@@ -181,7 +181,7 @@ def checkDespawnAlerts(conn, spawnID, spawnName, galaxyName, unavailable, galaxy
 
 	cursor.close()
 
-def checkServerBest(conn, spawnID, spawnName, galaxy):
+def checkServerBest(conn, spawnID, spawnName, galaxy, galaxyName):
 	result = serverBest.checkSpawn(spawnID, 'history')
 	for x in range(len(result[1])):
 		schematicStr = ''
@@ -198,7 +198,7 @@ def checkServerBest(conn, spawnID, spawnName, galaxy):
 		row = cursor.fetchone()
 		# Add alert for each user watching for profession server bests hit by this spawn
 		while row != None:
-			addAlert(row[0], row[1], bestStr, ''.join(('http://galaxyharvester.net/resource.py/', str(galaxy), '/', spawnName)), ''.join((row[2], ' Server Best Alert')))
+			addAlert(row[0], row[1], bestStr, ''.join(('http://galaxyharvester.net/resource.py/', str(galaxy), '/', spawnName)), ''.join((row[2], ' Server best alert for ', galaxyName)))
 			row = cursor.fetchone()
 
 		cursor.close()
@@ -209,7 +209,7 @@ def checkServerBest(conn, spawnID, spawnName, galaxy):
 		row = cursor.fetchone()
 		# Add alert for each user watching for schematic server bests hit by this spawn
 		while row != None:
-			addAlert(row[0], row[1], '\n'.join(result[1][x][row[2]]), ''.join(('http://galaxyharvester.net/resource.py/', str(galaxy), '/', spawnName)), ''.join((row[3], ' Server Best Alert')))
+			addAlert(row[0], row[1], '\n'.join(result[1][x][row[2]]), ''.join(('http://galaxyharvester.net/resource.py/', str(galaxy), '/', spawnName)), ''.join((row[3], ' Server best alert for ', galaxyName)))
 			row = cursor.fetchone()
 
 		cursor.close()
@@ -340,7 +340,7 @@ def main():
 			stats = [row[4],row[5],row[6],row[7],row[8],row[9],row[10],row[11],row[12],row[13],row[14]]
 			galaxyName = row[15]
 			checkSpawnAlerts(conn, spawnName, alertValue, galaxy, enteredBy, stats, galaxyName)
-			checkServerBest(conn, row[17], spawnName, galaxy)
+			checkServerBest(conn, row[17], spawnName, galaxy, galaxyName)
 			row = cursor.fetchone()
 
 		cursor.close()
