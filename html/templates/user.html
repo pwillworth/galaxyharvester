@@ -199,7 +199,7 @@ function checkConfirmText(confirmationText) {
 	      <div style="float:left;height:140px;"><img class="largeAvatar" src="/images/users/{{ userPictureName }}" /></div>
 	      <div style="float:left;height:128px;padding:4px;"><div style="font-size: 14px;font-weight:bold;">{{ userTitle }}</div>
 	      <div>{{ joinedStr }}</div>
-	      <br /><h4>In Game Info</h4>{{ convertGI }}
+	      <br /><h4>In Game Info</h4>{{ inGameInfo }}
 				{% if sharedInventory > 0 %}
 			  <h4>Shared Inventory Link:</h4><a href="{{ BASE_SCRIPT_URL }}user.py/{{ uid }}/inventory?{{ linkappend }}">http://galaxyharvester.net/user.py/{{ uid }}/inventory</a>
 			  {% endif %}
