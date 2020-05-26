@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2019 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -35,7 +35,7 @@ from jinja2 import Environment, FileSystemLoader
 def getResourceHistory(conn, spawnID):
 	# generate table of resource event history
 	resHistory = ''
-	sqlStr = 'SELECT eventTime, userID, eventType, planetName, eventDetail FROM tResourceEvents INNER JOIN tResources ON tResourceEvents.spawnID = tResources.spawnID LEFT JOIN tPlanet ON tResourceEvents.planetID = tPlanet.planetID WHERE tResources.spawnID="' + str(spawnID) + '" ORDER BY eventTime DESC;'
+	sqlStr = 'SELECT eventTime, userID, eventType, planetName, eventDetail, galaxyName FROM tResourceEvents INNER JOIN tResources ON tResourceEvents.spawnID = tResources.spawnID LEFT JOIN tPlanet ON tResourceEvents.planetID = tPlanet.planetID LEFT JOIN tGalaxy ON tResourceEvents.galaxy = tGalaxy.galaxyID WHERE tResources.spawnID="' + str(spawnID) + '" ORDER BY eventTime DESC;'
 	try:
 		cursor = conn.cursor()
 	except Exception:
@@ -45,14 +45,14 @@ def getResourceHistory(conn, spawnID):
 		cursor.execute(sqlStr)
 		row = cursor.fetchone()
 		resHistory += '<table class="userData">'
-		resHistory += '<thead><tr class="tableHead"><td>Time</td><td>User</td><td>Action</td><td width="50">Planet</td><td>Details</td></th></thead>'
+		resHistory += '<thead><tr class="tableHead"><td>Time</td><td>User</td><td>Action</td><td width="50">Planet</td><td>Details</td><td>Galaxy</td></th></thead>'
 		while (row != None):
 			if row[4] == None:
 				details = '-'
 			else:
 				details = row[4]
 
-			resHistory += '  <tr class="statRow"><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td>'.format(str(row[0]), row[1], ghShared.getActionName(row[2]), str(row[3]), details)
+			resHistory += '  <tr class="statRow"><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td>'.format(str(row[0]), row[1], ghShared.getActionName(row[2]), str(row[3]), details, row[5])
 			resHistory += '  </tr>'
 			row = cursor.fetchone()
 		resHistory += '  </table>'
