@@ -77,6 +77,7 @@ function refreshRecipes() {
     $("#busyImgRecipeList").show();
     $("#recipeList").load(BASE_SCRIPT_URL + "getRecipeList.py?{{ linkappend }}",{
         listFormat: "table",
+        profession: $("#profSelRecipeFilter").val(),
         galaxy: $("#galaxySel").val()
         },
         function() {
@@ -277,6 +278,9 @@ function slotHoverCheck(e) {
 	  <div id="rightMainContent" class="ghCol">
 	    <div id="recipeControls" class="ghWidgetBox">
         <h2>Home</h2>{{ recipeHTML }}
+        <div style="float:left;">Show Only Recipes For:<select name="profSelRecipeFilter" id="profSelRecipeFilter" onchange="refreshRecipes();"><option value=0>Any Profession</option>
+            {{ professionList }}
+        </select></div>
         <div style="float:right;">
           <button type=button value="New Recipe" class="ghButton" onclick="addRecipe();">New Recipe</button>
         </div>

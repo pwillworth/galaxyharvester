@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -122,7 +122,7 @@ def getSuggestedRecipes(conn, user, galaxy, prof):
 		spawns = inventory[resType].split()
 		schems = []
 		# Select schematics where ingredient in type or groups of type
-		sqlStr2 = 'SELECT tSchematic.schematicID, ingredientObject, Sum(ingredientContribution), schematicName, (SELECT imageName FROM tSchematicImages tsi WHERE tsi.schematicID=tSchematic.schematicID AND tsi.imageType=1) AS schemImage FROM tSchematicIngredients INNER JOIN tSchematic ON tSchematicIngredients.schematicID = tSchematic.schematicID INNER JOIN tSkillGroup ON tSchematic.skillGroup = tSkillGroup.skillGroup WHERE profID=' + prof + ' AND ingredientObject IN (' + str(resType) + ') GROUP BY tSchematic.schematicID, ingredientObject ORDER BY tSchematic.schematicID, ingredientQuantity DESC, ingredientName;'
+		sqlStr2 = 'SELECT tSchematic.schematicID, ingredientObject, Sum(ingredientContribution), schematicName, (SELECT imageName FROM tSchematicImages tsi WHERE tsi.schematicID=tSchematic.schematicID AND tsi.imageType=1) AS schemImage FROM tSchematicIngredients INNER JOIN tSchematic ON tSchematicIngredients.schematicID = tSchematic.schematicID INNER JOIN tSkillGroup ON tSchematic.skillGroup = tSkillGroup.skillGroup WHERE profID=' + prof + ' AND ingredientObject IN (' + str(resType) + ') GROUP BY tSchematic.schematicID, ingredientObject, ingredientQuantity, ingredientName ORDER BY tSchematic.schematicID, ingredientQuantity DESC, ingredientName;'
 		ingCursor = conn.cursor()
 		ingCursor.execute(sqlStr2)
 		ingRow = ingCursor.fetchone()
@@ -185,6 +185,7 @@ def main():
 	# Main program
 	errstr = ''
 	tmpStr = ''
+	profFilter = ''
 
 	if not galaxy.isdigit():
 		errstr = 'Error: You must provide a valid galaxy id.'
@@ -205,7 +206,10 @@ def main():
 			else:
 				tmpStr = '<tr><td>No suggestions at this time.  Try adding more to your inventory.</td></tr>'
 		else:
-			sqlStr = 'SELECT recipeID, userID, schematicID, recipeName, (SELECT imageName FROM tSchematicImages img WHERE img.schematicID=tRecipe.schematicID AND img.imageType=1) AS schemImage FROM tRecipe WHERE userID="' + currentUser + '" AND (galaxy=' + str(galaxy) + ' OR galaxy IS NULL) ORDER BY recipeName;'
+			if profession.isdigit() and profession != '0':
+				profFilter = ' AND profID={0}'.format(profession)
+			sqlStr = 'SELECT recipeID, userID, tRecipe.schematicID, recipeName, (SELECT imageName FROM tSchematicImages img WHERE img.schematicID=tRecipe.schematicID AND img.imageType=1) AS schemImage FROM tRecipe INNER JOIN tSchematic ON tRecipe.schematicID = tSchematic.schematicID LEFT JOIN tSkillGroup ON tSchematic.skillGroup = tSkillGroup.skillGroup WHERE userID="' + currentUser + '" AND (tRecipe.galaxy=' + str(galaxy) + ' OR tRecipe.galaxy IS NULL)' + profFilter + ' ORDER BY recipeName;'
+			sys.stderr.write(sqlStr)
 			cursor.execute(sqlStr)
 			row = cursor.fetchone()
 
