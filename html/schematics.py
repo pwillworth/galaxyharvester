@@ -284,7 +284,7 @@ def main():
 
 					# Get list of schematics this one can be used in
 					useCursor = conn.cursor()
-					useCursor.execute('SELECT tSchematicIngredients.schematicID, s2.schematicName FROM tSchematicIngredients INNER JOIN tSchematic ON tSchematicIngredients.ingredientObject = tSchematic.objectPath OR tSchematicIngredients.ingredientObject = tSchematic.objectGroup INNER JOIN tSchematic s2 ON tSchematicIngredients.schematicID=s2.schematicID WHERE tSchematic.schematicID = "' + schematicID + '" GROUP BY tSchematicIngredients.schematicID;')
+					useCursor.execute('SELECT tSchematicIngredients.schematicID, s2.schematicName FROM tSchematicIngredients INNER JOIN tSchematic ON tSchematicIngredients.ingredientObject = tSchematic.objectPath OR tSchematicIngredients.ingredientObject = tSchematic.objectGroup INNER JOIN tSchematic s2 ON tSchematicIngredients.schematicID=s2.schematicID WHERE tSchematic.schematicID = "' + schematicID + '" AND s2.galaxy IN (0, ' + str(galaxy) + ') GROUP BY tSchematicIngredients.schematicID;')
 					useRow = useCursor.fetchone()
 					while (useRow != None):
 						s.schematicsUsedIn.append([useRow[0], useRow[1]])
