@@ -56,8 +56,8 @@ passp = form.getfirst('passu')
 passc = form.getfirst('passc')
 persist = form.getfirst('persist')
 push_key = form.getfirst('push_key')
-#sessions persist up to 90 days
-duration = 7776000
+#sessions persist up to 180 days
+duration = 15552000
 #escape input to prevent sql injection
 loginp = dbShared.dbInsertSafe(loginp)
 sid = dbShared.dbInsertSafe(sid)
@@ -108,7 +108,7 @@ if useCookies:
 	cookies['loginAttempt'] = result
 	if result == "success":
 		# session id cookie expires when browser closes unless we are told to persist
-		expiration = datetime.datetime.utcnow() + datetime.timedelta(days=30)
+		expiration = datetime.datetime.utcnow() + datetime.timedelta(days=180)
 		cookies['gh_sid'] = sid
 		if persist != None:
 			cookies['gh_sid']['expires'] = expiration.strftime("%a, %d-%b-%Y %H:%M:%S GMT")
