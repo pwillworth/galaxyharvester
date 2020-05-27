@@ -278,7 +278,8 @@ class resourceSpawn:
 		if formatStyle != 2:
 			result += '  <table class="resAttr" style="cursor: pointer;" onclick="addResourceCopy(\''+self.spawnName+'\')" data-resource="'+self.spawnName+'" data-stats="'+self.spawnName+' ('+self.resourceTypeName+') '+ copyVals +'"><tr>' + statHeads + '</tr><tr>' + statVals + '</tr>'
 			result += '  </table></div></div>'
-
+			if self.units > 0:
+				result += '<div class="compareInfo" style="background-image: url(\'/images/inventory32.png\');height: 32px;min-width: 32px;"><span style="line-height:40px;">'+ghShared.getNumberAbbr(self.units)+'</span></div>'
 			if formatStyle == 0:
 				# resource update information
 
@@ -302,7 +303,6 @@ class resourceSpawn:
 				result += '  </div></div>'
 			else:
 				result += '    <div style="width: 248px;clear:both;margin-left:64px;">'+self.getPlanetBar()+'</div>'
-
 		else:
 			if (self.unavailable == None and currentUser != '' and reputation >= ghShared.MIN_REP_VALS['VERIFY_RESOURCE'] and ghShared.timeAgo(self.verified).find('minute') == -1):
 				result += '  <div id="cont_verify_'+self.spawnName+'" style="width:100px;float:right;"><input type="checkbox" id="chkVerify_' + self.spawnName + '" />Verify</div>'

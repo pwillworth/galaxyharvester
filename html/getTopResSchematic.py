@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2019 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -109,7 +109,9 @@ def getResourceData(conn, resSQL, logged_state, galaxyState, resourceFormat, rep
 					if row[36] != None:
 						s.favorite = 1
 					if row[37] != None:
-						s.overallScore = row[37]*1000
+						s.units = row[37]
+					if row[38] != None:
+						s.overallScore = row[38]*1000
 					s.planets = dbShared.getSpawnPlanets(conn, row[0], True, row[2])
 
 					resourceHTML += '  <tr><td>'
@@ -197,10 +199,10 @@ else:
 	galaxyState = dbShared.galaxyState(galaxy)
 
 if logged_state == 1:
-	joinStr = joinStr + ' LEFT JOIN (SELECT itemID, favGroup FROM tFavorites WHERE userID="' + currentUser + '" AND favType=1) favs ON tResources.spawnID = favs.itemID'
-	favCols = ', favGroup'
+	joinStr = joinStr + ' LEFT JOIN (SELECT itemID, favGroup, units FROM tFavorites WHERE userID="' + currentUser + '" AND favType=1) favs ON tResources.spawnID = favs.itemID'
+	favCols = ', favGroup, units'
 else:
-	favCols = ', NULL'
+	favCols = ', NULL, NULL'
 
 print 'Content-type: text/html\n'
 if (errstr != ''):

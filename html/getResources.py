@@ -119,8 +119,10 @@ def getResourceData(conn, resSQL, userReputation, activeUser, formatType):
 			if row[40] != None:
 				s.favorite = 1
 				s.despawnAlert = row[41]
+			if row[42] != None:
+				s.units = row[42]
 			if sort == "quality":
-				s.overallScore = row[42]
+				s.overallScore = row[43]
 			s.planets = dbShared.getSpawnPlanets(conn, row[0], False, row[2])
 
 			if formatType == 'json':
@@ -276,13 +278,13 @@ if logged_state == 1:
 	#wpCriteria = 'shareLevel=256 OR owner="' + currentUser + '" OR (shareLevel=64 AND owner IN (SELECT f1.friendID FROM tUserFriends f1 INNER JOIN tUserFriends f2 ON f1.userID=f2.friendID WHERE f1.userID="' + currentUser + '")) OR waypointID IN (SELECT uw.waypointID FROM tUserWaypoints uw WHERE unlocked IS NOT NULL AND uw.userID="' + currentUser + '")'
 	wpCriteria = 'shareLevel=256'
 	if favorite == "on":
-		joinStr = joinStr + " INNER JOIN (SELECT itemID, favGroup, despawnAlert FROM tFavorites WHERE userID='" + currentUser + "' AND favType=1) favs ON tResources.spawnID = favs.itemID"
+		joinStr = joinStr + " INNER JOIN (SELECT itemID, favGroup, despawnAlert, units FROM tFavorites WHERE userID='" + currentUser + "' AND favType=1) favs ON tResources.spawnID = favs.itemID"
 	else:
-		joinStr = joinStr + ' LEFT JOIN (SELECT itemID, favGroup, despawnAlert FROM tFavorites WHERE userID="' + currentUser + '" AND favType=1) favs ON tResources.spawnID = favs.itemID'
-	favCols = ', favGroup, despawnAlert'
+		joinStr = joinStr + ' LEFT JOIN (SELECT itemID, favGroup, despawnAlert, units FROM tFavorites WHERE userID="' + currentUser + '" AND favType=1) favs ON tResources.spawnID = favs.itemID'
+	favCols = ', favGroup, despawnAlert, units'
 else:
 	wpCriteria = 'shareLevel=256'
-	favCols = ', NULL, NULL'
+	favCols = ', NULL, NULL, NULL'
 
 if (userBy != '' and userAction != ''):
 	galaxyCriteriaStr += (" AND {0}By='{1}'").format(userAction, userBy)

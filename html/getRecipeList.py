@@ -209,7 +209,6 @@ def main():
 			if profession.isdigit() and profession != '0':
 				profFilter = ' AND profID={0}'.format(profession)
 			sqlStr = 'SELECT recipeID, userID, tRecipe.schematicID, recipeName, (SELECT imageName FROM tSchematicImages img WHERE img.schematicID=tRecipe.schematicID AND img.imageType=1) AS schemImage FROM tRecipe INNER JOIN tSchematic ON tRecipe.schematicID = tSchematic.schematicID LEFT JOIN tSkillGroup ON tSchematic.skillGroup = tSkillGroup.skillGroup WHERE userID="' + currentUser + '" AND (tRecipe.galaxy=' + str(galaxy) + ' OR tRecipe.galaxy IS NULL)' + profFilter + ' ORDER BY recipeName;'
-			sys.stderr.write(sqlStr)
 			cursor.execute(sqlStr)
 			row = cursor.fetchone()
 
