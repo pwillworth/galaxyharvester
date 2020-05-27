@@ -1,0 +1,16 @@
+Fixes and Cleanup
+
+<p>Today we have a laundry list of fixes and tweaks being published.  Please review the following list for details, and enjoy.</p>
+
+<ul>
+  <li>Fix issue when adding new custom schematic via lua file upload causing error.</li>
+  <li>Display inventory units qty when available on schematic and find resources compare screens.</li>
+  <li>Fix issue with component schematic display listing custom schematics for other galaxies as schematics it can be used in.</li>
+  <li>Fix session and cookie management so your login is remembered for longer (6 months).</li>
+  <li>Add galaxy name to alerts so it is more clear what galaxy an alert is for if you play on multiple servers.</li>
+  <li>Fix display of in-game info on profile so multi line shows up right.</li>
+  <li>Added galaxy name to history list display on resource page to make it more obvious what resource galaxy is in.</li>
+  <li>Added ability to filter your recipe list by profession.</li>
+</ul>
+
+<p>-ioscode</p>
