@@ -658,7 +658,7 @@ def renderHtmlFooter():
     ################################
     print "</div>"
     print '<div class="footer">'
-    print '<a href="/" title="Galaxy Harvester home page">Home</a> | <a href="{{ BASE_SCRIPT_URL }}help.py" title="Get more information about the Galaxy Harvester project and contributors">About</a> | <a href="http://www.ioscode.net:8000/cgi-bin/code" title="Open Source Code for Galaxy Harvester Application">Source</a> | <a href="#" onclick="contactMessage();">Contact</a> | <a href="/help.py" title="Get help using this site">Help</a> | <a href="/feedback.py" title="Submit and rate on suggestions for the site.">Suggestions</a>'
+    print '<a href="/" title="Galaxy Harvester home page">Home</a> | <a href="{{ BASE_SCRIPT_URL }}help.py" title="Get more information about the Galaxy Harvester project and contributors">About</a> | <a href="https://github.com/pwillworth/galaxyharvester" title="Open Source Code for Galaxy Harvester Application">Source</a> | <a href="#" onclick="contactMessage();">Contact</a> | <a href="/help.py" title="Get help using this site">Help</a> | <a href="/feedback.py" title="Submit and rate on suggestions for the site.">Suggestions</a>'
     print '<p style="padding: 4px;font-weight:normal;">Galaxy Harvester is a tool for tracking resources spawning in galaxies of the MMO game Star Wars Galaxies Emulator.  Serving the SWGEmu Community Since 2010.</p>'
     print '</div>'
     ################################
