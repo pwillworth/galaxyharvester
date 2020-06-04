@@ -98,10 +98,10 @@ def sendAlertMail(conn, userID, msgText, link, alertID, alertTitle):
 		email = row[0]
 		if (email.find("@") > -1):
 			# send message
-			message = Message(From="\"Galaxy Harvester Alerts\" <alert@galaxyharvester.net>",To=email)
+			message = Message(From="".join(("\"Galaxy Harvester Alerts\" <", mailInfo.ALERTMAIL_USER, "@galaxyharvester.net>")),To=email)
 			message.Subject = "".join(("Galaxy Harvester ", alertTitle))
 			message.Body = "".join(("Hello ", userID, ",\n\n", msgText, "\n\n", link, "\n\n You can manage your alerts at http://galaxyharvester.net/myAlerts.py\n"))
-			message.Html = "".join(("<div><img src='http://galaxyharvester.net/images/ghLogoLarge.png'/></div><p>Hello ", userID, ",</p><br/><p>", msgText.replace("\n", "<br/>"), "</p><p><a style='text-decoration:none;' href='", link, "'><div style='width:170px;font-size:18px;font-weight:600;color:#feffa1;background-color:#003344;padding:8px;margin:4px;border:1px solid black;'>View in Galaxy Harvester</div></a><br/>or copy and paste link: ", link, "</p><br/><p>You can manage your alerts at <a href='http://galaxyharvester.net/myAlerts.py'>http://galaxyharvester.net/myAlerts.py</a></p><p>-Galaxy Harvester Administrator</p>"))
+			message.Html = "".join(("<div><img src='http://galaxyharvester.net/images/ghLogoLarge.png'/></div><p>Hello ", userID, ",</p><br/><p>", msgText.replace("\n", "<br/>"), "</p><p><a style='text-decoration:none;' href='", link, "'><div style='width:170px;font-size:18px;font-weight:600;color:#feffa1;background-color:#003344;padding:8px;margin:4px;border:1px solid black;'>View in Galaxy Harvester</div></a><br/>or copy and paste link: ", link, "</p><br/><p>You can manage your alerts at <a href='http://galaxyharvester.net/myAlerts.py'>http://galaxyharvester.net/myAlerts.py</a></p><p>-Galaxy Harvester Bot</p>"))
 			mailer = Mailer(mailInfo.MAIL_HOST)
 			mailer.login(mailInfo.ALERTMAIL_USER, mailInfo.MAIL_PASS)
 			try:
@@ -137,7 +137,7 @@ def checkSpawnAlerts(conn, spawnName, alertValue, galaxy, enteredBy, stats, gala
 			# Check resource to see if it hits min quality
 			qualityTotal = 0.0
 			for x in range(11):
-				if (row[x+2]) > 0:
+				if row[x+2] > 0 and stats[x] != None:
 					thisValue = 1.0*stats[x]*(row[x+2]/100.0)
 					qualityTotal = qualityTotal + thisValue
 					statStr = statStr + statNames[x] + " " + str(row[x+2]) + "% "
