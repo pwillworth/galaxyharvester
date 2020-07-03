@@ -5,12 +5,9 @@
 <meta name="description" content="Tool for tracking resources spawning in galaxies of the MMO game Star Wars Galaxies that are emulating original game functionality." />
 <meta name="keywords" content="SWGEmu, crafting, resources, star wars galaxies, harvester" />
 <link rel="SHORTCUT ICON" href="favicon.ico"/>
-<link rel="stylesheet" href="/style/ghCore.css" type="text/css" />
-<link rel="stylesheet" href="/style/themes/{{ uiTheme }}.css" type="text/css" />
-<script type="text/javascript" src="/js/ghShared.js"></script>
-<script type="text/javascript" src="/js/jquery.min.js"></script>
-<script type="text/javascript" src="/js/jquery-ui-1.8.20.custom.min.js"></script>
-<script type="text/javascript" src="/js/Colors.js"></script>
+{{ blocks.commonResources(uiTheme, enableCAPTCHA) }}
+<script src="/js/jquery-ui-1.8.20.custom.min.js"></script>
+<script src="/js/Colors.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
@@ -359,7 +356,7 @@ function slotHoverCheck(e) {
 {% if loggedin == 1 %}
 	{{ blocks.recipeForm(professionList) }}
 {% endif %}
-{{ blocks.joinForm(loggedin, ['?src_url=recipe.py&', linkappend]|join, url) }}
+{{ blocks.joinForm(loggedin, ['?src_url=recipe.py&', linkappend]|join, url, enableCAPTCHA, siteidCAPTCHA) }}
 <div id="tooltip"></div>
 <div id="mask"></div>
 </body></html>

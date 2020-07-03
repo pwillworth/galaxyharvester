@@ -1,13 +1,8 @@
 {% import 'blocks.html' as blocks %}
 <!DOCTYPE html>
 <html lang="en"><head><title>Waypoint Maps - Galaxy Harvester</title>
-<link rel="stylesheet" href="/style/ghCore.css" type="text/css" />
-<link rel="stylesheet" href="/style/themes/{{ uiTheme }}.css" type="text/css" />
-<link rel="stylesheet" href="/style/autocomplete.css" type="text/css" />
-<script type="text/javascript" src="/js/jquery.min.js"></script>
-<script type="text/javascript" src="/js/jquery.autocomplete-min.js"></script>
-<script type="text/javascript" src="/js/Colors.js"></script>
-<script src="/js/ghShared.js" type="text/javascript"></script>
+{{ blocks.commonResources(uiTheme, enableCAPTCHA) }}
+<script src="/js/Colors.js"></script>
 <script type="text/javascript">
 var mapPlanet = "Corellia";
 $(document).ready(function() {
@@ -187,7 +182,7 @@ function loadPlanetButtons(galaxy) {
   </div>
 </div>
 {{ blocks.pageFooter() }}
-{{ blocks.joinForm(loggedin, ['?src_url=waypointMaps.py&', linkappend]|join, url) }}
+{{ blocks.joinForm(loggedin, ['?src_url=waypointMaps.py&', linkappend]|join, url, enableCAPTCHA, siteidCAPTCHA) }}
 {{ blocks.waypointForm(loggedin) }}
 <div id="tooltip"></div>
 <div id="mask"> </div>

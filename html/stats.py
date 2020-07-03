@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2019 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -123,4 +123,4 @@ env.globals['BASE_SCRIPT_URL'] = ghShared.BASE_SCRIPT_URL
 env.globals['MOBILE_PLATFORM'] = ghShared.getMobilePlatform(os.environ['HTTP_USER_AGENT'])
 template = env.get_template('stats.html')
 print template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), sid=sid,
- chart1URL=chart1URL, chart2URL=chart2URL, chart3URL=chart3URL, chart4URL=chart4URL, chart5URL=chart5URL, chart6URL=chart6URL)
+ chart1URL=chart1URL, chart2URL=chart2URL, chart3URL=chart3URL, chart4URL=chart4URL, chart5URL=chart5URL, chart6URL=chart6URL, enableCAPTCHA=ghShared.RECAPTCHA_ENABLED, siteidCAPTCHA=ghShared.RECAPTCHA_SITEID)

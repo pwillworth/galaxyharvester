@@ -1,12 +1,10 @@
 {% import 'blocks.html' as blocks %}
-<link rel="stylesheet" href="/style/ghCore.css" />
-<link rel="stylesheet" href="/style/themes/{{ uiTheme }}.css" type="text/css" />
-<script type="text/javascript" src="/js/jquery.min.js"></script>
+{{ blocks.commonResources(uiTheme, enableCAPTCHA) }}
 <link rel="shortcut icon" href="favicon.ico" />
 <link rel="alternate" type="application/rss+xml" title="Galaxy Harvester News Feed" href="http://feeds.feedburner.com/GalaxyHarvesterNews" />
 
 {{ blocks.pageTracker() }}
-{{ blocks.joinForm(loggedin, ['?src_url=/blog.py&', linkappend]|join, url) }}
+{{ blocks.joinForm(loggedin, ['?src_url=/blog.py&', linkappend]|join, url, enableCAPTCHA, siteidCAPTCHA) }}
 </head>
 <body>
 {{ blocks.headerSection(loggedin, currentUser, loginResult, linkappend, url, imgNum, galaxyList, pictureName) }}

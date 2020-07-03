@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com> & Chet Bortz <thrusterhead@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com> & Chet Bortz <thrusterhead@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -186,4 +186,4 @@ env.globals['MOBILE_PLATFORM'] = ghShared.getMobilePlatform(os.environ['HTTP_USE
 template = env.get_template('creaturelist.html')
 
 print 'Content-type: text/html\n'
-print template.render(validResource=validResource, typeID=typeID, containerType=containerType, typeTitle=typeTitle, showType=showType, breadcrumbHTML=breadcrumbHTML, uiTheme=uiTheme, galaxy=galaxy, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList())
+print template.render(validResource=validResource, typeID=typeID, containerType=containerType, typeTitle=typeTitle, showType=showType, breadcrumbHTML=breadcrumbHTML, uiTheme=uiTheme, galaxy=galaxy, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), enableCAPTCHA=ghShared.RECAPTCHA_ENABLED, siteidCAPTCHA=ghShared.RECAPTCHA_SITEID)

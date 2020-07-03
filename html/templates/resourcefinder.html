@@ -1,13 +1,8 @@
 {% import 'blocks.html' as blocks %}
 <!DOCTYPE html>
 <html lang="en"><head><title>Resource Finder - Galaxy Harvester</title>
-<link rel="stylesheet" href="/style/ghCore.css" type="text/css" />
-<link rel="stylesheet" href="/style/themes/{{ uiTheme }}.css" type="text/css" />
-<link rel="stylesheet" href="/style/autocomplete.css" type="text/css" />
 <link rel="alternate" type="application/rss+xml" title="Galaxy Harvester Resource Adds" href="http://feeds.feedburner.com/GalaxyHarvesterResourceActivity" />
-<script type="text/javascript" src="/js/ghShared.js"></script>
-<script type="text/javascript" src="/js/jquery.min.js"></script>
-<script type="text/javascript" src="/js/jquery.autocomplete-min.js"></script>
+{{ blocks.commonResources(uiTheme, enableCAPTCHA) }}
 <script type="text/javascript">
 var RES_STATS = new Array('ER','CR','CD','DR','FL','HR','MA','PE','OQ','SR','UT');
 $(document).ready(function() {
@@ -209,6 +204,6 @@ function setQualityControls() {
 </div>
 {{ blocks.pageFooter() }}
 {{ blocks.resourceForm() }}
-{{ blocks.joinForm(loggedin, ['?src_url=resourceFinder.py&', linkappend]|join, url) }}
+{{ blocks.joinForm(loggedin, ['?src_url=resourceFinder.py&', linkappend]|join, url, enableCAPTCHA, siteidCAPTCHA) }}
 <div id="mask"></div>
 </body></html>

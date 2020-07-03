@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2016 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -28,18 +28,48 @@ import Cookie
 import hashlib
 import uuid
 import MySQLdb
+import urllib
+import urllib2
+import json
 import dbSession
 import dbShared
+import ghShared
 sys.path.append("../")
 import dbInfo
+import keyInfo
 from mailer import Mailer
 from mailer import Message
 import mailInfo
 
 
+def getCAPTCHA(token):
+    # sends the data and request
+    values = {"secret": keyInfo.RECAPTCHA_KEY, "response": token}
+    jdata = urllib.urlencode(values)
+    req = urllib2.Request(ghShared.RECAPTCHA_URL, jdata)
+    # reads the response back from Google
+    try:
+        response = urllib2.urlopen(req)
+        status = response.read()
+        cResult = json.loads(status)
+        if cResult['success'] and cResult['action'] == 'submitJoin':
+            return cResult['score']
+        else:
+            sys.stderr.write("Captcha failure: {0}\n".format(str(cResult)))
+            return -1
+    except urllib2.URLError as e:
+        sys.stderr.write("Communication with reCAPTCHA URL failure: {0}".format(str(e)))
+        return 1
+    except json.JSONDecodeError as e:
+        sys.stderr.write("Failed to decode response for captcha: {0}\n{1}".format(status, str(e)))
+        return 1
+    except AttributeError as e:
+        sys.stderr.write("Failed to interpret reCAPTCHA response: {0}\n{1}".format(status, str(e)))
+        return 1
+
 def sendVerificationMail(user, address, code):
     # send message
-    message = Message(From="\"Galaxy Harvester Registration\" <registration@galaxyharvester.net>",To=address)
+    message = Message(From="\"Galaxy Harvester Activation\" <{0}>".format(mailInfo.REGMAIL_USER),To=address)
     message.Subject = "Galaxy Harvester Account Verification"
     link = "http://galaxyharvester.net/verifyUser.py?vc={0}".format(code)
     message.Body = "Hello " + user + ",\n\nYou have created a new account on galaxyharvester.net using this email address.  Before you can use your new account, you must verify this email with us by clicking the link below.  If the link does not work, please copy the link and paste it into your browser address box.\n\n" + link + "\n\nThanks,\n-Galaxy Harvester Administrator\n"
@@ -62,6 +92,7 @@ form = cgi.FieldStorage()
 uname = form.getfirst("uname")
 email = form.getfirst("email")
 userpass = form.getfirst("userpass")
+tokenCAPTCHA = form.getfirst("g-recaptcha-response")
 # escape input to prevent sql injection
 uname = dbShared.dbInsertSafe(uname)
 email = dbShared.dbInsertSafe(email)
@@ -84,6 +115,18 @@ else:
         errorstr = errorstr + "Error: email address contains illegal characters.\n"
     if '@eyepaste.com' in email:
         errorstr = errorstr + "Error: disposable emails not allowed.\n"
+
+# CAPTCHAv3 validation https://developers.google.com/recaptcha/docs/v3
+if ghShared.RECAPTCHA_ENABLED:
+    if tokenCAPTCHA:
+        scoreCAPTCHA = getCAPTCHA(tokenCAPTCHA)
+        if scoreCAPTCHA == -1:
+            errorstr = errorstr + "Error: CAPTCHA problem, please contact support."
+        elif not scoreCAPTCHA > 0.5:
+            sys.stderr.write("Registration failure due to low CAPTCHA score {0}".format(str(scoreCAPTCHA)))
+            errorstr = errorstr + "Error: Robot detected\n"
+    else:
+        errorstr = errorstr + "Error: No CAPTCHA token found\n"
 
 if errorstr != "":
     result = "createuserfail"
@@ -132,5 +175,5 @@ else:
         print cookies
 
     print 'Status: 303 See Other'
-    print 'Location: /message.py?action=' + result + '&actionreason=' + errorstr
+    print 'Location: /message.py?action=' + result + '&actionreason=' + urllib.quote_plus(errorstr)
     print ''

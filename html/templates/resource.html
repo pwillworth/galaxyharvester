@@ -1,12 +1,8 @@
 {% import 'blocks.html' as blocks %}
 <!DOCTYPE html>
 <html lang="en"><head><title>Resource - Galaxy Harvester</title>
-<link rel="stylesheet" href="/style/ghCore.css" type="text/css" />
-<link rel="stylesheet" href="/style/themes/{{ uiTheme }}.css" type="text/css" />
-<script type="text/javascript" src="/js/ghShared.js"></script>
-<script type="text/javascript" src="/js/jquery.min.js"></script>
-<script type="text/javascript" src="/js/jquery.autocomplete-min.js"></script>
-<script type="text/javascript" src="/js/Colors.js"></script>
+{{ blocks.commonResources(uiTheme, enableCAPTCHA) }}
+<script src="/js/Colors.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
@@ -92,7 +88,7 @@ function checkServerBest() {
 </div>
 {{ blocks.pageFooter() }}
 {{ blocks.resourceForm() }}
-{{ blocks.joinForm(loggedin, ['?src_url={{ BASE_SCRIPT_URL }}resource.py&', linkappend]|join, url) }}
+{{ blocks.joinForm(loggedin, ['?src_url={{ BASE_SCRIPT_URL }}resource.py&', linkappend]|join, url, enableCAPTCHA, siteidCAPTCHA) }}
 {{ blocks.waypointForm(loggedin) }}
 <div id="mask"></div>
 </body></html>

@@ -1,11 +1,8 @@
 {% import 'blocks.html' as blocks %}
 <!DOCTYPE html>
 <html lang="en"><head><title>Schematic Editor - Galaxy Harvester</title>
-<link rel="stylesheet" href="/style/ghCore.css" type="text/css" />
-<link rel="stylesheet" href="/style/themes/{{ uiTheme }}.css" type="text/css" />
-<script type="text/javascript" src="/js/ghShared.js"></script>
-<script type="text/javascript" src="/js/jquery.min.js"></script>
-<script type="text/javascript" src="/js/jquery-ui-1.8.20.custom.min.js"></script>
+{{ blocks.commonResources(uiTheme, enableCAPTCHA) }}
+<script src="/js/jquery-ui-1.8.20.custom.min.js"></script>
 <script type="text/javascript">
 var quickAddGroups = {};
 quickAddGroups['architectExtraction'] = 'HR:25:1,SR:25:1,UT:50:2';
@@ -395,7 +392,7 @@ function saveSchematic() {
 	</div>
 </div>
 {{ blocks.pageFooter() }}
-{{ blocks.joinForm(loggedin, ['?src_url={{ BASE_SCRIPT_URL }}schematics.py&', linkappend]|join, url) }}
+{{ blocks.joinForm(loggedin, ['?src_url={{ BASE_SCRIPT_URL }}schematics.py&', linkappend]|join, url, enableCAPTCHA, siteidCAPTCHA) }}
 <div id="mask"></div>
 <div id="tooltip"></div>
 <div style="display:none;"><select class="statSelectorSource">{{ statList }}</select></div>

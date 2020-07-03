@@ -1,13 +1,8 @@
 {% import 'blocks.html' as blocks %}
 <!DOCTYPE html>
 <html lang="en"><head><title>Creature Harvesting - Galaxy Harvester</title>
-<link rel="stylesheet" href="/style/ghCore.css" type="text/css" />
-<link rel="stylesheet" href="/style/themes/{{ uiTheme }}.css" type="text/css" />
-<link rel="stylesheet" href="/style/autocomplete.css" type="text/css" />
-<script type="text/javascript" src="/js/jquery.min.js"></script>
-<script type="text/javascript" src="/js/jquery.autocomplete-min.js"></script>
-<script type="text/javascript" src="/js/Colors.js"></script>
-<script src="/js/ghShared.js" type="text/javascript"></script>
+<script src="/js/Colors.js"></script>
+{{ blocks.commonResources(uiTheme, enableCAPTCHA) }}
 <script type="text/javascript">
 $(document).ready(function() {
     $("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
@@ -110,7 +105,7 @@ function refreshResourceTypes() {
   </div>
 </div>
 {{ blocks.pageFooter() }}
-{{ blocks.joinForm(loggedin, ['?src_url=creatureList.py&', linkappend]|join, url) }}
+{{ blocks.joinForm(loggedin, ['?src_url=creatureList.py&', linkappend]|join, url, enableCAPTCHA, siteidCAPTCHA) }}
 <div id="tooltip"></div>
 <div id="mask"> </div>
 </body></html>

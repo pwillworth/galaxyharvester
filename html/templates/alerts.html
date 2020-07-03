@@ -1,12 +1,7 @@
 {% import 'blocks.html' as blocks %}
 <!DOCTYPE html>
 <html lang="en"><head><title>My Alerts - Galaxy Harvester</title>
-<link rel="stylesheet" href="/style/ghCore.css" type="text/css" />
-<link rel="stylesheet" href="/style/themes/{{ uiTheme }}.css" type="text/css" />
-<link rel="stylesheet" href="/style/autocomplete.css" type="text/css" />
-<script src="/js/ghShared.js" type="text/javascript"></script>
-<script type="text/javascript" src="/js/jquery.min.js"></script>
-<script type="text/javascript" src="/js/jquery.autocomplete-min.js"></script>
+{{ blocks.commonResources(uiTheme, enableCAPTCHA) }}
 <script type="text/javascript">
 
 var rownum = 0;
@@ -239,6 +234,6 @@ function maskStats(typeSel) {
   </div>
 </div>
 {{ blocks.pageFooter() }}
-{{ blocks.joinForm(loggedin, ['?src_url=myAlerts.py&', linkappend]|join, url) }}
+{{ blocks.joinForm(loggedin, ['?src_url=myAlerts.py&', linkappend]|join, url, enableCAPTCHA, siteidCAPTCHA) }}
 <div id="mask"></div>
 </body></html>

@@ -1,11 +1,8 @@
 {% import 'blocks.html' as blocks %}
 <!DOCTYPE html>
 <html lang="en"><head><title>Resource List - Galaxy Harvester</title>
-<link rel="stylesheet" href="/style/ghCore.css" type="text/css" />
-<link rel="stylesheet" href="/style/themes/{{ uiTheme }}.css" type="text/css" />
 <link rel="alternate" type="application/rss+xml" title="Galaxy Harvester Resource Adds" href="http://feeds.feedburner.com/GalaxyHarvesterResourceActivity" />
-<script type="text/javascript" src="/js/ghShared.js"></script>
-<script type="text/javascript" src="/js/jquery.min.js"></script>
+{{ blocks.commonResources(uiTheme, enableCAPTCHA) }}
 <script type="text/javascript">
 $(document).ready(function() {
     var planet = getQueryVar("planet");
@@ -167,6 +164,6 @@ function filterResources() {
 </div>
 {{ blocks.pageFooter() }}
 {{ blocks.resourceForm() }}
-{{ blocks.joinForm(loggedin, ['?src_url=resourceList.py&', linkappend]|join, url) }}
+{{ blocks.joinForm(loggedin, ['?src_url=resourceList.py&', linkappend]|join, url, enableCAPTCHA, siteidCAPTCHA) }}
 <div id="mask"></div>
 </body></html>

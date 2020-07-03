@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -30,7 +30,10 @@ BASE_SCRIPT_URL = '/'
 DEFAULT_THEME = 'crafter'
 DEFAULT_GALAXY = '14'
 imgNum = random.randint(1,17)
-automatedUsers = ["etas", "c0pp3r", "RogueOne", "SRAlderaan", "EiFScript", "RelicsAdmin", "SRUpdater", "SwgAwakening", "Europa", "swginfinity", "Xela_TheCreation", "Reckoning"]
+automatedUsers = ["etas", "c0pp3r", "RogueOne", "SRAlderaan", "EiFScript", "RelicsAdmin", "SRUpdater", "SwgAwakening", "Europa", "swginfinity", "Xela_TheCreation", "Reckoning", "TarkinSWG"]
+RECAPTCHA_ENABLED = True
+RECAPTCHA_SITEID = "6LdKFa0ZAAAAAFqbK_-0VBPWtPmFAxjZuunGLqHo"
+RECAPTCHA_URL = "https://www.google.com/recaptcha/api/siteverify"
 
 # Minimum reputation needed to perform actions
 MIN_REP_VALS = {'VERIFY_RESOURCE': -99,
