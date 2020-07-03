@@ -60,7 +60,7 @@ def getCAPTCHA(token):
     except urllib2.URLError as e:
         sys.stderr.write("Communication with reCAPTCHA URL failure: {0}".format(str(e)))
         return 1
-    except json.JSONDecodeError as e:
+    except KeyError as e:
         sys.stderr.write("Failed to decode response for captcha: {0}\n{1}".format(status, str(e)))
         return 1
     except AttributeError as e:

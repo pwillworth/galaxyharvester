@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2016 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -69,12 +69,12 @@ else:
 
         if (lastReset == None or ghShared.timeAgo(lastReset).find("minute") == -1):
             message = mailer.Message()
-            message.From = "admin@galaxyharvester.net"
+            message.From = "reset@galaxyharvester.net"
             message.To = email
             message.Subject = "Galaxy Harvester password reset"
-            message.Body = "Hello " + uname + ",\n\nYour password for galaxyharvester.net has been reset to:\n\n" + newPass + "\n\n go to http://galaxyharvester.net to login.\n"
+            message.Body = "Hello " + uname + ",\n\nYour password for galaxyharvester.net has been reset to:\n\n" + newPass + "\n\n go to https://galaxyharvester.net to login.\n"
             mailer = mailer.Mailer(mailInfo.MAIL_HOST)
-            mailer.login(mailInfo.MAIL_USER, mailInfo.MAIL_PASS)
+            mailer.login('reset@galaxyharvester.net', mailInfo.MAIL_PASS)
             mailer.send(message)
             cursor.execute('UPDATE tUsers SET userPassword="' + crypt_pass + '", lastReset=NOW() WHERE userID="' + uname + '";')
             result = 'email sent'
