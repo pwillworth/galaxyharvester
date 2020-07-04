@@ -2,11 +2,23 @@
 {{ blocks.commonResources(uiTheme, enableCAPTCHA) }}
 <link rel="shortcut icon" href="favicon.ico" />
 <link rel="alternate" type="application/rss+xml" title="Galaxy Harvester News Feed" href="http://feeds.feedburner.com/GalaxyHarvesterNews" />
-
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
+        $(".window .close").click(function(e) {
+            e.preventDefault();
+            $("#mask, .window").hide();
+        });
+        $("#mask").click(function() {
+            $(this).hide();
+            $(".window").hide();
+        });
+    });
+</script>
 {{ blocks.pageTracker() }}
-{{ blocks.joinForm(loggedin, ['?src_url=/blog.py&', linkappend]|join, url, enableCAPTCHA, siteidCAPTCHA) }}
 </head>
 <body>
 {{ blocks.headerSection(loggedin, currentUser, loginResult, linkappend, url, imgNum, galaxyList, pictureName) }}
-
+{{ blocks.joinForm(loggedin, ['?src_url=/blog.py&', linkappend]|join, url, enableCAPTCHA, siteidCAPTCHA) }}
+<div id="mask"> </div>
 <div id="mainContent" class="wrapper">

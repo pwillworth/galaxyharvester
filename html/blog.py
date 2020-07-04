@@ -852,8 +852,8 @@ def renderHtmlHeader(title=None, links=[]):
           /* ]]> */
           </script>
     """ % (nospamanswer)
-    print "</head>"
-    print "<body>"
+    #print "</head>"
+    #print "<body>"
     ##################################
     print template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url='/blog.py', pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), enableCAPTCHA=ghShared.RECAPTCHA_ENABLED, siteidCAPTCHA=ghShared.RECAPTCHA_SITEID)
     print "<div id=\"blogBox\" class=\"ghWidgetBox\">"
