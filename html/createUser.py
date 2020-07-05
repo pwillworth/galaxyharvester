@@ -126,7 +126,10 @@ if ghShared.RECAPTCHA_ENABLED:
             sys.stderr.write("Registration failure due to low CAPTCHA score {0}".format(str(scoreCAPTCHA)))
             errorstr = errorstr + "Error: Robot detected\n"
     else:
-        errorstr = errorstr + "Error: No CAPTCHA token found\n"
+        if 'HTTP_USER_AGENT' in os.environ and ghShared.getMobilePlatform(os.environ["HTTP_USER_AGENT"]) != '':
+            errorstr = errorstr + "Error: Sorry, mobile joining is temporarily unavailable.  Please visit Galaxy Harvester from a web browser to join.  https://galaxyharvester.net"
+        else:
+            errorstr = errorstr + "Error: No CAPTCHA token found\n"
 
 if errorstr != "":
     result = "createuserfail"
