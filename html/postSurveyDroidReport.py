@@ -231,38 +231,42 @@ def main():
 		if isNGE:
 			typePattern = ' +([a-zA-Z][a-zA-Z0-9\- ]+)'
 			namePattern = ' +\\\#pcontrast1 (\w+)\\\#'
+			statPattern = ' +(?:\\\#\w{6,6})? *(ER|CR|CD|DR|FL|HR|MA|PE|OQ|SR|UT): *(?:\\\#\w{6,6})? *(\d+)'
 		else:
 			typePattern = '\t([a-zA-Z0-9\- ]+)'
 			namePattern = '\t\t\\\#pcontrast1 (\w+)\\\#'
+			statPattern = '\t\t\t(ER|CR|CD|DR|FL|HR|MA|PE|OQ|SR|UT): (\d+)'
 
 		while 1:
 			line = rpt_data.file.readline()
 			if not line: break;
-			if headerMatch == None and (planetMatch == None or classMatch == None):
+			if headerMatch == None:
 				headerMatch = re.match("Interplanetary Survey: (\w+) - (\w+)", line)
+			if planetMatch == None:
 				planetMatch = re.match("\\\#pcontrast\d\sPlanet: \\\#pcontrast\d\s(.+)", line)
+			if classMatch == None:
 				classMatch = re.match("\\\#pcontrast\d\sResource Class: \\\#pcontrast\d\s(.+)", line)
+
+			if resourceStart == None:
+				resourceStart = re.match("\\\#pcontrast\d\sResources located.*", line)
 			else:
-				if resourceStart == None:
-					resourceStart = re.match("\\\#pcontrast\d\sResources located.*", line)
-				else:
-					typeMatch = re.match(typePattern, line)
-					nameMatch = re.match(namePattern, line)
-					if typeMatch:
-						thisType = dbShared.getResourceTypeID(conn, typeMatch.group(1))
-						thisTypeName = typeMatch.group(1)
-					if nameMatch:
-						if thisSpawn.spawnName != '':
-							resourcesFound.append(thisSpawn)
-						thisName = nameMatch.group(1)
-						thisSpawn = ghObjects.resourceSpawn()
-						thisSpawn.spawnName = thisName.lower()
-						thisSpawn.resourceType = thisType
-						thisSpawn.resourceTypeName = thisTypeName
-					# Check for resource stats from enhanced droid reports
-					statMatch = re.match("\t\t\t(ER|CR|CD|DR|FL|HR|MA|PE|OQ|SR|UT): (\d+)", line)
-					if statMatch:
-						setattr(thisSpawn.stats, statMatch.group(1), int(statMatch.group(2)))
+				typeMatch = re.match(typePattern, line)
+				nameMatch = re.match(namePattern, line)
+				if typeMatch:
+					thisType = dbShared.getResourceTypeID(conn, typeMatch.group(1))
+					thisTypeName = typeMatch.group(1)
+				if nameMatch:
+					if thisSpawn.spawnName != '':
+						resourcesFound.append(thisSpawn)
+					thisName = nameMatch.group(1)
+					thisSpawn = ghObjects.resourceSpawn()
+					thisSpawn.spawnName = thisName.lower()
+					thisSpawn.resourceType = thisType
+					thisSpawn.resourceTypeName = thisTypeName
+				# Check for resource stats from enhanced droid reports
+				statMatch = re.match(statPattern, line)
+				if statMatch:
+					setattr(thisSpawn.stats, statMatch.group(1), int(statMatch.group(2)))
 
 		conn.close()
 
