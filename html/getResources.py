@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2019 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -312,7 +312,7 @@ if len(maxs) == len(RES_STATS):
 
 if sort == "time":
 	orderCol = "UNIX_TIMESTAMP(tResources.entered)"
-	orderStr = " ORDER BY " + orderCol + " DESC"
+	orderStr = " ORDER BY {0} DESC".format(orderCol)
 if sort == "quality":
 	weightStr = ""
 	weights = percVals.split(",")
@@ -328,7 +328,13 @@ if sort == "quality":
 			weightStr = weightStr[1:]
 
 		orderCol = weightStr
-		orderStr = " ORDER BY " + orderCol + " DESC"
+		orderStr = " ORDER BY {0} DESC".format(orderCol)
+if sort == "type":
+	orderCol = "tResources.resourceType"
+	orderStr = " ORDER BY {0} ASC".format(orderCol)
+if sort == "group":
+	orderCol = "rt1.resourceGroup"
+	orderStr = " ORDER BY {0} ASC".format(orderCol)
 
 if lastValue != "":
 	criteriaStr = criteriaStr + (" AND {0} < {1}").format(orderCol,lastValue)
