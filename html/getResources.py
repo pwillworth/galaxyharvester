@@ -144,7 +144,7 @@ def getResourceData(conn, resSQL, userReputation, activeUser, formatType):
 			else:
 				resourceHTML += '</td></tr>'
 
-			lastValue = row[42]
+			lastValue = row[43]
 
 			row = cursor.fetchone()
 
