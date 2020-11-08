@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -101,12 +101,16 @@ def n2n(inVal):
 	else:
 		return str(inVal)
 
-def favoriteExists(conn, user, favType, item):
+def favoriteExists(conn, user, favType, item, galaxy):
+	# galaxy not set for spawn favorites
+	galaxyCriteria = ""
+	if favType != "1":
+		galaxyCriteria = "".join((" AND galaxy=", galaxy))
 	# Check if a user has an item as a favorite
 	if favType == "2" or favType == "4":
-		favSQL = "".join(("SELECT itemID FROM tFavorites WHERE favGroup='", str(item), "' AND userID='", user, "' AND favType=", str(favType), ";"))
+		favSQL = "".join(("SELECT itemID FROM tFavorites WHERE favGroup='", str(item), "' AND userID='", user, "' AND favType=", str(favType), galaxyCriteria, ";"))
 	else:
-		favSQL = "".join(("SELECT favGroup FROM tFavorites WHERE itemID=", str(item), " AND userID='", user, "' AND favType=", str(favType), ";"))
+		favSQL = "".join(("SELECT favGroup FROM tFavorites WHERE itemID=", str(item), " AND userID='", user, "' AND favType=", str(favType), galaxyCriteria, ";"))
 	cursor = conn.cursor()
 	cursor.execute(favSQL)
 	row = cursor.fetchone()
@@ -130,12 +134,16 @@ def addFavorite(conn, user, favType, item, galaxy):
 
 	return result
 
-def removeFavorite(conn, user, favType, item):
+def removeFavorite(conn, user, favType, item, galaxy):
+	# galaxy not set for spawn favorites
+	galaxyCriteria = ""
+	if favType != "1":
+		galaxyCriteria = "".join((" AND galaxy=", galaxy))
 	cursor = conn.cursor()
 	if favType == "2" or favType == "4":
-		tempSQL = "DELETE FROM tFavorites WHERE favGroup='" + str(item) + "' AND userID='" + user + "' AND favType=" + str(favType) + ";"
+		tempSQL = "".join(("DELETE FROM tFavorites WHERE favGroup='", str(item), "' AND userID='", user, "' AND favType=", str(favType), galaxyCriteria, ";"))
 	else:
-		tempSQL = "DELETE FROM tFavorites WHERE itemID=" + str(item) + " AND userID='" + user + "' AND favType=" + str(favType) + ";"
+		tempSQL = "".join(("DELETE FROM tFavorites WHERE itemID=", str(item), " AND userID='", user, "' AND favType=", str(favType), galaxyCriteria, ";"))
 	cursor.execute(tempSQL)
 	result = cursor.rowcount
 	cursor.close()
@@ -184,7 +192,7 @@ if (errstr == ""):
 				if favGroup != "":
 					udStr = "favGroup='" + favGroup + "'"
 				if despawnAlert != "":
-					if favoriteExists(conn, currentUser, favType, itemID) != True:
+					if favoriteExists(conn, currentUser, favType, itemID, galaxyID) != True:
 						result = addFavorite(conn, currentUser, favType, itemID, galaxyID)
 					udStr = "despawnAlert={0}".format(despawnAlert)
 
@@ -197,10 +205,10 @@ if (errstr == ""):
 			else:
 				# Updating Favorite Status
 
-				if favoriteExists(conn, currentUser, favType, itemID):
+				if favoriteExists(conn, currentUser, favType, itemID, galaxyID):
 					if operation != "1":
 						# fav exists and not forcing add, must be removing
-						remresult = removeFavorite(conn, currentUser, favType, itemID)
+						remresult = removeFavorite(conn, currentUser, favType, itemID, galaxyID)
 						if remresult > 0:
 							result = "Favorite removed."
 						else:
