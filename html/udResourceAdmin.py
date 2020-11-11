@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -102,7 +102,7 @@ else:
 
 	conn = dbShared.ghConn()
 	checkCursor = conn.cursor()
-	checkCursor.execute("SELECT spawnName, galaxy, galaxyName FROM tResources INNER JOIN tGalaxy ON tResources.galaxy = tGalaxy.galaxyID WHERE spawnID=%s",spawnID)
+	checkCursor.execute("SELECT spawnName, galaxy, galaxyName FROM tResources INNER JOIN tGalaxy ON tResources.galaxy = tGalaxy.galaxyID WHERE spawnID=%s", (spawnID))
 	checkRow = checkCursor.fetchone()
 	updated = "nothing"
 	newLink = ""

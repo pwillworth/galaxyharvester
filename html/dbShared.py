@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2019 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -168,7 +168,7 @@ def logUserEvent(user, galaxy, targetType, targetID, eventType):
 
 		if eventType == "p" and expGood == True:
 			# Get target user that marked the resource unavailable that is being corrected
-			cursor.execute("SELECT userID, eventTime FROM tResourceEvents WHERE spawnID=%s AND eventType IN ('r') ORDER BY eventTime DESC;", targetID)
+			cursor.execute("SELECT userID, eventTime FROM tResourceEvents WHERE spawnID=%s AND eventType IN ('r') ORDER BY eventTime DESC;", (targetID))
 			eventRow = cursor.fetchone()
 			targetUser = ''
 			while eventRow != None:
