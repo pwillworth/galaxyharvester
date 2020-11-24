@@ -12,6 +12,8 @@ jobs:
     matrix:
       Python36:
         python.version: '3.6'
+      Python38:
+        python.version: '3.8'
     maxParallel: 2
 
   steps:
