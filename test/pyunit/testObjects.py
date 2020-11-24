@@ -70,7 +70,7 @@ class testObjects(unittest.TestCase):
 		try:
 			jsonObject = json.loads(spawnJSON)
 			jsonValid = True
-		except ValueError, e:
+		except ValueError:
 			jsonValid = False
 		self.assertTrue(jsonValid, "Generated Spawn JSON output not valid.")
 
