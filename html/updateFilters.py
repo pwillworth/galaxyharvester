@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
  Copyright 2017 Paul Willworth <ioscode@gmail.com>
@@ -23,11 +23,11 @@
 import os
 import sys
 import re
-import Cookie
+from http import cookies
 import dbSession
 import dbShared
 import cgi
-import MySQLdb
+import pymysql
 from xml.dom import minidom
 import ghNames
 #
@@ -40,23 +40,23 @@ except KeyError:
 form = cgi.FieldStorage()
 # Get Cookies
 useCookies = 1
-cookies = Cookie.SimpleCookie()
+C = cookies.SimpleCookie()
 try:
-	cookies.load(os.environ['HTTP_COOKIE'])
+	C.load(os.environ['HTTP_COOKIE'])
 except KeyError:
 	useCookies = 0
 
 if useCookies:
 	try:
-		currentUser = cookies['userID'].value
+		currentUser = C['userID'].value
 	except KeyError:
 		currentUser = ''
 	try:
-		loginResult = cookies['loginAttempt'].value
+		loginResult = C['loginAttempt'].value
 	except KeyError:
 		loginResult = 'success'
 	try:
-		sid = cookies['gh_sid'].value
+		sid = C['gh_sid'].value
 	except KeyError:
 		sid = form.getfirst('gh_sid', '')
 else:
@@ -241,7 +241,7 @@ if (errstr == ""):
 else:
 	result = errstr
 
-print 'Content-type: text/xml\n'
+print('Content-type: text/xml\n')
 doc = minidom.Document()
 eRoot = doc.createElement("result")
 doc.appendChild(eRoot)
@@ -254,7 +254,7 @@ eText = doc.createElement("resultText")
 tText = doc.createTextNode(result)
 eText.appendChild(tText)
 eRoot.appendChild(eText)
-print doc.toxml()
+print(doc.toxml())
 
 if (result.find("Error:") > -1):
 	sys.exit(500)

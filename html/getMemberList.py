@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2019 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -22,12 +22,12 @@
 
 import os
 import sys
-import Cookie
+from http import cookies
 import dbSession
 import dbShared
 import ghShared
 import cgi
-import MySQLdb
+import pymysql
 #
 form = cgi.FieldStorage()
 
@@ -37,22 +37,22 @@ galaxy = dbShared.dbInsertSafe(galaxy)
 
 # Main program returns a table with top 20 users in galaxy with most resource adds
 rowCount = 0
-print 'Content-type: text/html\n'
-print '<table class="userData" width="100%">'
+print('Content-type: text/html\n')
+print('<table class="userData" width="100%">')
 conn = dbShared.ghConn()
 cursor = conn.cursor()
 if (cursor):
-	print '<thead><tr class="tableHead"><td>Rank</td><td>Member</td><td>Resources</td></th></thead>'
+	print('<thead><tr class="tableHead"><td>Rank</td><td>Member</td><td>Resources</td></th></thead>')
 	sqlStr = 'SELECT tUsers.userID, added, pictureName FROM tUsers LEFT JOIN tUserStats ON tUsers.userID = tUserStats.userID WHERE galaxy=' + galaxy + ' ORDER BY added DESC LIMIT 20'
 	cursor.execute(sqlStr)
 	row = cursor.fetchone()
 
 	while (row != None):
 		rowCount += 1
-		print '  <tr class="statRow"><td>' + str(rowCount) + '</td><td><a href="' + ghShared.BASE_SCRIPT_URL + 'user.py/' + row[0] + '" class="nameLink"><img src="/images/users/'+str(row[2])+'" class="tinyAvatar" /><span style="vertical-align:4px;">'+ row[0] + '</span></a></td><td>' + str(row[1]) + '</td>'
-		print '  </tr>'
+		print('  <tr class="statRow"><td>' + str(rowCount) + '</td><td><a href="' + ghShared.BASE_SCRIPT_URL + 'user.py/' + row[0] + '" class="nameLink"><img src="/images/users/'+str(row[2])+'" class="tinyAvatar" /><span style="vertical-align:4px;">'+ row[0] + '</span></a></td><td>' + str(row[1]) + '</td>')
+		print('  </tr>')
 		row = cursor.fetchone()
         
 	cursor.close()
 conn.close()
-print '  </table>'
+print('  </table>')

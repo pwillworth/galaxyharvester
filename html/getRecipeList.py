@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
  Copyright 2020 Paul Willworth <ioscode@gmail.com>
@@ -23,8 +23,8 @@ import os
 import sys
 import dbShared
 import cgi
-import Cookie
-import MySQLdb
+from http import cookies
+import pymysql
 import ghShared
 import dbShared
 import dbSession
@@ -150,19 +150,19 @@ def main():
 	form = cgi.FieldStorage()
 	# Get Cookies
 	useCookies = 1
-	cookies = Cookie.SimpleCookie()
+	C = cookies.SimpleCookie()
 	try:
-		cookies.load(os.environ['HTTP_COOKIE'])
+		C.load(os.environ['HTTP_COOKIE'])
 	except KeyError:
 		useCookies = 0
 
 	if useCookies:
 		try:
-			currentUser = cookies['userID'].value
+			currentUser = C['userID'].value
 		except KeyError:
 			currentUser = ''
 		try:
-			sid = cookies['gh_sid'].value
+			sid = C['gh_sid'].value
 		except KeyError:
 			sid = form.getfirst('gh_sid', '')
 	else:
@@ -246,8 +246,8 @@ def main():
 		cursor.close()
 	conn.close()
 
-	print 'Content-type: text/html\n'
-	print tmpStr
+	print('Content-type: text/html\n')
+	print(tmpStr)
 
 
 if __name__ == "__main__":

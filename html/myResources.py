@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2019 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -22,10 +22,10 @@
 
 import os
 import cgi
-import Cookie
+from http import cookies
 import dbSession
 import dbShared
-import MySQLdb
+import pymysql
 
 # Get current url
 try:
@@ -36,19 +36,19 @@ uiTheme = ''
 form = cgi.FieldStorage()
 # Get Cookies
 useCookies = 1
-cookies = Cookie.SimpleCookie()
+C = cookies.SimpleCookie()
 try:
-	cookies.load(os.environ['HTTP_COOKIE'])
+	C.load(os.environ['HTTP_COOKIE'])
 except KeyError:
 	useCookies = 0
 
 if useCookies:
 	try:
-		currentUser = cookies['userID'].value
+		currentUser = C['userID'].value
 	except KeyError:
 		currentUser = ''
 	try:
-		sid = cookies['gh_sid'].value
+		sid = C['gh_sid'].value
 	except KeyError:
 		sid = form.getfirst('gh_sid', '')
 else:
@@ -72,6 +72,6 @@ if (sess != ''):
 		linkappend = 'gh_sid=' + sid
 
 # redirect to url for current user inventory
-print 'Status: 303 See Other'
-print 'Location: {0}user.py/{1}/inventory?{2}'.format(ghShared.BASE_SCRIPT_URL, currentUser, linkappend)
-print ''
+print('Status: 303 See Other')
+print('Location: {0}user.py/{1}/inventory?{2}'.format(ghShared.BASE_SCRIPT_URL, currentUser, linkappend))
+print('')

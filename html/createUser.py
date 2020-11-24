@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
  Copyright 2020 Paul Willworth <ioscode@gmail.com>
@@ -24,10 +24,10 @@ import sys
 import os
 import cgi
 import re
-import Cookie
+from http import cookies
 import hashlib
 import uuid
-import MySQLdb
+import pymysql
 import urllib
 import urllib2
 import json
@@ -79,7 +79,7 @@ def sendVerificationMail(user, address, code):
     mailer.send(message)
     return 'email sent'
 
-cookies = Cookie.SimpleCookie()
+C = cookies.SimpleCookie()
 useCookies = 1
 errorstr = ''
 try:
@@ -169,14 +169,14 @@ else:
     conn.close()
 
 if os.environ.get("HTTP_REFERER", "none") == 'none':
-    print 'Content-Type: text/html\n'
-    print result + '-' + errorstr
+    print('Content-Type: text/html\n')
+    print(result + '-' + errorstr)
 else:
     if useCookies:
-        cookies["create_result"] = result
-        cookies["create_error"] = errorstr
-        print cookies
+        C["create_result"] = result
+        C["create_error"] = errorstr
+        print(C)
 
-    print 'Status: 303 See Other'
-    print 'Location: /message.py?action=' + result + '&actionreason=' + urllib.quote_plus(errorstr)
-    print ''
+    print('Status: 303 See Other')
+    print('Location: /message.py?action=' + result + '&actionreason=' + urllib.quote_plus(errorstr))
+    print('')

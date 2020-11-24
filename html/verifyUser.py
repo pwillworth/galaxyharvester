@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
  Copyright 2019 Paul Willworth <ioscode@gmail.com>
@@ -23,17 +23,17 @@
 
 import os
 import cgi
-import Cookie
-import MySQLdb
+from http import cookies
+import pymysql
 import dbShared
 import time
 from datetime import timedelta, datetime
 
-cookies = Cookie.SimpleCookie()
+C = cookies.SimpleCookie()
 useCookies = 1
 errorstr = ''
 try:
-    cookies.load(os.environ["HTTP_COOKIE"])
+    C.load(os.environ["HTTP_COOKIE"])
 except KeyError:
     useCookies = 0
 
@@ -79,5 +79,5 @@ else:
     cursor.close()
     conn.close()
 
-print "Content-Type: text/html\n"
-print '<html><head><script type=text/javascript>document.location.href="message.py?action=' + result + '&actionreason=' + errorstr + '"</script></head><body></body></html>'
+print("Content-Type: text/html\n")
+print('<html><head><script type=text/javascript>document.location.href="message.py?action=' + result + '&actionreason=' + errorstr + '"</script></head><body></body></html>')

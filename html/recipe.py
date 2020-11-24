@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
  Copyright 2020 Paul Willworth <ioscode@gmail.com>
@@ -23,9 +23,9 @@
 import os
 import sys
 import cgi
-import Cookie
+from http import cookies
 import dbSession
-import MySQLdb
+import pymysql
 import ghShared
 import ghNames
 import ghObjectRecipe
@@ -67,31 +67,31 @@ def main():
 	uiTheme = ''
 	# Get Cookies
 	useCookies = 1
-	cookies = Cookie.SimpleCookie()
+	C = cookies.SimpleCookie()
 	try:
-		cookies.load(os.environ['HTTP_COOKIE'])
+		C.load(os.environ['HTTP_COOKIE'])
 	except KeyError:
 		useCookies = 0
 
 	if useCookies:
 		try:
-			currentUser = cookies['userID'].value
+			currentUser = C['userID'].value
 		except KeyError:
 			currentUser = ''
 		try:
-			loginResult = cookies['loginAttempt'].value
+			loginResult = C['loginAttempt'].value
 		except KeyError:
 			loginResult = 'success'
 		try:
-			sid = cookies['gh_sid'].value
+			sid = C['gh_sid'].value
 		except KeyError:
 			sid = form.getfirst('gh_sid', '')
 		try:
-			uiTheme = cookies['uiTheme'].value
+			uiTheme = C['uiTheme'].value
 		except KeyError:
 			uiTheme = ''
 		try:
-			galaxy = cookies['galaxy'].value
+			galaxy = C['galaxy'].value
 		except KeyError:
 			galaxy = form.getfirst('galaxy', ghShared.DEFAULT_GALAXY)
 	else:
@@ -125,7 +125,7 @@ def main():
 
 	# Get recipe id from path
 	path = []
-	if os.environ.has_key('PATH_INFO'):
+	if 'PATH_INFO' in os.environ:
 		path = os.environ['PATH_INFO'].split('/')[1:]
 		path = [p for p in path if p != '']
 	recipeHTML = ''
@@ -240,12 +240,12 @@ def main():
 		recipeHTML = 'You have not specified a recipe to edit, would you like to create a new one?<div style="float:right;"><button type=button value="New Recipe" class="ghButton" onclick="addRecipe();">New Recipe</button></div>'
 
 	pictureName = dbShared.getUserAttr(currentUser, 'pictureName')
-	print 'Content-type: text/html\n'
+	print('Content-type: text/html\n')
 	env = Environment(loader=FileSystemLoader('templates'))
 	env.globals['BASE_SCRIPT_URL'] = ghShared.BASE_SCRIPT_URL
 	env.globals['MOBILE_PLATFORM'] = ghShared.getMobilePlatform(os.environ['HTTP_USER_AGENT'])
 	template = env.get_template('recipe.html')
-	print template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), professionList=ghLists.getProfessionList(galaxy), recipeHTML=recipeHTML, slotHTML=slotHTML, schematicDetailsHTML=schematicDetailsHTML, ingTypes=ingTypes, ingGroups=ingGroups, pageType=pageType, recipeID=r.recipeID, recipeName=r.recipeName, schemImageName=schemImageName, enableCAPTCHA=ghShared.RECAPTCHA_ENABLED, siteidCAPTCHA=ghShared.RECAPTCHA_SITEID)
+	print(template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), professionList=ghLists.getProfessionList(galaxy), recipeHTML=recipeHTML, slotHTML=slotHTML, schematicDetailsHTML=schematicDetailsHTML, ingTypes=ingTypes, ingGroups=ingGroups, pageType=pageType, recipeID=r.recipeID, recipeName=r.recipeName, schemImageName=schemImageName, enableCAPTCHA=ghShared.RECAPTCHA_ENABLED, siteidCAPTCHA=ghShared.RECAPTCHA_SITEID))
 
 
 if __name__ == "__main__":

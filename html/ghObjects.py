@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2019 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 

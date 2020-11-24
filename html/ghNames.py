@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2010 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -20,7 +20,7 @@
 
 """
 
-import MySQLdb
+import pymysql
 import dbShared
 #
 
@@ -33,7 +33,7 @@ def getItemName(sqlStr):
         row = cursor.fetchone()
         if (row != None):
             result = row[1]
-	cursor.close()
+    cursor.close()
     conn.close()
     return result
 

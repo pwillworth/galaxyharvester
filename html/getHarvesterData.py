@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -22,11 +22,11 @@
 
 import os
 import sys
-import Cookie
+from http import cookies
 import dbSession
 import dbShared
 import cgi
-import MySQLdb
+import pymysql
 import ghShared
 #
 
@@ -39,23 +39,23 @@ except KeyError:
 form = cgi.FieldStorage()
 # Get Cookies
 errorstr = ''
-cookies = Cookie.SimpleCookie()
+C = cookies.SimpleCookie()
 try:
-	cookies.load(os.environ['HTTP_COOKIE'])
+	C.load(os.environ['HTTP_COOKIE'])
 except KeyError:
 	errorstr = 'no cookies\n'
 
 if errorstr == '':
 	try:
-		currentUser = cookies['userID'].value
+		currentUser = C['userID'].value
 	except KeyError:
 		currentUser = ''
 	try:
-		loginResult = cookies['loginAttempt'].value
+		loginResult = C['loginAttempt'].value
 	except KeyError:
 		loginResult = 'success'
 	try:
-		sid = cookies['gh_sid'].value
+		sid = C['gh_sid'].value
 	except KeyError:
 		sid = form.getfirst('gh_sid', '')
 else:
@@ -88,7 +88,7 @@ if (galaxy.isdigit() == False and uid == ''):
 
 tmpGalaxy = ''
 tableStart = '<table class="userData" width="100%">'
-print 'Content-type: text/html\n'
+print('Content-type: text/html\n')
 if errstr == "":
 	conn = dbShared.ghConn()
 	cursor = conn.cursor()
@@ -121,34 +121,34 @@ if errstr == "":
 		row = cursor.fetchone()
 
 		if uid == '':
-			print tableStart
+			print(tableStart)
 			while (row != None):
-				print '  <tr class="statRow"><td><a href="' + ghShared.BASE_SCRIPT_URL + 'user.py/' + row[0] + '" class="nameLink"><img src="/images/users/'+ row[3] + '" class="tinyAvatar" /><span style="vertical-align:4px;">'+ row[0] + '</span></a></td><td>', row[1], '</td><td>', str(row[2]), '</td>'
-				print '  </tr>'
+				print('  <tr class="statRow"><td><a href="' + ghShared.BASE_SCRIPT_URL + 'user.py/' + row[0] + '" class="nameLink"><img src="/images/users/'+ row[3] + '" class="tinyAvatar" /><span style="vertical-align:4px;">'+ row[0] + '</span></a></td><td>', row[1], '</td><td>', str(row[2]), '</td>')
+				print('  </tr>')
 				row = cursor.fetchone()
 		else:
 			if (row == None):
-				print tableStart
+				print(tableStart)
 			while (row != None):
 				if row[6] != tmpGalaxy:
 					if tmpGalaxy != '':
-						print '</table>'
+						print('</table>')
 					tmpGalaxy = row[6]
-					print '  <h3>Galaxy: ' + tmpGalaxy + '</h3>'
-					print tableStart
-				print '  <tr class="statRow"><td>Adds</td><td>'+ str(row[0]) + '</td></tr>'
-				print '  <tr class="statRow"><td>Planet Add</td><td>'+ str(row[1]) + '</td></tr>'
-				print '  <tr class="statRow"><td>Edits</td><td>'+ str(row[2]) + '</td></tr>'
-				print '  <tr class="statRow"><td>Cleanup</td><td>'+ str(row[3]) + '</td></tr>'
-				print '  <tr class="statRow"><td>Verified</td><td>'+ str(row[4]) + '</td></tr>'
-				print '  <tr class="statRow"><td>Waypoints</td><td>'+ str(row[5]) + '</td></tr>'
+					print('  <h3>Galaxy: ' + tmpGalaxy + '</h3>')
+					print(tableStart)
+				print('  <tr class="statRow"><td>Adds</td><td>'+ str(row[0]) + '</td></tr>')
+				print('  <tr class="statRow"><td>Planet Add</td><td>'+ str(row[1]) + '</td></tr>')
+				print('  <tr class="statRow"><td>Edits</td><td>'+ str(row[2]) + '</td></tr>')
+				print('  <tr class="statRow"><td>Cleanup</td><td>'+ str(row[3]) + '</td></tr>')
+				print('  <tr class="statRow"><td>Verified</td><td>'+ str(row[4]) + '</td></tr>')
+				print('  <tr class="statRow"><td>Waypoints</td><td>'+ str(row[5]) + '</td></tr>')
 				row = cursor.fetchone()
 
-		print '  </table>'
+		print('  </table>')
 		cursor.close()
 	conn.close()
 else:
-	print errstr
+	print(errstr)
 if (errstr.find("Error:") > -1):
 	sys.exit(500)
 else:

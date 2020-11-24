@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2010 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -20,7 +20,7 @@
 
 """
 
-import MySQLdb
+import pymysql
 import dbShared
 import ghLists
 import cgi
@@ -45,5 +45,5 @@ else:
 		result = 0
 	whereStr = ' WHERE imageType=1 AND objectType=' + str(result) + ' AND tSchematic.schematicID != "' + schematicID + '"'
 
-print 'Content-type: text/html\n'
-print '<option value="">-Select-</option>' + ghLists.getOptionList('SELECT tSchematic.schematicID, schematicName FROM tSchematic INNER JOIN tSchematicImages ON tSchematic.schematicID = tSchematicImages.schematicID' + whereStr + ';')
+print('Content-type: text/html\n')
+print('<option value="">-Select-</option>' + ghLists.getOptionList('SELECT tSchematic.schematicID, schematicName FROM tSchematic INNER JOIN tSchematicImages ON tSchematic.schematicID = tSchematicImages.schematicID' + whereStr + ';'))

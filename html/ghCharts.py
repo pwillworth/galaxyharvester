@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2016 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -35,7 +35,7 @@ def getChartURL(chartType, chartSize, dataType, resType, available, groupType, g
 	else:
 		chartAxes = '&chxt=x,y'
 	galaxyCriteria = ''
-	if galaxy != None and galaxy <> '':
+	if galaxy != None and galaxy != '':
 		galaxyCriteria = ' AND mt.galaxy=' + galaxy
 
 	conn = dbShared.ghConn()

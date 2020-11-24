@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2016 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -24,7 +24,7 @@ import cgi
 import os
 from datetime import datetime
 from time import localtime, strptime, strftime
-import MySQLdb
+import pymysql
 import dbSession
 import dbShared
 
@@ -32,12 +32,12 @@ def renderFeed(path):
 	newest = dbShared.getLastResourceChange()
 	resTitles = ['CR', 'CD', 'DR', 'FL', 'HR', 'MA', 'PE', 'OQ', 'SR', 'UT', 'ER']
 	rfc822time = "%a, %d %b %Y %H:%M:%S -0800"
-	print "Content-Type: text/xml; charset=iso-8859-15\n"
-	print "<?xml version=\"1.0\" encoding=\"iso-8859-15\"?>"
-	print "<rss version=\"2.0\""
-	print "xmlns:content=\"http://purl.org/rss/1.0/modules/content/\""
-	print ">"
-	print "<channel>"
+	print("Content-Type: text/xml; charset=iso-8859-15\n")
+	print("<?xml version=\"1.0\" encoding=\"iso-8859-15\"?>")
+	print("<rss version=\"2.0\"")
+	print("xmlns:content=\"http://purl.org/rss/1.0/modules/content/\"")
+	print(">")
+	print("<channel>")
 	resGroup = ""
 	if len(path) >= 1:
 		if (path[0] == "creature"):
@@ -55,15 +55,15 @@ def renderFeed(path):
 		elif (path[0] == "energy"):
 			resGroup = "energy_renewable"
 	if resGroup != "":
-		print "<title>Galaxy Harvester Resource Activity: " + resGroup + "</title>"
+		print("<title>Galaxy Harvester Resource Activity: " + resGroup + "</title>")
 	else:
-		print "<title>Galaxy Harvester Resource Activity</title>"
-	print "<link>http://galaxyharvester.net</link>"
-	print "<description>Latest additions to Galaxy Harvester resource listing</description>"
-	print "<pubDate>" + newest.strftime(rfc822time) + "</pubDate>"
-	print "<lastBuildDate>" + newest.strftime(rfc822time) + "</lastBuildDate>"
-	print "<generator>http://galaxyharvester.net/resourceList.py</generator>"
-	print "<language>en</language>"
+		print("<title>Galaxy Harvester Resource Activity</title>")
+	print("<link>http://galaxyharvester.net</link>")
+	print("<description>Latest additions to Galaxy Harvester resource listing</description>")
+	print("<pubDate>" + newest.strftime(rfc822time) + "</pubDate>")
+	print("<lastBuildDate>" + newest.strftime(rfc822time) + "</lastBuildDate>")
+	print("<generator>http://galaxyharvester.net/resourceList.py</generator>")
+	print("<language>en</language>")
 
 	# print resources
 	conn = dbShared.ghConn()
@@ -80,28 +80,28 @@ def renderFeed(path):
 		cursor.execute(sqlStr1)
 		row = cursor.fetchone()
 		while (row != None):
-			print "<item>"
-			print "<title>" + row[1] + " Added by " + row[4] + " on " + row[30] + "</title>"
-			print "<link>http://galaxyharvester.net/resource.py/" + str(row[2]) + "/" + row[1] + "</link>"
-			print "<pubDate>" + row[3].strftime(rfc822time) + "</pubDate>"
-			print "<guid isPermalink=\"true\">http://galaxyharvester.net/resource.py/" + str(row[2]) + "/" + row[1] + "</guid>"
-			print "<description><![CDATA[ " + row[6] + " ]]></description>"
-			print "<content:encoded><![CDATA["
-			print "<br />" + row[6] + "<br />"
+			print("<item>")
+			print("<title>" + row[1] + " Added by " + row[4] + " on " + row[30] + "</title>")
+			print("<link>http://galaxyharvester.net/resource.py/" + str(row[2]) + "/" + row[1] + "</link>")
+			print("<pubDate>" + row[3].strftime(rfc822time) + "</pubDate>")
+			print("<guid isPermalink=\"true\">http://galaxyharvester.net/resource.py/" + str(row[2]) + "/" + row[1] + "</guid>")
+			print("<description><![CDATA[ " + row[6] + " ]]></description>")
+			print("<content:encoded><![CDATA[")
+			print("<br />" + row[6] + "<br />")
 			for i in range(11):
 				if (row[i+8] != None and row[i+19] != None):
-					print resTitles[i] + ": " + str(row[i+8]) + " (" + ("%.0f" % float(row[i+19])) + "%)<br />",
-			print "]]></content:encoded>"
-			print "</item>"
+					print(resTitles[i] + ": " + str(row[i+8]) + " (" + ("%.0f" % float(row[i+19])) + "%)<br />")
+			print("]]></content:encoded>")
+			print("</item>")
 			row = cursor.fetchone()
 
-	print "</channel>"
-	print "</rss>"
+	print("</channel>")
+	print("</rss>")
 
 # get path info and render feed
 def main():
 	path = ['']
-	if os.environ.has_key('PATH_INFO'):
+	if 'PATH_INFO' in os.environ:
 		path = os.environ['PATH_INFO'].split('/')[1:]
 		path = [p for p in path if p != '']
 

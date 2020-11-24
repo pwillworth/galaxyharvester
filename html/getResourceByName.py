@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -22,11 +22,11 @@
 
 import os
 import sys
-import Cookie
+from http import cookies
 import dbSession
 import dbShared
 import cgi
-import MySQLdb
+import pymysql
 import ghLists
 from xml.dom import minidom
 import time
@@ -37,19 +37,19 @@ def main():
 	form = cgi.FieldStorage()
 	# Get Cookies
 	useCookies = 1
-	cookies = Cookie.SimpleCookie()
+	C = cookies.SimpleCookie()
 	try:
-		cookies.load(os.environ['HTTP_COOKIE'])
+		C.load(os.environ['HTTP_COOKIE'])
 	except KeyError:
 		useCookies = 0
 
 	if useCookies:
 		try:
-			currentUser = cookies['userID'].value
+			currentUser = C['userID'].value
 		except KeyError:
 			currentUser = ''
 		try:
-			sid = cookies['gh_sid'].value
+			sid = C['gh_sid'].value
 		except KeyError:
 			sid = form.getfirst('gh_sid', '')
 	else:
@@ -236,11 +236,11 @@ def getSpawnXML(spawnName, galaxy, currentUser, logged_state):
 	eNow.appendChild(tNow)
 	eRoot.appendChild(eNow)
 
-	print doc.toxml()
+	print(doc.toxml())
 	return result
 
 
-print 'Content-type: text/xml\n'
+print('Content-type: text/xml\n')
 result = main()
 
 if (result.find("Error:") > -1):

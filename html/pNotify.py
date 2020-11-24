@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2011 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -24,7 +24,7 @@ import urllib
 import urllib2
 import cgi
 import dbShared
-import MySQLdb
+import pymysql
 import sys
 
 PP_URL = "https://www.sandbox.paypal.com/cgi-bin/webscr"
@@ -154,7 +154,7 @@ else:
 
 if (result.find("Error:") > -1):
 	sys.stderr.write(result)
-	print 'Status: 500 Internal Server Error\r\n\r\n'
+	print('Status: 500 Internal Server Error\r\n\r\n')
 else:
-	print 'Status: 200 Ok\r\n\r\n'
+	print('Status: 200 Ok\r\n\r\n')
 

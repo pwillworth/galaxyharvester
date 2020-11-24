@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
  Copyright 2020 Paul Willworth <ioscode@gmail.com> & Chet Bortz <thrusterhead@gmail.com>
@@ -23,10 +23,10 @@
 import os
 import sys
 import cgi
-import Cookie
+from http import cookies
 import dbSession
 import dbShared
-import MySQLdb
+import pymysql
 import ghShared
 import ghLists
 from jinja2 import Environment, FileSystemLoader
@@ -52,31 +52,31 @@ except KeyError:
 form = cgi.FieldStorage()
 
 # Get Cookies
-cookies = Cookie.SimpleCookie()
+C = cookies.SimpleCookie()
 try:
-  cookies.load(os.environ['HTTP_COOKIE'])
+  C.load(os.environ['HTTP_COOKIE'])
 except KeyError:
   useCookies = 0
 
 if useCookies:
   try:
-    currentUser = cookies['userID'].value
+    currentUser = C['userID'].value
   except KeyError:
     currentUser = ''
   try:
-    loginResult = cookies['loginAttempt'].value
+    loginResult = C['loginAttempt'].value
   except KeyError:
     loginResult = 'success'
   try:
-    sid = cookies['gh_sid'].value
+    sid = C['gh_sid'].value
   except KeyError:
     sid = form.getfirst('gh_sid', '')
   try:
-    uiTheme = cookies['uiTheme'].value
+    uiTheme = C['uiTheme'].value
   except KeyError:
     uiTheme = ''
   try:
-    galaxy = cookies['galaxy'].value
+    galaxy = C['galaxy'].value
   except KeyError:
     galaxy = form.getfirst('galaxy', ghShared.DEFAULT_GALAXY)
 else:
@@ -104,7 +104,7 @@ else:
     uiTheme = 'crafter'
 
 path = ['']
-if os.environ.has_key('PATH_INFO'):
+if 'PATH_INFO' in os.environ:
   path = os.environ['PATH_INFO'].split('/')[1:]
   path = [p for p in path if p != '']
 
@@ -185,5 +185,5 @@ env.globals['MOBILE_PLATFORM'] = ghShared.getMobilePlatform(os.environ['HTTP_USE
 
 template = env.get_template('creaturelist.html')
 
-print 'Content-type: text/html\n'
-print template.render(validResource=validResource, typeID=typeID, containerType=containerType, typeTitle=typeTitle, showType=showType, breadcrumbHTML=breadcrumbHTML, uiTheme=uiTheme, galaxy=galaxy, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), enableCAPTCHA=ghShared.RECAPTCHA_ENABLED, siteidCAPTCHA=ghShared.RECAPTCHA_SITEID)
+print('Content-type: text/html\n')
+print(template.render(validResource=validResource, typeID=typeID, containerType=containerType, typeTitle=typeTitle, showType=showType, breadcrumbHTML=breadcrumbHTML, uiTheme=uiTheme, galaxy=galaxy, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), enableCAPTCHA=ghShared.RECAPTCHA_ENABLED, siteidCAPTCHA=ghShared.RECAPTCHA_SITEID))

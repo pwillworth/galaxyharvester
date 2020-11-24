@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2018 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -23,8 +23,8 @@
 import sys
 import os
 import cgi
-import Cookie
-import MySQLdb
+from http import cookies
+import pymysql
 import dbSession
 import dbShared
 import urllib
@@ -143,23 +143,23 @@ def main():
 	form = cgi.FieldStorage()
 	# Get Cookies
 	useCookies = 1
-	cookies = Cookie.SimpleCookie()
+	C = cookies.SimpleCookie()
 	try:
-		cookies.load(os.environ['HTTP_COOKIE'])
+		C.load(os.environ['HTTP_COOKIE'])
 	except KeyError:
 		useCookies = 0
 
 	if useCookies:
 		try:
-			currentUser = cookies['userID'].value
+			currentUser = C['userID'].value
 		except KeyError:
 			currentUser = ''
 		try:
-			loginResult = cookies['loginAttempt'].value
+			loginResult = C['loginAttempt'].value
 		except KeyError:
 			loginResult = 'success'
 		try:
-			sid = cookies['gh_sid'].value
+			sid = C['gh_sid'].value
 		except KeyError:
 			sid = form.getfirst('gh_sid', '')
 	else:
@@ -169,7 +169,7 @@ def main():
 
 	errstr=''
 
-	if not form.has_key("reportFile"):
+	if not "reportFile" in form:
 		errstr = "No report file sent."
 	else:
 		rpt_data = form["reportFile"]
@@ -294,22 +294,22 @@ def main():
 
 	if dataAction == 'returnJSON':
 		# add resources page uses json data to populate grid
-		print "Content-Type: text/json\n"
-		print result
+		print("Content-Type: text/json\n")
+		print(result)
 	else:
 		# survey list page will load result message from cookie after redirect
 		if useCookies:
-			cookies['surveyReportAttempt'] = result
-			cookies['surveyReportAttempt']['max-age'] = 60
-			print cookies
+			C['surveyReportAttempt'] = result
+			C['surveyReportAttempt']['max-age'] = 60
+			print(cookies)
 		else:
 			linkappend = linkappend + '&surveyReportAttempt=' + urllib.quote(result)
 
-		print "Content-Type: text/html\n"
+		print("Content-Type: text/html\n")
 		if src_url != None:
-			print '<html><head><script type=text/javascript>document.location.href="' + src_url + linkappend + '"</script></head><body></body></html>'
+			print('<html><head><script type=text/javascript>document.location.href="' + src_url + linkappend + '"</script></head><body></body></html>')
 		else:
-			print result
+			print(result)
 
 	if result.find("Error:") > -1:
 		sys.exit(500)
@@ -317,5 +317,5 @@ def main():
 		sys.exit(200)
 
 if __name__ == "__main__":
-        main()
+	main()
 

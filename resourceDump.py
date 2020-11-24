@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
- Copyright 2012 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -22,19 +22,19 @@
 
 import os
 import sys
-import MySQLdb
+import pymysql
 from datetime import date, datetime
 import time
 from time import localtime, strptime, strftime
 import dbInfo
 
 def ghConn():
-	conn = MySQLdb.connect(host = dbInfo.DB_HOST,
+	conn = pymysql.connect(host = dbInfo.DB_HOST,
 		db = dbInfo.DB_NAME,
 		user = dbInfo.DB_USER,
 		passwd = dbInfo.DB_PASS)
 	return conn
-#
+
 def n2z(inVal):
 	if (inVal == '' or inVal == None or inVal == 'undefined' or inVal == 'None'):
 		return '0'

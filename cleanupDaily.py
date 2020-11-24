@@ -22,17 +22,17 @@
 
 import os
 import sys
-import MySQLdb
+import pymysql
 import dbInfo
 sys.path.append(".")
 import dbShared
 
 def ghConn():
-	conn = MySQLdb.connect(host = dbInfo.DB_HOST,
+	conn = pymysql.connect(host = dbInfo.DB_HOST,
 		db = dbInfo.DB_NAME,
 		user = dbInfo.DB_USER,
 		passwd = dbInfo.DB_PASS)
-        conn.autocommit(True)
+	conn.autocommit(True)
 	return conn
 # Main program
 

@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2010 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -22,11 +22,11 @@
 
 import os
 import sys
-import Cookie
+from http import cookies
 import dbSession
 import dbShared
 import cgi
-import MySQLdb
+import pymysql
 import ghLists
 import difflib
 from xml.dom import minidom
@@ -46,7 +46,7 @@ resType = dbShared.dbInsertSafe(resType)
 
 # Main program
 
-print 'Content-type: text/xml\n'
+print('Content-type: text/xml\n')
 doc = minidom.Document()
 eRoot = doc.createElement("result")
 doc.appendChild(eRoot)
@@ -169,7 +169,7 @@ tText = doc.createTextNode(result)
 eText.appendChild(tText)
 eRoot.appendChild(eText)
 
-print doc.toxml()
+print(doc.toxml())
 if (result.find("Error:") > -1):
 	sys.exit(500)
 else:

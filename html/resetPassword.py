@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
  Copyright 2020 Paul Willworth <ioscode@gmail.com>
@@ -24,7 +24,7 @@ import sys
 import os
 import cgi
 import hashlib
-import MySQLdb
+import pymysql
 import dbSession
 import dbShared
 import ghShared
@@ -86,5 +86,5 @@ else:
     conn.close()
 
 
-print "Content-Type: text/html\n"
-print result
+print("Content-Type: text/html\n")
+print(result)

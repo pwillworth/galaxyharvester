@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -21,7 +21,7 @@
 """
 
 import cgi
-import MySQLdb
+import pymysql
 import dbShared
 import sys
 #
@@ -29,7 +29,7 @@ form = cgi.FieldStorage()
 
 profID = form.getfirst('prof', '')
 
-print 'Content-type: text/html\n'
+print('Content-type: text/html\n')
 
 if len(profID) > 0 and profID.isdigit() and int(profID) > 0:
 	criteriaStr = ' WHERE profID={0}'.format(profID)
@@ -42,7 +42,7 @@ if (cursor):
 	cursor.execute('SELECT Min(skillGroup), skillGroupName FROM tSkillGroup{0} GROUP BY skillGroupName;'.format(criteriaStr))
 	row = cursor.fetchone()
 	while (row != None):
-		print '<option value="'+str(row[0])+'">'+row[1]+'</option>'
+		print('<option value="'+str(row[0])+'">'+row[1]+'</option>')
 		row = cursor.fetchone()
 
 	cursor.close()

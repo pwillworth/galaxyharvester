@@ -1,6 +1,6 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
-import MySQLdb
+import pymysql
 import os
 import sys
 
@@ -160,7 +160,7 @@ def scrapeSchem(f):
 					sVal = line[eqPos+1:line.rfind("\"")].strip()
 					schem[sName] = sVal
 
-	#for k, v in schem.iteritems():
+	#for k, v in schem.items():
 	#	print k, v
 	try:
 		print "saving: " + schem["customObjectName"] + " - " + schem["targetTemplate"]
@@ -250,7 +250,7 @@ def scrapeSchem(f):
 				weightPos += int(expCounts[i])
 
 #main
-conn = MySQLdb.connect(host = "localhost",
+conn = pymysql.connect(host = "localhost",
 		db = "swgresource",
 		user = "webusr",
 		passwd = "")

@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2016 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -22,11 +22,11 @@
 
 import os
 import sys
-import Cookie
+from http import cookies
 import dbSession
 import dbShared
 import cgi
-import MySQLdb
+import pymysql
 from xml.dom import minidom
 #
 form = cgi.FieldStorage()
@@ -44,9 +44,9 @@ totalSpawnsSQL = 'SELECT totalSpawns, galaxyName FROM tGalaxy WHERE galaxyID=' +
 currentWaypointsSQL = 'SELECT Count(*) FROM tWaypoint INNER JOIN tResources ON tWaypoint.spawnID = tResources.spawnID WHERE galaxy=' + galaxy + ' AND tWaypoint.unavailable IS NULL AND tResources.unavailable IS NULL;'
 
 if statID == "all":
-	print 'Content-type: text/xml\n'
+	print('Content-type: text/xml\n')
 else:
-	print 'Content-type: text/html\r\n\r\n'
+	print('Content-type: text/html\r\n\r\n')
 
 conn = dbShared.ghConn()
 cursor = conn.cursor()
@@ -87,7 +87,7 @@ if (cursor):
 			eCurrentWaypoints.appendChild(tCurrentWaypoints)
 			eRoot.appendChild(eCurrentWaypoints)
 
-		print doc.toxml()
+		print(doc.toxml())
 
 	else:
 		if statID == 'currentSpawns':
@@ -103,10 +103,10 @@ if (cursor):
 		row = cursor.fetchone()
 
 		if (row != None):
-			print str(row[0])
+			print(str(row[0]))
 		else:
 			result = "Error: Galaxy not found."
-			print result
+			print(result)
 
 	cursor.close()
 else:

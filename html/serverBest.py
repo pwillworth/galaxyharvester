@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -21,7 +21,7 @@
 """
 
 import sys
-import MySQLdb
+import pymysql
 import dbShared
 import optparse
 
@@ -32,7 +32,7 @@ def getPosition(conn, spawnID, galaxy, statWeights, resourceGroup, serverBestMod
     maxCheckStr = ''
 
     # calculate column sort by based on quality weights
-    for k, v in statWeights.iteritems():
+    for k, v in statWeights.items():
         weightVal = '%.2f' % v
         obyStr = ''.join((obyStr, '+CASE WHEN ', k, 'max > 0 THEN (', k, ' / 1000)*', weightVal, ' ELSE ', weightVal, '*.25 END'))
         obyStr2 = ''.join((obyStr2, '+', weightVal))
@@ -187,7 +187,7 @@ def main():
 	    sys.stderr.write("missing required options.\n")
 	    exit(-1)
     else:
-        print checkSpawn(opts.spawn, 'history')
+        print(checkSpawn(opts.spawn, 'history'))
 
 if __name__ == "__main__":
     main()

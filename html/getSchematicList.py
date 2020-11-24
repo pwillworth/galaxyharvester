@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -23,29 +23,29 @@
 import os
 import sys
 import dbSession
-import MySQLdb
+import pymysql
 import cgi
-import Cookie
+from http import cookies
 import ghShared
 import ghLists
 import dbShared
 #
 
 form = cgi.FieldStorage()
-cookies = Cookie.SimpleCookie()
+C = cookies.SimpleCookie()
 errorstr = ''
 try:
-	cookies.load(os.environ['HTTP_COOKIE'])
+	C.load(os.environ['HTTP_COOKIE'])
 except KeyError:
 	errorstr = 'no cookies\n'
 
 if errorstr == '':
 	try:
-		currentUser = cookies['userID'].value
+		currentUser = C['userID'].value
 	except KeyError:
 		currentUser = ''
 	try:
-		sid = cookies['gh_sid'].value
+		sid = C['gh_sid'].value
 	except KeyError:
 		sid = form.getfirst('gh_sid', '')
 else:
@@ -119,9 +119,9 @@ if galaxy.isdigit():
 # We output an unordered list or a bunch of select element options depending on listFormat
 currentGroup = ''
 currentIngredient = ''
-print 'Content-type: text/html\n'
+print('Content-type: text/html\n')
 if listFormat != 'option':
-	print '  <ul class="schematics">'
+	print('  <ul class="schematics">')
 
 cursor = conn.cursor()
 if (cursor):
@@ -139,28 +139,28 @@ if (cursor):
 	cursor.execute(sqlStr1)
 	row = cursor.fetchone()
 	if (row == None):
-		print '    <li><h3>No Schematics Found</h3></li>'
+		print('    <li><h3>No Schematics Found</h3></li>')
 	while (row != None):
 		if listFormat == 'option':
-			print '<option value="' + row[0] + '">' + row[3] + '</option>'
+			print('<option value="' + row[0] + '">' + row[3] + '</option>')
 		else:
 			if (groupType == 'res'):
 				if (currentIngredient != row[5]):
-					print '  </ul>'
-					print '  <div  style="margin-top:14px;"><a class="bigLink" href="' + ghShared.BASE_SCRIPT_URL + 'resourceType.py/' + str(row[4]) + '">' + str(row[5]) + '</a></div>'
-					print '  <ul class="schematics">'
+					print('  </ul>')
+					print('  <div  style="margin-top:14px;"><a class="bigLink" href="' + ghShared.BASE_SCRIPT_URL + 'resourceType.py/' + str(row[4]) + '">' + str(row[5]) + '</a></div>')
+					print('  <ul class="schematics">')
 					currentIngredient = row[5]
 					currentGroup = ''
 			if (currentGroup != row[2]):
-				print '    <li><h3>' + row[2] + '</h3></li>'
+				print('    <li><h3>' + row[2] + '</h3></li>')
 				currentGroup = row[2]
 			if row[0] == selectSchematic:
-				print '    <li class="listSelected"><a href="' + ghShared.BASE_SCRIPT_URL + 'schematics.py/' + row[0] + '">' + row[3] + '</a></li>'
+				print('    <li class="listSelected"><a href="' + ghShared.BASE_SCRIPT_URL + 'schematics.py/' + row[0] + '">' + row[3] + '</a></li>')
 			else:
-				print '    <li><a href="' + ghShared.BASE_SCRIPT_URL + 'schematics.py/' + row[0] + '">' + row[3] + '</a></li>'
+				print('    <li><a href="' + ghShared.BASE_SCRIPT_URL + 'schematics.py/' + row[0] + '">' + row[3] + '</a></li>')
 		row = cursor.fetchone()
 
 	cursor.close()
 conn.close()
 if listFormat != 'option':
-	print '  </ul>'
+	print('  </ul>')

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 
 Kukkaisvoima a lightweight weblog system.
@@ -24,24 +24,16 @@ import cgi
 import pickle
 import os
 import sys
-from urllib import quote_plus, unquote_plus
+from urllib.parse import quote_plus, unquote_plus
 from time import localtime, strptime, strftime, time
-from sets import Set
 from datetime import datetime, timedelta
-import cgitb; cgitb.enable()
+import cgitb; cgitb.enable(display=0, logdir='/var/www/html/temp')
 import smtplib
-from email.MIMEText import MIMEText
+from email.mime.text import MIMEText
 import re
 import locale
 import random
-# kludge to get md5 hexdigest working on all python versions. Function
-# md5fun should be used only to get ascii like this
-# md5fun("kukkaisvoima").hexdigest()
-try:
-    from hashlib import md5 as md5fun
-except ImportError: # older python (older than 2.5) does not hashlib
-    import md5
-    md5fun = md5.new
+from hashlib import md5 as md5fun
 ####################################
 from jinja2 import Environment, FileSystemLoader
 sys.path.append("../")
@@ -49,7 +41,7 @@ import ghShared
 import dbSession
 import dbShared
 import ghLists
-import Cookie
+from http import cookies
 linkappend = ''
 logged_state = 0
 currentUser = ''
@@ -185,8 +177,8 @@ def generateDate(fileName):
     except:
         date = filedate
     # if date collision happens add seconds to date
-    if dates.has_key(date) and not dates[date] == fileName:
-        while dates.has_key(date):
+    if date in dates and not dates[date] == fileName:
+        while date in dates:
             date += timedelta(seconds=1)
     dates[date] = fileName
     return date
@@ -605,7 +597,7 @@ class Entries:
     def add(self, entry):
         self.date[entry.date] = entry
         for cat in entry.cat:
-            if self.categories.has_key(cat):
+            if cat in self.categories:
                 self.categories[cat][entry.date] = entry
             else:
                 self.categories[cat] = {}
@@ -626,16 +618,15 @@ class Entries:
         # load the files
         ents = list()
         swd = indexindex.keys()
-        swd.sort()
-        swd.reverse()
+        swd = sorted(swd, reverse=True)
         if pagenumber == -1: # no limit
             pass
         elif pagenumber > 0:
             sindex = numberofentriesperpage*pagenumber
             eindex = (numberofentriesperpage*pagenumber)+numberofentriesperpage
-            swd = swd[sindex:eindex]
+            swd = list(swd)[sindex:eindex]
         else:
-            swd = swd[:numberofentriesperpage]
+            swd = list(swd)[:numberofentriesperpage]
         for key in swd:
             ents.append(Entry(indexindex[key], datadir))
         return ents
@@ -653,17 +644,17 @@ class Entries:
 
 
 def renderHtmlFooter():
-    print "<div id=\"footer\">Powered by <a href=\"http://23.fi/kukkaisvoima\">Kukkaisvoima</a> version %s</div>" % version
-    print "</div>" # content1
+    print("<div id=\"footer\">Powered by <a href=\"http://23.fi/kukkaisvoima\">Kukkaisvoima</a> version %s</div>" % version)
+    print("</div>") # content1
     ################################
-    print "</div>"
-    print '<div class="footer">'
-    print '<a href="/" title="Galaxy Harvester home page">Home</a> | <a href="{{ BASE_SCRIPT_URL }}help.py" title="Get more information about the Galaxy Harvester project and contributors">About</a> | <a href="https://github.com/pwillworth/galaxyharvester" title="Open Source Code for Galaxy Harvester Application">Source</a> | <a href="#" onclick="contactMessage();">Contact</a> | <a href="/help.py" title="Get help using this site">Help</a> | <a href="/feedback.py" title="Submit and rate on suggestions for the site.">Suggestions</a>'
-    print '<p style="padding: 4px;font-weight:normal;">Galaxy Harvester is a tool for tracking resources spawning in galaxies of the MMO game Star Wars Galaxies Emulator.  Serving the SWGEmu Community Since 2010.</p>'
-    print '</div>'
+    print("</div>")
+    print('<div class="footer">')
+    print('<a href="/" title="Galaxy Harvester home page">Home</a> | <a href="{{ BASE_SCRIPT_URL }}help.py" title="Get more information about the Galaxy Harvester project and contributors">About</a> | <a href="https://github.com/pwillworth/galaxyharvester" title="Open Source Code for Galaxy Harvester Application">Source</a> | <a href="#" onclick="contactMessage();">Contact</a> | <a href="/help.py" title="Get help using this site">Help</a> | <a href="/feedback.py" title="Submit and rate on suggestions for the site.">Suggestions</a>')
+    print('<p style="padding: 4px;font-weight:normal;">Galaxy Harvester is a tool for tracking resources spawning in galaxies of the MMO game Star Wars Galaxies Emulator.  Serving the SWGEmu Community Since 2010.</p>')
+    print('</div>')
     ################################
-    print "</body>"
-    print "</html>"
+    print("</body>")
+    print("</html>")
 
 def renderHtmlHeader(title=None, links=[]):
     #################################################3
@@ -676,27 +667,27 @@ def renderHtmlHeader(title=None, links=[]):
     currentUser = ''
     loginResult = ''
     uiTheme = ''
-    cookies = Cookie.SimpleCookie()
+    C = cookies.SimpleCookie()
     try:
-        cookies.load(os.environ['HTTP_COOKIE'])
+        C.load(os.environ['HTTP_COOKIE'])
     except KeyError:
         useCookies = 0
 
     if useCookies:
         try:
-            currentUser = cookies['userID'].value
+            currentUser = C['userID'].value
         except KeyError:
             currentUser = ''
         try:
-            loginResult = cookies['loginAttempt'].value
+            loginResult = C['loginAttempt'].value
         except KeyError:
             loginResult = 'success'
         try:
-            sid = cookies['gh_sid'].value
+            sid = C['gh_sid'].value
         except KeyError:
            sid = form.getfirst('gh_sid', '')
         try:
-            uiTheme = cookies['uiTheme'].value
+            uiTheme = C['uiTheme'].value
         except KeyError:
             uiTheme = ''
     else:
@@ -740,25 +731,25 @@ def renderHtmlHeader(title=None, links=[]):
     template = env.get_template('blog.html')
 
     #################################################
-    print  "Content-Type: text/html; charset=%s\n" % encoding
-    print doctype
-    print "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"%(lang)s\" lang=\"%(lang)s\">" % {'lang':language}
-    print "<head>"
+    print("Content-Type: text/html; charset=%s\n" % encoding)
+    print(doctype)
+    print("<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"%(lang)s\" lang=\"%(lang)s\">" % {'lang':language})
+    print("<head>")
     if title:
-        print "<title>%s | %s - %s</title>" % (title, blogname, slogan)
+        print("<title>%s | %s - %s</title>" % (title, blogname, slogan))
     else:
-        print "<title>%s - %s </title>" % (blogname, slogan)
-    print "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=%s\" />" % encoding
-    print "<link rel=\"stylesheet\" href=\"%s\" type=\"text/css\" />" % stylesheet
-    print "<link rel=\"shortcut icon\" href=\"%s\"/>" % favicon
-    print "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"%s RSS Feed\" href=\"%s/feed/\" />" % (blogname, baseurl)
+        print("<title>%s - %s </title>" % (blogname, slogan))
+    print("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=%s\" />" % encoding)
+    print("<link rel=\"stylesheet\" href=\"%s\" type=\"text/css\" />" % stylesheet)
+    print("<link rel=\"shortcut icon\" href=\"%s\"/>" % favicon)
+    print("<link rel=\"alternate\" type=\"application/rss+xml\" title=\"%s RSS Feed\" href=\"%s/feed/\" />" % (blogname, baseurl))
 
     # print additional links
     for i in links:
-        print i
+        print(i)
 
     # Javascript. Used to validate comment form, nice eh :P
-    print """
+    print("""
           <script type="text/javascript">
           /* <![CDATA[ */
 
@@ -851,29 +842,29 @@ def renderHtmlHeader(title=None, links=[]):
           }
           /* ]]> */
           </script>
-    """ % (nospamanswer)
+    """ % (nospamanswer))
     #print "</head>"
     #print "<body>"
     ##################################
-    print template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url='/blog.py', pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), enableCAPTCHA=ghShared.RECAPTCHA_ENABLED, siteidCAPTCHA=ghShared.RECAPTCHA_SITEID)
-    print "<div id=\"blogBox\" class=\"ghWidgetBox\">"
+    print(template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url='/blog.py', pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), enableCAPTCHA=ghShared.RECAPTCHA_ENABLED, siteidCAPTCHA=ghShared.RECAPTCHA_SITEID))
+    print("<div id=\"blogBox\" class=\"ghWidgetBox\">")
     #############################################
-    print "<div id=\"content1\">"
-    print "<div id=\"header\">"
-    print "<h1><a href=\"%s\">%s</a></h1>" % (baseurl, blogname)
-    print "<div id=\"slogan\">%s</div>" % slogan
-    print "</div>" #header
+    print("<div id=\"content1\">")
+    print("<div id=\"header\">")
+    print("<h1><a href=\"%s\">%s</a></h1>" % (baseurl, blogname))
+    print("<div id=\"slogan\">%s</div>" % slogan)
+    print("</div>") #header
 
 
 def renderComment(entry, comment, numofcomment,
                   admin=False, pretext=False):
-    print "<li>"
+    print("<li>")
     if gravatarsupport:
-        print "<img style=\"padding-right:5px;\""
-        print "src=\"http://gravatar.com/avatar/%s?s=40&d=identicon\" align=\"left\"/>" % (
-            comment.getEmailMd5Sum())
-    print "<cite>%s</cite>:" % comment.getAuthorLink()
-    print "<br />"
+        print("<img style=\"padding-right:5px;\"")
+        print("src=\"http://gravatar.com/avatar/%s?s=40&d=identicon\" align=\"left\"/>" % (
+            comment.getEmailMd5Sum()))
+    print("<cite>%s</cite>:" % comment.getAuthorLink())
+    print("<br />")
     delcom = ""
     if admin:
         delcom = "<a href=\"%s/%s/?delcomment=%s\">(%s)</a>" % \
@@ -881,17 +872,17 @@ def renderComment(entry, comment, numofcomment,
              quote_plus(entry.fileName[:-4]),
              numofcomment,
              l_delete_comment)
-    print "<small><a name =\"comment-%s\" href=\"%s#comment-%s\">%s</a> %s </small>" % \
+    print("<small><a name =\"comment-%s\" href=\"%s#comment-%s\">%s</a> %s </small>" % \
         (numofcomment,
          entry.url,
          numofcomment,
          dateToString(comment.date),
-         delcom)
+         delcom))
     if pretext:
-        print pretext
+        print(pretext)
     else:
-        print "<p>%s</p>" % comment.getText()
-    print "</li>"
+        print("<p>%s</p>" % comment.getText())
+    print("</li>")
 
 
 def renderEntryLinks(entries, text=None, comment_tuple_list=None):
@@ -908,9 +899,9 @@ def renderEntryLinks(entries, text=None, comment_tuple_list=None):
         link += " (%s)" % entry.date
         if text:
             link += "<br /><pre>%s</pre>" % text
-        print link
+        print(link)
         if comment_tuple_list:
-            print "<ol style=\"list-style-type:none;\">"
+            print("<ol style=\"list-style-type:none;\">")
             numofcomment = 0
             for comment, ctext, author in comment_tuple_list:
                 numofcomment = numofcomment +1
@@ -926,36 +917,33 @@ def renderEntryLinks(entries, text=None, comment_tuple_list=None):
                 elif len(ctext) > 0:
                     ctext = "<pre>%s</pre>" % ctext
                 renderComment(entry, comment, numofcomment, False, ctext)
-            print "</ol>"
-        print "</li>"
+            print("</ol>")
+        print("</li>")
 
 
 def renderCategories(catelist, ent, path):
     renderHtmlHeader("archive")
-    print "<div id=\"content3\">"
+    print("<div id=\"content3\">")
 
     if len(path) == 1 and path[0] == "categories":
         sortedcat = catelist.keys()
-        try:
-            sortedcat.sort(key=locale.strxfrm)
-        except: # python < 2.4 fails
-            sortedcat.sort()
-        print "<h2>%s</h2>" % l_categories
-        print "<ul>"
+        sortedcat = sorted(sortedcat, key=locale.strxfrm)
+        print("<h2>%s</h2>" % l_categories)
+        print("<ul>")
 
         for cat in sortedcat:
-            print "<li><a href=\"%s/%s\">%s</a> (%s)</li>" % (
-                baseurl, quote_plus(cat), cat, len(catelist[cat]))
-            print "<ul>"
+            print("<li><a href=\"%s/%s\">%s</a> (%s)</li>" % (
+                baseurl, quote_plus(cat), cat, len(catelist[cat])))
+            print("<ul>")
             renderEntryLinks(ent.getMany(-1, cat))
-            print "</ul>"
+            print("</ul>")
 
-        print "</ul>"
+        print("</ul>")
     elif len(path) == 2 and path[1] in catelist.keys():
-            print "<h2>%s</h2>" % path[1]
+            print("<h2>%s</h2>" % path[1])
             renderEntryLinks(ent.getMany(-1, path[1]))
 
-    print "</div>" # content3
+    print("</div>") # content3
     renderHtmlFooter()
     return
 
@@ -963,21 +951,21 @@ def renderCategories(catelist, ent, path):
 def renderArchive(ent):
     entries = ent.getMany(-1)
     renderHtmlHeader(l_archives)
-    print "<div id=\"content3\">"
+    print("<div id=\"content3\">")
 
-    print "<h2>%s (%d)</h2>" % (l_archives, len(entries))
-    print "<ul>"
+    print("<h2>%s (%d)</h2>" % (l_archives, len(entries)))
+    print("<ul>")
     renderEntryLinks(entries)
-    print "</ul>"
+    print("</ul>")
 
-    print "</div>" # content3
+    print("</div>") # content3
     renderHtmlFooter()
     return
 
 
 def renderSearch(entries, searchstring):
     renderHtmlHeader(l_search)
-    print "<div id=\"content3\">"
+    print("<div id=\"content3\">")
 
     # Remove some special character so that one don't exhaust the web
     # host with stupid .*? searches
@@ -1022,57 +1010,54 @@ def renderSearch(entries, searchstring):
         renderEntryLinks([entry], pline, com_list)
 
     if len(matchedfiles) == 0: # no matches
-        print l_search2
+        print(l_search2)
 
-    print "</div>" # content3
+    print("</div>") # content3
     renderHtmlFooter()
     return
 
 def renderDeleteComments(entry, commentnum):
     renderHtmlHeader("comments")
-    print "<div id=\"content3\">"
+    print("<div id=\"content3\">")
     comments = entry.comments
 
     if len(comments) < commentnum:
-        print "<p>No comment</p>"
-        print "</body></html>"
+        print("<p>No comment</p>")
+        print("</body></html>")
         return
     comment = comments[commentnum-1]
-    print "<ol>"
-    print "<li>"
-    print "<cite>%s</cite>:" % comment.getAuthorLink()
+    print("<ol>")
+    print("<li>")
+    print("<cite>%s</cite>:" % comment.getAuthorLink())
 
-    print "<br />"
-    print "<small>%s</small>" % (dateToString(comment.date))
-    print "<p>%s</p>" % comment.getText()
-    print "</li>"
-    print "</ol>"
+    print("<br />")
+    print("<small>%s</small>" % (dateToString(comment.date)))
+    print("<p>%s</p>" % comment.getText())
+    print("</li>")
+    print("</ol>")
 
-    print "<p>%s</p>" % l_do_you_delete
-    print "<form action=\"%s/%s/?deletecomment\" method=\"post\" id=\"deleteform\">" % (baseurl,
-                                                                                         quote_plus(entry.fileName[:-4]))
-    print "<input type=\"hidden\" name=\"commentnum\" id=\"commentnum\" value=\"%s\"/>" % (commentnum)
-    print "<input type=\"hidden\" name=\"name\" id=\"name\" value=\"%s\"/>" % entry.fileName[:-4]
-    print "<p><input type=\"password\" name=\"password\" id=\"password\" size=\"22\" tabindex=\"1\" />"
-    print "<label for=\"password\"><small>%s</small></label></p>" % l_passwd
-    print "<p><input name=\"submit\" type=\"submit\" id=\"submit\" tabindex=\"5\" value=\"Submit\" />"
-    print "</p></form>"
-    print "</div>" # content3
+    print("<p>%s</p>" % l_do_you_delete)
+    print("<form action=\"%s/%s/?deletecomment\" method=\"post\" id=\"deleteform\">" % (baseurl,
+                                                                                         quote_plus(entry.fileName[:-4])))
+    print("<input type=\"hidden\" name=\"commentnum\" id=\"commentnum\" value=\"%s\"/>" % (commentnum))
+    print("<input type=\"hidden\" name=\"name\" id=\"name\" value=\"%s\"/>" % entry.fileName[:-4])
+    print("<p><input type=\"password\" name=\"password\" id=\"password\" size=\"22\" tabindex=\"1\" />")
+    print("<label for=\"password\"><small>%s</small></label></p>" % l_passwd)
+    print("<p><input name=\"submit\" type=\"submit\" id=\"submit\" tabindex=\"5\" value=\"Submit\" />")
+    print("</p></form>")
+    print("</div>") # content3
     renderHtmlFooter()
     return
 
 def renderSidebarCategories(catelist, rss_categories):
     categories = catelist.keys()
-    try:
-        categories.sort(key=locale.strxfrm)
-    except: # python < 2.4 fails
-        categories.sort()
-    print "<h2><a href=\"%s/categories\">%s</a></h2>" % (baseurl, l_categories)
+    categories = sorted(categories, key=locale.strxfrm)
+    print("<h2><a href=\"%s/categories\">%s</a></h2>" % (baseurl, l_categories))
 
     hide_cat_str = ""
     topcategories = list()
     if len(categories) > 5:
-        print "<a href=\"#\" onclick=\"toggle_categories('tcategory'); return false;\">Show more categories</a>"
+        print("<a href=\"#\" onclick=\"toggle_categories('tcategory'); return false;\">Show more categories</a>")
         topcategories = categories[:]
         topcategories.sort(key=lambda cat: len(catelist[cat]), reverse=True)
         topcategories = topcategories[:5]
@@ -1081,87 +1066,85 @@ def renderSidebarCategories(catelist, rss_categories):
                 topcategories.append(cat)
         hide_cat_str = " class=\"tcategory\" style=\"display:none;\""
 
-    print "<ul>"
+    print("<ul>")
     for cat in categories:
         add_str = ""
         if len(topcategories) > 0 and cat not in topcategories:
             add_str = hide_cat_str
-        print "<li%s><a href=\"%s/%s\">%s</a> (%s)" % (
-            add_str, baseurl, quote_plus(cat), cat, len(catelist[cat]))
+        print("<li%s><a href=\"%s/%s\">%s</a> (%s)" % (
+            add_str, baseurl, quote_plus(cat), cat, len(catelist[cat])))
         if cat in rss_categories:
-            print "<a href=\"%s/%s/feed\"><img alt=\"RSS Feed Icon\" src=\"%s\" style=\"vertical-align:top; border:none;\"/></a>" % \
-                (baseurl, cat, feedicon)
-        print "</li>"
-    print "</ul>"
+            print("<a href=\"%s/%s/feed\"><img alt=\"RSS Feed Icon\" src=\"%s\" style=\"vertical-align:top; border:none;\"/></a>" % \
+                (baseurl, cat, feedicon))
+        print("</li>")
+    print("</ul>")
 
 def renderSidebarSearch():
-    print "<h2>%s</h2>" % l_search
-    print "<form action=\"%s\" method=\"get\" id=\"searchform\">" % baseurl
-    print "<input type=\"text\" name=\"search\" id=\"search\" size=\"15\" /><br />"
-    print "<input type=\"submit\" value=\"%s\" />" % l_search
-    print "</form>"
+    print("<h2>%s</h2>" % l_search)
+    print("<form action=\"%s\" method=\"get\" id=\"searchform\">" % baseurl)
+    print("<input type=\"text\" name=\"search\" id=\"search\" size=\"15\" /><br />")
+    print("<input type=\"submit\" value=\"%s\" />" % l_search)
+    print("</form>")
 
 def renderSidebarCommments():
     if sidebarcomments:
-        print "<h2>%s</h2>" % l_recent_comments
+        print("<h2>%s</h2>" % l_recent_comments)
         comlist = getCommentList()
         if len(comlist) == 0:
-            print "No comments yet"
+            print("No comments yet")
         else:
-            print "<ul>"
+            print("<ul>")
             for com in comlist:
-                print "<li>%s on <a href=\"%s/%s#comment-%d\">%s</a>"\
+                print("<li>%s on <a href=\"%s/%s#comment-%d\">%s</a>"\
                     % (com["author"], baseurl,
-                       quote_plus(com["file"][:-4]), com["num"], com["subject"])
-                print "</li>"
-            print "</ul>"
+                       quote_plus(com["file"][:-4]), com["num"], com["subject"]))
+                print("</li>")
+            print("</ul>")
 
 def renderSidebarArchive(arclist):
-    print "<h2><a href=\"%s/archive\">%s</a> (%d)</h2>" % \
+    print("<h2><a href=\"%s/archive\">%s</a> (%d)</h2>" % \
         (baseurl, l_archives,
          # total number of entries
-         sum([len(l) for l in [i for i in arclist.itervalues()]]))
-    print l_toggle
-    print "<ul>"
+         sum([len(l) for l in [i for i in arclist]])))
+    print(l_toggle)
+    print("<ul>")
     sortedarc = arclist.keys()
-    sortedarc.sort()
-    sortedarc.reverse()
+    sortedarc = sorted(sortedarc, reverse=True)
 
     # get years from archive and sort them
     years = dict()
     for d in sortedarc:
         year = d.split("-", 1)[0]
-        if years.has_key(year) is False:
+        if year not in years:
             years[year] = list()
         years[year].append(d)
     years_keys = years.keys()
-    years_keys.sort()
-    years_keys.reverse()
+    years_keys = sorted(years_keys, reverse=True)
 
     # display each year at top lovel and if visiability is toggled
     # then show months
     for year in years_keys:
-        print "<li><a href=\"#\" onclick=\"toggle_years('con-year-%s'); return false;\">%s</a> (%d)" %\
+        print("<li><a href=\"#\" onclick=\"toggle_years('con-year-%s'); return false;\">%s</a> (%d)" %\
             (year, year,
              # number of entries per year
-             sum([len(arclist[dat]) for dat in years[year]]))
+             sum([len(arclist[dat]) for dat in years[year]])))
 
-        print "<ul id=\"con-year-%s\" style=\"display:none;\">" % year
+        print("<ul id=\"con-year-%s\" style=\"display:none;\">" % year)
         for dat in years[year]:
-            print "<li><a href=\"%s/%s\">%s</a> (%s)</li>" % (
-                baseurl, dat, dat, len(arclist[dat]))
-        print "</ul></li>"
-    print "</ul>"
+            print("<li><a href=\"%s/%s\">%s</a> (%s)</li>" % (
+                baseurl, dat, dat, len(arclist[dat])))
+        print("</ul></li>")
+    print("</ul>")
 
 def renderSidebarAdmin(entries):
     if len(entries) == 1:
-        print "<h2>%s</h2>" % l_admin
-        print "<ul>"
-        print "<li><a href=\"%s/%s/?admin\" rel=\"nofollow\">%s</a>" % \
+        print("<h2>%s</h2>" % l_admin)
+        print("<ul>")
+        print("<li><a href=\"%s/%s/?admin\" rel=\"nofollow\">%s</a>" % \
             (baseurl,
              quote_plus(entries[0].fileName[:-4]),
-             l_admin_comments)
-        print "</ul>"
+             l_admin_comments))
+        print("</ul>")
 
 def renderHtml(entries, path, catelist, arclist, admin, page, mode):
     """Render the blog. Some template stuff might be nice :D"""
@@ -1189,117 +1172,117 @@ def renderHtml(entries, path, catelist, arclist, admin, page, mode):
                        (blogname,cat,baseurl,quote_plus(cat)))
 
     if mode == "standalone":
-        print  "Content-Type: text/html; charset=%s\n" % encoding
-        print doctype
-        print "<html>"
-        print "<head>"
+        print("Content-Type: text/html; charset=%s\n" % encoding)
+        print(doctype)
+        print("<html>")
+        print("<head>")
         if title:
-            print "<title>%s | %s - %s</title>" % (title, blogname, slogan)
+            print("<title>%s | %s - %s</title>" % (title, blogname, slogan))
         else:
-            print "<title>%s - %s </title>" % (blogname, slogan)
-        print "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=%s\" />" % encoding
-        print "<link rel=\"stylesheet\" href=\"%s\" type=\"text/css\" />" % stylesheet
-        print "<link rel=\"shortcut icon\" href=\"%s\"/>" % favicon
-        print "</head><body>"
+            print("<title>%s - %s </title>" % (blogname, slogan))
+        print("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=%s\" />" % encoding)
+        print("<link rel=\"stylesheet\" href=\"%s\" type=\"text/css\" />" % stylesheet)
+        print("<link rel=\"shortcut icon\" href=\"%s\"/>" % favicon)
+        print("</head><body>")
     else:
         renderHtmlHeader(title, rss)
 
-    print "<div id=\"content2\">"
+    print("<div id=\"content2\">")
     for entry in entries:
-        print "<h2><a href=\"%s\">%s</a></h2>" % (
+        print("<h2><a href=\"%s\">%s</a></h2>" % (
             entry.url,
-            entry.headline)
-        print "<div class=\"post\">"
+            entry.headline))
+        print("<div class=\"post\">")
         for line in entry.getText(summary):
-            print line,
-        print "</div>"
+            print(line)
+        print("</div>")
 
         if len(entries) > 1 and maxcomments > -1:
             nc = len(entry.comments)
             if nc > 0:
-                print "<div class=\"comlink\">%s <a href=\"%s#comments\">%s</a></div>" % (
+                print("<div class=\"comlink\">%s <a href=\"%s#comments\">%s</a></div>" % (
                     nc,
                     entry.url,
-                    l_comments2)
+                    l_comments2))
             else:
-                print "<div class=\"comlink\"><a href=\"%s#leave_acomment\">%s</a></div>" % (
+                print("<div class=\"comlink\"><a href=\"%s#leave_acomment\">%s</a></div>" % (
                     entry.url,
-                    l_no_comments)
-        print "<div class=\"categories\">%s:" % l_categories
+                    l_no_comments))
+        print("<div class=\"categories\">%s:" % l_categories)
         num = 0
         for cat in entry.cat:
             num=num+1
             comma = ''
             if len(entry.cat) > num:
                 comma = ', '
-            print "<a href=\"%s/%s\">%s</a>%s" % (baseurl, quote_plus(cat), cat, comma)
-        print "</div>"
-        print "<div class=\"date\">%s: %s</div>" % \
-            (l_date, dateToString(entry.date))
+            print("<a href=\"%s/%s\">%s</a>%s" % (baseurl, quote_plus(cat), cat, comma))
+        print("</div>")
+        print("<div class=\"date\">%s: %s</div>" % \
+            (l_date, dateToString(entry.date)))
 
         # comments
         if len(entries) == 1:
             numofcomment = 0
             if len(entry.comments) > 0 and maxcomments > -1:
-                print "<h3><a name=\"comments\"></a>%s</h3>" % l_comments
-                print "<ol style=\"list-style-type:none;\">"
+                print("<h3><a name=\"comments\"></a>%s</h3>" % l_comments)
+                print("<ol style=\"list-style-type:none;\">")
                 for comment in entry.comments:
                     numofcomment = numofcomment +1
                     renderComment(entry, comment, numofcomment, admin)
-                print "</ol>"
+                print("</ol>")
             if maxcomments == -1 or len(entry.comments) >= maxcomments:
-                print "<h3>%s</h3>" % l_no_comments_allowed
+                print("<h3>%s</h3>" % l_no_comments_allowed)
             else:
-                print "<h3><a name=\"leave_acomment\"></a>%s</h3>" % l_leave_reply
-                print "<form action=\"%s/%s/?postcomment\" method=\"post\"" % (
+                print("<h3><a name=\"leave_acomment\"></a>%s</h3>" % l_leave_reply)
+                print("<form action=\"%s/%s/?postcomment\" method=\"post\"" % (
                     baseurl,
-                    entry.fileName[:-4])
-                print "id=\"commentform\" onsubmit=\"return validate_form(this)\">" # form
-                print "<input type=\"hidden\" name=\"name\" id=\"name\" value=\"%s\"/>" % entry.fileName[:-4]
-                print "<input type=\"hidden\" name=\"headline\" id=\"headline\" value=\"%s\"/>" % entry.headline
-                print "<input type=\"hidden\" name=\"commentnum\" id=\"commentnum\" value=\"%s\"/>" % (numofcomment+1)
-                print "<p><input type=\"text\" name=\"author\" id=\"author\" size=\"22\" tabindex=\"1\" />"
-                print "<label for=\"author\"><small>%s</small></label></p>" % l_name_needed
-                print "<p><input type=\"text\" name=\"email\" id=\"email\" size=\"22\" tabindex=\"2\" />"
-                print "<label for=\"email\"><small>%s</small></label></p>" % l_email_needed
-                print "<p><input type=\"text\" name=\"url\" id=\"url\" size=\"22\" tabindex=\"3\" />"
-                print "<label for=\"url\"><small>%s</small></label></p>" % l_webpage
-                print "<p><input type=\"text\" name=\"nospam\" id=\"nospam\" size=\"22\" tabindex=\"4\" />"
-                print "<label for=\"nospam\"><small>%s</small></label></p>" % l_nospam_question
-                print "<p>%s</p>" % l_no_html
-                print "<p><textarea name=\"comment\" id=\"comment\" cols=\"40\" rows=\"7\" tabindex=\"4\"></textarea></p>"
-                print "<p><input name=\"submit\" type=\"submit\" id=\"submit\" tabindex=\"5\" value=\"Submit\" />"
-                print "<input type=\"hidden\" name=\"comment_post_ID\" value=\"11\" />"
-                print "</p>"
-                print "<p><input type=\"checkbox\" name=\"subscribe\" id=\"subscribe\" tabindex=\"6\" value=\"subscribe\">%s</label></p>" % l_notify_comments
-                print "</form>"
+                    entry.fileName[:-4]))
+                print("id=\"commentform\" onsubmit=\"return validate_form(this)\">") # form
+                print("<input type=\"hidden\" name=\"name\" id=\"name\" value=\"%s\"/>" % entry.fileName[:-4])
+                print("<input type=\"hidden\" name=\"headline\" id=\"headline\" value=\"%s\"/>" % entry.headline)
+                print("<input type=\"hidden\" name=\"commentnum\" id=\"commentnum\" value=\"%s\"/>" % (numofcomment+1))
+                print("<p><input type=\"text\" name=\"author\" id=\"author\" size=\"22\" tabindex=\"1\" />")
+                print("<label for=\"author\"><small>%s</small></label></p>" % l_name_needed)
+                print("<p><input type=\"text\" name=\"email\" id=\"email\" size=\"22\" tabindex=\"2\" />")
+                print("<label for=\"email\"><small>%s</small></label></p>" % l_email_needed)
+                print("<p><input type=\"text\" name=\"url\" id=\"url\" size=\"22\" tabindex=\"3\" />")
+                print("<label for=\"url\"><small>%s</small></label></p>" % l_webpage)
+                print("<p><input type=\"text\" name=\"nospam\" id=\"nospam\" size=\"22\" tabindex=\"4\" />")
+                print("<label for=\"nospam\"><small>%s</small></label></p>" % l_nospam_question)
+                print("<p>%s</p>" % l_no_html)
+                print("<p><textarea name=\"comment\" id=\"comment\" cols=\"40\" rows=\"7\" tabindex=\"4\"></textarea></p>")
+                print("<p><input name=\"submit\" type=\"submit\" id=\"submit\" tabindex=\"5\" value=\"Submit\" />")
+                print("<input type=\"hidden\" name=\"comment_post_ID\" value=\"11\" />")
+                print("</p>")
+                print("<p><input type=\"checkbox\" name=\"subscribe\" id=\"subscribe\" tabindex=\"6\" value=\"subscribe\">%s</label></p>" % l_notify_comments)
+                print("</form>")
 
     if len(entries) > 1:
-        print "<div class=\"navi\">"
+        print("<div class=\"navi\">")
         if page > 0:
-            print "<a href=\"%s/%s?page=%s\">%s</a>" % (
+            print("<a href=\"%s/%s?page=%s\">%s</a>" % (
                 baseurl,
                 '/'.join(path),
                 page-1,
                 l_previouspage
-                )
+                ))
         if len(entries) == numberofentriesperpage:
-            print "<a href=\"%s/%s?page=%s\">%s</a>" % (
+            print("<a href=\"%s/%s?page=%s\">%s</a>" % (
                 baseurl,
                 '/'.join(path),
                 page+1,
                 l_nextpage
-                )
-        print "</div>"
-    print "</div>" # content2
+                ))
+        print("</div>")
+    print("</div>") # content2
 
     # sidebar
     if mode == "standalone":
-        print "</body></html"
+        print("</body></html")
     else:
-        print "<div id=\"sidebar\">"
+        print("<div id=\"sidebar\">")
         #######################################print "<a href=\"%s/feed\">Subscribe <img alt=\"RSS Feed Icon\" src=\"%s\" style=\"vertical-align:top; border:none;\"/></a>" % (baseurl, feedicon)
-        print '    <p><a href="http://feeds.feedburner.com/GalaxyHarvesterNews" title="Subscribe to my feed" rel="alternate" type="application/rss+xml"><img src="http://www.feedburner.com/fb/images/pub/feed-icon32x32.png" alt="" style="border:0"/></a><a href="http://feeds.feedburner.com/GalaxyHarvesterNews" title="Subscribe to my feed" rel="alternate" type="application/rss+xml">Subscribe in a reader</a></p>'
+        print('    <p><a href="http://feeds.feedburner.com/GalaxyHarvesterNews" title="Subscribe to my feed" rel="alternate" type="application/rss+xml"><img src="http://www.feedburner.com/fb/images/pub/feed-icon32x32.png" alt="" style="border:0"/></a><a href="http://feeds.feedburner.com/GalaxyHarvesterNews" title="Subscribe to my feed" rel="alternate" type="application/rss+xml">Subscribe in a reader</a></p>')
         #########################################
         renderSidebarCategories(catelist, categories)
         renderSidebarSearch()
@@ -1307,71 +1290,71 @@ def renderHtml(entries, path, catelist, arclist, admin, page, mode):
         renderSidebarArchive(arclist)
         renderSidebarAdmin(entries)
 
-        print "</div>" # sidebar
+        print("</div>") # sidebar
         renderHtmlFooter()
 
 def renderFeed(entries, path, categorieslist, totalCount):
     rfc822time = "%a, %d %b %Y %H:%M:%S -0800"
-    print "Content-Type: text/xml; charset=%s\n" % encoding
-    print "<?xml version=\"1.0\" encoding=\"%s\"?>" % encoding
-    print "<!-- generator=\"Kukkaisvoima version %s\" -->" % version
-    print "<rss version=\"2.0\""
-    print "xmlns:content=\"http://purl.org/rss/1.0/modules/content/\""
-    print "xmlns:wfw=\"http://wellformedweb.org/CommentAPI/\""
-    print "xmlns:dc=\"http://purl.org/dc/elements/1.1/\""
-    print ">"
-    print "<channel items=\"%s\">" % totalCount
+    print("Content-Type: text/xml; charset=%s\n" % encoding)
+    print("<?xml version=\"1.0\" encoding=\"%s\"?>" % encoding)
+    #print("<!-- generator=\"Kukkaisvoima version %s\" -->" % version)
+    print("<rss version=\"2.0\"")
+    print("xmlns:content=\"http://purl.org/rss/1.0/modules/content/\"")
+    print("xmlns:wfw=\"http://wellformedweb.org/CommentAPI/\"")
+    print("xmlns:dc=\"http://purl.org/dc/elements/1.1/\"")
+    print(">")
+    print("<channel items=\"%s\">" % totalCount)
     if len(path) >= 1 and path[0] in categorieslist.keys():
-        print "<title>%s: %s</title>" % (blogname, path[0])
+        print("<title>%s: %s</title>" % (blogname, path[0]))
     else:
-        print "<title>%s</title>" % blogname
-    print "<link>%s</link>" % baseurl
-    print "<description>%s</description>" % description
-    print "<pubDate>%s</pubDate>" % strftime(rfc822time, entries[0].date.timetuple())
-    print "<lastBuildDate>%s</lastBuildDate>" % strftime(rfc822time, entries[0].date.timetuple())
-    print "<serverTime>%s</serverTime>" % datetime.fromtimestamp(time()).strftime("%Y-%m-%d %H:%M:%S")
-    print "<generator>http://23.fi/kukkaisvoima/</generator>"
-    print "<language>%s</language>" % language
+        print("<title>%s</title>" % blogname)
+    print("<link>%s</link>" % baseurl)
+    print("<description>%s</description>" % description)
+    print("<pubDate>%s</pubDate>" % strftime(rfc822time, entries[0].date.timetuple()))
+    print("<lastBuildDate>%s</lastBuildDate>" % strftime(rfc822time, entries[0].date.timetuple()))
+    print("<serverTime>%s</serverTime>" % datetime.fromtimestamp(time()).strftime("%Y-%m-%d %H:%M:%S"))
+    print("<generator>http://23.fi/kukkaisvoima/</generator>")
+    print("<language>%s</language>" % language)
 
     # print entries
     for entry in entries:
-        print "<item>"
-        print "<title>%s</title>" % entry.headline
-        print "<link>%s</link>" % entry.url
-        print "<comments>%s#comments</comments>" % entry.url
-        print "<pubDate>%s</pubDate>" % strftime(rfc822time, entry.date.timetuple())
-        print "<dc:creator>%s</dc:creator>" % entry.author
+        print("<item>")
+        print("<title>%s</title>" % entry.headline)
+        print("<link>%s</link>" % entry.url)
+        print("<comments>%s#comments</comments>" % entry.url)
+        print("<pubDate>%s</pubDate>" % strftime(rfc822time, entry.date.timetuple()))
+        print("<dc:creator>%s</dc:creator>" % entry.author)
         for cat in entry.cat:
-            print "<category>%s</category>" % cat
-        print "<guid isPermaLink=\"false\">%s/</guid>" % entry.url
-        print "<description><![CDATA[ %s [...]]]></description>" % entry.text[0]
-        print "<content:encoded><![CDATA["
+            print("<category>%s</category>" % cat)
+        print("<guid isPermaLink=\"false\">%s/</guid>" % entry.url)
+        print("<description><![CDATA[ %s [...]]]></description>" % entry.text[0])
+        print("<content:encoded><![CDATA[")
         for line in entry.text:
-            print line,
-        print "]]></content:encoded>"
-        print "<wfw:commentRss>%s/feed/</wfw:commentRss>" % entry.url
-        print "</item>"
-    print "</channel>"
-    print "</rss>"
+            print(line)
+        print("]]></content:encoded>")
+        print("<wfw:commentRss>%s/feed/</wfw:commentRss>" % entry.url)
+        print("</item>")
+    print("</channel>")
+    print("</rss>")
 
 ###############################
 def renderSummary(entries, path, categorieslist):
 	shorttime = "%d %b %Y %H:%M"
-	print "Content-Type: text/html; charset=%s\n" % encoding
+	print("Content-Type: text/html; charset=%s\n" % encoding)
 
 	# print entries
 	for entry in entries:
-		print "<div class=\"newsItem\">"
-		print "<a href=\"%s\">" % entry.url
-		print "<h3>%s</h3></a>" % entry.headline
-		print "<span>%s</span>" % strftime(shorttime, entry.date.timetuple())
-		print "</div>"
+		print("<div class=\"newsItem\">")
+		print("<a href=\"%s\">" % entry.url)
+		print("<h3>%s</h3></a>" % entry.headline)
+		print("<span>%s</span>" % strftime(shorttime, entry.date.timetuple()))
+		print("</div>")
 ################################
 
 # main program starts here
 def main():
     path = ['']
-    if os.environ.has_key('PATH_INFO'):
+    if 'PATH_INFO' in os.environ:
         path = os.environ['PATH_INFO'].split('/')[1:]
         path = [p for p in path if p != '']
     page = 0
@@ -1385,7 +1368,7 @@ def main():
     unsubscribe_id = ""
     mode = "normal"
 
-    if os.environ.has_key('QUERY_STRING'):
+    if 'QUERY_STRING' in os.environ:
         querystr = os.environ['QUERY_STRING'].split('=')
         if len(querystr) == 2 and querystr[0] == 'page':
             try:
@@ -1455,19 +1438,19 @@ def main():
         date = file
         categories = categories.split(',')
         for cat in categories:
-            if categorieslist.has_key(cat):
+            if cat in categorieslist:
                 categorieslist[cat][date] = filelist[file]
             else:
                 categorieslist[cat] = {}
                 categorieslist[cat][date] = filelist[file]
-        if archivelist.has_key(adate):
+        if adate in archivelist:
             archivelist[adate][date] = filelist[file]
         else:
             archivelist[adate] = {}
             archivelist[adate][date] = filelist[file]
 
     # Compare the index
-    newarticles = Set(entries)^Set(indexold)
+    newarticles = set(entries)^set(indexold)
     if len(newarticles) > 0:
         # Pickle the categories
         for cat in categorieslist.keys():
@@ -1481,8 +1464,8 @@ def main():
             # No old index or new articles in category, update the index
             if not oldcategorieslist or \
                     (oldcategorieslist and \
-                         len(Set(oldcategorieslist.values())\
-                                 ^Set(categorieslist[cat].values())) > 0):
+                         len(set(oldcategorieslist.values())\
+                                 ^set(categorieslist[cat].values())) > 0):
                 catindex = open(os.path.join(indexdir,'%s.index' %cat), 'wb')
                 pickle.dump(categorieslist[cat], catindex)
                 catindex.close()
@@ -1498,8 +1481,8 @@ def main():
                 pass # :P
             if not oldarchivelist or \
                     (oldarchivelist and \
-                         len(Set(oldarchivelist.values())\
-                                 ^Set(archivelist[arc].values())) > 0):
+                         len(set(oldarchivelist.values())\
+                                 ^set(archivelist[arc].values())) > 0):
                 arcindex = open(os.path.join(indexdir,'%s.index' %arc), 'wb')
                 pickle.dump(archivelist[arc], arcindex)
                 arcindex.close()
@@ -1543,7 +1526,7 @@ def main():
         try:
             redirect = handleIncomingComment(cgi.FieldStorage(keep_blank_values=1))
             if redirect:
-                print redirect
+                print(redirect)
                 return
             else:
                 entries = ent.getOne("%s.txt" % unquote_plus(path[0]))
@@ -1558,12 +1541,12 @@ def main():
         filename = "%s.txt" % name
         if commentnum and name and password == passwd and passwd != 'password':
             deleteComment(filename, commentnum)
-        print 'Location: %s/%s\n' % (baseurl, name)
+        print('Location: %s/%s\n' % (baseurl, name))
     elif len(path) == 1 and unsubscribe and unsubscribe_id:
         name = unquote_plus(path[0])
         filename = "%s.txt" % name
         unsubscribeComments(filename, unsubscribe_id)
-        print 'Location: %s/%s#comments\n' % (baseurl, name)
+        print('Location: %s/%s#comments\n' % (baseurl, name))
     elif len(path) == 1:
         try:
             entries = ent.getOne("%s.txt" % unquote_plus(path[0]))

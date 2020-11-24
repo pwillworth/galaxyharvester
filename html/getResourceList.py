@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2019 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -22,10 +22,10 @@
 
 import os
 import sys
-import Cookie
+from http import cookies
 import dbSession
 import cgi
-import MySQLdb
+import pymysql
 import ghShared
 import ghLists
 import dbShared
@@ -72,23 +72,23 @@ except KeyError:
 form = cgi.FieldStorage()
 # Get Cookies
 useCookies = 1
-cookies = Cookie.SimpleCookie()
+C = cookies.SimpleCookie()
 try:
-	cookies.load(os.environ['HTTP_COOKIE'])
+	C.load(os.environ['HTTP_COOKIE'])
 except KeyError:
 	useCookies = 0
 
 if useCookies:
 	try:
-		currentUser = cookies['userID'].value
+		currentUser = C['userID'].value
 	except KeyError:
 		currentUser = ''
 	try:
-		loginResult = cookies['loginAttempt'].value
+		loginResult = C['loginAttempt'].value
 	except KeyError:
 		loginResult = 'success'
 	try:
-		sid = cookies['gh_sid'].value
+		sid = C['gh_sid'].value
 	except KeyError:
 		sid = form.getfirst('gh_sid', '')
 else:
@@ -219,7 +219,7 @@ currentGroups = ['resources|Resources','','','','','','']
 typeGroups = ['resources|Resources','','','','','','']
 
 
-print 'Content-type: text/html\n'
+print('Content-type: text/html\n')
 if (errorStr == ""):
 	conn = dbShared.ghConn()
 	# Only show update tools if user logged in and has positive reputation
@@ -263,30 +263,30 @@ if (errorStr == ""):
 						missingStr = ''
 					# print group header and start table
 					if currentGroup != '':
-						print '</table>'
-					print '<h3 style="margin-left:20px;"><a href="' + ghShared.BASE_SCRIPT_URL + 'resourceType.py/' + row[38] + '" title="View schematics and recent spawns of this type" class="nameLink">' + row[35] + '</a><span style="font-weight:normal;font-size:.9em;opacity:0.8;"> ' + missingStr + '</span></h3>'
-					print '<table id="tbl_' + row[38] + '" width="100%" class="resourceStats">'
+						print('</table>')
+					print('<h3 style="margin-left:20px;"><a href="' + ghShared.BASE_SCRIPT_URL + 'resourceType.py/' + row[38] + '" title="View schematics and recent spawns of this type" class="nameLink">' + row[35] + '</a><span style="font-weight:normal;font-size:.9em;opacity:0.8;"> ' + missingStr + '</span></h3>')
+					print('<table id="tbl_' + row[38] + '" width="100%" class="resourceStats">')
 					currentGroup = row[35]
 			# group by full tree of groups
- 			elif groupType == 2:
+			elif groupType == 2:
 				if s == None:
-					print '<table width="100%">'
+					print('<table width="100%">')
 				typeGroups = getTypeGroups(row[5])
 				for i in range(7):
 					#sys.stderr.write(typeGroups[i] + '\n')
 					if typeGroups[i] != '':
 						currentLevel = i+1
 					if currentGroups[i] != typeGroups[i]:
-						print '<tr><td><div class="surveyGroup" style="margin-left:' + str(i * 16) + 'px;"><a href="' + ghShared.BASE_SCRIPT_URL + 'resourceType.py/' + typeGroups[i][:typeGroups[i].find('|')] + '" title="View schematics and recent spawns of this type" class="nameLink" style="color:#999999;">' + typeGroups[i][typeGroups[i].find('|')+1:] + '</a></div></td></tr>'
+						print('<tr><td><div class="surveyGroup" style="margin-left:' + str(i * 16) + 'px;"><a href="' + ghShared.BASE_SCRIPT_URL + 'resourceType.py/' + typeGroups[i][:typeGroups[i].find('|')] + '" title="View schematics and recent spawns of this type" class="nameLink" style="color:#999999;">' + typeGroups[i][typeGroups[i].find('|')+1:] + '</a></div></td></tr>')
 				currentGroups = typeGroups
 				if currentType != row[5]:
-					print '<tr><td><div class="surveyGroup" style="margin-left:' + str(currentLevel * 16) + 'px;"><a href="' + ghShared.BASE_SCRIPT_URL + 'resourceType.py/' + row[5] + '" title="View schematics and recent spawns of this type" class="nameLink" style="color:#999999;">' + row[6] + '</a></div></td></tr>'
+					print('<tr><td><div class="surveyGroup" style="margin-left:' + str(currentLevel * 16) + 'px;"><a href="' + ghShared.BASE_SCRIPT_URL + 'resourceType.py/' + row[5] + '" title="View schematics and recent spawns of this type" class="nameLink" style="color:#999999;">' + row[6] + '</a></div></td></tr>')
 					currentType = row[5]
 				resBoxMargin = str((currentLevel+2) * 16) + 'px'
 			# no grouping for others
 			else:
 				if s == None:
-					print '<table width="100%" class=resourceStats>'
+					print('<table width="100%" class=resourceStats>')
 
 
 			# populate this resource to object and print it
@@ -332,7 +332,7 @@ if (errorStr == ""):
 				s.favorite = 1
 			s.planets = dbShared.getSpawnPlanets(conn, row[0], True, row[2])
 
-			print '  <tr><td>'
+			print('  <tr><td>')
 
 			if logged_state > 0 and galaxyState == 1:
 				controlsUser = currentUser
@@ -340,16 +340,16 @@ if (errorStr == ""):
 				controlsUser = ''
 
 			if formatType == 'mobile':
-				print s.getMobileHTML(controlsUser, int(stats[2]), dbShared.getUserAdmin(conn, currentUser, galaxy))
+				print(s.getMobileHTML(controlsUser, int(stats[2]), dbShared.getUserAdmin(conn, currentUser, galaxy)))
 			else:
-				print s.getHTML(formatStyle, resBoxMargin, controlsUser, userReputation, dbShared.getUserAdmin(conn, currentUser, galaxy))
+				print(s.getHTML(formatStyle, resBoxMargin, controlsUser, userReputation, dbShared.getUserAdmin(conn, currentUser, galaxy)))
 
-			print '</td></tr>'
+			print('</td></tr>')
 			row = cursor.fetchone()
 
 		cursor.close()
 	conn.close()
-	print '  </table>'
+	print('  </table>')
 
 else:
-	print '<h2>' + errorStr + '</h2>'
+	print('<h2>' + errorStr + '</h2>')

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """
 
  Copyright 2017 Paul Willworth <ioscode@gmail.com>
@@ -22,7 +22,7 @@
 
 import os
 import sys
-import MySQLdb
+import pymysql
 import dbInfo
 import optparse
 import smtplib
@@ -39,10 +39,10 @@ import serverBest
 import dbShared
 
 def ghConn():
-	conn = MySQLdb.connect(host = dbInfo.DB_HOST,
-		db = dbInfo.DB_NAME,
-		user = dbInfo.DB_USER,
-		passwd = dbInfo.DB_PASS)
+	conn = pymysql.connect(host = dbInfo.DB_HOST,
+	db = dbInfo.DB_NAME,
+	user = dbInfo.DB_USER,
+	passwd = dbInfo.DB_PASS)
 	conn.autocommit(True)
 	return conn
 
@@ -186,7 +186,7 @@ def checkServerBest(conn, spawnID, spawnName, galaxy, galaxyName):
 	for x in range(len(result[1])):
 		schematicStr = ''
 		bestStr = ''
-		for k, v in result[1][x].iteritems():
+		for k, v in result[1][x].items():
 			quoteSchem = "".join(("'", k, "'"))
 			schematicStr = ','.join((schematicStr, quoteSchem))
 			bestStr = '\n'.join((bestStr, '\n'.join(v)))
@@ -264,7 +264,7 @@ def checkDespawnReputation(conn, spawnID, spawnName, entered, galaxy):
 		if tmpDays > 3:
 			link = "/resource.py/" + str(galaxy) + "/" + spawnName
 			message = "You gained reputation for your contribution to tracking resource " + spawnName + "!"
-			for k, v in users.iteritems():
+			for k, v in users.items():
                 # Award rep for users contributing at least "4 points" and exclude automated users
 				if v >= 4 and k != "etas" and k != "default" and k != "c0pp3r":
 					dbShared.logEvent("INSERT INTO tUserEvents (userID, targetType, targetID, eventType, eventTime) VALUES ('" + k + "', 'r', " + str(spawnID) + ", '+', NOW());", "+", k, galaxy, spawnID)

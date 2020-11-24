@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -23,8 +23,8 @@
 import sys
 import os
 import cgi
-import Cookie
-import MySQLdb
+from http import cookies
+import pymysql
 import dbSession
 import dbShared
 import Image
@@ -40,23 +40,23 @@ except KeyError:
 form = cgi.FieldStorage()
 # Get Cookies
 useCookies = 1
-cookies = Cookie.SimpleCookie()
+C = cookies.SimpleCookie()
 try:
-	cookies.load(os.environ['HTTP_COOKIE'])
+	C.load(os.environ['HTTP_COOKIE'])
 except KeyError:
 	useCookies = 0
 
 if useCookies:
 	try:
-		currentUser = cookies['userID'].value
+		currentUser = C['userID'].value
 	except KeyError:
 		currentUser = ''
 	try:
-		loginResult = cookies['loginAttempt'].value
+		loginResult = C['loginAttempt'].value
 	except KeyError:
 		loginResult = 'success'
 	try:
-		sid = cookies['gh_sid'].value
+		sid = C['gh_sid'].value
 	except KeyError:
 		sid = form.getfirst('gh_sid', '')
 else:
@@ -175,14 +175,14 @@ else:
 
 
 if useCookies:
-	cookies['schemImageAttempt'] = result
-	cookies['schemImageAttempt']['max-age'] = 60
-	print cookies
+	C['schemImageAttempt'] = result
+	C['schemImageAttempt']['max-age'] = 60
+	print(C)
 else:
 	linkappend = linkappend + '&schemImageAttempt=' + urllib.quote(result)
 
-print "Content-Type: text/html\n"
+print("Content-Type: text/html\n")
 if src_url != None:
-	print '<html><head><script type=text/javascript>document.location.href="' + src_url + '?' + linkappend + '"</script></head><body></body></html>'
+	print('<html><head><script type=text/javascript>document.location.href="' + src_url + '?' + linkappend + '"</script></head><body></body></html>')
 else:
-	print result
+	print(result)

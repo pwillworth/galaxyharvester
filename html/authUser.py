@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2018 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -24,10 +24,10 @@
 import os
 import sys
 import cgi
-import Cookie
+from http import cookies
 import hashlib
 import time
-import MySQLdb
+import pymysql
 import dbSession
 import dbShared
 import urllib
@@ -35,15 +35,15 @@ import datetime
 sys.path.append("../")
 import dbInfo
 
-cookies = Cookie.SimpleCookie()
+C = cookies.SimpleCookie()
 useCookies = 1
 result = ''
 linkappend = ''
 exactUser = ''
-newhashDate = datetime.datetime(2016, 05, 16, 20, 30)
+newhashDate = datetime.datetime(2016, 5, 16, 20, 30)
 
 try:
-	cookies.load(os.environ['HTTP_COOKIE'])
+	C.load(os.environ['HTTP_COOKIE'])
 except KeyError:
 	useCookies = 0
 
@@ -80,10 +80,12 @@ else:
 		exactUser = row[0]
         # New hash date is when salt that goes with password to create hash was
         # changed from loginp to DB_KEY3 since loginp did not always exactly match username
+		newHash = dbInfo.DB_KEY3 + passp
+		oldHash = loginp + passp
 		if row[3] > newhashDate or (row[4] != None and row[4] > newhashDate):
-			crypt_pass = hashlib.sha1(dbInfo.DB_KEY3 + passp).hexdigest()
+			crypt_pass = hashlib.sha1(newHash.encode()).hexdigest()
 		else:
-			crypt_pass = hashlib.sha1(loginp + passp).hexdigest()
+			crypt_pass = hashlib.sha1(oldHash.encode()).hexdigest()
 		if passc != None:
 			# already encrypted password was sent
 			crypt_pass = passc
@@ -92,7 +94,8 @@ else:
 			updatestr = 'UPDATE tUsers SET lastLogin=NOW() WHERE userID=%s'
 			cursor.execute(updatestr, (loginp,))
 			dbSession.verifySessionDB()
-			sid = hashlib.sha1(str(time.time()) + exactUser).hexdigest()
+			sidHash = str(time.time()) + exactUser
+			sid = hashlib.sha1(sidHash.encode()).hexdigest()
 			updatestr = 'INSERT INTO tSessions (sid, userID, expires, pushKey) VALUES (%s, %s, %s, %s)'
 			cursor.execute(updatestr, (sid, exactUser, time.time() + duration, push_key))
 			result = 'success'
@@ -105,20 +108,20 @@ else:
 if sid == None:
 	sid = ""
 if useCookies:
-	cookies['loginAttempt'] = result
+	C['loginAttempt'] = result
 	if result == "success":
 		# session id cookie expires when browser closes unless we are told to persist
 		expiration = datetime.datetime.utcnow() + datetime.timedelta(days=180)
-		cookies['gh_sid'] = sid
+		C['gh_sid'] = sid
 		if persist != None:
-			cookies['gh_sid']['expires'] = expiration.strftime("%a, %d-%b-%Y %H:%M:%S GMT")
+			C['gh_sid']['expires'] = expiration.strftime("%a, %d-%b-%Y %H:%M:%S GMT")
 		# userid and theme stay for up to 7 days
 		expiration = datetime.datetime.now() + datetime.timedelta(days=7)
-		cookies['userID'] = exactUser
-		cookies['userID']['expires'] = expiration.strftime("%a, %d-%b-%Y %H:%M:%S GMT")
-		cookies['uiTheme'] = dbShared.getUserAttr(loginp, 'themeName')
-		cookies['uiTheme']['expires'] = expiration.strftime("%a, %d-%b-%Y %H:%M:%S GMT")
-	print cookies
+		C['userID'] = exactUser
+		C['userID']['expires'] = expiration.strftime("%a, %d-%b-%Y %H:%M:%S GMT")
+		C['uiTheme'] = dbShared.getUserAttr(loginp, 'themeName')
+		C['uiTheme']['expires'] = expiration.strftime("%a, %d-%b-%Y %H:%M:%S GMT")
+	print(C)
 else:
 	# add results to url if not using cookies
 	linkappend = 'loginAttempt=' + urllib.quote(result) + '&gh_sid=' + sid
@@ -129,9 +132,9 @@ if src_url != None:
 	else:
 		queryChar = '?'
 	# go back where they came from
-	print 'Status: 303 See Other'
-	print 'Location: ' + src_url + queryChar + linkappend
-	print ''
+	print('Status: 303 See Other')
+	print('Location: ' + src_url + queryChar + linkappend)
+	print('')
 else:
-	print 'Content-Type: text/html\n'
-	print result + '-' + sid
+	print('Content-Type: text/html\n')
+	print(result + '-' + sid)

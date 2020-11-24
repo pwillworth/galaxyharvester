@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2019 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -23,8 +23,8 @@
 import sys
 import os
 import cgi
-import Cookie
-import MySQLdb
+from http import cookies
+import pymysql
 import ghShared
 import dbSession
 import dbShared
@@ -44,23 +44,23 @@ except KeyError:
 form = cgi.FieldStorage()
 # Get Cookies
 useCookies = 1
-cookies = Cookie.SimpleCookie()
+C = cookies.SimpleCookie()
 try:
-	cookies.load(os.environ['HTTP_COOKIE'])
+	C.load(os.environ['HTTP_COOKIE'])
 except KeyError:
 	useCookies = 0
 
 if useCookies:
 	try:
-		currentUser = cookies['userID'].value
+		currentUser = C['userID'].value
 	except KeyError:
 		currentUser = ''
 	try:
-		loginResult = cookies['loginAttempt'].value
+		loginResult = C['loginAttempt'].value
 	except KeyError:
 		loginResult = 'success'
 	try:
-		sid = cookies['gh_sid'].value
+		sid = C['gh_sid'].value
 	except KeyError:
 		sid = form.getfirst('gh_sid', '')
 else:
@@ -69,7 +69,7 @@ else:
 	sid = form.getfirst('gh_sid', '')
 
 errstr=''
-if not form.has_key("avatar"):
+if not "avatar" in form:
 	errstr = "No avatar sent."
 else:
 	img_data = form["avatar"]
@@ -149,16 +149,16 @@ else:
 
 
 if useCookies:
-	cookies['avatarAttempt'] = result
-	cookies['avatarAttempt']['max-age'] = 60
-	print cookies
+	C['avatarAttempt'] = result
+	C['avatarAttempt']['max-age'] = 60
+	print(C)
 else:
 	linkappend = linkappend + '&avatarAttempt=' + urllib.quote(result)
 
 if currentUser != None:
 	# redirect back to user page
-	print 'Status: 303 See Other'
-	print 'Location: {0}user.py/{1}?{2}'.format(ghShared.BASE_SCRIPT_URL, currentUser, linkappend)
-	print ''
+	print('Status: 303 See Other')
+	print('Location: {0}user.py/{1}?{2}'.format(ghShared.BASE_SCRIPT_URL, currentUser, linkappend))
+	print('')
 else:
-	print result
+	print(result)

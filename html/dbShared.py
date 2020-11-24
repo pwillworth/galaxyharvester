@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
  Copyright 2020 Paul Willworth <ioscode@gmail.com>
@@ -21,7 +21,7 @@
 """
 
 
-import MySQLdb
+import pymysql
 import sys
 import time
 from datetime import timedelta, datetime
@@ -34,11 +34,11 @@ import ghShared
 import difflib
 
 def ghConn():
-	conn = MySQLdb.connect(host = dbInfo.DB_HOST,
-		db = dbInfo.DB_NAME,
-		user = dbInfo.DB_USER,
-		passwd = dbInfo.DB_PASS)
-        conn.autocommit(True)
+	conn = pymysql.connect(host = dbInfo.DB_HOST,
+	db = dbInfo.DB_NAME,
+	user = dbInfo.DB_USER,
+	passwd = dbInfo.DB_PASS)
+	conn.autocommit(True)
 	return conn
 
 def dbInsertSafe(insertStr):
@@ -205,7 +205,7 @@ def logSchematicEvent(spawnID, galaxy, schematicID, expGroup, eventType, eventDe
 	cursor = conn.cursor()
 	try:
 		cursor.execute('INSERT INTO {0} (galaxy, eventTime, eventType, schematicID, expGroup, spawnID, eventDetail) VALUES (%s, NOW(), %s, %s, %s, %s, %s);'.format(eventTable), [galaxy, eventType, schematicID, expGroup, spawnID, eventDetail])
-	except MySQLdb.IntegrityError as e:
+	except pymysql.IntegrityError as e:
 		sys.stderr.write('Tried to insert duplicate schematic event: ' + eventDetail)
 	result = cursor.rowcount
 	if result < 1:

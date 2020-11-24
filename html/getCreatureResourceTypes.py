@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com> & Chet Bortz <thrusterhead@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com> & Chet Bortz <thrusterhead@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -21,11 +21,11 @@
 """
 import os
 import sys
-import Cookie
+from http import cookies
 import dbSession
 import dbShared
 import cgi
-import MySQLdb
+import pymysql
 import ghShared
 #
 form = cgi.FieldStorage()
@@ -72,5 +72,5 @@ if (cursor):
   cursor.close()
 conn.close()
 
-print 'Content-type: text/html\n'
-print clist
+print('Content-type: text/html\n')
+print(clist)

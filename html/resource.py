@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
  Copyright 2020 Paul Willworth <ioscode@gmail.com>
@@ -23,10 +23,10 @@
 import os
 import sys
 import cgi
-import Cookie
+from http import cookies
 import dbSession
 import dbShared
-import MySQLdb
+import pymysql
 import ghShared
 import ghLists
 import ghObjects
@@ -169,27 +169,27 @@ def main():
 	form = cgi.FieldStorage()
 	# Get Cookies
 
-	cookies = Cookie.SimpleCookie()
+	C = cookies.SimpleCookie()
 	try:
-		cookies.load(os.environ['HTTP_COOKIE'])
+		C.load(os.environ['HTTP_COOKIE'])
 	except KeyError:
 		useCookies = 0
 
 	if useCookies:
 		try:
-			currentUser = cookies['userID'].value
+			currentUser = C['userID'].value
 		except KeyError:
 			currentUser = ''
 		try:
-			loginResult = cookies['loginAttempt'].value
+			loginResult = C['loginAttempt'].value
 		except KeyError:
 			loginResult = 'success'
 		try:
-			sid = cookies['gh_sid'].value
+			sid = C['gh_sid'].value
 		except KeyError:
 			sid = form.getfirst('gh_sid', '')
 		try:
-			uiTheme = cookies['uiTheme'].value
+			uiTheme = C['uiTheme'].value
 		except KeyError:
 			uiTheme = ''
 	else:
@@ -217,7 +217,7 @@ def main():
 			uiTheme = 'crafter'
 
 	path = ['']
-	if os.environ.has_key('PATH_INFO'):
+	if 'PATH_INFO' in os.environ:
 		path = os.environ['PATH_INFO'].split('/')[1:]
 		path = [p for p in path if p != '']
 
@@ -251,12 +251,12 @@ def main():
 
 	pictureName = dbShared.getUserAttr(currentUser, 'pictureName')
 
-	print 'Content-type: text/html\n'
+	print('Content-type: text/html\n')
 	env = Environment(loader=FileSystemLoader('templates'))
 	env.globals['BASE_SCRIPT_URL'] = ghShared.BASE_SCRIPT_URL
 	env.globals['MOBILE_PLATFORM'] = ghShared.getMobilePlatform(os.environ['HTTP_USER_AGENT'])
 	template = env.get_template('resource.html')
-	print template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), spawnName=spawnName, resHTML=resHTML, resHistory=resHistory, showAdmin=(userReputation >= ghShared.MIN_REP_VALS['EDIT_RESOURCE_GALAXY_NAME'] or admin), spawnID=spawnID, spawnGalaxy=galaxy, enableCAPTCHA=ghShared.RECAPTCHA_ENABLED, siteidCAPTCHA=ghShared.RECAPTCHA_SITEID)
+	print(template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), spawnName=spawnName, resHTML=resHTML, resHistory=resHistory, showAdmin=(userReputation >= ghShared.MIN_REP_VALS['EDIT_RESOURCE_GALAXY_NAME'] or admin), spawnID=spawnID, spawnGalaxy=galaxy, enableCAPTCHA=ghShared.RECAPTCHA_ENABLED, siteidCAPTCHA=ghShared.RECAPTCHA_SITEID))
 
 
 if __name__ == "__main__":

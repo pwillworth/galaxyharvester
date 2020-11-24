@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2019 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -22,11 +22,11 @@
 
 import os
 import sys
-import Cookie
+from http import cookies
 import dbSession
 import dbShared
 import cgi
-import MySQLdb
+import pymysql
 import ghLists
 import ghObjects
 #
@@ -53,7 +53,7 @@ def getProfOrder(profID):
 
 		expCursor.close()
 		# calculate column sort by based on quality weights((CR-CRmin) / (CRmax-CRmin))
-		for k, v in stats.iteritems():
+		for k, v in stats.items():
 			weightVal = '%.2f' % (v*1.0 / weightTotal * 200)
 			obyStr = obyStr + '+CASE WHEN ' + k + 'max > 0 THEN ((' + k + '-' + k + 'min) / (' + k + 'max-' + k + 'min))* ' + weightVal + ' ELSE 0 END'
 			obyStr2 = obyStr2 + '+CASE WHEN ' + k + 'max > 0 THEN ' + weightVal + ' ELSE 0 END'
@@ -97,7 +97,7 @@ def getTypeOrder(tabID, typeID):
 
 		expCursor.close()
 		# calculate column sort by based on quality weights
-		for k, v in stats.iteritems():
+		for k, v in stats.items():
 			weightVal = '%.2f' % (v / weightTotal * 200)
 			obyStr = obyStr + '+CASE WHEN ' + k + 'max > 0 THEN ((' + k + '-' + k + 'min) / (' + k + 'max-' + k + 'min))*' + weightVal + ' ELSE ' + weightVal + '/2 END'
 			obyStr2 = obyStr2 + '+' + weightVal
@@ -157,23 +157,23 @@ except KeyError:
 form = cgi.FieldStorage()
 # Get Cookies
 useCookies = 1
-cookies = Cookie.SimpleCookie()
+C = cookies.SimpleCookie()
 try:
-	cookies.load(os.environ['HTTP_COOKIE'])
+	C.load(os.environ['HTTP_COOKIE'])
 except KeyError:
 	useCookies = 0
 
 if useCookies:
 	try:
-		currentUser = cookies['userID'].value
+		currentUser = C['userID'].value
 	except KeyError:
 		currentUser = ''
 	try:
-		loginResult = cookies['loginAttempt'].value
+		loginResult = C['loginAttempt'].value
 	except KeyError:
 		loginResult = 'success'
 	try:
-		sid = cookies['gh_sid'].value
+		sid = C['gh_sid'].value
 	except KeyError:
 		sid = form.getfirst('gh_sid', '')
 else:
@@ -209,8 +209,8 @@ if (sess != ''):
 
 # Main program
 
-print 'Content-type: text/html\n'
-print '<table width="100%" class=resourceStats>'
+print('Content-type: text/html\n')
+print('<table width="100%" class=resourceStats>')
 if galaxy != '':
 	galaxyState = dbShared.galaxyState(galaxy)
 	conn = dbShared.ghConn()
@@ -312,15 +312,15 @@ if galaxy != '':
 				s.favorite = 1
 			s.planets = dbShared.getSpawnPlanets(conn, row[0], True, row[2])
 
-			print '  <tr><td>'
+			print('  <tr><td>')
 			if logged_state > 0 and galaxyState == 1:
 				controlsUser = currentUser
 			else:
 				controlsUser = ''
-			print s.getHTML(formatStyle, "", controlsUser, int(stats[2]), dbShared.getUserAdmin(conn, currentUser, galaxy))
-			print '</td></tr>'
+			print(s.getHTML(formatStyle, "", controlsUser, int(stats[2]), dbShared.getUserAdmin(conn, currentUser, galaxy)))
+			print('</td></tr>')
 			row = cursor.fetchone()
 
 		cursor.close()
 	conn.close()
-print '  </table>'
+print('  </table>')

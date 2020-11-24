@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -22,15 +22,15 @@
 
 import os
 import cgi
-import Cookie
-import MySQLdb
+from http import cookies
+import pymysql
 import dbSession
 import dbShared
 
-cookies = Cookie.SimpleCookie()
+C = cookies.SimpleCookie()
 errorstr = ""
 try:
-    cookies.load(os.environ["HTTP_COOKIE"])
+    C.load(os.environ["HTTP_COOKIE"])
 except KeyError:
     errorstr = "no cookies\n"
 
@@ -38,12 +38,12 @@ form = cgi.FieldStorage()
 
 logged_state = 0
 try:
-    currentUser = cookies['userID'].value
+    currentUser = C['userID'].value
 except KeyError:
     currentUser = ""
 
 try:
-    sid = cookies['gh_sid'].value
+    sid = C['gh_sid'].value
 except KeyError:
     sid = form.getfirst('gh_sid', '')
 # escape input to prevent sql injection
@@ -67,9 +67,9 @@ if logged_state > 0:
 
 if src_url != None:
     # go back where they came from
-    print 'Status: 303 See Other'
-    print 'Location: ' + src_url
-    print ''
+    print('Status: 303 See Other')
+    print('Location: ' + src_url)
+    print('')
 else:
-    print 'Content-Type: text/html\n'
-    print 'logout complete'
+    print('Content-Type: text/html\n')
+    print('logout complete')

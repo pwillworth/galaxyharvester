@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 import os
 import sys
-import MySQLdb
+import pymysql
 import urllib
 import urllib2
 
@@ -26,7 +26,7 @@ localUser = 'webusr'
 localPass = ''
 localName = 'swgresource'
 
-conn = MySQLdb.connect(host = localHost,
+conn = pymysql.connect(host = localHost,
 	db = localName,
 	user = localUser,
 	passwd = localPass,

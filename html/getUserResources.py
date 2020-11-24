@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2019 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -22,11 +22,11 @@
 
 import os
 import sys
-import Cookie
+from http import cookies
 import dbSession
 import dbShared
 import cgi
-import MySQLdb
+import pymysql
 import ghShared
 import ghLists
 import ghObjects
@@ -60,19 +60,19 @@ form = cgi.FieldStorage()
 # Get Cookies
 errorstr = ''
 result = ''
-cookies = Cookie.SimpleCookie()
+C = cookies.SimpleCookie()
 try:
-	cookies.load(os.environ['HTTP_COOKIE'])
+	C.load(os.environ['HTTP_COOKIE'])
 except KeyError:
 	errorstr = 'no cookies\n'
 
 if errorstr == '':
 	try:
-		currentUser = cookies['userID'].value
+		currentUser = C['userID'].value
 	except KeyError:
 		currentUser = ''
 	try:
-		sid = cookies['gh_sid'].value
+		sid = C['gh_sid'].value
 	except KeyError:
 		sid = form.getfirst('gh_sid', '')
 else:
@@ -181,10 +181,10 @@ groupUnits = 0
 groupResult = ""
 
 if formatType == 'csv':
-	print 'Content-type: text/csv'
-	print 'Content-disposition: attachment; filename="inventory.csv"\n'
+	print('Content-type: text/csv')
+	print('Content-disposition: attachment; filename="inventory.csv"\n')
 else:
-	print 'Content-type: text/html\n'
+	print('Content-type: text/html\n')
 
 if uid != '':
 	if galaxy.isdigit():
@@ -311,4 +311,4 @@ if uid != '':
 else:
 	result = "Error: No user specified."
 
-print result
+print(result)

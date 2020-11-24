@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2018 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -23,7 +23,7 @@
 import os
 import sys
 import cgi
-import MySQLdb
+import pymysql
 import dbShared
 
 
@@ -80,7 +80,7 @@ def getGalaxyStatusList():
 	result = ''
 	result += '    <option value="0">Draft</option>'
 	result += '    <option value="1">Active</option>'
-        result += '    <option value="2">Inactive</option>'
+	result += '    <option value="2">Inactive</option>'
 	result += '    <option value="3">Removed</option>'
 	return result
 

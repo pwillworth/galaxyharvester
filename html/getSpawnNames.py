@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2012 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -21,11 +21,11 @@
 """
 import os
 import sys
-import Cookie
+from http import cookies
 import dbSession
 import dbShared
 import cgi
-import MySQLdb
+import pymysql
 try:
 	import json
 except ImportError:
@@ -53,7 +53,7 @@ if qlen > 0:
 	criteriaStr += ' AND SUBSTRING(spawnName, 1, ' + str(qlen) + ') = \'' + q + '\''
 
 # Main program
-print 'Content-type: text/html; charset=UTF-8\n'
+print('Content-type: text/html; charset=UTF-8\n')
 if errstr == '':
 	conn = dbShared.ghConn()
 	cursor = conn.cursor()
@@ -69,8 +69,7 @@ if errstr == '':
         
 		cursor.close()
 	conn.close()
-	print json.dumps({'query': q, 'suggestions': spawns})
+	print(json.dumps({'query': q, 'suggestions': spawns}))
 else:
-	print errstr
-
+	print(errstr)
 

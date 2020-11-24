@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
  Copyright 2020 Paul Willworth <ioscode@gmail.com>
@@ -23,9 +23,9 @@
 import os
 import sys
 import cgi
-import Cookie
+from http import cookies
 import dbSession
-import MySQLdb
+import pymysql
 import ghShared
 import ghLists
 import dbShared
@@ -52,35 +52,35 @@ def main():
 	form = cgi.FieldStorage()
 	# Get Cookies
 	useCookies = 1
-	cookies = Cookie.SimpleCookie()
+	C = cookies.SimpleCookie()
 	try:
-		cookies.load(os.environ['HTTP_COOKIE'])
+		C.load(os.environ['HTTP_COOKIE'])
 	except KeyError:
 		useCookies = 0
 
 	if useCookies:
 		try:
-			currentUser = cookies['userID'].value
+			currentUser = C['userID'].value
 		except KeyError:
 			currentUser = ''
 		try:
-			loginResult = cookies['loginAttempt'].value
+			loginResult = C['loginAttempt'].value
 		except KeyError:
 			loginResult = 'success'
 		try:
-			sid = cookies['gh_sid'].value
+			sid = C['gh_sid'].value
 		except KeyError:
 			sid = form.getfirst('gh_sid', '')
 		try:
-			uiTheme = cookies['uiTheme'].value
+			uiTheme = C['uiTheme'].value
 		except KeyError:
 			uiTheme = ''
 		try:
-			avatarResult = cookies['avatarAttempt'].value
+			avatarResult = C['avatarAttempt'].value
 		except KeyError:
 			avatarResult = ''
 		try:
-			galaxy = cookies['galaxy'].value
+			galaxy = C['galaxy'].value
 		except KeyError:
 			galaxy = ghShared.DEFAULT_GALAXY
 	else:
@@ -147,7 +147,7 @@ def main():
 	uid = ''
 	template = 'user.html'
 	userPage = 'root'
-	if os.environ.has_key('PATH_INFO'):
+	if 'PATH_INFO' in os.environ:
 		path = os.environ['PATH_INFO'].split('/')[1:]
 		path = [p for p in path if p != '']
 
@@ -220,7 +220,7 @@ def main():
 			conn.close()
 
 		# Load list of unlocked abilities
-		for k, v in ghShared.ABILITY_DESCR.iteritems():
+		for k, v in ghShared.ABILITY_DESCR.items():
 			if reputation >= ghShared.MIN_REP_VALS[k] and ghShared.MIN_REP_VALS[k] != -99:
 				a = userAbility(k, v, True)
 				a.minReputation = ghShared.MIN_REP_VALS[k]
@@ -231,16 +231,16 @@ def main():
 	joinedStr = 'Joined ' + ghShared.timeAgo(created) + ' ago'
 	pictureName = dbShared.getUserAttr(currentUser, 'pictureName')
 
-	print 'Content-type: text/html\n'
+	print('Content-type: text/html\n')
 	env = Environment(loader=FileSystemLoader('templates'))
 	env.globals['BASE_SCRIPT_URL'] = ghShared.BASE_SCRIPT_URL
 	env.globals['MOBILE_PLATFORM'] = ghShared.getMobilePlatform(os.environ['HTTP_USER_AGENT'])
 	template = env.get_template(template)
 	if userPage == 'inventory':
-		print template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), professionList=ghLists.getProfessionList(galaxy), resourceGroupList=ghLists.getResourceGroupList(), resourceTypeList=ghLists.getResourceTypeList(galaxy), uid=uid, editable=(uid == currentUser and logged_state==1), enableCAPTCHA=ghShared.RECAPTCHA_ENABLED, siteidCAPTCHA=ghShared.RECAPTCHA_SITEID)
+		print(template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), professionList=ghLists.getProfessionList(galaxy), resourceGroupList=ghLists.getResourceGroupList(), resourceTypeList=ghLists.getResourceTypeList(galaxy), uid=uid, editable=(uid == currentUser and logged_state==1), enableCAPTCHA=ghShared.RECAPTCHA_ENABLED, siteidCAPTCHA=ghShared.RECAPTCHA_SITEID))
 	else:
-		print template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), themeList=ghLists.getThemeList(), uid=uid, convertGI=convertGI, sid=sid, avatarResult=avatarResult, email=email, donorBadge=donorBadge, joinedStr=joinedStr, userPictureName=userPictureName, tmpStat=tmpStat, userTitle=userTitle, friendCountStr=friendCountStr,
-		userAbilities=abilities, resScore=resScore, mapScore=mapScore, reputation=reputation, resColor=resColor, mapColor=mapColor, repColor=repColor, siteAlertCheckStr=siteAlertCheckStr, emailAlertCheckStr=emailAlertCheckStr, mobileAlertCheckStr=mobileAlertCheckStr, sharedInventory=sharedInventory, sharedRecipes=sharedRecipes, inGameInfo=ghShared.convertText(inGameInfo, 'html'), enableCAPTCHA=ghShared.RECAPTCHA_ENABLED, siteidCAPTCHA=ghShared.RECAPTCHA_SITEID)
+		print(template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), themeList=ghLists.getThemeList(), uid=uid, convertGI=convertGI, sid=sid, avatarResult=avatarResult, email=email, donorBadge=donorBadge, joinedStr=joinedStr, userPictureName=userPictureName, tmpStat=tmpStat, userTitle=userTitle, friendCountStr=friendCountStr,
+		userAbilities=abilities, resScore=resScore, mapScore=mapScore, reputation=reputation, resColor=resColor, mapColor=mapColor, repColor=repColor, siteAlertCheckStr=siteAlertCheckStr, emailAlertCheckStr=emailAlertCheckStr, mobileAlertCheckStr=mobileAlertCheckStr, sharedInventory=sharedInventory, sharedRecipes=sharedRecipes, inGameInfo=ghShared.convertText(inGameInfo, 'html'), enableCAPTCHA=ghShared.RECAPTCHA_ENABLED, siteidCAPTCHA=ghShared.RECAPTCHA_SITEID))
 
 if __name__ == "__main__":
 	main()

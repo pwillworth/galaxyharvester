@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2019 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -23,11 +23,11 @@
 import os
 import sys
 import re
-import Cookie
+from http import cookies
 import dbSession
 import dbShared
 import cgi
-import MySQLdb
+import pymysql
 import time
 from datetime import timedelta, datetime
 import ghShared
@@ -83,23 +83,23 @@ except KeyError:
 form = cgi.FieldStorage()
 # Get Cookies
 useCookies = 1
-cookies = Cookie.SimpleCookie()
+C = cookies.SimpleCookie()
 try:
-	cookies.load(os.environ['HTTP_COOKIE'])
+	C.load(os.environ['HTTP_COOKIE'])
 except KeyError:
 	useCookies = 0
 
 if useCookies:
 	try:
-		currentUser = cookies['userID'].value
+		currentUser = C['userID'].value
 	except KeyError:
 		currentUser = ''
 	try:
-		loginResult = cookies['loginAttempt'].value
+		loginResult = C['loginAttempt'].value
 	except KeyError:
 		loginResult = 'success'
 	try:
-		sid = cookies['gh_sid'].value
+		sid = C['gh_sid'].value
 	except KeyError:
 		sid = form.getfirst('gh_sid', '')
 else:
@@ -144,9 +144,9 @@ if not logged_state > 0:
 	errstr = errstr + "Error: must be logged in to get alerts. \r\n"
 
 if formatType == 'json':
-	print 'Content-type: text/json\n'
+	print('Content-type: text/json\n')
 else:
-	print 'Content-type: text/html\n'
+	print('Content-type: text/html\n')
 
 # Only process if no errors
 if (errstr == ""):
@@ -162,12 +162,12 @@ if (errstr == ""):
 	cursor.close()
 	conn.close()
 
-	print result
+	print(result)
 else:
 	if formatType == 'json':
-		print '{"response" : "' + errstr + '"}'
+		print('{"response" : "' + errstr + '"}')
 	else:
-		print '<h2>' + errstr + '</h2>'
+		print('<h2>' + errstr + '</h2>')
 
 if (result.find("Error:") > -1):
 	sys.exit(500)

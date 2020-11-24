@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -21,7 +21,7 @@
 """
 
 import cgi
-import MySQLdb
+import pymysql
 import dbShared
 import ghShared
 #
@@ -33,7 +33,7 @@ outType = form.getfirst('outType', '')
 craftingTab = dbShared.dbInsertSafe(craftingTab)
 outType = dbShared.dbInsertSafe(outType)
 
-print 'Content-type: text/html\n'
+print('Content-type: text/html\n')
 
 if len(craftingTab) > 0:
 	criteriaStr = ' AND craftingTab = {0}'.format(craftingTab)
@@ -53,11 +53,11 @@ if (cursor):
 			else:
 				imageName = 'none.jpg'
 
-			print "<div id='schemComponent{1}' class='inventoryItem inlineBlock' style='background-image:url(/images/schematics/{2});background-size:64px 64px;' tag='{0}'>".format(row[0], row[2], imageName)
-			print "<div style='position: absolute;bottom:0;width:100%'>{0}</div>".format(row[1])
-			print "</div>"
+			print("<div id='schemComponent{1}' class='inventoryItem inlineBlock' style='background-image:url(/images/schematics/{2});background-size:64px 64px;' tag='{0}'>".format(row[0], row[2], imageName))
+			print("<div style='position: absolute;bottom:0;width:100%'>{0}</div>".format(row[1]))
+			print("</div>")
 		else:
-			print '<option value="'+str(row[0])+'" title="'+row[2]+'">'+row[1]+'</option>'
+			print('<option value="'+str(row[0])+'" title="'+row[2]+'">'+row[1]+'</option>')
 		row = cursor.fetchone()
 
 	cursor.close()

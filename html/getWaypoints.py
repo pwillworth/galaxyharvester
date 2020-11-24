@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -22,11 +22,11 @@
 
 import os
 import sys
-import Cookie
+from http import cookies
 import dbSession
 import dbShared
 import cgi
-import MySQLdb
+import pymysql
 from xml.dom import minidom
 import ghShared
 #import locale
@@ -35,19 +35,19 @@ import ghShared
 form = cgi.FieldStorage()
 # Get Cookies
 errorstr = ''
-cookies = Cookie.SimpleCookie()
+C = cookies.SimpleCookie()
 try:
-    cookies.load(os.environ['HTTP_COOKIE'])
+    C.load(os.environ['HTTP_COOKIE'])
 except KeyError:
     errorstr = 'no cookies\n'
 
 if errorstr == '':
     try:
-        currentUser = cookies['userID'].value
+        currentUser = C['userID'].value
     except KeyError:
         currentUser = ''
     try:
-        sid = cookies['gh_sid'].value
+        sid = C['gh_sid'].value
     except KeyError:
         sid = form.getfirst('gh_sid', '')
 else:
@@ -87,7 +87,7 @@ result = ''
 setCriteria = ''
 rowLimitStr = ''
 sortString = ''
-print 'Content-type: text/xml\n'
+print('Content-type: text/xml\n')
 doc = minidom.Document()
 eRoot = doc.createElement("result")
 doc.appendChild(eRoot)
@@ -254,7 +254,7 @@ tText = doc.createTextNode(result)
 eText.appendChild(tText)
 eRoot.appendChild(eText)
 
-print doc.toxml()
+print(doc.toxml())
 if (result.find("Error:") > -1):
 	sys.exit(500)
 else:

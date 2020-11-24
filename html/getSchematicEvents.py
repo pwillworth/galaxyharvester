@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2019 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -23,7 +23,7 @@
 import sys
 import dbShared
 import cgi
-import MySQLdb
+import pymysql
 import time
 from datetime import timedelta, datetime
 import ghShared
@@ -65,9 +65,9 @@ responseData = ''
 
 # Main program
 if formatType == 'json':
-	print 'Content-type: text/json\n'
+	print('Content-type: text/json\n')
 else:
-	print 'Content-type: text/html\n'
+	print('Content-type: text/html\n')
 
 if spawnID.isdigit() == False and schematicID == '':
 	errors = 'Error: you must provide a spawn to get schematic event history for, or a schematicID to get edit history for.'
@@ -149,11 +149,11 @@ else:
 conn.close()
 
 if errors == '':
-	print responseData
+	print(responseData)
 	sys.exit(200)
 else:
 	if formatType == 'json':
-		print '{ "response" : "' + errors + '"}'
+		print('{ "response" : "' + errors + '"}')
 	else:
-		print errors
+		print(errors)
 	sys.exit(500)

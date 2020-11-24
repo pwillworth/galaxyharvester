@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -23,9 +23,9 @@
 import os
 import sys
 import cgi
-import Cookie
+from http import cookies
 import dbSession
-import MySQLdb
+import pymysql
 import ghShared
 import dbShared
 
@@ -34,19 +34,19 @@ def main():
 	form = cgi.FieldStorage()
 	# Get Cookies
 	useCookies = 1
-	cookies = Cookie.SimpleCookie()
+	C = cookies.SimpleCookie()
 	try:
-		cookies.load(os.environ['HTTP_COOKIE'])
+		C.load(os.environ['HTTP_COOKIE'])
 	except KeyError:
 		useCookies = 0
 
 	if useCookies:
 		try:
-			currentUser = cookies['userID'].value
+			currentUser = C['userID'].value
 		except KeyError:
 			currentUser = ''
 		try:
-			sid = cookies['gh_sid'].value
+			sid = C['gh_sid'].value
 		except KeyError:
 			sid = form.getfirst('gh_sid', '')
 	else:
@@ -113,8 +113,8 @@ def main():
 	else:
 		tmpStr = 'Error: You must be logged in to get your favorites list.'
 
-	print 'Content-type: text/html\n'
-	print tmpStr
+	print('Content-type: text/html\n')
+	print(tmpStr)
 
 
 if __name__ == "__main__":

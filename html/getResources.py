@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
  Copyright 2020 Paul Willworth <ioscode@gmail.com>
@@ -22,10 +22,10 @@
 
 import os
 import sys
-import Cookie
+from http import cookies
 import dbSession
 import cgi
-import MySQLdb
+import pymysql
 import time
 from datetime import timedelta, datetime
 import ghLists
@@ -171,23 +171,23 @@ except KeyError:
 form = cgi.FieldStorage()
 # Get Cookies
 useCookies = 1
-cookies = Cookie.SimpleCookie()
+C = cookies.SimpleCookie()
 try:
-	cookies.load(os.environ['HTTP_COOKIE'])
+	C.load(os.environ['HTTP_COOKIE'])
 except KeyError:
 	useCookies = 0
 
 if useCookies:
 	try:
-		currentUser = cookies['userID'].value
+		currentUser = C['userID'].value
 	except KeyError:
 		currentUser = ''
 	try:
-		loginResult = cookies['loginAttempt'].value
+		loginResult = C['loginAttempt'].value
 	except KeyError:
 		loginResult = 'success'
 	try:
-		sid = cookies['gh_sid'].value
+		sid = C['gh_sid'].value
 	except KeyError:
 		sid = form.getfirst('gh_sid', '')
 else:
@@ -344,9 +344,9 @@ stats = dbShared.getUserStats(currentUser, galaxy).split(",")
 userReputation = int(stats[2])
 
 if formatType == 'json':
-	print 'Content-type: text/json\n'
+	print('Content-type: text/json\n')
 else:
-	print 'Content-type: text/html\n'
+	print('Content-type: text/html\n')
 
 if (errorStr == ""):
 	resData = ''
@@ -397,15 +397,15 @@ if (errorStr == ""):
 					responseData += '"response" :\n { "total_results" : ' + str(row[0]) + ',\n "total_pages" : 1,\n'
 			cursor.close()
 			responseData += ' "server_time" : "' + datetime.fromtimestamp(time.time()).strftime("%Y-%m-%d %H:%M:%S") + '",\n'
-		print responseData + ' "resources" : '
+		print(responseData + ' "resources" : ')
 		resData += '\n  }\n}'
 
 	conn.close()
-	print resData
+	print(resData)
 	sys.exit(200)
 else:
 	if formatType == 'json':
-		print '{ "response" : "' + errorStr + '" }'
+		print('{ "response" : "' + errorStr + '" }')
 	else:
-		print '<h2>' + errorStr + '</h2>'
+		print('<h2>' + errorStr + '</h2>')
 	sys.exit(500)

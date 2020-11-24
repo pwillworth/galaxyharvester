@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -21,7 +21,7 @@
 """
 
 import cgi
-import MySQLdb
+import pymysql
 import dbShared
 import ghShared
 #
@@ -36,13 +36,13 @@ resGroup = dbShared.dbInsertSafe(resGroup)
 outType = dbShared.dbInsertSafe(outType)
 galaxy = dbShared.dbInsertSafe(galaxy)
 
-print 'Content-type: text/html\n'
+print('Content-type: text/html\n')
 if outType == 'links':
-	print '<ul class="plain">'
+	print('<ul class="plain">')
 elif outType == 'graphic':
-	print ''
+	print('')
 else:
-	print '<option value="none" title="p00000000000">None</option>'
+	print('<option value="none" title="p00000000000">None</option>')
 
 if len(resGroup) > 0:
 	criteriaStr = ' AND (resourceGroup = "' + resGroup + '" OR resourceCategory = "' + resGroup + '")'
@@ -66,17 +66,17 @@ if (cursor):
 
 	while (row != None):
 		if outType == 'links':
-			print '<li><a href="' + ghShared.BASE_SCRIPT_URL + 'resourceType.py/' + row[0] + '">' + row[1] + '</a></li>'
+			print('<li><a href="' + ghShared.BASE_SCRIPT_URL + 'resourceType.py/' + row[0] + '">' + row[1] + '</a></li>')
 		elif outType == 'graphic':
-			print "<div id='resInventory{0}' class='inventoryItem inlineBlock' style='background-image:url(/images/resources/{2}.png);background-size:64px 64px;' tag='{1}'>".format(row[0], row[2], row[3])
-			print "<div style='position: absolute;bottom:0;width:100%'>{0}</div>".format(row[1])
-			print "</div>"
+			print("<div id='resInventory{0}' class='inventoryItem inlineBlock' style='background-image:url(/images/resources/{2}.png);background-size:64px 64px;' tag='{1}'>".format(row[0], row[2], row[3]))
+			print("<div style='position: absolute;bottom:0;width:100%'>{0}</div>".format(row[1]))
+			print("</div>")
 		else:
-			print '<option value="'+str(row[0])+'" title="'+row[2]+'">'+row[1]+'</option>'
+			print('<option value="'+str(row[0])+'" title="'+row[2]+'">'+row[1]+'</option>')
 		row = cursor.fetchone()
 
 	cursor.close()
 conn.close()
 
 if outType == 'links':
-	print '</ul>'
+	print('</ul>')

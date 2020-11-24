@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2016 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -21,11 +21,11 @@
 """
 import os
 import sys
-import Cookie
+from http import cookies
 import dbSession
 import dbShared
 import cgi
-import MySQLdb
+import pymysql
 import ghLists
 #
 form = cgi.FieldStorage()
@@ -62,7 +62,7 @@ def getArrayList(listType, sqlStr):
 	return '<list_data>' + vResult + nResult + pResult + '</list_data>'
 
 # Main program
-print 'Content-type: text/xml\n'
+print('Content-type: text/xml\n')
 listResult = ''
 
 if listType == 'resource_type':
@@ -83,7 +83,7 @@ if listType == 'galaxy':
 if listType == 'planet':
     listResult = getArrayList(listType, 'SELECT DISTINCT tPlanet.planetID, planetName FROM tPlanet, tGalaxyPlanet WHERE (tPlanet.planetID < 11) OR (tPlanet.planetID = tGalaxyPlanet.planetID AND tGalaxyPlanet.galaxyID = {0}) ORDER BY planetName;'.format(galaxy));
 
-print listResult
+print(listResult)
 
 if (listResult.find("Error:") > -1):
 	sys.exit(500)

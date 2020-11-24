@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2019 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -22,11 +22,11 @@
 
 import os
 import sys
-import Cookie
+from http import cookies
 import dbSession
 import dbShared
 import cgi
-import MySQLdb
+import pymysql
 import ghLists
 import ghObjects
 #
@@ -34,19 +34,19 @@ import ghObjects
 form = cgi.FieldStorage()
 # Get Cookies
 errorstr = ''
-cookies = Cookie.SimpleCookie()
+C = cookies.SimpleCookie()
 try:
-	cookies.load(os.environ['HTTP_COOKIE'])
+	C.load(os.environ['HTTP_COOKIE'])
 except KeyError:
 	errorstr = 'no cookies\n'
 
 if errorstr == '':
 	try:
-		currentUser = cookies['userID'].value
+		currentUser = C['userID'].value
 	except KeyError:
 		currentUser = ''
 	try:
-		sid = cookies['gh_sid'].value
+		sid = C['gh_sid'].value
 	except KeyError:
 		sid = form.getfirst('gh_sid', '')
 else:
@@ -67,8 +67,8 @@ if (sess != ''):
 
 # Main program
 
-print 'Content-type: text/html\n'
-print '<table width="100%" class=resourceStats>'
+print('Content-type: text/html\n')
+print('<table width="100%" class=resourceStats>')
 if galaxy != '':
 	if logged_state == 1:
 		favJoin = ' LEFT JOIN (SELECT itemID, favGroup FROM tFavorites WHERE userID="' + currentUser + '" AND favType=1) favs ON tResources.spawnID = favs.itemID'
@@ -143,15 +143,15 @@ if galaxy != '':
 				s.favorite = 1
 			s.planets = dbShared.getSpawnPlanets(conn, row[0], True, row[2])
 
-			print '  <tr><td>'
+			print('  <tr><td>')
 			if logged_state > 0 and galaxyState == 1:
 				controlsUser = currentUser
 			else:
 				controlsUser = ''
-			print s.getHTML(1, "", controlsUser, userReputation, dbShared.getUserAdmin(conn, currentUser, galaxy))
-			print '</td></tr>'
+			print(s.getHTML(1, "", controlsUser, userReputation, dbShared.getUserAdmin(conn, currentUser, galaxy)))
+			print('</td></tr>')
 			row = cursor.fetchone()
 
 		cursor.close()
 	conn.close()
-print '  </table>'
+print('  </table>')

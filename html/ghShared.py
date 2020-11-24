@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
  Copyright 2020 Paul Willworth <ioscode@gmail.com>
@@ -25,6 +25,7 @@ from datetime import timedelta, datetime
 import random
 import os
 import sys
+import math
 
 BASE_SCRIPT_URL = '/'
 DEFAULT_THEME = 'crafter'
@@ -73,13 +74,13 @@ def timeAgo(theTime):
 		tmpStr = ''
 		if (tmpDays > 0):
 			if (tmpDays > 365):
-				tmpStr = str(tmpDays / 365) + " years, "
+				tmpStr = str(math.floor(tmpDays / 365)) + " years, "
 				tmpDays = tmpDays % 365
 			return tmpStr + str(tmpDays)+" days"
 		elif (timeSinceEntered.seconds/3600 >= 1):
-			return str(timeSinceEntered.seconds/3600)+" hours"
+			return str(math.floor(timeSinceEntered.seconds/3600))+" hours"
 		elif (timeSinceEntered.seconds/60 >= 1):
-			return str(timeSinceEntered.seconds/60)+" minutes"
+			return str(math.floor(timeSinceEntered.seconds/60))+" minutes"
 		else:
 			return "less than a minute"
 	except:

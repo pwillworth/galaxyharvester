@@ -1,6 +1,6 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
-import MySQLdb
+import pymysql
 import os
 import sys
 
@@ -84,7 +84,7 @@ def scrapeFile(f, n, planet):
 			print "Skipping duplicate milk for " + speciesName
 
 #main
-conn = MySQLdb.connect(host = "localhost",
+conn = pymysql.connect(host = "localhost",
 		db = "swgresource",
 		user = "webusr",
 		passwd = "")

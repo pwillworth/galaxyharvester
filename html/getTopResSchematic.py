@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
  Copyright 2020 Paul Willworth <ioscode@gmail.com>
@@ -22,11 +22,11 @@
 
 import os
 import sys
-import Cookie
+from http import cookies
 import dbSession
 import dbShared
 import cgi
-import MySQLdb
+import pymysql
 import ghLists
 import ghObjects
 #
@@ -137,23 +137,23 @@ except KeyError:
 form = cgi.FieldStorage()
 # Get Cookies
 useCookies = 1
-cookies = Cookie.SimpleCookie()
+C = cookies.SimpleCookie()
 try:
-	cookies.load(os.environ['HTTP_COOKIE'])
+	C.load(os.environ['HTTP_COOKIE'])
 except KeyError:
 	useCookies = 0
 
 if useCookies:
 	try:
-		currentUser = cookies['userID'].value
+		currentUser = C['userID'].value
 	except KeyError:
 		currentUser = ''
 	try:
-		loginResult = cookies['loginAttempt'].value
+		loginResult = C['loginAttempt'].value
 	except KeyError:
 		loginResult = 'success'
 	try:
-		sid = cookies['gh_sid'].value
+		sid = C['gh_sid'].value
 	except KeyError:
 		sid = form.getfirst('gh_sid', '')
 else:
@@ -204,9 +204,9 @@ if logged_state == 1:
 else:
 	favCols = ', NULL, NULL'
 
-print 'Content-type: text/html\n'
+print('Content-type: text/html\n')
 if (errstr != ''):
-	print errstr
+	print(errstr)
 else:
 	conn = dbShared.ghConn()
 	# Only show update tools if user logged in and has positive reputation
@@ -222,7 +222,7 @@ else:
 		while (ingRow != None):
 			if (resGroup != str(ingRow[0])):
 				resGroup = str(ingRow[0])
-				print '<h3 class="standOut">' + str(ingRow[1]) + '</h3>'
+				print('<h3 class="standOut">' + str(ingRow[1]) + '</h3>')
 
 			# get quality attributes for schematic
 			stats = {}
@@ -250,7 +250,7 @@ else:
 
 			expCursor.close()
 			# calculate column sort by based on quality weights
-			for k, v in stats.iteritems():
+			for k, v in stats.items():
 				weightVal = '%.2f' % (v / weightTotal * 200)
 				obyStr = obyStr + '+CASE WHEN ' + k + 'max > 0 THEN (' + k + ' / 1000)*' + weightVal + ' ELSE ' + weightVal + '*.25 END'
 				obyStr2 = obyStr2 + '+' + weightVal
@@ -263,23 +263,23 @@ else:
 				resourceFormat = 0
 				if compare == 'undefined' or logged_state == 0:
 					resSQL = getResourceSQL(maxCheckStr, favCols, joinStr, galaxy, resGroup, obyStr, obyStr2, '')
-					print getResourceData(conn, resSQL, logged_state, galaxyState, resourceFormat, userReputation)
+					print(getResourceData(conn, resSQL, logged_state, galaxyState, resourceFormat, userReputation))
 				else:
 					# Include side by side comparison of inventory
 					resourceFormat = 1
-					print '<div class="resourceCompareGroup">'
-					print '<div class="inlineBlock" style="width:50%">'
-					print '<h4>Galaxy</h4>'
+					print('<div class="resourceCompareGroup">')
+					print('<div class="inlineBlock" style="width:50%">')
+					print('<h4>Galaxy</h4>')
 					resSQL = getResourceSQL(maxCheckStr, favCols, joinStr, galaxy, resGroup, obyStr, obyStr2, '')
-					print getResourceData(conn, resSQL, logged_state, galaxyState, resourceFormat, userReputation)
-					print '</div><div class="inlineBlock" style="width:50%">'
-					print '<h4>My Inventory</h4>'
+					print(getResourceData(conn, resSQL, logged_state, galaxyState, resourceFormat, userReputation))
+					print('</div><div class="inlineBlock" style="width:50%">')
+					print('<h4>My Inventory</h4>')
 					resSQL = getResourceSQL(maxCheckStr, favCols, joinStr, galaxy, resGroup, obyStr, obyStr2, 'y')
-					print getResourceData(conn, resSQL, logged_state, galaxyState, resourceFormat, userReputation)
-					print '</div></div>'
+					print(getResourceData(conn, resSQL, logged_state, galaxyState, resourceFormat, userReputation))
+					print('</div></div>')
 			else:
 				# no ingredient quality stats
-				print '<div>Stats do not matter</div>'
+				print('<div>Stats do not matter</div>')
 			ingRow = ingCursor.fetchone()
 		ingCursor.close()
 	conn.close()

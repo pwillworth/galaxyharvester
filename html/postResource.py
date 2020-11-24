@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2019 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -23,12 +23,12 @@
 import os
 import sys
 import re
-import Cookie
+from http import cookies
 import dbSession
 import dbShared
 import ghShared
 import cgi
-import MySQLdb
+import pymysql
 from xml.dom import minidom
 import ghNames
 
@@ -167,11 +167,11 @@ def addResStats(spawn, resType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER, forc
 	row = cursor.fetchone()
 	if row != None:
 		for i in range(11):
-			if row[i] != None or row[i] > 0:
+			if row[i] is not None and row[i] > 0:
 				statStr = ",".join((statStr, str(row[i])))
-			if row[i+11] > 0 and row[i] == None:
+			if row[i+11] > 0 and row[i] is None:
 				needStat = 1
-			if (resStats[i]>0 and resStats[i] != "" and resStats[i] != None):
+			if (resStats[i] > "0" and resStats[i] != "" and resStats[i] is not None):
 				hasStats = 1
 		# override normal behavior of only updating
 		# when there are no stats if forceOp is set to edit
@@ -218,23 +218,23 @@ def main():
 	form = cgi.FieldStorage()
 	# Get Cookies
 	useCookies = 1
-	cookies = Cookie.SimpleCookie()
+	C = cookies.SimpleCookie()
 	try:
-		cookies.load(os.environ['HTTP_COOKIE'])
+		C.load(os.environ['HTTP_COOKIE'])
 	except KeyError:
 		useCookies = 0
 
 	if useCookies:
 		try:
-			currentUser = cookies['userID'].value
+			currentUser = C['userID'].value
 		except KeyError:
 			currentUser = ''
 		try:
-			loginResult = cookies['loginAttempt'].value
+			loginResult = C['loginAttempt'].value
 		except KeyError:
 			loginResult = 'success'
 		try:
-			sid = cookies['gh_sid'].value
+			sid = C['gh_sid'].value
 		except KeyError:
 			sid = form.getfirst('gh_sid', '')
 	else:
@@ -353,7 +353,7 @@ def main():
 	else:
 		result = errstr
 
-	print 'Content-type: text/xml\n'
+	print('Content-type: text/xml\n')
 	doc = minidom.Document()
 	eRoot = doc.createElement("result")
 	doc.appendChild(eRoot)
@@ -370,7 +370,7 @@ def main():
 	tSource = doc.createTextNode(sourceRow)
 	eSource.appendChild(tSource)
 	eRoot.appendChild(eSource)
-	print doc.toxml()
+	print(doc.toxml())
 
 	if (result.find("Error:") > -1):
 		sys.exit(500)
@@ -378,4 +378,4 @@ def main():
 		sys.exit(200)
 
 if __name__ == "__main__":
-        main()
+	main()

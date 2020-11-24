@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
- Copyright 2010 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -22,11 +22,11 @@
 
 import os
 import sys
-import Cookie
+from http import cookies
 import dbSession
 import dbShared
 import cgi
-import MySQLdb
+import pymysql
 #
 
 def findName(nameString):
@@ -58,5 +58,5 @@ if (tmpID == ""):
 else:
     result = "That user name is not available."
 
-print 'Content-type: text/html\n'
-print result
+print('Content-type: text/html\n')
+print(result)
