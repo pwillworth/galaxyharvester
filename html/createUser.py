@@ -31,14 +31,14 @@ import pymysql
 import urllib
 import urllib2
 import json
+import smtplib
+from email.message import EmailMessage
 import dbSession
 import dbShared
 import ghShared
 sys.path.append("../")
 import dbInfo
 import keyInfo
-from mailer import Mailer
-from mailer import Message
 import mailInfo
 
 
@@ -69,14 +69,17 @@ def getCAPTCHA(token):
 
 def sendVerificationMail(user, address, code):
     # send message
-    message = Message(From="\"Galaxy Harvester Activation\" <{0}>".format(mailInfo.REGMAIL_USER),To=address)
-    message.Subject = "Galaxy Harvester Account Verification"
+    message = EmailMessage()
+    message['From'] = "\"Galaxy Harvester Activation\" <{0}>".format(mailInfo.REGMAIL_USER)
+    message['To'] = address
+    message['Subject'] = "Galaxy Harvester Account Verification"
     link = "http://galaxyharvester.net/verifyUser.py?vc={0}".format(code)
-    message.Body = "Hello " + user + ",\n\nYou have created a new account on galaxyharvester.net using this email address.  Before you can use your new account, you must verify this email with us by clicking the link below.  If the link does not work, please copy the link and paste it into your browser address box.\n\n" + link + "\n\nThanks,\n-Galaxy Harvester Administrator\n"
-    message.Html = "<div><img src='http://galaxyharvester.net/images/ghLogoLarge.png'/></div><p>Hello " + user + ",</p><br/><p>You have created a new account on galaxyharvester.net using this email address.  Before you can use your new account, you must verify this email with us by clicking the link below.  If the link does not work, please copy the link and paste it into your browser address box.</p><p><a style='text-decoration:none;' href='" + link + "'><div style='width:170px;font-size:18px;font-weight:600;color:#feffa1;background-color:#003344;padding:8px;margin:4px;border:1px solid black;'>Click Here To Verify</div></a><br/>or copy and paste link: " + link + "</p><br/><p>Thanks,</p><p>-Galaxy Harvester Administrator</p>"
-    mailer = Mailer(mailInfo.MAIL_HOST)
+    message.set_content("Hello " + user + ",\n\nYou have created a new account on galaxyharvester.net using this email address.  Before you can use your new account, you must verify this email with us by clicking the link below.  If the link does not work, please copy the link and paste it into your browser address box.\n\n" + link + "\n\nThanks,\n-Galaxy Harvester Administrator\n")
+    message.add_alternative("<div><img src='http://galaxyharvester.net/images/ghLogoLarge.png'/></div><p>Hello " + user + ",</p><br/><p>You have created a new account on galaxyharvester.net using this email address.  Before you can use your new account, you must verify this email with us by clicking the link below.  If the link does not work, please copy the link and paste it into your browser address box.</p><p><a style='text-decoration:none;' href='" + link + "'><div style='width:170px;font-size:18px;font-weight:600;color:#feffa1;background-color:#003344;padding:8px;margin:4px;border:1px solid black;'>Click Here To Verify</div></a><br/>or copy and paste link: " + link + "</p><br/><p>Thanks,</p><p>-Galaxy Harvester Administrator</p>", subtype='html')
+    mailer = smtplib.SMTP(mailInfo.MAIL_HOST)
     mailer.login(mailInfo.REGMAIL_USER, mailInfo.MAIL_PASS)
-    mailer.send(message)
+    mailer.send_message(message)
+    mailer.quit()
     return 'email sent'
 
 C = cookies.SimpleCookie()

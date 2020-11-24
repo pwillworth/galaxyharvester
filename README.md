@@ -6,11 +6,11 @@
 The following software must be set up on the server prior to setting up Galaxy Harvester (The versions listed reflect what the current code base is running on)
 
 * Webserver (apache2 2.4)
-* MySQL Server (5.7)
+* MySQL/MariaDB Server (5.8)
 * Python (3.6)
- * module: pymysql (0.8)
+ * module: pymysql (0.10)
  * module: jinja2 (2.11)
- * module: PIL (5.1)
+ * module: Pillow (8.0)
 
 ### Web Server Configuration:
 The web server being used must be configured to serve the Python based CGI scripts as follows

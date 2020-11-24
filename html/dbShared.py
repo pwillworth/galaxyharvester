@@ -523,7 +523,7 @@ def checkUserAbilities(conn, userID, galaxy):
 	# See if Rep bonus has granted new ability and alert
 	stats = getUserStats(userID, galaxy).split(',')
 	reputation = int(stats[2])
-	for k, v in ghShared.MIN_REP_VALS.iteritems():
+	for k, v in ghShared.MIN_REP_VALS.items():
 		if v == reputation:
 			alertNewAbility(conn, userID, k, galaxy)
 

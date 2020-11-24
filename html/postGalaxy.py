@@ -28,12 +28,12 @@ import dbSession
 import dbShared
 import cgi
 import pymysql
+import smtplib
+from email.message import EmailMessage
 from xml.dom import minidom
 import ghNames
 import ghShared
 sys.path.append("../")
-from mailer import Mailer
-from mailer import Message
 import mailInfo
 
 #
@@ -102,14 +102,17 @@ if (sess != ''):
 
 def sendGalaxyNotifyMail(galaxyID, galaxyName, user):
 	# send message
-	message = Message(From="\"Galaxy Harvester Registration\" <admin@galaxyharvester.net>",To="galaxyharvester@gmail.com")
-	message.Subject = "New Galaxy Submitted For Review"
+	message = EmailMessage()
+	message['From'] = "\"Galaxy Harvester Registration\" <admin@galaxyharvester.net>"
+	message['To'] = "galaxyharvester@gmail.com"
+	message['Subject'] = "New Galaxy Submitted For Review"
 	link = "http://galaxyharvester.net/galaxy.py/{0}".format(galaxyID)
-	message.Body = user + " has submitted a new galaxy for review.\n\n" + link
-	message.Html = "<div><img src='http://galaxyharvester.net/images/ghLogoLarge.png'/></div><p>" + user + " has submitted a new galaxy for review.</p><p><a style='text-decoration:none;' href='" + link + "'><div style='width:170px;font-size:18px;font-weight:600;color:#feffa1;background-color:#003344;padding:8px;margin:4px;border:1px solid black;'>Click Here To Review</div></a><br/>or copy and paste link: " + link + "</p>"
-	mailer = Mailer(mailInfo.MAIL_HOST)
+	message.set_content(user + " has submitted a new galaxy for review.\n\n" + link)
+	message.add_alternative("<div><img src='http://galaxyharvester.net/images/ghLogoLarge.png'/></div><p>" + user + " has submitted a new galaxy for review.</p><p><a style='text-decoration:none;' href='" + link + "'><div style='width:170px;font-size:18px;font-weight:600;color:#feffa1;background-color:#003344;padding:8px;margin:4px;border:1px solid black;'>Click Here To Review</div></a><br/>or copy and paste link: " + link + "</p>", subtype='html')
+	mailer = smtplib.SMTP(mailInfo.MAIL_HOST)
 	mailer.login(mailInfo.MAIL_USER, mailInfo.MAIL_PASS)
-	mailer.send(message)
+	mailer.send_message(message)
+	mailer.quit()
 	return 'email sent'
 
 def addGalaxy(galaxyName, galaxyNGE, galaxyWebsite, galaxyPlanets, userID, galaxyAdmins):

@@ -25,6 +25,8 @@ import os
 import cgi
 import hashlib
 import pymysql
+import smtplib
+from email.message import EmailMessage
 import dbSession
 import dbShared
 import ghShared
@@ -33,8 +35,6 @@ from random import *
 import string
 sys.path.append("../")
 import dbInfo
-import mailer
-import mailInfo
 
 
 form = cgi.FieldStorage()
@@ -68,14 +68,15 @@ else:
         crypt_pass = hashlib.sha1(dbInfo.DB_KEY3 + newPass).hexdigest()
 
         if (lastReset == None or ghShared.timeAgo(lastReset).find("minute") == -1):
-            message = mailer.Message()
-            message.From = "reset@galaxyharvester.net"
-            message.To = email
-            message.Subject = "Galaxy Harvester password reset"
-            message.Body = "Hello " + uname + ",\n\nYour password for galaxyharvester.net has been reset to:\n\n" + newPass + "\n\n go to https://galaxyharvester.net to login.\n"
-            mailer = mailer.Mailer(mailInfo.MAIL_HOST)
+            message = EmailMessage()
+            message['From'] = "reset@galaxyharvester.net"
+            message['To'] = email
+            message['Subject'] = "Galaxy Harvester password reset"
+            message.set_content("Hello " + uname + ",\n\nYour password for galaxyharvester.net has been reset to:\n\n" + newPass + "\n\n go to https://galaxyharvester.net to login.\n")
+            mailer = smtplib.SMTP(mailInfo.MAIL_HOST)
             mailer.login('reset@galaxyharvester.net', mailInfo.MAIL_PASS)
-            mailer.send(message)
+            mailer.send_message(message)
+            mailer.quit()
             cursor.execute('UPDATE tUsers SET userPassword="' + crypt_pass + '", lastReset=NOW() WHERE userID="' + uname + '";')
             result = 'email sent'
         else:

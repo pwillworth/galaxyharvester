@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
 
- Copyright 2017 Paul Willworth <ioscode@gmail.com>
+ Copyright 2020 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -26,8 +26,7 @@ import pymysql
 import dbInfo
 import optparse
 import smtplib
-from mailer import Mailer
-from mailer import Message
+from email.message import EmailMessage
 from smtplib import SMTPRecipientsRefused
 import time
 from datetime import timedelta, datetime
@@ -98,19 +97,22 @@ def sendAlertMail(conn, userID, msgText, link, alertID, alertTitle):
 		email = row[0]
 		if (email.find("@") > -1):
 			# send message
-			message = Message(From="".join(("\"Galaxy Harvester Alerts\" <", mailInfo.ALERTMAIL_USER, "@galaxyharvester.net>")),To=email)
-			message.Subject = "".join(("Galaxy Harvester ", alertTitle))
-			message.Body = "".join(("Hello ", userID, ",\n\n", msgText, "\n\n", link, "\n\n You can manage your alerts at http://galaxyharvester.net/myAlerts.py\n"))
-			message.Html = "".join(("<div><img src='http://galaxyharvester.net/images/ghLogoLarge.png'/></div><p>Hello ", userID, ",</p><br/><p>", msgText.replace("\n", "<br/>"), "</p><p><a style='text-decoration:none;' href='", link, "'><div style='width:170px;font-size:18px;font-weight:600;color:#feffa1;background-color:#003344;padding:8px;margin:4px;border:1px solid black;'>View in Galaxy Harvester</div></a><br/>or copy and paste link: ", link, "</p><br/><p>You can manage your alerts at <a href='http://galaxyharvester.net/myAlerts.py'>http://galaxyharvester.net/myAlerts.py</a></p><p>-Galaxy Harvester Bot</p>"))
-			mailer = Mailer(mailInfo.MAIL_HOST)
+			message = EmailMessage()
+			message['From'] = "".join(("\"Galaxy Harvester Alerts\" <", mailInfo.ALERTMAIL_USER, "@galaxyharvester.net>"))
+			message['To'] = email
+			message['Subject'] = "".join(("Galaxy Harvester ", alertTitle))
+			message.set_content("".join(("Hello ", userID, ",\n\n", msgText, "\n\n", link, "\n\n You can manage your alerts at http://galaxyharvester.net/myAlerts.py\n")))
+			message.add_alternative("".join(("<div><img src='http://galaxyharvester.net/images/ghLogoLarge.png'/></div><p>Hello ", userID, ",</p><br/><p>", msgText.replace("\n", "<br/>"), "</p><p><a style='text-decoration:none;' href='", link, "'><div style='width:170px;font-size:18px;font-weight:600;color:#feffa1;background-color:#003344;padding:8px;margin:4px;border:1px solid black;'>View in Galaxy Harvester</div></a><br/>or copy and paste link: ", link, "</p><br/><p>You can manage your alerts at <a href='http://galaxyharvester.net/myAlerts.py'>http://galaxyharvester.net/myAlerts.py</a></p><p>-Galaxy Harvester Bot</p>")), subtype='html')
+			mailer = smtplib.SMTP(mailInfo.MAIL_HOST)
 			mailer.login(mailInfo.ALERTMAIL_USER, mailInfo.MAIL_PASS)
 			try:
-				mailer.send(message)
+				mailer.send_message(message)
 				result = 'email sent'
 			except SMTPRecipientsRefused as e:
 				result = 'email failed'
 				sys.stderr.write('Email failed - ' + str(e))
 				trackEmailFailure(datetime.fromtimestamp(time.time()).strftime("%Y-%m-%d %H:%M:%S"))
+			mailer.quit()
 
 			# update alert status
 			if ( result == 'email sent' ):
@@ -133,7 +135,7 @@ def checkSpawnAlerts(conn, spawnName, alertValue, galaxy, enteredBy, stats, gala
 		sendAlert = True
 		statStr = ""
 		alertMessage = ""
-		if row[15] > 0:
+		if row[15] is not None and row[15] > 0:
 			# Check resource to see if it hits min quality
 			qualityTotal = 0.0
 			for x in range(11):
@@ -190,7 +192,7 @@ def checkServerBest(conn, spawnID, spawnName, galaxy, galaxyName):
 			quoteSchem = "".join(("'", k, "'"))
 			schematicStr = ','.join((schematicStr, quoteSchem))
 			bestStr = '\n'.join((bestStr, '\n'.join(v)))
-		if schematicStr > 0:
+		if len(schematicStr) > 0:
 			schematicStr = schematicStr[1:]
 		# open people with favorites for the professions involved
 		cursor = conn.cursor()
