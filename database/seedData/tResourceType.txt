@@ -776,21 +776,21 @@ petrochem_fuel_liquid_hoth	Hothian Liquid Petro Fuel	chemical	fuel_petrochem_liq
 petrochem_fuel_solid_hoth	Hothian Solid Petro Fuel	mineral	fuel_petrochem_solid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	11
 radioactive_hoth	Hothian Radioactive	mineral	radioactive	1	2	0	0	0	0	1	800	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	radioactive	radioactive	11
 steel_hoth	Hothian Steel	mineral	steel	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	steel	steel	11
-aluminum_mustafar	Mustafarian Aluminum	mineral	aluminum	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	aluminum	aluminum	15
-copper_mustafar	Mustafarian Copper	mineral	copper	1	2	1	800	300	1000	1	700	0	0	200	800	300	1000	0	0	1	1000	300	900	300	1000	0	0	copper	copper	15
-armophous_mustafar	Mustafarian Amorphous Gemstone	mineral	gemstone_armophous	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	15
-crystalline_mustafar	Mustafarian Crystalline Gemstone	mineral	gemstone_crystalline	1	2	1	1000	0	0	1	1000	0	0	600	1000	1	600	0	0	1	1000	1	1000	1	1000	1	1000	gemstone	gemstone	15
+aluminum_mustafar	Mustafarian Aluminum	mineral	aluminum	1	2	750	800	750	800	800	800	0	0	750	800	848	1000	0	0	500	1000	800	900	800	900	0	0	aluminum	aluminum	15
+copper_mustafar	Mustafarian Copper	mineral	copper	1	2	750	800	500	1000	650	700	0	0	600	650	500	1000	0	0	500	1000	750	800	750	800	0	0	copper	copper	15
+armophous_mustafar	Mustafarian Amorphous Gemstone	mineral	gemstone_armophous	1	2	870	1000	0	0	870	1000	0	0	948	1000	550	600	0	0	1	1000	870	1000	870	1000	750	800	gemstone	gemstone	15
+crystalline_mustafar	Mustafarian Crystalline Gemstone	mineral	gemstone_crystalline	1	2	838	1000	0	0	838	1000	0	0	951	1000	350	400	0	0	500	1000	886	1000	886	1000	919	1000	gemstone	gemstone	15
 gas_inert_mustafar	Mustafarian Inert Gas	gas	gas_inert	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_inert	gas_inert	15
-gas_reactive_mustafar	Mustafarian Reactive Gas	gas	gas_reactive	1	1	0	0	0	0	1	1000	0	0	0	0	0	0	0	0	1	1000	0	0	0	0	0	0	gas_reactive	gas_reactive	15
-iron_mustafar	Mustafarian Iron	mineral	iron	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	iron	metal_ferrous	15
-ore_extrusive_mustafar	Mustafarian Extrusive Ore	mineral	ore_extrusive	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	15
-ore_intrusive_mustafar	Mustafarian Intrusive Ore	mineral	ore_intrusive	1	2	200	1000	0	0	300	1000	0	0	400	1000	1	800	0	0	1	1000	400	1000	400	1000	0	0	ore_igneous	ore_igneous	15
+gas_reactive_mustafar	Mustafarian Reactive Gas	gas	gas_reactive	1	1	0	0	0	0	800	1000	0	0	0	0	0	0	0	0	500	1000	0	0	0	0	0	0	gas_reactive	gas_reactive	15
+iron_mustafar	Mustafarian Iron	mineral	iron	1	2	750	800	450	500	886	1000	0	0	919	1000	550	600	0	0	500	1000	903	1000	903	1000	0	0	iron	metal_ferrous	15
+ore_extrusive_mustafar	Mustafarian Extrusive Ore	mineral	ore_extrusive	1	2	896	1000	0	0	909	1000	0	0	922	1000	550	600	0	0	500	1000	922	1000	922	1000	0	0	ore_igneous	ore_igneous	15
+ore_intrusive_mustafar	Mustafarian Intrusive Ore	mineral	ore_intrusive	1	2	884	1000	0	0	899	1000	0	0	957	1000	550	600	0	0	500	1000	928	1000	913	1000	0	0	ore_igneous	ore_igneous	15
 ore_carbonate_mustafar	Mustafarian Carbonate Ore	mineral	ore_carbonate	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_carbonate	ore_carbonate	15
 ore_siliclastic_mustafar	Mustafarian Siliclastic Ore	mineral	ore_siliclastic	1	2	300	1000	0	0	1	700	0	0	300	1000	300	1000	0	0	1	1000	1	700	1	1000	0	0	ore_siliclastic	ore_siliclastic	15
 petrochem_fuel_liquid_mustafar	Mustafarian Liquid Petro Fuel	chemical	fuel_petrochem_liquid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_liquid	fuel_petrochem_liquid	15
-petrochem_fuel_solid_mustafar	Mustafarian Solid Petro Fuel	mineral	fuel_petrochem_solid	1	2	0	0	0	0	1	1000	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	15
-radioactive_mustafar	Mustafarian Radioactive	mineral	radioactive	1	2	0	0	0	0	1	800	0	0	0	0	0	0	1	1000	1	1000	0	0	0	0	0	0	radioactive	radioactive	15
-steel_mustafar	Mustafarian Steel	mineral	steel	1	2	1	800	1	650	300	1000	0	0	300	1000	1	600	0	0	1	1000	400	1000	400	1000	0	0	steel	steel	15
+petrochem_fuel_solid_mustafar	Mustafarian Solid Petro Fuel	mineral	fuel_petrochem_solid	1	2	0	0	0	0	750	800	0	0	0	0	0	0	870	1000	500	1000	0	0	0	0	0	0	fuel_petrochem_solid	fuel_petrochem_solid	15
+radioactive_mustafar	Mustafarian Radioactive	mineral	radioactive	1	2	0	0	0	0	900	1000	0	0	0	0	0	0	907	1000	500	1000	0	0	0	0	0	0	radioactive	radioactive	15
+steel_mustafar	Mustafarian Steel	mineral	steel	1	2	750	800	600	650	935	1000	0	0	948	1000	350	400	0	0	500	1000	935	1000	922	1000	0	0	steel	steel	15
 bone_avian_mustafar	Mustafarian Avian Bones	creature_structural	bone_avian	1	1	0	0	0	0	1	700	0	0	0	0	1	600	0	0	1	1000	100	500	1	500	0	0	bone	bone	15
 bone_horn_mustafar	Mustafarian Horn	creature_structural	bone_horn	1	1	0	0	0	0	200	1000	0	0	0	0	1	500	0	0	1	1000	300	700	1	500	0	0	bone	bone_horn	15
 bone_mammal_mustafar	Mustafarian Animal Bones	creature_structural	bone	1	1	0	0	0	0	300	1000	0	0	0	0	1	500	0	0	1	1000	400	1000	1	1000	0	0	bone	bone	15
