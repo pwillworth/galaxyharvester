@@ -99,7 +99,7 @@ def lookupResourceType(typeName):
 
 
 errstr=''
-if not form.has_key("capture"):
+if not "capture" in form:
     errstr = "Error: No capture image sent."
 else:
     img_data = form["capture"]

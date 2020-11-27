@@ -51,13 +51,14 @@ def buildBestRecipe(conn, schem, inventory, user):
 	while oingRow != None and oingRow[0] != None:
 		thisFilled = False
 		# Iterate over the option for each ingredient and save top quality to new list
-		for resType in inventory.iterkeys():
+		for resType in inventory.keys():
 			if str(resType).find('\'' + oingRow[0] + '\'') > -1:
 				thisFilled = True
 				spawns = inventory[resType].split()
 				for s in spawns:
 					spawnQuality = recipe.calcIngredientQuality(conn, s.split('|')[0].strip(','), schem[0], user)
-					ingredients.append((oingRow[0], s, spawnQuality))
+					if spawnQuality is not None:
+						ingredients.append((oingRow[0], s, spawnQuality))
 		if thisFilled == False:
 			filledIng = False
 			break
@@ -114,11 +115,11 @@ def getSuggestedRecipes(conn, user, galaxy, prof):
 		cursor.execute(sqlStr1)
 		row = cursor.fetchone()
 		while row != None:
-			inventory['\'' + row[2] + '\',\'' + row[15] + '\''] = inventory.get('\'' + row[2] + '\',' + row[15], '') + ',' + str(row[0]) + '|CR' + str(row[3]) + '|CD' + str(row[4]) + '|DR' + str(row[5]) + '|FL' + str(row[6]) + '|HR' + str(row[7]) + '|MA' + str(row[8]) + '|PE' + str(row[9]) + '|OQ' + str(row[10]) + '|SR' + str(row[11]) + '|UT' + str(row[12]) + '|ER' + str(row[13])
+			inventory['\'' + str(row[2]) + '\',\'' + str(row[15]) + '\''] = inventory.get('\'' + str(row[2]) + '\',' + str(row[15]), '') + ',' + str(row[0]) + '|CR' + str(row[3]) + '|CD' + str(row[4]) + '|DR' + str(row[5]) + '|FL' + str(row[6]) + '|HR' + str(row[7]) + '|MA' + str(row[8]) + '|PE' + str(row[9]) + '|OQ' + str(row[10]) + '|SR' + str(row[11]) + '|UT' + str(row[12]) + '|ER' + str(row[13])
 			row = cursor.fetchone()
 		cursor.close()
 	# Iterate over inventory dict
-	for resType in inventory.iterkeys():
+	for resType in inventory.keys():
 		spawns = inventory[resType].split()
 		schems = []
 		# Select schematics where ingredient in type or groups of type
@@ -131,13 +132,14 @@ def getSuggestedRecipes(conn, user, galaxy, prof):
 			for s in spawns:
 				spawnQuality = recipe.calcIngredientQuality(conn, s.split('|')[0].strip(','), ingRow[0], user)
 				# Add to list of top quality spawn to ingredient with schemID
-				schems.append((ingRow[0], ingRow[1], s, spawnQuality, ingRow[3], ingRow[4]))
+				if spawnQuality is not None:
+					schems.append((ingRow[0], ingRow[1], s, spawnQuality, ingRow[3], ingRow[4]))
 			ingRow = ingCursor.fetchone()
 		ingCursor.close()
 		schems = sorted(schems, key=lambda schem: schem[3], reverse=True)
 		# Iterate over sorted list of ingredient qualities
 		for schem in schems:
-			if usedSchems.find(',' + schem[0]) == -1 and spawnQuality > 0:
+			if usedSchems.find(',' + schem[0]) == -1 and schem[3] > 0:
 				r = buildBestRecipe(conn, schem, inventory, user)
 				if r.getAverageQuality() > 100:
 					recipes.append(r)

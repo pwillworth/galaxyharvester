@@ -410,13 +410,13 @@ else:
 		errstr = errstr + 'Error: Schematic name contains illegal characters.'
 
 if detailsMethod == 'DetailsLua':
-	if not form.has_key('schematicLua'):
+	if not 'schematicLua' in form:
 		errstr = 'No schematic lua file sent.'
 	else:
 		luaSchematic = form['schematicLua']
 		if not luaSchematic.file: errstr = 'schematic lua data is not a file.'
 
-	if not form.has_key('objectLua'):
+	if not 'objectLua' in form:
 		luaObject = ''
 	else:
 		luaObject = form['objectLua']

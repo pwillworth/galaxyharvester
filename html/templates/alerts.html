@@ -91,6 +91,7 @@ function addFilterRow(tableName, numset) {
         "<td><img src='/images/xRed16.png' alt='red x' title='Remove this row' style='cursor:pointer' onclick='removeRow("+numset+")'/></td>"+
         "<td style='padding-left:6px;'><input id='fltGroup"+numset+"' type='text' size=14 maxlength=255></input></td>"+
         "</tr>");
+      setTGlist(numset);
       rownum = numset + 1;
     }
 }

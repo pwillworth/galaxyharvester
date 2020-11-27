@@ -64,7 +64,7 @@ else:
 	loginResult = 'success'
 	sid = form.getfirst('gh_sid', '')
 
-if not form.has_key("schemImage"): errstr = "No image sent."
+if not "schemImage" in form: errstr = "No image sent."
 img_data = form["schemImage"]
 if not img_data.file: errstr = "image sent is not a file."
 src_url = form.getfirst('src_url', '/schematics.py')

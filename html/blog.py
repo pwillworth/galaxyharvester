@@ -523,7 +523,7 @@ def handleIncomingComment(fs):
         "\n\n******\nYou are receiving this because you have signed up for email notifications. "
 
     email_and_id = getSubscribedEmails(comments_for_entry)
-    for subscribe_email in email_and_id.iterkeys():
+    for subscribe_email in email_and_id.keys():
         comm_id = email_and_id[subscribe_email]
         try:
             email_body_comment = email_body
@@ -727,7 +727,8 @@ def renderHtmlHeader(title=None, links=[]):
     pictureName = dbShared.getUserAttr(currentUser, 'pictureName')
     env = Environment(loader=FileSystemLoader('templates'))
     env.globals['BASE_SCRIPT_URL'] = ghShared.BASE_SCRIPT_URL
-    env.globals['MOBILE_PLATFORM'] = ghShared.getMobilePlatform(os.environ['HTTP_USER_AGENT'])
+    if 'HTTP_USER_AGENT' in os.environ:
+        env.globals['MOBILE_PLATFORM'] = ghShared.getMobilePlatform(os.environ['HTTP_USER_AGENT'])
     template = env.get_template('blog.html')
 
     #################################################
@@ -996,9 +997,9 @@ def renderSearch(entries, searchstring):
             # remove entries with no matches in text or in comments
             del(matchedfiles[entry])
 
-    for entry in matchedfiles.iterkeys():
+    for entry in matchedfiles.keys():
         com_list = list()
-        for comment in matchedfiles[entry]["comments"].iterkeys():
+        for comment in matchedfiles[entry]["comments"].keys():
             pline = ""
             for line in matchedfiles[entry]["comments"][comment]["lines"]:
                 pline += line

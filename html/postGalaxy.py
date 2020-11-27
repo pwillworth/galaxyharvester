@@ -126,7 +126,7 @@ def addGalaxy(galaxyName, galaxyNGE, galaxyWebsite, galaxyPlanets, userID, galax
 	try:
 		cursor.execute(tempSQL, (galaxyName, 0, galaxyNGE, galaxyWebsite, userID))
 		result = cursor.rowcount
-	except Exception, e:
+	except Exception as e:
 		returnStr = 'Error: Add Failed. {0}'.format(e)
 
 	cursor.execute('SELECT LAST_INSERT_ID();')

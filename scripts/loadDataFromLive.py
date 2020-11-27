@@ -43,7 +43,7 @@ for i in range(len(tableNames)):
 		#tableResult = urllib2.urlopen(liveService + '?key1=' + liveKey1 + '&key2=' + tableNames[i] + '&key3=' + liveKey3 + '&key4=' + liveKey4)
 		#send live key 5 to redirect
 		#tableResult = urllib2.urlopen(liveService + '?key1=' + liveKey1 + '&key2=' + tableNames[i] + '&key3=' + liveKey3 + '&key5=' + liveKey5 + '&iFile=' + urllib.quote(indexFile) + '&iContent=' + urllib.quote(indexContent))
-	except urllib2.URLError, e:
+	except urllib2.URLError as e:
 		tableResult = None
 		print tableNames[i] + ' failed. ' + str(e)
 

@@ -123,7 +123,7 @@ def main():
 			uiTheme = 'crafter'
 
 	path = ['']
-	if os.environ.has_key('PATH_INFO'):
+	if 'PATH_INFO' in os.environ:
 		path = os.environ['PATH_INFO'].split('/')[1:]
 		path = [p for p in path if p != '']
 
