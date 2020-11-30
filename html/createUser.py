@@ -28,9 +28,9 @@ from http import cookies
 import hashlib
 import uuid
 import pymysql
-import urllib
-import urllib2
 import json
+import urllib
+import requests
 import smtplib
 from email.message import EmailMessage
 import dbSession
@@ -43,29 +43,26 @@ import mailInfo
 
 
 def getCAPTCHA(token):
-    # sends the data and request
+    # prepare data for request
     values = {"secret": keyInfo.RECAPTCHA_KEY, "response": token}
-    jdata = urllib.urlencode(values)
-    req = urllib2.Request(ghShared.RECAPTCHA_URL, jdata)
     # reads the response back from Google
     try:
-        response = urllib2.urlopen(req)
-        status = response.read()
-        cResult = json.loads(status)
+        response = requests.post(ghShared.RECAPTCHA_URL, values)
+        cResult = json.loads(response.content)
         if cResult['success'] and cResult['action'] == 'submitJoin':
             return cResult['score']
         else:
             sys.stderr.write("Captcha failure: {0}\n".format(str(cResult)))
             return -1
-    except urllib2.URLError as e:
+    except requests.RequestException as e:
         sys.stderr.write("Communication with reCAPTCHA URL failure: {0}".format(str(e)))
-        return 1
+        return -1
     except KeyError as e:
-        sys.stderr.write("Failed to decode response for captcha: {0}\n{1}".format(status, str(e)))
-        return 1
+        sys.stderr.write("Failed to decode response for captcha: {0}\n{1}".format(response.status_code, str(e)))
+        return -1
     except AttributeError as e:
-        sys.stderr.write("Failed to interpret reCAPTCHA response: {0}\n{1}".format(status, str(e)))
-        return 1
+        sys.stderr.write("Failed to interpret reCAPTCHA response: {0}\n{1}".format(response.status_code, str(e)))
+        return -1
 
 def sendVerificationMail(user, address, code):
     # send message
@@ -86,7 +83,7 @@ C = cookies.SimpleCookie()
 useCookies = 1
 errorstr = ''
 try:
-    cookies.load(os.environ["HTTP_COOKIE"])
+    C.load(os.environ["HTTP_COOKIE"])
 except KeyError:
     useCookies = 0
 
@@ -140,7 +137,8 @@ else:
     # For passing in to message for on success
     errorstr = email
     # Prepare encrypted password and verification code
-    crypt_pass = hashlib.sha1(dbInfo.DB_KEY3 + userpass).hexdigest()
+    passString = dbInfo.DB_KEY3 + userpass
+    crypt_pass = hashlib.sha1(passString.encode()).hexdigest()
     verify_code = uuid.uuid4().hex
 
     conn = dbShared.ghConn()
@@ -181,5 +179,5 @@ else:
         print(C)
 
     print('Status: 303 See Other')
-    print('Location: /message.py?action=' + result + '&actionreason=' + urllib.quote_plus(errorstr))
+    print('Location: /message.py?action=' + result + '&actionreason=' + urllib.parse.quote_plus(errorstr))
     print('')
