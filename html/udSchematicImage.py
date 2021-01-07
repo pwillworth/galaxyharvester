@@ -27,7 +27,10 @@ from http import cookies
 import pymysql
 import dbSession
 import dbShared
-import Image
+try:
+    from PIL import Image
+except ImportError:
+    import Image
 import urllib
 import time
 
