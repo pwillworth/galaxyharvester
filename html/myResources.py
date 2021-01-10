@@ -61,8 +61,6 @@ sid = dbShared.dbInsertSafe(sid)
 # Get a session
 logged_state = 0
 linkappend = ''
-if loginResult == None:
-	loginResult = 'success'
 
 sess = dbSession.getSession(sid)
 if (sess != ''):

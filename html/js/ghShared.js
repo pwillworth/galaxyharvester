@@ -724,7 +724,7 @@ function deleteRecipe(linkFrom, recipeID) {
 					alert(result);
 				} else {
 					if (linkFrom == "recipe") {
-						document.location.href=BASE_SCRIPT_URL + "myResources.py";
+						document.location.href=BASE_SCRIPT_URL + "recipe.py/home";
 					} else {
 						$("#recipe" + recipeID).hide(1200);
 					}
