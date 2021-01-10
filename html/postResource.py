@@ -246,7 +246,7 @@ def main():
 	# Get form info
 	galaxy = form.getfirst("galaxy", "")
 	planet = form.getfirst("planet", "")
-	spawnID = form.getfirst("resID", "")
+	resID = form.getfirst("resID", "")
 	spawnName = form.getfirst("resName", "")
 	resType = form.getfirst("resType", "")
 	forceOp = form.getfirst("forceOp", "")
@@ -267,7 +267,7 @@ def main():
 	numRows = dbShared.dbInsertSafe(numRows)
 	galaxy = dbShared.dbInsertSafe(galaxy)
 	planet = dbShared.dbInsertSafe(planet)
-	spawnID = dbShared.dbInsertSafe(spawnID)
+	resID = dbShared.dbInsertSafe(resID)
 	spawnName = dbShared.dbInsertSafe(spawnName)
 	resType = dbShared.dbInsertSafe(resType)
 	forceOp = dbShared.dbInsertSafe(forceOp)
@@ -296,15 +296,20 @@ def main():
 
 	#  Check for errors
 	errstr = ""
-	if (len(spawnName) < 1 and spawnID == ""):
+	if resID.isdigit():
+		spawnID = int(resID)
+	else:
+		spawnID = -1
+
+	if (len(spawnName) < 1 and spawnID == -1):
 		errstr = errstr + "Error: no resource name. \r\n"
-	if ((resType == "none" or len(resType) < 1) and spawnID == "" and forceOp != "verify"):
+	if ((resType == "none" or len(resType) < 1) and spawnID == -1 and forceOp != "verify"):
 		errstr = errstr + "Error: no resource type. \r\n"
 	else:
 		#  Some automated updaters post reptillian meat as 'reptilian', normalize
 		resType = resType.replace("reptilian", "reptillian")
 
-	if spawnID == "":
+	if spawnID == -1:
 		if galaxy == "":
 			errstr = errstr + "Error: no galaxy selected. \r\n"
 		else:
@@ -331,7 +336,7 @@ def main():
 			if (spawnName == "" or spawnName == None):
 				spawnName = ghNames.getSpawnName(spawnID)
 
-			if (spawnID>-1):
+			if (spawnID > -1):
 				# spawn already entered
 				if (forceOp == "edit"):
 					result = "edit: "
