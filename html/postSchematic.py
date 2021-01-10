@@ -36,7 +36,7 @@ import urllib
 def generateSchematicID(schematicName, galaxy):
 	galaxyLen = len(str(galaxy))
 	newID = schematicName.replace(' ', '_')
-	newID = newID.translate(None, ';/?:@=&"<>#%\{\}|\^~[]`\'')
+	newID = re.sub('[^A-Za-z0-9_]+', '', newID)
 	newID = newID[:127-galaxyLen] + str(galaxy)
 
 	return newID
@@ -50,7 +50,7 @@ def addSchematicFromLua(conn, skillGroup, luaSchematic, luaObject, galaxy, userI
 
     # Extract value pairs from the two files
 	while 1:
-		line = luaSchematic.file.readline()
+		line = luaSchematic.file.readline().decode('utf-8')
 		if not line: break
 		line.strip()
 		eqPos = line.find("=")
@@ -64,7 +64,7 @@ def addSchematicFromLua(conn, skillGroup, luaSchematic, luaObject, galaxy, userI
 
 	if luaObject.file:
 		while 1:
-			oline = luaObject.file.readline()
+			oline = luaObject.file.readline().decode('utf-8')
 			if not oline: break
 			oline.strip()
 			oeqPos = oline.find("=")

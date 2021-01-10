@@ -210,7 +210,7 @@ def main():
 		# process file
 		thisSpawn = ghObjects.resourceSpawn()
 		resourcesFound = []
-		planetID = 0
+		planetID = '0'
 		classID = ''
 		headerMatch = None
 		planetMatch = None
@@ -238,7 +238,7 @@ def main():
 			statPattern = '\t\t\t(ER|CR|CD|DR|FL|HR|MA|PE|OQ|SR|UT): (\d+)'
 
 		while 1:
-			line = rpt_data.file.readline()
+			line = rpt_data.file.readline().decode('utf-8')
 			if not line: break;
 			if headerMatch == None:
 				headerMatch = re.match("Interplanetary Survey: (\w+) - (\w+)", line)
@@ -284,7 +284,7 @@ def main():
 		if classMatch:
 			classID = classMatch.group(1).lower()
 
-		if planetID > 0:
+		if planetID > '0':
 			if dataAction == 'returnJSON':
 				result = getSpawnsJSON(planetID, resourcesFound, "{0} spawns loaded from report".format(len(resourcesFound)))
 			else:
@@ -301,7 +301,7 @@ def main():
 		if useCookies:
 			C['surveyReportAttempt'] = result
 			C['surveyReportAttempt']['max-age'] = 60
-			print(cookies)
+			print(C)
 		else:
 			linkappend = linkappend + '&surveyReportAttempt=' + urllib.quote(result)
 
