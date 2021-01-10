@@ -21,27 +21,23 @@
 """
 
 import urllib
-import urllib2
+import requests
 import cgi
 import dbShared
 import pymysql
 import sys
 
-PP_URL = "https://www.sandbox.paypal.com/cgi-bin/webscr"
-#PP_URL = "https://www.paypal.com/cgi-bin/webscr"
+PP_URL = "https://ipnpb.sandbox.paypal.com/cgi-bin/webscr"
+#PP_URL = "https://ipnpb.paypal.com/cgi-bin/webscr"
 
 
 def verify_ipn(data):
 	# prepares provided data set to inform PayPal we wish to validate the response
 	data["cmd"] = "_notify-validate"
-	params = urllib.urlencode(data)
  
 	# sends the data and request to the PayPal Sandbox
-	req = urllib2.Request(PP_URL, params)
-	req.add_header("Content-type", "application/x-www-form-urlencoded")
-	# reads the response back from PayPal
-	response = urllib2.urlopen(req)
-	status = response.read()
+	r = requests.post(PP_URL, data) 
+	status = r.text
  
 	# If not verified
 	if not status == "VERIFIED":
@@ -146,7 +142,7 @@ else:
 	
 	try:
 		cursor.execute(tempSQL, (rcvEmail, rcvID, payerEmail, payerID, payerStatus, firstName, lastName, paymentStatus, paymentGross, paymentFee, shippingAmount, handlingAmount, currency, paymentDate, transactionType, addressCity, addressCountryCode, addressState, addressStatus, addressStreet, addressZip, customInfo, transactionID))
-	except Exception, ex:
+	except Exception as ex:
 		result = 'Error: Add Failed.' + str(ex)
 
 	cursor.close()
