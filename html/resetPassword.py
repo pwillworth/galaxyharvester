@@ -35,6 +35,7 @@ from random import *
 import string
 sys.path.append("../")
 import dbInfo
+import mailInfo
 
 
 form = cgi.FieldStorage()
@@ -65,7 +66,8 @@ else:
         lastReset = row[1]
 
         newPass = randomString()
-        crypt_pass = hashlib.sha1(dbInfo.DB_KEY3 + newPass).hexdigest()
+        cryptString = dbInfo.DB_KEY3 + newPass
+        crypt_pass = hashlib.sha1(cryptString.encode()).hexdigest()
 
         if (lastReset == None or ghShared.timeAgo(lastReset).find("minute") == -1):
             message = EmailMessage()
