@@ -88,7 +88,8 @@ if (logged_state == 0):
 if (errstr != ''):
     result = "Your Password could not be updated because of the following errors:\r\n" + errstr
 else:
-    crypt_pass = hashlib.sha1(dbInfo.DB_KEY3 + userpass).hexdigest()
+    cryptString = dbInfo.DB_KEY3 + userpass
+    crypt_pass = hashlib.sha1(cryptString.encode()).hexdigest()
 
     conn = dbShared.ghConn()
     cursor = conn.cursor()
