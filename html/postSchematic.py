@@ -88,7 +88,7 @@ def addSchematicFromLua(conn, skillGroup, luaSchematic, luaObject, galaxy, userI
 	checkCursor.close()
 
 	try:
-		print "saving: " + schem["customObjectName"] + " - " + schem["targetTemplate"]
+		print("saving: " + schem["customObjectName"] + " - " + schem["targetTemplate"])
 	except KeyError:
 		result = 'Error: Could not even determine schematic name and object path from schematic lua file, it may be invalid.'
 		badSchem = True
