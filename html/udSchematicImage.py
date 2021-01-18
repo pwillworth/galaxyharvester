@@ -31,7 +31,7 @@ try:
     from PIL import Image
 except ImportError:
     import Image
-import urllib
+import urllib.parse
 import time
 
 # Get current url
@@ -182,7 +182,7 @@ if useCookies:
 	C['schemImageAttempt']['max-age'] = 60
 	print(C)
 else:
-	linkappend = linkappend + '&schemImageAttempt=' + urllib.quote(result)
+	linkappend = linkappend + '&schemImageAttempt=' + urllib.parse.quote(result)
 
 print("Content-Type: text/html\n")
 if src_url != None:

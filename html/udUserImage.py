@@ -32,7 +32,7 @@ try:
     from PIL import Image
 except ImportError:
     import Image
-import urllib
+import urllib.parse
 import time
 
 # Get current url
@@ -153,7 +153,7 @@ if useCookies:
 	C['avatarAttempt']['max-age'] = 60
 	print(C)
 else:
-	linkappend = linkappend + '&avatarAttempt=' + urllib.quote(result)
+	linkappend = linkappend + '&avatarAttempt=' + urllib.parse.quote(result)
 
 if currentUser != None:
 	# redirect back to user page

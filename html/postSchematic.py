@@ -30,7 +30,7 @@ import ghShared
 import cgi
 import pymysql
 import json
-import urllib
+import urllib.parse
 
 # create a URL safe schematic id based on proposed name
 def generateSchematicID(schematicName, galaxy):
@@ -497,7 +497,7 @@ if errstr != '':
 		print(errstr)
 	else:
 		print('Status: 303 See Other')
-		print('Location: /message.py?action=addschematicfail&actionreason=' + urllib.quote_plus(errstr))
+		print('Location: /message.py?action=addschematicfail&actionreason=' + urllib.parse.quote(errstr))
 		print('')
 else:
 	if (forceOp == 'edit'):

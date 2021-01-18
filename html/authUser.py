@@ -30,7 +30,7 @@ import time
 import pymysql
 import dbSession
 import dbShared
-import urllib
+import urllib.parse
 import datetime
 sys.path.append("../")
 import dbInfo
@@ -124,7 +124,7 @@ if useCookies:
 	print(C)
 else:
 	# add results to url if not using cookies
-	linkappend = 'loginAttempt=' + urllib.quote(result) + '&gh_sid=' + sid
+	linkappend = 'loginAttempt=' + urllib.parse.quote(result) + '&gh_sid=' + sid
 
 if src_url != None:
 	if src_url.find('?') > -1:
