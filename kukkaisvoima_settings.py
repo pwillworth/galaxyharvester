@@ -43,7 +43,7 @@ datadir = 'posts'
 indexdir = 'temp'
 # Maximum comments per entry. Use -1 for no comments and 0 for no
 # restriction
-maxcomments = 30
+maxcomments = -1
 # answer to spamquestion (question variable is l_nospam_question)
 nospamanswer = '5'
 # This is admin password to manage comments. password should be
