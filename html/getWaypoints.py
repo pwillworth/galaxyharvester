@@ -135,7 +135,7 @@ if errstr == "":
 			sortString = ' ORDER BY concentration DESC'
 
 		# set waypoint concentration criteria
-		if minCon.isdigit() and minCon > 0:
+		if minCon.isdigit() and int(minCon) > 0:
 			setCriteria += ' AND concentration >=' + minCon
 
 		wpSql = 'SELECT waypointID, spawnName, owner, concentration, lattitude, longitude, waypointType, waypointName, price, shareLevel, planetName, tWaypoint.entered, tResources.resourceType, resourceTypeName, (SELECT Count(userID) FROM tUserEvents ue WHERE ue.targetType=\'w\' AND ue.targetID=waypointID AND ue.eventType=\'r\') AS delCount, (SELECT Count(userID) FROM tUserEvents ue WHERE ue.targetType=\'w\' AND ue.targetID=waypointID AND ue.eventType=\'v\') AS verCount FROM tWaypoint LEFT JOIN tResources ON tWaypoint.spawnID = tResources.spawnID LEFT JOIN tResourceType ON tResources.resourceType = tResourceType.resourceType INNER JOIN tPlanet ON tWaypoint.planetID = tPlanet.planetID WHERE (CASE WHEN tResources.galaxy IS NULL THEN ' + galaxy + ' ELSE tResources.galaxy END)=' + galaxy + setCriteria + sortString + rowLimitStr + ';'
