@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 
- Copyright 2020 Paul Willworth <ioscode@gmail.com>
+ Copyright 2021 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -25,6 +25,7 @@ import cgi
 from http import cookies
 import dbSession
 import dbShared
+import ghShared
 import pymysql
 
 # Get current url
