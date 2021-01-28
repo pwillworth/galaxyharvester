@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 
  Copyright 2020 Paul Willworth <ioscode@gmail.com>

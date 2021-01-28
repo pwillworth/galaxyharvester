@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """
 
  Copyright 2020 Paul Willworth <ioscode@gmail.com>
@@ -151,7 +151,7 @@ def checkSpawnAlerts(conn, spawnName, alertValue, galaxy, enteredBy, stats, gala
 			# check  to see if min stats hit
 			for x in range(11):
 				if (row[x+2]) > 0:
-					if (stats[x] < row[x+2]):
+					if stats[x] is None or (stats[x] < row[x+2]):
 						sendAlert = False
 					else:
 						statStr = statStr + statNames[x] + ": " + str(stats[x]) + ", "
