@@ -133,7 +133,7 @@ def addFavorite(conn, user, favType, item, galaxy):
 		else:
 			tempSQL = "INSERT INTO tFavorites (userID, favType, itemID, favGroup, galaxy) VALUES ('" + user + "', " + str(favType) + ", " + str(item) + ", '', " + str(galaxy) + ");"
 		cursor.execute(tempSQL)
-		result = cursor.rowcount
+		result = str(cursor.rowcount)
 		cursor.close()
 	else:
 		result = "Error: Galaxy is required when adding a new favorite. \r\n"
@@ -224,7 +224,7 @@ if (errstr == ""):
 				else:
 					# does not exist, adding as new favorite
 					addresult = addFavorite(conn, currentUser, favType, itemID, galaxyID)
-					if str(result).find("Error:") == -1 and addresult > 0:
+					if str(result).find("Error:") == -1 and addresult.isdigit() and addresult > 0:
 						result = "New favorite added."
 					else:
 						result = "Error: Failed to add favorite.  " + result

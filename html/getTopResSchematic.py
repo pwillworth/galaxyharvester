@@ -45,7 +45,7 @@ def getResourceSQL(maxCheckStr, favCols, joinStr, galaxy, resGroup, obyStr, obyS
 	else:
 		sqlStr1 += ' WHERE tResources.galaxy=' + galaxy + ' AND unavailable IS NULL'
 	if mine != '':
-		sqlStr1 += ' AND favGroup IS NOT NULL'
+		sqlStr1 += " AND favGroup IS NOT NULL AND favGroup NOT IN ('Surveying', 'Shopping')"
 	if obyStr != '':
 		sqlStr1 += ' ORDER BY ('
 		sqlStr1 += obyStr

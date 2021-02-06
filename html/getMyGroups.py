@@ -66,10 +66,12 @@ else:
 # Get form info
 favType = form.getfirst("favType", "")
 firstOption = form.getfirst("firstOption", "<option value=\"New_Group\">New Group</option>")
+excludeGroups = form.getfirst("excludeGroups", "")
 # escape input to prevent sql injection
 sid = dbShared.dbInsertSafe(sid)
 favType = dbShared.dbInsertSafe(favType)
 firstOption = dbShared.dbInsertSafe(firstOption)
+excludeGroups = dbShared.dbInsertSafe(excludeGroups)
 
 # Get a session
 logged_state = 0
@@ -92,9 +94,12 @@ print('Content-type: text/html\n')
 if (errstr == ""):
 	if (logged_state > 0):
 		conn = dbShared.ghConn()
+		filterStr = " WHERE userID='" + currentUser + "' AND favType=" + favType
+		if excludeGroups == "system":
+			filterStr += " AND favGroup NOT IN ('', 'Surveying', 'Harvesting', 'Shopping')"
 		# open list of users existing groups
 		cursor = conn.cursor()
-		cursor.execute("SELECT DISTINCT favGroup FROM tFavorites WHERE userID='" + currentUser + "' AND favType=" + favType + " ORDER BY favGroup;")
+		cursor.execute("SELECT DISTINCT favGroup FROM tFavorites" + filterStr + " ORDER BY favGroup;")
 		row = cursor.fetchone()
 		while row != None:
 			result = result + '<option value="' + row[0] + '">' + str(row[0]).replace("_"," ") + '</option>'
