@@ -17,26 +17,8 @@ $(document).ready(function() {
     }
 {% if loggedin == 1 %}
       refreshAlerts();
-      $("#surveyResourceData").load(BASE_SCRIPT_URL + "getUserResources.py?{{ linkappend }}",{
-        galaxy: $("#galaxySel").val(),
-        formatType: "survey",
-        favGroup: "Surveying"},
-        function() {
-            $("#addBusyImgSurvey").css("display","none");
-            if($("#surveyResourceData").html().includes("No Matching Resources")){
-              $("#surveyResourceData").html("<table><tr><td>Click the favorite selector on a resource you want to survey for to make it show up here.</td><td><img src='/images/favSelector.png'/></td></tr></table>");
-            }
-        });
-      $("#harvestResourceData").load(BASE_SCRIPT_URL + "getUserResources.py?{{ linkappend }}", {
-        galaxy: $("#galaxySel").val(),
-        formatType: "harvest",
-        favGroup: "Harvesting"},
-        function() {
-            $("#addBusyImgHarvest").css("display","none");
-            if($("#harvestResourceData").html().includes("No Matching Resources")){
-              $("#harvestResourceData").html("<table><tr><td>Click the favorite selector on a resource you are currently harvesting to make it show up here.</td><td><img src='/images/favSelector.png'/></td></tr></table>");
-            }
-        });
+      refreshSurveying();
+      refreshHarvesting();
 {% endif %}
     $("#newsList").load("/blog.py/smy");
     $("#topCurrentCount").load(BASE_SCRIPT_URL + "ghStats.py",{statID:"currentSpawns",galaxy:$("#galaxySel").val()});
@@ -70,6 +52,30 @@ function refreshAlerts() {
 }
 function filterTopResources() {
     $("#topResourceData").load(BASE_SCRIPT_URL + "getTopResources.py",{galaxy:$("#galaxySel").val(), prof: $("#profSel").val(), resGroup: $("#resTopGroup").val() });
+}
+function refreshSurveying() {
+  $("#surveyResourceData").load(BASE_SCRIPT_URL + "getUserResources.py?{{ linkappend }}",{
+    galaxy: $("#galaxySel").val(),
+    formatType: "survey",
+    favGroup: "Surveying"},
+    function() {
+      $("#addBusyImgSurvey").css("display","none");
+      if($("#surveyResourceData").html().includes("No Matching Resources")){
+        $("#surveyResourceData").html("<table><tr><td>Click the favorite selector on a resource you want to survey for to make it show up here.</td><td><img src='/images/favSelector.png'/></td></tr></table>");
+      }
+  });
+}
+function refreshHarvesting() {
+  $("#harvestResourceData").load(BASE_SCRIPT_URL + "getUserResources.py?{{ linkappend }}", {
+    galaxy: $("#galaxySel").val(),
+    formatType: "harvest",
+    favGroup: "Harvesting"},
+    function() {
+      $("#addBusyImgHarvest").css("display","none");
+      if($("#harvestResourceData").html().includes("No Matching Resources")){
+        $("#harvestResourceData").html("<table><tr><td>Click the favorite selector on a resource you are currently harvesting to make it show up here.</td><td><img src='/images/favSelector.png'/></td></tr></table>");
+      }
+  });
 }
 </script>
 {{ blocks.pageTracker() }}

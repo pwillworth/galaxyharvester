@@ -649,15 +649,15 @@ function removeFavorite(favoriteItem, itemType) {
 function favoritePicker(linkFrom, spawnID, galaxyID, spawnName, currentFavInfo) {
 	$('#favCurrentInfo').html(`Select favorite group for ${spawnName}`);
 	$('#favPicksurvey').unbind('click');
-	$('#favPicksurvey').click(function(){updateFavoriteGroup(spawnID, 'Surveying', galaxyID);$(linkFrom).css('background-image', 'url(\'/images/resources/underground_liquid.png\')');$('#mask, .window').hide();});
+	$('#favPicksurvey').click(function(){updateFavoriteGroup(spawnID, 'Surveying', galaxyID);$(linkFrom).css('background-image', 'url(\'/images/resources/underground_liquid.png\')');favoritePickerCloseRefresh();});
 	$('#favPickharvest').unbind('click');
-	$('#favPickharvest').click(function(){updateFavoriteGroup(spawnID, 'Harvesting', galaxyID);$(linkFrom).css('background-image', 'url(\'/images/harvesterCapacity.png\')');$('#mask, .window').hide();});
+	$('#favPickharvest').click(function(){updateFavoriteGroup(spawnID, 'Harvesting', galaxyID);$(linkFrom).css('background-image', 'url(\'/images/harvesterCapacity.png\')');favoritePickerCloseRefresh();});
 	$('#favPickinv').unbind('click');
-	$('#favPickinv').click(function(){if (currentFavInfo == '-') {addFavorite(galaxyID, spawnName);} else {updateFavoriteGroup(spawnID, $('#favPickerGroupSel').val(), galaxyID);}$(linkFrom).css('background-image', 'url(\'/images/inventory32.png\')');$('#mask, .window').hide();});
+	$('#favPickinv').click(function(){if (currentFavInfo == '-') {addFavorite(galaxyID, spawnName);} else {updateFavoriteGroup(spawnID, $('#favPickerGroupSel').val(), galaxyID);}$(linkFrom).css('background-image', 'url(\'/images/inventory32.png\')');$favoritePickerCloseRefresh();});
 	$('#favPickshop').unbind('click');
-	$('#favPickshop').click(function(){updateFavoriteGroup(spawnID, 'Shopping', galaxyID);$(linkFrom).css('background-image', 'url(\'/images/favoriteOn.png\')');$('#mask, .window').hide();});
+	$('#favPickshop').click(function(){updateFavoriteGroup(spawnID, 'Shopping', galaxyID);$(linkFrom).css('background-image', 'url(\'/images/favoriteOn.png\')');favoritePickerCloseRefresh();});
 	$('#favRemove').unbind('click');
-	$('#favRemove').click(function(){removeFavorite(spawnID, 1);$(linkFrom).css('background-image', 'url(\'/images/favSelector.png\')');$('#mask, .window').hide();});
+	$('#favRemove').click(function(){removeFavorite(spawnID, 1);$(linkFrom).css('background-image', 'url(\'/images/favSelector.png\')');favoritePickerCloseRefresh();});
 	$('#favText'+currentFavInfo).addClass('contrastStyle');
 	if (currentFavInfo == '-') {
 		$('#favRemove').hide();
@@ -668,6 +668,14 @@ function favoritePicker(linkFrom, spawnID, galaxyID, spawnName, currentFavInfo) 
 	}
 	$("#favPickerGroupSel").load(BASE_SCRIPT_URL + "getMyGroups.py",{favType:1, firstOption: "<option value=\"Incoming\">Incoming</option>", excludeGroups: "system"});
 	showWindow("#favoriteDialog");
+}
+
+function favoritePickerCloseRefresh() {
+	if (window.location.href.includes('ghHome')) {
+      refreshSurveying();
+      refreshHarvesting();
+	}
+	$('#mask, .window').hide();
 }
 
 function toggleFavorite(linkFrom, favoriteType, favoriteItem, galaxyID) {

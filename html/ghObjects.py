@@ -666,12 +666,12 @@ class resourceSpawn:
 		result = ''
 		# display fav icon, res name, planet bar, and waypoint indicator
 		result += '<tr id="svy_cont_'+self.spawnName+'" name="svy_cont_'+self.spawnName+'" class="statRow">'
-		result += '  <td><img style="width:16px;height:16px;cursor:pointer;" src="/images/resources/underground_liquid.png" title="Click to toggle favorite group" onclick="favoritePicker(this, \''+str(self.spawnID)+'\', '+str(self.spawnGalaxy)+', \''+self.spawnName+'\', \'harvest\');"></td>'
+		result += '  <td><img style="width:16px;height:16px;cursor:pointer;" src="/images/resources/underground_liquid.png" title="Click to toggle favorite group" onclick="favoritePicker(this, \''+str(self.spawnID)+'\', '+str(self.spawnGalaxy)+', \''+self.spawnName+'\', \'survey\');"></td>'
 		result += '    <td style="width:90px;"><span style="font-size: 12px;font-weight: bold;"><a href="' + ghShared.BASE_SCRIPT_URL + 'resource.py/'+str(self.spawnGalaxy)+'/'+self.spawnName+'" class="nameLink">'+self.spawnName+'</a></td>'
 		result += '    <td>'+self.getPlanetBar()+'</td>'
 		# add waypoints indicator
 		if self.maxWaypointConc != None:
-			result += '<div style="float:right;"><a href="' + ghShared.BASE_SCRIPT_URL + 'resource.py/'+str(self.spawnGalaxy)+'/'+self.spawnName+'"><img src="/images/waypointMarker.png" alt="waypoint marker" title="waypoint(s) available (best is ' + str(self.maxWaypointConc) + '%)" width="20" /></a></div>'
+			result += '<td><a href="' + ghShared.BASE_SCRIPT_URL + 'resource.py/'+str(self.spawnGalaxy)+'/'+self.spawnName+'"><img src="/images/waypointMarker.png" alt="waypoint marker" title="waypoint(s) available (best is ' + str(self.maxWaypointConc) + '%)" width="20" /></a></td>'
 		result += "</tr>"
 
 		return result
