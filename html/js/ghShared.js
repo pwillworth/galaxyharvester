@@ -614,7 +614,7 @@ function compareResources(resGroup) {
 				galaxyQuality = parseInt($(galaxyRes).attr("title"));
 				myQuality = parseInt($(myRes).attr("title"));
 				if (galaxyQuality > myQuality) {
-					compareInfo = $(galaxyRes).children(".compareInfo")[0];
+					compareInfo = $(galaxyRes).find(".compareInfo")[0];
 					if ($(compareInfo).children().length < 2) {
 						$(compareInfo).append("<span class='qualityBad'>&nbsp;(" + (((galaxyQuality - myQuality) / myQuality)*100).toFixed(1) + "% better!)</span>");
 					}

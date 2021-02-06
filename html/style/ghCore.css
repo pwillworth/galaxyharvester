@@ -4,6 +4,7 @@
 	margin: 0;
 	border: 0;
 }
+
 body {
 	font-family: Trebuchet, Verdana, sans-serif;
 	font-size: 10px;
@@ -724,11 +725,7 @@ a div.resTreeItem {
 #myShortcuts {
 	border-radius: 4px;
 }
-.compareInfo {
-	float: right;
-	font-weight:bold;
-	margin: 4px;
-}
+
 ul.feedback {
 	margin-left: 8px;
 }
@@ -868,4 +865,10 @@ div.blockUserItem img {
 }
 .favPick td {
 	text-align: center;
+}
+
+.compareInfo {
+	float: right;
+	font-weight: bold;
+	margin: 4px;
 }

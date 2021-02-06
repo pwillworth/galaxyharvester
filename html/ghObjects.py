@@ -295,9 +295,9 @@ class resourceSpawn:
 					favInfo = '-'
 
 				if self.units > 0:
-					result += '<div title="Click to toggle favorite group" class="compareInfo" style="width:32px;height:32px;cursor: pointer;background-image: url(\'/images/'+favImage+'\');background-size: 32px 32px;background-repeat: no-repeat;" onclick="favoritePicker(this, \''+str(self.spawnID)+'\', '+str(self.spawnGalaxy)+', \''+self.spawnName+'\', \''+favInfo+'\');"><span style="line-height:40px;">'+ghShared.getNumberAbbr(self.units)+'</span></div>'
+					result += '<div title="Click to toggle favorite group" style="float:right;width:32px;height:32px;margin:4px;cursor:pointer;background-image: url(\'/images/'+favImage+'\');background-size: 32px 32px;background-repeat: no-repeat;" onclick="favoritePicker(this, \''+str(self.spawnID)+'\', '+str(self.spawnGalaxy)+', \''+self.spawnName+'\', \''+favInfo+'\');"><span style="line-height:40px;font-weight:bold;">'+ghShared.getNumberAbbr(self.units)+'</span></div>'
 				else:
-					result += '<div title="Click to toggle favorite group" class="compareInfo" style="width:32px;height:32px;cursor: pointer;background-image: url(\'/images/'+favImage+'\');background-size: 32px 32px;background-repeat: no-repeat;" onclick="favoritePicker(this, \''+str(self.spawnID)+'\', '+str(self.spawnGalaxy)+', \''+self.spawnName+'\', \''+favInfo+'\');"></div>'
+					result += '<div title="Click to toggle favorite group" style="float:right;width:32px;height:32px;margin:4px;cursor:pointer;background-image: url(\'/images/'+favImage+'\');background-size: 32px 32px;background-repeat: no-repeat;" onclick="favoritePicker(this, \''+str(self.spawnID)+'\', '+str(self.spawnGalaxy)+', \''+self.spawnName+'\', \''+favInfo+'\');"></div>'
 
 			if formatStyle == 0:
 				# resource update information
