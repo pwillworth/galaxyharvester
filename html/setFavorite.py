@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 
- Copyright 2020 Paul Willworth <ioscode@gmail.com>
+ Copyright 2021 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -31,6 +31,12 @@ import pymysql
 import re
 
 #
+# Favorite Types
+# 1 = Resource Spawn
+# 2 = Resource Type
+# 3 = Profession
+# 4 = Schematic
+
 # Get current url
 try:
 	url = os.environ['SCRIPT_NAME']
@@ -186,14 +192,14 @@ if (errstr == ""):
 
 		if itemID != "-1":
 			if units != "" or favGroup != "" or despawnAlert != "":
-				# Just updating favorite property
+				# Just updating favorite property but make sure its a favorite incase adding despawn or group for first time
+				if favoriteExists(conn, currentUser, favType, itemID, galaxyID) != True:
+					result = addFavorite(conn, currentUser, favType, itemID, galaxyID)
 				if units != "":
 					udStr = "units=" + str(units)
 				if favGroup != "":
 					udStr = "favGroup='" + favGroup + "'"
 				if despawnAlert != "":
-					if favoriteExists(conn, currentUser, favType, itemID, galaxyID) != True:
-						result = addFavorite(conn, currentUser, favType, itemID, galaxyID)
 					udStr = "despawnAlert={0}".format(despawnAlert)
 
 				if (str(result).find("Error:") == -1):

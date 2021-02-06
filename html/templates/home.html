@@ -16,7 +16,27 @@ $(document).ready(function() {
         $("#quickAddGo").attr("disabled","disabled");
     }
 {% if loggedin == 1 %}
-	    refreshAlerts();
+      refreshAlerts();
+      $("#surveyResourceData").load(BASE_SCRIPT_URL + "getUserResources.py?{{ linkappend }}",{
+        galaxy: $("#galaxySel").val(),
+        formatType: "survey",
+        favGroup: "Surveying"},
+        function() {
+            $("#addBusyImgSurvey").css("display","none");
+            if($("#surveyResourceData").html().includes("No Matching Resources")){
+              $("#surveyResourceData").html("<table><tr><td>Click the favorite selector on a resource you want to survey for to make it show up here.</td><td><img src='/images/favSelector.png'/></td></tr></table>");
+            }
+        });
+      $("#harvestResourceData").load(BASE_SCRIPT_URL + "getUserResources.py?{{ linkappend }}", {
+        galaxy: $("#galaxySel").val(),
+        formatType: "harvest",
+        favGroup: "Harvesting"},
+        function() {
+            $("#addBusyImgHarvest").css("display","none");
+            if($("#harvestResourceData").html().includes("No Matching Resources")){
+              $("#harvestResourceData").html("<table><tr><td>Click the favorite selector on a resource you are currently harvesting to make it show up here.</td><td><img src='/images/favSelector.png'/></td></tr></table>");
+            }
+        });
 {% endif %}
     $("#newsList").load("/blog.py/smy");
     $("#topCurrentCount").load(BASE_SCRIPT_URL + "ghStats.py",{statID:"currentSpawns",galaxy:$("#galaxySel").val()});
@@ -66,7 +86,17 @@ function filterTopResources() {
   </div>
 	<div id="alertList"></div>
 	<div id=busyImgAlerts><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
-	</div>
+  </div>
+  <div id="mySurveys" class="ghWidgetBox">
+    <div class="boxHeader">Surveying</div>
+    <div id="surveyResourceData"></div>
+    <div id=addBusyImgSurvey><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+  </div>
+  <div id="myHarvests" class="ghWidgetBox">
+    <div class="boxHeader">Harvesting</div>
+    <div id="harvestResourceData"></div>
+    <div id=addBusyImgHarvest><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+  </div>
 {% endif %}
     <div id="userStats" class="ghWidgetBox">
     <div class="boxHeader">Top Harvesters</div>
@@ -176,5 +206,6 @@ function filterTopResources() {
 {{ blocks.resourceForm() }}
 {{ blocks.joinForm(loggedin, ['?src_url=ghHome.py&',linkappend]|join, url, enableCAPTCHA, siteidCAPTCHA) }}
 {{ blocks.waypointForm(loggedin) }}
+{{ blocks.favoriteForm() }}
 <div id="mask"></div>
 </body></html>

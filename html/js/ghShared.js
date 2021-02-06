@@ -635,6 +635,38 @@ function addFavorite(galaxyID, spawnName) {
 		}, "html");
 }
 
+function removeFavorite(favoriteItem, itemType) {
+	$.post(BASE_SCRIPT_URL + "setFavorite.py",{ itemID: favoriteItem, favType: itemType },
+		function(data) {
+			if (data.substr(0,5) == "Error") {
+				alert(data);
+			} else {
+				// all good
+			}
+		}, "html");
+}
+
+function favoritePicker(linkFrom, spawnID, galaxyID, spawnName, currentFavInfo) {
+	$('#favCurrentInfo').html(`Select favorite group for ${spawnName}`);
+	$('#favPicksurvey').unbind('click');
+	$('#favPicksurvey').click(function(){updateFavoriteGroup(spawnID, 'Surveying', galaxyID);$(linkFrom).css('background-image', 'url(\'/images/resources/underground_liquid.png\')');$('#mask, .window').hide();});
+	$('#favPickharvest').unbind('click');
+	$('#favPickharvest').click(function(){updateFavoriteGroup(spawnID, 'Harvesting', galaxyID);$(linkFrom).css('background-image', 'url(\'/images/harvesterCapacity.png\')');$('#mask, .window').hide();});
+	$('#favPickinv').unbind('click');
+	$('#favPickinv').click(function(){addFavorite(galaxyID, spawnName);$(linkFrom).css('background-image', 'url(\'/images/inventory32.png\')');$('#mask, .window').hide();});
+	$('#favPickshop').unbind('click');
+	$('#favPickshop').click(function(){updateFavoriteGroup(spawnID, 'Shopping', galaxyID);$(linkFrom).css('background-image', 'url(\'/images/favoriteOn.png\')');$('#mask, .window').hide();});
+	$('#favRemove').unbind('click');
+	$('#favRemove').click(function(){removeFavorite(spawnID, 1);$(linkFrom).css('background-image', 'url(\'/images/favSelector.png\')');$('#mask, .window').hide();});
+	$('#favText'+currentFavInfo).addClass('contrastStyle');
+	if (currentFavInfo == '-') {
+		$('#favRemove').hide();
+	} else {
+		$('#favRemove').show();
+	}
+	showWindow("#favoriteDialog");
+}
+
 function toggleFavorite(linkFrom, favoriteType, favoriteItem, galaxyID) {
 	$.post(BASE_SCRIPT_URL + "setFavorite.py",{ itemID: favoriteItem, favType: favoriteType, galaxy: galaxyID },
 		function(data) {
@@ -652,8 +684,8 @@ function toggleFavorite(linkFrom, favoriteType, favoriteItem, galaxyID) {
 		}, "html");
 }
 
-function updateFavoriteGroup(spawnID, groupName) {
-	$.post(BASE_SCRIPT_URL + "setFavorite.py",{ itemID: spawnID, favType: 1, favGroup: groupName },
+function updateFavoriteGroup(spawnID, groupName, galaxyID) {
+	$.post(BASE_SCRIPT_URL + "setFavorite.py",{ itemID: spawnID, favType: 1, favGroup: groupName, galaxy: galaxyID },
 		function(data) {
 			if (data.substr(0,5) == "Error") {
 				alert(data);

@@ -79,6 +79,23 @@ function moveChecked() {
     $("#mask, .window").hide();
     filterResources();
 }
+function removeChecked() {
+  var doit = false;
+  doit = confirm("Are you sure you want to REMOVE all selected resources from your inventory?");
+
+  if (doit) {
+    var newGroup = $("#txtGroup").val();
+    $(":checkbox").each(function(index) {
+        var namePrefix = this.id.substr(0,8);
+        if (namePrefix == "chkMove_") {
+            if (this.checked) {
+                removeFavorite(this.id.substr(8), 1);
+            }
+        }
+    });
+    filterResources();
+  }
+}
 function dragRowHelper(event) {
     return $('<div class="drag-fav-item"><table class="resourceStats"></table></div>').find('table').append($(event.target).closest('tr').clone()).end().insertAfter($("#resourceData"));
 }
@@ -166,7 +183,8 @@ function exportInventory(format) {
 {% if editable %}
 	        <div style="float:right;">
 	        Add by name:<input type="text" name="findSpawn" id="findSpawn" tabindex="20" size="16" maxlength="64" />
-	        <button type=button value="Add" class="ghButton" onclick="addFavorite($('#galaxySel').val(), $('#findSpawn').val());" style="margin-right:20px;">Add</button>
+            <button type=button value="Add" class="ghButton" onclick="addFavorite($('#galaxySel').val(), $('#findSpawn').val());" style="margin-right:20px;">Add</button>
+            <button type=button value="Remove Checked" class="ghButton" onclick="removeChecked();">Remove Checked</button>
 	        <button type=button value="Move Checked" class="ghButton" onclick="getMoveGroup();">Move Checked</button></div>
 {% endif %}
     </div>
@@ -191,6 +209,7 @@ function exportInventory(format) {
 {% endif %}
 {{ blocks.resourceForm() }}
 {{ blocks.joinForm(loggedin, ['?src_url=myResources.py&', linkappend]|join, url, enableCAPTCHA, siteidCAPTCHA) }}
+{{ blocks.favoriteForm() }}
 <div id="mask"></div>
 <iframe id="download_frame" style="display:none;"></iframe>
 </body></html>

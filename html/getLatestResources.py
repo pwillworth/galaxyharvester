@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 
- Copyright 2020 Paul Willworth <ioscode@gmail.com>
+ Copyright 2021 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -71,11 +71,11 @@ print('Content-type: text/html\n')
 print('<table width="100%" class=resourceStats>')
 if galaxy != '':
 	if logged_state == 1:
-		favJoin = ' LEFT JOIN (SELECT itemID, favGroup FROM tFavorites WHERE userID="' + currentUser + '" AND favType=1) favs ON tResources.spawnID = favs.itemID'
-		favCols = ', favGroup'
+		favJoin = ' LEFT JOIN (SELECT itemID, favGroup, units FROM tFavorites WHERE userID="' + currentUser + '" AND favType=1) favs ON tResources.spawnID = favs.itemID'
+		favCols = ', favGroup, units'
 	else:
 		favJoin = ''
-		favCols = ', NULL'
+		favCols = ', NULL, NULL'
 	galaxyState = dbShared.galaxyState(galaxy)
 	conn = dbShared.ghConn()
 
@@ -141,6 +141,9 @@ if galaxy != '':
 			s.unavailableBy = row[34]
 			if row[35] != None:
 				s.favorite = 1
+				s.favGroup = row[35]
+			if row[36] != None:
+				s.units = row[36]
 			s.planets = dbShared.getSpawnPlanets(conn, row[0], True, row[2])
 
 			print('  <tr><td>')

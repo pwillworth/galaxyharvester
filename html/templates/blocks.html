@@ -136,7 +136,7 @@
 
 {% macro resourceForm() %}
 	<div id="resourceDialog" class="window bigForm">
-	    <h2 style="display: inline;">Adding Resources</h2><div style="float: right;postion: relative;top:0px;"><a href="#" class="close">Close</a></div>
+	    <h2 style="display: inline;">Adding Resources</h2><div style="float: right;position: relative;top:0px;"><a href="#" class="close">Close</a></div>
 	    <div id=resStatusUpdate class="statusMsg"></div><div id=addBusyImg style="float:left;display:none;"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
 	    <div id=resCurrentInfo class="standOut"></div>
 	    <form name="quickResForm" method="post" action="" enctype="application/x-www-form-urlencoded">
@@ -275,7 +275,7 @@
 
 {% macro recipeForm(professionList) %}
 	<div id="recipeDialog" class="window">
-		<h2 style="display: inline;">New Recipe</h2><div style="float: right;postion: relative;top:0px;"><a href="#" class="close">Close</a></div>
+		<h2 style="display: inline;">New Recipe</h2><div style="float: right;position: relative;top:0px;"><a href="#" class="close">Close</a></div>
 		<div id="schematicSelectionGroup">
 		<div class="searchInput">Select Schematic:<br /><select name="profSel" id="profSel" onchange="setCookie('schemPickerProfSel',this.value,7);refreshSchematics();"><option value=0>Select Profession</option>
 		{{ professionList }}
@@ -288,4 +288,32 @@
 		<div style="float:right;margin:6px;padding-top:100px;"><input type="button" class="ghButton" value="Create" id="goCreate" onclick="newRecipe($('#schematicList').val(), $('#recipeName').val(), $('#galaxySel').val());" /></div>
 		<div style="float:right;margin:6px;padding-top:100px;"><input type="button" class="ghButton" value="Cancel" id="cancelRecipe" onclick="$('#mask, .window').hide();" /></div>
 	</div>
+{% endmacro %}
+
+{% macro favoriteForm() %}
+	<div id="favoriteDialog" class="window bigForm">
+	    <h2 style="display: inline;">Toggle Favorite</h2><div style="float: right;position: relative;top:0px;"><a href="#" class="close">Close</a></div>
+	    <div id="favStatusUpdate" class="statusMsg"></div><div id=favBusyImg style="float:left;display:none;"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+	    <div id="favCurrentInfo" class="standOut"></div>
+        <table class="favPick">
+			<tr class="favPickImageRow">
+				<td style="cursor: pointer;" id="favPicksurvey"><img src="/images/resources/underground_liquid.png" class="favPicker"/></td>
+				<td style="cursor: pointer;" id="favPickharvest"><img src="/images/harvesterCapacity.png" class="favPicker"/></td>
+				<td style="cursor: pointer;" id="favPickshop"><img src="/images/favoriteOn.png" class="favPicker"/></td>
+				<td style="cursor: pointer;" id="favPickinv"><img src="/images/inventory64.png" class="favPicker"/></td>
+			</tr>
+			<tr>
+				<td id="favTextsurvey">Surveying</td>
+				<td id="favTextharvest">Harvesting</td>
+				<td id="favTextshop">Shopping</td>
+				<td id="favTextinv">Inventory</td>
+			</tr>
+		</table>
+		<input style="margin: 20px 20px 80px 10px;" type="button" class="ghButton" value="Remove From Favorites" id="favRemove" />
+	    <div id="resFavResults"></div>
+	</div>
+	<script>
+		$('.favPickImageRow td').mouseover(function(){$(this).addClass('contrastStyle');})
+		$('.favPickImageRow td').mouseout(function(){$(this).removeClass('contrastStyle');})
+	</script>
 {% endmacro %}

@@ -856,3 +856,16 @@ div.blockUserItem img {
 	position: absolute;
 	left: -9999px;
 }
+
+.favPicker {
+	width: 64px;
+	height: 64px;
+}
+
+.favPick {
+	margin: 6px;
+	width: 100%;
+}
+.favPick td {
+	text-align: center;
+}

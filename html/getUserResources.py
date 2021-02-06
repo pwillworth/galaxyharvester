@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 
- Copyright 2020 Paul Willworth <ioscode@gmail.com>
+ Copyright 2021 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -35,10 +35,7 @@ import ghObjects
 def getTableHeader(sortBy, editable):
 	dbCols = ['spawnName','resourceTypeName','ER','CR','CD','DR','FL','HR','MA','PE','OQ','SR','UT','units']
 	headerCols = ['Name','Type','ER','CR','CD','DR','FL','HR','MA','PE','OQ','SR','UT','units']
-	if editable:
-		headerString = '<tr><th></th>'
-	else:
-		headerString = '<tr>'
+	headerString = '<tr>'
 	for col in range(len(headerCols)):
 		if (sortBy == dbCols[col]):
 			headerStyle = 'sorted'
@@ -47,7 +44,7 @@ def getTableHeader(sortBy, editable):
 		headerString = ''.join((headerString, '<th class="', headerStyle, '" onclick="filterResources(\'', dbCols[col], '\')">', headerCols[col], '</th>'))
 
 	if editable:
-		headerString = ''.join((headerString, '<th style="background-image:url(/images/xRed16.png);background-repeat:no-repeat;background-position:0px 0px;" title="Despawn Alert"></th><th></th>'))
+		headerString = ''.join((headerString, '<th></th>'))
 	headerString = ''.join((headerString, '</tr>'))
 
 	return headerString
@@ -140,7 +137,7 @@ if formatType == 'alerts':
 	criteriaStr = criteriaStr + " AND despawnAlert > 0 AND unavailable IS NULL"
 
 # Restrict returned results if user is not sharing inventory
-accessString = 'My'
+accessString = 'Mine'
 if uid != currentUser:
 	invShared = dbShared.getUserAttr(uid, 'sharedInventory')
 	if invShared > 1:
@@ -205,7 +202,7 @@ if uid != '':
 			sqlStr1 += ' CASE WHEN SRmax > 0 THEN (((CASE WHEN SR IS NULL THEN 0 ELSE SR END)-SRmin) / (SRmax-SRmin))*100 ELSE NULL END AS SRperc,'
 			sqlStr1 += ' CASE WHEN UTmax > 0 THEN (((CASE WHEN UT IS NULL THEN 0 ELSE UT END)-UTmin) / (UTmax-UTmin))*100 ELSE NULL END AS UTperc,'
 			sqlStr1 += ' CASE WHEN ERmax > 0 THEN (((CASE WHEN ER IS NULL THEN 0 ELSE ER END)-ERmin) / (ERmax-ERmin))*100 ELSE NULL END AS ERperc,'
-			sqlStr1 += ' tResourceType.containerType, verified, verifiedBy, unavailable, unavailableBy, favGroup, units, inventoryType, groupName, (SELECT GROUP_CONCAT(resourceGroup SEPARATOR ",") FROM tResourceTypeGroup rtg WHERE rtg.resourceType=tResources.resourceType), despawnAlert FROM tResources'
+			sqlStr1 += ' tResourceType.containerType, verified, verifiedBy, unavailable, unavailableBy, favGroup, units, inventoryType, groupName, (SELECT GROUP_CONCAT(resourceGroup SEPARATOR ",") FROM tResourceTypeGroup rtg WHERE rtg.resourceType=tResources.resourceType), despawnAlert, (SELECT Max(concentration) FROM tWaypoint WHERE tWaypoint.spawnID=tResources.spawnID) AS wpMaxConc FROM tResources'
 			sqlStr1 += ' INNER JOIN tResourceType ON tResources.resourceType = tResourceType.resourceType INNER JOIN tResourceGroup ON tResourceType.resourceGroup = tResourceGroup.resourceGroup INNER JOIN tFavorites ON tResources.spawnID = tFavorites.itemID' + joinStr
 			sqlStr1 += ' WHERE userID="' + uid + '" AND favType=1 AND tResources.galaxy=' + galaxy + criteriaStr + orderStr + ';'
 			cursor.execute(sqlStr1)
@@ -215,7 +212,7 @@ if uid != '':
 			else:
 				result += accessString + ' - No Matching Resources.'
 
-			if formatType == 'alerts':
+			if formatType in ['alerts', 'survey', 'harvest']:
 				result += '<table id="tbl_despawnAlerts" class="resourceStats">'
 			if formatType == 'csv':
 				result += 'group,name,resource type,type name,ER,CR,CD,DR,FL,HR,MA,PE,OQ,SR,UT,units,enter date,unavailable date\n'
@@ -281,6 +278,8 @@ if uid != '':
 				s.groupName = row[38]
 				if row[39] != None:
 					s.groupList = ',' + row[39] + ','
+				s.maxWaypointConc = row[41]
+				s.planets = dbShared.getSpawnPlanets(conn, row[0], True, row[2])
 
 				if formatType == 'inventory':
 					result += s.getInventoryObject()
@@ -289,6 +288,10 @@ if uid != '':
 				elif formatType == 'csv':
 					result += ','.join((s.favGroup, s.spawnName, s.resourceType, s.resourceTypeName, xstr(s.stats.ER), xstr(s.stats.CR), xstr(s.stats.CD), xstr(s.stats.DR), xstr(s.stats.FL), xstr(s.stats.HR), xstr(s.stats.MA), xstr(s.stats.PE), xstr(s.stats.OQ), xstr(s.stats.SR), xstr(s.stats.UT), str(s.units), xstr(s.entered), xstr(s.unavailable)))
 					result += '\n'
+				elif formatType == 'survey':
+					result += s.getSurveyRow()
+				elif formatType == 'harvest':
+					result += s.getHarvestRow()
 				else:
 					groupResult += s.getRow(uid == currentUser and logged_state==1)
 					groupCount += 1
@@ -304,7 +307,7 @@ if uid != '':
 			result += getTableHeader(sortBy, uid==currentUser and logged_state==1)
 			result += groupResult
 			result += '</table>'
-		if formatType == 'alerts':
+		if formatType in ['alerts', 'survey', 'harvest']:
 			result += '</table>'
 	else:
 		result = "Error: No galaxy specified"

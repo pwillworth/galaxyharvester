@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 
- Copyright 2020 Paul Willworth <ioscode@gmail.com>
+ Copyright 2021 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -62,11 +62,11 @@ def getResourceHistory(conn, spawnID):
 
 def getResource(conn, logged_state, currentUser, spawnID, galaxy, spawnName):
 	if logged_state == 1:
-		favJoin = ' LEFT JOIN (SELECT itemID, favGroup FROM tFavorites WHERE userID="' + currentUser + '" AND favType=1) favs ON tResources.spawnID = favs.itemID'
-		favCols = ', favGroup'
+		favJoin = ' LEFT JOIN (SELECT itemID, favGroup, units FROM tFavorites WHERE userID="' + currentUser + '" AND favType=1) favs ON tResources.spawnID = favs.itemID'
+		favCols = ', favGroup, units'
 	else:
 		favJoin = ''
-		favCols = ', NULL'
+		favCols = ', NULL, NULL'
 	if spawnID != None:
 		criteriaStr = 'spawnID=' + str(spawnID)
 	else:
@@ -136,8 +136,11 @@ def getResource(conn, logged_state, currentUser, spawnID, galaxy, spawnName):
 			s.unavailableBy = row[34]
 			if row[38] != None:
 				s.favorite = 1
+				s.favGroup = row[38]
 			if row[39] != None:
-				s.groupList = ',' + row[39] + ','
+				s.units = row[39]
+			if row[40] != None:
+				s.groupList = ',' + row[40] + ','
 			s.planets = dbShared.getSpawnPlanets(conn, row[0], True, row[2])
 		else:
 			s = None

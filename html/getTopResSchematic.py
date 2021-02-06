@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 
- Copyright 2020 Paul Willworth <ioscode@gmail.com>
+ Copyright 2021 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -108,6 +108,7 @@ def getResourceData(conn, resSQL, logged_state, galaxyState, resourceFormat, rep
 					s.unavailableBy = row[34]
 					if row[36] != None:
 						s.favorite = 1
+						s.favGroup = row[36]
 					if row[37] != None:
 						s.units = row[37]
 					if row[38] != None:

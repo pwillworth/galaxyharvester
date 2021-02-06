@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 
- Copyright 2020 Paul Willworth <ioscode@gmail.com>
+ Copyright 2021 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -225,11 +225,11 @@ if galaxy != '':
 	else:
 		formatStyle = 1
 	if logged_state == 1:
-		favJoin = ' LEFT JOIN (SELECT itemID, favGroup FROM tFavorites WHERE userID="' + currentUser + '" AND favType=1) favs ON tResources.spawnID = favs.itemID'
-		favCols = ', favGroup'
+		favJoin = ' LEFT JOIN (SELECT itemID, favGroup, units FROM tFavorites WHERE userID="' + currentUser + '" AND favType=1) favs ON tResources.spawnID = favs.itemID'
+		favCols = ', favGroup, units'
 	else:
 		favJoin = ''
-		favCols = ', NULL'
+		favCols = ', NULL, NULL'
 
 	if (cursor):
 		if prof.isdigit() and prof != '0':
@@ -310,6 +310,9 @@ if galaxy != '':
 			s.unavailableBy = row[35]
 			if row[36] != None:
 				s.favorite = 1
+				s.favGroup = row[36]
+			if row[37] != None:
+				s.units = row[37]
 			s.planets = dbShared.getSpawnPlanets(conn, row[0], True, row[2])
 
 			print('  <tr><td>')

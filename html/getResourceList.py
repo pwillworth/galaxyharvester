@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 
- Copyright 2020 Paul Willworth <ioscode@gmail.com>
+ Copyright 2021 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -174,13 +174,13 @@ if logged_state == 1:
 	#wpCriteria = 'shareLevel=256 OR owner="' + currentUser + '" OR (shareLevel=64 AND owner IN (SELECT f1.friendID FROM tUserFriends f1 INNER JOIN tUserFriends f2 ON f1.userID=f2.friendID WHERE f1.userID="' + currentUser + '")) OR waypointID IN (SELECT uw.waypointID FROM tUserWaypoints uw WHERE unlocked IS NOT NULL AND uw.userID="' + currentUser + '")'
 	wpCriteria = 'shareLevel=256'
 	if favorite == "on":
-		joinStr = joinStr + " INNER JOIN (SELECT itemID, favGroup FROM tFavorites WHERE userID='" + currentUser + "' AND favType=1) favs ON tResources.spawnID = favs.itemID"
+		joinStr = joinStr + " INNER JOIN (SELECT itemID, favGroup, units FROM tFavorites WHERE userID='" + currentUser + "' AND favType=1) favs ON tResources.spawnID = favs.itemID"
 	else:
-		joinStr = joinStr + ' LEFT JOIN (SELECT itemID, favGroup FROM tFavorites WHERE userID="' + currentUser + '" AND favType=1) favs ON tResources.spawnID = favs.itemID'
-	favCols = ', favGroup'
+		joinStr = joinStr + ' LEFT JOIN (SELECT itemID, favGroup, units FROM tFavorites WHERE userID="' + currentUser + '" AND favType=1) favs ON tResources.spawnID = favs.itemID'
+	favCols = ', favGroup, units'
 else:
 	wpCriteria = 'shareLevel=256'
-	favCols = ', NULL'
+	favCols = ', NULL, NULL'
 
 
 if sort[:4] == "time":
@@ -330,6 +330,9 @@ if (errorStr == ""):
 			s.maxWaypointConc = row[39]
 			if row[40] != None:
 				s.favorite = 1
+				s.favGroup = row[40]
+			if row[41] != None:
+				s.units = row[41]
 			s.planets = dbShared.getSpawnPlanets(conn, row[0], True, row[2])
 
 			print('  <tr><td>')

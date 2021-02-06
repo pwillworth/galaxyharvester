@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 
- Copyright 2020 Paul Willworth <ioscode@gmail.com>
+ Copyright 2021 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -118,6 +118,7 @@ def getResourceData(conn, resSQL, userReputation, activeUser, formatType):
 			s.maxWaypointConc = row[39]
 			if row[40] != None:
 				s.favorite = 1
+				s.favGroup = row[40]
 				s.despawnAlert = row[41]
 			if row[42] != None:
 				s.units = row[42]

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 
- Copyright 2020 Paul Willworth <ioscode@gmail.com>
+ Copyright 2021 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -227,8 +227,6 @@ class resourceSpawn:
 			result += '  <div id="cont_'+self.spawnName+'" class="boxBorderHidden" style="' + resBoxStyle + '"' + titleStr + ' onmouseover="$(this).removeClass(\'boxBorderHidden\');$(this).addClass(\'listSelected\');" onmouseout="$(this).removeClass(\'listSelected\');$(this).addClass(\'boxBorderHidden\');">'
 		else:
 			result += '  <div id="cont_'+self.spawnName+'" class="resourceBox" style="' + resBoxStyle + '"' + titleStr + '>'
-		if self.overallScore != None and self.overallScore > 0:
-			result += '  <div class="compareInfo"><span>Quality: ' + str("%.0f" % (float(self.overallScore))) + '</span></div>'
 
 		# resource title row
 		if formatStyle == 0:
@@ -245,6 +243,8 @@ class resourceSpawn:
 					result += '  <div style="width:100px;float:right;"><input type="checkbox" id="chkRemove_' + self.spawnName + '" />Remove</div>'
 				else:
 					result += '  <a alt="Mark Unavailable" style="cursor: pointer;" onclick="markUnavailable(this, \''+self.spawnName+'\', '+str(self.spawnGalaxy)+unPlanetStr+');"> [X]</a>'
+		if self.overallScore != None and self.overallScore > 0:
+			result += '  <div class="compareInfo"><span>Quality: ' + str("%.0f" % (float(self.overallScore))) + '</span></div>'
 
 		# non-stat info
 		if formatStyle == 0:
@@ -260,13 +260,6 @@ class resourceSpawn:
 		else:
 			result += ''
 
-		# favorite indicator
-		if currentUser != '':
-			if self.favorite > 0:
-				result += '  <div class="inlineBlock" style="width:3%;float:left;"><a alt="Favorite" title="Favorite" style="cursor: pointer;" onclick="toggleFavorite(this, 1, \''+str(self.spawnID)+'\', '+str(self.spawnGalaxy)+');"><img src="/images/favorite16On.png" /></a></div>'
-			else:
-				result += '  <div class="inlineBlock" style="width:3%;float:left;"><a alt="Favorite" title="Favorite" style="cursor: pointer;" onclick="toggleFavorite(this, 1, \''+str(self.spawnID)+'\', '+str(self.spawnGalaxy)+');"><img src="/images/favorite16Off.png" /></a></div>'
-
 		# stats information table
 		if formatStyle == 0:
 			result += '  <div style="width:275px;float:left;">'
@@ -278,11 +271,36 @@ class resourceSpawn:
 		if formatStyle != 2:
 			result += '  <table class="resAttr" style="cursor: pointer;" onclick="addResourceCopy(\''+self.spawnName+'\')" data-resource="'+self.spawnName+'" data-stats="'+self.spawnName+' ('+self.resourceTypeName+') '+ copyVals +'"><tr>' + statHeads + '</tr><tr>' + statVals + '</tr>'
 			result += '  </table></div></div>'
-			if self.units > 0:
-				result += '<div class="compareInfo" style="background-image: url(\'/images/inventory32.png\');height: 32px;min-width: 32px;"><span style="line-height:40px;">'+ghShared.getNumberAbbr(self.units)+'</span></div>'
+
+			# favorite indicator
+			if currentUser != '':
+				if self.favorite > 0:
+					if self.favGroup == 'Surveying':
+						favImage = 'resources/underground_liquid.png'
+						favInfo = 'survey'
+					elif self.favGroup == 'Harvesting':
+						favInfo = 'harvest'
+						if self.unavailable:
+							favImage = 'harvesterIntegrity.png'
+						else:
+							favImage = 'harvesterCapacity.png'
+					elif self.favGroup == 'Shopping':
+						favImage = 'favoriteOn.png'
+						favInfo = 'shop'
+					else:
+						favImage = 'inventory32.png'
+						favInfo = 'inv'
+				else:
+					favImage = 'favSelector.png'
+					favInfo = '-'
+
+				if self.units > 0:
+					result += '<div title="Click to toggle favorite group" class="compareInfo" style="width:32px;height:32px;cursor: pointer;background-image: url(\'/images/'+favImage+'\');background-size: 32px 32px;background-repeat: no-repeat;" onclick="favoritePicker(this, \''+str(self.spawnID)+'\', '+str(self.spawnGalaxy)+', \''+self.spawnName+'\', \''+favInfo+'\');"><span style="line-height:40px;">'+ghShared.getNumberAbbr(self.units)+'</span></div>'
+				else:
+					result += '<div title="Click to toggle favorite group" class="compareInfo" style="width:32px;height:32px;cursor: pointer;background-image: url(\'/images/'+favImage+'\');background-size: 32px 32px;background-repeat: no-repeat;" onclick="favoritePicker(this, \''+str(self.spawnID)+'\', '+str(self.spawnGalaxy)+', \''+self.spawnName+'\', \''+favInfo+'\');"></div>'
+
 			if formatStyle == 0:
 				# resource update information
-
 				result += '  <div style="clear:both;">'
 				# add waypoints indicator
 				if self.maxWaypointConc != None:
@@ -383,13 +401,6 @@ class resourceSpawn:
 			rowClassAdd = ' ui-draggable'
 		result += '<tr id="cont_'+self.spawnName+'" name="cont_'+self.spawnName+'" class="statRow'+rowClassAdd+'">'
 
-		# favorite indicator
-		if editable:
-			if self.favorite > 0:
-				result += '  <td class="dragColumn" style="width:20px;"><a alt="Favorite" title="Favorite" style="cursor: pointer;" onclick="toggleFavorite(this, 1, \''+str(self.spawnID)+'\', '+str(self.spawnGalaxy)+');"><img src="/images/favorite16On.png" /></a></td>'
-			else:
-				result += '  <td class="dragColumn" style="width:20px;"><a alt="Favorite" title="Favorite" style="cursor: pointer;" onclick="toggleFavorite(this, 1, \''+str(self.spawnID)+'\', '+str(self.spawnGalaxy)+');"><img src="/images/favorite16Off.png" /></a></td>'
-
 		# resource title row
 		if self.unavailable != None:
 			styleAdd = "background-image:url(/images/xRed16.png);background-repeat:no-repeat;background-position:2px 2px;"
@@ -487,22 +498,7 @@ class resourceSpawn:
 		else:
 			result += "<td><span id='units_" + str(self.spawnID) + " tag='" + str(self.units) + "'>" + str(self.units) + "</span></td>"
 
-		# resource despawn alert
-		if self.despawnAlert == 2:
-			despawnStyle = "background-image:url(/images/email16.png);background-repeat:no-repeat;background-position:0px 0px;"
-			despawnTitle = "e-mail"
-		elif self.despawnAlert == 1:
-			despawnStyle = "background-image:url(/images/browser16.png);background-repeat:no-repeat;background-position:0px 0px;"
-			despawnTitle = "home page"
-		elif self.despawnAlert == 4:
-			despawnStyle = "background-image:url(/images/mobile16.png);background-repeat:no-repeat;background-position:0px 0px;"
-			despawnTitle = "mobile"
-		else:
-			despawnStyle = "background-image:url(/images/none16.png);background-repeat:no-repeat;background-position:0px 0px;"
-			despawnTitle = "none"
-
 		if editable:
-			result += "<td style='width:16px;{0}' tag='{1}' onclick='toggleAlertType(this, \"{2}\", 1);' title='{3}'></td>".format(despawnStyle, self.despawnAlert, self.spawnID, despawnTitle)
 			result += "<td style='width:20px'><input type='checkbox' id='chkMove_" + str(self.spawnID) + "' /></td>"
 
 		return result
@@ -663,5 +659,52 @@ class resourceSpawn:
 			result += '      "despawnAlert" : {0},\n'.format(self.despawnAlert)
 		if self.maxWaypointConc != None:
 			result += '      "max_waypoint_conc" : ' + str(self.maxWaypointConc) + ',\n'
+
+		return result
+
+	def getSurveyRow(self):
+		result = ''
+		# display fav icon, res name, planet bar, and waypoint indicator
+		result += '<tr id="svy_cont_'+self.spawnName+'" name="svy_cont_'+self.spawnName+'" class="statRow">'
+		result += '  <td><img style="width:16px;height:16px;cursor:pointer;" src="/images/resources/underground_liquid.png" title="Click to toggle favorite group" onclick="favoritePicker(this, \''+str(self.spawnID)+'\', '+str(self.spawnGalaxy)+', \''+self.spawnName+'\', \'harvest\');"></td>'
+		result += '    <td style="width:90px;"><span style="font-size: 12px;font-weight: bold;"><a href="' + ghShared.BASE_SCRIPT_URL + 'resource.py/'+str(self.spawnGalaxy)+'/'+self.spawnName+'" class="nameLink">'+self.spawnName+'</a></td>'
+		result += '    <td>'+self.getPlanetBar()+'</td>'
+		# add waypoints indicator
+		if self.maxWaypointConc != None:
+			result += '<div style="float:right;"><a href="' + ghShared.BASE_SCRIPT_URL + 'resource.py/'+str(self.spawnGalaxy)+'/'+self.spawnName+'"><img src="/images/waypointMarker.png" alt="waypoint marker" title="waypoint(s) available (best is ' + str(self.maxWaypointConc) + '%)" width="20" /></a></div>'
+		result += "</tr>"
+
+		return result
+
+	def getHarvestRow(self):
+		result = ''
+		# Display favicon, res type, age, and despawn alert indicator
+		if self.unavailable:
+			harvImage = 'harvesterIntegrity.png'
+		else:
+			harvImage = 'harvesterCapacity.png'
+		result += '<tr id="hrv_cont_'+self.spawnName+'" name="hrv_cont_'+self.spawnName+'" class="statRow">'
+		result += '  <td><img style="width:16px;height:16px;cursor:pointer;" src="/images/'+harvImage+'" title="Click to toggle favorite group" onclick="favoritePicker(this, \''+str(self.spawnID)+'\', '+str(self.spawnGalaxy)+', \''+self.spawnName+'\', \'harvest\');"></td>'
+		result += '  <td><span style="font-size: 12px;font-weight: bold;"><a href="' + ghShared.BASE_SCRIPT_URL + 'resource.py/'+str(self.spawnGalaxy)+'/'+self.spawnName+'" class="nameLink">'+self.spawnName+'</a></td>'
+		result += '  <td><a href="' + ghShared.BASE_SCRIPT_URL + 'resourceType.py/'+self.resourceType+'" title="View recent spawns of this type" class="nameLink">'+self.resourceTypeName+'</a></td>'
+		result += '  <td>' + ghShared.timeAgo(self.entered) + ' old</td>'
+
+		# resource despawn alert
+		if self.despawnAlert == 2:
+			despawnStyle = "background-image:url(/images/email16.png);background-repeat:no-repeat;background-position:0px 0px;"
+			despawnTitle = "e-mail Despawn Alert Active"
+		elif self.despawnAlert == 1:
+			despawnStyle = "background-image:url(/images/browser16.png);background-repeat:no-repeat;background-position:0px 0px;"
+			despawnTitle = "home page Despawn Alert Active"
+		elif self.despawnAlert == 4:
+			despawnStyle = "background-image:url(/images/mobile16.png);background-repeat:no-repeat;background-position:0px 0px;"
+			despawnTitle = "mobile Despawn Alert Active"
+		else:
+			despawnStyle = "background-image:url(/images/none16.png);background-repeat:no-repeat;background-position:0px 0px;"
+			despawnTitle = "Click to Activate Despawn Alert"
+
+		result += "<td style='width:16px;{0}' tag='{1}' onclick='toggleAlertType(this, \"{2}\", 1);' title='{3}'></td>".format(despawnStyle, self.despawnAlert, self.spawnID, despawnTitle)
+
+		result += "</tr>"
 
 		return result
