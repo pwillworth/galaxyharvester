@@ -228,6 +228,8 @@ class resourceSpawn:
 		else:
 			result += '  <div id="cont_'+self.spawnName+'" class="resourceBox" style="' + resBoxStyle + '"' + titleStr + '>'
 
+		if self.overallScore != None and self.overallScore > 0:
+			result += '  <div class="compareInfo"><span>Quality: ' + str("%.0f" % (float(self.overallScore))) + '</span></div>'
 		# resource title row
 		if formatStyle == 0:
 			result += '  <div style="text-align:left;"><div class="inlineBlock" style="width:55%;text-align:left;float:left;"><span style="font-size: 12px;font-weight: bold;"><a href="' + ghShared.BASE_SCRIPT_URL + 'resource.py/'+str(self.spawnGalaxy)+'/'+self.spawnName+'" class="nameLink">'+self.spawnName+'</a></span>'
@@ -243,8 +245,6 @@ class resourceSpawn:
 					result += '  <div style="width:100px;float:right;"><input type="checkbox" id="chkRemove_' + self.spawnName + '" />Remove</div>'
 				else:
 					result += '  <a alt="Mark Unavailable" style="cursor: pointer;" onclick="markUnavailable(this, \''+self.spawnName+'\', '+str(self.spawnGalaxy)+unPlanetStr+');"> [X]</a>'
-		if self.overallScore != None and self.overallScore > 0:
-			result += '  <div class="compareInfo"><span>Quality: ' + str("%.0f" % (float(self.overallScore))) + '</span></div>'
 
 		# non-stat info
 		if formatStyle == 0:
