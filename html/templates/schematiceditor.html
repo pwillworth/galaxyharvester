@@ -236,10 +236,14 @@ function saveSchematic() {
   if ( errors == '' ) {
     $.post(BASE_SCRIPT_URL + "postSchematic.py?{{ linkappend }}", { forceOp: "edit", schematicID: schematic.schematicID, schematic: JSON.stringify(schematic), galaxy: $("#galaxySel option:selected").val() },
       function(data) {
-        alert(data);
         // Only leave schematic editor if no error message returned.
         if (data.indexOf("Error:") < 0) {
-          document.location.href='/schematics.py/{{ schematicID }}';
+          resultData = data.split('|');
+          alert(resultData[1]);
+          updateSchemID = resultData[0]
+          document.location.href=`/schematics.py/${updateSchemID}`;
+        } else {
+          alert(data);
         }
       });
   } else {

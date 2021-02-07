@@ -207,18 +207,18 @@ def addSchematicFromLua(conn, skillGroup, luaSchematic, luaObject, galaxy, userI
 
 # Copy details from an existing schematic for later edit
 def addSchematicByCopy(conn, skillGroup, sourceSchematic, schematicName, galaxy, userID):
-	schematicID = generateSchematicID(schematicName, galaxy)
+	newSchemID = generateSchematicID(schematicName, galaxy)
 	checkCursor = conn.cursor()
-	checkCursor.execute('SELECT schematicName FROM tSchematic WHERE schematicID=%s;', [schematicID])
+	checkCursor.execute('SELECT schematicName FROM tSchematic WHERE schematicID=%s;', [newSchemID])
 	checkRow = checkCursor.fetchone()
 	checkCursor.close()
 	if checkRow == None:
 		# Proceed with schematic copy
 		cursor = conn.cursor()
-		schemSQL = "INSERT INTO tSchematic (schematicID, schematicName, craftingTab, skillGroup, objectType, complexity, objectSize, xpType, xpAmount, objectPath, objectGroup, galaxy, enteredBy) SELECT %s, %s, craftingTab, %s, objectType, complexity, objectSize, xpType, xpAmount, 'object/{0}', objectGroup, %s, %s FROM tSchematic WHERE schematicID=%s;".format(schematicID)
-		cursor.execute(schemSQL, [schematicID, schematicName, skillGroup, galaxy, userID, sourceSchematic])
+		schemSQL = "INSERT INTO tSchematic (schematicID, schematicName, craftingTab, skillGroup, objectType, complexity, objectSize, xpType, xpAmount, objectPath, objectGroup, galaxy, enteredBy) SELECT %s, %s, craftingTab, %s, objectType, complexity, objectSize, xpType, xpAmount, 'object/{0}', objectGroup, %s, %s FROM tSchematic WHERE schematicID=%s;".format(newSchemID)
+		cursor.execute(schemSQL, [newSchemID, schematicName, skillGroup, galaxy, userID, sourceSchematic])
 		ingSQL = "INSERT INTO tSchematicIngredients (schematicID, ingredientName, ingredientType, ingredientObject, ingredientQuantity, ingredientContribution) SELECT %s, ingredientName, ingredientType, ingredientObject, ingredientQuantity, ingredientContribution FROM tSchematicIngredients WHERE schematicID=%s;"
-		cursor.execute(ingSQL, [schematicID, sourceSchematic])
+		cursor.execute(ingSQL, [newSchemID, sourceSchematic])
 		# Iterate over the quality groups so we can generate new sets of res weights records pointing to new auto increment ids
 		qualCursor = conn.cursor()
 		qualSQL = "SELECT expQualityID, expProperty, expGroup, weightTotal FROM tSchematicQualities WHERE schematicID=%s"
@@ -226,7 +226,7 @@ def addSchematicByCopy(conn, skillGroup, sourceSchematic, schematicName, galaxy,
 		qualRow = qualCursor.fetchone()
 		while qualRow != None:
 			qualSQL = "INSERT INTO tSchematicQualities (schematicID, expProperty, expGroup, weightTotal) VALUES (%s, %s, %s, %s);"
-			cursor.execute(qualSQL, [schematicID, qualRow[1], qualRow[2], qualRow[3]])
+			cursor.execute(qualSQL, [newSchemID, qualRow[1], qualRow[2], qualRow[3]])
 			weightSQL = "INSERT INTO tSchematicResWeights (expQualityID, statName, statWeight) SELECT LAST_INSERT_ID(), statName, statWeight FROM tSchematicResWeights WHERE expQualityID=%s;"
 			cursor.execute(weightSQL, [qualRow[0]])
 			qualRow = qualCursor.fetchone()
@@ -236,7 +236,7 @@ def addSchematicByCopy(conn, skillGroup, sourceSchematic, schematicName, galaxy,
 	else:
 		result = 'Error: The name you are providing is very similar to an existing schematic resulting in a duplicate id.  Please look at at schematic {0} do make sure you are not adding a duplicate or make the name more unique.'.format(checkRow[0])
 
-	return '{0}|{1}'.format(schematicID, result)
+	return '{0}|{1}'.format(newSchemID, result)
 
 # Add the basic skeleton of the schematic to be filled in later on edit screen
 def addSchematicSkeleton(conn, skillGroup, schematicName, galaxy, userID):
@@ -428,6 +428,7 @@ if detailsMethod == 'DetailsCopy':
 	if len(schematicName) < 3:
 		errstr = errstr + 'Error: Valid schematic name must be provided.'
 
+updateSchemID = schematicID
 if errstr == '':
 	checkCursor = conn.cursor()
 
@@ -447,7 +448,7 @@ if errstr == '':
 		if errstr == '':
 			if detailsMethod == 'DetailsLua':
 				results = addSchematicFromLua(conn, skillGroup, luaSchematic, luaObject, galaxy, currentUser).split('|')
-				schematicID = results[0]
+				updateSchemID = results[0]
 				result = results[1]
 			elif detailsMethod == 'DetailsCopy':
 				checkCursor.execute('SELECT schematicName FROM tSchematic WHERE schematicID=%s;', [copyFromSchem])
@@ -455,37 +456,52 @@ if errstr == '':
 				checkCursor.close()
 				if row != None:
 					results = addSchematicByCopy(conn, skillGroup, copyFromSchem, schematicName, galaxy, currentUser).split('|')
-					schematicID = results[0]
+					updateSchemID = results[0]
 					result = results[1]
 				else:
 					errstr = errstr + 'Error: Could not find the schematic requested to copy from.'
 			else:
 				results = addSchematicSkeleton(conn, skillGroup, schematicName, galaxy, currentUser).split('|')
-				schematicID = results[0]
+				updateSchemID = results[0]
 				result = results[1]
 
 			if result.find("Error:") > -1:
 				errstr = result
 			else:
-				dbShared.logSchematicEvent(0, galaxy, schematicID, currentUser, 'a', 'Added new schematic {0} using {1}.'.format(schematicName, detailsMethod), 'history')
+				dbShared.logSchematicEvent(0, galaxy, updateSchemID, currentUser, 'a', 'Added new schematic {0} using {1}.'.format(schematicName, detailsMethod), 'history')
 	else:
 		# Update existing schematic
-		checkCursor.execute('SELECT enteredBy FROM tSchematic WHERE schematicID=%s', [schematicID])
+		checkCursor.execute('SELECT enteredBy, (SELECT customSchematicID FROM tSchematicOverrides WHERE galaxyID=%s AND schematicID=%s) AS customID FROM tSchematic WHERE schematicID=%s', [galaxy, schematicID, schematicID])
 		checkRow = checkCursor.fetchone()
 		if checkRow != None:
-			if checkRow[0] == None or checkRow[0] == '':
-				errstr = errstr + 'Error: That schematic is part of the core game schematics and cannot be edited.'
-			elif checkRow[0] != currentUser and userReputation < ghShared.MIN_REP_VALS['EDIT_OTHER_SCHEMATIC'] and not admin:
+			if checkRow[0] != currentUser and userReputation < ghShared.MIN_REP_VALS['EDIT_OTHER_SCHEMATIC'] and not admin:
 				errstr = errstr + 'Error: You do not have high enough reputation to edit other users\' schematic data yet.'
+			elif checkRow[0] == None or checkRow[0] == '':
+				# Allow overriding base schematics by creating an editable copy and hiding the original for this galaxy
+				if checkRow[1] == None:
+					checkCursor.execute('SELECT schematicName, skillGroup FROM tSchematic WHERE schematicID=%s;', [schematicID])
+					lookRow = checkCursor.fetchone()
+					if lookRow != None:
+						results = addSchematicByCopy(conn, lookRow[1], schematicID, schematicID, galaxy, currentUser).split('|')
+						updateSchemID = results[0]
+						result = results[1]
+						if result.find("Error:") > -1:
+							errstr = result
+						else:
+							checkCursor.execute('INSERT INTO tSchematicOverrides (schematicID, galaxyID, customSchematicID) VALUES (%s, %s, %s);', [schematicID, galaxy, updateSchemID])
+					else:
+						errstr = errstr + 'Error: Could not find the schematic requested to edit from.'
+				else:
+					errstr = errstr + 'Error: That schematic is part of the core game schematics and cannot be edited.'
 		else:
 			errstr = errstr + 'Error: Schematic with that ID could not be found for editing.'
 
 		if errstr == '':
-			result = updateSchematic(conn, schematicID, schematic)
+			result = updateSchematic(conn, updateSchemID, schematic)
 			if result.find("Error:") > -1:
 				errstr = result
 			else:
-				dbShared.logSchematicEvent(0, galaxy, schematicID, currentUser, 'e', result, 'history')
+				dbShared.logSchematicEvent(0, galaxy, updateSchemID, currentUser, 'e', result, 'history')
 
 	checkCursor.close()
 
@@ -502,9 +518,9 @@ if errstr != '':
 else:
 	if (forceOp == 'edit'):
 		print('Content-type: text/html\n')
-		print('Schematic saved.')
+		print('{0}|Schematic saved.'.format(updateSchemID))
 	else:
 		# redirect to new/edited schematic
 		print('Status: 303 See Other')
-		print('Location: /schematics.py/{0}'.format(schematicID))
+		print('Location: /schematics.py/{0}'.format(updateSchemID))
 		print('')

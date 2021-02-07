@@ -114,7 +114,7 @@ if galaxy.isdigit():
 		if (checkRow != None) and (checkRow[0] > 0):
 			baseProfs = '-1, 1337'
 		checkCursor.close()
-	filterStr = filterStr + ' AND tSchematic.galaxy IN ({1}, {0})'.format(galaxy, baseProfs)
+	filterStr = filterStr + ' AND tSchematic.galaxy IN ({1}, {0}) AND tSchematic.schematicID NOT IN (SELECT schematicID FROM tSchematicOverrides WHERE galaxyID={0})'.format(galaxy, baseProfs)
 
 # We output an unordered list or a bunch of select element options depending on listFormat
 currentGroup = ''

@@ -1,0 +1,23 @@
+A New Flow for Resource Favorite Groups
+
+<p>As time passed and features were added to the inventory aspect of Galaxy Harvester, it has taken on much more baggage than the simple concept of starring a resource as a favorite that it began as.
+In light of that, the concept of marking resources as favorites is evolving a bit today in a way that should relate more closely to the evolved set of features around resource inventory.
+This will not change the way inventory works so much as how resources flow in and out of it.</p>
+<p>You will notice that resources no longer have an on/off star next to thier name.  Instead, in the far right of the resource box is an indicator of what "bucket" the resource is currently in for you.
+You can click on whatever the current icon is to bring up a picker that lets you select that.  In addition to these groups being represented on the inventory screen, they also interact with some new widgets on the top left of the home page.
+These new widgets highlight the 2 new fixed resource inventory groups, "Surveying" and "Harvesting".</p>
+<p>The Surveying widget lists all the resources you have marked as such, and lists what planets it is on and if it has waypoints available.  As you review alerts and identify resources you want to go out and survey for, you might add them to this group.
+They will be conveniently grouped with planet info handy until you are ready to go out and start tracking them down.</p>
+<p>The Harvesting widget lists all the resources you ahve marked as such, and lists the type and age of the resource as well as a despawn alert management icon.
+If a resource in your harvesting list becomes unavailable, the harvester icon will also shift from green to red giving you visual queue that this resource you are harvesting has stopped spawning.
+Naturally, after that happens, you might move that resource to a custom inventory group, which can be done from the new picker as well.</p>
+<p>There is also another built in group called Shopping you can move resources into.  This is intended to allow you to favorite resources that you don't have and can't harvest, but want to try to acquire from others.  Since you don't have them yet, resources in this group and the Surveying will not show up as available to you when doing quality comparisons on the schematics and finer pages.
+You can continue to use inventory as before by just clicking resources straight to inventory if you don't want to use these new pre-defined groups.</p>
+<p>As usual, there's a few other minor fixes, etc. also, here they are:</p>
+
+<ul>
+  <li>Added remove checked button to inventory page for bulk removing from inventory.</li>
+  <li>Add ability to edit/remove base schematics for a specific galaxy incase it is customized there.</li>
+</ul>
+
+<p>-ioscode</p>

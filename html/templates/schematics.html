@@ -138,6 +138,7 @@ $(document).ready(function() {
     $("#schemCopySel").load(BASE_SCRIPT_URL + "getSchematicList.py",{
         groupType: "prof",
         profession: $("#schemCopyProfSel").val(),
+        galaxy: $("#galaxySel").val(),
         listFormat: "option"
       });
   }
@@ -239,7 +240,7 @@ function refreshRecipes() {
 function deleteSchematic() {
   doit = confirm("Do you really want to PERMANENTLY delete this schematic?");
   if (doit) {
-      $.get(BASE_SCRIPT_URL + "delSchematic.py", {schematicID: "{{ schematicID }}", rid: new Date()}, function(data) {
+      $.get(BASE_SCRIPT_URL + "delSchematic.py", {schematicID: "{{ schematicID }}", galaxy: $("#galaxySel").val(), rid: new Date()}, function(data) {
         if (data.indexOf("Error:")>-1) {
           alert(data);
         } else {

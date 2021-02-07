@@ -84,6 +84,7 @@ else:
 	sid = form.getfirst('gh_sid', '')
 
 schematicID = form.getfirst('schematicID', '')
+userGalaxy = form.getfirst('galaxy', '')
 # escape input to prevent sql injection
 sid = dbShared.dbInsertSafe(sid)
 schematicID = dbShared.dbInsertSafe(schematicID)
@@ -120,9 +121,13 @@ if (logged_state > 0):
 			schematicName = row[2]
 
 		# Lookup reputation to validate abilities
-		stats = dbShared.getUserStats(currentUser, galaxy).split(",")
+		if galaxy != 0:
+			repGalaxy = galaxy
+		else:
+			repGalaxy = userGalaxy
+		stats = dbShared.getUserStats(currentUser, repGalaxy).split(",")
 		userReputation = int(stats[2])
-		admin = dbShared.getUserAdmin(conn, currentUser, galaxy)
+		admin = dbShared.getUserAdmin(conn, currentUser, repGalaxy)
 		# remove it
 		if owner == currentUser:
 			result = deleteSchematic(conn, schematicID)
@@ -133,7 +138,14 @@ if (logged_state > 0):
 				else:
 					result = 'Error: You do not have enough reputation to edit other users schematics.'
 			else:
-				result = 'Error: Core game schematics cannot be deleted.'
+				if admin or userReputation >= ghShared.MIN_REP_VALS['EDIT_OTHER_SCHEMATIC']:
+					cursor = conn.cursor()
+					cursor.execute('INSERT INTO tSchematicOverrides (schematicID, galaxyID) VALUES (%s, %s);', [schematicID, userGalaxy])
+					result = str(cursor.rowcount)
+					if result != "1":
+						result = 'Error: Failed to delete schematic for this galaxy with override method, please contact Administrator.'
+				else:
+					result = 'Error: You do not have enough reputation to edit other users schematics.'
 
 		if result.find("Error:") < 0:
 			dbShared.logSchematicEvent(0, galaxy, schematicID, currentUser, 'd', 'Deleted custom schematic {0}.'.format(schematicName), 'history')
