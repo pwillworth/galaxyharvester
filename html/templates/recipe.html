@@ -50,9 +50,9 @@ $(document).ready(function() {
 	        listFormat: "option",
 	        groupType: "prof",
 	        profession: $("#profSel").val(),
-		galaxy: $("#galaxySel").val()
-	        },
-	        function() {$("#schematicList").removeAttr("disabled");$("#recipeName").val($("#schematicList option:selected").text());});
+		    galaxy: $("#galaxySel").val()
+	    },
+	    function() {$("#schematicList").removeAttr("disabled");$("#recipeName").val($("#schematicList option:selected").text());});
 	}
 	function addRecipe() {
 	    refreshSchematics();
