@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 
- Copyright 2020 Paul Willworth <ioscode@gmail.com>
+ Copyright 2021 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -132,7 +132,7 @@ if (cursor and errors == ''):
 			else:
 				responseData = ''.join((responseData, '  <tr class="statRow"><td>', str(row[0]), '</td><td><a href="', ghShared.BASE_SCRIPT_URL, 'user.py/', row[1] + '">', row[1], '</a></td><td>', ghShared.SCHEMATIC_EVENT_NAMES[row[2]], '</td><td>', row[3], '</td>'))
 				responseData += '  </tr>'
-		lastTime = row[0]
+		lastTime = str(row[0])
 		row = cursor.fetchone()
 	if len(lastTime) == 0:
 		responseData += 'It seems this resource is not really good for much.'

@@ -144,6 +144,8 @@ if (logged_state > 0):
 					result = str(cursor.rowcount)
 					if result != "1":
 						result = 'Error: Failed to delete schematic for this galaxy with override method, please contact Administrator.'
+					else:
+						result = 'Schematic deleted.'
 				else:
 					result = 'Error: You do not have enough reputation to edit other users schematics.'
 
