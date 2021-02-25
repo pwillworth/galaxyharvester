@@ -1371,11 +1371,11 @@ function loadAlerts(linkappend) {
 					if ( fltQuality != "0" && fltQuality != "None" ) {
 						$('#minQuality' + fltOrder).val($(this).find('fltQuality').eq(0).text());
 					}
-          $('#fltGroup' + fltOrder).val($(this).find('fltGroup').eq(0).text());
+					$('#fltGroup' + fltOrder).val($(this).find('fltGroup').eq(0).text());
 					tmpRow = parseInt(fltOrder);
-          if (tmpRow > maxRow) {
-            maxRow = tmpRow;
-          }
+					if (tmpRow > maxRow) {
+						maxRow = tmpRow;
+					}
 				});
 			var result = $(data).find('resultText').eq(0).text();
 			$("#sentMessage").html(result);
