@@ -653,7 +653,7 @@ function favoritePicker(linkFrom, spawnID, galaxyID, spawnName, currentFavInfo) 
 	$('#favPickharvest').unbind('click');
 	$('#favPickharvest').click(function(){updateFavoriteGroup(spawnID, 'Harvesting', galaxyID);$(linkFrom).css('background-image', 'url(\'/images/harvesterCapacity.png\')');favoritePickerCloseRefresh();});
 	$('#favPickinv').unbind('click');
-	$('#favPickinv').click(function(){if (currentFavInfo == '-') {addFavorite(galaxyID, spawnName);} else {updateFavoriteGroup(spawnID, $('#favPickerGroupSel').val(), galaxyID);}$(linkFrom).css('background-image', 'url(\'/images/inventory32.png\')');$favoritePickerCloseRefresh();});
+	$('#favPickinv').click(function(){if (currentFavInfo == '-') {addFavorite(galaxyID, spawnName);} else {updateFavoriteGroup(spawnID, $('#favPickerGroupSel').val(), galaxyID);}$(linkFrom).css('background-image', 'url(\'/images/inventory32.png\')');favoritePickerCloseRefresh();});
 	$('#favPickshop').unbind('click');
 	$('#favPickshop').click(function(){updateFavoriteGroup(spawnID, 'Shopping', galaxyID);$(linkFrom).css('background-image', 'url(\'/images/favoriteOn.png\')');favoritePickerCloseRefresh();});
 	$('#favRemove').unbind('click');

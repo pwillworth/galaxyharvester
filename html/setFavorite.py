@@ -224,7 +224,7 @@ if (errstr == ""):
 				else:
 					# does not exist, adding as new favorite
 					addresult = addFavorite(conn, currentUser, favType, itemID, galaxyID)
-					if str(result).find("Error:") == -1 and addresult.isdigit() and addresult > 0:
+					if str(result).find("Error:") == -1 and addresult.isdigit() and addresult > '0':
 						result = "New favorite added."
 					else:
 						result = "Error: Failed to add favorite.  " + result
