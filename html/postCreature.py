@@ -100,7 +100,7 @@ def addCreature(conn, resourceType, creatureName, harvestYield, missionLevel, ga
 	try:
 		cursor.execute(tempSQL, (resourceType, creatureName, harvestYield, missionLevel, galaxy, currentUser))
 		result = cursor.rowcount
-	except Exception, e:
+	except Exception as e:
 		returnStr = 'Error: Add Failed. {0}'.format(e)
 
 	if result > 0:
