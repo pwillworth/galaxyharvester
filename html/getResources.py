@@ -211,6 +211,7 @@ maxVals = form.getfirst('maxVals', '')
 percVals = form.getfirst('percVals', '')
 available = form.getfirst('available', '')
 verified = form.getfirst('verified', '')
+unverified = form.getfirst('unverified', '')
 lastValue = form.getfirst('lastValue', '')
 compare = form.getfirst('compare', '')
 favorite = form.getfirst('favorite', 'undefined')
@@ -298,6 +299,10 @@ else:
 
 if verified != 'undefined' and verified != '':
 	galaxyCriteriaStr += ' AND tResources.verified IS NOT NULL'
+
+if unverified != 'undefined' and unverified != '':
+	galaxyCriteriaStr += ' AND tResources.verified IS NULL'
+
 
 mins = minVals.split(",")
 if len(mins) == len(RES_STATS):

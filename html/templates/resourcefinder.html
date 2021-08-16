@@ -88,6 +88,7 @@ function filterResources(compare) {
         percVals: percVals,
         available: $("#oAvailable:checked").val(),
         verified: $("#oVerified:checked").val(),
+        unverified: $("#oUnverified:checked").val(),
         compare: $("#oCompare:checked").val(),
         sort: sortBy},
         function() {compareResources("resourceData");$("#busyImg").css("display","none");});
@@ -125,6 +126,7 @@ function moreResources(lastValue) {
         percVals: percVals,
         available: $("#oAvailable:checked").val(),
         verified: $("#oVerified:checked").val(),
+        unverified: $("#oUnverified:checked").val(),
         compare: $("#oCompare:checked").val(),
         sort: sortBy,
         uid:"{{ uid }}",
@@ -184,7 +186,9 @@ function setQualityControls() {
         <option value="unavailable">Removed</option>
       </select></div>
       <div class="searchInput">Only Available:<input type="checkbox" id="oAvailable"/></div>
-      <div class="searchInput">Only Verified:<input type="checkbox" id="oVerified"/></div>
+      <div class="searchInput">Verified & Unverified:<input type="radio" name="verification" id="oEitherVerified" selected/></div>
+      <div class="searchInput">Only Verified:<input type="radio" name="verification" id="oVerified"/></div>
+      <div class="searchInput">Only Unverified:<input type="radio" name="verification" id="oUnverified"/></div>
       <div class="searchInput" style="text-align:center"><input type="reset" value="Reset" class="ghButton" tabindex=70/></div></form>
     </div>
     </div>
