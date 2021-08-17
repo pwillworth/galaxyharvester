@@ -1,0 +1,144 @@
+
+body {
+  background: #0d1417;
+  color: #808b8f;
+}
+a {
+	color: #6e93b1;
+}
+a:link {
+	color: #6e93b1;
+}
+a:hover {
+	color: #71d1a4;
+}
+a:visited, .altText {
+	color: #6e93b1;
+}
+a:active, .groupText {
+	color: #71d1a9;
+}
+.statNormal { /* Standard resource stats text */
+    color: #5f6b6f;
+}
+.statHigh { /* If stats are above 500 */
+ 	color: #75a528;
+}
+.statMax { /* If stats hit the cap or go over it */
+ 	color: #cfac40;
+}
+.footer {
+	border-top-color: #252e31; /* Box Trim Color */
+	background: #252e31; /* Box Body Color */
+}
+.ghWidgetBox, #tooltip {
+	background: #161e22; /* Box Body Color */
+	border-color: #252e31; /* Box Trim Color */
+}
+.bigForm, .bigForm input {
+	color: #617b91; /* ??? */
+}
+#loginForm {
+	color: #617b91; /* use default text color, or link color */
+}
+.tableHead, .contrastStyle {
+	background: #161e22; /* Stats table header background */
+	color: #617b91; /* Stats table text */
+}
+.statRow, .recipeRow {
+	background: #2a3538; /* Stat table cell background */
+}
+.window {
+	background: #252e31; /* Add Resource window body */
+	border-color: #252e31; /* Add Resource window trim */
+}
+.formMsg {
+	color: #990000; /* Not sure this needs altered */
+}
+.resourceBox {
+	background: #252e31; /* Body interior color */
+	padding: 5px;
+}
+.standOut, div.blockUserItem {
+	color: white;
+	background-color: #252e31;
+}
+.statusMsg {
+	color: #54a4a5; /* "Lookups complete" text in Quick Add */
+}
+.bigLink {
+	border-color: #b7afb9; /* Use default text color */
+}
+.listSelected {
+	background-color: #2a3538;
+	border-color: #252e31;
+}
+.boxBorderHidden {
+	border-color: #252e31;
+}
+ul.schematics a:hover, ul.schematics a:visited {
+	color: #808b8f;
+}
+.control {
+	border-color: #252e31;
+	background: #2a3538;
+}
+.textOnBackground {
+	color: #54a4a5;
+}
+ul.alert li {
+	background: #364447;
+}
+a div.resTreeItem, a:link div.resTreeItem, a:visited div.resTreeItem, a:active div.resTreeItem {
+	color: #808b8f;
+	background: #2a3538;
+	border-color: #252e31;
+}
+a:hover div.resTreeItem, .slotIndicatorFilled {
+	background: #54a4a5;
+	color: #2a3538;
+	border-color: #252e31;
+}
+.ingredientSlot {
+	border-color: #252e31;
+	background: #2a3538;
+}
+.ingredientSlotActive {
+	background: #639299;
+}
+.ingredientSlotFilled {
+	background: #465c54;
+}
+.slotIndicator {
+	border-color: #252e31;
+}
+/** Input Overrides **/
+input,textarea,select
+{
+	border: 1px solid #252e31 !important;
+	background: #060a0f !important;
+
+	color: #777f88 !important;
+	font-size: 11px;
+}
+input.inactive {
+	border: 1px solid #252e31 !important;
+	background: #060a0f !important;
+	color: #999;
+}
+input.active {
+	border: 1px solid #252e31 !important;
+	background: #101a25;
+	color: #000;
+}
+input.ghButton, button.ghButton {
+	background: #060a0f !important;
+	color: #777f88 !important;
+	border: 1px solid #252e31 !important;
+
+	padding: 2px 5px;
+	font-weight: 700;
+	cursor: pointer;
+	border-radius: 5px;
+
+}
