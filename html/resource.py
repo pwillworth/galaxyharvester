@@ -159,6 +159,9 @@ def main():
 	galaxy = ''
 	spawnName = ''
 	spawnID = 0
+	spawnStats = ''
+	spawnContainerType = ''
+	spawnResourceTypeName = ''
 	uiTheme = ''
 	galaxyState = 0
 	userReputation = 0
@@ -232,6 +235,20 @@ def main():
 			spawn = getResource(conn, logged_state, currentUser, None, galaxy, spawnName)
 			if spawn != None:
 				spawnID = spawn.spawnID
+				spawnStats = 'ER ' + str(spawn.stats.ER) + '&#xA;'
+				spawnStats += 'CR ' + str(spawn.stats.CR) + '&#xA;'
+				spawnStats += 'CD ' + str(spawn.stats.CD) + '&#xA;'
+				spawnStats += 'DR ' + str(spawn.stats.DR) + '&#xA;'
+				spawnStats += 'FL ' + str(spawn.stats.FL) + '&#xA;'
+				spawnStats += 'HR ' + str(spawn.stats.HR) + '&#xA;'
+				spawnStats += 'MA ' + str(spawn.stats.MA) + '&#xA;'
+				spawnStats += 'PE ' + str(spawn.stats.PE) + '&#xA;'
+				spawnStats += 'OQ ' + str(spawn.stats.OQ) + '&#xA;'
+				spawnStats += 'SR ' + str(spawn.stats.SR) + '&#xA;'
+				spawnStats += 'UT ' + str(spawn.stats.UT) + '&#xA;'
+				spawnContainerType = spawn.containerType
+				spawnResourceTypeName = spawn.resourceTypeName
+
 				galaxyState = dbShared.galaxyState(spawn.spawnGalaxy)
 				# Only show update tools if user logged in and has positive reputation
 				stats = dbShared.getUserStats(currentUser, galaxy).split(",")
@@ -259,7 +276,7 @@ def main():
 	env.globals['BASE_SCRIPT_URL'] = ghShared.BASE_SCRIPT_URL
 	env.globals['MOBILE_PLATFORM'] = ghShared.getMobilePlatform(os.environ['HTTP_USER_AGENT'])
 	template = env.get_template('resource.html')
-	print(template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), spawnName=spawnName, resHTML=resHTML, resHistory=resHistory, showAdmin=(userReputation >= ghShared.MIN_REP_VALS['EDIT_RESOURCE_GALAXY_NAME'] or admin), spawnID=spawnID, spawnGalaxy=galaxy, enableCAPTCHA=ghShared.RECAPTCHA_ENABLED, siteidCAPTCHA=ghShared.RECAPTCHA_SITEID))
+	print(template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), spawnName=spawnName, resHTML=resHTML, resHistory=resHistory, showAdmin=(userReputation >= ghShared.MIN_REP_VALS['EDIT_RESOURCE_GALAXY_NAME'] or admin), spawnID=spawnID, spawnGalaxy=galaxy, spawnStats=spawnStats, spawnContainerType=spawnContainerType, spawnResourceTypeName=spawnResourceTypeName, enableCAPTCHA=ghShared.RECAPTCHA_ENABLED, siteidCAPTCHA=ghShared.RECAPTCHA_SITEID))
 
 
 if __name__ == "__main__":
