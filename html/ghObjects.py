@@ -76,17 +76,16 @@ class resourceSpawn:
 		criteriaStr = ''
 
 		for planet in self.planets:
+			availability = planet.planetName + ' - not available'
 			result = result + '    <li class="planetBarBox'
 			if (planet.enteredBy != None):
 				result = result + ' ' + planet.planetName.replace(' ','')
 				result +='"'
-			if (planet.enteredBy != None):
-				result = result + ' title="'+planet.planetName+' marked available by '+planet.enteredBy+'"'
+				availability = 'marked available by '+ planet.enteredBy
 				result = result + ' onclick="planetRemove(this,'+str(planet.planetID)+','+str(self.spawnID)+',\''+planet.planetName+'\');"'
 			else:
-				result = result + ' title="'+planet.planetName+' - not available"'
-				result = result + ' onclick="planetAdd(this,'+str(planet.planetID)+','+str(self.spawnID)+',\''+planet.planetName+'\');"'
-			result = result + '>'+planet.planetName[0]+'</li>'
+				result = result + '" onclick="planetAdd(this,'+str(planet.planetID)+','+str(self.spawnID)+',\''+planet.planetName+'\');"'
+			result = result + ' title="'+ availability +'">'+planet.planetName[0]+'</li>'
 
 		result += '</ul>'
 		return result
@@ -320,7 +319,7 @@ class resourceSpawn:
 					result += '  <img src="/images/xRed16.png" alt="Unavailable" title="Unavailable" /><span style="vertical-align:4px;">' + ghShared.timeAgo(self.unavailable) + ' ago by <a href="' + ghShared.BASE_SCRIPT_URL + 'user.py/'+self.unavailableBy+'">'+self.unavailableBy+'</a></span>'
 				result += '  </div></div>'
 			else:
-				result += '    <div style="width: 248px;clear:both;margin-left:64px;">'+self.getPlanetBar()+'</div>'
+				result += '    <div style="width: 248px;clear:both;margin-left:64px; padding:2px 0px;">'+self.getPlanetBar()+'</div>'
 		else:
 			if (self.unavailable == None and currentUser != '' and reputation >= ghShared.MIN_REP_VALS['VERIFY_RESOURCE'] and ghShared.timeAgo(self.verified).find('minute') == -1):
 				result += '  <div id="cont_verify_'+self.spawnName+'" style="width:100px;float:right;"><input type="checkbox" id="chkVerify_' + self.spawnName + '" />Verify</div>'
