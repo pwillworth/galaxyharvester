@@ -54,6 +54,7 @@ def getThemeList():
 	result += '      <option value="Rebel">Rebel</option>'
 	result += '      <option value="rebelFlightSuits">Rebel Flight Suits</option>'
 	result += '      <option value="WinduPurple">Windu Purple</option>'
+	result += '      <option value="modernDarkMode">Dark Mode</option>'
 	return result
 
 def getSchematicTabList():
