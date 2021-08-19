@@ -28,6 +28,7 @@ import sys
 import math
 
 BASE_SCRIPT_URL = '/'
+BASE_WEB_DOMAIN = 'https://www.galaxyharvester.net' # Update to the root domain name for your site. Used for email verification link do not include trailing /
 DEFAULT_THEME = 'crafter'
 DEFAULT_GALAXY = '14'
 imgNum = random.randint(1,17)
