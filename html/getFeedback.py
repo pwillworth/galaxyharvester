@@ -39,9 +39,9 @@ def getFeedbackComments(conn, feedbackID):
 		comments = comments + '<div class="comments" id="comments_' + str(feedbackID) + '">'
 		while comrow != None:
 			if (comrow[3] == None):
-				userText = comrow[1] + ' - <small>' + str(row[1]) + '</small>'
+				userText = comrow[1] + ' - <small>' + str(comrow[1]) + '</small>'
 			else:
-				userText = '<a href="' + ghShared.BASE_SCRIPT_URL + 'user.py/' + comrow[1] + '" class="nameLink"><img src="/images/users/'+ comrow[3] + '" class="tinyAvatar" /><span style="vertical-align:4px;">'+ comrow[1] +  '</span></a> <span style="vertical-align:4px;"><small>'+ str(row[1]) +'</small><span>'
+				userText = '<a href="' + ghShared.BASE_SCRIPT_URL + 'user.py/' + comrow[1] + '" class="nameLink"><img src="/images/users/'+ comrow[3] + '" class="tinyAvatar" /><span style="vertical-align:4px;">'+ comrow[1] +  '</span></a> <span style="vertical-align:4px;"><small>'+ str(comrow[1]) +'</small><span>'
 			
 			commentWithLines = re.sub(r'\n{3,}', r'\n', comrow[2])
 			commentWithLines = re.sub(r'\n', r'<br>', commentWithLines)
