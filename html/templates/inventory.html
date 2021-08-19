@@ -147,7 +147,7 @@ function exportInventory(format) {
 <div id="mainContent" class="wrapper">
   <div id="leftNavContent" class="ghCol">
     <div id="resourceCriteria" class="ghWidgetBox">
-    <form id="resourceSearch" name="resourceSearch"><div class="boxHeader">Filter Inventory<button id="goFilter" type="button" class="ghButton" style="float: right;" onclick="filterResources();">Go</button></div>
+    <form id="resourceSearch" name="resourceSearch"><div class="boxHeader">Filter Inventory</div>
     <div id="searchInputs">
       <div class="searchInput">Res Group:<select name="resGroup" id="resGroup" style="width:100%"><option value="any" selected="selected">Any</option>
 {{ resourceGroupList }}
@@ -157,7 +157,9 @@ function exportInventory(format) {
       </select></div>
       <div class="searchInput">Units More Than: <input type="text" id="unitsGT" size="10" maxlength="13" value="" /></div>
       <div class="searchInput">Units Less Than: <input type="text" id="unitsLT" size="10" maxlength="13" value="" /></div>
-      <div class="searchInput" style="text-align:center"><input type="reset" value="Reset" class="ghButton" /></div></form>
+      <div class="searchInput" style="text-align:center">
+        <button id="goFilter" type="button" class="ghButton" onclick="filterResources();">Go</button>
+        <input type="reset" value="Reset" class="ghButton" /></div></form>
     </div>
     </div>
 {% if editable %}
