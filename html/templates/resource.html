@@ -1,7 +1,12 @@
 {% import 'blocks.html' as blocks %}
 <!DOCTYPE html>
-<html lang="en"><head><title>Resource - Galaxy Harvester</title>
+<html lang="en"><head><title>{{ spawnName }} {{ spawnResourceTypeName }}- Galaxy Harvester</title>
 {{ blocks.commonResources(uiTheme, enableCAPTCHA) }}
+<meta property="og:title" content="{{ spawnName }} {{ spawnResourceTypeName }} at Galaxy Harvester">
+<meta property="og:description" content="{{ spawnStats }}">
+<meta property="og:image" content="https://www.galaxyharvester.net/images/resources/{{ spawnContainerType }}.png">
+
+
 <script src="/js/Colors.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
