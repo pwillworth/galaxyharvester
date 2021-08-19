@@ -34,16 +34,18 @@ def getFeedbackComments(conn, feedbackID):
 		comments = ''
 		# fetch comments
 		comcursor = conn.cursor()
-		comcursor.execute("SELECT entered, tFeedbackComments.userID, comment, pictureName FROM tFeedbackComments LEFT JOIN tUsers ON tFeedbackComments.userID = tUsers.userID WHERE feedbackID=" + str(feedbackID) + " ORDER BY entered;")
+		comcursor.execute("SELECT entered, tFeedbackComments.userID, comment, pictureName, tFeedbackComments.entered FROM tFeedbackComments LEFT JOIN tUsers ON tFeedbackComments.userID = tUsers.userID WHERE feedbackID=" + str(feedbackID) + " ORDER BY entered;")
 		comrow = comcursor.fetchone()
 		comments = comments + '<div class="comments" id="comments_' + str(feedbackID) + '">'
 		while comrow != None:
 			if (comrow[3] == None):
-				userText = comrow[1]
+				userText = comrow[1] + ' - <small>' + str(comrow[4]) + '</small>'
 			else:
-				userText = '<a href="' + ghShared.BASE_SCRIPT_URL + 'user.py/' + comrow[1] + '" class="nameLink"><img src="/images/users/'+ comrow[3] + '" class="tinyAvatar" /><span style="vertical-align:4px;">'+ comrow[1] + '</span></a>'
-
-			comments = comments + '<p class="commentItem">' + comrow[2] + '</p><p>' + userText + '</p>'
+				userText = '<a href="' + ghShared.BASE_SCRIPT_URL + 'user.py/' + comrow[1] + '" class="nameLink"><img src="/images/users/'+ comrow[3] + '" class="tinyAvatar" /><span style="vertical-align:4px;">'+ comrow[1] +  '</span></a> <span style="vertical-align:4px;"><small>'+ str(comrow[4]) +'</small><span>'
+			
+			commentWithLines = re.sub(r'\n{3,}', r'\n', comrow[2])
+			commentWithLines = re.sub(r'\n', r'<br>', commentWithLines)
+			comments = comments + '<p class="commentItem">' + commentWithLines + '</p><p>' + userText + '</p>'
 			comrow = comcursor.fetchone()
 
 		comcursor.close()
@@ -168,9 +170,9 @@ if (errstr == ""):
 				voteTools = "<div>Yours, thanks!</div>"
 
 		if (row[4] == None):
-			userText = row[2]
+			userText = row[2] + ' - <small>' + str(row[1]) + '</small>'
 		else:
-			userText = '<a href="' + ghShared.BASE_SCRIPT_URL + 'user.py/' + row[2] + '" class="nameLink"><img src="/images/users/'+ row[4] + '" class="tinyAvatar" /><span style="vertical-align:4px;">'+ row[2] + '</span></a>'
+			userText = '<a href="' + ghShared.BASE_SCRIPT_URL + 'user.py/' + row[2] + '" class="nameLink"><img src="/images/users/'+ row[4] + '" class="tinyAvatar" /><span style="vertical-align:4px;">'+ row[2] + '</span></a> <span style="vertical-align:4px;"><small>'+ str(row[1]) +'</small><span>'
 		if logged_state > 0:
 			userText = userText + '<button type="button" id="addFeedbackComment_' + str(row[0]) + '" class="ghButton" onclick="addFeedbackComment(this)" style="float:right;">Add Comment</button>'
 
