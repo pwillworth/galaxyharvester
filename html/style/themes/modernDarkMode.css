@@ -142,3 +142,6 @@ input.ghButton, button.ghButton {
 	border-radius: 5px;
 
 }
+input[disabled] {
+	background-color: #3d3232 !important;
+}
