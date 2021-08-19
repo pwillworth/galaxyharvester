@@ -1,0 +1,12 @@
+<p>Find by Unverified and More</p>
+<p>Today we have a few features and tweaks coming to you contributed by <a href="https://github.com/MrKraken">MrKraken</a>.  Check them out, I'm sure many will appreciate them:</p>
+<ul>
+<li>A new theme "Dark Mode" is available.  Try it out by changing your theme on the profile page.</li>
+<li>opengraph metadata added to resource pages.  When you share a link to a specific resource page in some places like Discord, etc.  Resource stats will display as a preview</li>
+<li>You can now filter by "unverified" resources on the <a href="http://galaxyharvester.net/resourceFinder.py">Find Page</a>.</li>
+<li>The <a href="http://galaxyharvester.net/feedback.py">suggestions page</a> has improved display features including retained newlines and timestamped entries.</li>
+</ul>
+
+<p>Thanks again for your contributions MrKraken!</p>
+
+<p>-ioscode</p>
