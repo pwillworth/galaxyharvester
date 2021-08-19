@@ -34,14 +34,14 @@ def getFeedbackComments(conn, feedbackID):
 		comments = ''
 		# fetch comments
 		comcursor = conn.cursor()
-		comcursor.execute("SELECT entered, tFeedbackComments.userID, comment, pictureName FROM tFeedbackComments LEFT JOIN tUsers ON tFeedbackComments.userID = tUsers.userID WHERE feedbackID=" + str(feedbackID) + " ORDER BY entered;")
+		comcursor.execute("SELECT entered, tFeedbackComments.userID, comment, pictureName, tFeedbackComments.entered FROM tFeedbackComments LEFT JOIN tUsers ON tFeedbackComments.userID = tUsers.userID WHERE feedbackID=" + str(feedbackID) + " ORDER BY entered;")
 		comrow = comcursor.fetchone()
 		comments = comments + '<div class="comments" id="comments_' + str(feedbackID) + '">'
 		while comrow != None:
 			if (comrow[3] == None):
-				userText = comrow[1] + ' - <small>' + str(comrow[1]) + '</small>'
+				userText = comrow[1] + ' - <small>' + str(comrow[4]) + '</small>'
 			else:
-				userText = '<a href="' + ghShared.BASE_SCRIPT_URL + 'user.py/' + comrow[1] + '" class="nameLink"><img src="/images/users/'+ comrow[3] + '" class="tinyAvatar" /><span style="vertical-align:4px;">'+ comrow[1] +  '</span></a> <span style="vertical-align:4px;"><small>'+ str(comrow[1]) +'</small><span>'
+				userText = '<a href="' + ghShared.BASE_SCRIPT_URL + 'user.py/' + comrow[1] + '" class="nameLink"><img src="/images/users/'+ comrow[3] + '" class="tinyAvatar" /><span style="vertical-align:4px;">'+ comrow[1] +  '</span></a> <span style="vertical-align:4px;"><small>'+ str(comrow[4]) +'</small><span>'
 			
 			commentWithLines = re.sub(r'\n{3,}', r'\n', comrow[2])
 			commentWithLines = re.sub(r'\n', r'<br>', commentWithLines)
