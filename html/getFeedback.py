@@ -168,9 +168,9 @@ if (errstr == ""):
 				voteTools = "<div>Yours, thanks!</div>"
 
 		if (row[4] == None):
-			userText = row[2]
+			userText = row[2] + ' - <small>' + str(row[1]) + '</small>'
 		else:
-			userText = '<a href="' + ghShared.BASE_SCRIPT_URL + 'user.py/' + row[2] + '" class="nameLink"><img src="/images/users/'+ row[4] + '" class="tinyAvatar" /><span style="vertical-align:4px;">'+ row[2] + '</span></a>'
+			userText = '<a href="' + ghShared.BASE_SCRIPT_URL + 'user.py/' + row[2] + '" class="nameLink"><img src="/images/users/'+ row[4] + '" class="tinyAvatar" /><span style="vertical-align:4px;">'+ row[2] + '</span></a> <span style="vertical-align:4px;"><small>'+ str(row[1]) +'</small><span>'
 		if logged_state > 0:
 			userText = userText + '<button type="button" id="addFeedbackComment_' + str(row[0]) + '" class="ghButton" onclick="addFeedbackComment(this)" style="float:right;">Add Comment</button>'
 
