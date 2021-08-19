@@ -42,8 +42,10 @@ def getFeedbackComments(conn, feedbackID):
 				userText = comrow[1]
 			else:
 				userText = '<a href="' + ghShared.BASE_SCRIPT_URL + 'user.py/' + comrow[1] + '" class="nameLink"><img src="/images/users/'+ comrow[3] + '" class="tinyAvatar" /><span style="vertical-align:4px;">'+ comrow[1] + '</span></a>'
-
-			comments = comments + '<p class="commentItem">' + comrow[2] + '</p><p>' + userText + '</p>'
+			
+			commentWithLines = re.sub(r'\n{3,}', r'\n', comrow[2])
+			commentWithLines = re.sub(r'\n', r'<br>', commentWithLines)
+			comments = comments + '<p class="commentItem">' + commentWithLines + '</p><p>' + userText + '</p>'
 			comrow = comcursor.fetchone()
 
 		comcursor.close()
