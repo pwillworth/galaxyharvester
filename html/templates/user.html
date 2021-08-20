@@ -28,7 +28,7 @@ $(document).ready(function() {
 {% endif %}
 });
 function moreFriends(lastFriend, dir) {
-    $('#friendList').html('<div id="flBusyImg"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>');
+    $('#friendList').html('<div id="flBusyImg" class="lds-ripple"><div></div><div></div></div>');
     $.get(BASE_SCRIPT_URL + "getFriendsList.py",{uid:"{{ uid }}", lastUser: lastFriend, direction: dir},
         function(data) {
             if (data.indexOf("Error:") == -1) {
@@ -171,7 +171,7 @@ function checkConfirmText(confirmationText) {
     <div id="userStats" class="ghWidgetBox">
     <div class="boxHeader">User Stats</div>
     <div id="harvesterData"></div>
-    <div id="addBusyImgHD"><img src="/images/ghWait.gif" alt="waiting..." border="0" /></div>
+    <div id="addBusyImgHD" class="lds-ripple"><div></div><div></div></div>
     </div>
   </div>
   <div class="ghCol" style="width:65%;">
@@ -202,7 +202,7 @@ function checkConfirmText(confirmationText) {
 			  {% endif %}
 			  </div>
 	      <div style="float:right;"><h4>Friends {{ friendCountStr }}</h4><div id="friendList">
-	      <div id="flBusyImg"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div></div>
+	      <div id="flBusyImg" class="lds-ripple"><div></div><div></div></div></div>
 	      </div>
 	      <div style="clear:both;"></div>
 	      <div id="userStats">
@@ -222,7 +222,7 @@ function checkConfirmText(confirmationText) {
 {% endif %}
     <br /><h3 style="clear:both;">Recent Activity</h3>
     <div id="userHistory"></div>
-    <div id="addBusyImgUH"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+    <div id="addBusyImgUH" class="lds-ripple"><div></div><div></div></div>
     </div>
   </div>
 </div>
@@ -235,7 +235,7 @@ function checkConfirmText(confirmationText) {
 		<div class="standOut">Are you sure you want to delete your account?  This will remove all of your data from the site and is not reversible.  All of your favorites, inventory, recipes, etc.  will ALL be deleted.  You will not be able to join again with the same username.  It's not too late to turn back... if you want to take a break for a while you can just turn off alerts instead.</div>
 		<div>If you are really sure you want to do this, type <span class="alert">delete</span> in the box below, and click the Delete Me button.</div>
 	    <div style="width:100%;text-align:center;margin:6px;"><input style="height:28px;font-size:24px;text-align:center;" type="text" id="confirmIt" size="16" maxlength="32" onchange="checkConfirmText(this.value)" /></div>
-	    <div id="busyImgDelete" style="display:none;float:right;"><img src="/images/ghWait.gif" /></div>
+	    <div id="busyImgDelete" style="display:none;float:right;"><div class="lds-ripple"><div></div><div></div></div></div>
 	    <div style="text-align: center;padding: 20px;"><button type="button" id="goDeleteButton" class="ghButton" onclick="goDeleteMe($('#confirmIt').val());">Delete Me</button></div>
 	    <div id="deleteInfo"></div>
 	</div>

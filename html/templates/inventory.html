@@ -166,14 +166,14 @@ function exportInventory(format) {
     <div id="favoriteTypesTool" class="ghWidgetBox">
       <div class="boxHeader">Favorite Types
 	      <div style="float:right;"> [<a href="resourceType.py?{{ linkappend }}">Find More</a>]</div>
-	      <div id="busyImgTypesList" style="display:none;"><img src="/images/ghWait.gif" /></div>
+	      <div id="busyImgTypesList" style="display:none;"><div class="lds-ripple"><div></div><div></div></div></div>
 	      <div id="favoriteTypesList"></div>
       </div>
     </div>
     <div id="recipeTool" class="ghWidgetBox">
       <div class="boxHeader">Recipes [<a href="{{ BASE_SCRIPT_URL }}recipe.py/home?{{ linkappend }}">Recipe Home</a>]
 	      <div style="float:right;"><button type=button value="New Recipe" class="ghButton" onclick="addRecipe();">New Recipe</button></div></div>
-	      <div id="busyImgRecipeList" style="display:none;"><img src="/images/ghWait.gif" /></div>
+	      <div id="busyImgRecipeList" style="display:none;"><div class="lds-ripple"><div></div><div></div></div></div>
 	      <div id="recipeList"></div>
       </div>
     </div>
@@ -191,7 +191,7 @@ function exportInventory(format) {
 {% endif %}
     </div>
       <div class="footer"></div>
-    <div id="busyImg" style="text-align:center;"><img src="../../images/ghWait.gif" /></div>
+    <div id="busyImg" style="text-align:center;" class="lds-ripple"><div></div><div></div></div>
     <div id="resourceData">
     </div>
   </div>

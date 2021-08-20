@@ -174,7 +174,7 @@ function maskStats(typeSel) {
           <div id="favProfessionMask" class="disabled">Login First</div>
 {% else %}
           <div id="favProfessionMask"></div>
-          <div id="favProfessionBusyImg" style="text-align:center;"><img src="../../images/ghWait.gif" /></div>
+          <div id="favProfessionBusyImg" style="text-align:center;"><div class="loadingImage"></div></div>
 {% endif %}
       <div id="favProfessionList"></div>
     </div>
@@ -184,7 +184,7 @@ function maskStats(typeSel) {
           <div id="favSchematicMask" class="disabled">Login First</div>
 {% else %}
           <div id="favSchematicMask"></div>
-          <div id="favSchematicBusyImg" style="text-align:center;"><img src="../../images/ghWait.gif" /></div>
+          <div id="favSchematicBusyImg" style="text-align:center;"><div class="loadingImage"></div></div>
 {% endif %}
       <div id="favSchematicList"></div>
     </div>
@@ -196,7 +196,7 @@ function maskStats(typeSel) {
       <div id="despawnAlertsMask" class="disabled">Login First</div>
 {% else %}
       <div id="despawnAlertsMask"></div>
-      <div id="despawnBusyImg" style="text-align:center;"><img src="../../images/ghWait.gif" /></div>
+      <div id="despawnBusyImg" style="text-align:center;"><div class="loadingImage"></div></div>
 {% endif %}
       <div id="despawnAlertsList"></div>
     </div>
@@ -209,7 +209,7 @@ function maskStats(typeSel) {
     </div>
     <span id="sentMessage"></span>
     <div id="alertData" style="margin-top:12px;">
-      <div style="position:relative;"><div id="alertMask" class="disabledDark" style="display:none;"><div id="udBusyImg" style="display:none;"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div></div>
+      <div style="position:relative;"><div id="alertMask" class="disabledDark" style="display:none;"><div id="udBusyImg" style="display:none;" class="lds-ripple"><div></div><div></div></div></div>
       <h3>Quality Based on Stat Percentage Weights</h3>
       <table id="addQualityAlertTable"><thead>
       <tr class="tableHead"><td colspan=2 style="text-align:center;">Resource Types</td><td colspan=11 style="font-weight:bold;text-align:center;">Stat % Weights</td><td>Min Quality</td><td colspan=3 style="font-weight:bold;text-align:center;">Alert Types</td></tr>

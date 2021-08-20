@@ -56,16 +56,16 @@ function refreshResourceTypes() {
   {% endif %}
     <div id="groupsInfo" class="ghWidgetBox">
       <div class="boxHeader">Resource Groups</div>
-      <div id="busyImgFindGroups">
-        <img src="/images/ghWait.gif" alt="waiting..." border=0 />
+      <div id="busyImgFindGroups" class="lds-ripple">
+        <div></div><div></div>
       </div>
       <div id="resGroups"></div>
     </div>
   {% if (validResource and showType) %}
     <div id="typesInfo" class="ghWidgetBox">
       <div class="boxHeader">Types</div>
-      <div id="busyImgFindTypes">
-        <img src="/images/ghWait.gif" alt="waiting..." border=0 />
+      <div id="busyImgFindTypes" class="lds-ripple">
+        <div></div><div></div>
       </div>
       <div id="resTypes"></div>
     </div>
@@ -84,8 +84,8 @@ function refreshResourceTypes() {
       </h3>
       <div class="footer"></div>
     {% if (validResource) %}
-      <div id="busyImgFindCreatures">
-        <img src="/images/ghWait.gif" alt="waiting..." border=0 />
+      <div id="busyImgFindCreatures" class="lds-ripple">
+        <div></div><div></div>
       </div>
       <div id="resCreatures"></div>
     {% else %}

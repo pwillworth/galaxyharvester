@@ -1922,7 +1922,7 @@ function loadCategory(container, categoryID, categoryName) {
 		aimg.css("-moz-transform","rotate(90deg)");
 		aimg.css("filter","progid:DXImageTransform.Microsoft.BasicImage(rotation=2)");
     } else {
-		$('#cont_' + categoryID).html('<div id="busyImg_' + categoryID + '" style="text-align:center;"><img src="../../images/ghWait.gif" /></div>');
+		$('#cont_' + categoryID).html('<div id="busyImg_' + categoryID + '" style="text-align:center;" class="lds-ripple"><div></div><div></div></div>');
         $("#cont_" + categoryID).load(BASE_SCRIPT_URL + "getResourceList.py",{
 			galaxy: $("#galaxySel").val(),
             unavailableDays: parseInt($("#weeksUnavailable").val())*7,

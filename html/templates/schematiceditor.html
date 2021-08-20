@@ -277,14 +277,14 @@ function saveSchematic() {
       <select name="tabSel" id="tabSel" style="display:none;" onchange="setCookie('ingListTabSel',this.value,7);loadIngredientPicker();">
         {{ schematicTabList }}
       </select>
-      <div id=busyImgList><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+      <div id=busyImgList class="lds-ripple"><div></div><div></div></div>
       <div id="ingredientPickerList"></div>
     </div>
   </div>
   <div id="rightMainContent" class="ghCol">
     <div class="ghWidgetBox">
 			<div class="bigLink">Schematic: <input type="text" id="schematicName" name="schematicName" value="{{ schematic.schematicName }}" size="60" maxlength="255" />
-      <div id="busyImgSave" style="display:none;"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+      <div id="busyImgSave" style="display:none;" class="lds-ripple"><div></div><div></div></div>
 			{% if loggedin == 1 %}
 					<div style="float:right;">
             <button type=button value="Cancel" class="ghButton" onclick="document.location.href='/schematics.py/{{ schematicID }}?{{ linkappend }}';">Cancel</button>

@@ -91,27 +91,27 @@ function refreshHarvesting() {
     <button type=button value="Clear" class="ghButton" style="float:right;" onclick="clearAlerts(1);">Clear</button>
   </div>
 	<div id="alertList"></div>
-	<div id=busyImgAlerts><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+	<div id="busyImgAlerts" class="lds-ripple"><div></div><div></div></div>
   </div>
   <div id="mySurveys" class="ghWidgetBox">
     <div class="boxHeader">Surveying</div>
     <div id="surveyResourceData"></div>
-    <div id=addBusyImgSurvey><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+    <div id=addBusyImgSurvey class="lds-ripple"><div></div><div></div></div>
   </div>
   <div id="myHarvests" class="ghWidgetBox">
     <div class="boxHeader">Harvesting</div>
     <div id="harvestResourceData"></div>
-    <div id=addBusyImgHarvest><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+    <div id="addBusyImgHarvest" class="lds-ripple"><div></div><div></div></div>
   </div>
 {% endif %}
     <div id="userStats" class="ghWidgetBox">
     <div class="boxHeader">Top Harvesters</div>
     <h4 class="sectionHead">Current Spawns (<span id="topCurrentCount">?</span>) Waypoints (<span id="currentWaypointCount">?</span>)</h4>
     <div id="harvesterDataC"></div>
-    <div id=addBusyImgTHC><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+    <div id=addBusyImgTHC class="lds-ripple"><div></div><div></div></div>
     <h4 class="sectionHead">All Time (<span id="topAllCount">?</span>)</h4>
     <div id="harvesterData"></div>
-    <div id=addBusyImgTH><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+    <div id=addBusyImgTH class="lds-ripple"><div></div><div></div></div>
     </div>
     <div id="donateBox" class="ghOrphanBox" style="text-align:center;">
 {{ blocks.donateTracker(totalAmt,percentOfGoal) }}
@@ -123,7 +123,7 @@ function refreshHarvesting() {
 {% endif %}
 	</div>
       <table id="findWaypointsList"></table>
-      <div id="busyImgWaypointSearch"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+      <div id="busyImgWaypointSearch" class="lds-ripple"><div></div><div></div></div>
       <input type="hidden" id="findSpawn" />
     </div>
   </div>
@@ -131,7 +131,7 @@ function refreshHarvesting() {
     <div id="newResources" class="ghWidgetBox">
     <div class="boxHeader">Latest Resources <a href="{{ BASE_SCRIPT_URL }}resourceList.py?list=Entered">[More]</a></div>
     <div id="newResourceData"></div>
-    <div id=addBusyImgNR><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+    <div id=addBusyImgNR class="lds-ripple"><div></div><div></div></div>
     </div>
     <div id="topResources" class="ghWidgetBox">
       <div class="boxHeader">Top Current Resources
@@ -142,7 +142,7 @@ function refreshHarvesting() {
 {{ professionList }}
       </select></span></div>
       <div id="topResourceData"></div>
-    <div id=addBusyImgTR><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+    <div id=addBusyImgTR class="lds-ripple"><div></div><div></div></div>
     </div>
   </div>
   <div id="rightColumn" class="ghCol">
