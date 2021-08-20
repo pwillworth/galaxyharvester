@@ -57,7 +57,6 @@ a:active, .groupText {
 }
 .resourceBox {
 	background: #252e31; /* Body interior color */
-	padding: 5px;
 }
 .standOut, div.blockUserItem {
 	color: white;

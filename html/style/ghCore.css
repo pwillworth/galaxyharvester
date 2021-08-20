@@ -254,6 +254,7 @@ input.ghButton[disabled] {
 	/*border: 1px solid #990000;*/
 	border-radius: 2px;
 	min-height: 80px;
+	padding: 5px;
 }
 
 .feedList li {
