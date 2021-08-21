@@ -273,14 +273,14 @@ input.ghButton[disabled] {
 	border-radius: 50%;
 	color: #b3b3b3;
 	background-color: #353535;
-	width: 16px;
-	min-height: 16px;
+	width: 12px;
+	min-height: 12px;
 	display: inline-block;
 	zoom: 1;
 	margin: -2px;
 	text-align: center;
 	vertical-align: middle;
-	line-height: 16px;
+	line-height: 12px;
 	cursor: pointer;
 	margin-right: 2px;
 	font-size: 8px;
