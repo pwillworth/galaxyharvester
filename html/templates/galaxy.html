@@ -104,7 +104,7 @@ function saveGalaxy() {
             <div class="blockUserItem">{{ admin }}<img src='/images/xRed16.png' alt='Remove' title='Remove' onclick='this.parentNode.remove();'></img></div>
 {% endfor %}          
           </div></td></tr>
-          <tr><td><div id="busyImgSave" style="display: none;"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div></td><td><input type="button" value="Save" class="ghButton" onclick="saveGalaxy();"/></input></td></tr>
+          <tr><td><div id="busyImgSave" style="display: none;" class="lds-ripple"><div></div><div></div></div></td><td><input type="button" value="Save" class="ghButton" onclick="saveGalaxy();"/></input></td></tr>
         </table>
       </form>
     </div>

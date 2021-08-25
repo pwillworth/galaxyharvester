@@ -46,7 +46,7 @@ $(document).ready(function() {
         <input type="radio" name="oViewType" id="oTime" value="ByTime" onclick="loadFeedback()" />Latest</div>
       </div>
       <div class="footer"></div>
-      <div id="feedbackList"><div id="feedbackBusyImg" style="text-align:center;"><img src="../../images/ghWait.gif" /></div></div>
+      <div id="feedbackList"><div id="feedbackBusyImg" style="text-align:center;" class="lds-ripple"><div></div><div></div></div></div>
     </div>
   </div>
 </div>
@@ -59,7 +59,7 @@ $(document).ready(function() {
     <textarea id="feedbackText" rows="5" cols="70"></textarea>
     </div>
     <input type="hidden" name="feedbackID" id="feedbackID" />
-    <div id="busyImgAdd" style="display:none;float:right;"><img src="/images/ghWait.gif" /></div>
+    <div id="busyImgAdd" style="display:none;float:right;"><div class="lds-ripple"><div></div><div></div></div></div>
     <span id="addInfo"></span>
     <div style="float:right;margin:6px;padding-top:100px;"><input type="button" class="ghButton" value="Create" id="goCreate" onclick="postFeedback(0, $('#feedbackText').val());" /></div>
     <div style="float:right;margin:6px;padding-top:100px;"><input type="button" class="ghButton" value="Cancel" id="cancelFeedback" onclick="$('#mask, .window').hide();" /></div>

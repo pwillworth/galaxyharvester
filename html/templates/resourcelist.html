@@ -114,7 +114,7 @@ function filterResources() {
 <div id="mainContent" class="wrapper">
   <div id="leftNavContent" class="ghCol">
     <div id="resourceCriteria" class="ghWidgetBox">
-    <form id="resourceSearch" name="resourceSearch"><div class="boxHeader">Search Criteria<button id="goFilter" type="button" class="ghButton" style="float: right;" onclick="filterResources();">Go</button></div>
+    <form id="resourceSearch" name="resourceSearch"><div class="boxHeader">Search Criteria</div>
     <div id="searchInputs">
       <div class="searchInput">Planet:<select id="planetSel" name="planetSel"><option value="any" selected="selected">Any</option>
 {{ planetList }}
@@ -129,7 +129,9 @@ function filterResources() {
       <div class="searchInput">Res Type:<select name="resType" id="resType" style="width:100%"><option value="any" selected="selected">Any</option>
 {{ resourceTypeList }}
       </select></div>
-      <div class="searchInput" style="text-align:center"><input type="reset" value="Reset" class="ghButton" /></div></form>
+      <div class="searchInput" style="text-align:center">
+        <button id="goFilter" type="button" class="ghButton" onclick="filterResources();">Go</button>
+        <input type="reset" value="Reset" class="ghButton" /></div></form>
     </div>
     </div>
   </div>
@@ -157,7 +159,7 @@ function filterResources() {
       </select>
       </span></div></div>
       <div class="footer"></div>
-    <div id="busyImg" style="text-align:center;"><img src="../../images/ghWait.gif" /></div>
+    <div id="busyImg" style="text-align:center;" class="lds-ripple"><div></div><div></div></div>
     <div id="resourceData">
     </div>
   </div>

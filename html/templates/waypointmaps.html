@@ -164,14 +164,14 @@ function loadPlanetButtons(galaxy) {
       <div style="margin:10px;">Spawn:<input type="text" name="findSpawn" id="findSpawn" tabindex="20" size="16" maxlength=64" />
       <button type="button" id="findWaypointsButton" class="ghButton" onclick="findWaypoints()">Search</button>
       </div>
-      <div id="busyImgWaypointSearch" style="text-align:center;"><img src="/images/ghWait.gif" /></div>
+      <div id="busyImgWaypointSearch" style="text-align:center;"><div class="lds-ripple"><div></div><div></div></div></div>
       <table id="findWaypointsList"></table>
     </div>
   </div>
   <div id="rightMainContent" class="ghCol">
     <div id="waypointsBox" class="ghWidgetBox" style="min-width:820px;">
       <div id="coords" class="tooltip"></div>
-      <div id="busyImgDrawWaypoints" style="text-align:center;display:none;position:absolute;top:36px;"><img src="/images/ghWait.gif" />Mapping Waypoints...</div>
+      <div id="busyImgDrawWaypoints" style="text-align:center;display:none;position:absolute;top:36px;"><div class="lds-ripple"><div></div><div></div></div>Mapping Waypoints...</div>
       <div id="planetButtonRow" style="text-align:center">
       </div>
       <canvas id="mapCanvas" width="840" height="820" onmousemove="mapHoverCheck(event)" style="background-position: bottom-left;background-repeat: no-repeat;"><div class="standOut">View this page in a modern web browser like Mozilla Firefox, Google Chrome, or Safari to view waypoints in graphical map mode.</div></canvas>

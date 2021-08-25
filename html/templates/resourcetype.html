@@ -85,7 +85,7 @@ $(document).ready(function() {
 	    </div>
 	    <div id="schematicInfo" class="ghWidgetBox">
 	    <div class="boxHeader">Schematics</div>
-	      <div id="busyImgFindSchem" style="display:none;"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+	      <div id="busyImgFindSchem" style="display:none;" class="lds-ripple"><div></div><div></div></div>
 	      <div id="resSchematics"></div>
 	    </div>
 
@@ -97,14 +97,14 @@ $(document).ready(function() {
       	<div style="float:right;"><button type=button value="Add Creature" class="ghButton" onclick="addCreature();">Add Creature</button></div>
       {% endif %}
       </div>
-			  <div id="busyImgFindCreatures" style="display:none;"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+			  <div id="busyImgFindCreatures" style="display:none;" class="lds-ripple"><div></div><div></div></div>
 			  <div id="resCreatures"></div>
 			</div>
 		{% endif %}
 	{% else %}
 		<div id="childrenInfo" class="ghWidgetBox">
 		<div class="boxHeader">Types</div>
-		  <div id="busyImgFindChildren" style="display:none;"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+		  <div id="busyImgFindChildren" style="display:none;" class="lds-ripple"><div></div><div></div></div>
 		  <div id="resChildren"></div>
 		</div>
 	{% endif %}
@@ -114,7 +114,7 @@ $(document).ready(function() {
     <div id="resourceTypeInfo" class="ghWidgetBox">
 {{ resHTML }}
 {% if typeID != '' %}
-	    <div id="busyImgSpawns" style="display:none;"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+	    <div id="busyImgSpawns" style="display:none;" class="lds-ripple"><div></div><div></div></div>
       <h3>Recent Spawns</h3>
   	  <div id="recentSpawns"></div>
 	    <h3>Best Spawns</h3>
@@ -147,7 +147,7 @@ $(document).ready(function() {
 	    </table>
       <input type="hidden" name="resourceType" id="resourceType" value="{{ resourceType }}" />
       <input type="hidden" name="operation" id="operation" value="" />
-	    <div id="busyImgAddCreature" style="display:none;float:right;"><img src="/images/ghWait.gif" /></div>
+	    <div id="busyImgAddCreature" style="display:none;float:right;"><div class="lds-ripple"><div></div><div></div></div></div>
 	    <div style="text-align: center;padding: 20px;"><button type="button" id="sendCreatureData" tabIndex="123" class="ghButton" onclick="postCreature()">Add Creature</button></div></form>
 	    <div id="addCreatureInfo"></div>
 	</div>

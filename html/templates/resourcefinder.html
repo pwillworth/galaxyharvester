@@ -152,11 +152,7 @@ function setQualityControls() {
 <div id="mainContent" class="wrapper">
   <div id="leftNavContent" class="ghCol">
     <div id="resourceCriteria" class="ghWidgetBox">
-    <form id="resourceSearch" name="resourceSearch"><div class="boxHeader">Search Options
-{% if loggedin == 1 %}
-    <button id="compareFilter" type="button" class="ghButton" tabindex=2 style="float: right;" onclick="filterResources('true');">Compare</button>
-{% endif %}
-    <button id="goFilter" type="button" class="ghButton" tabindex=1 style="margin-right:4px;float: right;" onclick="filterResources('undefined');">Search</button></div>
+    <form id="resourceSearch" name="resourceSearch"><div class="boxHeader">Search Options</div>
     <div id="searchInputs">
       <div class="searchInput">Was on Planet:<select id="planetSel" name="planetSel" tabindex=2>
     </select></div>
@@ -189,7 +185,15 @@ function setQualityControls() {
       <div class="searchInput">Verified & Unverified:<input type="radio" name="verification" id="oEitherVerified" selected/></div>
       <div class="searchInput">Only Verified:<input type="radio" name="verification" id="oVerified"/></div>
       <div class="searchInput">Only Unverified:<input type="radio" name="verification" id="oUnverified"/></div>
-      <div class="searchInput" style="text-align:center"><input type="reset" value="Reset" class="ghButton" tabindex=70/></div></form>
+        <div class="searchInput" style="text-align:center">
+            <button id="goFilter" type="button" class="ghButton" tabindex=1 onclick="filterResources('undefined');">Search</button>
+            {% if loggedin == 1 %}
+                <button id="compareFilter" type="button" class="ghButton" tabindex=2 onclick="filterResources('true');">Compare</button>
+            {% endif %}
+            <input type="reset" value="Reset" class="ghButton" tabindex=70/>
+            
+        </div>
+    </form>
     </div>
     </div>
   </div>
@@ -203,7 +207,7 @@ function setQualityControls() {
       </span><input type="checkbox" id="oCompare" style="display:none;"/></div></div>
       <div class="footer"></div>
     <div id="resourceData">Select some criteria on the left and click Search or Compare.</div>
-    <div id="busyImg" style="text-align:center;display:none;"><img src="../../images/ghWait.gif" /></div>
+    <div id="busyImg" style="text-align:center;display:none;" class="lds-ripple"><div></div><div></div></div>
   </div>
 </div>
 {{ blocks.pageFooter() }}

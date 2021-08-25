@@ -140,7 +140,7 @@
 {% macro resourceForm() %}
 	<div id="resourceDialog" class="window bigForm">
 	    <h2 style="display: inline;">Adding Resources</h2><div style="float: right;position: relative;top:0px;"><a href="#" class="close">Close</a></div>
-	    <div id=resStatusUpdate class="statusMsg"></div><div id=addBusyImg style="float:left;display:none;"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+	    <div id=resStatusUpdate class="statusMsg"></div><div id=addBusyImg style="float:left;display:none;" class="lds-ripple"><div></div><div></div></div>
 	    <div id=resCurrentInfo class="standOut"></div>
 	    <form name="quickResForm" method="post" action="" enctype="application/x-www-form-urlencoded">
 	        Resource Type:&nbsp;<select name="typeSel" id="typeSel" width="100" onchange="maskStats(this, true);"></select>
@@ -258,7 +258,7 @@
 	    <td><span id="ShareTypeInf" class="formMsg">Select an option for sharing this waypoint.</span></td></tr>
 	    </table>
 	    <input type="hidden" name="wpID" id="wpID" />
-	    <div id="busyImgAdd" style="display:none;float:right;"><img src="/images/ghWait.gif" /></div>
+	    <div id="busyImgAdd" style="display:none;float:right;"><div class="lds-ripple"><div></div><div></div></div></div>
 	    <div style="text-align: center;padding: 20px;"><button type="button" id="sendWaypointData" class="ghButton" onclick="postWaypoint()">Create</button></div></form>
 	    <div id="addInfo"></div>
 	</div>
@@ -286,7 +286,7 @@
 		<select name="schematicList" id="schematicList" onchange="$('#recipeName').val($('#schematicList option:selected').text());"></select>
 		</div>
 		<div class="searchInput">Recipe Name:<br /> <input type="text" id="recipeName" size="60" maxlength="255" value="" /></div>
-		<div id="busyImgAdd" style="display:none;float:right;"><img src="/images/ghWait.gif" /></div>
+		<div id="busyImgAdd" style="display:none;float:right;"><div class="lds-ripple"><div></div><div></div></div></div>
 		<span id="addInfo"></span>
 		<div style="float:right;margin:6px;padding-top:100px;"><input type="button" class="ghButton" value="Create" id="goCreate" onclick="newRecipe($('#schematicList').val(), $('#recipeName').val(), $('#galaxySel').val());" /></div>
 		<div style="float:right;margin:6px;padding-top:100px;"><input type="button" class="ghButton" value="Cancel" id="cancelRecipe" onclick="$('#mask, .window').hide();" /></div>
@@ -296,7 +296,7 @@
 {% macro favoriteForm() %}
 	<div id="favoriteDialog" class="window bigForm">
 	    <h2 style="display: inline;">Toggle Favorite</h2><div style="float: right;position: relative;top:0px;"><a href="#" class="close">Close</a></div>
-	    <div id="favStatusUpdate" class="statusMsg"></div><div id=favBusyImg style="float:left;display:none;"><img src="/images/ghWait.gif" alt="waiting..." border=0 /></div>
+	    <div id="favStatusUpdate" class="statusMsg"></div><div id=favBusyImg style="float:left;display:none;" class="lds-ripple"><div></div><div></div></div>
 	    <div id="favCurrentInfo" class="standOut"></div>
         <table class="favPick">
 			<tr class="favPickImageRow">
