@@ -257,23 +257,9 @@ input.ghButton[disabled] {
 	/*border: 1px solid #990000;*/
 	border-radius: 2px;
 	min-height: 80px;
+	padding: 5px;
 }
-.planetBarBox {
-	background-repeat: no-repeat;
-	color: #b3b3b3;
-	width: 16px;
-	min-height: 16px;
-	display: -moz-inline-stack;
-	display: inline-block;
-	zoom: 1;
-	*display: inline;
-	_height: 16px;
-	margin: -2px;
-	text-align: center;
-	vertical-align: middle;
-	line-height: 16px;
-	cursor: pointer;
-}
+
 .feedList li {
 	background-image: url(http://www.feedburner.com/fb/images/pub/feed-icon16x16.png);
 	background-repeat: no-repeat;
@@ -283,126 +269,120 @@ input.ghButton[disabled] {
 .feedList li div {
 	margin-left: 8px;
 }
+/* Planet Icons */
+
+.planetBarBox {
+	border: 0.5px #b3b3b3 solid;
+	border-radius: 50%;
+	color: #b3b3b3;
+	background-color: #353535;
+	width: 12px;
+	min-height: 12px;
+	display: inline-block;
+	zoom: 1;
+	margin: -2px;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 12px;
+	cursor: pointer;
+	margin-right: 2px;
+	font-size: 8px;
+}
+.planetUnavailable
+{
+	opacity: 0.25;
+}
 .Chandrila {
-	/*background-color: #32cd99;*/
-	background-image: url(/images/spriteCircles16.png);
-	background-position: -10px -82px;
+	background-color: #32cd99;
 }
 .Corellia {
-	/*background-color: #26466d;*/
-	background-image: url(/images/spriteCircles16.png);
-	background-position: -10px -46px;
+	background-color: #26466d;
 }
 .Dantooine {
-	/*background-color: #9a32cd;*/
-	background-image: url(/images/spriteCircles16.png);
-	background-position: -10px -118px;
+	background-color: #703a69;
 }
 .Dathomir {
-	/*background-color: #ff6103;*/
-	background-image: url(/images/spriteCircles16.png);
-	background-position: -10px -10px;
+	background-color: #70473a;
 }
 .Endor {
-	/*background-color: #3b5323;*/
-	background-image: url(/images/spriteCircles16.png);
-	background-position: -10px -154px;
+	background-color: #3b5323;
 }
 .Ghomrassen {
-	/*background-color: #ffcc11;*/
-	background-image: url(/images/spriteCircles16.png);
-	background-position: -10px -262px;
+	background-color: #c9b262;
+	color: #3f3f3f !important;
 }
 .NalHutta {
-	/*background-color: #ffcc11;*/
-	background-image: url(/images/spriteCircles16.png);
-	background-position: -10px -262px;
+	background-color: #c9b262;
+	color: #3f3f3f !important;
 }
 .Lok {
-	/*background-color: #666600;*/
-	background-image: url(/images/spriteCircles16.png);
-	background-position: -10px -190px;
+	background-color: #70683b;
 }
 .Naboo {
-	/*background-color: #333300;*/
-	background-image: url(/images/spriteCircles16.png);
-	background-position: -10px -226px;
+	background-color: #446b7a;
 }
 .Rori {
-	/*background-color: #dc143c;*/
-	background-image: url(/images/spriteCircles16.png);
-	background-position: -10px -334px;
+	background-color: #8d4856;
 }
 .Talus {
-	/*background-color: #32cd99;*/
-	background-image: url(/images/spriteCircles16.png);
-	background-position: -10px -82px;
+	background-color: #539b83;
+	color: #3f3f3f !important;
 }
 .Tatooine {
-	/*background-color: #ffcc11;*/
-	background-image: url(/images/spriteCircles16.png);
-	background-position: -10px -262px;
+	background-color: #c9b262;
+	color: #3f3f3f !important;
 }
 .Yavin4 {
-	/*background-color: #7cfc00;*/
-	background-image: url(/images/spriteCircles16.png);
-	background-position: -10px -298px;
+	background-color: #489c56;
+	color: #3f3f3f !important;
 }
 .Hoth {
-	background-image: url(/images/spriteCircles16.png);
-	background-position: -10px -370px;
+	background-color: #c0c9ca;
+	color: #3f3f3f !important;
 }
 .DromundKaas {
-	background-image: url(/images/spriteCircles16.png);
-	background-position: -10px -406px;
+	background-color: #4c385a;
 }
 .Kashyyyk {
-	background-image: url(/images/spriteCircles16.png);
-	background-position: -10px -442px;
+	background-color: #5a6d48;
 }
 .Mandalore {
-	background-image: url(/images/spriteCircles16.png);
-	background-position: -10px -478px;
+	background-color: #666d48;
 }
 .Mustafar {
-	background-image: url(/images/spriteCircles16.png);
-	background-position: -10px -514px;
+	background-color: #8d452f;
 }
 .Taanab {
-	background-image: url(/images/spriteCircles16.png);
-	background-position: -10px -550px;
+	background-color: #486d56;
 }
 .Lothal {
-	background-image: url(/images/spriteCircles16.png);
-	background-position: -10px -586px;
+	background-color: #70683b;
 }
 .Jakku {
-	background-image: url(/images/spriteCircles16.png);
-	background-position: -10px -262px;
+	background-color: #a1895c;
 }
 .OrdMantell {
-	background-image: url(/images/spriteCircles16.png);
-	background-position: -10px -190px;
+	background-color: #726e4e;
 }
 .Kuat {
-	background-image: url(/images/spriteCircles16.png);
-	background-position: -10px -154px;
+	background-color: #85b448;
+	color: #3f3f3f !important;
 }
 .Moraband {
-	background-image: url(/images/spriteCircles16.png);
-	background-position: -10px -10px;
+	background-color: #b8642c;
+	color: #3f3f3f !important;
 }
 .Coruscant {
-	background-image: url(/images/spriteCircles16.png);
-	background-position: -10px -478px;
+	background-color: #ac7550;
+	color: #3f3f3f !important;
 }
 .Florrum {
-	background-image: url(/images/spriteCircles16.png);
-	background-position: -10px -190px;
+	background-color: #c9b262;
+	color: #3f3f3f !important;
 }
 .Sullust {
-	background-image: url(/images/spriteCircles16.png);
-	background-position: -10px -478px;
+	background-color: #c99c62;
+	color: #3f3f3f !important;
 }
 .resourceStats td {
 	text-align: center;
