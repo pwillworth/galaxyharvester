@@ -84,7 +84,7 @@ class resourceSpawn:
 				availability = 'marked available by '+ planet.enteredBy
 				result = result + ' onclick="planetRemove(this,'+str(planet.planetID)+','+str(self.spawnID)+',\''+planet.planetName+'\');"'
 			else:
-				result = result + '" onclick="planetAdd(this,'+str(planet.planetID)+','+str(self.spawnID)+',\''+planet.planetName+'\');"'
+				result = result + ' planetUnavailable" onclick="planetAdd(this,'+str(planet.planetID)+','+str(self.spawnID)+',\''+planet.planetName+'\');"'
 			result = result + ' title="'+ availability +'">'+planet.planetName[0]+'</li>'
 
 		result += '</ul>'

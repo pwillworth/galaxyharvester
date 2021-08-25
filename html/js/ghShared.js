@@ -561,6 +561,7 @@ function planetAdd(linkFrom, planet, spawn, planetName) {
 					$(linkFrom).unbind('click');
 					$(linkFrom).click(function(){planetRemove(this,planet,spawn,planetName);});
 					$(linkFrom).addClass(planetName.replace(' ',''));
+					$(linkFrom).removeClass('planetUnavailable');
 					$("#cont_"+data).fadeIn(300);
 				}
 			}, "html");
@@ -580,6 +581,7 @@ function planetRemove(linkFrom, planet, spawn, planetName) {
 					$(linkFrom).removeAttr('onclick');
 					$(linkFrom).unbind('click');
 					$(linkFrom).click(function(){planetAdd(this,planet,spawn,planetName);});
+					$(linkFrom).addClass('planetUnavailable');
 					$(linkFrom).removeClass(planetName.replace(' ',''));
 					$("#cont_"+data).fadeIn(300);
 				}

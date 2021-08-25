@@ -285,6 +285,10 @@ input.ghButton[disabled] {
 	margin-right: 2px;
 	font-size: 8px;
 }
+.planetUnavailable
+{
+	opacity: 0.25;
+}
 .Chandrila {
 	background-color: #32cd99;
 }
