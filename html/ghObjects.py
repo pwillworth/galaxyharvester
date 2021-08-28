@@ -231,7 +231,7 @@ class resourceSpawn:
 			result += '  <div class="compareInfo"><span>Quality: ' + str("%.0f" % (float(self.overallScore))) + '</span></div>'
 		# resource title row
 		if formatStyle == 0:
-			result += '  <div style="text-align:left;"><div class="inlineBlock" style="width:55%;text-align:left;float:left;"><span style="font-size: 12px;font-weight: bold;"><a href="' + ghShared.BASE_SCRIPT_URL + 'resource.py/'+str(self.spawnGalaxy)+'/'+self.spawnName+'" class="nameLink">'+self.spawnName+'</a></span>'
+			result += '  <div style="text-align:left;"><div class="inlineBlock" style="width:55%;text-align:left;"><span style="font-size: 12px;font-weight: bold;"><a href="' + ghShared.BASE_SCRIPT_URL + 'resource.py/'+str(self.spawnGalaxy)+'/'+self.spawnName+'" class="nameLink">'+self.spawnName+'</a></span>'
 		elif formatStyle == 2:
 			result += '    <div style="margin-bottom:4px;text-align:left;"><span style="font-size: 12px;"><a href="' + ghShared.BASE_SCRIPT_URL + 'resource.py/'+str(self.spawnGalaxy)+'/'+self.spawnName+'" class="nameLink">'+self.spawnName+'</a></span>'
 		else:
