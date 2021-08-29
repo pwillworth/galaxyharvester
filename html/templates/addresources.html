@@ -200,7 +200,7 @@ function loadReportData(reportData) {
 
 <div id="mainContent" class="wrapper">
   <div id="rightMainContent" class="ghCol">
-    <div id="addResBox" class="ghWidgetBox">
+    <div id="addResBox" class="ghWidgetBox" style="overflow:auto;"> <!-- Overflow dirty fix for Issue #37 -->
       <div class="boxHeader">Add Resources</div>
       <form name="faddres" id="faddres" onsubmit="return postResources({{ linkappend }})">
       <div>
