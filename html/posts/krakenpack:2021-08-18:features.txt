@@ -1,4 +1,5 @@
-<p>Find by Unverified and More</p>
+Find by Unverified and More
+
 <p>Today we have a few features and tweaks coming to you contributed by <a href="https://github.com/MrKraken">MrKraken</a>.  Check them out, I'm sure many will appreciate them:</p>
 <ul>
 <li>A new theme "Dark Mode" is available.  Try it out by changing your theme on the profile page.</li>
