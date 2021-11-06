@@ -72,7 +72,7 @@ def sendAlertMail(conn, userID, msgText, link, alertID, alertTitle, emailIndex):
 		if (email.find("@") > -1 and email.find(".") > -1):
 			# send message
 			message = EmailMessage()
-			message['From'] = "\"Galaxy Harvester Alerts\" <" + emailIDs[emailIndex] + "@galaxyharvester.net>"
+			message['From'] = emailIDs[emailIndex] + "@galaxyharvester.net"
 			message['To'] = email
 			message['Subject'] = "".join(("Galaxy Harvester ", alertTitle))
 			message.set_content("".join(("Hello ", userID, ",\n\n", msgText, "\n\n", link, "\n\n You can manage your alerts at http://galaxyharvester.net/myAlerts.py\n")))
