@@ -78,7 +78,9 @@ def sendAlertMail(conn, userID, msgText, link, alertID, alertTitle):
 	timeSinceFailure = currentTime - lastFailureTime
 	try:
 		f = open("last_email_failure.txt")
-		lastFailureTime = datetime.strptime(f.read().strip(), "%Y-%m-%d %H:%M:%S")
+		failureString = f.read().strip()
+		if len(failureString) > 8:
+			lastFailureTime = datetime.strptime(failureString, "%Y-%m-%d %H:%M:%S")
 		f.close()
 		timeSinceFailure = currentTime - lastFailureTime
 	except IOError as e:
