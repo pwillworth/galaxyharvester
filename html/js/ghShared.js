@@ -1,6 +1,6 @@
 var BASE_SCRIPT_URL = '/';
 //var resCategories = new Array('Creature Food','Creature Structural','Flora Food','Flora Structural','Chemical','Water','Mineral','Gas','Energy');
-var defaultGalaxy = 14;
+var defaultGalaxy = 118;
 var refreshPos = 0;
 var newRecipeID = 0;
 var resCategoryIDs = new Array('creature_food','creature_structural','flora_food','flora_structural','chemical','water','mineral','gas','energy_renewable');
