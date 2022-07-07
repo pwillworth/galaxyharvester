@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 
- Copyright 2020 Paul Willworth <ioscode@gmail.com>
+ Copyright 2022 Paul Willworth <ioscode@gmail.com>
 
  This file is part of Galaxy Harvester.
 
@@ -100,7 +100,7 @@ def sendAlertMail(conn, userID, msgText, link, alertID, alertTitle):
 		if (email.find("@") > -1):
 			# send message
 			message = EmailMessage()
-			message['From'] = "".join(("\"Galaxy Harvester Alerts\" <", mailInfo.ALERTMAIL_USER, "@galaxyharvester.net>"))
+			message['From'] = mailInfo.ALERTMAIL_USER
 			message['To'] = email
 			message['Subject'] = "".join(("Galaxy Harvester ", alertTitle))
 			message.set_content("".join(("Hello ", userID, ",\n\n", msgText, "\n\n", link, "\n\n You can manage your alerts at http://galaxyharvester.net/myAlerts.py\n")))

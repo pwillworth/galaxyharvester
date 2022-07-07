@@ -30,7 +30,7 @@ import math
 BASE_SCRIPT_URL = '/'
 BASE_WEB_DOMAIN = 'https://www.galaxyharvester.net' # Update to the root domain name for your site. Used for email verification link do not include trailing /
 DEFAULT_THEME = 'crafter'
-DEFAULT_GALAXY = '14'
+DEFAULT_GALAXY = '118'
 imgNum = random.randint(1,17)
 automatedUsers = ["etas", "c0pp3r", "RogueOne", "SRAlderaan", "EiFScript", "RelicsAdmin", "SRUpdater", "SwgAwakening", "Europa", "swginfinity", "Xela_TheCreation", "Reckoning", "TarkinSWG"]
 RECAPTCHA_ENABLED = True
