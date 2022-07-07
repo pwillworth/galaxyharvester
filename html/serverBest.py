@@ -80,7 +80,7 @@ def getPosition(conn, spawnID, galaxy, statWeights, resourceGroup, serverBestMod
 
     return spawnPos
 
-def checkSchematics(conn, spawnID, galaxy, prof, resourceTypes, serverBestMode):
+def checkSchematics(conn, spawnID, galaxy, prof, resourceTypes, serverBestMode, allPositions):
     bestPositions = {}
     # Select schematics where ingredient in type or groups of type
     sqlStr2 = 'SELECT tSchematic.schematicID, ingredientObject, Sum(ingredientContribution), schematicName, resName FROM tSchematicIngredients INNER JOIN tSchematic ON tSchematicIngredients.schematicID = tSchematic.schematicID INNER JOIN tSkillGroup ON tSchematic.skillGroup = tSkillGroup.skillGroup  LEFT JOIN (SELECT resourceGroup AS resID, groupName AS resName FROM tResourceGroup UNION ALL SELECT resourceType, resourceTypeName FROM tResourceType) res ON ingredientObject = res.resID WHERE profID={0} AND tSchematic.schematicID NOT IN (SELECT schematicID FROM tSchematicOverrides WHERE galaxyID={1}) AND tSchematic.galaxy IN ({3}, {1}) AND ingredientObject IN ({2}) GROUP BY tSchematic.schematicID, ingredientObject, resName, ingredientQuantity, ingredientName ORDER BY tSchematic.schematicID, ingredientQuantity DESC, ingredientName;'.format(prof, galaxy, resourceTypes, dbShared.getBaseProfs(galaxy))
@@ -104,7 +104,12 @@ def checkSchematics(conn, spawnID, galaxy, prof, resourceTypes, serverBestMode):
                 if tmpGroup != '':
                     # Check for top 3 status
                     if stats != lastStats:
-                        spawnPosition = getPosition(conn, spawnID, galaxy, stats, ingRow[1], serverBestMode)
+                        allKey = '{0}|{1}'.format(str(stats), ingRow[1])
+                        if allKey in allPositions:
+                            spawnPosition = allPositions[allKey]
+                        else:
+                            spawnPosition = getPosition(conn, spawnID, galaxy, stats, ingRow[1], serverBestMode)
+                            allPositions[allKey] = spawnPosition
                     if spawnPosition > 0:
                         if spawnPosition == 1:
                             eventDetail = ''.join(('New server best spawn for ', ingRow[3], ' ', tmpGroup.replace('exp_','').replace('exp','').replace('_', ' '), ', ingredient ', ingRow[4], '.'))
@@ -127,7 +132,12 @@ def checkSchematics(conn, spawnID, galaxy, prof, resourceTypes, serverBestMode):
 
         # Check for top 3 status on last ingredient
         if stats != lastStats:
-            spawnPosition = getPosition(conn, spawnID, galaxy, stats, ingRow[1], serverBestMode)
+            allKey = '{0}|{1}'.format(str(stats), ingRow[1])
+            if allKey in allPositions:
+                spawnPosition = allPositions[allKey]
+            else:
+                spawnPosition = getPosition(conn, spawnID, galaxy, stats, ingRow[1], serverBestMode)
+                allPositions[allKey] = spawnPosition
         if spawnPosition > 0:
             if spawnPosition == 1:
                 eventDetail = ''.join(('New server best spawn for ', ingRow[3], ' ', tmpGroup.replace('exp_','').replace('exp','').replace('_', ' '), ', ingredient ', ingRow[4], '.'))
@@ -144,10 +154,11 @@ def checkSchematics(conn, spawnID, galaxy, prof, resourceTypes, serverBestMode):
         ingRow = ingCursor.fetchone()
     ingCursor.close()
 
-    return bestPositions
+    return [allPositions, bestPositions]
 
 def checkSpawn(spawnID, serverBestMode):
     # Look up additional spawn info needed
+    allPositions = {}
     professions = []
     profresults = []
     hasResults = False
@@ -161,10 +172,11 @@ def checkSpawn(spawnID, serverBestMode):
         pc.execute('SELECT profID, profName FROM tProfession WHERE craftingQuality > 0;')
         pcRow = pc.fetchone()
         while pcRow != None:
-            result = checkSchematics(conn, str(spawnID), row[0], pcRow[0], "".join(("'", row[1], "','", str(row[2]), "'")), serverBestMode)
-            if result != None and len(result) > 0:
+            result = checkSchematics(conn, str(spawnID), row[0], pcRow[0], "".join(("'", row[1], "','", str(row[2]), "'")), serverBestMode, allPositions)
+            allPositions = result[0]
+            if result[1] != None and len(result[1]) > 0:
                 professions.append(str(pcRow[0]))
-                profresults.append(result)
+                profresults.append(result[1])
                 hasResults = True
 
             pcRow = pc.fetchone()
