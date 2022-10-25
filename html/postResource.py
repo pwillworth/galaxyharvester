@@ -64,18 +64,23 @@ def addResource(resName, galaxy, resType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT
 			if row[18] == 0: UT = ''
 			if row[20] == 0: ER = ''
 
-
-		tempSQL = "INSERT INTO tResources (spawnName, galaxy, entered, enteredBy, resourceType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER) VALUES ('" + resName + "'," + n2n(galaxy) + ",NOW(),'" + userID + "','" + resType + "'," + n2n(CR) + "," + n2n(CD) + "," + n2n(DR) + "," + n2n(FL) + "," + n2n(HR) + "," + n2n(MA) + "," + n2n(PE) + "," + n2n(OQ) + "," + n2n(SR) + "," + n2n(UT) + "," + n2n(ER) + ");"
-		cursor.execute(tempSQL)
-		result = cursor.rowcount
-		if (result < 1):
-			returnStr = "Error: resource not added."
+		# Only allow update if user has positive reputation or was the one who entered resource
+		stats = dbShared.getUserStats(userID, galaxy).split(",")
+		admin = dbShared.getUserAdmin(conn, userID, galaxy)
+		if int(stats[2]) < ghShared.MIN_REP_VALS['ADD_RESOURCE'] and userID != 'default' and not admin:
+			returnStr = "Error: Your reputation score is too low to add resources. \r\n"
 		else:
-			returnStr = "1st entry."
-		# add event for add if stats included
-		if OQ.isdigit() and OQ != '0':
-			spawnID = dbShared.getSpawnID(resName,galaxy)
-			dbShared.logEvent("INSERT INTO tResourceEvents (galaxy, spawnID, userID, eventTime, eventType) VALUES (" + str(galaxy) + "," + str(spawnID) + ",'" + userID + "',NOW(),'a');","a", userID, galaxy, spawnID)
+			tempSQL = "INSERT INTO tResources (spawnName, galaxy, entered, enteredBy, resourceType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER) VALUES ('" + resName + "'," + n2n(galaxy) + ",NOW(),'" + userID + "','" + resType + "'," + n2n(CR) + "," + n2n(CD) + "," + n2n(DR) + "," + n2n(FL) + "," + n2n(HR) + "," + n2n(MA) + "," + n2n(PE) + "," + n2n(OQ) + "," + n2n(SR) + "," + n2n(UT) + "," + n2n(ER) + ");"
+			cursor.execute(tempSQL)
+			result = cursor.rowcount
+			if (result < 1):
+				returnStr = "Error: resource not added."
+			else:
+				returnStr = "1st entry."
+			# add event for add if stats included
+			if OQ.isdigit() and OQ != '0':
+				spawnID = dbShared.getSpawnID(resName,galaxy)
+				dbShared.logEvent("INSERT INTO tResourceEvents (galaxy, spawnID, userID, eventTime, eventType) VALUES (" + str(galaxy) + "," + str(spawnID) + ",'" + userID + "',NOW(),'a');","a", userID, galaxy, spawnID)
 
 		cursor.close()
 		conn.close()
@@ -93,61 +98,71 @@ def addResPlanet(spawn, planet, spawnName, userID, galaxy):
 	cursor = conn.cursor()
 	cursor.execute("SELECT trp.enteredBy, trp.unavailable, tr.unavailable AS tru, trp.planetID, tr.enteredBy, trp.verified, trp.verifiedBy, tr.verified, tr.verifiedBy FROM tResources tr LEFT JOIN (SELECT * FROM tResourcePlanet WHERE tResourcePlanet.spawnID=" + str(spawn) + " AND tResourcePlanet.planetID=" + str(planet) + ") trp ON tr.spawnID = trp.spawnID WHERE tr.spawnID=" + str(spawn) + ";")
 	row = cursor.fetchone()
+	# Only allow update if user has positive reputation or was the one who entered resource
+	stats = dbShared.getUserStats(userID, galaxy).split(",")
+	admin = dbShared.getUserAdmin(conn, userID, galaxy)
+
 	if row[3] == None:
-		# insert spawn planet record
-		tempSQL = "INSERT INTO tResourcePlanet (spawnID, planetID, entered, enteredBy) VALUES (" + str(spawn) + "," + str(planet) + ",NOW(),'" + userID + "');"
-		cursor.execute(tempSQL)
-		result = cursor.rowcount
-		if (result < 1):
-			returnStr = "Error: Could not add resource to planet."
+		if int(stats[2]) < ghShared.MIN_REP_VALS['ADD_RES_PLANET'] and userID != 'default' and not admin:
+			returnStr = "Error: Your reputation score is too low to add resources to planets. \r\n"
 		else:
-			returnStr = spawnName + " added to " + str(ghNames.getPlanetName(planet))
-
-		if row[2] != None:
-			# update main resource table when becoming re-available
-			tempSQL = "UPDATE tResources SET unavailable=NULL WHERE spawnID = " + str(spawn) + ";"
-			cursor.execute(tempSQL)
-			returnStr += " and marked re-available"
-			detailCol = ", eventDetail"
-			detailVal = ", 'previously unavailable'"
-
-		# add resource planet add event
-		dbShared.logEvent("INSERT INTO tResourceEvents (galaxy, spawnID, userID, eventTime, eventType, planetID" + detailCol + ") VALUES (" + str(galaxy) + "," + str(spawn) + ",'" + userID + "',NOW(),'p'," + str(planet) + detailVal + ");", 'p', userID, galaxy, spawn)
-	else:
-		if (row[1] == None and row[2] == None):
-			if ((row[0] == None) or (row[0].lower() != userID.lower() and row[4].lower() != userID.lower())):
-				if (row[6] == None or row[6].lower() != userID.lower()):
-					tempSQL = "UPDATE tResourcePlanet SET verified=NOW(), verifiedBy='" + userID + "' WHERE spawnID=" + str(spawn) + " AND planetID=" + str(planet) + ";"
-					result = cursor.execute(tempSQL)
-					if (result < 1):
-						returnStr = "Error: Resource " + spawnName + " was marked available on " + str(ghNames.getPlanetName(planet)) + " by " + row[0] + " and there was an error entering your verification."
-					else:
-						returnStr = "Resource " + spawnName + " has been verified by you.  It was marked available on " + str(ghNames.getPlanetName(planet)) + " by " + row[0] + "."
-						# add event for verification
-						if row[7] != None:
-							detailCol = ", eventDetail"
-							detailVal = ", 'previously verified by " + row[8] + " on " + str(row[7]) + "'"
-						dbShared.logEvent("INSERT INTO tResourceEvents (galaxy, spawnID, userID, eventTime, eventType, planetID" + detailCol + ") VALUES (" + str(galaxy) + "," + str(spawn) + ",'" + userID + "',NOW(),'v'," + str(planet) + detailVal + ");",'v', userID, galaxy, spawn)
-						# update main resource table when verifying
-						tempSQL = "UPDATE tResources SET verified=NOW(), verifiedBy='" + userID + "' WHERE spawnID = " + str(spawn) + ";"
-						cursor.execute(tempSQL)
-				else:
-					returnStr = "You already verified " + spawnName + " on " + str(row[5]) + "."
-			else:
-				returnStr = "You already entered resource " + spawnName
-		else:
-			# update resource status available for planet
-			tempSQL = "UPDATE tResourcePlanet SET unavailable = NULL WHERE spawnID=" + str(spawn) + " AND planetID=" + str(planet) + ";"
+			# insert spawn planet record
+			tempSQL = "INSERT INTO tResourcePlanet (spawnID, planetID, entered, enteredBy) VALUES (" + str(spawn) + "," + str(planet) + ",NOW(),'" + userID + "');"
 			cursor.execute(tempSQL)
 			result = cursor.rowcount
-			# update main resource table when becoming re-available
-			tempSQL = "UPDATE tResources SET unavailable=NULL WHERE spawnID = " + str(spawn) + ";"
-			cursor.execute(tempSQL)
-			returnStr = spawnName + " marked re-available on " + ghNames.getPlanetName(planet)
-			detailCol = ", eventDetail"
-			detailVal = ", 'previously unavailable'"
+			if (result < 1):
+				returnStr = "Error: Could not add resource to planet."
+			else:
+				returnStr = spawnName + " added to " + str(ghNames.getPlanetName(planet))
+
+			if row[2] != None:
+				# update main resource table when becoming re-available
+				tempSQL = "UPDATE tResources SET unavailable=NULL WHERE spawnID = " + str(spawn) + ";"
+				cursor.execute(tempSQL)
+				returnStr += " and marked re-available"
+				detailCol = ", eventDetail"
+				detailVal = ", 'previously unavailable'"
+
 			# add resource planet add event
 			dbShared.logEvent("INSERT INTO tResourceEvents (galaxy, spawnID, userID, eventTime, eventType, planetID" + detailCol + ") VALUES (" + str(galaxy) + "," + str(spawn) + ",'" + userID + "',NOW(),'p'," + str(planet) + detailVal + ");", 'p', userID, galaxy, spawn)
+	else:
+		if int(stats[2]) < ghShared.MIN_REP_VALS['VERIFY_RESOURCE'] and userID != 'default' and not admin:
+			returnStr = "Error: Your reputation score is too low to verify resources. \r\n"
+		else:
+			if (row[1] == None and row[2] == None):
+				if ((row[0] == None) or (row[0].lower() != userID.lower() and row[4].lower() != userID.lower())):
+					if (row[6] == None or row[6].lower() != userID.lower()):
+						tempSQL = "UPDATE tResourcePlanet SET verified=NOW(), verifiedBy='" + userID + "' WHERE spawnID=" + str(spawn) + " AND planetID=" + str(planet) + ";"
+						result = cursor.execute(tempSQL)
+						if (result < 1):
+							returnStr = "Error: Resource " + spawnName + " was marked available on " + str(ghNames.getPlanetName(planet)) + " by " + row[0] + " and there was an error entering your verification."
+						else:
+							returnStr = "Resource " + spawnName + " has been verified by you.  It was marked available on " + str(ghNames.getPlanetName(planet)) + " by " + row[0] + "."
+							# add event for verification
+							if row[7] != None:
+								detailCol = ", eventDetail"
+								detailVal = ", 'previously verified by " + row[8] + " on " + str(row[7]) + "'"
+							dbShared.logEvent("INSERT INTO tResourceEvents (galaxy, spawnID, userID, eventTime, eventType, planetID" + detailCol + ") VALUES (" + str(galaxy) + "," + str(spawn) + ",'" + userID + "',NOW(),'v'," + str(planet) + detailVal + ");",'v', userID, galaxy, spawn)
+							# update main resource table when verifying
+							tempSQL = "UPDATE tResources SET verified=NOW(), verifiedBy='" + userID + "' WHERE spawnID = " + str(spawn) + ";"
+							cursor.execute(tempSQL)
+					else:
+						returnStr = "You already verified " + spawnName + " on " + str(row[5]) + "."
+				else:
+					returnStr = "You already entered resource " + spawnName
+			else:
+				# update resource status available for planet
+				tempSQL = "UPDATE tResourcePlanet SET unavailable = NULL WHERE spawnID=" + str(spawn) + " AND planetID=" + str(planet) + ";"
+				cursor.execute(tempSQL)
+				result = cursor.rowcount
+				# update main resource table when becoming re-available
+				tempSQL = "UPDATE tResources SET unavailable=NULL WHERE spawnID = " + str(spawn) + ";"
+				cursor.execute(tempSQL)
+				returnStr = spawnName + " marked re-available on " + ghNames.getPlanetName(planet)
+				detailCol = ", eventDetail"
+				detailVal = ", 'previously unavailable'"
+				# add resource planet add event
+				dbShared.logEvent("INSERT INTO tResourceEvents (galaxy, spawnID, userID, eventTime, eventType, planetID" + detailCol + ") VALUES (" + str(galaxy) + "," + str(spawn) + ",'" + userID + "',NOW(),'p'," + str(planet) + detailVal + ");", 'p', userID, galaxy, spawn)
 
 	cursor.close()
 	conn.close()
@@ -343,12 +358,14 @@ def main():
 					result = result + addResStats(spawnID, resType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER, forceOp, currentUser, galaxy)
 				else:
 					result = addResPlanet(spawnID, planet, spawnName, currentUser, galaxy)
-					result = result + '  ' + addResStats(spawnID, resType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER, forceOp, currentUser, galaxy)
+					if (result.find("Error:") < 0):
+						result = result + '  ' + addResStats(spawnID, resType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER, forceOp, currentUser, galaxy)
 			else:
 				# new spawn
 				result = addResource(spawnName, galaxy, resType, CR, CD, DR, FL, HR, MA, PE, OQ, SR, UT, ER, currentUser)
-				spawnID = dbShared.getSpawnID(spawnName, galaxy)
-				result = addResPlanet(spawnID, planet, spawnName, currentUser, galaxy) + '  ' + result
+				if (result.find("Error:") < 0):
+					spawnID = dbShared.getSpawnID(spawnName, galaxy)
+					result = addResPlanet(spawnID, planet, spawnName, currentUser, galaxy) + '  ' + result
 
 		else:
 			if logged_state > 0:

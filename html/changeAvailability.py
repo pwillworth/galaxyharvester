@@ -129,6 +129,9 @@ if (logged_state > 0):
 		sqlStr = ""
 		if (spawnID != '' and galaxy != ''):
 			if (dbShared.galaxyState(galaxy) == 1):
+				stats = dbShared.getUserStats(currentUser, galaxy).split(",")
+				admin = dbShared.getUserAdmin(conn, currentUser, galaxy)
+				repVal = ghShared.MIN_REP_VALS['REMOVE_RESOURCE']
 				if (availability == "0"):
 					# mark unavailable on planet(s)
 					if (planets == "all"):
@@ -138,6 +141,7 @@ if (logged_state > 0):
 						sqlStr = "UPDATE tResourcePlanet SET unavailable=NOW(), unavailableBy='" + currentUser + "' WHERE spawnID=" + spawnID + " AND planetID=" + dbShared.dbInsertSafe(planets) + ";"
 						result = "Marked unavailable on " + ghNames.getPlanetName(planets)
 				elif (availability == "1"):
+					repVal = ghShared.MIN_REP_VALS['ADD_RES_PLANET']
 					# mark (re)available on planet
 					cursor.execute("SELECT enteredBy, unavailable FROM tResourcePlanet WHERE spawnID=" + str(spawnID) + " AND planetID=" + str(planets) + ";")
 					row = cursor.fetchone()
@@ -150,11 +154,9 @@ if (logged_state > 0):
 						result = "Marked re-available on " + ghNames.getPlanetName(planets)
 						availability = -1
 
-				# Only allow update if user has positive reputation
-				stats = dbShared.getUserStats(currentUser, galaxy).split(",")
-				admin = dbShared.getUserAdmin(conn, currentUser, galaxy)
-				if (int(stats[2]) < ghShared.MIN_REP_VALS['REMOVE_RESOURCE'] and enteredBy != currentUser) and availability == "0" and not admin:
-					result = "Error: You must earn a little reputation on the site before you can edit resources.  Try adding or verifying some first. \r\n"
+				# Only allow update if user has enough reputation
+				if int(stats[2]) < repVal and (enteredBy != currentUser or availability == "1") and not admin:
+					result = "Error: Your reputation is currently too low to change resource planet availability. \r\n"
 				else:
 					cursor.execute(sqlStr)
 
