@@ -27,6 +27,7 @@ from http import cookies
 import pymysql
 import dbSession
 import dbShared
+import ghShared
 try:
     from PIL import Image
 except ImportError:
@@ -94,6 +95,11 @@ errstr=''
 imgName = img_data.filename
 if (logged_state == 0):
 	errstr = errstr + "You must be logged in to add schematic images. \r\n"
+else:
+	# Only allow update if user has enough reputation
+	stats = dbShared.getUserStats(currentUser, 0).split(",")
+	if int(stats[2]) < ghShared.MIN_REP_VALS['UPDATE_SCHEMATIC_IMAGE']:
+		errstr = "Error: You must earn a little reputation on the site before you can update schematic images.  Try adding or verifying some resources first. \r\n"
 
 if (schematicID == ''):
 	errstr = errstr + "You must specify a schematic upload an image for. \r\n"
