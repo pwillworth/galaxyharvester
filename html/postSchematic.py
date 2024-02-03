@@ -145,11 +145,11 @@ def addSchematicFromLua(conn, skillGroup, luaSchematic, luaObject, galaxy, userI
 			resQuantities = schem["resourceQuantities"].strip('{').strip('}').split(",")
 			resContribution = schem["contribution"].strip('{').strip('}').split(",")
 			# Git rid of whitespace that may be present after items
-			ingredients = map(str.strip, ingredients)
-			ingTypes = map(str.strip, ingTypes)
-			ingObjects = map(str.strip, ingObjects)
-			resQuantities = map(str.strip, resQuantities)
-			resContribution = map(str.strip, resContribution)
+			ingredients = list(map(str.strip, ingredients))
+			ingTypes = list(map(str.strip, ingTypes))
+			ingObjects = list(map(str.strip, ingObjects))
+			resQuantities = list(map(str.strip, resQuantities))
+			resContribution = list(map(str.strip, resContribution))
 		except KeyError:
 			result = '{0}  Could not determine ingredient data from schematic lua file.  Ingredients will need to entered manually or delete schematic, correct lua file, and try again.'.format(result)
 
@@ -175,11 +175,11 @@ def addSchematicFromLua(conn, skillGroup, luaSchematic, luaObject, galaxy, userI
 			expResProps = schem["experimentalProperties"].strip('{').strip('}').split(",")
 			expResWeights = schem["experimentalWeights"].strip('{').strip('}').split(",")
 			# git rid of whitespace that may be present after items
-			expProps = map(str.strip, expProps)
-			expGroups = map(str.strip, expGroups)
-			expCounts = map(str.strip, expCounts)
-			expResProps = map(str.strip, expResProps)
-			expResWeights = map(str.strip, expResWeights)
+			expProps = list(map(str.strip, expProps))
+			expGroups = list(map(str.strip, expGroups))
+			expCounts = list(map(str.strip, expCounts))
+			expResProps = list(map(str.strip, expResProps))
+			expResWeights = list(map(str.strip, expResWeights))
 		except KeyError:
 			result = '{0}  No schematic qualities data could be extracted from the object lua.  Qualities will need to be entered manually or delete schematic, correct lua file and try again.'.format(result)
 
