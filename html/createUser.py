@@ -27,13 +27,11 @@ import re
 from http import cookies
 import hashlib
 import uuid
-import pymysql
 import json
 import urllib
 import requests
 import smtplib
 from email.message import EmailMessage
-import dbSession
 import dbShared
 import ghShared
 sys.path.append("../")
@@ -49,8 +47,8 @@ def getCAPTCHA(token):
     try:
         response = requests.post(ghShared.RECAPTCHA_URL, values)
         cResult = json.loads(response.content)
-        if cResult['success'] and cResult['action'] == 'submitJoin':
-            return cResult['score']
+        if cResult['success'] == True:
+            return 1
         else:
             sys.stderr.write("Captcha failure: {0}\n".format(str(cResult)))
             return -1

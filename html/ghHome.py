@@ -127,7 +127,7 @@ else:
 	galaxyAdmin = 0
 conn.close()
 
-percentOfGoal = totalAmt/28
+percentOfGoal = totalAmt/33
 totalAmt = str(int(totalAmt))
 pictureName = dbShared.getUserAttr(currentUser, 'pictureName')
 print('Content-type: text/html\n')

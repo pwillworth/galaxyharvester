@@ -270,8 +270,7 @@ if (errstr == "" or (forceOp == "verify" and wpID != None and wpID.isdigit())):
 						cursor.close()
 
 					if owner == '':
-                                                result = addWaypoint(spawnID, planet, price, int(concentration), lattitude, longitude, wpName, shareLevel)
-
+						result = addWaypoint(spawnID, planet, price, int(concentration), lattitude, longitude, wpName, shareLevel)
 					else:
 						result = "Error: That public waypoint has already been entered by " + owner
 				else:
