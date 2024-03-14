@@ -36,7 +36,7 @@ outType = dbShared.dbInsertSafe(outType)
 print('Content-type: text/html\n')
 
 if len(craftingTab) > 0:
-	criteriaStr = ' AND craftingTab = {0}'.format(craftingTab)
+	criteriaStr = ' AND tSchematic.craftingTab = {0}'.format(craftingTab)
 else:
 	criteriaStr = ''
 
@@ -47,10 +47,12 @@ if (cursor):
 	SELECT tSchematic.schematicID, schematicName, objectPath, imageName
 	FROM tSchematic
 	  LEFT JOIN (SELECT schematicID, imageName FROM tSchematicImages WHERE imageType = 1) tsi ON tSchematic.schematicID = tsi.schematicID
+	  LEFT JOIN tObjectType ON tObjectType.objectType = tSchematic.objectType
 	WHERE (
 		objectPath IN(SELECT ingredientObject FROM tSchematicIngredients WHERE ingredientType > 0)
 	  OR objectGroup LIKE "%component%"
-	  OR objectType = 262144
+	  OR tObjectType.typeName LIKE "%component%"
+	  OR tSchematic.objectType = 262144
 	) {criteriaStr}
 	ORDER BY schematicName;
 	"""
