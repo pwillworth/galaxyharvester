@@ -46,13 +46,13 @@ if (cursor):
 	queryStr = f"""
 	SELECT tSchematic.schematicID, schematicName, objectPath, imageName
 	FROM tSchematic
-	  LEFT JOIN (SELECT schematicID, imageName FROM tSchematicImages WHERE imageType = 1) tsi ON tSchematic.schematicID = tsi.schematicID
-	  LEFT JOIN tObjectType ON tObjectType.objectType = tSchematic.objectType
+	LEFT JOIN (SELECT schematicID, imageName FROM tSchematicImages WHERE imageType = 1) tsi ON tSchematic.schematicID = tsi.schematicID
+	LEFT JOIN tObjectType ON tObjectType.objectType = tSchematic.objectType
 	WHERE (
 		objectPath IN(SELECT ingredientObject FROM tSchematicIngredients WHERE ingredientType > 0)
-	  OR objectGroup LIKE "%component%"
-	  OR tObjectType.typeName LIKE "%component%"
-	  OR tSchematic.objectType = 262144
+		OR objectGroup LIKE "%component%"
+		OR tObjectType.typeName LIKE "%component%"
+		OR tSchematic.objectType = 262144
 	) {criteriaStr}
 	ORDER BY schematicName;
 	"""
