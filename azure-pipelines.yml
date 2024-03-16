@@ -10,10 +10,10 @@ jobs:
     vmImage: 'ubuntu-22.04'
   strategy:
     matrix:
-      Python36:
-        python.version: '3.6'
-      Python38:
-        python.version: '3.8'
+      Python-3.7:
+        python.version: '3.7'
+      Python-3.10:
+        python.version: '3.10'
     maxParallel: 2
 
   steps:
