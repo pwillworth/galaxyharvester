@@ -90,7 +90,7 @@ class resourceSpawn:
 		result += '</ul>'
 		return result
 
-	def getHTML(self, formatStyle, resBoxMargin, currentUser, reputation, admin):
+	def getHTML(self, formatStyle, resBoxMargin, currentUser, reputation, admin, statsMatter = True):
 		result = ''
 		unPlanetStr = ",'all'"
 		statHeads = ""
@@ -108,126 +108,128 @@ class resourceSpawn:
 			# other is compact style
 			resBoxStyle = ""
 
-		# prepare stat value table contents
-		if (self.percentStats.ER != None or formatStyle == 0):
-			statHeads = statHeads + "<td class='header'><span>ER</span></td>"
-			if (self.stats.ER != None and self.percentStats.ER != None):
-				statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.ER)+"'><span>" + str(self.stats.ER) + "<br />(" + ("%.0f" % float(self.percentStats.ER)) + "%)</span></td>"
-				copyVals = copyVals + "ER " + str(self.stats.ER) + " "
-			elif (self.percentStats.ER != None):
-				statVals = statVals + "<td>?</td>"
-			else:
-				statVals = statVals + "<td></td>"
+		if statsMatter:
+			# prepare stat value table contents
+			if (self.percentStats.ER != None or formatStyle == 0):
+				statHeads = statHeads + "<td class='header'><span>ER</span></td>"
+				if (self.stats.ER != None and self.percentStats.ER != None):
+					statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.ER)+"'><span>" + str(self.stats.ER) + "<br />(" + ("%.0f" % float(self.percentStats.ER)) + "%)</span></td>"
+					copyVals = copyVals + "ER " + str(self.stats.ER) + " "
+				elif (self.percentStats.ER != None):
+					statVals = statVals + "<td>?</td>"
+				else:
+					statVals = statVals + "<td></td>"
 
-		if (self.percentStats.CR != None or formatStyle == 0):
-			statHeads = statHeads + "<td class='header'><span>CR</span></td>"
-			if (self.stats.CR != None and self.percentStats.CR != None):
-				statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.CR)+"'><span>" + str(self.stats.CR) + "<br />(" + ("%.0f" % float(self.percentStats.CR)) + "%)</span></td>"
-				copyVals = copyVals + "CR " + str(self.stats.CR) + " "
-			elif (self.percentStats.CR != None):
-				statVals = statVals + "<td>?</td>"
-			else:
-				statVals = statVals + "<td></td>"
+			if (self.percentStats.CR != None or formatStyle == 0):
+				statHeads = statHeads + "<td class='header'><span>CR</span></td>"
+				if (self.stats.CR != None and self.percentStats.CR != None):
+					statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.CR)+"'><span>" + str(self.stats.CR) + "<br />(" + ("%.0f" % float(self.percentStats.CR)) + "%)</span></td>"
+					copyVals = copyVals + "CR " + str(self.stats.CR) + " "
+				elif (self.percentStats.CR != None):
+					statVals = statVals + "<td>?</td>"
+				else:
+					statVals = statVals + "<td></td>"
 
-		if (self.percentStats.CD != None or formatStyle == 0):
-			statHeads = statHeads + "<td class='header'><span>CD</span></td>"
-			if (self.stats.CD != None and self.percentStats.CD != None):
-				statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.CD)+"'><span>" + str(self.stats.CD) + "<br />(" + ("%.0f" % float(self.percentStats.CD)) + "%)</span></td>"
-				copyVals = copyVals + "CD " + str(self.stats.CD) + " "
-			elif (self.percentStats.CD != None):
-				statVals = statVals + "<td>?</td>"
-			else:
-				statVals = statVals + "<td></td>"
+			if (self.percentStats.CD != None or formatStyle == 0):
+				statHeads = statHeads + "<td class='header'><span>CD</span></td>"
+				if (self.stats.CD != None and self.percentStats.CD != None):
+					statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.CD)+"'><span>" + str(self.stats.CD) + "<br />(" + ("%.0f" % float(self.percentStats.CD)) + "%)</span></td>"
+					copyVals = copyVals + "CD " + str(self.stats.CD) + " "
+				elif (self.percentStats.CD != None):
+					statVals = statVals + "<td>?</td>"
+				else:
+					statVals = statVals + "<td></td>"
 
-		if (self.percentStats.DR != None or formatStyle == 0):
-			statHeads = statHeads + "<td class='header'><span>DR</span></td>"
-			if (self.stats.DR != None and self.percentStats.DR != None):
-				statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.DR)+"'><span>" + str(self.stats.DR) + "<br />(" + ("%.0f" % float(self.percentStats.DR)) + "%)</span></td>"
-				copyVals = copyVals + "DR " + str(self.stats.DR) + " "
-			elif (self.percentStats.DR != None):
-				statVals = statVals + "<td>?</td>"
-			else:
-				statVals = statVals + "<td></td>"
+			if (self.percentStats.DR != None or formatStyle == 0):
+				statHeads = statHeads + "<td class='header'><span>DR</span></td>"
+				if (self.stats.DR != None and self.percentStats.DR != None):
+					statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.DR)+"'><span>" + str(self.stats.DR) + "<br />(" + ("%.0f" % float(self.percentStats.DR)) + "%)</span></td>"
+					copyVals = copyVals + "DR " + str(self.stats.DR) + " "
+				elif (self.percentStats.DR != None):
+					statVals = statVals + "<td>?</td>"
+				else:
+					statVals = statVals + "<td></td>"
 
-		if (self.percentStats.FL != None or formatStyle == 0):
-			statHeads = statHeads + "<td class='header'><span>FL</span></td>"
-			if (self.stats.FL != None and self.percentStats.FL != None):
-				statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.FL)+"'><span>" + str(self.stats.FL) + "<br />(" + ("%.0f" % float(self.percentStats.FL)) + "%)</span></td>"
-				copyVals = copyVals + "FL " + str(self.stats.FL) + " "
-			elif (self.percentStats.FL != None):
-				statVals = statVals + "<td>?</td>"
-			else:
-				statVals = statVals + "<td></td>"
+			if (self.percentStats.FL != None or formatStyle == 0):
+				statHeads = statHeads + "<td class='header'><span>FL</span></td>"
+				if (self.stats.FL != None and self.percentStats.FL != None):
+					statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.FL)+"'><span>" + str(self.stats.FL) + "<br />(" + ("%.0f" % float(self.percentStats.FL)) + "%)</span></td>"
+					copyVals = copyVals + "FL " + str(self.stats.FL) + " "
+				elif (self.percentStats.FL != None):
+					statVals = statVals + "<td>?</td>"
+				else:
+					statVals = statVals + "<td></td>"
 
-		if (self.percentStats.HR != None or formatStyle == 0):
-			statHeads = statHeads + "<td class='header'><span>HR</span></td>"
-			if (self.stats.HR != None and self.percentStats.HR != None):
-				statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.HR)+"'><span>" + str(self.stats.HR) + "<br />(" + ("%.0f" % float(self.percentStats.HR)) + "%)</span></td>"
-				copyVals = copyVals + "HR " + str(self.stats.HR) + " "
-			elif (self.percentStats.HR != None):
-				statVals = statVals + "<td>?</td>"
-			else:
-				statVals = statVals + "<td></td>"
+			if (self.percentStats.HR != None or formatStyle == 0):
+				statHeads = statHeads + "<td class='header'><span>HR</span></td>"
+				if (self.stats.HR != None and self.percentStats.HR != None):
+					statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.HR)+"'><span>" + str(self.stats.HR) + "<br />(" + ("%.0f" % float(self.percentStats.HR)) + "%)</span></td>"
+					copyVals = copyVals + "HR " + str(self.stats.HR) + " "
+				elif (self.percentStats.HR != None):
+					statVals = statVals + "<td>?</td>"
+				else:
+					statVals = statVals + "<td></td>"
 
-		if (self.percentStats.MA != None or formatStyle == 0):
-			statHeads = statHeads + "<td class='header'><span>MA</span></td>"
-			if (self.stats.MA != None and self.percentStats.MA != None):
-				statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.MA)+"'><span>" + str(self.stats.MA) + "<br />(" + ("%.0f" % float(self.percentStats.MA)) + "%)</span></td>"
-				copyVals = copyVals + "MA " + str(self.stats.MA) + " "
-			elif (self.percentStats.MA != None):
-				statVals = statVals + "<td>?</td>"
-			else:
-				statVals = statVals + "<td></td>"
+			if (self.percentStats.MA != None or formatStyle == 0):
+				statHeads = statHeads + "<td class='header'><span>MA</span></td>"
+				if (self.stats.MA != None and self.percentStats.MA != None):
+					statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.MA)+"'><span>" + str(self.stats.MA) + "<br />(" + ("%.0f" % float(self.percentStats.MA)) + "%)</span></td>"
+					copyVals = copyVals + "MA " + str(self.stats.MA) + " "
+				elif (self.percentStats.MA != None):
+					statVals = statVals + "<td>?</td>"
+				else:
+					statVals = statVals + "<td></td>"
 
-		if (self.percentStats.PE != None or formatStyle == 0):
-			statHeads = statHeads + "<td class='header'><span>PE</span></td>"
-			if (self.stats.PE != None and self.percentStats.PE != None):
-				statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.PE)+"'><span>" + str(self.stats.PE) + "<br />(" + ("%.0f" % float(self.percentStats.PE)) + "%)</span></td>"
-				copyVals = copyVals + "PE " + str(self.stats.PE) + " "
-			elif (self.percentStats.PE != None):
-				statVals = statVals + "<td>?</td>"
-			else:
-				statVals = statVals + "<td></td>"
+			if (self.percentStats.PE != None or formatStyle == 0):
+				statHeads = statHeads + "<td class='header'><span>PE</span></td>"
+				if (self.stats.PE != None and self.percentStats.PE != None):
+					statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.PE)+"'><span>" + str(self.stats.PE) + "<br />(" + ("%.0f" % float(self.percentStats.PE)) + "%)</span></td>"
+					copyVals = copyVals + "PE " + str(self.stats.PE) + " "
+				elif (self.percentStats.PE != None):
+					statVals = statVals + "<td>?</td>"
+				else:
+					statVals = statVals + "<td></td>"
 
-		if (self.percentStats.OQ != None or formatStyle == 0):
-			statHeads = statHeads + "<td class='header'><span>OQ</span></td>"
-			if (self.stats.OQ != None and self.percentStats.OQ != None):
-				statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.OQ)+"'><span>" + str(self.stats.OQ) + "<br />(" + ("%.0f" % float(self.percentStats.OQ)) + "%)</span></td>"
-				copyVals = copyVals + "OQ " + str(self.stats.OQ) + " "
-			elif (self.percentStats.OQ != None):
-				statVals = statVals + "<td>?</td>"
-			else:
-				statVals = statVals + "<td></td>"
+			if (self.percentStats.OQ != None or formatStyle == 0):
+				statHeads = statHeads + "<td class='header'><span>OQ</span></td>"
+				if (self.stats.OQ != None and self.percentStats.OQ != None):
+					statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.OQ)+"'><span>" + str(self.stats.OQ) + "<br />(" + ("%.0f" % float(self.percentStats.OQ)) + "%)</span></td>"
+					copyVals = copyVals + "OQ " + str(self.stats.OQ) + " "
+				elif (self.percentStats.OQ != None):
+					statVals = statVals + "<td>?</td>"
+				else:
+					statVals = statVals + "<td></td>"
 
-		if (self.percentStats.SR != None or formatStyle == 0):
-			statHeads = statHeads + "<td class='header'><span>SR</span></td>"
-			if (self.stats.SR != None and self.percentStats.SR != None):
-				statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.SR)+"'><span>" + str(self.stats.SR) + "<br />(" + ("%.0f" % float(self.percentStats.SR)) + "%)</span></td>"
-				copyVals = copyVals + "SR " + str(self.stats.SR) + " "
-			elif (self.percentStats.SR != None):
-				statVals = statVals + "<td>?</td>"
-			else:
-				statVals = statVals + "<td></td>"
+			if (self.percentStats.SR != None or formatStyle == 0):
+				statHeads = statHeads + "<td class='header'><span>SR</span></td>"
+				if (self.stats.SR != None and self.percentStats.SR != None):
+					statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.SR)+"'><span>" + str(self.stats.SR) + "<br />(" + ("%.0f" % float(self.percentStats.SR)) + "%)</span></td>"
+					copyVals = copyVals + "SR " + str(self.stats.SR) + " "
+				elif (self.percentStats.SR != None):
+					statVals = statVals + "<td>?</td>"
+				else:
+					statVals = statVals + "<td></td>"
 
-		if (self.percentStats.UT != None or formatStyle == 0):
-			statHeads = statHeads + "<td class='header'><span>UT</span></td>"
-			if (self.stats.UT != None and self.percentStats.UT != None):
-				statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.UT)+"'><span>" + str(self.stats.UT) + "<br />(" + ("%.0f" % float(self.percentStats.UT)) + "%)</span></td>"
-				copyVals = copyVals + "UT " + str(self.stats.UT)
-			elif (self.percentStats.UT != None):
-				statVals = statVals + "<td>?</td>"
-			else:
-				statVals = statVals + "<td></td>"
-
+			if (self.percentStats.UT != None or formatStyle == 0):
+				statHeads = statHeads + "<td class='header'><span>UT</span></td>"
+				if (self.stats.UT != None and self.percentStats.UT != None):
+					statVals = statVals + "<td class='"+ghShared.percOfRangeColor(self.percentStats.UT)+"'><span>" + str(self.stats.UT) + "<br />(" + ("%.0f" % float(self.percentStats.UT)) + "%)</span></td>"
+					copyVals = copyVals + "UT " + str(self.stats.UT)
+				elif (self.percentStats.UT != None):
+					statVals = statVals + "<td>?</td>"
+				else:
+					statVals = statVals + "<td></td>"
+		else:
+			statVals = '<div class="irrStats">Stats do not matter</div>'
 		# construct resource container
-		if self.overallScore != None and self.overallScore > 0:
+		if statsMatter and self.overallScore != None and self.overallScore > 0:
 			titleStr = ' title="' + str("%.0f" % (float(self.overallScore))) + '"'
 		if formatStyle == 2:
 			result += '  <div id="cont_'+self.spawnName+'" class="boxBorderHidden" style="' + resBoxStyle + '"' + titleStr + ' onmouseover="$(this).removeClass(\'boxBorderHidden\');$(this).addClass(\'listSelected\');" onmouseout="$(this).removeClass(\'listSelected\');$(this).addClass(\'boxBorderHidden\');">'
 		else:
 			result += '  <div id="cont_'+self.spawnName+'" class="resourceBox" style="' + resBoxStyle + '"' + titleStr + '>'
 
-		if self.overallScore != None and self.overallScore > 0:
+		if statsMatter and self.overallScore != None and self.overallScore > 0:
 			result += '  <div class="compareInfo"><span>Quality: ' + str("%.0f" % (float(self.overallScore))) + '</span></div>'
 		# resource title row
 		if formatStyle == 0:
