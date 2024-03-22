@@ -9,6 +9,11 @@ services:
       dockerfile: ./Dockerfile
     links:
       - "db"
+    develop:
+      watch:
+        - action: sync
+          path: ./html
+          target: /var/www/html
   db:
     container_name: galaxyharvester-db
     image: mysql:5.7.11
