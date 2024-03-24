@@ -54,7 +54,7 @@ def getResourceSQL(maxCheckStr, favCols, joinStr, galaxy, resGroup, obyStr, obyS
 	sqlStr1 += ';'
 	return sqlStr1
 
-def getResourceData(conn, resSQL, logged_state, galaxyState, resourceFormat, reputation):
+def getResourceData(conn, resSQL, logged_state, galaxyState, resourceFormat, reputation, statsMatter):
 	# get resource data for given criteria
 	resourceHTML = '<table width="100%" class=resourceStats>'
 	cursor = conn.cursor()
@@ -64,65 +64,62 @@ def getResourceData(conn, resSQL, logged_state, galaxyState, resourceFormat, rep
 		row = cursor.fetchone()
 		# check first row to see if all quality stats do not belong to resource type
 		if (row != None):
-			if (row[35] == 0):
-				resourceHTML += '<tr><td>Stats do not matter</td></tr>'
-			else:
-				# print resource rows if stats matter
-				while (row != None):
-					s = ghObjects.resourceSpawn()
-					s.spawnID = row[0]
-					s.spawnName = row[1]
-					s.spawnGalaxy = row[2]
-					s.resourceType = row[5]
-					s.resourceTypeName = row[6]
-					s.containerType = row[30]
-					s.stats.CR = row[8]
-					s.stats.CD = row[9]
-					s.stats.DR = row[10]
-					s.stats.FL = row[11]
-					s.stats.HR = row[12]
-					s.stats.MA = row[13]
-					s.stats.PE = row[14]
-					s.stats.OQ = row[15]
-					s.stats.SR = row[16]
-					s.stats.UT = row[17]
-					s.stats.ER = row[18]
+			# print resource rows if stats matter
+			while (row != None):
+				s = ghObjects.resourceSpawn()
+				s.spawnID = row[0]
+				s.spawnName = row[1]
+				s.spawnGalaxy = row[2]
+				s.resourceType = row[5]
+				s.resourceTypeName = row[6]
+				s.containerType = row[30]
+				s.stats.CR = row[8]
+				s.stats.CD = row[9]
+				s.stats.DR = row[10]
+				s.stats.FL = row[11]
+				s.stats.HR = row[12]
+				s.stats.MA = row[13]
+				s.stats.PE = row[14]
+				s.stats.OQ = row[15]
+				s.stats.SR = row[16]
+				s.stats.UT = row[17]
+				s.stats.ER = row[18]
 
-					s.percentStats.CR = row[19]
-					s.percentStats.CD = row[20]
-					s.percentStats.DR = row[21]
-					s.percentStats.FL = row[22]
-					s.percentStats.HR = row[23]
-					s.percentStats.MA = row[24]
-					s.percentStats.PE = row[25]
-					s.percentStats.OQ = row[26]
-					s.percentStats.SR = row[27]
-					s.percentStats.UT = row[28]
-					s.percentStats.ER = row[29]
+				s.percentStats.CR = row[19]
+				s.percentStats.CD = row[20]
+				s.percentStats.DR = row[21]
+				s.percentStats.FL = row[22]
+				s.percentStats.HR = row[23]
+				s.percentStats.MA = row[24]
+				s.percentStats.PE = row[25]
+				s.percentStats.OQ = row[26]
+				s.percentStats.SR = row[27]
+				s.percentStats.UT = row[28]
+				s.percentStats.ER = row[29]
 
-					s.entered = row[3]
-					s.enteredBy = row[4]
-					s.verified = row[31]
-					s.verifiedBy = row[32]
-					s.unavailable = row[33]
-					s.unavailableBy = row[34]
-					if row[36] != None:
-						s.favorite = 1
-						s.favGroup = row[36]
-					if row[37] != None:
-						s.units = row[37]
-					if row[38] != None:
-						s.overallScore = row[38]*1000
-					s.planets = dbShared.getSpawnPlanets(conn, row[0], True, row[2])
+				s.entered = row[3]
+				s.enteredBy = row[4]
+				s.verified = row[31]
+				s.verifiedBy = row[32]
+				s.unavailable = row[33]
+				s.unavailableBy = row[34]
+				if row[36] != None:
+					s.favorite = 1
+					s.favGroup = row[36]
+				if row[37] != None:
+					s.units = row[37]
+				if row[38] != None:
+					s.overallScore = row[38]*1000
+				s.planets = dbShared.getSpawnPlanets(conn, row[0], True, row[2])
 
-					resourceHTML += '  <tr><td>'
-					if logged_state > 0 and galaxyState == 1:
-						controlsUser = currentUser
-					else:
-						controlsUser = ''
-					resourceHTML += s.getHTML(resourceFormat, "", controlsUser, reputation, dbShared.getUserAdmin(conn, currentUser, galaxy))
-					resourceHTML += '  </td></tr>'
-					row = cursor.fetchone()
+				resourceHTML += '  <tr><td>'
+				if logged_state > 0 and galaxyState == 1:
+					controlsUser = currentUser
+				else:
+					controlsUser = ''
+				resourceHTML += s.getHTML(resourceFormat, "", controlsUser, reputation, dbShared.getUserAdmin(conn, currentUser, galaxy), statsMatter)
+				resourceHTML += '  </td></tr>'
+				row = cursor.fetchone()
 		else:
 			resourceHTML += '<tr><td>Not Available</td></tr>'
 		cursor.close()
@@ -261,26 +258,30 @@ else:
 				obyStr = obyStr[1:]
 				obyStr2 = obyStr2[1:]
 				maxCheckStr = maxCheckStr[1:]
-				resourceFormat = 0
-				if compare == 'undefined' or logged_state == 0:
-					resSQL = getResourceSQL(maxCheckStr, favCols, joinStr, galaxy, resGroup, obyStr, obyStr2, '')
-					print(getResourceData(conn, resSQL, logged_state, galaxyState, resourceFormat, userReputation))
-				else:
-					# Include side by side comparison of inventory
-					resourceFormat = 1
-					print('<div class="resourceCompareGroup">')
-					print('<div class="inlineBlock" style="width:50%">')
-					print('<h4>Galaxy</h4>')
-					resSQL = getResourceSQL(maxCheckStr, favCols, joinStr, galaxy, resGroup, obyStr, obyStr2, '')
-					print(getResourceData(conn, resSQL, logged_state, galaxyState, resourceFormat, userReputation))
-					print('</div><div class="inlineBlock" style="width:50%">')
-					print('<h4>My Inventory</h4>')
-					resSQL = getResourceSQL(maxCheckStr, favCols, joinStr, galaxy, resGroup, obyStr, obyStr2, 'y')
-					print(getResourceData(conn, resSQL, logged_state, galaxyState, resourceFormat, userReputation))
-					print('</div></div>')
+				statsMatter = True
 			else:
-				# no ingredient quality stats
-				print('<div>Stats do not matter</div>')
+				obyStr = '1'
+				obyStr2 = '1'
+				maxCheckStr = '1'
+				statsMatter = False
+
+			if compare == 'undefined' or logged_state == 0:
+				resourceFormat = 0
+				resSQL = getResourceSQL(maxCheckStr, favCols, joinStr, galaxy, resGroup, obyStr, obyStr2, '')
+				print(getResourceData(conn, resSQL, logged_state, galaxyState, resourceFormat, userReputation, statsMatter))
+			else:
+				# Include side by side comparison of inventory
+				resourceFormat = 1
+				print('<div class="resourceCompareGroup">')
+				print('<div class="inlineBlock" style="width:50%">')
+				print('<h4>Galaxy</h4>')
+				resSQL = getResourceSQL(maxCheckStr, favCols, joinStr, galaxy, resGroup, obyStr, obyStr2, '')
+				print(getResourceData(conn, resSQL, logged_state, galaxyState, resourceFormat, userReputation, statsMatter))
+				print('</div><div class="inlineBlock" style="width:50%">')
+				print('<h4>My Inventory</h4>')
+				resSQL = getResourceSQL(maxCheckStr, favCols, joinStr, galaxy, resGroup, obyStr, obyStr2, 'y')
+				print(getResourceData(conn, resSQL, logged_state, galaxyState, resourceFormat, userReputation, statsMatter))
+				print('</div></div>')
 			ingRow = ingCursor.fetchone()
 		ingCursor.close()
 	conn.close()

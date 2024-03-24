@@ -856,6 +856,12 @@ div.blockUserItem img {
 	margin: 4px;
 }
 
+body .irrStats {
+	padding-top: 16px;
+	font-size: 12px;
+	font-style: italic;
+}
+
 .lds-ripple {
 	display: inline-block;
 	position: relative;
