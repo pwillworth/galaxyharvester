@@ -13,6 +13,10 @@ The following software must be set up on the server prior to setting up Galaxy H
  * module: Pillow (8.0)
 
 ### Web Server Configuration:
+
+> **Want to use Docker?**
+> See: [Docker instructions (experimental)](#docker).
+
 The web server being used must be configured to serve the Python based CGI scripts as follows
 
 * Set "html" folder of this repo as web site root (for apache2 update DocumentRoot in /etc/apache2/sites-enabled/000-default.conf)
@@ -63,3 +67,13 @@ Galaxy Harvester seed data includes creature and schematic data that is automati
 
 ### Presentation Templates
 In most cases, Galaxy Harvester uses the [Jinja2](http://jinja.pocoo.org/) template engine to render any html to the user.  The html folder contains various scripts, some of which are called by AJAX from an already rendered page, and some of which render one of the templates under html/templates.  The blocks.html template is not rendered directly but has various blocks like headers and footers that are imported by the other templates.
+
+### Docker
+
+> **This is currently experimental.**
+
+To run a development environment using Docker, including the app server and MySQL server, you can run:
+
+```bash
+docker-compose up --build
+```

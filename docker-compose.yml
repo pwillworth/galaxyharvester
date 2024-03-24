@@ -1,0 +1,34 @@
+version: "3"
+name: galaxyharvester
+services:
+  app:
+    container_name: galaxyharvester-app
+    ports:
+      - "8888:80"
+    build:
+      dockerfile: ./Dockerfile
+    links:
+      - "db"
+    develop:
+      watch:
+        - action: sync
+          path: ./html
+          target: /var/www/html
+  db:
+    container_name: galaxyharvester-db
+    image: mysql:5.7.11
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3305:3306'
+    expose:
+      - '3306'
+    volumes:
+      - ./.docker/docker-entrypoint-initdb.d/00-create-webusr-users.sql:/docker-entrypoint-initdb.d/00-create-webusr-users.sql
+      - ./database/createSWGresourcedb.sql:/docker-entrypoint-initdb.d/01-create-database.sql
+      - ./.docker/docker-entrypoint-initdb.d/02-grant-webusr-global.sql:/docker-entrypoint-initdb.d/02-grant-webusr-global.sql
+      - ./database/seedData:/var/www/database/seedData
+      - db:/var/lib/mysql
+volumes:
+  db:
