@@ -65,13 +65,13 @@ function addFilterRow(tableName, numset) {
     if (numset == null) {
         numset = rownum;
     }
-    if (true) {
-      var typeGroupBox = "typeGroupSel" + numset;
-      var qualityRow = "";
-      if ( tableName.includes("Quality") ) {
+
+    var typeGroupBox = "typeGroupSel" + numset;
+    var qualityRow = "";
+    if ( tableName.includes("Quality") ) {
         qualityRow = "<td align='center'><input type='text' size=4 maxlength=4 id='minQuality"+numset+"' name='minQuality"+numset+"'></td>";
-      }
-      $("#"+tableName).append("<tr height=16px valign=middle id='resRow"+numset+"' class='filterRow'><td><input type='radio' name='oResTG"+numset+"' id='oType"+numset+"' value='ByType' checked='checked' onclick='setTGlist("+numset+")' />Type<input type='radio' name='oResTG"+numset+"' id='oGroup"+numset+"' value='ByGroup' onclick='setTGlist("+numset+")' />Group</td>"+
+    }
+    $("#"+tableName).append("<tr height=16px valign=middle id='resRow"+numset+"' class='filterRow'><td><input type='radio' name='oResTG"+numset+"' id='oType"+numset+"' value='ByType' checked='checked' onclick='setTGlist("+numset+")' />Type<input type='radio' name='oResTG"+numset+"' id='oGroup"+numset+"' value='ByGroup' onclick='setTGlist("+numset+")' />Group</td>"+
         "<td><select name='"+typeGroupBox+"' id='"+typeGroupBox+"' style='width:200px;' onchange='maskStats(this);'></select></td>"+
         "<td><input type='text' size=2 maxlength=4 id='ER"+numset+"' name='ER"+numset+"'></td>"+
         "<td><input type='text' size=2 maxlength=4 id='CR"+numset+"' name='CR"+numset+"'></td>"+
@@ -91,8 +91,7 @@ function addFilterRow(tableName, numset) {
         "<td><img src='/images/xRed16.png' alt='red x' title='Remove this row' style='cursor:pointer' onclick='removeRow("+numset+")'/></td>"+
         "<td style='padding-left:6px;'><input id='fltGroup"+numset+"' type='text' size=14 maxlength=255></input></td>"+
         "</tr>");
-      rownum = numset + 1;
-    }
+    rownum = numset + 1;
 
     return numset;
 }
