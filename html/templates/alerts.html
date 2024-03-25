@@ -93,6 +93,8 @@ function addFilterRow(tableName, numset) {
         "</tr>");
       rownum = numset + 1;
     }
+
+    return numset;
 }
 
 function maskStats(typeSel) {
@@ -215,13 +217,13 @@ function maskStats(typeSel) {
       <tr class="tableHead"><td colspan=2 style="text-align:center;">Resource Types</td><td colspan=11 style="font-weight:bold;text-align:center;">Stat % Weights</td><td>Min Quality</td><td colspan=3 style="font-weight:bold;text-align:center;">Alert Types</td></tr>
       <tr><td>Res. Option</td><td>Resource</td><td>ER</td><td>CR</td><td>CD</td><td>DR</td><td>FL</td><td>HR</td><td>MA</td><td>PE</td><td>OQ</td><td>SR</td><td>UT</td><td align="center">Value</td><td width="40" align="center">Site</td><td width="40" align="center">E-Mail</td><td width="40" align="center">Mobile</td><td></td><td style='padding-lef:8px;'>Group/Note</td></tr>
       </thead></table>
-      <img src="/images/plusGreen32.png" alt="plus sign" title="Add another quality filter definition row" onclick="addFilterRow('addQualityAlertTable');setTGlist();" style="cursor:pointer;margin-right:120px;"/>
+      <img src="/images/plusGreen32.png" alt="plus sign" title="Add another quality filter definition row" onclick="setTGlist(addFilterRow('addQualityAlertTable'));" style="cursor:pointer;margin-right:120px;"/>
       <h3>Raw Stat Value Triggered</h3>
       <table id="addAlertTable"><thead>
       <tr class="tableHead"><td colspan=2 style="text-align:center;">Resource Types</td><td colspan=11 style="font-weight:bold;text-align:center;">Minimum Stat Values</td><td colspan=3 style="font-weight:bold;text-align:center;">Alert Types</td></tr>
       <tr><td>Res. Option</td><td>Resource</td><td>ER</td><td>CR</td><td>CD</td><td>DR</td><td>FL</td><td>HR</td><td>MA</td><td>PE</td><td>OQ</td><td>SR</td><td>UT</td><td width="40" align="center">Site</td><td width="40" align="center">E-Mail</td><td width="40" align="center">Mobile</td><td></td><td style='padding-lef:8px;'>Group/Note</td></tr>
       </thead></table>
-      <img src="/images/plusGreen32.png" alt="plus sign" title="Add another filter definition row" onclick="addFilterRow('addAlertTable');setTGlist();" style="cursor:pointer;margin-right:120px;"/>
+      <img src="/images/plusGreen32.png" alt="plus sign" title="Add another filter definition row" onclick="setTGlist(addFilterRow('addAlertTable'));" style="cursor:pointer;margin-right:120px;"/>
       <div id="sendResponse" style="display:none;"></div>
       </form>
     </div>
