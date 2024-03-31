@@ -29,6 +29,7 @@ form = cgi.FieldStorage()
 
 craftingTab = form.getfirst('craftingTab', '')
 outType = form.getfirst('outType', '')
+galaxy = form.getfirst('galaxy', '')
 # escape input to prevent sql injection
 craftingTab = dbShared.dbInsertSafe(craftingTab)
 outType = dbShared.dbInsertSafe(outType)
@@ -41,6 +42,18 @@ else:
 	criteriaStr = ''
 
 conn = dbShared.ghConn()
+
+if galaxy.isdigit():
+	baseProfs = '0, 1337'
+	checkCursor = conn.cursor()
+	if (checkCursor):
+		checkCursor.execute('SELECT galaxyNGE FROM tGalaxy WHERE galaxyID={0};'.format(str(galaxy)))
+		checkRow = checkCursor.fetchone()
+		if (checkRow != None) and (checkRow[0] > 0):
+			baseProfs = '-1, 1337'
+		checkCursor.close()
+	criteriaStr = criteriaStr + ' AND tSchematic.galaxy IN ({1}, {0}) AND tSchematic.schematicID NOT IN (SELECT schematicID FROM tSchematicOverrides WHERE galaxyID={0})'.format(galaxy, baseProfs)
+
 cursor = conn.cursor()
 if (cursor):
 	queryStr = f"""
