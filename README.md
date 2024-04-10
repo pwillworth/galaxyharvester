@@ -77,3 +77,13 @@ To run a development environment using Docker, including the app server and MySQ
 ```bash
 docker-compose up --build
 ```
+
+#### Hot Reloading
+
+If you want to automatically update and preview your running services as you edit and save your code, you can start the services using:
+
+```bash
+docker-compose watch
+```
+
+> Note: after exiting from `watch`, you may need to run `docker compose stop` to stop the services.
