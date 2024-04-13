@@ -204,9 +204,9 @@ function maskStats(typeSel) {
   </div>
   <div style="width:68%;" class="ghCol">
     <div id="addAlertsBox" class="ghWidgetBox">
-    <form name="fsetfilts" id="fsetfilts" onsubmit="return updateAlerts()">
+    <form name="fsetfilts" id="fsetfilts">
     <div class="boxHeader">My Resource Spawn Alerts
-      <button type="button" id="sendData" class="ghButton"{{ disableStr }} onclick="updateAlerts()" style="float:right;">Update Alerts</button>
+      <button type="button" id="sendData" class="ghButton"{{ disableStr }} onclick="updateAlerts('{{ linkappend }}')" style="float:right;">Update Alerts</button>
     </div>
     <span id="sentMessage"></span>
     <div id="alertData" style="margin-top:12px;">
