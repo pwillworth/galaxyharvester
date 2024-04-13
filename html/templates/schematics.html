@@ -305,6 +305,11 @@ function deleteSchematic() {
 {% endif %}
 
 {% if (schematicID != '' and schematicID != 'index' and schematicID != 'home') %}
+    {% if schematic.schematicID and schematic.galaxy != 0 and schematic.galaxy|string != selectedGalaxy %}
+    <div class="standOut" style="padding: 10px !important">
+        You're viewing a schematic for a different galaxy. Some ingredients may not exist your selected galaxy.
+    </div>
+    {% endif %}
     <h2>{{ schematic.schematicName }}
     {% if loggedin == 1 %}
         {{ favHTML }}

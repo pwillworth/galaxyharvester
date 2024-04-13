@@ -374,6 +374,7 @@ def main():
 		schematic=s,
 		schematicID=schematicID,
 		schematicTabList=ghLists.getSchematicTabList(),
+		selectedGalaxy=galaxy,
 		siteidCAPTCHA=ghShared.RECAPTCHA_SITEID,
 		statList=ghLists.getStatList(),
 		uiTheme=uiTheme,
