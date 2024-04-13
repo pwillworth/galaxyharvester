@@ -62,9 +62,41 @@ def getQualityData(conn, schematicID):
 	return qualityData
 
 # Get a list item for a component ingredient
-def getComponentLink(cn, objectPath, ingredientType):
+def getComponentLink(cn, objectPath, ingredientType, galaxy, schematic):
+	criteriaStr = ''
+
+	if galaxy.isdigit():
+		relevantGalaxy = galaxy if schematic.galaxy == 0 else schematic.galaxy
+		criteriaStr += f"""
+			AND tSchematic.galaxy IN(0, {relevantGalaxy})
+			  AND tSchematic.schematicID NOT IN(
+			    SELECT
+			      schematicID FROM tSchematicOverrides
+			    WHERE
+			      galaxyID = {relevantGalaxy})
+		"""
+
 	compCursor = cn.cursor()
-	compCursor.execute('SELECT schematicID, schematicName, complexity, xpAmount, (SELECT imageName FROM tSchematicImages tsi WHERE tsi.schematicID=tSchematic.schematicID AND tsi.imageType=1) AS schemImage FROM tSchematic WHERE objectPath="' + objectPath + '" OR objectGroup="' + objectPath + '";')
+	query = f"""
+		SELECT
+		  schematicID,
+		  schematicName,
+		  complexity,
+		  xpAmount,
+		  (
+		    SELECT
+		      imageName
+		    FROM
+		      tSchematicImages tsi
+		    WHERE
+		      tsi.schematicID = tSchematic.schematicID
+		      AND tsi.imageType = 1) AS schemImage
+		  FROM
+		    tSchematic
+		  WHERE (objectPath = '{objectPath}'
+		    OR objectGroup = '{objectPath}') {criteriaStr};
+	"""
+	compCursor.execute(query)
 	compRow = compCursor.fetchone()
 	tempStr = ''
 	schemImageName = ''
@@ -240,7 +272,7 @@ def main():
 								tmpLink = '<a href="' + ghShared.BASE_SCRIPT_URL + 'resourceType.py/' + ingRow[2] + '">' + tmpName + '</a>'
 						else:
 							# component
-							results = getComponentLink(conn, tmpObject, ingRow[1]).split('|')
+							results = getComponentLink(conn, tmpObject, ingRow[1], galaxy, s).split('|')
 							tmpLink = results[1]
 							tmpImage = results[0]
 							tmpName = results[2]
