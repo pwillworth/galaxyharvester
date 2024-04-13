@@ -353,7 +353,32 @@ def main():
 		template = env.get_template('schematiceditor.html')
 	else:
 		template = env.get_template('schematics.html')
-	print(template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), professionList=ghLists.getProfessionList(galaxy), schematicTabList=ghLists.getSchematicTabList(), objectTypeList=ghLists.getObjectTypeList(), noenergyTypeList=ghLists.getOptionList('SELECT resourceType, resourceTypeName FROM tResourceType WHERE resourceCategory != "energy" ORDER BY resourceTypeName;'), resourceGroupList=ghLists.getResourceGroupList(), resourceGroupListShort=groupListShort, statList=ghLists.getStatList(), schematicID=schematicID, schematic=s, favHTML=favHTML, canEdit=canEdit, profession=profession, canAdd=canAdd, enableCAPTCHA=ghShared.RECAPTCHA_ENABLED, siteidCAPTCHA=ghShared.RECAPTCHA_SITEID))
+	print(template.render(
+		canAdd=canAdd,
+		canEdit=canEdit,
+		currentUser=currentUser,
+		enableCAPTCHA=ghShared.RECAPTCHA_ENABLED,
+		favHTML=favHTML,
+		galaxyList=ghLists.getGalaxyList(),
+		imgNum=ghShared.imgNum,
+		linkappend=linkappend,
+		loggedin=logged_state,
+		loginResult=loginResult,
+		noenergyTypeList=ghLists.getOptionList('SELECT resourceType, resourceTypeName FROM tResourceType WHERE resourceCategory != "energy" ORDER BY resourceTypeName;'),
+		objectTypeList=ghLists.getObjectTypeList(),
+		pictureName=pictureName,
+		profession=profession,
+		professionList=ghLists.getProfessionList(galaxy),
+		resourceGroupList=ghLists.getResourceGroupList(),
+		resourceGroupListShort=groupListShort,
+		schematic=s,
+		schematicID=schematicID,
+		schematicTabList=ghLists.getSchematicTabList(),
+		siteidCAPTCHA=ghShared.RECAPTCHA_SITEID,
+		statList=ghLists.getStatList(),
+		uiTheme=uiTheme,
+		url=url
+	))
 
 
 if __name__ == "__main__":
