@@ -132,6 +132,10 @@ def getProfession(conn, skillGroup):
 		return 0
 	profCursor.close()
 
+def displayGalaxyMismatchNotice(schematic, selectedGalaxy):
+	return (schematic and schematic.galaxy not in (-1, 0, 1337) and
+					str(selectedGalaxy) != str(schematic.galaxy))
+
 def main():
 	# Get current url
 	try:
@@ -373,6 +377,7 @@ def main():
 		canAdd=canAdd,
 		canEdit=canEdit,
 		currentUser=currentUser,
+		displayGalaxyMismatchNotice=displayGalaxyMismatchNotice(s, galaxy),
 		enableCAPTCHA=ghShared.RECAPTCHA_ENABLED,
 		favHTML=favHTML,
 		galaxyList=ghLists.getGalaxyList(),
