@@ -62,13 +62,14 @@ def getQualityData(conn, schematicID):
 	return qualityData
 
 # Get a list item for a component ingredient
-def getComponentLink(cn, objectPath, ingredientType, galaxy, schematic):
+def getComponentLink(cn, objectPath, ingredientType, galaxy, schematic, schematicBaseProfs):
 	criteriaStr = ''
 
 	if galaxy.isdigit():
-		relevantGalaxy = galaxy if schematic.galaxy == 0 else schematic.galaxy
+		relevantGalaxy = galaxy if schematic.galaxy in (-1, 0, 1337) else schematic.galaxy
+
 		criteriaStr += f"""
-			AND tSchematic.galaxy IN(0, {relevantGalaxy})
+			AND tSchematic.galaxy IN({schematicBaseProfs}, {relevantGalaxy})
 			  AND tSchematic.schematicID NOT IN(
 			    SELECT
 			      schematicID FROM tSchematicOverrides
@@ -255,6 +256,7 @@ def main():
 					s.objectType = row[8]
 
 					profession = getProfession(conn, s.skillGroup)
+					schematicBaseProfs = dbShared.getBaseProfs(s.galaxy)
 
 					ingCursor = conn.cursor()
 					ingCursor.execute('SELECT ingredientName, ingredientType, ingredientObject, ingredientQuantity, res.resName, containerType FROM tSchematicIngredients LEFT JOIN (SELECT resourceGroup AS resID, groupName AS resName, containerType FROM tResourceGroup UNION ALL SELECT resourceType, resourceTypeName, containerType FROM tResourceType) res ON ingredientObject = res.resID WHERE schematicID="' + schematicID + '" ORDER BY ingredientType, ingredientQuantity DESC;')
@@ -272,7 +274,7 @@ def main():
 								tmpLink = '<a href="' + ghShared.BASE_SCRIPT_URL + 'resourceType.py/' + ingRow[2] + '">' + tmpName + '</a>'
 						else:
 							# component
-							results = getComponentLink(conn, tmpObject, ingRow[1], galaxy, s).split('|')
+							results = getComponentLink(conn, tmpObject, ingRow[1], galaxy, s, schematicBaseProfs).split('|')
 							tmpLink = results[1]
 							tmpImage = results[0]
 							tmpName = results[2]
@@ -316,7 +318,21 @@ def main():
 
 					# Get list of schematics this one can be used in
 					useCursor = conn.cursor()
-					useCursor.execute('SELECT tSchematicIngredients.schematicID, s2.schematicName FROM tSchematicIngredients INNER JOIN tSchematic ON tSchematicIngredients.ingredientObject = tSchematic.objectPath OR tSchematicIngredients.ingredientObject = tSchematic.objectGroup INNER JOIN tSchematic s2 ON tSchematicIngredients.schematicID=s2.schematicID WHERE tSchematic.schematicID = "' + schematicID + '" AND s2.galaxy IN (0, ' + str(galaxy) + ') GROUP BY tSchematicIngredients.schematicID;')
+					useCursor.execute(f"""
+						SELECT
+						  tSchematicIngredients.schematicID,
+						  s2.schematicName
+						FROM
+						  tSchematicIngredients
+						  INNER JOIN tSchematic ON tSchematicIngredients.ingredientObject = tSchematic.objectPath
+						    OR tSchematicIngredients.ingredientObject = tSchematic.objectGroup
+						  INNER JOIN tSchematic s2 ON tSchematicIngredients.schematicID = s2.schematicID
+						WHERE
+						  tSchematic.schematicID = '{schematicID}'
+						  AND s2.galaxy IN({schematicBaseProfs}, {str(galaxy)})
+						GROUP BY
+						  tSchematicIngredients.schematicID;
+					""")
 					useRow = useCursor.fetchone()
 					while (useRow != None):
 						s.schematicsUsedIn.append([useRow[0], useRow[1]])

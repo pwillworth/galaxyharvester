@@ -536,6 +536,17 @@ def alertNewAbility(conn, userID, abilityKey, galaxy):
 	alertcursor.close()
 
 def getBaseProfs(galaxy):
+	# Short-circuit returns on system galaxy IDs (NGE, Non-NGE, Jedi). Move on if neither.
+	match str(galaxy):
+		case '-1':
+			return '-1, 1337'
+		case '0':
+			return '0, 1337'
+		case '1337':
+			return '-1, 0, 1337'
+		case _:
+			pass
+
 	# Determine set of base profession galaxy IDs to include by checking if galaxy is flagged NGE
 	baseProfs = '0, 1337'
 	conn = ghConn()
