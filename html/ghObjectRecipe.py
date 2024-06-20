@@ -93,7 +93,7 @@ class schematicRecipe:
 			result += '  <td style="width:32px;"><img src="/images/schematics/' + self.schematicImage + '" class="schematicIngredient" /></td>'
 			result += '  <td title="' + qualityBarInfo + '"><div>' + self.recipeName + '</div>'
 		else:
-			linkTarget = ' href="' + ghShared.BASE_SCRIPT_URL + 'recipe.py/' + str(self.recipeID) + '?gh_sid=' + sid + '"'
+			linkTarget = ' href="' + ghShared.BASE_SCRIPT_URL + 'recipe.py/' + str(self.recipeID) + '"'
 			result += '  <td style="width:32px;"><a' + linkTarget + '><img src="/images/schematics/' + self.schematicImage + '" class="schematicIngredient" /></a></td>'
 			result += '  <td title="' + qualityBarInfo + '"><div><a class="nameLink"' + linkTarget + '>' + self.recipeName + '</a></div>'
 
