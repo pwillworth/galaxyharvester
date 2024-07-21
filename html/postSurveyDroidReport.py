@@ -253,7 +253,7 @@ def main():
 				typeMatch = re.match(typePattern, line)
 				nameMatch = re.match(namePattern, line)
 				if typeMatch:
-					thisType = dbShared.getResourceTypeID(conn, typeMatch.group(1))
+					thisType = dbShared.getResourceTypeID(conn, typeMatch.group(1).strip())
 					thisTypeName = typeMatch.group(1)
 				if nameMatch:
 					if thisSpawn.spawnName != '':
@@ -275,10 +275,10 @@ def main():
 
 		# Update planet data if valid results
 		if headerMatch:
-			planetID = dbShared.getPlanetID(headerMatch.group(1))
+			planetID = dbShared.getPlanetID(headerMatch.group(1).strip())
 			classID = headerMatch.group(2).lower()
 		elif planetMatch:
-			planetID = dbShared.getPlanetID(planetMatch.group(1))
+			planetID = dbShared.getPlanetID(planetMatch.group(1).strip())
 		else:
 			result = "Error: No planet found in file header."
 		if classMatch:
