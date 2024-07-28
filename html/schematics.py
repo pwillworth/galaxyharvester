@@ -62,9 +62,42 @@ def getQualityData(conn, schematicID):
 	return qualityData
 
 # Get a list item for a component ingredient
-def getComponentLink(cn, objectPath, ingredientType):
+def getComponentLink(cn, objectPath, ingredientType, galaxy, schematic, schematicBaseProfs):
+	criteriaStr = ''
+
+	if galaxy.isdigit():
+		relevantGalaxy = galaxy if schematic.galaxy in (-1, 0, 1337) else schematic.galaxy
+
+		criteriaStr += f"""
+			AND tSchematic.galaxy IN({schematicBaseProfs}, {relevantGalaxy})
+			  AND tSchematic.schematicID NOT IN(
+			    SELECT
+			      schematicID FROM tSchematicOverrides
+			    WHERE
+			      galaxyID = {relevantGalaxy})
+		"""
+
 	compCursor = cn.cursor()
-	compCursor.execute('SELECT schematicID, schematicName, complexity, xpAmount, (SELECT imageName FROM tSchematicImages tsi WHERE tsi.schematicID=tSchematic.schematicID AND tsi.imageType=1) AS schemImage FROM tSchematic WHERE objectPath="' + objectPath + '" OR objectGroup="' + objectPath + '";')
+	query = f"""
+		SELECT
+		  schematicID,
+		  schematicName,
+		  complexity,
+		  xpAmount,
+		  (
+		    SELECT
+		      imageName
+		    FROM
+		      tSchematicImages tsi
+		    WHERE
+		      tsi.schematicID = tSchematic.schematicID
+		      AND tsi.imageType = 1) AS schemImage
+		  FROM
+		    tSchematic
+		  WHERE (objectPath = '{objectPath}'
+		    OR objectGroup = '{objectPath}') {criteriaStr};
+	"""
+	compCursor.execute(query)
 	compRow = compCursor.fetchone()
 	tempStr = ''
 	schemImageName = ''
@@ -98,6 +131,10 @@ def getProfession(conn, skillGroup):
 	else:
 		return 0
 	profCursor.close()
+
+def displayGalaxyMismatchNotice(schematic, selectedGalaxy):
+	return (schematic and schematic.galaxy not in (-1, 0, 1337) and
+					str(selectedGalaxy) != str(schematic.galaxy))
 
 def main():
 	# Get current url
@@ -223,6 +260,7 @@ def main():
 					s.objectType = row[8]
 
 					profession = getProfession(conn, s.skillGroup)
+					schematicBaseProfs = dbShared.getBaseProfs(s.galaxy)
 
 					ingCursor = conn.cursor()
 					ingCursor.execute('SELECT ingredientName, ingredientType, ingredientObject, ingredientQuantity, res.resName, containerType FROM tSchematicIngredients LEFT JOIN (SELECT resourceGroup AS resID, groupName AS resName, containerType FROM tResourceGroup UNION ALL SELECT resourceType, resourceTypeName, containerType FROM tResourceType) res ON ingredientObject = res.resID WHERE schematicID="' + schematicID + '" ORDER BY ingredientType, ingredientQuantity DESC;')
@@ -240,7 +278,7 @@ def main():
 								tmpLink = '<a href="' + ghShared.BASE_SCRIPT_URL + 'resourceType.py/' + ingRow[2] + '">' + tmpName + '</a>'
 						else:
 							# component
-							results = getComponentLink(conn, tmpObject, ingRow[1]).split('|')
+							results = getComponentLink(conn, tmpObject, ingRow[1], galaxy, s, schematicBaseProfs).split('|')
 							tmpLink = results[1]
 							tmpImage = results[0]
 							tmpName = results[2]
@@ -284,7 +322,21 @@ def main():
 
 					# Get list of schematics this one can be used in
 					useCursor = conn.cursor()
-					useCursor.execute('SELECT tSchematicIngredients.schematicID, s2.schematicName FROM tSchematicIngredients INNER JOIN tSchematic ON tSchematicIngredients.ingredientObject = tSchematic.objectPath OR tSchematicIngredients.ingredientObject = tSchematic.objectGroup INNER JOIN tSchematic s2 ON tSchematicIngredients.schematicID=s2.schematicID WHERE tSchematic.schematicID = "' + schematicID + '" AND s2.galaxy IN (0, ' + str(galaxy) + ') GROUP BY tSchematicIngredients.schematicID;')
+					useCursor.execute(f"""
+						SELECT
+						  tSchematicIngredients.schematicID,
+						  s2.schematicName
+						FROM
+						  tSchematicIngredients
+						  INNER JOIN tSchematic ON tSchematicIngredients.ingredientObject = tSchematic.objectPath
+						    OR tSchematicIngredients.ingredientObject = tSchematic.objectGroup
+						  INNER JOIN tSchematic s2 ON tSchematicIngredients.schematicID = s2.schematicID
+						WHERE
+						  tSchematic.schematicID = '{schematicID}'
+						  AND s2.galaxy IN({schematicBaseProfs}, {str(galaxy)})
+						GROUP BY
+						  tSchematicIngredients.schematicID;
+					""")
 					useRow = useCursor.fetchone()
 					while (useRow != None):
 						s.schematicsUsedIn.append([useRow[0], useRow[1]])
@@ -321,7 +373,34 @@ def main():
 		template = env.get_template('schematiceditor.html')
 	else:
 		template = env.get_template('schematics.html')
-	print(template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), professionList=ghLists.getProfessionList(galaxy), schematicTabList=ghLists.getSchematicTabList(), objectTypeList=ghLists.getObjectTypeList(), noenergyTypeList=ghLists.getOptionList('SELECT resourceType, resourceTypeName FROM tResourceType WHERE resourceCategory != "energy" ORDER BY resourceTypeName;'), resourceGroupList=ghLists.getResourceGroupList(), resourceGroupListShort=groupListShort, statList=ghLists.getStatList(), schematicID=schematicID, schematic=s, favHTML=favHTML, canEdit=canEdit, profession=profession, canAdd=canAdd, enableCAPTCHA=ghShared.RECAPTCHA_ENABLED, siteidCAPTCHA=ghShared.RECAPTCHA_SITEID))
+	print(template.render(
+		canAdd=canAdd,
+		canEdit=canEdit,
+		currentUser=currentUser,
+		displayGalaxyMismatchNotice=displayGalaxyMismatchNotice(s, galaxy),
+		enableCAPTCHA=ghShared.RECAPTCHA_ENABLED,
+		favHTML=favHTML,
+		galaxyList=ghLists.getGalaxyList(),
+		imgNum=ghShared.imgNum,
+		linkappend=linkappend,
+		loggedin=logged_state,
+		loginResult=loginResult,
+		noenergyTypeList=ghLists.getOptionList('SELECT resourceType, resourceTypeName FROM tResourceType WHERE resourceCategory != "energy" ORDER BY resourceTypeName;'),
+		objectTypeList=ghLists.getObjectTypeList(),
+		pictureName=pictureName,
+		profession=profession,
+		professionList=ghLists.getProfessionList(galaxy),
+		resourceGroupList=ghLists.getResourceGroupList(),
+		resourceGroupListShort=groupListShort,
+		schematic=s,
+		schematicID=schematicID,
+		schematicTabList=ghLists.getSchematicTabList(),
+		selectedGalaxy=galaxy,
+		siteidCAPTCHA=ghShared.RECAPTCHA_SITEID,
+		statList=ghLists.getStatList(),
+		uiTheme=uiTheme,
+		url=url
+	))
 
 
 if __name__ == "__main__":
