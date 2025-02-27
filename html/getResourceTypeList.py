@@ -45,7 +45,7 @@ else:
 	print('<option value="none" title="p00000000000">None</option>')
 
 if len(resGroup) > 0:
-	criteriaStr = ' AND (resourceGroup = "' + resGroup + '" OR resourceCategory = "' + resGroup + '")'
+	criteriaStr = 'AND (resourceGroup = "{0}" OR resourceCategory = "{0}")'.format(resGroup)
 else:
 	criteriaStr = ''
 
@@ -58,7 +58,33 @@ else:
 conn = dbShared.ghConn()
 cursor = conn.cursor()
 if (cursor):
-	cursor.execute('SELECT resourceType, resourceTypeName, CONCAT("p", CASE WHEN CRmax>0 THEN "1" ELSE "0" END, CASE WHEN CDmax>0 THEN "1" ELSE "0" END, CASE WHEN DRmax>0 THEN "1" ELSE "0" END, CASE WHEN FLmax>0 THEN "1" ELSE "0" END, CASE WHEN HRmax>0 THEN "1" ELSE "0" END, CASE WHEN MAmax>0 THEN "1" ELSE "0" END, CASE WHEN PEmax>0 THEN "1" ELSE "0" END, CASE WHEN OQmax>0 THEN "1" ELSE "0" END, CASE WHEN SRmax>0 THEN "1" ELSE "0" END, CASE WHEN UTmax>0 THEN "1" ELSE "0" END, CASE WHEN ERmax>0 THEN "1" ELSE "0" END) AS statMask, containerType FROM tResourceType WHERE enterable>0' + criteriaStr + ' ORDER BY resourceTypeName;')
+	sqlString = """
+		SELECT
+			tResourceType.resourceType,
+			resourceTypeName,
+			CONCAT(
+				"p",
+				CASE WHEN CRmax>0 THEN "1" ELSE "0" END,
+				CASE WHEN CDmax>0 THEN "1" ELSE "0" END,
+				CASE WHEN DRmax>0 THEN "1" ELSE "0" END,
+				CASE WHEN FLmax>0 THEN "1" ELSE "0" END,
+				CASE WHEN HRmax>0 THEN "1" ELSE "0" END,
+				CASE WHEN MAmax>0 THEN "1" ELSE "0" END,
+				CASE WHEN PEmax>0 THEN "1" ELSE "0" END,
+				CASE WHEN OQmax>0 THEN "1" ELSE "0" END,
+				CASE WHEN SRmax>0 THEN "1" ELSE "0" END,
+				CASE WHEN UTmax>0 THEN "1" ELSE "0" END,
+				CASE WHEN ERmax>0 THEN "1" ELSE "0" END
+			) AS statMask,
+			containerType
+		FROM
+			tResourceType
+			LEFT JOIN tGalaxyResourceType tgrt ON tgrt.resourceType = tResourceType.resourceType AND tgrt.galaxyID = {0}
+		WHERE enterable>0 {1} AND (elective = 0 OR tgrt.resourceType IS NOT NULL)
+		ORDER BY resourceTypeName;
+	""".format(galaxy, criteriaStr)
+
+	cursor.execute(sqlString)
 	row = cursor.fetchone()
 	if row == None and len(resGroup) > 0:
 		cursor.execute('select rgc.resourceGroup, rg.groupName, "p11111111111" AS statMask, containerType FROM tResourceGroupCategory rgc INNER JOIN tResourceGroup rg ON rgc.resourceGroup = rg.resourceGroup WHERE rgc.resourceCategory="' + resGroup + '";')

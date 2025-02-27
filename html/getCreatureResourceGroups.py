@@ -49,12 +49,14 @@ if (cursor):
          tResourceGroup.containerType
     FROM tResourceGroup
       INNER JOIN tResourceType ON tResourceType.resourceGroup = tResourceGroup.resourceGroup
+      LEFT JOIN tGalaxyResourceType tgrt ON tgrt.resourceType = tResourceType.resourceType AND tgrt.galaxyID={0}
       INNER JOIN tResourceTypeCreature ON tResourceTypeCreature.resourceType = tResourceType.resourceType
     WHERE tResourceGroup.containerType IN ('bone', 'hide', 'meat', 'milk')
       AND tResourceTypeCreature.galaxy IN (0, %s)
+      AND (tResourceType.elective = 0 OR tgrt.resourceType IS NOT NULL)
     GROUP BY tResourceGroup.resourceGroup
     ORDER BY tResourceGroup.resourceGroup
-  """
+  """.format(galaxy)
 
   # Execute SQL and fetch first row
   cursor.execute(sqlStr, (galaxy,))
