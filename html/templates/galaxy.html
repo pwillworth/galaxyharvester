@@ -45,21 +45,57 @@ function removePlanets() {
     this.remove();
   });
 }
+// Managed resource type list functions
+function addResourceTypes() {
+  if ($("#resourceTypesAvailable > option:selected").length > 0) {
+    $("#resourceTypesSelected > option:selected").removeAttr('selected');
+  }
+
+  $("#resourceTypesAvailable > option:selected").each(function() {
+    $("#resourceTypesSelected").append(this).html(
+      $('#resourceTypesSelected > option').sort(function(a, b) {
+        return a.text.localeCompare(b.text);
+      })
+    );
+  });
+}
+function removeResourceTypes() {
+  if ($("#resourceTypesSelected > option:selected").length > 0) {
+    $("#resourceTypesAvailable > option:selected").removeAttr('selected');
+  }
+
+  $("#resourceTypesSelected > option:selected").each(function() {
+    $("#resourceTypesAvailable").append(this).html(
+      $('#resourceTypesAvailable > option').sort(function(a, b) {
+        return a.text.localeCompare(b.text);
+      })
+    );
+  });
+}
 // Send galaxy details
 function saveGalaxy() {
   $('#busyImgSave').css('display','block');
+
   // build comma separated list of planets.
   var planets = '';
   $('#planetsSelected > option').each(function() {
     planets += ($(this).attr('value') + ',');
   });
+
+  // build comma separated list of resource types.
+  var resourceTypes = '';
+  $('#resourceTypesSelected > option').each(function() {
+    resourceTypes += ($(this).attr('value') + ',');
+  });
+
   // build list of admin users.
   var admins = '';
   $('#adminUsers > div').each(function() {
     admins += ($(this).text() + ',');
   });
+
   // send data
-  $.post(BASE_SCRIPT_URL + 'postGalaxy.py', { galaxyID: '{{ galaxyID }}', galaxyName: $('#galaxyName').val(), galaxyState: $('#galaxyStatus').val(), galaxyNGE: $('#oGalaxyNGE').attr('checked'), galaxyWebsite: $('#galaxyWebsite').val(), galaxyPlanets: planets, galaxyAdmins: admins },
+  $.post(BASE_SCRIPT_URL + 'postGalaxy.py', { galaxyID: '{{ galaxyID }}', galaxyName: $('#galaxyName').val(), galaxyState: $('#galaxyStatus').val(), galaxyNGE: $('#oGalaxyNGE').attr('checked'), galaxyWebsite: $('#galaxyWebsite').val(), galaxyPlanets: planets, galaxyResourceTypes: resourceTypes, galaxyAdmins: admins },
     function(data) {
       var result = $(data).find('resultText').eq(0).text();
       $('#busyImgSave').css('display','none');
@@ -94,9 +130,27 @@ function saveGalaxy() {
           <tr><td><div title="Please enter the web address where people can go to get info on how to sign up and play on your server.">Website:</div></td><td colspan="2"><input type="text" id="galaxyWebsite" size="40" maxlength="1023" value="{{ galaxyWebsite }}"/></td></tr>
           <tr><td colspan=3><h3 title="If your server has additional planets where players can collect resources, add them here.">Extra Planets:</h3></td></tr>
           <tr>
-            <td>Available:<br/><select multiple size="12" id="planetsAvailable" style="min-width: 120px;">{{ availablePlanetList }}</select></td>
-            <td align="center"><input type="button" class="ghButton planetButton" value="Add    -&gt;" onclick="addPlanets();"></input><br/><br/><input type="button" class="ghButton planetButton" value="&lt;- Remove" onclick="removePlanets();"></input></td>
-            <td>Selected:<br/><select multiple size="12" id="planetsSelected" style="min-width: 120px;">{{ galaxyPlanetList }}</select></td>
+            <td colspan="3">
+              <table>
+                <tr>
+                  <td>Available:<br/><select multiple size="12" id="planetsAvailable" style="min-width: 120px;">{{ availablePlanetList }}</select></td>
+                  <td align="center"><input type="button" class="ghButton planetButton" value="Add    -&gt;" onclick="addPlanets();"></input><br/><br/><input type="button" class="ghButton planetButton" value="&lt;- Remove" onclick="removePlanets();"></input></td>
+                  <td>Selected:<br/><select multiple size="12" id="planetsSelected" style="min-width: 120px;">{{ galaxyPlanetList }}</select></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr><td colspan=3><h3 title="If your server has additional resource types, add them here.">Extra Resource Types:</h3></td></tr>
+          <tr>
+            <td colspan="3">
+              <table>
+                <tr>
+                  <td>Available:<br/><select multiple size="12" id="resourceTypesAvailable" style="min-width: 120px;">{{ availableResourceTypeList }}</select></td>
+                  <td align="center"><input type="button" class="ghButton" value="Add    -&gt;" onclick="addResourceTypes();"></input><br/><br/><input type="button" class="ghButton" value="&lt;- Remove" onclick="removeResourceTypes();"></input></td>
+                  <td>Selected:<br/><select multiple size="12" id="resourceTypesSelected" style="min-width: 120px;">{{ galaxyResourceTypeList }}</select></td>
+                </tr>
+              </table>
+            </td>
           </tr>
           <tr><td><div title="List any Galaxy Harvester users that should be able to come to this screen and edit this galaxy's details.">Galaxy Admins:</div></td><td colspan="2"></td></tr>
           <tr><td colspan="3"><div id="adminUsers" class="inlineItemBlockList"><input id="adminUserAdd" type="text" size="12" />

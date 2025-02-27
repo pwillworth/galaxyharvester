@@ -50,6 +50,34 @@ def getPlanetList(conn, galaxy, available):
 	cursor.close()
 	return listHTML
 
+# Get extra resource types for a galaxy or the available ones they can add
+def getElectiveResourceTypeList(conn, galaxy, available):
+	listHTML = ''
+	if not galaxy.isdigit():
+		galaxy = 0
+
+	is_or_is_not_null = "IS NULL" if available > 0 else "IS NOT NULL"
+
+	resourceTypeSQL = """
+		SELECT
+			tResourceType.resourceType,
+			resourceTypeName
+		FROM tResourceType
+			LEFT JOIN tGalaxyResourceType tgrt ON tgrt.resourceType = tResourceType.resourceType AND tgrt.galaxyID = {0}
+		WHERE
+			elective = 1 AND tgrt.resourceType {1}
+		ORDER BY resourceTypeName;
+	""".format(galaxy, is_or_is_not_null)
+
+	cursor = conn.cursor()
+	cursor.execute(resourceTypeSQL)
+	row = cursor.fetchone()
+	while row != None:
+		listHTML += '<option value="{0}">{1}</option>'.format(row[0], row[1])
+		row = cursor.fetchone()
+	cursor.close()
+	return listHTML
+
 def main():
 	useCookies = 1
 	linkappend = ''
@@ -65,6 +93,8 @@ def main():
 	galaxyAdminList = []
 	galaxyPlanetList = []
 	availablePlanetList = []
+	galaxyResourceTypeList = []
+	availableResourceTypeList = []
 	galaxyAdmins = []
 	# Get current url
 	try:
@@ -132,6 +162,7 @@ def main():
 		conn = dbShared.ghConn()
 		galaxyAdminList = dbShared.getGalaxyAdminList(conn, currentUser)
 		availablePlanetList = getPlanetList(conn, galaxy, 1)
+		availableResourceTypeList = getElectiveResourceTypeList(conn, galaxy, 1)
 		if galaxy.isdigit():
 			# get the galaxy details for edit
 			galaxyCursor = conn.cursor()
@@ -145,6 +176,7 @@ def main():
 				galaxyWebsite = galaxyRow[3]
 			galaxyCursor.close()
 			galaxyPlanetList = getPlanetList(conn, galaxy, 0)
+			galaxyResourceTypeList = getElectiveResourceTypeList(conn, galaxy, 0)
 			galaxyAdmins = dbShared.getGalaxyAdmins(conn, galaxy)
 			conn.close()
 		else:
@@ -159,7 +191,7 @@ def main():
 	env.globals['BASE_SCRIPT_URL'] = ghShared.BASE_SCRIPT_URL
 	env.globals['MOBILE_PLATFORM'] = ghShared.getMobilePlatform(os.environ['HTTP_USER_AGENT'])
 	template = env.get_template('galaxy.html')
-	print(template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, pictureName=pictureName, loginResult=loginResult, linkappend=linkappend, url=url, imgNum=ghShared.imgNum, galaxyID=galaxy, galaxyList=ghLists.getGalaxyList(), msgHTML=msgHTML, galaxyName=galaxyName, galaxyState=galaxyState, galaxyCheckedNGE=galaxyCheckedNGE, galaxyWebsite=galaxyWebsite, galaxyStatusList=ghLists.getGalaxyStatusList(), galaxyPlanetList=galaxyPlanetList, availablePlanetList=availablePlanetList, galaxyAdminList=galaxyAdminList, galaxyAdmins=galaxyAdmins, enableCAPTCHA=ghShared.RECAPTCHA_ENABLED, siteidCAPTCHA=ghShared.RECAPTCHA_SITEID))
+	print(template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, pictureName=pictureName, loginResult=loginResult, linkappend=linkappend, url=url, imgNum=ghShared.imgNum, galaxyID=galaxy, galaxyList=ghLists.getGalaxyList(), msgHTML=msgHTML, galaxyName=galaxyName, galaxyState=galaxyState, galaxyCheckedNGE=galaxyCheckedNGE, galaxyWebsite=galaxyWebsite, galaxyStatusList=ghLists.getGalaxyStatusList(), galaxyPlanetList=galaxyPlanetList, availablePlanetList=availablePlanetList, galaxyResourceTypeList=galaxyResourceTypeList, availableResourceTypeList=availableResourceTypeList, galaxyAdminList=galaxyAdminList, galaxyAdmins=galaxyAdmins, enableCAPTCHA=ghShared.RECAPTCHA_ENABLED, siteidCAPTCHA=ghShared.RECAPTCHA_SITEID))
 
 
 if __name__ == "__main__":
