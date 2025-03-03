@@ -38,6 +38,9 @@ galaxy = dbShared.dbInsertSafe(galaxy)
 clist = ''
 containerType = ''
 
+if galaxy.isdigit():
+  galaxy = int(galaxy)
+
 conn = dbShared.ghConn()
 cursor = conn.cursor()
 

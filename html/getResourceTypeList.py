@@ -50,9 +50,11 @@ else:
 	criteriaStr = ''
 
 if planetID.isdigit() and int(planetID) > 0:
+	planetID = int(planetID)
 	criteriaStr = criteriaStr + ' AND (specificPlanet = 0 OR specificPlanet = %(planetID)s)'
 else:
 	if galaxy.isdigit() and int(galaxy) > 0:
+		galaxy = int(galaxy)
 		criteriaStr = criteriaStr + ' AND (specificPlanet = 0 OR specificPlanet IN (SELECT DISTINCT tPlanet.planetID FROM tPlanet, tGalaxyPlanet WHERE (tPlanet.planetID < 11) OR (tPlanet.planetID = tGalaxyPlanet.planetID AND tGalaxyPlanet.galaxyID = %(galaxy)s)))'
 
 conn = dbShared.ghConn()

@@ -70,7 +70,7 @@ def getElectiveResourceTypeList(conn, galaxy, available):
 	""".format(is_or_is_not_null)
 
 	cursor = conn.cursor()
-	cursor.execute(resourceTypeSQL, {'galaxy': galaxy})
+	cursor.execute(resourceTypeSQL, {'galaxy': int(galaxy)})
 	row = cursor.fetchone()
 	while row != None:
 		listHTML += '<option value="{0}">{1}</option>'.format(row[0], row[1])
