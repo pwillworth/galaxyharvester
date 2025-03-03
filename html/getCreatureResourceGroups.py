@@ -38,9 +38,6 @@ galaxy = dbShared.dbInsertSafe(galaxy)
 clist = ''
 containerType = ''
 
-if galaxy.isdigit():
-  galaxy = int(galaxy)
-
 conn = dbShared.ghConn()
 cursor = conn.cursor()
 
@@ -62,7 +59,7 @@ if (cursor):
   """
 
   # Execute SQL and fetch first row
-  cursor.execute(sqlStr, {'galaxy': galaxy})
+  cursor.execute(sqlStr, {'galaxy': ghShared.tryInt(galaxy)})
   row = cursor.fetchone()
 
   clist += '<ul class="schematics">'

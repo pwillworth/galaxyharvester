@@ -149,6 +149,12 @@ def getMobilePlatform(agentString):
 
 	return mobilePlatform
 
+def tryInt(v):
+	try:
+		int(v)
+	except:
+		v
+
 # Translation of schematic event types to names
 SCHEMATIC_EVENT_NAMES = {'a': 'Added',
                 'e': 'Edited',
