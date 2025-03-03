@@ -63,14 +63,14 @@ def getElectiveResourceTypeList(conn, galaxy, available):
 			tResourceType.resourceType,
 			resourceTypeName
 		FROM tResourceType
-			LEFT JOIN tGalaxyResourceType tgrt ON tgrt.resourceType = tResourceType.resourceType AND tgrt.galaxyID = {0}
+			LEFT JOIN tGalaxyResourceType tgrt ON tgrt.resourceType = tResourceType.resourceType AND tgrt.galaxyID = %(galaxy)s
 		WHERE
-			elective = 1 AND tgrt.resourceType {1}
+			elective = 1 AND tgrt.resourceType {0}
 		ORDER BY resourceTypeName;
-	""".format(galaxy, is_or_is_not_null)
+	""".format(is_or_is_not_null)
 
 	cursor = conn.cursor()
-	cursor.execute(resourceTypeSQL)
+	cursor.execute(resourceTypeSQL, {'galaxy': galaxy})
 	row = cursor.fetchone()
 	while row != None:
 		listHTML += '<option value="{0}">{1}</option>'.format(row[0], row[1])
