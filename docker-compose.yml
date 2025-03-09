@@ -12,8 +12,8 @@ services:
     develop:
       watch:
         - action: sync
-          path: ./html
-          target: /var/www/html
+          path: ./
+          target: /var/www
   db:
     container_name: galaxyharvester-db
     image: mysql:5.7.11
