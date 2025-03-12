@@ -1488,3 +1488,7 @@ water_vapor_sullust	Sullust Water Vapor	water	water	1	5	0	0	0	0	1	1000	0	0	0	0	0
 wheat_domesticated_sullust	Sullust Domesticated Wheat	flora_food	wheat_domesticated	1	1	0	0	0	0	1	1000	1	700	0	0	0	0	300	1000	1	1000	0	0	0	0	0	0	cereal	wheat	29
 wheat_wild_sullust	Sullust Wild Wheat	flora_food	wheat_wild	1	1	0	0	0	0	1	1000	300	1000	0	0	0	0	1	700	1	1000	0	0	0	0	0	0	cereal	wheat	29
 wood_deciduous_sullust	Sullust Deciduous Wood	flora_structural	wood_deciduous	1	1	0	0	0	0	1	800	0	0	0	0	400	800	0	0	1	1000	300	700	1	800	0	0	flora_structural	wood	29
+amorphous_mandalore_1	Mandalorian Type 1 Crystal Amorphous Gem	mineral	gemstone_armophous	1	2	600	1000	0	0	600	1000	0	0	600	1000	300	700	0	0	1	1000	600	1000	600	1000	1	900	gemstone	gemstone	0	1
+amorphous_mandalore_2	Mandalorian Type 2 Crystal Amorphous Gem	mineral	gemstone_armophous	1	2	600	1000	0	0	600	1000	0	0	600	1000	300	700	0	0	1	1000	600	1000	600	1000	1	900	gemstone	gemstone	0	1
+crystalline_mandalore_1	Mandalorian Type 1 Crystalline Gem	mineral	gemstone_crystalline	1	2	600	1000	0	0	500	1000	0	0	600	1000	1	500	0	0	300	1000	600	1000	600	1000	700	1000	gemstone	gemstone	0	1
+crystalline_mandalore_2	Mandalorian Type 2 Crystalline Gem	mineral	gemstone_crystalline	1	2	600	1000	0	0	500	1000	0	0	600	1000	1	500	0	0	300	1000	600	1000	600	1000	700	1000	gemstone	gemstone	0	1
