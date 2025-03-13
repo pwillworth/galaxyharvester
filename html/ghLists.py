@@ -118,7 +118,27 @@ def getOptionList(sqlStr):
 
 def getResourceTypeList(galaxy='-1'):
 	if galaxy != '-1':
-		listStr = getOptionList('SELECT resourceType, resourceTypeName FROM tResourceType WHERE (specificPlanet = 0 OR specificPlanet IN (SELECT DISTINCT tPlanet.planetID FROM tPlanet, tGalaxyPlanet WHERE (tPlanet.planetID < 11) OR (tPlanet.planetID = tGalaxyPlanet.planetID AND tGalaxyPlanet.galaxyID = {0})))'.format(galaxy) + ' ORDER BY resourceTypeName;')
+		sqlStr = """
+			SELECT
+				tResourceType.resourceType,
+				resourceTypeName
+			FROM
+				tResourceType
+				LEFT JOIN tGalaxyResourceType tgrt ON tgrt.resourceType = tResourceType.resourceType AND tgrt.galaxyID = {0}
+			WHERE
+				(
+					specificPlanet = 0
+					OR specificPlanet IN (
+						SELECT
+							DISTINCT tPlanet.planetID
+						FROM tPlanet, tGalaxyPlanet
+						WHERE (tPlanet.planetID < 11) OR (tPlanet.planetID = tGalaxyPlanet.planetID AND tGalaxyPlanet.galaxyID = {0})
+					)
+				) AND (elective = 0 OR tgrt.resourceType IS NOT NULL)
+			ORDER BY resourceTypeName;
+		""".format(galaxy)
+
+		listStr = getOptionList(sqlStr)
 	else:
 		listStr = getOptionList('SELECT resourceType, resourceTypeName FROM tResourceType ORDER BY resourceTypeName;')
 	return listStr

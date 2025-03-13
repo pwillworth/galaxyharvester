@@ -77,6 +77,7 @@ galaxyState = form.getfirst("galaxyState", "")
 galaxyNGE = form.getfirst("galaxyNGE", "0")
 galaxyWebsite = form.getfirst("galaxyWebsite", "")
 galaxyPlanets = form.getfirst("galaxyPlanets", "")
+galaxyResourceTypes = form.getfirst("galaxyResourceTypes", "")
 galaxyAdmins = form.getfirst("galaxyAdmins", "")
 # escape input to prevent sql injection
 sid = dbShared.dbInsertSafe(sid)
@@ -86,9 +87,11 @@ galaxyState = dbShared.dbInsertSafe(galaxyState)
 galaxyNGE = dbShared.dbInsertSafe(galaxyNGE)
 galaxyWebsite = dbShared.dbInsertSafe(galaxyWebsite)
 galaxyPlanets = dbShared.dbInsertSafe(galaxyPlanets)
+galaxyResourceTypes = dbShared.dbInsertSafe(galaxyResourceTypes)
 galaxyAdmins = dbShared.dbInsertSafe(galaxyAdmins)
 
 galaxyPlanets = galaxyPlanets.split(",")
+galaxyResourceTypes = galaxyResourceTypes.split(",")
 galaxyAdmins = galaxyAdmins.split(",")
 
 result = ""
@@ -115,7 +118,7 @@ def sendGalaxyNotifyMail(galaxyID, galaxyName, user):
 	mailer.quit()
 	return 'email sent'
 
-def addGalaxy(galaxyName, galaxyNGE, galaxyWebsite, galaxyPlanets, userID, galaxyAdmins):
+def addGalaxy(galaxyName, galaxyNGE, galaxyWebsite, galaxyPlanets, galaxyResourceTypes, userID, galaxyAdmins):
 	# Add new draft galaxy
 	returnStr = "Galaxy submit failed."
 	result = 0
@@ -140,6 +143,12 @@ def addGalaxy(galaxyName, galaxyNGE, galaxyWebsite, galaxyPlanets, userID, galax
 		if planet.isdigit():
 			cursor.execute("INSERT INTO tGalaxyPlanet (galaxyID, planetID) VALUES (LAST_INSERT_ID(), %s)", [planet])
 			result = result + cursor.rowcount
+
+	for resourceType in galaxyResourceTypes:
+		if isinstance(resourceType, str) and len(resourceType) > 0:
+			cursor.execute('INSERT INTO tGalaxyResourceType (galaxyID, resourceType) VALUES (LAST_INSERT_ID(), %s)', [resourceType])
+			result = result + cursor.rowcount
+
 	for user in galaxyAdmins:
 		if len(user) > 0:
 			cursor.execute("INSERT INTO tGalaxyUser (galaxyID, userID, roleType) VALUES (LAST_INSERT_ID(), %s, %s);", [user, "a"])
@@ -152,7 +161,7 @@ def addGalaxy(galaxyName, galaxyNGE, galaxyWebsite, galaxyPlanets, userID, galax
 	conn.close()
 	return returnStr
 
-def updateGalaxy(galaxyID, galaxyName, galaxyState, galaxyNGE, galaxyWebsite, galaxyPlanets, galaxyAdmins):
+def updateGalaxy(galaxyID, galaxyName, galaxyState, galaxyNGE, galaxyWebsite, galaxyPlanets, galaxyResourceTypes, galaxyAdmins):
 	# Update galaxy information
 	returnStr = ""
 	result = 0
@@ -168,6 +177,13 @@ def updateGalaxy(galaxyID, galaxyName, galaxyState, galaxyNGE, galaxyWebsite, ga
 		if planet.isdigit():
 			cursor.execute("INSERT INTO tGalaxyPlanet (galaxyID, planetID) VALUES (%s, %s)", [galaxyID, planet])
 			result = result + cursor.rowcount
+
+	cursor.execute("DELETE FROM tGalaxyResourceType WHERE galaxyID=%s;", [galaxyID])
+	for resourceType in galaxyResourceTypes:
+		if isinstance(resourceType, str) and len(resourceType) > 0:
+			cursor.execute('INSERT INTO tGalaxyResourceType (galaxyID, resourceType) VALUES (%s, %s)', [galaxyID, resourceType])
+			result = result + cursor.rowcount
+
 	cursor.execute("DELETE FROM tGalaxyUser WHERE galaxyID=%s AND roleType='a';", [galaxyID])
 	for user in galaxyAdmins:
 		if len(user) > 0:
@@ -224,7 +240,7 @@ if (errstr == ""):
 					# Get user galaxy admin status
 					adminList = dbShared.getGalaxyAdminList(conn, currentUser)
 					if '<option value="{0}">'.format(galaxy) in adminList:
-						result = updateGalaxy(galaxy, galaxyName, galaxyState, galaxyNGE, galaxyWebsite, galaxyPlanets, galaxyAdmins)
+						result = updateGalaxy(galaxy, galaxyName, galaxyState, galaxyNGE, galaxyWebsite, galaxyPlanets, galaxyResourceTypes, galaxyAdmins)
 					else:
 						result = "Error: You are not listed as an administrator of that galaxy.\n"
 			else:
@@ -251,7 +267,7 @@ if (errstr == ""):
 				cursor.close()
 
 				if errstr == "":
-					result = addGalaxy(galaxyName, galaxyNGE, galaxyWebsite, galaxyPlanets, currentUser, galaxyAdmins)
+					result = addGalaxy(galaxyName, galaxyNGE, galaxyWebsite, galaxyPlanets, galaxyResourceTypes, currentUser, galaxyAdmins)
 				else:
 					result = errstr
 			else:

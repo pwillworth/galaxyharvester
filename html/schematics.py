@@ -237,7 +237,8 @@ def main():
 								tmpName = ingRow[4]
 								tmpLink = '<a href="' + ghShared.BASE_SCRIPT_URL + 'resourceType.py/' + ingRow[2] + '">' + tmpName + '</a>'
 							else:
-								tmpLink = '<a href="' + ghShared.BASE_SCRIPT_URL + 'resourceType.py/' + ingRow[2] + '">' + tmpName + '</a>'
+								tmpName = "Unknown Ingredient"
+								tmpLink = f"[{tmpName}]"
 						else:
 							# component
 							results = getComponentLink(conn, tmpObject, ingRow[1]).split('|')

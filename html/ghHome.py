@@ -76,6 +76,7 @@ else:
 
 # escape input to prevent sql injection
 sid = dbShared.dbInsertSafe(sid)
+galaxy = dbShared.dbInsertSafe(galaxy)
 
 # Get a session
 logged_state = 0
