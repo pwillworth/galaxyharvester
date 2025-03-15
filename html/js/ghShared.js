@@ -589,7 +589,7 @@ function planetRemove(linkFrom, planet, spawn, planetName) {
 	}
 
 }
-function loadPlanetSel(galaxy, optionZero, elmSelector) {
+function loadPlanetSel(galaxy, optionZero, elmSelector, selected="") {
   var planetOptions = optionZero || '';
   var elmSelector = elmSelector || '#planetSel'
   // Fetch planet data and load into html select elm
@@ -601,6 +601,7 @@ function loadPlanetSel(galaxy, optionZero, elmSelector) {
           planetOptions = planetOptions + '<option value=' + $(planetIds).find('item').eq(i).text() + '>' + $(planetNames).find('item').eq(i).text() + '</option>';
       }
       $(elmSelector).html(planetOptions);
+      $(elmSelector).val(selected);
     }, "xml");
   return;
 }

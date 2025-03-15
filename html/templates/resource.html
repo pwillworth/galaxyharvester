@@ -26,7 +26,11 @@ $(document).ready(function() {
       { spawnID: {{ spawnID }} },
       function(){$("#busyImgServerBest").css("display","none");}
     );
-    loadPlanetSel($("#galaxySel option:selected").val(), '', '#wpPlanetSel');
+
+    const availablePlanetIDs = {{ availablePlanetIDsJSON }};
+    defaultSelectedPlanet = availablePlanetIDs.length > 0 ? availablePlanetIDs[0] : ""
+
+    loadPlanetSel($("#galaxySel option:selected").val(), '', '#wpPlanetSel', defaultSelectedPlanet);
 });
 function saveAdmin() {
     var newName = document.getElementById("newResourceName").value;
