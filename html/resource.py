@@ -24,6 +24,7 @@ import os
 import sys
 import cgi
 from http import cookies
+import json
 import dbSession
 import dbShared
 import pymysql
@@ -166,6 +167,7 @@ def main():
 	galaxyState = 0
 	userReputation = 0
 	admin = False
+	availablePlanetIDs = []
 	# Get current url
 	try:
 		url = os.environ['SCRIPT_NAME']
@@ -260,8 +262,8 @@ def main():
 				else:
 					controlsUser = ''
 
+				availablePlanetIDs = [str(p.planetID) for p in spawn.planets if p.enteredBy != None]
 				resHTML = spawn.getHTML(0, "", controlsUser, userReputation, admin)
-
 				resHistory = getResourceHistory(conn, spawn.spawnID)
 			conn.close()
 		else:
@@ -276,7 +278,7 @@ def main():
 	env.globals['BASE_SCRIPT_URL'] = ghShared.BASE_SCRIPT_URL
 	env.globals['MOBILE_PLATFORM'] = ghShared.getMobilePlatform(os.environ['HTTP_USER_AGENT'])
 	template = env.get_template('resource.html')
-	print(template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), spawnName=spawnName, resHTML=resHTML, resHistory=resHistory, showAdmin=(userReputation >= ghShared.MIN_REP_VALS['EDIT_RESOURCE_GALAXY_NAME'] or admin), spawnID=spawnID, spawnGalaxy=galaxy, spawnStats=spawnStats, spawnContainerType=spawnContainerType, spawnResourceTypeName=spawnResourceTypeName, enableCAPTCHA=ghShared.RECAPTCHA_ENABLED, siteidCAPTCHA=ghShared.RECAPTCHA_SITEID))
+	print(template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, loginResult=loginResult, linkappend=linkappend, url=url, pictureName=pictureName, imgNum=ghShared.imgNum, galaxyList=ghLists.getGalaxyList(), spawnName=spawnName, availablePlanetIDsJSON=json.dumps(availablePlanetIDs), resHTML=resHTML, resHistory=resHistory, showAdmin=(userReputation >= ghShared.MIN_REP_VALS['EDIT_RESOURCE_GALAXY_NAME'] or admin), spawnID=spawnID, spawnGalaxy=galaxy, spawnStats=spawnStats, spawnContainerType=spawnContainerType, spawnResourceTypeName=spawnResourceTypeName, enableCAPTCHA=ghShared.RECAPTCHA_ENABLED, siteidCAPTCHA=ghShared.RECAPTCHA_SITEID))
 
 
 if __name__ == "__main__":
