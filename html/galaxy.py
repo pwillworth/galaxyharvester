@@ -41,6 +41,17 @@ def getPlanetList(conn, galaxy, available):
 		planetSQL = 'SELECT planetID, planetName FROM tPlanet WHERE planetID > 10 AND planetID NOT IN (SELECT planetID FROM tGalaxyPlanet WHERE galaxyID={0}) ORDER BY planetName;'.format(galaxy)
 	else:
 		planetSQL = 'SELECT tGalaxyPlanet.planetID, planetName FROM tGalaxyPlanet INNER JOIN tPlanet ON tGalaxyPlanet.planetID=tPlanet.planetID WHERE tGalaxyPlanet.planetID > 10 AND tGalaxyPlanet.galaxyID={0} ORDER BY planetName;'.format(galaxy)
+	return buildPlanetList(conn, planetSQL)
+
+def getAllPlanetList(conn, galaxy):
+	listHTML = ''
+	if not galaxy.isdigit():
+		galaxy = 0
+	planetSQL = 'SELECT tPlanet.planetID, tPlanet.planetName FROM tPlanet LEFT JOIN tGalaxyPlanet ON tGalaxyPlanet.planetID=tPlanet.planetID WHERE tPlanet.planetID <= 10 OR tGalaxyPlanet.galaxyID={0} ORDER BY tPlanet.planetName;'.format(galaxy)
+	return buildPlanetList(conn, planetSQL)
+
+def buildPlanetList(conn, planetSQL):
+	listHTML = ''
 	cursor = conn.cursor()
 	cursor.execute(planetSQL)
 	row = cursor.fetchone()
@@ -96,6 +107,7 @@ def main():
 	availablePlanetList = []
 	galaxyResourceTypeList = []
 	availableResourceTypeList = []
+	allPlanetList = []
 	galaxyAdmins = []
 	# Get current url
 	try:
@@ -176,6 +188,7 @@ def main():
 			galaxyCursor.close()
 			galaxyPlanetList = getPlanetList(conn, galaxy, 0)
 			availablePlanetList = getPlanetList(conn, galaxy, 1)
+			allPlanetList = getAllPlanetList(conn, galaxy)
 			availableResourceTypeList = getElectiveResourceTypeList(conn, galaxy, 1)
 			galaxyResourceTypeList = getElectiveResourceTypeList(conn, galaxy, 0)
 			galaxyAdmins = dbShared.getGalaxyAdmins(conn, galaxy)
@@ -192,7 +205,7 @@ def main():
 	env.globals['BASE_SCRIPT_URL'] = ghShared.BASE_SCRIPT_URL
 	env.globals['MOBILE_PLATFORM'] = ghShared.getMobilePlatform(os.environ['HTTP_USER_AGENT'])
 	template = env.get_template('galaxy.html')
-	print(template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, pictureName=pictureName, loginResult=loginResult, linkappend=linkappend, url=url, imgNum=ghShared.imgNum, galaxyID=galaxy, galaxyList=ghLists.getGalaxyList(), msgHTML=msgHTML, galaxyName=galaxyName, galaxyState=galaxyState, galaxyCheckedNGE=galaxyCheckedNGE, galaxyWebsite=galaxyWebsite, galaxyStatusList=ghLists.getGalaxyStatusList(), galaxyPlanetList=galaxyPlanetList, availablePlanetList=availablePlanetList, galaxyResourceTypeList=galaxyResourceTypeList, availableResourceTypeList=availableResourceTypeList, galaxyAdminList=galaxyAdminList, galaxyAdmins=galaxyAdmins, enableCAPTCHA=ghShared.RECAPTCHA_ENABLED, siteidCAPTCHA=ghShared.RECAPTCHA_SITEID))
+	print(template.render(uiTheme=uiTheme, loggedin=logged_state, currentUser=currentUser, pictureName=pictureName, loginResult=loginResult, linkappend=linkappend, url=url, imgNum=ghShared.imgNum, galaxyID=galaxy, galaxyList=ghLists.getGalaxyList(), msgHTML=msgHTML, galaxyName=galaxyName, galaxyState=galaxyState, galaxyCheckedNGE=galaxyCheckedNGE, galaxyWebsite=galaxyWebsite, galaxyStatusList=ghLists.getGalaxyStatusList(), galaxyPlanetList=galaxyPlanetList, availablePlanetList=availablePlanetList, allPlanetList=allPlanetList, galaxyResourceTypeList=galaxyResourceTypeList, availableResourceTypeList=availableResourceTypeList, galaxyAdminList=galaxyAdminList, galaxyAdmins=galaxyAdmins, enableCAPTCHA=ghShared.RECAPTCHA_ENABLED, siteidCAPTCHA=ghShared.RECAPTCHA_SITEID))
 
 
 if __name__ == "__main__":

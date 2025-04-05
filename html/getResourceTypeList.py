@@ -49,11 +49,15 @@ if len(resGroup) > 0:
 else:
 	criteriaStr = ''
 
-if planetID.isdigit() and int(planetID) > 0:
-	criteriaStr = criteriaStr + ' AND (specificPlanet = 0 OR specificPlanet = %(planetID)s)'
+if galaxy.isdigit() and int(galaxy) > 0:
+	if planetID.isdigit() and int(planetID) > 0:
+		criteriaStr = criteriaStr + ' AND (COALESCE(trto.specificPlanet, tResourceType.specificPlanet) = 0 OR COALESCE(trto.specificPlanet, tResourceType.specificPlanet) = %(planetID)s)'
+	else:
+		criteriaStr = criteriaStr + ' AND (COALESCE(trto.specificPlanet, tResourceType.specificPlanet) = 0 OR COALESCE(trto.specificPlanet, tResourceType.specificPlanet) IN (SELECT DISTINCT tPlanet.planetID FROM tPlanet, tGalaxyPlanet WHERE (tPlanet.planetID < 11) OR (tPlanet.planetID = tGalaxyPlanet.planetID AND tGalaxyPlanet.galaxyID = %(galaxy)s)))'
 else:
-	if galaxy.isdigit() and int(galaxy) > 0:
-		criteriaStr = criteriaStr + ' AND (specificPlanet = 0 OR specificPlanet IN (SELECT DISTINCT tPlanet.planetID FROM tPlanet, tGalaxyPlanet WHERE (tPlanet.planetID < 11) OR (tPlanet.planetID = tGalaxyPlanet.planetID AND tGalaxyPlanet.galaxyID = %(galaxy)s)))'
+	if planetID.isdigit() and int(planetID) > 0:
+		criteriaStr = criteriaStr + ' AND (tResourceType.specificPlanet = 0 OR tResourceType.specificPlanet = %(planetID)s)'
+
 
 conn = dbShared.ghConn()
 cursor = conn.cursor()
@@ -80,6 +84,7 @@ if (cursor):
 		FROM
 			tResourceType
 			LEFT JOIN tGalaxyResourceType tgrt ON tgrt.resourceType = tResourceType.resourceType AND tgrt.galaxyID = %(galaxy)s
+			LEFT JOIN tResourceTypeOverrides trto ON trto.resourceType = tResourceType.resourceType AND trto.galaxyID = %(galaxy)s
 		WHERE enterable>0 {0} AND (elective = 0 OR tgrt.resourceType IS NOT NULL)
 		ORDER BY resourceTypeName;
 	""".format(criteriaStr)
