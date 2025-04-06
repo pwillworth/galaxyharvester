@@ -174,6 +174,8 @@ def main():
 		galaxy = dbShared.dbInsertSafe(path[0])
 		conn = dbShared.ghConn()
 		galaxyAdminList = dbShared.getGalaxyAdminList(conn, currentUser)
+		availablePlanetList = getPlanetList(conn, galaxy, 1)
+		availableResourceTypeList = getElectiveResourceTypeList(conn, galaxy, 1)
 		if galaxy.isdigit():
 			# get the galaxy details for edit
 			galaxyCursor = conn.cursor()
@@ -187,9 +189,7 @@ def main():
 				galaxyWebsite = galaxyRow[3]
 			galaxyCursor.close()
 			galaxyPlanetList = getPlanetList(conn, galaxy, 0)
-			availablePlanetList = getPlanetList(conn, galaxy, 1)
 			allPlanetList = getAllPlanetList(conn, galaxy)
-			availableResourceTypeList = getElectiveResourceTypeList(conn, galaxy, 1)
 			galaxyResourceTypeList = getElectiveResourceTypeList(conn, galaxy, 0)
 			galaxyAdmins = dbShared.getGalaxyAdmins(conn, galaxy)
 			conn.close()
