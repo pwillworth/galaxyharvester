@@ -352,7 +352,7 @@ def getUserAdmin(conn, user, galaxy):
 def getGalaxyAdminList(conn, userID):
         listHTML = ''
         cursor = conn.cursor()
-        cursor.execute("SELECT tGalaxyUser.galaxyID, galaxyName FROM tGalaxyUser INNER JOIN tGalaxy ON tGalaxyUser.galaxyID = tGalaxy.galaxyID WHERE tGalaxyUser.userID='{0}' AND roleType='a' ORDER BY galaxyName;".format(userID))
+        cursor.execute("SELECT tGalaxyUser.galaxyID, galaxyName FROM tGalaxyUser INNER JOIN tGalaxy ON tGalaxyUser.galaxyID = tGalaxy.galaxyID WHERE tGalaxyUser.userID='{0}' AND roleType='a' GROUP BY tGalaxyUser.galaxyID ORDER BY galaxyName;".format(userID))
         row = cursor.fetchone()
         while row != None:
                 listHTML += '<option value="{0}">{1}</option>'.format(row[0], row[1])

@@ -3,6 +3,9 @@
 <html lang="en"><head><title>Galaxy Admin - Galaxy Harvester</title>
 {{ blocks.commonResources(uiTheme, enableCAPTCHA) }}
 <script type="text/javascript">
+const planetSelectOptions = `{{ allPlanetList }}`;
+const currentGalaxyId = '{{ galaxyID }}';
+
 $(document).ready(function() {
     $("#galaxySel").val(getCookie("galaxy",defaultGalaxy));
     $("#galaxyStatus").val("{{ galaxyState }}");
@@ -21,6 +24,23 @@ $(document).ready(function() {
         onSelect: function(value,data) {addAdmin(value);$('#adminUserAdd').val('')}
     });
 
+    if (currentGalaxyId != "new") {
+      $.ajax({
+        url: `${BASE_SCRIPT_URL}getResourceTypeOverrides.py`,
+        method: 'GET',
+        data: {galaxy: currentGalaxyId},
+        dataType: "json",
+        success: function(data) {
+          for (const override of data.overrides) {
+            addTypeOverrideRow(override);
+          }
+        },
+        error: function(data) {
+          error = JSON.parse(data.responseText);
+          console.log(error.message);
+        }
+      });
+    }
 });
 // Add admin user
 function addAdmin(userID) {
@@ -72,6 +92,84 @@ function removeResourceTypes() {
     );
   });
 }
+
+type_override_num = 0;
+
+// add resource type override table
+function addTypeOverrideRow(override = {}) {
+  // table header content
+
+  var $select = $("<select/>", {
+    id: typeSelectId(type_override_num),
+    name: typeSelectName(),
+    style: "width:200px",
+    tag: override["resourceType"]
+  });
+
+  $("#resourceTypeOverridesContainer").append(
+    $("<div/>", {class: "rto-container ghWidgetBox"})
+      .append(
+        $("<div/>", {style: "display: flex; justify-content: space-between; margin-bottom: 10px"})
+          .append($select)
+          .append(
+            $("<img/>", {
+              src: "/images/xRed16.png",
+              title: "Remove override",
+              style: "cursor: pointer;width:20px;height:20px",
+              onclick: "removeTypeOverrideRow(this)"
+            })
+          )
+      )
+      .append(
+        $("<table>", {class: "rto-attr-table"})
+          .append($("<tbody/>").append(
+            $("<tr>")
+              .append($("<td>", {text: "Specific Planet"}))
+              .append(
+                $("<select>", {name: "specificPlanet"})
+                .append($(`<option value="all">None</option>`))
+                .append(planetSelectOptions)
+                .val(override["specificPlanet"])
+              )
+          ))
+      )
+  );
+
+  loadTypes(type_override_num, -1);
+
+  type_override_num += 1;
+}
+
+// remove resource type override table
+function removeTypeOverrideRow(closeBtn) {
+  $(closeBtn).closest(".rto-container").remove();
+}
+
+function loadTypes(idx, galaxyId = currentGalaxyId) {
+  console.log(galaxyId);
+  $(`#${typeSelectId(idx)}`).load(
+    "/getResourceTypeList.py",
+    {galaxy: galaxyId},
+    function(data) {
+      if ( $(this).attr('tag') != '') {
+        $(this).val($(this).attr('tag'));
+      }
+    }
+  );
+}
+
+function typeSelectId(idx) {
+  return `${typeSelectName()}${idx}`;
+}
+
+function typeSelectName() {
+  return "resourceType";
+}
+
+function getTypeOverridesValues() {
+  return $('.rto-container').map((_idx, c) => $(c).find('input, select').serialize()).toArray();
+}
+
 // Send galaxy details
 function saveGalaxy() {
   $('#busyImgSave').css('display','block');
@@ -95,12 +193,23 @@ function saveGalaxy() {
   });
 
   // send data
-  $.post(BASE_SCRIPT_URL + 'postGalaxy.py', { galaxyID: '{{ galaxyID }}', galaxyName: $('#galaxyName').val(), galaxyState: $('#galaxyStatus').val(), galaxyNGE: $('#oGalaxyNGE').attr('checked'), galaxyWebsite: $('#galaxyWebsite').val(), galaxyPlanets: planets, galaxyResourceTypes: resourceTypes, galaxyAdmins: admins },
+  $.post(BASE_SCRIPT_URL + 'postGalaxy.py', {
+      galaxyID: '{{ galaxyID }}',
+      galaxyName: $('#galaxyName').val(),
+      galaxyState: $('#galaxyStatus').val(),
+      galaxyNGE: $('#oGalaxyNGE').attr('checked'),
+      galaxyWebsite: $('#galaxyWebsite').val(),
+      galaxyPlanets: planets,
+      galaxyResourceTypes: resourceTypes,
+      galaxyAdmins: admins,
+      galaxyResourceTypeOverrides: getTypeOverridesValues()
+    },
     function(data) {
       var result = $(data).find('resultText').eq(0).text();
+      var $result = $("<div/>", {style: 'white-space: pre-line;'}).text(result)
       $('#busyImgSave').css('display','none');
       $('#galaxyMessage').hide();
-      $('#galaxyMessage').html(result);
+      $('#galaxyMessage').html($result);
       $('#galaxyMessage').show(1000);
     }, 'xml');
 }
@@ -152,7 +261,16 @@ function saveGalaxy() {
               </table>
             </td>
           </tr>
-          <tr><td><div title="List any Galaxy Harvester users that should be able to come to this screen and edit this galaxy's details.">Galaxy Admins:</div></td><td colspan="2"></td></tr>
+{% if galaxyID != 'new' and galaxyID != '' %}
+          <tr><td colspan=3><h3 title="If you want to configure resource types differently from the default values (e.g. specific planet), do so here.">Resource Type Overrides:</h3></td></tr>
+          <tr>
+            <td colspan="3">
+              <div id="resourceTypeOverridesContainer"></div>
+              <img src="/images/plusGreen32.png" alt="plus sign" title="Add another resource type override row" onclick="addTypeOverrideRow();" style="cursor:pointer;width: 20px; height: 20px; margin-top: 5px"/>
+            </td>
+          </tr>
+{% endif %}
+          <tr><td colspan="3"><h3 title="List any Galaxy Harvester users that should be able to come to this screen and edit this galaxy's details.">Galaxy Admins:</h3></td></tr>
           <tr><td colspan="3"><div id="adminUsers" class="inlineItemBlockList"><input id="adminUserAdd" type="text" size="12" />
 {% for admin in galaxyAdmins %}
             <div class="blockUserItem">{{ admin }}<img src='/images/xRed16.png' alt='Remove' title='Remove' onclick='this.parentNode.remove();'></img></div>

@@ -31,6 +31,7 @@ import pymysql
 import smtplib
 from email.message import EmailMessage
 from xml.dom import minidom
+from urllib.parse import parse_qsl
 import ghNames
 import ghShared
 sys.path.append("../")
@@ -78,7 +79,25 @@ galaxyNGE = form.getfirst("galaxyNGE", "0")
 galaxyWebsite = form.getfirst("galaxyWebsite", "")
 galaxyPlanets = form.getfirst("galaxyPlanets", "")
 galaxyResourceTypes = form.getfirst("galaxyResourceTypes", "")
+galaxyResourceTypeOverridesStrList = form.getlist("galaxyResourceTypeOverrides[]")
 galaxyAdmins = form.getfirst("galaxyAdmins", "")
+
+def parseSpecificPlanet(value):
+	if value.isdigit():
+		return int(value)
+	else:
+		return 0
+
+galaxyResourceTypeOverrides = []
+for override_str in galaxyResourceTypeOverridesStrList:
+	override = dict(parse_qsl(override_str))
+	override = {
+		'resourceType': override.get('resourceType'),
+		'specificPlanet': parseSpecificPlanet(override.get('specificPlanet')),
+	}
+
+	galaxyResourceTypeOverrides.append(override)
+
 # escape input to prevent sql injection
 sid = dbShared.dbInsertSafe(sid)
 galaxy = dbShared.dbInsertSafe(galaxy)
@@ -161,7 +180,7 @@ def addGalaxy(galaxyName, galaxyNGE, galaxyWebsite, galaxyPlanets, galaxyResourc
 	conn.close()
 	return returnStr
 
-def updateGalaxy(galaxyID, galaxyName, galaxyState, galaxyNGE, galaxyWebsite, galaxyPlanets, galaxyResourceTypes, galaxyAdmins):
+def updateGalaxy(galaxyID, galaxyName, galaxyState, galaxyNGE, galaxyWebsite, galaxyPlanets, galaxyResourceTypes, galaxyResourceTypeOverrides, galaxyAdmins):
 	# Update galaxy information
 	returnStr = ""
 	result = 0
@@ -184,6 +203,19 @@ def updateGalaxy(galaxyID, galaxyName, galaxyState, galaxyNGE, galaxyWebsite, ga
 			cursor.execute('INSERT INTO tGalaxyResourceType (galaxyID, resourceType) VALUES (%s, %s)', [galaxyID, resourceType])
 			result = result + cursor.rowcount
 
+	cursor.execute("DELETE FROM tResourceTypeOverrides WHERE galaxyID=%s;", [galaxyID])
+	for resourceTypeOverride in galaxyResourceTypeOverrides:
+		if isinstance(resourceTypeOverride, dict):
+			cursor.execute(
+				"""
+					INSERT INTO tResourceTypeOverrides
+						(galaxyID, resourceType, specificPlanet)
+							VALUES (%(galaxyID)s, %(resourceType)s, %(specificPlanet)s)
+				""",
+				{**resourceTypeOverride, **{'galaxyID': ghShared.tryInt(galaxyID)}}
+			)
+			result = result + cursor.rowcount
+
 	cursor.execute("DELETE FROM tGalaxyUser WHERE galaxyID=%s AND roleType='a';", [galaxyID])
 	for user in galaxyAdmins:
 		if len(user) > 0:
@@ -198,18 +230,39 @@ def updateGalaxy(galaxyID, galaxyName, galaxyState, galaxyNGE, galaxyWebsite, ga
 	conn.close()
 	return returnStr
 
+def type_override_duplicate_types(overrides):
+	resourceTypes = [o.get('resourceType') for o in overrides]
+	resourceTypes = [t for t in resourceTypes if t != 'none']
+
+	return len(resourceTypes) != len(set(resourceTypes))
+
+def capture_type_override_errors(overrides):
+	errorStr = ""
+
+	if type_override_duplicate_types(overrides):
+		errorStr += "Error: You must select unique resource types to override. \r\n"
+
+	if any(o.get('resourceType') == 'none' for o in overrides):
+		errorStr += "Error: You must select a type for all resource type overrides. \r\n"
+
+	return errorStr
 
 #  Check for errors
 errstr = ""
 
 if not len(galaxyName) > 3:
 	errstr = errstr + "Error: You must include the Galaxy name longer than 3 letters. \r\n"
+
 if not len(galaxyWebsite) > 7 or not galaxyWebsite.startswith("http"):
 	errstr = errstr + "Error: You must include a valid website so public server access can be verified.\r\n"
+
 if (len(galaxy) > 0 and galaxy != 'new' and galaxy.isdigit() != True):
 	errstr = errstr + "Error: Galaxy ID was not a valid number.\n"
+
 if len(galaxy) > 0 and galaxy != 'new' and galaxyState.isdigit() != True:
 	errstr = errstr + "Error: Galaxy State was not a valid number.\n"
+
+errstr += capture_type_override_errors(galaxyResourceTypeOverrides)
 
 if galaxyNGE == '1' or galaxyNGE == 'checked':
 	galaxyNGE = 1
@@ -240,7 +293,7 @@ if (errstr == ""):
 					# Get user galaxy admin status
 					adminList = dbShared.getGalaxyAdminList(conn, currentUser)
 					if '<option value="{0}">'.format(galaxy) in adminList:
-						result = updateGalaxy(galaxy, galaxyName, galaxyState, galaxyNGE, galaxyWebsite, galaxyPlanets, galaxyResourceTypes, galaxyAdmins)
+						result = updateGalaxy(galaxy, galaxyName, galaxyState, galaxyNGE, galaxyWebsite, galaxyPlanets, galaxyResourceTypes, galaxyResourceTypeOverrides, galaxyAdmins)
 					else:
 						result = "Error: You are not listed as an administrator of that galaxy.\n"
 			else:
