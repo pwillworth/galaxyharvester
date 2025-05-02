@@ -894,3 +894,12 @@ body .irrStats {
 	  opacity: 0;
 	}
   }
+
+#resourceTypeOverridesContainer {
+	font-size: 10px;
+}
+
+#resourceTypeOverridesContainer .rto-container {
+	padding: 10px;
+	margin: 10px 0;
+}
