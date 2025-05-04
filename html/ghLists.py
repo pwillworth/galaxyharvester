@@ -125,10 +125,11 @@ def getResourceTypeList(galaxy='-1'):
 			FROM
 				tResourceType
 				LEFT JOIN tGalaxyResourceType tgrt ON tgrt.resourceType = tResourceType.resourceType AND tgrt.galaxyID = {0}
+				LEFT JOIN tResourceTypeOverrides trto ON trto.resourceType = tResourceType.resourceType AND trto.galaxyID = {0}
 			WHERE
 				(
-					specificPlanet = 0
-					OR specificPlanet IN (
+					COALESCE(trto.specificPlanet, tResourceType.specificPlanet) = 0
+					OR COALESCE(trto.specificPlanet, tResourceType.specificPlanet) IN (
 						SELECT
 							DISTINCT tPlanet.planetID
 						FROM tPlanet, tGalaxyPlanet
