@@ -95,7 +95,7 @@ def checkSchematics(conn, spawnID, galaxy, prof, resourceTypes, serverBestMode, 
         tmpGroup = ''
         spawnPosition = 0
         # Select the quality groups for this ingredient
-        expSQL = 'SELECT expGroup, statName, Sum(statWeight)/Sum(weightTotal)*100 AS wp FROM tSchematicQualities INNER JOIN tSchematicResWeights ON tSchematicQualities.expQualityID = tSchematicResWeights.expQualityID WHERE schematicID="' + ingRow[0] + '" GROUP BY expGroup, statName;'
+        expSQL = 'SELECT expGroup, statName, Sum(statWeight)/Sum(weightTotal)*100 AS wp FROM tSchematicQualities INNER JOIN tSchematicResWeights ON tSchematicQualities.expQualityID = tSchematicResWeights.expQualityID WHERE schematicID="' + ingRow[0] + '" GROUP BY expGroup, statName ORDER BY expGroup'
         expCursor = conn.cursor()
         expCursor.execute(expSQL)
         expRow = expCursor.fetchone()
