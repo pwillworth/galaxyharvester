@@ -548,3 +548,16 @@ def getBaseProfs(galaxy):
 		cursor.close()
 	conn.close()
 	return baseProfs
+
+def isValidResourceType(resourceType):
+	# for input validation, check if resource type exists in the database.  This is needed because some automated updaters might use wrong type names.
+	conn = ghConn()
+	cursor = conn.cursor()
+	cursor.execute("SELECT resourceTypeName FROM tResourceType WHERE resourceType=%s;", (resourceType,))
+	row = cursor.fetchone()
+	cursor.close()
+	conn.close()
+	if row != None and row[0] != None:
+		return True
+	else:
+		return False

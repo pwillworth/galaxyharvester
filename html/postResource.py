@@ -323,6 +323,9 @@ def main():
 	else:
 		#  Some automated updaters post reptillian meat as 'reptilian', normalize
 		resType = resType.replace("reptilian", "reptillian")
+		isValidType = dbShared.isValidResourceType(resType)
+		if not isValidType:
+			errstr = errstr + "Error: invalid resource type. \r\n"
 
 	if spawnID == -1:
 		if galaxy == "":
