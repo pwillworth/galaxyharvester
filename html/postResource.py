@@ -324,7 +324,7 @@ def main():
 		#  Some automated updaters post reptillian meat as 'reptilian', normalize
 		resType = resType.replace("reptilian", "reptillian")
 		isValidType = dbShared.isValidResourceType(resType)
-		if not isValidType:
+		if not isValidType and spawnID == -1 and forceOp != "verify":
 			errstr = errstr + "Error: invalid resource type. \r\n"
 
 	if spawnID == -1:
