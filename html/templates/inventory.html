@@ -209,7 +209,7 @@ function exportInventory(format) {
 {% if loggedin == 1 %}
 	{{ blocks.recipeForm(professionList) }}
 {% endif %}
-{{ blocks.resourceForm() }}
+{{ blocks.resourceForm(linkappend) }}
 {{ blocks.joinForm(loggedin, ['?src_url=myResources.py&', linkappend]|join, url, enableCAPTCHA, siteidCAPTCHA) }}
 {{ blocks.favoriteForm() }}
 <div id="mask"></div>

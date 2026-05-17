@@ -172,7 +172,7 @@ function refreshHarvesting() {
       <option value=0>&lt;Select&gt;</option>
 {{ planetList }}
     </select>
-      <button id="quickAddGo" type=button value="Go" class="ghButton" onclick="quickAdd(form, '');"{{ disableStr }}>Go</button>
+      <button id="quickAddGo" type=button value="Go" class="ghButton" onclick="quickAdd('{{ linkappend }}', form, '');"{{ disableStr }}>Go</button>
       </form>
       </div>
 {% if loggedin == 0 %}
@@ -209,7 +209,7 @@ function refreshHarvesting() {
   </div>
 </div>
 {{ blocks.pageFooter() }}
-{{ blocks.resourceForm() }}
+{{ blocks.resourceForm(linkappend) }}
 {{ blocks.joinForm(loggedin, ['?src_url=ghHome.py&',linkappend]|join, url, enableCAPTCHA, siteidCAPTCHA) }}
 {{ blocks.waypointForm(loggedin) }}
 {{ blocks.favoriteForm() }}

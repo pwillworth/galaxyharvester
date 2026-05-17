@@ -153,7 +153,7 @@ function confirmSurvey() {
       <textarea name=resName id=resName rows=3 cols=20{{ disableStr }}></textarea><br />
       Planet:<select name="planetSel" id="planetSel"{{ disableStr }}>
       </select>
-      &nbsp;&nbsp;<button type=button value="Go" class="ghButton" onclick="quickAdd(form, '');"{{ disableStr }}>Go</button>
+      &nbsp;&nbsp;<button type=button value="Go" class="ghButton" onclick="quickAdd('{{ linkappend }}', form, '');"{{ disableStr }}>Go</button>
       </form>
       </div>
 {% if loggedin == 0 %}
@@ -202,7 +202,7 @@ function confirmSurvey() {
   </div>
 </div>
 {{ blocks.pageFooter() }}
-{{ blocks.resourceForm() }}
+{{ blocks.resourceForm(linkappend) }}
 {{ blocks.joinForm(loggedin, ['?src_url=surveyList.py&', linkappend]|join, url, enableCAPTCHA, siteidCAPTCHA) }}
 <div id="mask"></div>
 </body></html>

@@ -128,7 +128,7 @@ $(document).ready(function() {
 {% endif %}
 </div>
 {{ blocks.pageFooter() }}
-{{ blocks.resourceForm() }}
+{{ blocks.resourceForm(linkappend) }}
 {{ blocks.joinForm(loggedin, ['?src_url={{ BASE_SCRIPT_URL }}resource.py&', linkappend]|join, url, enableCAPTCHA, siteidCAPTCHA) }}
 {% if loggedin != 0 %}
 	<div id="creatureDialog" class="window">

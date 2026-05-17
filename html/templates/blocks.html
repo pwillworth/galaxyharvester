@@ -137,7 +137,7 @@
 	</div>
 {% endmacro %}
 
-{% macro resourceForm() %}
+{% macro resourceForm(linkappend) %}
 	<div id="resourceDialog" class="window bigForm">
 	    <h2 style="display: inline;">Adding Resources</h2><div style="float: right;position: relative;top:0px;"><a href="#" class="close">Close</a></div>
 	    <div id=resStatusUpdate class="statusMsg"></div><div id=addBusyImg style="float:left;display:none;" class="lds-ripple"><div></div><div></div></div>
@@ -159,7 +159,7 @@
 	        <td id="SRbox"><input type="text" size=2 maxlength=4 id="SR0" name="SR0"></td>
 	        <td id="UTbox"><input type="text" size=2 maxlength=4 id="UT0" name="UT0"></td>
 	    </tr></table></td>
-	    <td valign="bottom"><div style="float:right;margin:6px;"><input type="button" class="ghButton" value="Save" id="saveRes" onclick="quickAddSave();" /></div>
+	    <td valign="bottom"><div style="float:right;margin:6px;"><input type="button" class="ghButton" value="Save" id="saveRes" onclick="quickAddSave('{{ linkappend }}');" /></div>
 	    <div style="float:right;margin:6px;"><input type="button" class="ghButton" value="Skip" id="skipRes" onclick="quickAddNext();" /></div></td>
 	    </tr></table></form>
 	    <div id="resAddResults"></div>

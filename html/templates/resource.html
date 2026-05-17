@@ -96,7 +96,7 @@ function checkServerBest() {
   </div>
 </div>
 {{ blocks.pageFooter() }}
-{{ blocks.resourceForm() }}
+{{ blocks.resourceForm(linkappend) }}
 {{ blocks.joinForm(loggedin, ['?src_url={{ BASE_SCRIPT_URL }}resource.py&', linkappend]|join, url, enableCAPTCHA, siteidCAPTCHA) }}
 {{ blocks.waypointForm(loggedin) }}
 {{ blocks.favoriteForm() }}

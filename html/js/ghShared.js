@@ -51,8 +51,8 @@ function verifyResource(spawnName, onPlanet) {
 			$("#resAddResults").append(result+"<br />");
 		});
 }
-function editStats(linkFrom, resName) {
-    quickAdd(linkFrom, resName);
+function editStats(linkappend, linkFrom, resName) {
+    quickAdd(linkappend, linkFrom, resName);
 }
 // Check if old resource needs to be marked unavailable for single instance spawn types
 function removeOldCheck(spawnName) {
@@ -122,7 +122,7 @@ var newTypes = new Array();
 var newMsg = new Array();
 var numReturns = 0; // total number of results from resource lookups returned
 var numRes = 0; // total number of resources entered
-function quickAdd(qform, singleName) {
+function quickAdd(linkappend, qform, singleName) {
 	var resStr = "";
 	if (singleName != "") resStr = singleName;
 	else resStr = qform.resName.value.toLowerCase();
@@ -208,7 +208,7 @@ function quickAdd(qform, singleName) {
 							if (singleName == "" || qform == null) {
 								if (qform == null) {
 									// verify resource
-									$.post(BASE_SCRIPT_URL + "postResource.py", { galaxy: $("#galaxySel option:selected").val(), planet: $("#planetSel option:selected").val(), resID: spawnID, forceOp: "verify" },
+									$.post(BASE_SCRIPT_URL + "postResource.py?" + linkappend, { galaxy: $("#galaxySel option:selected").val(), planet: $("#planetSel option:selected").val(), resID: spawnID, forceOp: "verify" },
 										function(data) {
 											var result = $(data).find("resultText").eq(0).text();
 											if (result.indexOf("Error:") == -1) {
@@ -225,7 +225,7 @@ function quickAdd(qform, singleName) {
 										});
 								} else {
 									// existing stats and new entry post resource to planet or verify
-									$.post(BASE_SCRIPT_URL + "postResource.py", { galaxy: $("#galaxySel option:selected").val(), planet: $("#planetSel option:selected").val(), resID: spawnID },
+									$.post(BASE_SCRIPT_URL + "postResource.py?" + linkappend, { galaxy: $("#galaxySel option:selected").val(), planet: $("#planetSel option:selected").val(), resID: spawnID },
 										function(data) {
 											var result = $(data).find("resultText").eq(0).text();
 											$("#resAddResults").append(result+"<br />");
@@ -311,7 +311,7 @@ function quickAdd(qform, singleName) {
 	}
 }
 // save info added to form for prompted resource
-function quickAddSave() {
+function quickAddSave(linkappend) {
 	var typeSel = $("#typeSel option:selected").val();
 	if (typeSel == "none") {
 		alert("You can't save a resource without selecting a type.");
@@ -319,7 +319,7 @@ function quickAddSave() {
 		if (newNames[newPos-1] != "") {
 			if (newMsg[newPos-1].substr(0,8) == "Editing:") {
 				// post resource by editing resource details only
-				$.post(BASE_SCRIPT_URL + "postResource.py?forceOp=edit", {galaxy: $("#galaxySel option:selected").val(),
+				$.post(BASE_SCRIPT_URL + "postResource.py?" + linkappend, {galaxy: $("#galaxySel option:selected").val(),
 					resName: newNames[newPos-1],
 					forceOp: "edit",
 					resType: $("#typeSel option:selected").val(),
@@ -340,7 +340,7 @@ function quickAddSave() {
 					}, "xml");
 			} else {
 				// post all resource data collected
-				$.post(BASE_SCRIPT_URL + "postResource.py", { galaxy: $("#galaxySel option:selected").val(), planet: $("#planetSel option:selected").val(), resName: newNames[newPos-1], resType: $("#typeSel option:selected").val(), CR: $("#CR0").val(), CD: $("#CD0").val(), DR: $("#DR0").val(), FL: $("#FL0").val(), HR: $("#HR0").val(), MA: $("#MA0").val(), PE: $("#PE0").val(), OQ: $("#OQ0").val(), SR: $("#SR0").val(), UT: $("#UT0").val(), ER: $("#ER0").val() },
+				$.post(BASE_SCRIPT_URL + "postResource.py?" + linkappend, { galaxy: $("#galaxySel option:selected").val(), planet: $("#planetSel option:selected").val(), resName: newNames[newPos-1], resType: $("#typeSel option:selected").val(), CR: $("#CR0").val(), CD: $("#CD0").val(), DR: $("#DR0").val(), FL: $("#FL0").val(), HR: $("#HR0").val(), MA: $("#MA0").val(), PE: $("#PE0").val(), OQ: $("#OQ0").val(), SR: $("#SR0").val(), UT: $("#UT0").val(), ER: $("#ER0").val() },
 					function(data) {
 						var result = $(data).find("resultText").eq(0).text();
 						var spawnName = $(data).find("spawnName").eq(0).text();
